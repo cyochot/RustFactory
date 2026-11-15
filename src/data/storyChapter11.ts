@@ -14,7 +14,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "焼き上がりの味見チェックなら僕におまかせカニ！1回につき3個ずつ試食するロボ！"
+        "text": "焼き上がりの味見チェックなら僕におまかせカニ！1回につき3個ずつ試食するカニ！"
       }
     ],
     "outro": [
@@ -62,7 +62,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "薄すぎたら僕が水でうすめたのバレちゃうカニ！？……うそ、ちゃんと規定どおりに混ぜるロボ！"
+        "text": "薄すぎたら僕が水でうすめたのバレちゃうカニ！？……うそ、ちゃんと規定どおりに混ぜるカニ！"
       }
     ],
     "outro": [
@@ -182,7 +182,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ぴっかぴかの合格シールつきで出荷ロボ！いってくるカニ！"
+        "text": "ぴっかぴかの合格シールつきで出荷カニ！いってくるカニ！"
       }
     ],
     "outro": [
@@ -206,7 +206,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "し、知らないカニ！この粉は……パンの香りを確認した証拠ロボ！"
+        "text": "し、知らないカニ！この粉は……パンの香りを確認した証拠カニ！"
       }
     ],
     "outro": [
@@ -235,7 +235,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "これは事件カニ！犯人はカップの泡……いや、僕のおひげも立派ロボ！"
+        "text": "これは事件カニ！犯人はカップの泡……いや、僕のおひげも立派カニ！"
       }
     ],
     "outro": [
@@ -247,7 +247,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "優勝カニ！でも飲んだらひげが消えたロボ……もう一杯で復活するカニ？"
+        "text": "優勝カニ！でも飲んだらひげが消えたカニ……もう一杯で復活するカニ？"
       }
     ]
   },
@@ -264,7 +264,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ふむ……甘くて、ふわっとして、最後にコーヒーの香りカニ！これは雲の上プリンロボ！"
+        "text": "ふむ……甘くて、ふわっとして、最後にコーヒーの香りカニ！これは雲の上プリンカニ！"
       }
     ],
     "outro": [
@@ -276,7 +276,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "名前もかわいいカニ！次は名前を当てる前に食べてもいいロボ？"
+        "text": "名前もかわいいカニ！次は名前を当てる前に食べてもいいカニ？"
       }
     ]
   },
@@ -293,7 +293,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ぺた、ぽん、ぺたぽんカニ！僕のハサミも鳴らしてバンドに入るロボ！"
+        "text": "ぺた、ぽん、ぺたぽんカニ！僕のハサミも鳴らしてバンドに入るカニ！"
       }
     ],
     "outro": [
@@ -363,7 +363,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "味見係の報酬はパンの耳カニ？……えっ、ちゃんと一人前あるロボ！"
+        "text": "味見係の報酬はパンの耳カニ？……えっ、ちゃんと一人前あるカニ！"
       }
     ]
   },
@@ -380,7 +380,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "この鉢なら余裕カニ！……と思ったら、僕が入る場所はないロボ？"
+        "text": "この鉢なら余裕カニ！……と思ったら、僕が入る場所はないカニ？"
       }
     ],
     "outro": [
@@ -392,7 +392,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "花の隣なら日なたぼっこできるカニ！鉢は……やっぱり窮屈ロボ！"
+        "text": "花の隣なら日なたぼっこできるカニ！鉢は……やっぱり窮屈カニ！"
       }
     ]
   },
@@ -409,7 +409,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "主役のカニ武者フェリス、出陣カニ！……あれ、迷路の絵の裏から出られないロボ！"
+        "text": "主役のカニ武者フェリス、出陣カニ！……あれ、迷路の絵の裏から出られないカニ！"
       }
     ],
     "outro": [
@@ -421,7 +421,7 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "拍手のあとに本物のおやつも出てきたカニ！この紙芝居、毎日やりたいロボ！"
+        "text": "拍手のあとに本物のおやつも出てきたカニ！この紙芝居、毎日やりたいカニ！"
       }
     ]
   }

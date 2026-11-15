@@ -14,7 +14,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "お急ぎモード発動カニ！ハサミを後ろに流して空気抵抗を減らすロボ〜！"
+        "text": "お急ぎモード発動カニ！ハサミを後ろに流して空気抵抗を減らすカニ〜！"
       }
     ],
     "outro": [
@@ -62,7 +62,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "僕が走る係カニ！計算はしっかり者の誰かにお願いするロボ！"
+        "text": "僕が走る係カニ！計算はしっかり者の誰かにお願いするカニ！"
       }
     ],
     "outro": [
@@ -86,7 +86,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "一等賞の金メダル（チョコ味）は僕のものカニ！よーいドンロボ！"
+        "text": "一等賞の金メダル（チョコ味）は僕のものカニ！よーいドンカニ！"
       }
     ],
     "outro": [
@@ -110,7 +110,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ドン、ドン、カニ！太鼓に合わせるとハサミも勝手に動くロボ！"
+        "text": "ドン、ドン、カニ！太鼓に合わせるとハサミも勝手に動くカニ！"
       }
     ],
     "outro": [
@@ -122,7 +122,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "僕のハサミが太鼓より大きな音を出したカニ！みんなびっくりロボ！"
+        "text": "僕のハサミが太鼓より大きな音を出したカニ！みんなびっくりカニ！"
       }
     ]
   },
@@ -139,7 +139,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "揺れに合わせて踊ってるんじゃないカニ！テーブルを支えてるロボ！"
+        "text": "揺れに合わせて踊ってるんじゃないカニ！テーブルを支えてるカニ！"
       }
     ],
     "outro": [
@@ -151,7 +151,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "揺れないのに踊ってるカニ！次は椅子も一緒に踊るロボ！"
+        "text": "揺れないのに踊ってるカニ！次は椅子も一緒に踊るカニ！"
       }
     ]
   },
@@ -168,7 +168,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "床まで届く立派なリボンカニ！僕が引っぱって、花束を運ぶロボ！"
+        "text": "床まで届く立派なリボンカニ！僕が引っぱって、花束を運ぶカニ！"
       }
     ],
     "outro": [
@@ -180,7 +180,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ハサミが急におしゃれカニ！でも歩くたびにリボンが揺れてくすぐったいロボ！"
+        "text": "ハサミが急におしゃれカニ！でも歩くたびにリボンが揺れてくすぐったいカニ！"
       }
     ]
   },
@@ -197,7 +197,7 @@ export const STORY_CHAPTER_14: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "帽子が大きくなったら僕もかぶれるカニ？……あっ、これはパン生地ロボ！"
+        "text": "帽子が大きくなったら僕もかぶれるカニ？……あっ、これはパン生地カニ！"
       }
     ],
     "outro": [

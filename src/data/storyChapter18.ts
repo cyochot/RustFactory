@@ -14,7 +14,7 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "箱をパカッと開けて中身を仕分けるカニ！……あっ、特賞の黄金パン券がキラッと光ってるロボ！"
+        "text": "箱をパカッと開けて中身を仕分けるカニ！……あっ、特賞の黄金パン券がキラッと光ってるカニ！"
       }
     ],
     "outro": [
@@ -86,7 +86,7 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ピピガガッ……「パンを3つ食べろ」って聞こえたカニ！？……うそ、「3歩進め」だったロボ！"
+        "text": "ピピガガッ……「パンを3つ食べろ」って聞こえたカニ！？……うそ、「3歩進め」だったカニ！"
       }
     ],
     "outro": [
@@ -134,7 +134,7 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "3と4と5だけ拾うカニ！ほかの数字には見向きもせずクールに素通りするロボ！"
+        "text": "3と4と5だけ拾うカニ！ほかの数字には見向きもせずクールに素通りするカニ！"
       }
     ],
     "outro": [

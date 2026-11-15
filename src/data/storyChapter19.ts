@@ -62,7 +62,7 @@ export const STORY_CHAPTER_19: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ちちんぷいぷい、カニカニダッシュ〜！って唱えたら勝手に足が動く魔法みたいで楽しいロボ！"
+        "text": "ちちんぷいぷい、カニカニダッシュ〜！って唱えたら勝手に足が動く魔法みたいで楽しいカニ！"
       }
     ],
     "outro": [
@@ -86,7 +86,7 @@ export const STORY_CHAPTER_19: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "これで町中の時計がピタリと合ったカニ！いよいよお祭り本番の始まりロボ！"
+        "text": "これで町中の時計がピタリと合ったカニ！いよいよお祭り本番の始まりカニ！"
       }
     ],
     "outro": [

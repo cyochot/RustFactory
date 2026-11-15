@@ -14,7 +14,7 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "形はちがっても「お祭りを盛り上げるぞ！」って気持ちはみんな同じカニ！並んで行進ロボ！"
+        "text": "形はちがっても「お祭りを盛り上げるぞ！」って気持ちはみんな同じカニ！並んで行進カニ！"
       }
     ],
     "outro": [
@@ -38,7 +38,7 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "バネも歯車も力を合わせれば100人力カニ！……って、バネが跳ねすぎて屋根に届きそうロボ！"
+        "text": "バネも歯車も力を合わせれば100人力カニ！……って、バネが跳ねすぎて屋根に届きそうカニ！"
       }
     ],
     "outro": [
@@ -158,7 +158,7 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "のんびり〜からの、ターボ全開カニ！！切り替えタイミングを見逃さないロボ！"
+        "text": "のんびり〜からの、ターボ全開カニ！！切り替えタイミングを見逃さないカニ！"
       }
     ],
     "outro": [

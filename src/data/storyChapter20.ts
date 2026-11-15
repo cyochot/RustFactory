@@ -38,7 +38,7 @@ export const STORY_CHAPTER_20: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "あっちもこっちもお祭り騒ぎカニ！全ブースへ全力で「おっけー！」をお届けするロボ！"
+        "text": "あっちもこっちもお祭り騒ぎカニ！全ブースへ全力で「おっけー！」をお届けするカニ！"
       }
     ],
     "outro": [
@@ -103,7 +103,7 @@ export const STORY_CHAPTER_20: StageStoryEntry[] = [
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ここまで一緒に遊んでくれてありがとうカニ！これからも「鉄と歯車のからくり工房」のドタバタな毎日をよろしくロボ〜！！"
+        "text": "ここまで一緒に遊んでくれてありがとうカニ！これからも「鉄と歯車のからくり工房」のドタバタな毎日をよろしくカニ〜！！"
       }
     ]
   }
