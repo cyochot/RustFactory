@@ -295,12 +295,7 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-bold text-[#7C6154]">
-                          <span className="rounded-md bg-[#4A352B] px-1.5 py-0.5 font-code tabular-nums text-white">
-                            #{String(st.index).padStart(3, '0')}
-                          </span>
                           <span className="font-code text-[#EA580C]">{st.displayId}</span>
-                          <span aria-hidden="true">·</span>
-                          <span>{`第${st.chapter}章 ${st.chapterTitle}`}</span>
                           <span aria-hidden="true">·</span>
                           <span className={kindInfo.colorClass}>{kindInfo.label}</span>
                           <span aria-hidden="true">·</span>
