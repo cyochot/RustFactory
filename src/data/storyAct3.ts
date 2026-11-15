@@ -1,9 +1,9 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_ACT3: StageStoryEntry[] = [
-  // ===== 第9章：うっかり防止の安全マット (9-1 〜 9-12) =====
+  // ===== 第13章：うっかり防止の安全マット (13-1 〜 13-12) =====
   {
-    stageId: '9-1',
+    stageId: '30b7ab6e-c1d6-5da6-b49c-1d325b5fcc04',
     requestTitle: '空っぽの小箱を開けてドッキリ大騒ぎ',
     client: 'poppo',
     intro: [
@@ -27,7 +27,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-2',
+    stageId: '31f89893-aee2-53ab-9ede-48b08dee2dd9',
     requestTitle: '風邪をひいた温度計と元気な温度計',
     client: 'moka',
     intro: [
@@ -51,7 +51,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-3',
+    stageId: '0c8e7fea-a205-584d-9f37-d4d0f1659487',
     requestTitle: '予備バッテリーでL字おつかい走破',
     client: 'mimosa',
     intro: [
@@ -75,7 +75,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-4',
+    stageId: 'fecb5db3-4f07-5baf-acbe-87c4035235a5',
     requestTitle: 'パン焼きタイマーのあわてんぼう停止を直せ！',
     client: 'coppe',
     intro: [
@@ -99,7 +99,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-5',
+    stageId: 'd0ae5f54-2197-50fa-9847-9d1206122074',
     requestTitle: 'たまごパックの「割れあり」見分け術',
     client: 'coppe',
     intro: [
@@ -123,7 +123,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-6',
+    stageId: '7b9aba47-b647-55a6-ac6f-bb5628471879',
     requestTitle: 'おつかいメモが雨でにじんだ時の代替ルート',
     client: 'poppo',
     intro: [
@@ -147,7 +147,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-7',
+    stageId: '190eda01-8414-5c6a-82d4-c243fb94df7d',
     requestTitle: 'モカさん直伝・豆の「合格・やり直し」選別',
     client: 'moka',
     intro: [
@@ -171,7 +171,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-8',
+    stageId: '23405996-2992-5507-8492-e6961dbe4a43',
     requestTitle: '合格シール付きの光の玉だけ納品！',
     client: 'mimosa',
     intro: [
@@ -195,7 +195,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-9',
+    stageId: '64c273dd-e5b8-5a07-b2ce-c8fc0e6505fd',
     requestTitle: '伝言リレーのチェックが長すぎて目が回る〜',
     client: 'poppo',
     intro: [
@@ -219,7 +219,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-10',
+    stageId: '2b843031-35fa-56e4-b78e-0b0c1745840c',
     requestTitle: '小麦粉と卵のダブル確認を一気につなごう',
     client: 'coppe',
     intro: [
@@ -243,7 +243,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-11',
+    stageId: 'e8bba780-ccd3-5cd3-986e-997f4979a8af',
     requestTitle: '伝言が戻ってきたあとのフォロー大作戦',
     client: 'moka',
     intro: [
@@ -267,7 +267,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '9-12',
+    stageId: 'e204841a-48fc-5a37-952f-a00f0e10c9be',
     requestTitle: 'どんなハプニングもへっちゃら航行！',
     client: 'kurumi',
     intro: [
@@ -291,9 +291,9 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第10章：なんでも運べる魔法のトレイ (10-1 〜 10-12) =====
+  // ===== 第14章：なんでも運べる魔法のトレイ (14-1 〜 14-12) =====
   {
-    stageId: '10-1',
+    stageId: '814eb34c-a41c-5c6b-8eea-651e248a469b',
     requestTitle: 'お花もパンも乗る万能おぼん',
     client: 'mimosa',
     intro: [
@@ -317,7 +317,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-2',
+    stageId: 'a9910c82-84a5-5e5e-abcf-75706a78d6eb',
     requestTitle: 'おそろいパン2個入りの仲良しボックス',
     client: 'coppe',
     intro: [
@@ -341,7 +341,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-3',
+    stageId: '581e38ad-f1a7-5277-bd7d-5df7a4769556',
     requestTitle: '万能トレイに便利な取り出し口をつけよう',
     client: 'moka',
     intro: [
@@ -365,7 +365,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-4',
+    stageId: 'dcacc81e-6cfa-53a1-ab53-9c2ecc9e4126',
     requestTitle: '手紙とキャラメル、ちがう種類の仲良しコンビ',
     client: 'poppo',
     intro: [
@@ -389,7 +389,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-5',
+    stageId: 'd39e7fc6-3812-56fd-bce7-72c69cd529bf',
     requestTitle: 'フェリスとみるく号、おそろいの号令！',
     client: 'kurumi',
     intro: [
@@ -413,7 +413,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-6',
+    stageId: '2ffed195-378d-5077-b5bd-d451e2930f47',
     requestTitle: '花屋ロボとパン屋ロボの合同充電',
     client: 'mimosa',
     intro: [
@@ -437,7 +437,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-7',
+    stageId: '9488c624-3fd3-54cf-a8a1-8490c9c47af7',
     requestTitle: '「走れる約束」がある車だけ発進ゲート！',
     client: 'coppe',
     intro: [
@@ -461,7 +461,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-8',
+    stageId: 'dc872ad3-345b-5f25-95d4-1d780fd8a7eb',
     requestTitle: 'ゲート突破の名人、颯爽と駆け抜ける！',
     client: 'poppo',
     intro: [
@@ -485,7 +485,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-9',
+    stageId: '501b44e2-7067-5e83-8742-ecb185d3add7',
     requestTitle: '喫茶店の貸出ブック、返却期限を守ろう！',
     client: 'moka',
     intro: [
@@ -509,7 +509,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-10',
+    stageId: 'c0fd3332-442d-55fc-838d-c594d61eb5cc',
     requestTitle: '2つの見積もりメモ、期限切れにご注意！',
     client: 'mimosa',
     intro: [
@@ -533,7 +533,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-11',
+    stageId: '11ff3b4b-9609-535e-9aa0-286223f193a5',
     requestTitle: '案内メモに「借りた数字の有効期限」シール',
     client: 'coppe',
     intro: [
@@ -557,7 +557,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '10-12',
+    stageId: '0bd720eb-7730-583a-a337-672efa528996',
     requestTitle: '魔法のトレイとお約束、全部まとめて大活躍！',
     client: 'kurumi',
     intro: [
@@ -581,9 +581,9 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第11章：お味見チェックと合格スタンプ (11-1 〜 11-8) =====
+  // ===== 第15章：お味見チェックと合格スタンプ (15-1 〜 15-8) =====
   {
-    stageId: '11-1',
+    stageId: '0a19c51a-2f6c-5a4c-9247-29534bd93f8a',
     requestTitle: '出荷まえのひと押し！焼き上がりチェック',
     client: 'coppe',
     intro: [
@@ -607,7 +607,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-2',
+    stageId: '570bc484-898f-5e5f-91d9-3f80f7e43530',
     requestTitle: 'タイマーの計算ミスを発見！犯人は誰だ？',
     client: 'moka',
     intro: [
@@ -631,7 +631,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-3',
+    stageId: '5b076c31-42b8-59b9-aabe-7805a786eac2',
     requestTitle: 'お花の栄養剤、濃さはバッチリかな？',
     client: 'mimosa',
     intro: [
@@ -655,7 +655,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-4',
+    stageId: 'f7279691-407d-568c-8f17-97b5a23aad9b',
     requestTitle: '重すぎ小包が来たときの限界チェック！',
     client: 'poppo',
     intro: [
@@ -679,7 +679,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-5',
+    stageId: '163a23b2-ec90-5f86-a31b-8bc41aa59448',
     requestTitle: 'お祝いブーケのダブルチェック大作戦',
     client: 'mimosa',
     intro: [
@@ -703,7 +703,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-6',
+    stageId: '6cdfbfb3-0af5-52c3-b817-05dbbbc623e5',
     requestTitle: 'パン生地3種類の重さチェック合格せよ！',
     client: 'coppe',
     intro: [
@@ -727,7 +727,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-7',
+    stageId: 'ae5f34d9-8b3d-5240-b03b-053ab713166e',
     requestTitle: '失敗理由もメモしてくれる賢い検査スタンプ',
     client: 'moka',
     intro: [
@@ -751,7 +751,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '11-8',
+    stageId: '9dc94aec-ccf0-5432-8846-c0c15b87b666',
     requestTitle: '合格スタンプを並べて堂々と出荷ゲートへ！',
     client: 'kurumi',
     intro: [
@@ -775,9 +775,9 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第12章：探偵ごっこと迷子の手紙 (12-1 〜 12-8) =====
+  // ===== 第16章：探偵ごっこと迷子の手紙 (16-1 〜 16-8) =====
   {
-    stageId: '12-1',
+    stageId: 'cb19db0b-240d-50ed-be38-89c3fe355fee',
     requestTitle: 'ポッポ探偵登場！キーワードで届け先を探せ',
     client: 'poppo',
     intro: [
@@ -801,7 +801,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-2',
+    stageId: '82b69a1f-ff10-522f-b41d-dc663fc6fa3f',
     requestTitle: 'バラバラの手がかりを手帳1冊にまとめよう',
     client: 'moka',
     intro: [
@@ -825,7 +825,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-3',
+    stageId: 'cdcc5256-5359-5cce-a2aa-61ab4a272fc1',
     requestTitle: '昼モード・夜モードの切り替えスイッチ',
     client: 'mimosa',
     intro: [
@@ -849,7 +849,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-4',
+    stageId: 'cf512ac5-9221-505e-870c-1d52ec940528',
     requestTitle: '忘れん坊さんにも優しいお助けメッセージ',
     client: 'coppe',
     intro: [
@@ -873,7 +873,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-5',
+    stageId: 'c7c95c3c-4f38-5cdc-9522-57b0cea1a312',
     requestTitle: '普通の伝票と赤い注意メモの仕分け術',
     client: 'moka',
     intro: [
@@ -897,7 +897,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-6',
+    stageId: '98bb6489-186b-53c3-828e-0cf6576d9cb5',
     requestTitle: '「OK！」と「気をつけて！」の二重奏',
     client: 'poppo',
     intro: [
@@ -921,7 +921,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-7',
+    stageId: '06f4c9fa-5322-5af9-81f8-2f52695e366d',
     requestTitle: '探偵の虫眼鏡道具だけ別箱に整理しよう',
     client: 'mimosa',
     intro: [
@@ -945,7 +945,7 @@ export const STORY_ACT3: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '12-8',
+    stageId: '1ebcf4e6-6bc1-5f61-9487-faa01683ed43',
     requestTitle: 'ポッポ探偵・迷子の手紙をぜんぶ解決！',
     client: 'kurumi',
     intro: [

@@ -1,9 +1,9 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_ACT5: StageStoryEntry[] = [
-  // ===== 第17章：お祭り屋台の準備で大わらわ (17-1 〜 17-8) =====
+  // ===== 第2章：お祭り屋台の準備で大わらわ (2-1 〜 2-8) =====
   {
-    stageId: '17-1',
+    stageId: 'cc3aa3b6-256c-5917-8355-bdb415791494',
     requestTitle: 'いろんなお店のお祭りロボ大集合！',
     client: 'mimosa',
     intro: [
@@ -27,7 +27,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-2',
+    stageId: 'c419f437-352b-5f1d-8298-e4c37e52a12a',
     requestTitle: 'バネ式と歯車式、仲良く屋台を動かそう',
     client: 'coppe',
     intro: [
@@ -51,7 +51,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-3',
+    stageId: '7a5d0c50-d5f6-588f-9f29-ae1174a234f5',
     requestTitle: 'ひみつのレジ箱、中を勝手に触らないで！',
     client: 'moka',
     intro: [
@@ -75,7 +75,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-4',
+    stageId: '8cb63b66-a58b-569e-ae65-433de5ecea2a',
     requestTitle: '充電して発進！お祭り屋台トラック',
     client: 'poppo',
     intro: [
@@ -99,7 +99,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-5',
+    stageId: '0ab6754a-d4df-54ac-a77f-e80fc746a157',
     requestTitle: '「よし、出発！」の承認ハンコ待ち',
     client: 'kurumi',
     intro: [
@@ -123,7 +123,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-6',
+    stageId: 'bee5e43c-ba0a-5915-a8bd-4412c17f2ead',
     requestTitle: '広場の大ランタン、点灯までの3ステップ',
     client: 'moka',
     intro: [
@@ -147,7 +147,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-7',
+    stageId: '661f50ef-b06b-5e02-b076-2228c88a0e8e',
     requestTitle: '省エネお散歩＆ターボダッシュの二段階！',
     client: 'mimosa',
     intro: [
@@ -171,7 +171,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '17-8',
+    stageId: '70cb7557-cf2f-57ca-8b60-541cbead8dc1',
     requestTitle: '屋台パレードの安全確認＆ゲート開放！',
     client: 'kurumi',
     intro: [
@@ -195,9 +195,9 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第18章：福引き大会のあたりくじ騒動 (18-1 〜 18-8) =====
+  // ===== 第3章：福引き大会のあたりくじ騒動 (3-1 〜 3-8) =====
   {
-    stageId: '18-1',
+    stageId: 'a4e95ee9-d55c-5c3b-aa42-63d292e22a0e',
     requestTitle: '福引きボックスの中身、ひと目でバラバラ仕分け',
     client: 'coppe',
     intro: [
@@ -221,7 +221,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-2',
+    stageId: '7e0db7bd-3d57-50a0-93b7-78ecaeff3f76',
     requestTitle: '配達ルートとおまけ賞品のすっきり整理',
     client: 'mimosa',
     intro: [
@@ -245,7 +245,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-3',
+    stageId: '2408bb72-9259-5dd6-ba85-f9857cf291a5',
     requestTitle: '「1か2」と「3から5」、福引きの点数を一気分け！',
     client: 'poppo',
     intro: [
@@ -269,7 +269,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-4',
+    stageId: '6032bb13-8be5-517d-95d7-784a910560e3',
     requestTitle: 'お祭り無線「3歩進め！」の合図を解読',
     client: 'moka',
     intro: [
@@ -293,7 +293,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-5',
+    stageId: '7bafe10a-2ef4-517f-b48f-9256122665f4',
     requestTitle: '迷子札のぴったり条件探し！落とし物係',
     client: 'poppo',
     intro: [
@@ -317,7 +317,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-6',
+    stageId: '331c57e3-ad96-5e04-b779-c1c7a378c808',
     requestTitle: 'あたり番号3〜5だけ金庫へぽいぽい回収！',
     client: 'coppe',
     intro: [
@@ -341,7 +341,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-7',
+    stageId: 'b4374fe3-6426-5e4b-ab02-e93453235b97',
     requestTitle: '長い荷物伝票、いるところだけチラ見！',
     client: 'mimosa',
     intro: [
@@ -365,7 +365,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '18-8',
+    stageId: '6881bf72-be99-592e-99bc-f6ad3df32748',
     requestTitle: '福引き司令室からゲートへ突撃！',
     client: 'kurumi',
     intro: [
@@ -389,9 +389,9 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第19章：広場のからくり大時計 (19-1 〜 19-4) =====
+  // ===== 第4章：広場のからくり大時計 (4-1 〜 4-4) =====
   {
-    stageId: '19-1',
+    stageId: '62c16d48-5006-58eb-a279-15dc4fbab59e',
     requestTitle: '広場の古いからくり時計、最後のネジ調整！',
     client: 'kurumi',
     intro: [
@@ -415,7 +415,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '19-2',
+    stageId: '63517659-1139-5cc9-9399-c16490d7cf29',
     requestTitle: '熟練の時計調整、安全ラインの中で慎重に',
     client: 'moka',
     intro: [
@@ -439,7 +439,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '19-3',
+    stageId: '7e58cc7c-831e-5f71-a098-53511a88fcf7',
     requestTitle: 'お好みのステップを唱える魔法の呪文！？',
     client: 'coppe',
     intro: [
@@ -463,7 +463,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '19-4',
+    stageId: '62a4650f-fe84-5fda-836a-c0036f5ffe9b',
     requestTitle: 'ボーン！広場の時計台グランドオープン！',
     client: 'kurumi',
     intro: [
@@ -487,9 +487,9 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第20章：歯車町みんなでお祭り本番！ (20-1 〜 20-4) =====
+  // ===== 第5章：歯車町みんなでお祭り本番！ (5-1 〜 5-4) =====
   {
-    stageId: '20-1',
+    stageId: 'e5174596-ce40-5101-8458-936adfaa471e',
     requestTitle: 'お祭り屋台が超満員！みんなで分担さばき！',
     client: 'coppe',
     intro: [
@@ -513,7 +513,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '20-2',
+    stageId: '4afacd4d-4762-58fe-a29a-d9d840ab00a1',
     requestTitle: '4つの屋台から「おかわりー！」大合唱',
     client: 'mimosa',
     intro: [
@@ -537,7 +537,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '20-3',
+    stageId: 'bbc23ec8-df92-58c5-9893-853e4f7ed3e3',
     requestTitle: 'お祭りの夜、みんなお片付け終わるまで待とう',
     client: 'moka',
     intro: [
@@ -561,7 +561,7 @@ export const STORY_ACT5: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '20-4',
+    stageId: '9f448eba-db6a-5cb2-b0e7-68f02e74f4e5',
     requestTitle: '歯車町のお祭り、みんな大集合グランドフィナーレ！',
     client: 'kurumi',
     intro: [

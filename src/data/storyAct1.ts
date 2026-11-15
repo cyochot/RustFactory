@@ -3,7 +3,7 @@ import { StageStoryEntry } from '../types/game';
 export const STORY_ACT1: StageStoryEntry[] = [
   // ===== 第1章：工房オープンとご近所あいさつ (1-1 〜 1-8) =====
   {
-    stageId: '1-1',
+    stageId: '3d738a54-da4a-52c6-b1cb-c05b7553fc60',
     requestTitle: '看板カニのフェリス、初出勤でずっこけ',
     client: 'kurumi',
     intro: [
@@ -32,7 +32,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-2',
+    stageId: 'd9ea670f-238a-54b4-879b-8201d9706c66',
     requestTitle: '右曲がりが苦手なカニの特訓',
     client: 'kurumi',
     intro: [
@@ -56,7 +56,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-3',
+    stageId: '5da9d1d4-abaa-508e-aabc-f56914cf3969',
     requestTitle: 'お花畑でダンス！？ジグザグ水やり',
     client: 'mimosa',
     intro: [
@@ -80,7 +80,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-4',
+    stageId: 'f82c6a65-fb35-5d1b-8409-c3354d315bdd',
     requestTitle: '小麦粉の山とぐるぐる迷子',
     client: 'coppe',
     intro: [
@@ -109,7 +109,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-5',
+    stageId: '97cc03cb-b7c6-531c-85f4-775660346be9',
     requestTitle: 'パン屋の「いらっしゃいませ！」大音量事件',
     client: 'coppe',
     intro: [
@@ -133,7 +133,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-6',
+    stageId: '8fbca29b-fc90-5a12-b7f2-1038db1c6314',
     requestTitle: '喫茶店の常連さん呼び出しトラブル',
     client: 'moka',
     intro: [
@@ -157,7 +157,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-7',
+    stageId: 'c3cdcf8a-02f3-54a9-9358-f873fcb627de',
     requestTitle: '出発まえの「いってきます！」忘れ',
     client: 'poppo',
     intro: [
@@ -181,7 +181,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '1-8',
+    stageId: 'b022d65a-c79c-5290-93b0-e24c94ca7c37',
     requestTitle: 'ご近所あいさつ回りでぜんまい切れ！？',
     client: 'kurumi',
     intro: [
@@ -205,9 +205,9 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第2章：ひみつの鍵とジャム缶騒動 (2-1 〜 2-4) =====
+  // ===== 第6章：ひみつの鍵とジャム缶騒動 (6-1 〜 6-4) =====
   {
-    stageId: '2-1',
+    stageId: 'c7db5262-fe5d-5bd7-ada8-b547ecb72e20',
     requestTitle: 'おやつ缶の番号、誰が忘れたの！？',
     client: 'coppe',
     intro: [
@@ -236,7 +236,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '2-2',
+    stageId: '7fd4e25e-40fb-5133-adee-a1a0221e491d',
     requestTitle: '温室物置のダイヤルと居眠りネコ',
     client: 'mimosa',
     intro: [
@@ -260,7 +260,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '2-3',
+    stageId: 'd9193199-6424-5df5-b90b-3fd3665c6a67',
     requestTitle: '珈琲豆の秘密金庫とマスターのこだわり',
     client: 'moka',
     intro: [
@@ -284,7 +284,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '2-4',
+    stageId: 'eb488e99-3eeb-56ad-8db6-716fca47d7b3',
     requestTitle: 'シュッシュッと噴き出す蒸気ドアの向こう',
     client: 'poppo',
     intro: [
@@ -308,9 +308,9 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第3章：おつかい三昧の春らんまん (3-1 〜 3-24) =====
+  // ===== 第7章：おつかい三昧の春らんまん (7-1 〜 7-24) =====
   {
-    stageId: '3-1',
+    stageId: '6e466d1c-6446-50a6-9f20-5713b0f001bc',
     requestTitle: 'ひなたぼっこ争奪戦！鉢植えのお引越し',
     client: 'mimosa',
     intro: [
@@ -334,7 +334,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-2',
+    stageId: 'ee29dcf5-b86c-5d88-a78c-bcadf4f31c38',
     requestTitle: '駅前と公園、どっちが遠い？暗算大失敗',
     client: 'poppo',
     intro: [
@@ -358,7 +358,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-3',
+    stageId: 'c039a435-cf9f-5b6d-87cf-6bc49c25ab78',
     requestTitle: '工房の「絶対動かしちゃダメ」な定規',
     client: 'kurumi',
     intro: [
@@ -382,7 +382,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-4',
+    stageId: 'b4247893-4f8e-55a6-bf4b-bfd93240b2f4',
     requestTitle: '石段ガーデンで花びらチャレンジ',
     client: 'mimosa',
     intro: [
@@ -406,7 +406,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-5',
+    stageId: '039e4a88-0c87-5c92-8e17-3cf0b2f296ca',
     requestTitle: '小銭貯金箱の「あと2コイン」事件',
     client: 'coppe',
     intro: [
@@ -430,7 +430,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-6',
+    stageId: '377498db-d9ab-5616-bbb4-224392d3567f',
     requestTitle: 'おかわりコーヒーとカップのすり替え',
     client: 'moka',
     intro: [
@@ -454,7 +454,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-7',
+    stageId: 'f15cf767-4a5e-5cc3-a583-ef9a0b9066c1',
     requestTitle: 'スタンプカード3回分のパン屋さん',
     client: 'coppe',
     intro: [
@@ -478,7 +478,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-8',
+    stageId: 'f7b3e4bb-0166-575d-a501-a676dfc374f0',
     requestTitle: '2回に分けて荷物積み！坂道お届け',
     client: 'poppo',
     intro: [
@@ -502,7 +502,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-9',
+    stageId: 'd1c509c8-ae38-50bc-a8fa-ab48455d6760',
     requestTitle: '晴れスイッチがオフのまま雨具装備！？',
     client: 'mimosa',
     intro: [
@@ -526,7 +526,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-10',
+    stageId: 'b11c3a34-ea38-54b2-8739-ab0bb02b4dfe',
     requestTitle: '地図メモが破れた！？縦横ペアの解読',
     client: 'poppo',
     intro: [
@@ -550,7 +550,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-11',
+    stageId: '8ad7a0c6-1726-556b-ba4d-308098dc63b2',
     requestTitle: '焼きたてトレーの「2番目」つまみ食い未遂',
     client: 'coppe',
     intro: [
@@ -574,7 +574,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-12',
+    stageId: '627e9a97-0fe4-5eea-b8d4-b8130c2b866c',
     requestTitle: '秘密の豆リストと喫茶店の開錠スイッチ',
     client: 'moka',
     intro: [
@@ -598,7 +598,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-13',
+    stageId: 'ad8723b7-9cb3-5a23-a8e0-f0ddc061b223',
     requestTitle: 'おねむの郵便屋さんと倍速配達',
     client: 'poppo',
     intro: [
@@ -622,7 +622,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-14',
+    stageId: '0a3c9f77-c645-5cd5-af0e-bbc385222479',
     requestTitle: '花束お出かけメモの1行まとめ術',
     client: 'mimosa',
     intro: [
@@ -646,7 +646,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-15',
+    stageId: '041cf963-f0ba-508c-92a4-f44dac3db59d',
     requestTitle: '屋根裏の粉倉庫！同じ階段を何度も往復',
     client: 'coppe',
     intro: [
@@ -670,7 +670,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-16',
+    stageId: 'f734e8a9-cba0-5a6b-814c-dc38fc85ee09',
     requestTitle: '準備係と出発係のバタバタ連携',
     client: 'kurumi',
     intro: [
@@ -694,7 +694,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-17',
+    stageId: 'e41c8968-0b68-5dca-a17c-0cdd5b6ac63d',
     requestTitle: 'パン窯の蒸気ドアで焦らずひと休み',
     client: 'coppe',
     intro: [
@@ -718,7 +718,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-18',
+    stageId: '8adb3fdd-da52-5b73-a97b-ccffec78fe4f',
     requestTitle: '小包の重さチェック！3つの仕分けコース',
     client: 'poppo',
     intro: [
@@ -742,7 +742,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-19',
+    stageId: 'a90971e7-5050-5236-ba1f-7abfe3891ba7',
     requestTitle: '急ぎ足？のんびり？お天気しだいのお散歩',
     client: 'moka',
     intro: [
@@ -766,7 +766,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-20',
+    stageId: 'f66e8848-d720-552b-905d-bc7647dd47fa',
     requestTitle: '秘密の踏み石でゲートを開けよう',
     client: 'mimosa',
     intro: [
@@ -790,7 +790,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-21',
+    stageId: '91c103b3-4b14-5702-825b-17ba9f9def66',
     requestTitle: '2つの蒸気ゲートでタイミング勝負',
     client: 'mimosa',
     intro: [
@@ -814,7 +814,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-22',
+    stageId: '3164f81c-a2e0-50c3-8b9c-ed58da4e0c6b',
     requestTitle: 'ビリビリ巡回ロボットにご用心！',
     client: 'kurumi',
     intro: [
@@ -838,7 +838,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-23',
+    stageId: '156c1e98-7679-5841-bb20-4bc9e0bd9ea6',
     requestTitle: '広場のぐるぐるパトロールで目が回る〜',
     client: 'poppo',
     intro: [
@@ -862,7 +862,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '3-24',
+    stageId: '4197175c-0415-5922-90de-969c839b1e44',
     requestTitle: '商店街の合同大そうじリレー！',
     client: 'kurumi',
     intro: [
@@ -886,9 +886,9 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
 
-  // ===== 第4章：迷子の荷物とひとりじめ事件 (4-1 〜 4-12) =====
+  // ===== 第8章：迷子の荷物とひとりじめ事件 (8-1 〜 8-12) =====
   {
-    stageId: '4-1',
+    stageId: '50da55a5-9f54-56a0-9ca7-ad9d72ff3541',
     requestTitle: 'お花のタネ、手放したあとも気になっちゃう',
     client: 'mimosa',
     intro: [
@@ -912,7 +912,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-2',
+    stageId: '2cd33dd4-9627-54ce-97b8-a711e77061e4',
     requestTitle: 'お買い物カゴ、誰が持ってるの！？',
     client: 'coppe',
     intro: [
@@ -936,7 +936,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-3',
+    stageId: '3bfa7dd4-ab23-5565-9b0f-a597d3e73d62',
     requestTitle: '預けた大事なもの、ちゃんと返して〜！',
     client: 'moka',
     intro: [
@@ -960,7 +960,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-4',
+    stageId: '05bf262f-5786-5234-b6cc-9de582a1a776',
     requestTitle: '2つの光の玉を順番リレー',
     client: 'poppo',
     intro: [
@@ -984,7 +984,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-5',
+    stageId: '982d2f3c-0ac0-53b8-a8c4-e8d038dd8fa4',
     requestTitle: 'ランプのちょっと貸し出し＆ピカピカ磨き',
     client: 'moka',
     intro: [
@@ -1008,7 +1008,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-6',
+    stageId: '780244e4-ee33-5914-93ed-d60d1bf06489',
     requestTitle: '新種のお花、クンクン香りチェックは大人気',
     client: 'mimosa',
     intro: [
@@ -1032,7 +1032,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-7',
+    stageId: '93d94563-e767-55af-911d-43a5c6a17067',
     requestTitle: 'チョコペンは1本だけ！取り合いケンカ勃発',
     client: 'coppe',
     intro: [
@@ -1056,7 +1056,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-8',
+    stageId: 'b93e4f37-2a9d-5313-84f8-af74f2395f5e',
     requestTitle: 'まぶしすぎ！？特大パワーの光お届け',
     client: 'poppo',
     intro: [
@@ -1080,7 +1080,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-9',
+    stageId: 'f5a0f239-cfc0-553b-8c39-f24be2137f2e',
     requestTitle: '焼き菓子トレーの真ん中だけ味見タイム',
     client: 'coppe',
     intro: [
@@ -1104,7 +1104,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-10',
+    stageId: 'be100168-6dd5-54c6-b965-8e2b5f48f2bd',
     requestTitle: '端っこからザックリ花束づくり',
     client: 'mimosa',
     intro: [
@@ -1128,7 +1128,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-11',
+    stageId: '9ba6d447-0926-51b4-b323-bcd6e3074cc8',
     requestTitle: '数えたお豆の数だけトコトコ歩き',
     client: 'moka',
     intro: [
@@ -1152,7 +1152,7 @@ export const STORY_ACT1: StageStoryEntry[] = [
     ],
   },
   {
-    stageId: '4-12',
+    stageId: '9173a523-fa9e-5b50-adc2-b98d38e4c2a7',
     requestTitle: '町内会のおおそうじ・みんなでひと休み！',
     client: 'kurumi',
     intro: [

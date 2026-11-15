@@ -27,7 +27,7 @@ interface StoryLogModalProps {
   seenStories: SeenStoryMap;
   freeStudyMode: boolean;
   currentStageId?: string;
-  onPlayStoryBeat: (stageId: string, phase: StoryBeatPhase) => void;
+  onPlayStoryBeat: (stageUUID: string, phase: StoryBeatPhase) => void;
   onClose: () => void;
 }
 
@@ -309,7 +309,7 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
                   {isExpanded && (
                     <div className="grid grid-cols-1 gap-3 border-t border-[#E5D3BC] p-4 sm:grid-cols-2">
                       {grp.filteredStages.map((st) => {
-                        const story = getStageStory(st.displayId);
+                        const story = getStageStory(st.id);
                         if (!story) return null;
                         const client = STORY_CHARACTERS[story.client];
                         const unlocked = isStageUnlocked(st);
@@ -371,7 +371,7 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
                               <button
                                 type="button"
                                 disabled={!canPlayIntro}
-                                onClick={() => onPlayStoryBeat(st.displayId, 'intro')}
+                                onClick={() => onPlayStoryBeat(st.id, 'intro')}
                                 className="anime-btn flex min-h-[40px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#FFF8EE] px-3 text-xs font-bold text-[#4A352B] disabled:opacity-45 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer"
                               >
                                 {canPlayIntro ? (
@@ -385,7 +385,7 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
                               <button
                                 type="button"
                                 disabled={!canPlayOutro}
-                                onClick={() => onPlayStoryBeat(st.displayId, 'outro')}
+                                onClick={() => onPlayStoryBeat(st.id, 'outro')}
                                 className="anime-btn flex min-h-[40px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#CCFBF1] px-3 text-xs font-bold text-[#0F766E] disabled:opacity-45 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer"
                               >
                                 {canPlayOutro ? (

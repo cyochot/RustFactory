@@ -303,7 +303,7 @@ export default function App() {
       setShowFunctionRef(false);
       setShowStoryLog(false);
       setGameState('PLAYING');
-      if (!seenStories[target.id]?.intro && getStageStory(target.displayId)) {
+      if (!seenStories[target.id]?.intro && getStageStory(target.id)) {
         setActiveStory({
           stageId: target.id,
           phase: 'intro',
@@ -397,7 +397,7 @@ export default function App() {
           },
         }));
         const openClear = () => {
-          if (!seenStories[currentStage.id]?.outro && getStageStory(currentStage.displayId)) {
+          if (!seenStories[currentStage.id]?.outro && getStageStory(currentStage.id)) {
             setActiveStory({
               stageId: currentStage.id,
               phase: 'outro',
@@ -727,7 +727,7 @@ export default function App() {
     ? ALL_STAGES.find((s) => s.id === activeStory.stageId)
     : undefined;
   const activeStoryObj = activeStoryStage
-    ? getStageStory(activeStoryStage.displayId)
+    ? getStageStory(activeStoryStage.id)
     : undefined;
 
   return (
@@ -772,7 +772,7 @@ export default function App() {
               onPause={() => setGameState('PAUSED')}
               onOpenBook={() => setShowBookGuide(true)}
               onReplayStory={() => {
-                if (getStageStory(currentStage.displayId)) {
+                if (getStageStory(currentStage.id)) {
                   setActiveStory({
                     stageId: currentStage.id,
                     phase: 'intro',
@@ -836,9 +836,9 @@ export default function App() {
           seenStories={seenStories}
           freeStudyMode={freeStudyMode}
           currentStageId={currentStage.id}
-          onPlayStoryBeat={(stageId, beatPhase) => {
-            const stage = ALL_STAGES.find((candidate) => candidate.displayId === stageId);
-            if (stage && getStageStory(stage.displayId)) {
+          onPlayStoryBeat={(stageUUID, beatPhase) => {
+            const stage = ALL_STAGES.find((candidate) => candidate.id === stageUUID);
+            if (stage && getStageStory(stage.id)) {
               setActiveStory({
                 stageId: stage.id,
                 phase: beatPhase,
@@ -875,7 +875,7 @@ export default function App() {
         onOpenAtlas={() => setShowAtlas(true)}
         onOpenStoryLog={() => setShowStoryLog(true)}
         onReplayOutro={() => {
-          if (getStageStory(currentStage.displayId)) {
+          if (getStageStory(currentStage.id)) {
             setActiveStory({
               stageId: currentStage.id,
               phase: 'outro',
