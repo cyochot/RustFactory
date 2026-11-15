@@ -812,6 +812,7 @@ export default function App() {
       {activeStory && activeStoryObj && activeStoryStage && (
         <StoryNovelOverlay
           story={activeStoryObj}
+          stageDisplayId={activeStoryStage.displayId}
           chapterTitle={getStoryChapterTitle(activeStoryStage.chapter)}
           beatPhase={activeStory.phase}
           onComplete={handleCompleteActiveStory}

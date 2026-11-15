@@ -5,6 +5,7 @@ import {
   Unlock,
   CheckCircle2,
   Compass,
+  ArrowLeft,
 } from 'lucide-react';
 import { getStageDisplayTitle } from '../data/stages';
 import { StageDefinition, StageKind, StageProgress } from '../types/game';
@@ -35,6 +36,13 @@ interface StageAtlasModalProps {
   onClose: () => void;
 }
 
+interface AtlasChapter {
+  chapter: number;
+  title: string;
+  stages: StageDefinition[];
+  clearedCount: number;
+}
+
 export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
   stages,
   progress,
@@ -45,15 +53,34 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
   onClose,
 }) => {
   const activeStage = stages.find((s) => s.id === currentStageId) ?? stages[0];
-  const [selectedChapter, setSelectedChapter] = useState<number | 'all'>('all');
+  const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [statusFilter, setStatusFilter] = useState<AtlasStatusFilter>('all');
   const [kindFilter, setKindFilter] = useState<AtlasKindFilter>('all');
   const [pendingJumpId, setPendingJumpId] = useState<string | null>(null);
   const stageRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
+  const chapters = useMemo(() => {
+    const chapterMap = new Map<number, StageDefinition[]>();
+    for (const stage of stages) {
+      const chapterStages = chapterMap.get(stage.chapter) ?? [];
+      chapterStages.push(stage);
+      chapterMap.set(stage.chapter, chapterStages);
+    }
+
+    return Array.from(chapterMap, ([chapter, chapterStages]) => {
+      const orderedStages = chapterStages.sort((a, b) => a.index - b.index);
+      return {
+        chapter,
+        title: orderedStages[0]?.chapterTitle.replace(/^第\d+章\s*/, '') ?? '',
+        stages: orderedStages,
+        clearedCount: orderedStages.filter((stage) => progress[stage.id]?.cleared).length,
+      };
+    }).sort((a, b) => a.chapter - b.chapter);
+  }, [stages, progress]);
+
   const chapterStages = useMemo(
     () => stages
-      .filter((s) => selectedChapter === 'all' || s.chapter === selectedChapter)
+      .filter((stage) => stage.chapter === selectedChapter)
       .sort((a, b) => a.index - b.index),
     [stages, selectedChapter]
   );
@@ -78,13 +105,19 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
       el.scrollIntoView({ block: 'center', behavior: 'smooth' });
       setPendingJumpId(null);
     }
-  }, [pendingJumpId, selectedChapter, statusFilter, kindFilter]);
+  }, [pendingJumpId, selectedChapter, filteredStages]);
 
   const handleJumpToCurrent = () => {
-    setSelectedChapter('all');
+    setSelectedChapter(activeStage.chapter);
     setStatusFilter('all');
     setKindFilter('all');
     setPendingJumpId(activeStage.id);
+  };
+
+  const handleSelectChapter = (chapter: number) => {
+    setSelectedChapter(chapter);
+    setStatusFilter('all');
+    setKindFilter('all');
   };
 
   // Determine unlocked stages sequentially
@@ -102,7 +135,7 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#4A352B] bg-[#F7EBDA] px-5 py-4">
           <div>
             <h2 className="font-display text-xl font-extrabold text-[#4A352B]">
-              Rust工房 ステージ地図（全{stages.length}ステージ）
+              Rust工房 ステージ一覧（全{stages.length}ステージ）
             </h2>
             <p className="text-xs font-medium text-[#7C6154]">
               『プログラミング言語Rust 日本語版』第1章〜第20章を基礎・応用・実践で段階収録
@@ -141,83 +174,86 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
         {/* Filter & Navigation Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-[#E5D3BC] bg-[#FFF8EE] px-5 py-2.5">
           <div className="flex flex-wrap items-center gap-2">
-            <label className="flex min-h-[38px] items-center gap-2 rounded-xl border border-[#E5D3BC] bg-[#FFFDF9] px-3 text-xs font-bold text-[#4A352B]">
-              <span>章</span>
-              <select
-                value={selectedChapter}
-                onChange={(event) => setSelectedChapter(event.target.value === 'all' ? 'all' : Number(event.target.value))}
-                aria-label="章で絞り込む"
-                className="max-w-[180px] bg-transparent font-bold outline-none"
-              >
-                <option value="all">全章・全体順</option>
-                {Array.from(new Set(stages.map((stage) => stage.chapter))).sort((a, b) => a - b).map((chapter) => (
-                  <option key={chapter} value={chapter}>{`第${chapter}章`}</option>
-                ))}
-              </select>
-            </label>
+            {selectedChapter === null ? (
+              <p className="px-1 text-sm font-extrabold text-[#4A352B]">学習する章を選択</p>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setSelectedChapter(null)}
+                  className="flex min-h-[38px] items-center gap-1.5 rounded-xl border border-[#E5D3BC] bg-[#FFFDF9] px-3 text-xs font-bold text-[#4A352B] hover:bg-[#F7EBDA] cursor-pointer"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  <span>章一覧へ戻る</span>
+                </button>
+                <p className="min-w-0 text-xs font-extrabold text-[#4A352B]">
+                  第{selectedChapter}章 · {chapters.find((chapter) => chapter.chapter === selectedChapter)?.title}
+                </p>
 
-            {/* Status Filter Segmented Control */}
-            <div
-              className="flex items-center gap-1 rounded-xl border border-[#E5D3BC] bg-[#F7EBDA] p-1"
-              role="group"
-              aria-label="クリア状況で絞り込む"
-            >
-              {(
-                [
-                  { id: 'all', label: 'すべて' },
-                  { id: 'uncleared', label: '未クリア' },
-                  { id: 'cleared', label: 'クリア済み' },
-                ] as const
-              ).map((opt) => {
-                const active = statusFilter === opt.id;
-                return (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    onClick={() => setStatusFilter(opt.id)}
-                    className={`min-h-[32px] rounded-lg px-2.5 py-1 text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                      active
-                        ? 'bg-[#FFFDF9] text-[#4A352B] shadow-sm'
-                        : 'text-[#7C6154] hover:text-[#4A352B]'
-                    }`}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
+                {/* Status Filter Segmented Control */}
+                <div
+                  className="flex items-center gap-1 rounded-xl border border-[#E5D3BC] bg-[#F7EBDA] p-1"
+                  role="group"
+                  aria-label="クリア状況で絞り込む"
+                >
+                  {(
+                    [
+                      { id: 'all', label: 'すべて' },
+                      { id: 'uncleared', label: '未クリア' },
+                      { id: 'cleared', label: 'クリア済み' },
+                    ] as const
+                  ).map((opt) => {
+                    const active = statusFilter === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => setStatusFilter(opt.id)}
+                        className={`min-h-[32px] rounded-lg px-2.5 py-1 text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                          active
+                            ? 'bg-[#FFFDF9] text-[#4A352B] shadow-sm'
+                            : 'text-[#7C6154] hover:text-[#4A352B]'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
 
-            {/* Kind Filter Segmented Control */}
-            <div
-              className="flex items-center gap-1 rounded-xl border border-[#E5D3BC] bg-[#F7EBDA] p-1"
-              role="group"
-              aria-label="難易度種別で絞り込む"
-            >
-              {(
-                [
-                  { id: 'all', label: '全種別' },
-                  { id: 'basic', label: '基礎' },
-                  { id: 'puzzle', label: 'パズル' },
-                  { id: 'challenge', label: '挑戦' },
-                ] as const
-              ).map((opt) => {
-                const active = kindFilter === opt.id;
-                return (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    onClick={() => setKindFilter(opt.id)}
-                    className={`min-h-[32px] rounded-lg px-2.5 py-1 text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                      active
-                        ? 'bg-[#FFFDF9] text-[#4A352B] shadow-sm'
-                        : 'text-[#7C6154] hover:text-[#4A352B]'
-                    }`}
-                  >
-                    {opt.label}
-                  </button>
-                );
-              })}
-            </div>
+                {/* Kind Filter Segmented Control */}
+                <div
+                  className="flex items-center gap-1 rounded-xl border border-[#E5D3BC] bg-[#F7EBDA] p-1"
+                  role="group"
+                  aria-label="難易度種別で絞り込む"
+                >
+                  {(
+                    [
+                      { id: 'all', label: '全種別' },
+                      { id: 'basic', label: '基礎' },
+                      { id: 'puzzle', label: 'パズル' },
+                      { id: 'challenge', label: '挑戦' },
+                    ] as const
+                  ).map((opt) => {
+                    const active = kindFilter === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => setKindFilter(opt.id)}
+                        className={`min-h-[32px] rounded-lg px-2.5 py-1 text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                          active
+                            ? 'bg-[#FFFDF9] text-[#4A352B] shadow-sm'
+                            : 'text-[#7C6154] hover:text-[#4A352B]'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex items-center gap-2">
@@ -232,9 +268,28 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
           </div>
         </div>
 
-        {/* Flat Stage List */}
-        <div className="flex-1 overflow-y-auto p-5">
-          {filteredStages.length === 0 ? (
+        {/* Chapter Picker or Chapter Stage List */}
+        <div className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-5">
+          {selectedChapter === null ? (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {chapters.map((chapter) => (
+                <button
+                  key={chapter.chapter}
+                  type="button"
+                  onClick={() => handleSelectChapter(chapter.chapter)}
+                  className="flex min-h-28 flex-col justify-between rounded-2xl border-2 border-[#4A352B] bg-white p-4 text-left shadow-[0_3px_0_#D9C0A3] transition-transform duration-150 hover:-translate-y-0.5 cursor-pointer"
+                >
+                  <div>
+                    <p className="text-xs font-extrabold text-[#EA580C]">第{chapter.chapter}章</p>
+                    <h3 className="mt-1 text-sm font-extrabold text-[#4A352B]">{chapter.title}</h3>
+                  </div>
+                  <p className="mt-3 text-xs font-bold text-[#7C6154]">
+                    {chapter.stages.length}ステージ · クリア {chapter.clearedCount}/{chapter.stages.length}
+                  </p>
+                </button>
+              ))}
+            </div>
+          ) : filteredStages.length === 0 ? (
             <div className="rounded-2xl border-2 border-dashed border-[#D9C0A3] bg-[#FFFDF9] p-8 text-center">
               <p className="text-sm font-bold text-[#4A352B]">
                 {statusFilter === 'uncleared'

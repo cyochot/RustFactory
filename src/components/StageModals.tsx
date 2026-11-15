@@ -70,7 +70,7 @@ export const StageModals: React.FC<StageModalsProps> = ({
               className="anime-btn flex h-12 items-center justify-center gap-2 rounded-xl bg-[#CCFBF1] text-sm font-bold text-[#0F766E] cursor-pointer"
             >
               <Map className="h-4 w-4" />
-              <span>ステージ地図を開く</span>
+              <span>ステージ一覧を開く</span>
             </button>
             <button
               type="button"
@@ -159,7 +159,7 @@ export const StageModals: React.FC<StageModalsProps> = ({
                 onClick={onOpenAtlas}
                 className="anime-btn flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[#0D9488] px-5 text-sm font-extrabold text-white whitespace-nowrap cursor-pointer"
               >
-                <span>全{totalStages}ステージ制覇！地図を見る</span>
+                <span>全{totalStages}ステージ制覇！ステージ一覧を見る</span>
               </button>
             )}
           </div>

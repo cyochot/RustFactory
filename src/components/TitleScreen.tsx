@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Map, Play, BookOpen, Award, Trash2 } from 'lucide-react';
+import { Map, Play, Trash2 } from 'lucide-react';
 import { StageDefinition, StageProgress } from '../types/game';
 import titleBgImg from '../assets/images/atelier_title_bg_1794618239723.jpg';
 
@@ -46,8 +46,6 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
       <div className="relative z-10 flex h-full flex-col justify-between p-6 md:p-12 lg:p-16 max-w-2xl">
         {/* Top quiet progress line (no pills) */}
         <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-[#7C6154]">
-          <span>プログラミング言語Rust 日本語版 第1章〜第20章 全網羅</span>
-          <span aria-hidden="true">·</span>
           <span className="tabular-nums text-[#4A352B]">
             クリア {clearedCount} / {stages.length}
           </span>
@@ -91,7 +89,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
 
             <div>
               <p className="font-display text-sm font-bold tracking-wide text-[#EA580C]">
-                KOBO RUST · かわいいアニメ調アクションパズル
+                KOBO RUST
               </p>
               <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#4A352B] leading-tight">
                 鉄と歯車のRust工房
@@ -100,7 +98,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
           </div>
 
           <p className="max-w-lg text-sm sm:text-base font-medium leading-relaxed text-[#5C4438]">
-            プログラムの超基礎（順次実行・変数・分岐）から、Rustならではの所有権・借用・スマートポインター・並行処理まで。本物のRustコードを書いて、かわいい機械カニ「フェリスちゃん」と一緒に全{stages.length}ステージを冒険しよう！
+            Rustを学びながら、フェリスちゃんと工房を冒険しよう。
           </p>
 
           {/* Primary Start CTA + Stage Atlas */}
@@ -110,12 +108,12 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               onClick={onStartNext}
               className="anime-btn flex h-13 items-center gap-2.5 rounded-2xl bg-[#F97316] px-6 text-base font-extrabold text-white whitespace-nowrap cursor-pointer"
             >
-              <Play className="h-5 w-5 fill-current" />
-              <span>
-                {clearedCount > 0
-                  ? `つづきから遊ぶ (${nextStage.displayId})`
-                  : '工房へあそびにいく'}
-              </span>
+                <Play className="h-5 w-5 fill-current" />
+                <span>
+                  {clearedCount > 0
+                  ? `つづきから (${nextStage.displayId})`
+                  : 'はじめる'}
+                </span>
             </button>
 
             <button
@@ -124,7 +122,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               className="anime-btn flex h-13 items-center gap-2 rounded-2xl bg-[#FFFDF9] px-5 text-sm font-bold text-[#4A352B] whitespace-nowrap cursor-pointer"
             >
               <Map className="h-4 w-4 text-[#0D9488]" />
-              <span>全{stages.length}ステージ地図</span>
+              <span>ステージ一覧</span>
             </button>
 
             <button
@@ -134,30 +132,14 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               className="anime-btn flex h-13 items-center gap-2 rounded-2xl bg-[#FFFDF9] px-4 text-sm font-bold text-[#9F1239] whitespace-nowrap cursor-pointer"
             >
               <Trash2 className="h-4 w-4 text-[#E11D48]" />
-              <span>セーブ初期化</span>
+              <span>初期化</span>
             </button>
-          </div>
-
-          {/* 3-line concise feature highlights without cards-inside-cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-[#D9C0A3]/70 text-xs text-[#5C4438]">
-            <div className="flex items-start gap-2">
-              <BookOpen className="h-4 w-4 shrink-0 text-[#EA580C] mt-0.5" />
-              <span>Book-ja 第1〜20章を1トピックずつ細分化</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <Play className="h-4 w-4 shrink-0 text-[#0D9488] mt-0.5" />
-              <span>実行タイミングに左右されない同期ティック制</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <Award className="h-4 w-4 shrink-0 text-[#EC4899] mt-0.5" />
-              <span>優しい日本語コンパイラ診断＆1クリック入力</span>
-            </div>
           </div>
         </div>
 
         {/* Single flat control-hint line */}
         <p className="text-xs font-bold text-[#7C6154]">
-          Enter / Space で開始 · Ctrl+Enter コンパイル実行 · R リセット · Esc メニュー
+          Enter / Space 開始 · Ctrl+Enter 実行 · R リセット · Esc メニュー
         </p>
       </div>
     </div>
