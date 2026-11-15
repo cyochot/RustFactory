@@ -9,8 +9,8 @@ const storyIds = new Set<string>();
 const chapterFirstAppearance: number[] = [];
 const stagesByChapter = new Map<number, typeof ALL_STAGES>();
 
-if (ALL_STAGES.length !== 384) {
-  failures.push(`Expected 384 stages, found ${ALL_STAGES.length}.`);
+if (ALL_STAGES.length !== 400) {
+  failures.push(`Expected 400 stages, found ${ALL_STAGES.length}.`);
 }
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -117,10 +117,82 @@ for (const stage of ALL_STAGES) {
   if (!storyIds.has(stage.id)) failures.push(`${stage.id}: missing story reference.`);
 }
 
+const prerequisiteFeatures: Array<{ name: string; regex: RegExp }> = [
+  { name: 'println!', regex: /println!/ },
+  { name: 'let', regex: /\blet\s+[a-z_]/ },
+  { name: 'let mut', regex: /\blet\s+mut\b/ },
+  { name: 'const', regex: /\bconst\s+[A-Z_]/ },
+  { name: 'shadowing', regex: /\blet\s+([a-z_][a-zA-Z0-9_]*)\b[\s\S]*\blet\s+\1\b/ },
+  { name: 'tuple destructuring', regex: /let\s*\([^)]+,[^)]+\)\s*=/ },
+  { name: 'array literal', regex: /\[\s*\d+\s*,/ },
+  { name: 'fn definition', regex: /\bfn\s+(?!main\b)[a-z_]/ },
+  { name: 'if/else', regex: /\bif\s+(?!let\b)/ },
+  { name: 'else if', regex: /\belse\s+if\b/ },
+  { name: 'loop', regex: /\bloop\s*\{/ },
+  { name: 'while', regex: /\bwhile\s+/ },
+  { name: 'for', regex: /\bfor\s+[a-zA-Z_]+\s+in\b/ },
+  { name: 'is_gate_open()', regex: /\bis_gate_open\b/ },
+  { name: 'at_goal()', regex: /\bat_goal\b/ },
+  { name: 'add_vault()', regex: /\badd_vault\b/ },
+  { name: 'grab_core()/deliver()', regex: /\b(grab_core|deliver)\b/ },
+  { name: '& / &mut borrow', regex: /&mut\s+[a-z_]|&[a-z_]+/ },
+  { name: 'slice / conveyor_batch()', regex: /inspect_slice|conveyor_batch/ },
+  { name: 'struct', regex: /\bstruct\s+[A-Z]/ },
+  { name: 'impl', regex: /\bimpl\b/ },
+  { name: '::new()', regex: /::new\(/ },
+  { name: '&mut self', regex: /&mut\s+self\b/ },
+  { name: 'enum', regex: /\benum\s+[A-Z]/ },
+  { name: 'match', regex: /\bmatch\s+/ },
+  { name: 'Option/Some/None', regex: /\b(Option|Some|None)\b/ },
+  { name: 'if let', regex: /\bif\s+let\b/ },
+  { name: 'Ordering / try_dial()', regex: /\b(Ordering::|try_dial)\b/ },
+  { name: 'mod / pub', regex: /\bmod\s+[a-z_]/ },
+  { name: 'use', regex: /\buse\s+[a-z_]/ },
+  { name: 'Vec / vec!', regex: /\b(vec!|Vec::)/ },
+  { name: 'String::', regex: /\bString::/ },
+  { name: 'HashMap::', regex: /\bHashMap::/ },
+  { name: '.unwrap_or()', regex: /\.unwrap_or\(/ },
+  { name: 'Result / read_part()', regex: /\b(Result<|read_part)/ },
+  { name: '? operator', regex: /\?\s*;/ },
+  { name: 'generics <T>', regex: /<[A-Z][a-zA-Z]*(?:,\s*[A-Z][a-zA-Z]*)*>/ },
+  { name: 'trait', regex: /\btrait\s+[A-Z]/ },
+  { name: "lifetime <'a>", regex: /<'a>/ },
+  { name: '#[test]', regex: /#\[test\]/ },
+  { name: 'cli_args / env_flag / eprintln!', regex: /\b(cli_args|env_flag|eprintln!)\b/ },
+  { name: '.iter()', regex: /\.iter\(\)/ },
+  { name: '#[cfg(...)]', regex: /#\[cfg\(/ },
+  { name: 'Box / Rc / RefCell', regex: /\b(Box::|Rc::|RefCell::)/ },
+  { name: 'thread / mpsc / Arc / Mutex', regex: /\b(thread::spawn|mpsc::|Arc::|Mutex::)/ },
+  { name: 'unsafe / macro_rules!', regex: /\bunsafe\b|macro_rules!/ },
+];
+
+for (const feat of prerequisiteFeatures) {
+  let firstGuidedIndex = Number.POSITIVE_INFINITY;
+  const unlearnedEmpty: string[] = [];
+
+  for (const stage of ALL_STAGES) {
+    const trimmedStarter = stage.starterCode.trim();
+    const isEmptyStarter = trimmedStarter === 'fn main() {\n    \n}' || trimmedStarter === '';
+    if (!feat.regex.test(stage.solutionCode)) continue;
+
+    if (!isEmptyStarter || feat.regex.test(stage.starterCode)) {
+      if (stage.index < firstGuidedIndex) firstGuidedIndex = stage.index;
+    } else if (stage.index < firstGuidedIndex) {
+      unlearnedEmpty.push(stage.displayId);
+    }
+  }
+
+  if (unlearnedEmpty.length > 0) {
+    failures.push(
+      `Prerequisite violation for "${feat.name}": used in empty starter stage(s) [${unlearnedEmpty.join(', ')}] before first guided introduction.`
+    );
+  }
+}
+
 if (failures.length > 0) {
   console.error(`Stage verification failed with ${failures.length} issue(s):`);
   for (const failure of failures) console.error(`- ${failure}`);
   process.exitCode = 1;
 } else {
-  console.log(`Verified ${ALL_STAGES.length} stages across 20 chapters: stable UUIDs, chapter-local IDs, story references, solutions, and starters.`);
+  console.log(`Verified ${ALL_STAGES.length} stages across 20 chapters: stable UUIDs, chapter-local IDs, prerequisite order, story references, solutions, and starters.`);
 }

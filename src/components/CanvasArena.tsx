@@ -378,16 +378,21 @@ function drawCuteCrabBot(
 
   // Direction indicator arrow
   ctx.save();
-  ctx.translate(lookDx * size * 0.46, lookDy * size * 0.46);
+  ctx.translate(lookDx * size * 0.51, lookDy * size * 0.49);
   ctx.rotate((dir * Math.PI) / 2);
+  const arrowTip = Math.max(11, size * 0.21);
+  const arrowTail = Math.max(7, size * 0.13);
+  const arrowHalfW = Math.max(9.5, size * 0.19);
   ctx.beginPath();
-  ctx.moveTo(6, 0);
-  ctx.lineTo(-4, -5);
-  ctx.lineTo(-4, 5);
+  ctx.moveTo(arrowTip, 0);
+  ctx.lineTo(-arrowTail, -arrowHalfW);
+  ctx.lineTo(-arrowTail * 0.55, 0);
+  ctx.lineTo(-arrowTail, arrowHalfW);
   ctx.closePath();
   ctx.fillStyle = '#FDE047';
   ctx.fill();
-  ctx.lineWidth = 1.8;
+  ctx.lineWidth = Math.max(2.2, size * 0.042);
+  ctx.lineJoin = 'round';
   ctx.strokeStyle = INK;
   ctx.stroke();
   ctx.restore();
@@ -1359,14 +1364,26 @@ export const CanvasArena: React.FC<CanvasArenaProps> = ({
 
       {/* Low-occlusion perimeter HUD (pointer-events: none wrapper) */}
       <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-3">
-        <div className="pointer-events-auto flex items-center gap-2 rounded-xl border-2 border-[#4A352B] bg-[#FFFDF9] px-3 py-1.5 shadow-[0_3px_0_#D9C0A3]">
-          <span className="font-code text-xs font-bold text-[#EA580C]">
-            {stage.displayId}
-          </span>
-          <span className="text-xs text-[#7C6154]">·</span>
-          <span className="text-xs font-bold text-[#4A352B] truncate max-w-[230px]">
-            {getStageDisplayTitle(stage)}
-          </span>
+        <div className="pointer-events-auto flex min-w-0 items-center gap-2">
+          <button
+            type="button"
+            onClick={onPause}
+            aria-label="一時停止メニュー"
+            title="一時停止メニュー (Esc)"
+            className="anime-btn flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FFFDF9] text-[#4A352B] cursor-pointer"
+          >
+            <Pause className="h-4 w-4" />
+          </button>
+
+          <div className="flex h-9 min-w-0 items-center gap-2 rounded-xl border-2 border-[#4A352B] bg-[#FFFDF9] px-3 shadow-[0_3px_0_#D9C0A3]">
+            <span className="font-code text-xs font-bold text-[#EA580C] shrink-0">
+              {stage.displayId}
+            </span>
+            <span className="text-xs text-[#7C6154] shrink-0">·</span>
+            <span className="text-xs font-bold text-[#4A352B] truncate max-w-[230px]">
+              {getStageDisplayTitle(stage)}
+            </span>
+          </div>
         </div>
 
         <div className="pointer-events-auto flex items-center gap-2">
@@ -1399,15 +1416,6 @@ export const CanvasArena: React.FC<CanvasArenaProps> = ({
             className="anime-btn flex h-9 w-9 items-center justify-center rounded-xl bg-[#FFFDF9] text-[#4A352B] cursor-pointer"
           >
             {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
-
-          <button
-            type="button"
-            onClick={onPause}
-            aria-label="一時停止メニュー"
-            className="anime-btn flex h-9 w-9 items-center justify-center rounded-xl bg-[#FFFDF9] text-[#4A352B] cursor-pointer"
-          >
-            <Pause className="h-4 w-4" />
           </button>
         </div>
       </div>

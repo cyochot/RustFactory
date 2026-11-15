@@ -108,102 +108,6 @@ export const STORY_CHAPTER_1: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "97cc03cb-b7c6-531c-85f4-775660346be9",
-    "requestTitle": "パン屋の「いらっしゃいませ！」大音量事件",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "normal",
-        "text": "焼きたてパンが並んだ合図に、元気よく店先で「おはよう！」って声かけしてくれるお迎え係をお願いしたいんだ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "のど飴なめたから準備バッチリカニ！町中に響きわたる声であいさつするカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "おお〜っ、元気がよすぎて屋根の上のハトまでお辞儀したよ！お礼のクリームパン置いとくね！"
-      }
-    ]
-  },
-  {
-    "stageId": "8fbca29b-fc90-5a12-b7f2-1038db1c6314",
-    "requestTitle": "喫茶店の常連さん呼び出しトラブル",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "おはよう。今日は混みそうだから、お客さんの番号札をカウンターで分かりやすく読み上げてくれると助かるんだがね。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "モカさんおはよう！フェリスちゃん、注文した人の番号を間違えて「自分の年齢」とか言わないでね？"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "よし、間違えずに届いたね。おかげでミルクの泡立てもちょうどよく仕上がったよ。"
-      }
-    ]
-  },
-  {
-    "stageId": "c3cdcf8a-02f3-54a9-9358-f873fcb627de",
-    "requestTitle": "出発まえの「いってきます！」忘れ",
-    "client": "poppo",
-    "intro": [
-      {
-        "speaker": "poppo",
-        "emotion": "panic",
-        "text": "あっ、また朝ごはんのトーストくわえたまま飛び出してきちゃいました！郵便局では「出発報告」と「到着報告」がルールなのに！"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ポッポさん、まず落ち着いてパンを飲み込もうね。フェリスちゃんが代わりに出発と到着のあいさつ、ちゃんとしてくるよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "poppo",
-        "emotion": "happy",
-        "text": "出発も到着もパーフェクトな礼儀正しさ！見習わなくっちゃ……。"
-      }
-    ]
-  },
-  {
-    "stageId": "b022d65a-c79c-5290-93b0-e24c94ca7c37",
-    "requestTitle": "ご近所あいさつ回りでぜんまい切れ！？",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "開店祝いのご近所あいさつ巡りだよ！U字の通りをぐるっと回りながら、パン屋さんも花屋さんも一気に挨拶しちゃおう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "あいさつのたびに手土産もらえる予感がするカニ！はりきって行くカニ〜！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "みんなと仲良くなれたし大成功！……ってフェリスちゃん、もらいすぎたお菓子で動きが重くなってるよ！"
-      }
-    ]
-  },
-  {
     "stageId": "56ba2a08-9045-5e05-a06d-61cd7405338b",
     "requestTitle": "連動スイッチの順序制御の依頼",
     "client": "kurumi",
@@ -552,64 +456,6 @@ export const STORY_CHAPTER_1: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "e34ed4af-4924-5008-9856-45f158f643a8",
-    "requestTitle": "花屋さんの臨時お茶会、大盛況！",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "今日は花屋さんの庭でお茶会！ミモザさんが花柄のテーブルクロスを広げたら、風で飛んでいった帽子を追いかけてフェリスちゃんが庭をぐるぐる。奥の蒸気門の向こうでは、赤い光がちらちらしているよ。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "帽子をつかまえたカニ！……と思ったら、ミモザさんの大きな花びらだったロボ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "まあ、花びらを帽子にするのもかわいいわね。お茶菓子を並べたら、みんなでのんびりしましょう♪"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "花びらの帽子でお茶会も華やかだね！……ってフェリスちゃん、お茶菓子を帽子にのせないで！"
-      }
-    ]
-  },
-  {
-    "stageId": "88728e13-36e6-54a1-8354-99c8bc40d969",
-    "requestTitle": "商店街の巨大サンドイッチ作り",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "商店街のみんなで巨大サンドイッチを作るよ！コッペさんのパンに、ミモザさんのレタスとモカさんのトマトをのせて、最後にフェリスちゃんが旗を立ててね。工房のベルトの上を大きなお皿がゆっくり流れてくるよ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "任せるカニ！旗を高く……あっ、僕の頭に刺さっちゃったカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "旗も立ったし、サンドイッチの完成！フェリスちゃん、その旗は食べられないよ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ええっ、飾りのピックじゃなかったカニ！？あぶないところだったカニ〜！"
-      }
-    ]
-  },
-  {
     "stageId": "3dc08e11-a91c-53de-9ebb-d47c15b5ecc1",
     "requestTitle": "お昼寝ネコに毛布をお届け",
     "client": "kurumi",
@@ -697,35 +543,6 @@ export const STORY_CHAPTER_1: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "f57d3e58-9575-5163-8c39-5ba16985ba21",
-    "requestTitle": "モカさんのコーヒー豆、いい香り！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "モカさんが新しいコーヒー豆を焙煎したよ。お店いっぱいに香りが広がって、フェリスちゃんの鼻がくんくん止まらない！焙煎機のそばでは小さな火花がぱちぱちしてるよ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "この香り、ふわふわの雲みたいカニ〜！豆を一粒だけ見せてもらうカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "豆を挽く前から楽しんでくれてうれしいよ。フェリス、鼻がくすぐったくてくしゃみが出そうだね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "はっくしょん！……あっ、コーヒーの泡がハートになったカニ！"
-      }
-    ]
-  },
-  {
     "stageId": "9e823160-a764-556e-95b9-48f519d8e6c4",
     "requestTitle": "ミモザさんの花束、色合わせ大作戦",
     "client": "kurumi",
@@ -755,6 +572,136 @@ export const STORY_CHAPTER_1: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "f57d3e58-9575-5163-8c39-5ba16985ba21",
+    "requestTitle": "モカさんのコーヒー豆、いい香り！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "モカさんが新しいコーヒー豆を焙煎したよ。お店いっぱいに香りが広がって、フェリスちゃんの鼻がくんくん止まらない！焙煎機のそばでは小さな火花がぱちぱちしてるよ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "この香り、ふわふわの雲みたいカニ〜！豆を一粒だけ見せてもらうカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "豆を挽く前から楽しんでくれてうれしいよ。フェリス、鼻がくすぐったくてくしゃみが出そうだね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "はっくしょん！……あっ、コーヒーの泡がハートになったカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "e34ed4af-4924-5008-9856-45f158f643a8",
+    "requestTitle": "花屋さんの臨時お茶会、大盛況！",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "今日は花屋さんの庭でお茶会！ミモザさんが花柄のテーブルクロスを広げたら、風で飛んでいった帽子を追いかけてフェリスちゃんが庭をぐるぐる。奥の蒸気門の向こうでは、赤い光がちらちらしているよ。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "帽子をつかまえたカニ！……と思ったら、ミモザさんの大きな花びらだったロボ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "まあ、花びらを帽子にするのもかわいいわね。お茶菓子を並べたら、みんなでのんびりしましょう♪"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "花びらの帽子でお茶会も華やかだね！……ってフェリスちゃん、お茶菓子を帽子にのせないで！"
+      }
+    ]
+  },
+  {
+    "stageId": "97cc03cb-b7c6-531c-85f4-775660346be9",
+    "requestTitle": "パン屋の「いらっしゃいませ！」大音量事件",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "焼きたてパンが並んだ合図に、元気よく店先で「おはよう！」って声かけしてくれるお迎え係をお願いしたいんだ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "のど飴なめたから準備バッチリカニ！町中に響きわたる声であいさつするカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "おお〜っ、元気がよすぎて屋根の上のハトまでお辞儀したよ！お礼のクリームパン置いとくね！"
+      }
+    ]
+  },
+  {
+    "stageId": "c3cdcf8a-02f3-54a9-9358-f873fcb627de",
+    "requestTitle": "出発まえの「いってきます！」忘れ",
+    "client": "poppo",
+    "intro": [
+      {
+        "speaker": "poppo",
+        "emotion": "panic",
+        "text": "あっ、また朝ごはんのトーストくわえたまま飛び出してきちゃいました！郵便局では「出発報告」と「到着報告」がルールなのに！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "ポッポさん、まず落ち着いてパンを飲み込もうね。フェリスちゃんが代わりに出発と到着のあいさつ、ちゃんとしてくるよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "出発も到着もパーフェクトな礼儀正しさ！見習わなくっちゃ……。"
+      }
+    ]
+  },
+  {
+    "stageId": "8fbca29b-fc90-5a12-b7f2-1038db1c6314",
+    "requestTitle": "喫茶店の常連さん呼び出しトラブル",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "おはよう。今日は混みそうだから、お客さんの番号札をカウンターで分かりやすく読み上げてくれると助かるんだがね。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "モカさんおはよう！フェリスちゃん、注文した人の番号を間違えて「自分の年齢」とか言わないでね？"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "よし、間違えずに届いたね。おかげでミルクの泡立てもちょうどよく仕上がったよ。"
+      }
+    ]
+  },
+  {
     "stageId": "fc1e8444-017a-5f77-a6d3-646044eec856",
     "requestTitle": "商店街の朝、フェリスのあいさつ大作戦",
     "client": "kurumi",
@@ -780,6 +727,59 @@ export const STORY_CHAPTER_1: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "おはようの声を少し小さくしたら、今度は自分に聞こえなかったカニ！朝の声量はむずかしいカニ〜！"
+      }
+    ]
+  },
+  {
+    "stageId": "b022d65a-c79c-5290-93b0-e24c94ca7c37",
+    "requestTitle": "ご近所あいさつ回りでぜんまい切れ！？",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "開店祝いのご近所あいさつ巡りだよ！U字の通りをぐるっと回りながら、パン屋さんも花屋さんも一気に挨拶しちゃおう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "あいさつのたびに手土産もらえる予感がするカニ！はりきって行くカニ〜！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "みんなと仲良くなれたし大成功！……ってフェリスちゃん、もらいすぎたお菓子で動きが重くなってるよ！"
+      }
+    ]
+  },
+  {
+    "stageId": "88728e13-36e6-54a1-8354-99c8bc40d969",
+    "requestTitle": "商店街の巨大サンドイッチ作り",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "商店街のみんなで巨大サンドイッチを作るよ！コッペさんのパンに、ミモザさんのレタスとモカさんのトマトをのせて、最後にフェリスちゃんが旗を立ててね。工房のベルトの上を大きなお皿がゆっくり流れてくるよ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "任せるカニ！旗を高く……あっ、僕の頭に刺さっちゃったカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "旗も立ったし、サンドイッチの完成！フェリスちゃん、その旗は食べられないよ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ええっ、飾りのピックじゃなかったカニ！？あぶないところだったカニ〜！"
       }
     ]
   }

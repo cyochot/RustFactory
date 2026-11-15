@@ -26,174 +26,6 @@ export const STORY_CHAPTER_12: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "82b69a1f-ff10-522f-b41d-dc663fc6fa3f",
-    "requestTitle": "バラバラの手がかりを手帳1冊にまとめよう",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "捜査メモがポケットのあちこちに散らかっていると探しづらいね。設定専用のカード1枚にまとめられないかい？"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "それ名案！手帳のカードにスッキリひとまとめにしておけば、ポケットを探り回らなくて済むよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "情報が1枚のカードにまとまると、あとからの見直しもぐっと楽になるね。"
-      }
-    ]
-  },
-  {
-    "stageId": "cdcc5256-5359-5cce-a2aa-61ab4a272fc1",
-    "requestTitle": "昼モード・夜モードの切り替えスイッチ",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "夜のランプがオンのときは、お昼のときとちょっと歩数を変えてお庭を見回りたいわ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "お昼は元気に大股、夜はお星さまを見ながらそろり歩きカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "時間帯に合わせて賢く歩き方を変えてくれて助かったわ！"
-      }
-    ]
-  },
-  {
-    "stageId": "cf512ac5-9221-505e-870c-1d52ec940528",
-    "requestTitle": "忘れん坊さんにも優しいお助けメッセージ",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "panic",
-        "text": "うっかり必要なメモを渡し忘れたとき、機械がプイッと止まっちゃわないで優しく「忘れてるよ〜」って教えてほしいんだ！"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "任せて！足りないときは親切なメッセージでお知らせするようにしておけば、誰でも安心して使えるね！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "これなら初めて使うお客さんにも優しい道具になるね！"
-      }
-    ]
-  },
-  {
-    "stageId": "c7c95c3c-4f38-5cdc-9522-57b0cea1a312",
-    "requestTitle": "普通の伝票と赤い注意メモの仕分け術",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "ふつうのお手紙と緊急の注意書きが同じカゴに混ざると見づらくてね。注意書きだけは赤いトレイに分けたいんだ。"
-      },
-      {
-        "speaker": "milk",
-        "emotion": "happy",
-        "text": "ピピ！大事な注意書きを赤いトレイに分けておけば、いざという時も見落とさないよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "すっきり分かれて見やすいね。頼もしい道具になったよ。"
-      }
-    ]
-  },
-  {
-    "stageId": "98bb6489-186b-53c3-828e-0cf6576d9cb5",
-    "requestTitle": "「OK！」と「気をつけて！」の二重奏",
-    "client": "poppo",
-    "intro": [
-      {
-        "speaker": "poppo",
-        "emotion": "normal",
-        "text": "順調なときの記録はふつうの日記に、注意のお知らせは赤い連絡帳に、両方きちんと分けて記録したいです！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "右手に日記、左手に連絡帳を持ってササッと書き分けるカニ！……文字がカニ文字にならないよう気をつけるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "poppo",
-        "emotion": "happy",
-        "text": "綺麗な仕分けで記録がぴかぴかになりました！"
-      }
-    ]
-  },
-  {
-    "stageId": "06f4c9fa-5322-5af9-81f8-2f52695e366d",
-    "requestTitle": "探偵の虫眼鏡道具だけ別箱に整理しよう",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "全部をひとつの机に広げずに、探し物の道具だけを小さな専用ケースにまとめてチェックもつけておきたいの。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "道具を小さなケースに分けて、しかも点検チェック付きにするんだね！とってもきれいで使いやすいよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "点検付きの探し物道具、とっても頼もしいわ！"
-      }
-    ]
-  },
-  {
-    "stageId": "1ebcf4e6-6bc1-5f61-9487-faa01683ed43",
-    "requestTitle": "ポッポ探偵・迷子の手紙をぜんぶ解決！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "探偵道具がぜんぶ揃ったね！手がかり読み取り・赤メモ仕分け・連動ゲート突破まで一気に決めよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "名探偵フェリス＆ポッポの活躍、とくと見るカニ！真実はいつもお菓子箱の中カニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "よくここまで調べ上げたね。迷子の手紙もみんな持ち主の元へ戻って、町がまたひとつ明るくなったよ。"
-      }
-    ]
-  },
-  {
     "stageId": "d7653986-119c-5386-ae39-f3e78c4799f6",
     "requestTitle": "ポッポくん、昼寝用の枕を探す",
     "client": "kurumi",
@@ -223,6 +55,131 @@ export const STORY_CHAPTER_12: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "cdcc5256-5359-5cce-a2aa-61ab4a272fc1",
+    "requestTitle": "昼モード・夜モードの切り替えスイッチ",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "夜のランプがオンのときは、お昼のときとちょっと歩数を変えてお庭を見回りたいわ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "お昼は元気に大股、夜はお星さまを見ながらそろり歩きカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "時間帯に合わせて賢く歩き方を変えてくれて助かったわ！"
+      }
+    ]
+  },
+  {
+    "stageId": "71bac323-56c1-54c5-a7b2-4d7db7c3abf3",
+    "requestTitle": "ミモザさんの温室で、くしゃみ連発！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "温室に光る飾り玉を運んでいたフェリスちゃんが、くしゃみを三連発！花粉じゃなくて、ふわふわの綿毛が鼻をくすぐったみたい。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "へっくしょんカニ！綿毛がハサミにくっついて、くすぐったいカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "綿毛は外へ逃がして、光る飾り玉も無事に温室の棚へ。ミモザさん、鉢のそばに小さな風車も飾っておいたわ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "風車を見るたびにくしゃみを思い出すカニ！へっくしょん！"
+      }
+    ]
+  },
+  {
+    "stageId": "98bb6489-186b-53c3-828e-0cf6576d9cb5",
+    "requestTitle": "「OK！」と「気をつけて！」の二重奏",
+    "client": "poppo",
+    "intro": [
+      {
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "順調なときの記録はふつうの日記に、注意のお知らせは赤い連絡帳に、両方きちんと分けて記録したいです！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "右手に日記、左手に連絡帳を持ってササッと書き分けるカニ！……文字がカニ文字にならないよう気をつけるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "綺麗な仕分けで記録がぴかぴかになりました！"
+      }
+    ]
+  },
+  {
+    "stageId": "82b69a1f-ff10-522f-b41d-dc663fc6fa3f",
+    "requestTitle": "バラバラの手がかりを手帳1冊にまとめよう",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "捜査メモがポケットのあちこちに散らかっていると探しづらいね。設定専用のカード1枚にまとめられないかい？"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "それ名案！手帳のカードにスッキリひとまとめにしておけば、ポケットを探り回らなくて済むよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "情報が1枚のカードにまとまると、あとからの見直しもぐっと楽になるね。"
+      }
+    ]
+  },
+  {
+    "stageId": "cf512ac5-9221-505e-870c-1d52ec940528",
+    "requestTitle": "忘れん坊さんにも優しいお助けメッセージ",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "panic",
+        "text": "うっかり必要なメモを渡し忘れたとき、機械がプイッと止まっちゃわないで優しく「忘れてるよ〜」って教えてほしいんだ！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "任せて！足りないときは親切なメッセージでお知らせするようにしておけば、誰でも安心して使えるね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "これなら初めて使うお客さんにも優しい道具になるね！"
+      }
+    ]
+  },
+  {
     "stageId": "986e5ff1-ac6c-57dc-90f1-74296736adc1",
     "requestTitle": "モカさんのカフェ、雨の日の窓辺席",
     "client": "kurumi",
@@ -248,6 +205,54 @@ export const STORY_CHAPTER_12: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "絵の横に『本日のおすすめはカニプリン』って書いたカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "c7c95c3c-4f38-5cdc-9522-57b0cea1a312",
+    "requestTitle": "普通の伝票と赤い注意メモの仕分け術",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "ふつうのお手紙と緊急の注意書きが同じカゴに混ざると見づらくてね。注意書きだけは赤いトレイに分けたいんだ。"
+      },
+      {
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！大事な注意書きを赤いトレイに分けておけば、いざという時も見落とさないよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "すっきり分かれて見やすいね。頼もしい道具になったよ。"
+      }
+    ]
+  },
+  {
+    "stageId": "06f4c9fa-5322-5af9-81f8-2f52695e366d",
+    "requestTitle": "探偵の虫眼鏡道具だけ別箱に整理しよう",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "全部をひとつの机に広げずに、探し物の道具だけを小さな専用ケースにまとめてチェックもつけておきたいの。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "道具を小さなケースに分けて、しかも点検チェック付きにするんだね！とってもきれいで使いやすいよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "点検付きの探し物道具、とっても頼もしいわ！"
       }
     ]
   },
@@ -310,31 +315,31 @@ export const STORY_CHAPTER_12: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "71bac323-56c1-54c5-a7b2-4d7db7c3abf3",
-    "requestTitle": "ミモザさんの温室で、くしゃみ連発！",
+    "stageId": "990fa11d-9836-56be-9f70-6e2e77edde16",
+    "requestTitle": "お昼寝中のモカさんに、そっとお届け",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "温室に光る飾り玉を運んでいたフェリスちゃんが、くしゃみを三連発！花粉じゃなくて、ふわふわの綿毛が鼻をくすぐったみたい。"
+        "text": "モカさんがカウンターでうとうとしてるよ。冷めないうちにお茶を置きたいけど、起こさないようにそっとね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "へっくしょんカニ！綿毛がハサミにくっついて、くすぐったいカニ！"
+        "text": "静かに歩くカニ……ハサミも鳴らさないカニ……くぅ〜。今のお腹の音は僕じゃないカニ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "綿毛は外へ逃がして、光る飾り玉も無事に温室の棚へ。ミモザさん、鉢のそばに小さな風車も飾っておいたわ。"
+        "text": "お茶、ありがとう。寝ていたわけじゃないよ。フェリスくんのお腹が鳴るか、静かに聞いていたんだ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "風車を見るたびにくしゃみを思い出すカニ！へっくしょん！"
+        "text": "聞こえてたカニ！？お茶の香りでお腹が起きちゃったカニ！"
       }
     ]
   },
@@ -368,31 +373,26 @@ export const STORY_CHAPTER_12: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "990fa11d-9836-56be-9f70-6e2e77edde16",
-    "requestTitle": "お昼寝中のモカさんに、そっとお届け",
+    "stageId": "1ebcf4e6-6bc1-5f61-9487-faa01683ed43",
+    "requestTitle": "ポッポ探偵・迷子の手紙をぜんぶ解決！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "モカさんがカウンターでうとうとしてるよ。冷めないうちにお茶を置きたいけど、起こさないようにそっとね。"
+        "emotion": "happy",
+        "text": "探偵道具がぜんぶ揃ったね！手がかり読み取り・赤メモ仕分け・連動ゲート突破まで一気に決めよう！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "静かに歩くカニ……ハサミも鳴らさないカニ……くぅ〜。今のお腹の音は僕じゃないカニ！"
+        "text": "名探偵フェリス＆ポッポの活躍、とくと見るカニ！真実はいつもお菓子箱の中カニ！"
       }
     ],
     "outro": [
       {
-        "speaker": "kurumi",
+        "speaker": "moka",
         "emotion": "happy",
-        "text": "お茶、ありがとう。寝ていたわけじゃないよ。フェリスくんのお腹が鳴るか、静かに聞いていたんだ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "聞こえてたカニ！？お茶の香りでお腹が起きちゃったカニ！"
+        "text": "よくここまで調べ上げたね。迷子の手紙もみんな持ち主の元へ戻って、町がまたひとつ明るくなったよ。"
       }
     ]
   },

@@ -138,7 +138,7 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
               Rust工房 ステージ一覧（全{stages.length}ステージ）
             </h2>
             <p className="text-xs font-medium text-[#7C6154]">
-              『プログラミング言語Rust 日本語版』第1章〜第20章を基礎・応用・実践で段階収録
+              『プログラミング言語Rust 日本語版』第1章〜第20章を未習事項が出ない学習順で段階収録
             </p>
           </div>
 

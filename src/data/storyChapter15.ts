@@ -26,6 +26,35 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "1f4e58fb-4cfe-5cd5-ba57-5aa128266ec5",
+    "requestTitle": "ミモザさんの植木鉢、どこに置こう？",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "ミモザさんの大きな植木鉢を窓辺に置きたいけど、日当たりのいい場所はどこかな？フェリスちゃん、鉢の横で日なたぼっこしないでね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "僕も観葉植物の仲間カニ！葉っぱのふりをして並ぶカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "日がよく当たる場所に置けたわ。植木鉢がベルトに乗って動き出しそうで、フェリスちゃんまで鉢の陰から見張ってるけど……水やりは必要かしら？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "葉っぱのふりをしてたら、本物の鉢植えと間違えられたカニ！水やりは一日一回でいいカニ？"
+      }
+    ]
+  },
+  {
     "stageId": "b901a04c-139c-52fd-9d85-acc046a59495",
     "requestTitle": "箱を開けずに中身を数えるマジック！？",
     "client": "coppe",
@@ -98,6 +127,35 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "007f4c05-dd69-51b7-b3ee-e80303a04656",
+    "requestTitle": "フェリスのくしゃみで紙吹雪！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "フェリスちゃんがくしゃみをしたら、机の上の紙吹雪がふわっと舞い上がった！お祝いの飾りみたいで、みんな笑っちゃったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "へっくしょんカニ！紙吹雪が鼻に入ったカニ！もう一回くしゃみしたら片付くカニ？"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "紙吹雪はみんなで集めて、窓辺の瓶に飾ったよ。フェリスちゃんのくしゃみで、思いがけない飾りつけになったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "瓶の中でキラキラするカニ！次はくしゃみじゃなくて、そっと吹いて舞わせるカニ！"
+      }
+    ]
+  },
+  {
     "stageId": "bb17e121-9dc5-594a-ace4-b233fef8e9d4",
     "requestTitle": "ふたりで一緒に読める町内会回覧板",
     "client": "kurumi",
@@ -118,6 +176,35 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "ふたりとも同じメモが見れたカニ！ケンカせずに仲良しカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "3e9730a7-1de7-5c4c-a484-74c7ebfb0bf6",
+    "requestTitle": "みんなで一枚の大きな絵を描こう",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "商店街のみんなで、大きな一枚の絵を描くことになったよ。広場の二つの角から見える絵にしよう。ミモザさんは花、コッペさんはパン、フェリスちゃんは何を描く？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "もちろんカニの絵カニ！ハサミで筆を持つとちょっと太いカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できあがり！大きな絵の真ん中で、フェリスちゃんのカニがパンを抱えてるわ。みんなの好きなものが一枚に集まったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "パンを抱えたカニは最高カニ！絵のパンも食べられたらいいカニ！"
       }
     ]
   },
@@ -170,6 +257,35 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "bda5e013-6d70-5ae8-a991-b576407822e8",
+    "requestTitle": "焼き芋の包み紙に、落ち葉の模様",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "コッペさんの焼き芋を包む紙に、秋らしい落ち葉の模様を描こう！できた包みはパン屋さんのベルトでお店まで運ぶんだって。フェリスちゃんのハサミなら、葉っぱの形も作れそうだね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ギザギザの葉っぱを描くカニ！ハサミで紙を切ったら、焼き芋も包めるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "模様入りの包み紙ができたよ！フェリスちゃん、試しに自分を包もうとしてるけど、焼き芋じゃないからね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "包み紙の中からカニが出てきたら、びっくり焼き芋屋さんカニ！"
+      }
+    ]
+  },
+  {
     "stageId": "fb8c2141-1beb-5df9-a172-a207752b4715",
     "requestTitle": "分け合った元気玉で光の玉もお届け！",
     "client": "coppe",
@@ -190,6 +306,35 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
         "speaker": "coppe",
         "emotion": "happy",
         "text": "金庫も光の玉も満点！バッチリだったよ〜！"
+      }
+    ]
+  },
+  {
+    "stageId": "e3cedf2e-58b8-55c4-ab2d-4c8bd0f5fee6",
+    "requestTitle": "喫茶店の忘れ物、赤い手袋は誰のもの？",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "モカさんのお店に赤い手袋の忘れ物があったよ。小さくて、指先に白い毛糸の飾りがついてる。番号合わせの小箱のそばにあったけど、誰のかな？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "僕のハサミカバーにちょうどよさそうカニ！……えっ、手袋は手につけるものカニ？"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "手袋はポッポくんのものでした！配達中に外れたみたい。片方だけでも見つかってよかったですね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "手袋ってあったかいカニ？僕のハサミには……やっぱり入らないカニ！"
       }
     ]
   },
@@ -262,175 +407,6 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
         "speaker": "poppo",
         "emotion": "happy",
         "text": "順番を整理したら破れずに 4 まで増えました！"
-      }
-    ]
-  },
-  {
-    "stageId": "451659e2-c700-5579-a149-c060ef9f5d3a",
-    "requestTitle": "お片付け・回覧板・観察ノートの三重奏！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "箱にしまったり、回覧板でシェアしたり、ノートに追記したり！いろんな工夫を組み合わせて金庫とゴールをクリアしよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "回覧板マスターの名にかけてバッチリ決めるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "完璧！次はいよいよフェリスちゃんとみるく号、ふたり同時の大作戦が始まるよ！"
-      }
-    ]
-  },
-  {
-    "stageId": "1f4e58fb-4cfe-5cd5-ba57-5aa128266ec5",
-    "requestTitle": "ミモザさんの植木鉢、どこに置こう？",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ミモザさんの大きな植木鉢を窓辺に置きたいけど、日当たりのいい場所はどこかな？フェリスちゃん、鉢の横で日なたぼっこしないでね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "僕も観葉植物の仲間カニ！葉っぱのふりをして並ぶカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "日がよく当たる場所に置けたわ。植木鉢がベルトに乗って動き出しそうで、フェリスちゃんまで鉢の陰から見張ってるけど……水やりは必要かしら？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "葉っぱのふりをしてたら、本物の鉢植えと間違えられたカニ！水やりは一日一回でいいカニ？"
-      }
-    ]
-  },
-  {
-    "stageId": "007f4c05-dd69-51b7-b3ee-e80303a04656",
-    "requestTitle": "フェリスのくしゃみで紙吹雪！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "フェリスちゃんがくしゃみをしたら、机の上の紙吹雪がふわっと舞い上がった！お祝いの飾りみたいで、みんな笑っちゃったね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "へっくしょんカニ！紙吹雪が鼻に入ったカニ！もう一回くしゃみしたら片付くカニ？"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "紙吹雪はみんなで集めて、窓辺の瓶に飾ったよ。フェリスちゃんのくしゃみで、思いがけない飾りつけになったね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "瓶の中でキラキラするカニ！次はくしゃみじゃなくて、そっと吹いて舞わせるカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "3e9730a7-1de7-5c4c-a484-74c7ebfb0bf6",
-    "requestTitle": "みんなで一枚の大きな絵を描こう",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "商店街のみんなで、大きな一枚の絵を描くことになったよ。広場の二つの角から見える絵にしよう。ミモザさんは花、コッペさんはパン、フェリスちゃんは何を描く？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "もちろんカニの絵カニ！ハサミで筆を持つとちょっと太いカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "できあがり！大きな絵の真ん中で、フェリスちゃんのカニがパンを抱えてるわ。みんなの好きなものが一枚に集まったね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "パンを抱えたカニは最高カニ！絵のパンも食べられたらいいカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "bda5e013-6d70-5ae8-a991-b576407822e8",
-    "requestTitle": "焼き芋の包み紙に、落ち葉の模様",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "コッペさんの焼き芋を包む紙に、秋らしい落ち葉の模様を描こう！できた包みはパン屋さんのベルトでお店まで運ぶんだって。フェリスちゃんのハサミなら、葉っぱの形も作れそうだね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ギザギザの葉っぱを描くカニ！ハサミで紙を切ったら、焼き芋も包めるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "模様入りの包み紙ができたよ！フェリスちゃん、試しに自分を包もうとしてるけど、焼き芋じゃないからね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "包み紙の中からカニが出てきたら、びっくり焼き芋屋さんカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "e3cedf2e-58b8-55c4-ab2d-4c8bd0f5fee6",
-    "requestTitle": "喫茶店の忘れ物、赤い手袋は誰のもの？",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "モカさんのお店に赤い手袋の忘れ物があったよ。小さくて、指先に白い毛糸の飾りがついてる。番号合わせの小箱のそばにあったけど、誰のかな？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "僕のハサミカバーにちょうどよさそうカニ！……えっ、手袋は手につけるものカニ？"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "手袋はポッポくんのものでした！配達中に外れたみたい。片方だけでも見つかってよかったですね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "手袋ってあったかいカニ？僕のハサミには……やっぱり入らないカニ！"
       }
     ]
   },
@@ -605,6 +581,30 @@ export const STORY_CHAPTER_15: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "麦茶がおいしいカニ！じょうろは頭にかぶるものじゃなかったカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "451659e2-c700-5579-a149-c060ef9f5d3a",
+    "requestTitle": "お片付け・回覧板・観察ノートの三重奏！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "箱にしまったり、回覧板でシェアしたり、ノートに追記したり！いろんな工夫を組み合わせて金庫とゴールをクリアしよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "回覧板マスターの名にかけてバッチリ決めるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "完璧！次はいよいよフェリスちゃんとみるく号、ふたり同時の大作戦が始まるよ！"
       }
     ]
   },

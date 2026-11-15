@@ -3,177 +3,29 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_7_STAGES: StageDefinition[] = [
   {
     "displayId": "7-1",
-    "id": "116ceadb-8d15-54f0-ba3f-88b3f67ea44e",
+    "id": "9fd2a72f-a235-5928-849d-4fe8c447f483",
     "index": 161,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "stageKind": "puzzle",
-    "title": "7-1. 迷路ソルバーモジュール maze_lib",
-    "topicTag": "アルゴリズム mod 分離",
-    "kurumiIntro": "迷路探索の仕組みを `mod maze_lib` に隔離して、メイン関数からはたった1行 `use maze_lib::escape; escape();` だけで抜け出せる美しいコードを作ろう！",
-    "goalSummary": "maze_lib::escape() を公開・インポートして迷路を突破しよう",
-    "bookSectionTitle": "7.2 再利用可能なアルゴリズムをモジュール化",
-    "bookSummary": "汎用的な左手法迷路ソルバーなどをモジュールにまとめておけば、呼び出し元の `main` が劇的に簡潔になります。",
-    "bookKeyCode": "use maze_lib::escape;\nescape();",
-    "starterCode": "mod maze_lib {\n    // escape() に pub を付けよう！\n    fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}",
-    "solutionCode": "mod maze_lib {\n    pub fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}",
+    "title": "7-1. mod と pub による公開設定",
+    "topicTag": "mod / pub 可視性",
+    "kurumiIntro": "工房の部品は `mod motor { ... }` に整理されているよ。でも外から呼ぶには `pub` を付けて公開してあげる必要があるんだ！",
+    "goalSummary": "motor モジュールの関数を pub にしてゴール (3, 1) へ",
+    "bookSectionTitle": "7.2 & 7.3 スコープとプライバシーの制御",
+    "bookSummary": "Rustではモジュール `mod` の中身はデフォルトで非公開（プライベート）です。外から使いたい関数や構造体には `pub` キーワードを付けます。",
+    "bookKeyCode": "mod motor {\n    pub fn go() { step(3); }\n}",
+    "starterCode": "mod motor {\n    // 外から呼べるように pub を付けよう！\n    fn go() {\n        step(3);\n    }\n}\n\nfn main() {\n    motor::go();\n}",
+    "solutionCode": "mod motor {\n    pub fn go() {\n        step(3);\n    }\n}\n\nfn main() {\n    motor::go();\n}",
     "quickChips": [
       {
-        "label": "pub fn escape()",
-        "insert": "pub fn escape()"
+        "label": "pub ",
+        "insert": "pub "
       }
     ],
     "hints": [
-      "mod maze_lib の中の escape() が非公開のままだと呼び出せないよ！",
-      "外から呼ぶ `escape()` の前に `pub` を付けよう。",
-      "pub fn escape() {"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 2,
-        "dir": 0
-      },
-      "goal": {
-        "x": 2,
-        "y": 1
-      },
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 3,
-              "y": 1
-            },
-            {
-              "x": 3,
-              "y": 2
-            },
-            {
-              "x": 3,
-              "y": 3
-            },
-            {
-              "x": 3,
-              "y": 2
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "7-2",
-    "id": "0908821d-5296-51dc-9388-cc0bd3f783f5",
-    "index": 162,
-    "chapter": 7,
-    "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "stageKind": "puzzle",
-    "title": "7-2. ダイヤル解錠モジュール security",
-    "topicTag": "mod + ダイヤル解錠",
-    "kurumiIntro": "金庫室のカギを開ける `mod security` が用意されているよ。ダイヤル解錠関数を公開して呼んだあと、門を通ってゴールへ進もう！",
-    "goalSummary": "security::unlock() を公開・呼び出し、ダイヤル解錠＋金庫⚡3＋ゴールへ",
-    "bookSectionTitle": "7.2 セキュリティ処理のカプセル化",
-    "bookSummary": "ダイヤルの総当たりループのような少し複雑な処理も、モジュールに閉じ込めて `unlock()` として公開すれば安全に使えます。",
-    "bookKeyCode": "security::unlock();",
-    "starterCode": "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\n// use security::unlock; を書いて main から呼ぼう！\n\nfn main() {\n    step(4);\n}",
-    "solutionCode": "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\nuse security::unlock;\n\nfn main() {\n    unlock();\n    step(4);\n}",
-    "quickChips": [
-      {
-        "label": "use security::unlock;",
-        "insert": "use security::unlock;\n"
-      },
-      {
-        "label": "unlock();",
-        "insert": "unlock();\n    "
-      }
-    ],
-    "hints": [
-      "mod security の中の unlock() はもう完成しているよ！",
-      "`use security::unlock;` を宣言して、main() の最初に `unlock();` を呼ぼう！",
-      "use security::unlock;\nfn main() { unlock(); step(4); }"
+      "このまま実行すると「関数 motor::go は非公開（プライベート）です」とエラーが出るよ！",
+      "3行目の `fn go()` を `pub fn go()` に変えよう。",
+      "pub fn go() {"
     ],
     "worldSetup": {
       "width": 5,
@@ -226,52 +78,22 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 4,
+        "x": 3,
         "y": 1
-      },
-      "dial": {
-        "secret": 5
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 3
       }
     },
     "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "vaultTarget": 3,
-      "requireAllSwitches": true
+      "reachGoal": true
     },
-    "parTicks": 11
+    "parTicks": 3
   },
   {
-    "displayId": "7-3",
+    "displayId": "7-2",
     "id": "1fd4629d-d6fc-5324-87c3-2e3c62301d56",
-    "index": 163,
+    "index": 162,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-3. 複数モジュールの連携と金庫操作",
+    "title": "7-2. 複数モジュールの連携と金庫操作",
     "topicTag": "複数 mod の使い分け",
     "kurumiIntro": "「金庫係 `mod bank`」と「移動係 `mod engine`」にモジュールを分けてみよう！それぞれの関数を公開して呼び出せば、責務がスッキリ分かれるよ。",
     "goalSummary": "bank::charge と engine::run を呼び金庫⚡3＋ゴールへ",
@@ -363,12 +185,12 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 4
   },
   {
-    "displayId": "7-4",
+    "displayId": "7-3",
     "id": "5aba927d-c321-5c48-947d-6b2f02470cd8",
-    "index": 164,
+    "index": 163,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-4. 入れ子モジュール mod とフルパス呼び出し",
+    "title": "7-3. 入れ子モジュール mod とフルパス呼び出し",
     "topicTag": "ネスト mod / :: パス",
     "kurumiIntro": "`mod atelier { pub mod wheel { pub fn roll() ... } }` みたいにモジュールの中にさらにモジュールを入れ子にできるよ！2つの経路関数をどちらも公開しよう。",
     "goalSummary": "入れ子モジュールの roll() と turn() を呼んで (2, 3) へ",
@@ -449,12 +271,12 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 5
   },
   {
-    "displayId": "7-5",
+    "displayId": "7-4",
     "id": "2f2642fd-792f-527a-bd05-f3802fca0a1f",
-    "index": 165,
+    "index": 164,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-5. モジュール内の構造体公開パズル",
+    "title": "7-4. モジュール内の構造体公開パズル",
     "topicTag": "mod 内の struct と impl",
     "kurumiIntro": "モジュールの中の構造体にもメソッドを持たせられるよ！金庫にチャージしつつ、U字コースのゴールまで移動する部品を組み上げよう。",
     "goalSummary": "mod mech 内の関数を組み合わせてコア⚡1を納品＋ゴールへ",
@@ -555,30 +377,30 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 7
   },
   {
-    "displayId": "7-6",
-    "id": "9fd2a72f-a235-5928-849d-4fe8c447f483",
-    "index": 166,
+    "displayId": "7-5",
+    "id": "139e5770-fd95-505e-8019-e90c224abd63",
+    "index": 165,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-6. mod と pub による公開設定",
-    "topicTag": "mod / pub 可視性",
-    "kurumiIntro": "工房の部品は `mod motor { ... }` に整理されているよ。でも外から呼ぶには `pub` を付けて公開してあげる必要があるんだ！",
-    "goalSummary": "motor モジュールの関数を pub にしてゴール (3, 1) へ",
-    "bookSectionTitle": "7.2 & 7.3 スコープとプライバシーの制御",
-    "bookSummary": "Rustではモジュール `mod` の中身はデフォルトで非公開（プライベート）です。外から使いたい関数や構造体には `pub` キーワードを付けます。",
-    "bookKeyCode": "mod motor {\n    pub fn go() { step(3); }\n}",
-    "starterCode": "mod motor {\n    // 外から呼べるように pub を付けよう！\n    fn go() {\n        step(3);\n    }\n}\n\nfn main() {\n    motor::go();\n}",
-    "solutionCode": "mod motor {\n    pub fn go() {\n        step(3);\n    }\n}\n\nfn main() {\n    motor::go();\n}",
+    "title": "7-5. use キーワードでパスをスッキリ",
+    "topicTag": "use パス導入",
+    "kurumiIntro": "長いモジュール名も `use kobo::drive;` でショートカットを作ればスッキリ呼び出せるよ！",
+    "goalSummary": "use を使って kobo::drive を呼び出しゴールへ進もう",
+    "bookSectionTitle": "7.4 パスを指し示すための use キーワード",
+    "bookSummary": "`use モジュール::項目;` を書いておくと、それ以降は短い名前だけで呼び出せるようになります。",
+    "bookKeyCode": "use kobo::drive;\ndrive();",
+    "starterCode": "mod kobo {\n    pub fn drive() {\n        step(3);\n    }\n}\n\n// ここに use kobo::drive; を書いてみよう！\n\nfn main() {\n    drive();\n}",
+    "solutionCode": "mod kobo {\n    pub fn drive() {\n        step(3);\n    }\n}\n\nuse kobo::drive;\n\nfn main() {\n    drive();\n}",
     "quickChips": [
       {
-        "label": "pub ",
-        "insert": "pub "
+        "label": "use kobo::drive;",
+        "insert": "use kobo::drive;\n"
       }
     ],
     "hints": [
-      "このまま実行すると「関数 motor::go は非公開（プライベート）です」とエラーが出るよ！",
-      "3行目の `fn go()` を `pub fn go()` に変えよう。",
-      "pub fn go() {"
+      "mainの中で drive(); を呼んでいるけど、どのモジュールの drive かまだ分からない状態だよ。",
+      "fn main() の上に `use kobo::drive;` を追加しよう！",
+      "use kobo::drive;\n\nfn main() {\n    drive();\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -641,20 +463,211 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 3
   },
   {
+    "displayId": "7-6",
+    "id": "2bb92ccf-f7f1-5c9b-b56c-4cbc9775004a",
+    "index": 166,
+    "chapter": 7,
+    "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
+    "title": "7-6. 複数の use でショートカット整理",
+    "topicTag": "複数 use インポート",
+    "kurumiIntro": "2つの別々のモジュールからそれぞれ関数を `use` で呼び込んで、スッキリ組み合わせよう！",
+    "goalSummary": "use で charge と go を導入して金庫⚡3＋ゴール (3, 1) へ",
+    "bookSectionTitle": "7.4 慣例的な use パスの書き方",
+    "bookSummary": "よく使う関数やモジュールを先頭で `use` しておけば、コード本体が簡潔になって読みやすくなります。",
+    "bookKeyCode": "use power::charge;\nuse motion::go;",
+    "starterCode": "mod power {\n    pub fn charge() { add_vault(3); }\n}\n\nmod motion {\n    pub fn go() { step(3); }\n}\n\nuse power::charge;\n// motion::go も use で取り込もう！\n\nfn main() {\n    charge();\n    go();\n}",
+    "solutionCode": "mod power {\n    pub fn charge() { add_vault(3); }\n}\n\nmod motion {\n    pub fn go() { step(3); }\n}\n\nuse power::charge;\nuse motion::go;\n\nfn main() {\n    charge();\n    go();\n}",
+    "quickChips": [
+      {
+        "label": "use motion::go;",
+        "insert": "use motion::go;\n"
+      }
+    ],
+    "hints": [
+      "main で go(); を呼んでいるけど、`use motion::go;` がまだ書かれていないよ！",
+      "use power::charge; の次の行に `use motion::go;` を追加しよう！",
+      "use power::charge;\nuse motion::go;"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3
+    },
+    "parTicks": 4
+  },
+  {
     "displayId": "7-7",
-    "id": "73562f8a-40ac-509e-8445-4d6ccc8298b4",
+    "id": "4e588275-2689-5c3b-adf5-77dad26fd8a3",
     "index": 167,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
+    "title": "7-7. 同じ名前の衝突を避ける親モジュール use",
+    "topicTag": "親モジュール名での区別",
+    "kurumiIntro": "パン屋モジュールにも花屋モジュールにも同じ `send()` という名前の関数があるよ！そんなときは親モジュール名をつけて `bakery::send()` のように呼び分けよう。",
+    "goalSummary": "bakery::send と florist::send を使い分けてゴール (4, 1) へ",
+    "bookSectionTitle": "7.4 同名の型や関数を親モジュールで区別する",
+    "bookSummary": "異なるモジュールに同じ名前の関数があるときは、親モジュール名を残して呼び出すことで名前の衝突を避けられます。",
+    "bookKeyCode": "bakery::send();\nflorist::send();",
+    "starterCode": "mod bakery {\n    pub fn send() {\n        println!(\"BREAD\");\n        step(2);\n    }\n}\n\nmod florist {\n    pub fn send() {\n        println!(\"FLOWER\");\n        step(2);\n    }\n}\n\nfn main() {\n    bakery::send();\n    // 次に florist::send(); を呼んで合計4歩＆両方出力しよう！\n    \n}",
+    "solutionCode": "mod bakery {\n    pub fn send() {\n        println!(\"BREAD\");\n        step(2);\n    }\n}\n\nmod florist {\n    pub fn send() {\n        println!(\"FLOWER\");\n        step(2);\n    }\n}\n\nfn main() {\n    bakery::send();\n    florist::send();\n}",
+    "quickChips": [
+      {
+        "label": "florist::send();",
+        "insert": "florist::send();"
+      }
+    ],
+    "hints": [
+      "bakery::send() だけだと 2歩しか進めないし \"FLOWER\" が出力されないよ！",
+      "main の最後に `florist::send();` を書こう。",
+      "bakery::send();\nflorist::send();"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "BREAD",
+        "FLOWER"
+      ]
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "7-8",
+    "id": "73562f8a-40ac-509e-8445-4d6ccc8298b4",
+    "index": 168,
+    "chapter": 7,
+    "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
     "stageKind": "puzzle",
-    "title": "7-7. 非公開モジュールを開放して迷路突破",
+    "title": "7-8. 非公開モジュールを開放して迷路突破",
     "topicTag": "入れ子 mod + pub 公開",
-    "kurumiIntro": "工房の案内システム `mod nav { mod sensor { ... } }` の中身が全部プライベートで呼べなくなってるよ！`pub` を適切に付けてセンサー移動を動かそう。",
+    "kurumiIntro": "入れ子のモジュール `mod nav { pub mod sensor { ... } }` を作って、`pub` で公開した関数からセンサー移動を呼び出そう！",
     "goalSummary": "入れ子のモジュールを公開して迷路のゴール (4, 3) へ到達",
     "bookSectionTitle": "7.2 & 7.3 階層ごとの pub 可視性管理",
     "bookSummary": "内側の関数に `pub` を付けるだけでなく、親モジュール（例：`pub mod sensor`）自体も外に見せたい場合は `pub` が必要です。",
     "bookKeyCode": "mod nav { pub mod sensor { pub fn safe_step() { ... } } }",
-    "starterCode": "mod nav {\n    pub mod sensor {\n        // ↓ 外から呼べるように pub を付けよう！\n        fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    for _ in 0..4 {\n        go_safe();\n    }\n    turn_right();\n    for _ in 0..2 {\n        go_safe();\n    }\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "mod nav {\n    pub mod sensor {\n        pub fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    for _ in 0..4 {\n        go_safe();\n    }\n    turn_right();\n    for _ in 0..2 {\n        go_safe();\n    }\n}",
     "quickChips": [
       {
@@ -663,9 +676,9 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "nav::sensor::go_safe が非公開になっているためコンパイルエラーになるよ！",
-      "fn go_safe() の前に `pub` を付ければ use と呼び出しが通って、スパークとスイッチゲートを越えて (4, 3) へ着くよ！",
-      "pub fn go_safe() {"
+      "mod nav { pub mod sensor { pub fn go_safe() { ... } } } のように内側の mod と fn の両方に pub を付けよう！",
+      "use nav::sensor::go_safe; で取り込み、東へ4回 → turn_right(); → 南へ2回 進んでゴール (4, 3) へ！",
+      "mod nav {\n    pub mod sensor {\n        pub fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    for _ in 0..4 {\n        go_safe();\n    }\n    turn_right();\n    for _ in 0..2 {\n        go_safe();\n    }\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -815,34 +828,35 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 10
   },
   {
-    "displayId": "7-8",
-    "id": "139e5770-fd95-505e-8019-e90c224abd63",
-    "index": 168,
+    "displayId": "7-9",
+    "id": "116ceadb-8d15-54f0-ba3f-88b3f67ea44e",
+    "index": 169,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-8. use キーワードでパスをスッキリ",
-    "topicTag": "use パス導入",
-    "kurumiIntro": "長いモジュール名も `use kobo::drive;` でショートカットを作ればスッキリ呼び出せるよ！",
-    "goalSummary": "use を使って kobo::drive を呼び出しゴールへ進もう",
-    "bookSectionTitle": "7.4 パスを指し示すための use キーワード",
-    "bookSummary": "`use モジュール::項目;` を書いておくと、それ以降は短い名前だけで呼び出せるようになります。",
-    "bookKeyCode": "use kobo::drive;\ndrive();",
-    "starterCode": "mod kobo {\n    pub fn drive() {\n        step(3);\n    }\n}\n\n// ここに use kobo::drive; を書いてみよう！\n\nfn main() {\n    drive();\n}",
-    "solutionCode": "mod kobo {\n    pub fn drive() {\n        step(3);\n    }\n}\n\nuse kobo::drive;\n\nfn main() {\n    drive();\n}",
+    "stageKind": "puzzle",
+    "title": "7-9. 迷路ソルバーモジュール maze_lib",
+    "topicTag": "アルゴリズム mod 分離",
+    "kurumiIntro": "迷路探索の仕組みを `mod maze_lib` に隔離して、メイン関数からはたった1行 `use maze_lib::escape; escape();` だけで抜け出せる美しいコードを作ろう！",
+    "goalSummary": "maze_lib::escape() を公開・インポートして迷路を突破しよう",
+    "bookSectionTitle": "7.2 再利用可能なアルゴリズムをモジュール化",
+    "bookSummary": "汎用的な左手法迷路ソルバーなどをモジュールにまとめておけば、呼び出し元の `main` が劇的に簡潔になります。",
+    "bookKeyCode": "use maze_lib::escape;\nescape();",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "mod maze_lib {\n    pub fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}",
     "quickChips": [
       {
-        "label": "use kobo::drive;",
-        "insert": "use kobo::drive;\n"
+        "label": "pub fn escape()",
+        "insert": "pub fn escape()"
       }
     ],
     "hints": [
-      "mainの中で drive(); を呼んでいるけど、どのモジュールの drive かまだ分からない状態だよ。",
-      "fn main() の上に `use kobo::drive;` を追加しよう！",
-      "use kobo::drive;\n\nfn main() {\n    drive();\n}"
+      "mod maze_lib { pub fn escape() { ... } } を作って、左手法＋スパーク待ち（while is_spark_ahead() { wait_tick(1); }）の迷路ソルバーを書こう！",
+      "use maze_lib::escape; を宣言し、main() から escape(); を呼び出そう！",
+      "mod maze_lib {\n    pub fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}"
     ],
     "worldSetup": {
       "width": 5,
-      "height": 3,
+      "height": 5,
       "walls": [
         {
           "x": 0,
@@ -866,65 +880,126 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
         },
         {
           "x": 0,
-          "y": 2
+          "y": 1
         },
         {
           "x": 1,
-          "y": 2
+          "y": 1
         },
         {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
+          "x": 4,
+          "y": 1
         },
         {
           "x": 4,
           "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
         }
       ],
       "botStart": {
         "x": 0,
-        "y": 1,
+        "y": 2,
         "dir": 0
       },
       "goal": {
-        "x": 3,
+        "x": 2,
         "y": 1
-      }
+      },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 3,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": 2
+            }
+          ],
+          "initialIndex": 0
+        }
+      ]
     },
     "victoryCondition": {
       "reachGoal": true
     },
-    "parTicks": 3
+    "parTicks": 10
   },
   {
-    "displayId": "7-9",
-    "id": "2bb92ccf-f7f1-5c9b-b56c-4cbc9775004a",
-    "index": 169,
+    "displayId": "7-10",
+    "id": "0908821d-5296-51dc-9388-cc0bd3f783f5",
+    "index": 170,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-9. 複数の use でショートカット整理",
-    "topicTag": "複数 use インポート",
-    "kurumiIntro": "2つの別々のモジュールからそれぞれ関数を `use` で呼び込んで、スッキリ組み合わせよう！",
-    "goalSummary": "use で charge と go を導入して金庫⚡3＋ゴール (3, 1) へ",
-    "bookSectionTitle": "7.4 慣例的な use パスの書き方",
-    "bookSummary": "よく使う関数やモジュールを先頭で `use` しておけば、コード本体が簡潔になって読みやすくなります。",
-    "bookKeyCode": "use power::charge;\nuse motion::go;",
-    "starterCode": "mod power {\n    pub fn charge() { add_vault(3); }\n}\n\nmod motion {\n    pub fn go() { step(3); }\n}\n\nuse power::charge;\n// motion::go も use で取り込もう！\n\nfn main() {\n    charge();\n    go();\n}",
-    "solutionCode": "mod power {\n    pub fn charge() { add_vault(3); }\n}\n\nmod motion {\n    pub fn go() { step(3); }\n}\n\nuse power::charge;\nuse motion::go;\n\nfn main() {\n    charge();\n    go();\n}",
+    "stageKind": "puzzle",
+    "title": "7-10. ダイヤル解錠モジュール security",
+    "topicTag": "mod + ダイヤル解錠",
+    "kurumiIntro": "金庫室のカギを開ける `mod security` を作って、ダイヤル解錠関数を公開・呼び出し、門を通ってゴールへ進もう！",
+    "goalSummary": "security::unlock() を公開・呼び出し、ダイヤル解錠＋金庫⚡3＋ゴールへ",
+    "bookSectionTitle": "7.2 セキュリティ処理のカプセル化",
+    "bookSummary": "ダイヤルの総当たりループのような少し複雑な処理も、モジュールに閉じ込めて `unlock()` として公開すれば安全に使えます。",
+    "bookKeyCode": "security::unlock();",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\nuse security::unlock;\n\nfn main() {\n    unlock();\n    step(4);\n}",
     "quickChips": [
       {
-        "label": "use motion::go;",
-        "insert": "use motion::go;\n"
+        "label": "use security::unlock;",
+        "insert": "use security::unlock;\n"
+      },
+      {
+        "label": "unlock();",
+        "insert": "unlock();\n    "
       }
     ],
     "hints": [
-      "main で go(); を呼んでいるけど、`use motion::go;` がまだ書かれていないよ！",
-      "use power::charge; の次の行に `use motion::go;` を追加しよう！",
-      "use power::charge;\nuse motion::go;"
+      "mod security { pub fn unlock() { ... } } の中で try_dial の二分探索/ループと add_vault(3); を行おう。",
+      "use security::unlock; を宣言して、main() で unlock(); のあとに step(4); を実行しよう！",
+      "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\nuse security::unlock;\n\nfn main() {\n    unlock();\n    step(4);\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -977,11 +1052,32 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 3,
+        "x": 4,
         "y": 1
       },
+      "dial": {
+        "secret": 5
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
       "vault": {
-        "x": 2,
+        "x": 1,
         "y": 0,
         "initial": 0,
         "target": 3
@@ -989,25 +1085,27 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 3
+      "dialSolved": true,
+      "vaultTarget": 3,
+      "requireAllSwitches": true
     },
-    "parTicks": 4
+    "parTicks": 11
   },
   {
-    "displayId": "7-10",
+    "displayId": "7-11",
     "id": "7273cc50-a9a7-5c71-a468-708caf117875",
-    "index": 170,
+    "index": 171,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
     "stageKind": "puzzle",
-    "title": "7-10. 専門モジュール分業でコア納品",
+    "title": "7-11. 専門モジュール分業でコア納品",
     "topicTag": "複数 mod + use 分業",
     "kurumiIntro": "「金庫担当 `mod treasury`」と「輸送担当 `mod cargo`」を分けて、それぞれの関数を `use` で組み合わせてコア納品と金庫目標を両方達成しよう！",
     "goalSummary": "2つのモジュールを呼び出し、金庫⚡4とコア⚡4以上納品を達成",
     "bookSectionTitle": "7.4 異なるモジュールから機能を集める use",
     "bookSummary": "役割ごとにモジュールを切り出し、`main` で `use` して流れを組み立てると、設計の見通しがとても良くなります。",
     "bookKeyCode": "use treasury::store;\nuse cargo::deliver_l;",
-    "starterCode": "mod treasury {\n    pub fn store(v: i32) {\n        add_vault(v);\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nuse treasury::store;\n// cargo::carry も use で取り込もう！\n\nfn main() {\n    store(4);\n    carry();\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "mod treasury {\n    pub fn store(v: i32) {\n        add_vault(v);\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nuse treasury::store;\nuse cargo::carry;\n\nfn main() {\n    store(4);\n    carry();\n}",
     "quickChips": [
       {
@@ -1016,9 +1114,9 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "main で `carry()` を呼んでいるけれど、まだ `use cargo::carry;` が書かれていないよ！",
-      "use treasury::store; の次の行に `use cargo::carry;` を書き足そう。",
-      "use cargo::carry;"
+      "金庫担当 mod treasury { pub fn store(v: i32) { add_vault(v); } } と輸送担当 mod cargo { pub fn carry() { ... } } を定義しよう！",
+      "use treasury::store; と use cargo::carry; の両方を取り込み、store(4); carry(); でコアを拾って(1,1)→強化(2,1)→納品(4,1)しよう。",
+      "mod treasury {\n    pub fn store(v: i32) {\n        add_vault(v);\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nuse treasury::store;\nuse cargo::carry;\n\nfn main() {\n    store(4);\n    carry();\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -1131,104 +1229,6 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 9
   },
   {
-    "displayId": "7-11",
-    "id": "4e588275-2689-5c3b-adf5-77dad26fd8a3",
-    "index": 171,
-    "chapter": 7,
-    "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "title": "7-11. 同じ名前の衝突を避ける親モジュール use",
-    "topicTag": "親モジュール名での区別",
-    "kurumiIntro": "パン屋モジュールにも花屋モジュールにも同じ `send()` という名前の関数があるよ！そんなときは親モジュール名をつけて `bakery::send()` のように呼び分けよう。",
-    "goalSummary": "bakery::send と florist::send を使い分けてゴール (4, 1) へ",
-    "bookSectionTitle": "7.4 同名の型や関数を親モジュールで区別する",
-    "bookSummary": "異なるモジュールに同じ名前の関数があるときは、親モジュール名を残して呼び出すことで名前の衝突を避けられます。",
-    "bookKeyCode": "bakery::send();\nflorist::send();",
-    "starterCode": "mod bakery {\n    pub fn send() {\n        println!(\"BREAD\");\n        step(2);\n    }\n}\n\nmod florist {\n    pub fn send() {\n        println!(\"FLOWER\");\n        step(2);\n    }\n}\n\nfn main() {\n    bakery::send();\n    // 次に florist::send(); を呼んで合計4歩＆両方出力しよう！\n    \n}",
-    "solutionCode": "mod bakery {\n    pub fn send() {\n        println!(\"BREAD\");\n        step(2);\n    }\n}\n\nmod florist {\n    pub fn send() {\n        println!(\"FLOWER\");\n        step(2);\n    }\n}\n\nfn main() {\n    bakery::send();\n    florist::send();\n}",
-    "quickChips": [
-      {
-        "label": "florist::send();",
-        "insert": "florist::send();"
-      }
-    ],
-    "hints": [
-      "bakery::send() だけだと 2歩しか進めないし \"FLOWER\" が出力されないよ！",
-      "main の最後に `florist::send();` を書こう。",
-      "bakery::send();\nflorist::send();"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "stdoutIncludes": [
-        "BREAD",
-        "FLOWER"
-      ]
-    },
-    "parTicks": 6
-  },
-  {
     "displayId": "7-12",
     "id": "5b6edd0d-a1bc-5c03-8ff9-024a867d04f0",
     "index": 172,
@@ -1242,7 +1242,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.4 親モジュールを残して名前の衝突を回避",
     "bookSummary": "`bakery::act()` と `post::act()` のように親モジュールを付けて呼び分けることで、同名の関数を混乱なく使えます。",
     "bookKeyCode": "bakery::act();\npost::act();",
-    "starterCode": "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    bakery::act();\n    // 次に post::act(); を呼んでスイッチ2とゴール(5, 1)へ！\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    bakery::act();\n    post::act();\n}",
     "quickChips": [
       {
@@ -1251,9 +1251,9 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "bakery::act() は (0,1) から 2歩進んで (2,1) のコンベア? いえ、スイッチ(1,1)を通って(2,1)に着くよ！",
-      "そのあと post::act() を呼べば (4,1) のスイッチを踏みつつゲート(3,1)を抜けて (5,1) に到達するよ！",
-      "post::act();"
+      "mod bakery { pub fn act() { println!(\"BREAD_OK\"); step(2); } } と mod post { pub fn act() { println!(\"POST_OK\"); step(3); } } を定義しよう！",
+      "同名関数が衝突しないよう use せず bakery::act(); と post::act(); で呼び分けるとスイッチ(1,1)と(4,1)を踏んで (5,1) に到達するよ！",
+      "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    bakery::act();\n    post::act();\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1352,19 +1352,145 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
   },
   {
     "displayId": "7-13",
-    "id": "33c3ce56-0349-55bc-8a50-c15e47c87e4d",
+    "id": "0ac079f4-88b5-5189-bdc4-4d3a4e098701",
     "index": 173,
     "chapter": 7,
     "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
+    "stageKind": "puzzle",
+    "title": "7-13. ベルト制御モジュールと金庫連動",
+    "topicTag": "mod + コンベア時短",
+    "kurumiIntro": "ベルトコンベアに乗って最短ルートを走りつつ、途中の金庫チャージもモジュールの関数から呼んで、7ティック以内の高速配達を決めよう！",
+    "goalSummary": "turbo モジュールを使って金庫⚡4・全スイッチ・7ティック以内ゴールを達成",
+    "bookSectionTitle": "7.3 & 7.4 高速輸送モジュールの切り出し",
+    "bookSummary": "充電と移動のモジュールを整えて呼び出すことで、コンベア区間の最短ステップを正確に走らせます。",
+    "bookKeyCode": "turbo::boost_vault(4);\nturbo::dash();",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        step(3);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}",
+    "quickChips": [
+      {
+        "label": "step(3);",
+        "insert": "step(3);"
+      }
+    ],
+    "hints": [
+      "(1,1) と (3,1) がどちらも右向きコンベアだよ！step(3) するだけで (5,1) のゴールに着くよ。",
+      "mod turbo の中に pub fn boost_vault(n: i32) と pub fn dash() { step(3); } を作って main から呼び出そう！",
+      "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        step(3);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "dir": 0
+        }
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4,
+      "requireAllSwitches": true,
+      "maxTicks": 7
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "7-14",
+    "id": "33c3ce56-0349-55bc-8a50-c15e47c87e4d",
+    "index": 174,
+    "chapter": 7,
+    "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
     "stageKind": "challenge",
-    "title": "7-13. モジュール・パイプラインで全工程走破",
+    "title": "7-14. モジュール・パイプラインで全工程走破",
     "topicTag": "3モジュール連携チャレンジ",
     "kurumiIntro": "「合言葉・金庫 `mod auth`」「コア操作 `mod core_ops`」「移動制御 `mod pilot`」の3モジュールを統合して、スパークとスイッチを越えよう！",
     "goalSummary": "3モジュール連携で \"MODULE_CLEAR\"・金庫⚡5・コア⚡5+納品・ゴールへ",
     "bookSectionTitle": "7.4 複数サブシステムの連携",
     "bookSummary": "責務を明確に分けた3つのモジュールを `use` で呼び込み、安全確実にゴールまでのパイプラインを構築します。",
     "bookKeyCode": "auth::verify(); pilot::move_safe(2);",
-    "starterCode": "mod auth {\n    pub fn verify() {\n        println!(\"MODULE_CLEAR\");\n        add_vault(5);\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        // コア(1,1)→検査(2,1)→強化(3,1)\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        while is_spark_ahead() { wait_tick(1); }\n        step(1);\n    }\n}\n\nfn main() {\n    // auth::verify(), pilot::go_to_core(), core_ops::process() を順に呼ぼう！\n    auth::verify();\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "mod auth {\n    pub fn verify() {\n        println!(\"MODULE_CLEAR\");\n        add_vault(5);\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        while is_spark_ahead() { wait_tick(1); }\n        step(1);\n    }\n}\n\nfn main() {\n    auth::verify();\n    pilot::go_to_core();\n    core_ops::process();\n}",
     "quickChips": [
       {
@@ -1377,9 +1503,9 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "auth::verify() で合言葉と金庫⚡5が済むよ。次は (1,1) にあるコアまで `pilot::go_to_core();` で移動しよう！",
-      "その後 `core_ops::process();` を呼ぶと、ピックアップ→検査(2,1)→強化兼スイッチ(3,1)→ゲート通過→納品(5,1)まで一気に完了するよ！",
-      "auth::verify();\npilot::go_to_core();\ncore_ops::process();"
+      "mod auth (verify)、mod pilot (go_to_core)、mod core_ops (process) の3モジュールに分けてみよう！",
+      "auth::verify() で \"MODULE_CLEAR\" と金庫⚡5、pilot::go_to_core() でスパーク待ち＆(1,1)移動、core_ops::process() で拾得→検査(2,1)→強化兼スイッチ(3,1)→納品(5,1)まで一気に完了！",
+      "mod auth {\n    pub fn verify() {\n        println!(\"MODULE_CLEAR\");\n        add_vault(5);\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        while is_spark_ahead() { wait_tick(1); }\n        step(1);\n    }\n}\n\nfn main() {\n    auth::verify();\n    pilot::go_to_core();\n    core_ops::process();\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1510,132 +1636,6 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "parTicks": 12
   },
   {
-    "displayId": "7-14",
-    "id": "0ac079f4-88b5-5189-bdc4-4d3a4e098701",
-    "index": 174,
-    "chapter": 7,
-    "chapterTitle": "第7章 パッケージ、クレート、モジュールを利用して管理する",
-    "stageKind": "puzzle",
-    "title": "7-14. ベルト制御モジュールと金庫連動",
-    "topicTag": "mod + コンベア時短",
-    "kurumiIntro": "ベルトコンベアに乗って最短ルートを走りつつ、途中の金庫チャージもモジュールの関数から呼んで、7ティック以内の高速配達を決めよう！",
-    "goalSummary": "turbo モジュールを使って金庫⚡4・全スイッチ・7ティック以内ゴールを達成",
-    "bookSectionTitle": "7.3 & 7.4 高速輸送モジュールの切り出し",
-    "bookSummary": "充電と移動のモジュールを整えて呼び出すことで、コンベア区間の最短ステップを正確に走らせます。",
-    "bookKeyCode": "turbo::boost_vault(4);\nturbo::dash();",
-    "starterCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        // コンベア(1,1)が(2,1)スイッチへ運ぶよ。さらに進んで(5,1)へ！\n        step(1);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}",
-    "solutionCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        step(3);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}",
-    "quickChips": [
-      {
-        "label": "step(3);",
-        "insert": "step(3);"
-      }
-    ],
-    "hints": [
-      "(1,1) と (3,1) がどちらも右向きコンベアだよ！",
-      "step(1) で (1,1)→(2,1)スイッチ、step(2) で (3,1)→(4,1)スイッチ、step(3) で (5,1)ゴールに着くよ！",
-      "dash() の中を `step(3);` に直そう！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "conveyors": [
-        {
-          "x": 1,
-          "y": 1,
-          "dir": 0
-        },
-        {
-          "x": 3,
-          "y": 1,
-          "dir": 0
-        }
-      ],
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "vault": {
-        "x": 0,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 4,
-      "requireAllSwitches": true,
-      "maxTicks": 7
-    },
-    "parTicks": 5
-  },
-  {
     "displayId": "7-15",
     "id": "42360a9a-65e1-5548-b488-2805d64d5ed5",
     "index": 175,
@@ -1763,7 +1763,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第7章まとめ — モジュール分割と可視性設計の極意",
     "bookSummary": "複雑なロボットの制御システムも、適切なモジュール階層と `pub` / `use` の境界設計によりすっきり見通せるようになります。",
     "bookKeyCode": "use factory::nav::step_safe;",
-    "starterCode": "mod factory {\n    pub mod vault {\n        pub fn fill() { add_vault(6); }\n    }\n    pub mod nav {\n        // pub を付けて公開しよう！\n        fn step_safe(n: i32) {\n            for _ in 0..n {\n                while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                step();\n            }\n        }\n    }\n}\n\nuse factory::vault::fill;\nuse factory::nav::step_safe;\n\nfn main() {\n    fill();\n    step_safe(3);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "mod factory {\n    pub mod vault {\n        pub fn fill() { add_vault(6); }\n    }\n    pub mod nav {\n        pub fn step_safe(n: i32) {\n            for _ in 0..n {\n                while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                step();\n            }\n        }\n    }\n}\n\nuse factory::vault::fill;\nuse factory::nav::step_safe;\n\nfn main() {\n    fill();\n    step_safe(5);\n    turn_right();\n    step_safe(2);\n}",
     "quickChips": [
       {
@@ -1784,9 +1784,9 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "まずは `fn step_safe` に `pub` を付けて呼び出せるようにしよう！",
-      "上の廊下にはスイッチ (1,1)・スパーク (2,1)・スイッチ (4,1) があるよ。`step_safe(5);` で (5,1) の角まで一気に進もう！",
-      "そこから `turn_right(); step_safe(2);` で下のゲート (5,2) を越えて (5,3) のゴールへ到着するよ！"
+      "mod factory { pub mod vault { pub fn fill() { ... } } pub mod nav { pub fn step_safe(n: i32) { ... } } } を作ろう！",
+      "上の廊下にはスイッチ (1,1)・スパーク (2,1)・スイッチ (4,1) があるよ。fill(); のあと step_safe(5); で (5,1) まで進み、turn_right(); step_safe(2); でゴール (5,3) へ！",
+      "mod factory {\n    pub mod vault {\n        pub fn fill() { add_vault(6); }\n    }\n    pub mod nav {\n        pub fn step_safe(n: i32) {\n            for _ in 0..n {\n                while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                step();\n            }\n        }\n    }\n}\n\nuse factory::vault::fill;\nuse factory::nav::step_safe;\n\nfn main() {\n    fill();\n    step_safe(5);\n    turn_right();\n    step_safe(2);\n}"
     ],
     "worldSetup": {
       "width": 6,

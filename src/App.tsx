@@ -31,8 +31,8 @@ import { ResetSaveModal } from './components/ResetSaveModal';
 import { StoryNovelOverlay } from './components/StoryNovelOverlay';
 import { CheckCircle2 } from 'lucide-react';
 
-const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v5';
-const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v5';
+const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v6';
+const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v6';
 
 function buildInitialTick0Snapshot(stage: StageDefinition): TickSnapshot {
   const s = stage.worldSetup;

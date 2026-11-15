@@ -2,6 +2,30 @@ import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_17: StageStoryEntry[] = [
   {
+    "stageId": "7a5d0c50-d5f6-588f-9f29-ae1174a234f5",
+    "requestTitle": "ひみつのレジ箱、中を勝手に触らないで！",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "屋台の売上箱、外から勝手に中身をいじられないように「入れる」「合計を見る」だけの小窓から使いたいんだ。"
+      },
+      {
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！大事な中身は箱の中にしっかり隠して、決まった小窓からだけ出し入れすれば計算間違いもゼロだよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "これなら誰がレジ番をしても計算が狂わなくて安心だね。"
+      }
+    ]
+  },
+  {
     "stageId": "cc3aa3b6-256c-5917-8355-bdb415791494",
     "requestTitle": "いろんなお店のお祭りロボ大集合！",
     "client": "mimosa",
@@ -50,26 +74,26 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "7a5d0c50-d5f6-588f-9f29-ae1174a234f5",
-    "requestTitle": "ひみつのレジ箱、中を勝手に触らないで！",
-    "client": "moka",
+    "stageId": "888400ea-bdf9-4fd2-8323-8bb65c964991",
+    "requestTitle": "3つの屋台パーツ、ぜんぶまとめて力くらべ！",
+    "client": "coppe",
     "intro": [
       {
-        "speaker": "moka",
+        "speaker": "coppe",
         "emotion": "normal",
-        "text": "屋台の売上箱、外から勝手に中身をいじられないように「入れる」「合計を見る」だけの小窓から使いたいんだ。"
+        "text": "お祭り用の新しい荷車、バネと歯車と鈴の3つの飾りをぜんぶ乗せたらどれくらい元気が出るか試してみたいんだ！"
       },
       {
-        "speaker": "milk",
+        "speaker": "ferris",
         "emotion": "happy",
-        "text": "ピピ！大事な中身は箱の中にしっかり隠して、決まった小窓からだけ出し入れすれば計算間違いもゼロだよ！"
+        "text": "3つとも全部のせの欲張りセットカニ！どこまで走れるか競争カニ！"
       }
     ],
     "outro": [
       {
-        "speaker": "moka",
+        "speaker": "coppe",
         "emotion": "happy",
-        "text": "これなら誰がレジ番をしても計算が狂わなくて安心だね。"
+        "text": "おおっ、全部の力を合わせたら一発で金庫も満タン、屋台まで一直線だ〜！"
       }
     ]
   },
@@ -94,6 +118,30 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
         "speaker": "poppo",
         "emotion": "happy",
         "text": "手順通りに充電して曲がって、ぴったり屋台に届きました！"
+      }
+    ]
+  },
+  {
+    "stageId": "7e57985c-d770-4ed9-9c75-2e8a7eb906fd",
+    "requestTitle": "くるみ工房のピカピカ仕上げ台！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "お祭りで使う大事な飾りパーツ、作業台でしっかり検品して、ピカピカに磨いてから納品箱に届けよう！"
+      },
+      {
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！まずはチェック、つぎにパワーを込めて磨き上げ、最後に納品だね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "わぁ、鏡みたいにピカピカ！これならお祭りの主役にぴったりだね！"
       }
     ]
   },
@@ -146,6 +194,30 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "0d70d2bb-4608-4d54-9811-d924693f3109",
+    "requestTitle": "掲示板の許可証と、お祭り門のカギ！",
+    "client": "poppo",
+    "intro": [
+      {
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "町の掲示板に貼るお知らせ、きちんと手順どおりにチェックを済ませて、おまけに門のスイッチも押してきていただけますか？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "順番どおりにスタンプをポンポン押して、門のボタンもポチッと押してくるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "手順にひとつも抜けがなくて、門もスムーズに開きました！助かりましたよ！"
+      }
+    ]
+  },
+  {
     "stageId": "661f50ef-b06b-5e02-b076-2228c88a0e8e",
     "requestTitle": "省エネお散歩＆ターボダッシュの二段階！",
     "client": "mimosa",
@@ -170,6 +242,30 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "7fc10734-5e74-4bd5-833b-4231c43b726e",
+    "requestTitle": "ちかちか火花をぬって、のんびり＆ダッシュ切り替え！",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "通りの先に火花がパチパチ飛んでるね。最初はのんびり様子を見て、タイミングが合ったらダッシュに切り替えて飾り台へ運べるかい？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "panic",
+        "text": "びびっ、火花がすぐそばを横切っていくカニ！焦らず切り替えて駆け抜けるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "見事な切り替えだね。飾りパーツも傷ひとつなくピカピカのまま届いたよ。"
+      }
+    ]
+  },
+  {
     "stageId": "70cb7557-cf2f-57ca-8b60-541cbead8dc1",
     "requestTitle": "屋台パレードの安全確認＆ゲート開放！",
     "client": "kurumi",
@@ -190,6 +286,40 @@ export const STORY_CHAPTER_17: StageStoryEntry[] = [
         "speaker": "kurumi",
         "emotion": "happy",
         "text": "屋台の準備は完璧！さあ、お楽しみの福引き大会の準備に行こう！"
+      }
+    ]
+  },
+  {
+    "stageId": "0e45101c-00e8-4c70-80d0-a4b51f6bf30d",
+    "requestTitle": "山車パレード前の総点検！屋台のお披露目リハーサル",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "本番の山車パレードに向けて、今日はリハーサルよ！花屋のお手伝いロボもパン屋のお手伝いロボも、みんな順番に動かしてチェックするわ！"
+      },
+      {
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "おっと、出発前の確認ハンコも忘れずにな！途中にスイッチもあるし、大切な飾りの仕上げも一緒に済ませちゃおう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "花吹雪と焼きたてパンの香りが混ざって最高のリハーサルカニ！ぜんぶ完璧に決めてみせるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "まぁ素敵！どのお店のロボも完璧な動きで、本番のお祭りが待ちきれなくなったわ！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "確認ハンコも飾りパーツの仕上げも100点満点！みんな、本番もこの調子でいこうね！"
       }
     ]
   }

@@ -74,30 +74,6 @@ export const STORY_CHAPTER_9: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "fecb5db3-4f07-5baf-acbe-87c4035235a5",
-    "requestTitle": "パン焼きタイマーのあわてんぼう停止を直せ！",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "panic",
-        "text": "あわわ、パン焼きタイマーが「ちょっとでも焦げそう！」ってすぐ非常ベルを鳴らして止まろうとしてるよ〜！"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "本当に危ない時だけ止まるように見直せば、焦げずにスイッチを踏んでゲートを抜けられるよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "焦げずにふわふわパンが取り出せたし、安全装置もばっちりだね！"
-      }
-    ]
-  },
-  {
     "stageId": "d0ae5f54-2197-50fa-9847-9d1206122074",
     "requestTitle": "たまごパックの「割れあり」見分け術",
     "client": "coppe",
@@ -146,6 +122,35 @@ export const STORY_CHAPTER_9: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "347b5576-609f-5487-9baa-3c95ffef4880",
+    "requestTitle": "雨の日の傘忘れもの係",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "商店街に傘の忘れものがたくさん！雨がやむ前に、持ち主のところへ届けてあげよう。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくは赤い傘を届けるカニ！……開いたら風にあおられて、くるくる回るカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "傘は持ち主に戻ったよ。フェリスの傘だけ、風で裏返ってお皿みたいになっちゃったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "雨水をためて持って帰るカニ！……お風呂にするには少なすぎるカニ！"
+      }
+    ]
+  },
+  {
     "stageId": "190eda01-8414-5c6a-82d4-c243fb94df7d",
     "requestTitle": "モカさん直伝・豆の「合格・やり直し」選別",
     "client": "moka",
@@ -190,131 +195,6 @@ export const STORY_CHAPTER_9: StageStoryEntry[] = [
         "speaker": "mimosa",
         "emotion": "happy",
         "text": "品質バッチリの玉が届いたわ！安心ね♪"
-      }
-    ]
-  },
-  {
-    "stageId": "64c273dd-e5b8-5a07-b2ce-c8fc0e6505fd",
-    "requestTitle": "伝言リレーのチェックが長すぎて目が回る〜",
-    "client": "poppo",
-    "intro": [
-      {
-        "speaker": "poppo",
-        "emotion": "panic",
-        "text": "確認する手順が増えてメモが何段にも重なっちゃって、読んでるだけで目がグルグル回りそうです〜！"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "そんなときは「ダメならそのまま上へパス！」の合図を使えば、伝言メモがスッキリ1本道になるよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "poppo",
-        "emotion": "happy",
-        "text": "わあ、短いのにちゃんとチェックできてる！おめめパッチリです！"
-      }
-    ]
-  },
-  {
-    "stageId": "2b843031-35fa-56e4-b78e-0b0c1745840c",
-    "requestTitle": "小麦粉と卵のダブル確認を一気につなごう",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "normal",
-        "text": "小麦粉のチェックと卵のチェック、2つ連続で確認してからパン焼き金庫に入れたいんだけど、もっと手短に書けないかな？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "1個目よし！2個目よし！ダメなら即Uターン！これでサクッと焼き上がりが早くなるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "読みやすくてミスもなし！まるで魔法のレシピブックみたいだね！"
-      }
-    ]
-  },
-  {
-    "stageId": "e8bba780-ccd3-5cd3-986e-997f4979a8af",
-    "requestTitle": "伝言が戻ってきたあとのフォロー大作戦",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "おつかい先から「ダメでした〜」って伝言が返ってきた時、親元でしっかり受け止めて安全に進みたいんだ。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "一番上の担当がしっかり受け止めて代わりの作戦に切り替えれば、トラブルが起きてもへっちゃらだね！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "下から上まで責任のリレーがつながっているね。頼もしいよ。"
-      }
-    ]
-  },
-  {
-    "stageId": "e204841a-48fc-5a37-952f-a00f0e10c9be",
-    "requestTitle": "どんなハプニングもへっちゃら航行！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "安全対策の総まとめ！予備プランとトラブル回避を組み合わせて、スイッチを押してゲートを堂々と越えよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "転んでもタダでは起きない、タフなカニロボに進化したカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "どんなトラブルが起きても止まらなくなったね！さあ、明日はもっと便利な道具を作ってみよう！"
-      }
-    ]
-  },
-  {
-    "stageId": "347b5576-609f-5487-9baa-3c95ffef4880",
-    "requestTitle": "雨の日の傘忘れもの係",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "商店街に傘の忘れものがたくさん！雨がやむ前に、持ち主のところへ届けてあげよう。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぼくは赤い傘を届けるカニ！……開いたら風にあおられて、くるくる回るカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "傘は持ち主に戻ったよ。フェリスの傘だけ、風で裏返ってお皿みたいになっちゃったね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "雨水をためて持って帰るカニ！……お風呂にするには少なすぎるカニ！"
       }
     ]
   },
@@ -435,6 +315,131 @@ export const STORY_CHAPTER_9: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "e191b416-e095-5ee1-9b79-8582cbfe3795",
+    "requestTitle": "フェリスのくしゃみと風車",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "庭の小さな風車が止まっちゃった。風が弱いのかな？みんなでふうっと息を吹きかけてみよう。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくのくしゃみなら強風カニ！……へっくしょん！風車より帽子が飛んでいったカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "風車はくるくる回り始めたよ。フェリスの帽子は、隣のミモザさんの花壇に着地して花飾りつきに。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくの新しい帽子カニ！花の香りで、くしゃみはもう出ないカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "fecb5db3-4f07-5baf-acbe-87c4035235a5",
+    "requestTitle": "パン焼きタイマーのあわてんぼう停止を直せ！",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "panic",
+        "text": "あわわ、パン焼きタイマーが「ちょっとでも焦げそう！」ってすぐ非常ベルを鳴らして止まろうとしてるよ〜！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "本当に危ない時だけ止まるように見直せば、焦げずにスイッチを踏んでゲートを抜けられるよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "焦げずにふわふわパンが取り出せたし、安全装置もばっちりだね！"
+      }
+    ]
+  },
+  {
+    "stageId": "64c273dd-e5b8-5a07-b2ce-c8fc0e6505fd",
+    "requestTitle": "伝言リレーのチェックが長すぎて目が回る〜",
+    "client": "poppo",
+    "intro": [
+      {
+        "speaker": "poppo",
+        "emotion": "panic",
+        "text": "確認する手順が増えてメモが何段にも重なっちゃって、読んでるだけで目がグルグル回りそうです〜！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "そんなときは「ダメならそのまま上へパス！」の合図を使えば、伝言メモがスッキリ1本道になるよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "わあ、短いのにちゃんとチェックできてる！おめめパッチリです！"
+      }
+    ]
+  },
+  {
+    "stageId": "2b843031-35fa-56e4-b78e-0b0c1745840c",
+    "requestTitle": "小麦粉と卵のダブル確認を一気につなごう",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "小麦粉のチェックと卵のチェック、2つ連続で確認してからパン焼き金庫に入れたいんだけど、もっと手短に書けないかな？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "1個目よし！2個目よし！ダメなら即Uターン！これでサクッと焼き上がりが早くなるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "読みやすくてミスもなし！まるで魔法のレシピブックみたいだね！"
+      }
+    ]
+  },
+  {
+    "stageId": "e8bba780-ccd3-5cd3-986e-997f4979a8af",
+    "requestTitle": "伝言が戻ってきたあとのフォロー大作戦",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "おつかい先から「ダメでした〜」って伝言が返ってきた時、親元でしっかり受け止めて安全に進みたいんだ。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "一番上の担当がしっかり受け止めて代わりの作戦に切り替えれば、トラブルが起きてもへっちゃらだね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "下から上まで責任のリレーがつながっているね。頼もしいよ。"
+      }
+    ]
+  },
+  {
     "stageId": "12b4325e-3fae-5070-b5cc-4ac200fee821",
     "requestTitle": "みんなで作るフルーツサンド",
     "client": "kurumi",
@@ -551,35 +556,6 @@ export const STORY_CHAPTER_9: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "e191b416-e095-5ee1-9b79-8582cbfe3795",
-    "requestTitle": "フェリスのくしゃみと風車",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "庭の小さな風車が止まっちゃった。風が弱いのかな？みんなでふうっと息を吹きかけてみよう。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぼくのくしゃみなら強風カニ！……へっくしょん！風車より帽子が飛んでいったカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "風車はくるくる回り始めたよ。フェリスの帽子は、隣のミモザさんの花壇に着地して花飾りつきに。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぼくの新しい帽子カニ！花の香りで、くしゃみはもう出ないカニ！"
-      }
-    ]
-  },
-  {
     "stageId": "d2207f99-4376-534a-998a-71b6e795a295",
     "requestTitle": "商店街のみんなで朝のラジオ体操",
     "client": "kurumi",
@@ -605,6 +581,30 @@ export const STORY_CHAPTER_9: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "歌も準備運動カニ！もう一回、今度は体操からやるカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "e204841a-48fc-5a37-952f-a00f0e10c9be",
+    "requestTitle": "どんなハプニングもへっちゃら航行！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "安全対策の総まとめ！予備プランとトラブル回避を組み合わせて、スイッチを押してゲートを堂々と越えよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "転んでもタダでは起きない、タフなカニロボに進化したカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "どんなトラブルが起きても止まらなくなったね！さあ、明日はもっと便利な道具を作ってみよう！"
       }
     ]
   },

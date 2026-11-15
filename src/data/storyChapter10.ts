@@ -98,6 +98,64 @@ export const STORY_CHAPTER_10: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "8b3d8b50-360b-5151-aed0-ad7cc476ab70",
+    "requestTitle": "みんなの荷物を運ぶお花見ピクニック",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "お花見の荷物を広場まで運ぼう！お弁当も敷物も、みんなで少しずつ持てば大丈夫だね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくはお弁当係カニ！……ふたを開けたら、桜もちがこっちを見てるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "荷物は全部広場に到着！フェリスが運んだお弁当は、桜もちがひとつだけ減ってるね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "運ぶ前に味見して安全確認したカニ！桜の花もきれいカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "31e70608-d2d8-5714-8eee-3fba590ecdb3",
+    "requestTitle": "喫茶店の読書カードを作ろう",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "モカさんのお店で読書会をするんだって。読んだ本の感想を書けるカードを用意しよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくは絵本の感想を書くカニ！『カニがいっぱいで楽しかった』って、どの本にも書けるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "カードができたよ！フェリスの感想はどの本にもぴったりだけど、絵本のカニが一番好きなんだね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "次の読書会にも同じ感想を書くカニ！……本の題名だけは覚えるカニ！"
+      }
+    ]
+  },
+  {
     "stageId": "d39e7fc6-3812-56fd-bce7-72c69cd529bf",
     "requestTitle": "フェリスとみるく号、おそろいの号令！",
     "client": "kurumi",
@@ -190,131 +248,6 @@ export const STORY_CHAPTER_10: StageStoryEntry[] = [
         "speaker": "poppo",
         "emotion": "happy",
         "text": "風がビューッと吹くくらい颯爽と駆け抜けて行きましたね！かっこいいです！"
-      }
-    ]
-  },
-  {
-    "stageId": "501b44e2-7067-5e83-8742-ecb185d3add7",
-    "requestTitle": "喫茶店の貸出ブック、返却期限を守ろう！",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "お店の貸出本、持ち主が帰ったあともしおりだけ残ってたら困るだろう？返却期限をしっかり合わせたいんだ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "panic",
-        "text": "えっ、僕がこの前借りた絵本……たしかベッドの下に……じゃなくて今すぐ返却しに走るカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "ははは、期限を守ってくれてありがとう。これで喫茶店の本棚もずっと平和だ。"
-      }
-    ]
-  },
-  {
-    "stageId": "c0fd3332-442d-55fc-838d-c594d61eb5cc",
-    "requestTitle": "2つの見積もりメモ、期限切れにご注意！",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "2つのお花の見積もりを比べて短い方の歩数を使いたいんだけど、どっちを借りても期限が切れないように気をつけたいわ。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "2つとも「お返しするまでずっとここにあるよ！」って約束しておけば、安心して比べられるね！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "どちらを選んでも期限切れにならないから安心ね！"
-      }
-    ]
-  },
-  {
-    "stageId": "11ff3b4b-9609-535e-9aa0-286223f193a5",
-    "requestTitle": "案内メモに「借りた数字の有効期限」シール",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "normal",
-        "text": "パン屋の案内メモに別の人から借りた歩数を書き留めたいんだけど、元の人が帰る前までに使い切らないとダメなんだよね？"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "その通り！案内メモにも「この数字がある間だけ有効」ってシールを貼っておけば完璧だよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "案内メモにも有効期限をつけられるんだね！賢いなあ！"
-      }
-    ]
-  },
-  {
-    "stageId": "0bd720eb-7730-583a-a337-672efa528996",
-    "requestTitle": "魔法のトレイとお約束、全部まとめて大活躍！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "どんな荷物も運べて、誰とでも同じ合図で動けて、お約束の期限も守れる！集大成のおてつだいを決めよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "難しそうに見えたお約束も、慣れたらとっても快適カニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "お見事！よし、明日はみんなで出荷まえの味見チェックに挑戦だよ！"
-      }
-    ]
-  },
-  {
-    "stageId": "8b3d8b50-360b-5151-aed0-ad7cc476ab70",
-    "requestTitle": "みんなの荷物を運ぶお花見ピクニック",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "お花見の荷物を広場まで運ぼう！お弁当も敷物も、みんなで少しずつ持てば大丈夫だね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぼくはお弁当係カニ！……ふたを開けたら、桜もちがこっちを見てるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "荷物は全部広場に到着！フェリスが運んだお弁当は、桜もちがひとつだけ減ってるね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "運ぶ前に味見して安全確認したカニ！桜の花もきれいカニ！"
       }
     ]
   },
@@ -464,31 +397,74 @@ export const STORY_CHAPTER_10: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "31e70608-d2d8-5714-8eee-3fba590ecdb3",
-    "requestTitle": "喫茶店の読書カードを作ろう",
-    "client": "kurumi",
+    "stageId": "501b44e2-7067-5e83-8742-ecb185d3add7",
+    "requestTitle": "喫茶店の貸出ブック、返却期限を守ろう！",
+    "client": "moka",
     "intro": [
       {
-        "speaker": "kurumi",
+        "speaker": "moka",
         "emotion": "normal",
-        "text": "モカさんのお店で読書会をするんだって。読んだ本の感想を書けるカードを用意しよう！"
+        "text": "お店の貸出本、持ち主が帰ったあともしおりだけ残ってたら困るだろう？返却期限をしっかり合わせたいんだ。"
       },
       {
         "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぼくは絵本の感想を書くカニ！『カニがいっぱいで楽しかった』って、どの本にも書けるカニ！"
+        "emotion": "panic",
+        "text": "えっ、僕がこの前借りた絵本……たしかベッドの下に……じゃなくて今すぐ返却しに走るカニ！"
       }
     ],
     "outro": [
       {
-        "speaker": "kurumi",
+        "speaker": "moka",
         "emotion": "happy",
-        "text": "カードができたよ！フェリスの感想はどの本にもぴったりだけど、絵本のカニが一番好きなんだね。"
+        "text": "ははは、期限を守ってくれてありがとう。これで喫茶店の本棚もずっと平和だ。"
+      }
+    ]
+  },
+  {
+    "stageId": "c0fd3332-442d-55fc-838d-c594d61eb5cc",
+    "requestTitle": "2つの見積もりメモ、期限切れにご注意！",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "2つのお花の見積もりを比べて短い方の歩数を使いたいんだけど、どっちを借りても期限が切れないように気をつけたいわ。"
       },
       {
-        "speaker": "ferris",
+        "speaker": "kurumi",
         "emotion": "happy",
-        "text": "次の読書会にも同じ感想を書くカニ！……本の題名だけは覚えるカニ！"
+        "text": "2つとも「お返しするまでずっとここにあるよ！」って約束しておけば、安心して比べられるね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "どちらを選んでも期限切れにならないから安心ね！"
+      }
+    ]
+  },
+  {
+    "stageId": "11ff3b4b-9609-535e-9aa0-286223f193a5",
+    "requestTitle": "案内メモに「借りた数字の有効期限」シール",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "パン屋の案内メモに別の人から借りた歩数を書き留めたいんだけど、元の人が帰る前までに使い切らないとダメなんだよね？"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "その通り！案内メモにも「この数字がある間だけ有効」ってシールを貼っておけば完璧だよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "案内メモにも有効期限をつけられるんだね！賢いなあ！"
       }
     ]
   },
@@ -605,6 +581,30 @@ export const STORY_CHAPTER_10: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "忘れてたクッキーもおいしいカニ！ポケットがクッキー入れにぴったりカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "0bd720eb-7730-583a-a337-672efa528996",
+    "requestTitle": "魔法のトレイとお約束、全部まとめて大活躍！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "どんな荷物も運べて、誰とでも同じ合図で動けて、お約束の期限も守れる！集大成のおてつだいを決めよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "難しそうに見えたお約束も、慣れたらとっても快適カニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "お見事！よし、明日はみんなで出荷まえの味見チェックに挑戦だよ！"
       }
     ]
   },

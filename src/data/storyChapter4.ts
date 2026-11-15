@@ -2,643 +2,426 @@ import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_4: StageStoryEntry[] = [
   {
-    "stageId": "50da55a5-9f54-56a0-9ca7-ad9d72ff3541",
-    "requestTitle": "お花のタネ、手放したあとも気になっちゃう",
+    "stageId": "1980bf6e-258f-5ba0-80b7-eebe20305171",
+    "requestTitle": "お花配達カードが風で飛ばされた！",
     "client": "mimosa",
     "intro": [
       {
         "speaker": "mimosa",
         "emotion": "normal",
-        "text": "大事な光のタネを1つだけ花壇のゴールへ運んでほしいの。渡したあとも気になって触ろうとしちゃダメよ？"
+        "text": "最近お花のお届け先が増えてきたから、「送り先」と「歩数」をひとまとめにした可愛い配達カードを作りたいの。"
       },
       {
         "speaker": "ferris",
         "emotion": "panic",
-        "text": "えっ、預けたあともピカピカしてるからついツンツンしたくなっちゃうカニ……我慢するカニ！"
+        "text": "あっ！バラバラのメモ用紙が窓からの風で全部ヒラヒラ飛んでいくカニ〜！カードにまとめて正解カニ！"
       }
     ],
     "outro": [
       {
         "speaker": "mimosa",
         "emotion": "happy",
-        "text": "タネが迷子にならず、きちんと1つだけ届いたわ！これで春のお花も安心ね。"
+        "text": "すごく見やすい配達カードね！これならお店番の子にもすぐ渡せるわ。"
       }
     ]
   },
   {
-    "stageId": "2cd33dd4-9627-54ce-97b8-a711e77061e4",
-    "requestTitle": "お買い物カゴ、誰が持ってるの！？",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "panic",
-        "text": "あれっ！？隣の店員さんにパンのカゴを渡したはずなのに、うっかり自分の空っぽのカゴを届けようとしちゃったよ〜！"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "コッペさん、それただのエア荷物だよ！受け取った人の手元からちゃんと届けようね！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "そっか、中身は1つしかないから受け取ったほうを渡せばいいんだね！あはは、うっかりうっかり！"
-      }
-    ]
-  },
-  {
-    "stageId": "3bfa7dd4-ab23-5565-9b0f-a597d3e73d62",
-    "requestTitle": "預けた大事なもの、ちゃんと返して〜！",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "点検に出した光る豆ランプ、向こうに持っていかれたまま戻ってこないんだが。ちゃんと手元へ返してもらえるかな？"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "おまかせ！点検が終わったらきちんと持ち主へ返すように伝えておいたよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "おお、ピカピカになって戻ってきたよ。これなら安心して預けられるね。"
-      }
-    ]
-  },
-  {
-    "stageId": "05bf262f-5786-5234-b6cc-9de582a1a776",
-    "requestTitle": "2つの光の玉を順番リレー",
+    "stageId": "6bc94245-f5e4-561c-b1a1-f702ad499fb6",
+    "requestTitle": "配達カードの字がクセ字すぎて読めない？",
     "client": "poppo",
     "intro": [
       {
         "speaker": "poppo",
         "emotion": "normal",
-        "text": "今日は大事なお届け物が2つあります！1つ目を届けてから、忘れずに2つ目もお願いできますか？"
+        "text": "カードに書かれた「右への歩数」と「下への歩数」を読み取って、角を曲がってお届けお願いできますか？"
       },
       {
-        "speaker": "ferris",
+        "speaker": "kurumi",
         "emotion": "happy",
-        "text": "両手に1個ずつ……は重くてコケそうだから、1個ずつしっかり届けるカニ！"
+        "text": "はーい！ちゃんと項目ごとに欄が分かれてるから、ポッポさんの丸文字でもばっちり読めるよ！"
       }
     ],
     "outro": [
       {
         "speaker": "poppo",
         "emotion": "happy",
-        "text": "2つとも取り違えゼロで完璧に届きました！"
+        "text": "カード通りのコースで一発配達ですね！字の練習もちょっとだけ頑張ります……。"
       }
     ]
   },
   {
-    "stageId": "982d2f3c-0ac0-53b8-a8c4-e8d038dd8fa4",
-    "requestTitle": "ランプのちょっと貸し出し＆ピカピカ磨き",
-    "client": "moka",
+    "stageId": "1255fea6-f0fc-5911-9d77-9e6386a528cf",
+    "requestTitle": "「お名前おんなじ」なら省略しちゃえ！",
+    "client": "coppe",
     "intro": [
       {
-        "speaker": "moka",
+        "speaker": "coppe",
         "emotion": "normal",
-        "text": "喫茶店のランプ、ちょっとだけ見せて、ついでに光パワーを強くしてから返してくれるかい？"
+        "text": "パンの名前を書くとき「メロンパンの欄にメロンパン」って2回書くの、手が疲れちゃうよね？"
       },
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "はーい！「ちょっと見せて」と「ちょっと磨くよ」を順番にやれば、持ち主の手元からなくならないよ！"
+        "text": "たしかに！同じなら1回で済ませちゃおう！ついでに燃料も満タンまで足して出発だよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "おお、短くて読みやすい！これで注文票を書くスピードが倍になるぞ〜！"
+      }
+    ]
+  },
+  {
+    "stageId": "d4f80b3d-a05c-5b52-af65-5dac0d83bd98",
+    "requestTitle": "大事なレシピカード、丸ごとあげないで！",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "panic",
+        "text": "おつかい係にレシピのカードを渡したら、向こうに持っていかれたきり僕の手元からなくなっちゃって困ってるんだ。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "それなら渡す前に「見るだけね」って約束して貸し出そう！終わったらちゃんと手元に残るよ！"
       }
     ],
     "outro": [
       {
         "speaker": "moka",
         "emotion": "happy",
-        "text": "うん、温かみのあるいい光だ。お店がぐっと明るくなったよ。"
+        "text": "大事なメモを手元に残したまま配達まで済んだね。助かったよ。"
       }
     ]
   },
   {
-    "stageId": "780244e4-ee33-5914-93ed-d60d1bf06489",
-    "requestTitle": "新種のお花、クンクン香りチェックは大人気",
+    "stageId": "cc08fb86-3ef1-5b5c-be2c-bcd5f084d0a9",
+    "requestTitle": "フェリスちゃんの特技！必殺カニダッシュ",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ねえねえくるみちゃん！僕にも「必殺カニダッシュ！」みたいなカッコいい特技ボタンを付けてほしいカニ！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "ふふ、いいよ！でも勢い余って壁に激突しないように、ちゃんと止まれる特技にしておくね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "わーい！自分専用の特技が増えてヒーローみたいになったカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "a71ca700-b80a-5bcb-9c08-acb27467c9f2",
+    "requestTitle": "商店街の花飾り、色をそろえよう！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "商店街の飾りつけをするよ。ミモザさんが花飾りを持ってきたけど、フェリスちゃんが赤い花だけ自分の頭に集めちゃった！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "赤い花は目立つカニ！僕がつけていれば、みんな迷わず集まれるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "フェリスちゃんの花飾りもかわいいけど、残りのお花は入口に飾ろうね。商店街がぱっと華やかになったわ♪"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "花を返したら頭がさみしくなったカニ……小さな一輪だけつけておくカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "0c23c893-e04b-58eb-8123-1a5ead126bb4",
+    "requestTitle": "ポッポさん、配達かばんをおしゃれに！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "ポッポさんの配達かばんを飾ることになったよ。通路を行ったり来たりする赤い光を眺めながらリボンを結んでいたら、かばんを背負ったフェリスちゃんの首に結ばれてた！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "かばんと僕が仲良しになったカニ！これなら配達中も離れないカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "結び目をほどいたら、かばんにリボンがきれいについたよ。フェリスちゃんも首が楽になって、ポッポさんと一緒に出発ね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今度はかばんだけに結ぶカニ！僕の首にも小さいリボンをつけてほしいカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "47e6d964-34c0-503b-b7b9-ca62cf48076a",
+    "requestTitle": "喫茶店の時計、五分だけ進んでる？",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "モカさんの喫茶店の時計が五分だけ進んでるみたい。フェリスちゃんが時計を見上げていたら、針の形がカニのはさみに見えてきた！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "長い針は左のはさみ、短い針は右のはさみカニ！時計さん、僕とおそろいカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "時計はちゃんと直ったよ。フェリスちゃん、時刻を読むたびに自分のはさみを動かして、時計と一緒にチョキチョキしてたね♪"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "チョキチョキ体操で体もほぐれたカニ！時間ぴったりのおやつに間に合うカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "2fcba75b-b840-54f5-ace5-9e10d4f3ecd6",
+    "requestTitle": "新装カートをピカピカ量産！",
     "client": "mimosa",
     "intro": [
       {
         "speaker": "mimosa",
         "emotion": "normal",
-        "text": "珍しいお花が咲いたの！見るだけなら何人で覗き込んでも減らないし、2回続けてチェックしても平気よね？"
+        "text": "新しい鉢植えカートを用意するたび、車輪を1個ずつ組み立てるより「はい出来上がり！」って一発で出せたらおしゃれよね！"
       },
       {
-        "speaker": "ferris",
+        "speaker": "kurumi",
         "emotion": "happy",
-        "text": "クンクン……甘い香りがするカニ！触らないで眺めるだけなら100人でも見れるカニ！"
+        "text": "カート製造ボタンを作っちゃえば、いつでも新品ピッカピカのカートが出せるよ！"
       }
     ],
     "outro": [
       {
         "speaker": "mimosa",
         "emotion": "happy",
-        "text": "2回のチェックも合格ね！さっそくお店の特等席に並べましょう♪"
+        "text": "見た目も押し心地も、まさに工房特製のカートね！"
       }
     ]
   },
   {
-    "stageId": "93d94563-e767-55af-911d-43a5c6a17067",
-    "requestTitle": "チョコペンは1本だけ！取り合いケンカ勃発",
+    "stageId": "3b4bfcf0-aa4f-5711-8936-ac4766059c00",
+    "requestTitle": "秋祭りの落とし物テント、大にぎわい！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "秋祭りの落とし物テントに、帽子や手袋やぬいぐるみが次々届いたよ。フェリスちゃんが預かろうとしたら、ぬいぐるみを抱っこして離さない！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "持ち主が見つかるまで、僕がぎゅっと見守るカニ！この子も落とし物でさみしいカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "ぬいぐるみの持ち主が見つかったよ。フェリスちゃんは笑顔で返して、代わりにテントのぬいぐるみ係を任されたね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぬいぐるみが帰れてよかったカニ！次は僕が落とし物にならないよう気をつけるカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "f02d67b8-17fb-5ba9-bed7-58542c37634e",
+    "requestTitle": "ポッポさんの配達メモ、風でくるり",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "ポッポさんの配達メモが風でくるりと丸まって、帽子の中に入っちゃった！フェリスちゃんが帽子を取ろうとしたら、つばが目を隠して前が見えないよ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "帽子を持ち上げたらメモが出てきたカニ！でも今度は僕が前を見られないカニ〜！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "配達メモも帽子も無事に戻ったね。フェリスちゃんには、つばの短い帽子のほうが似合うかも♪"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "短いつばなら前が見えるカニ！これで配達メモも帽子も見失わないカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "192b0b47-cbdf-57df-9e79-5b6b9661e700",
+    "requestTitle": "オーブンロボのセルフ充電タイム",
     "client": "coppe",
     "intro": [
       {
         "speaker": "coppe",
-        "emotion": "panic",
-        "text": "たいへんだ！ケーキに字を書くチョコペンを2人同時に使おうとして、クリームがぐちゃぐちゃになりそうだよ〜！"
+        "emotion": "normal",
+        "text": "お店のオーブンロボが「充電お願いしまーす！」って自分で元気をチャージできるようにしたいんだ！"
       },
       {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "書き換えるペンは1回に1人ずつ！順番を守ればケンカにならないし、文字もきれいに書けるよ！"
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "自分で自分の電池を回復するカニ！？僕もおやつを自分で焼いて食べられるようになりたいカニ！"
       }
     ],
     "outro": [
       {
         "speaker": "coppe",
         "emotion": "happy",
-        "text": "順番を守ったら「たんじょうびおめでとう」が綺麗に書けたよ！仲直りだね！"
+        "text": "セルフ充電でバッチリ金庫が満たされたよ〜！"
       }
     ]
   },
   {
-    "stageId": "b93e4f37-2a9d-5313-84f8-af74f2395f5e",
-    "requestTitle": "まぶしすぎ！？特大パワーの光お届け",
+    "stageId": "c8c5352e-5e91-522d-bc7f-0b113b345d01",
+    "requestTitle": "コッペさんの新作パン、ふわふわ検査",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "コッペさんの新作パンは、検査台の上でふわふわに焼けたかな？フェリスちゃんがそっと指で押して確かめたら、パンの真ん中に小さなへこみができちゃった！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "わわっ、やさしく触ったつもりだったカニ！パンが僕の指の形を覚えたカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "へこみは焼き印みたいでかわいいよ。フェリスちゃんの手形パン、今日の人気商品にしよう♪"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "手形パンが売れたカニ！次は両手の形で大きなパンを作るカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "054630ab-1a53-53e5-8f0e-62559507dd13",
+    "requestTitle": "ミモザさんの温室で、花の迷子探し",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "温室の鉢植えが一つだけ棚から移動してるみたい。フェリスちゃんが探し始めたけど、珍しい花を見つけるたびに立ち止まって見とれちゃう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "あっちの花もきれい、こっちの葉っぱもつやつやカニ！探し物を忘れそうカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "迷子の鉢植えは温室の入口にありました！フェリスちゃん、ついでに花を見て回れてうれしそうね♪"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "探し物も見つかって花も見られて一石二鳥カニ！もう一周してから帰るカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "15fbf14e-4902-5a68-b725-e98586b19c62",
+    "requestTitle": "特製おてつだいロボの完成おひろめ会！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "特技も充電もカート作りも全部まとめた特製おてつだいメニューで、金庫チャージとL字のお届けをカッコよく決めよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "よしっ、商店街のみんなにカッコいいところを見せちゃうカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "大拍手！フェリスちゃん、今日はおやつのメロンパン特大サイズだよ！"
+      }
+    ]
+  },
+  {
+    "stageId": "aa57e89b-520e-570f-8ed0-3dde87e472b0",
+    "requestTitle": "商店街の冬支度、みんなで毛布を運ぼう",
     "client": "poppo",
     "intro": [
       {
         "speaker": "poppo",
         "emotion": "normal",
-        "text": "遠くの灯台へ送るランプ、夜道でも目立つように2回ぶんピカピカに磨いて届けてほしいんです！"
+        "text": "冷たい風が吹いてきたから、商店街のみんなで毛布を運ぶよ。ポッポさんには小さな毛布、モカさんには大きな毛布。フェリスちゃんは毛布の山を抱えてる！"
       },
       {
-        "speaker": "ferris",
+        "speaker": "kurumi",
         "emotion": "happy",
-        "text": "キュキュッと2回磨いたら……うわっ、まぶしすぎてサングラスがほしいカニ！"
+        "text": "フェリスちゃん、毛布を配り終わってから自分の分を選ぼうね！二枚も抱えたら前が見えないよ！"
       }
     ],
     "outro": [
       {
         "speaker": "poppo",
         "emotion": "happy",
-        "text": "お星さまみたいにキラキラですね！これなら夜中の配達も道に迷いません！"
-      }
-    ]
-  },
-  {
-    "stageId": "f5a0f239-cfc0-553b-8c39-f24be2137f2e",
-    "requestTitle": "焼き菓子トレーの真ん中だけ味見タイム",
-    "client": "coppe",
-    "intro": [
-      {
-        "speaker": "coppe",
-        "emotion": "normal",
-        "text": "オーブンから出した4個のパンのうち、真ん中の2個だけ焼き色がちょうどいいか見てほしいんだ！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "お皿ごと運ばなくても、真ん中2つだけチラッと見ればいいカニ！……味見はダメカニ？"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "お見事！こんがりきつね色、完璧な焼き上がりだよ！"
-      }
-    ]
-  },
-  {
-    "stageId": "be100168-6dd5-54c6-b965-8e2b5f48f2bd",
-    "requestTitle": "端っこからザックリ花束づくり",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "「最初から3本だけ」とか「後ろの残り全部」みたいに、パッと見てすぐわかる束ね方をしたいのよ。"
+        "text": "みんなに毛布が届きました！フェリスちゃんは一枚だけ……と思ったら、毛布の山に埋もれて眠ってしまいました！"
       },
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "それならリボンでサッとくくる場所だけ決めて、端っこからまとめて見よう！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "お花束のサイズ分けがとっても見やすくなったわ♪"
-      }
-    ]
-  },
-  {
-    "stageId": "9ba6d447-0926-51b4-b323-bcd6e3074cc8",
-    "requestTitle": "数えたお豆の数だけトコトコ歩き",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "選んだ豆のグループの本数をそのまま歩数にして、カウンターの端まで運んでもらえるかい？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "豆を1、2、3……って数えたらお腹がすいてきたカニ。寄り道しないで届けるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "ちょうど注文数とおんなじ歩数で届いたね。無駄のない動きだ。"
-      }
-    ]
-  },
-  {
-    "stageId": "9173a523-fa9e-5b50-adc2-b98d38e4c2a7",
-    "requestTitle": "町内会のおおそうじ・みんなでひと休み！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "商店街のみんなからの合同おてつだいだよ！大事な荷物も貸し出しの道具も、ぜんぶまとめてやりきっちゃおう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "終わったらおやつタイムが待ってるカニ！最後のひとふんばりカニ〜！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "coppe",
-        "emotion": "happy",
-        "text": "お見事！全部スッキリ片付いたね。試食会のパンを山盛り持ってきたよ〜！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "わーい！いただきまーすカニ！！"
-      }
-    ]
-  },
-  {
-    "stageId": "f1fea5fa-191c-5269-8dc8-e4d3486dbbe9",
-    "requestTitle": "ミモザさんの鉢植え、リボンのお返し",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ミモザさんの鉢植えに飾ったリボンを、フェリスちゃんが借りておめかし中。工房の光る玉を運ぶ台のそばで、そろそろ返す時間だけど、リボンが甲羅の飾りにぴったり！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "もう少しだけ貸してほしいカニ！このリボン、僕の甲羅と色がぴったりカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "鉢植えに戻ってきたわ。フェリスちゃんが結んでくれたおかげで、リボンが前よりかわいく見えるね♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "返すのはちょっぴりさみしいけど、リボンが喜んでるならよかったカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "c2034a35-446f-5458-861a-e8845be95e9d",
-    "requestTitle": "コッペさんのパンを二段重ね！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "コッペさんのパンをお店の棚へ運ぶよ。フェリスちゃんが二個を重ねたら、上のパンがぐらぐら！落ちる前に支えてね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "僕のはさみで支えるカニ！……パンを見てたらお腹が鳴って、手がゆれたカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "パンは無事に棚へ。フェリスちゃん、支えてる間に一番上のパンへよだれが一滴……焼き直しておくね！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ご、ごめんなさいカニ！新しいパンが焼けるまで、いい匂いで待ってるカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "c24b0e4e-1143-56af-9b3f-e27b805160e5",
-    "requestTitle": "喫茶店の新作カップ、みんなで品評会",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "モカさんが新しいカップを仕入れたよ。みんなで眺めて感想を言い合うことに。フェリスちゃんはカップの絵柄より、入っているココアが気になるみたい！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "このカップ、ココアの湯気でおひげが描けるカニ！鏡みたいに映るカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "白い泡がおひげみたいね。カップもココアも好評で、フェリスちゃんには泡のおひげ賞をあげよう♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "賞状にココアのひげがついちゃったカニ！これも記念カニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "48754d16-9caf-509c-8aa7-b0042f4d82d9",
-    "requestTitle": "ポッポさんの郵便帽、ぴかぴかお直し",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ポッポさんの郵便帽が雨でしんなりしちゃった。工房の検査台のそばでフェリスちゃんが磨いて、ミモザさんのお花屋さんで小さな飾りを選んであげよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "帽子の羽根飾り、僕の甲羅のリボンとおそろいカニ！磨いたらもっと目立つカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "帽子がふんわり元通り！花の飾りも似合ってるよ。ポッポさん、これなら風の日も見つけやすいね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "帽子を受け取ったら、羽根が僕の鼻をくすぐったカニ！またくしゃみが出そうカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "7038a61a-393c-5fcc-b7ba-9108ba9d831b",
-    "requestTitle": "花屋さんの台車、車輪がきゅるきゅる",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ミモザさんの花屋さんで使う台車が、押すたびにきゅるきゅる鳴るんだって。フェリスちゃん、車輪に油をさしてあげて！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "僕が台車を押しておくカニ！……きゅるきゅる音に合わせて踊りたくなるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "台車の音が静かになったわ。フェリスちゃん、音楽に合わせた踊りを見せてくれてありがとう♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "音が止まったら踊りも止まっちゃったカニ！次は鈴をつけておくカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "5565fbf6-40de-53c4-912d-bd215afe50f2",
-    "requestTitle": "パン屋さんのオーブン、焼きたての番人",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "コッペさんのパンが焼き上がるまで、オーブンの前で見張り番をするよ。赤い火花がぱちっと見えても、フェリスちゃん、熱いから近づきすぎないでね！"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "あら、フェリスちゃん！オーブンに近づきすぎよ。冷たいタオルを持ってくるわね♪"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "パンはふっくら焼けたよ！フェリスちゃんのほっぺも赤くなったけど、冷たいタオルでひと休みね。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "フェリスちゃん、焼きたてのパンはおいしいけど、ほっぺは冷ましてからね！"
-      }
-    ]
-  },
-  {
-    "stageId": "839a50b3-0e8d-5eab-8a16-e61279527412",
-    "requestTitle": "広場の落とし物、赤い手袋はだれの？",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "広場に赤い手袋が片方落ちてるよ。フェリスちゃんが拾ったら、ちょうど自分のはさみにぴったり！持ち主を探しに行こう。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "僕のはさみ用手袋かと思ったカニ！でも片方だけじゃ、もう片方のはさみが寒いカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "手袋はポッポさんのものだったよ。片方の手は羽根で温めるんだって。持ち主が見つかってよかったね！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "手袋は返せたけど、僕のはさみが片方だけちょっと寒いカニ……両手用の手袋を作ってもらうカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "ee757951-5d2f-5c76-ada5-6791b35593b6",
-    "requestTitle": "コッペさんの新作クッキー、星が足りない！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "コッペさんが星形クッキーを焼いたけど、最後の一枚だけ星の角が欠けちゃった。フェリスちゃんが飾り砂糖で直してあげるよ！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "欠けたところに砂糖をたっぷり……あっ、雪山みたいになったカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "星形が雪のお山みたいで冬らしいね。ほかのクッキーにも砂糖を少し振ったら、みんなでお茶にしましょう♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "雪山クッキー、一番大きいのをいただくカニ！……あれ、飾り砂糖だけ先に食べちゃったカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "0c595cd1-d38e-5bce-8a42-e6c45af0dd2b",
-    "requestTitle": "商店街の福引き、特賞の行方は？",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "商店街の福引きで、特賞の大きなぬいぐるみが当たったよ！でも持ち主が見当たらない。門のそばに落ちていた光る玉も気になるけど、フェリスちゃんはぬいぐるみを抱っこして離れないね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ふわふわで最高カニ！この子は今日から僕の相棒カニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "特賞はくるみちゃんが当てたものだったね！フェリスちゃんは名残惜しそうにぬいぐるみを返して、代わりに小さな景品をもらったよ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "小さな景品もふわふわカニ！ぬいぐるみと交換したら、くるみちゃんが困るカニ？"
-      }
-    ]
-  },
-  {
-    "stageId": "e059ebd7-5f3d-55e8-afda-279711b587a2",
-    "requestTitle": "ミモザさんの花束、香りの見本市",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ミモザさんが花束の香りを比べる見本市を開くよ。フェリスちゃんが一輪ずつ鼻を近づけていたら、くしゃみを我慢しすぎて顔が真っ赤！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "くんくん……むずむず……この花は甘いカニ！こっちは……へっくしょんカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "香りの見本は全部楽しめたわ。フェリスちゃんのくしゃみで花びらがひらひら舞って、思いがけず華やかな見本市になったね♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "花びらの紙吹雪カニ！次はくしゃみをこらえず、最初から紙吹雪係をするカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "ebdddaaf-e4ed-5151-a9a4-dd654d3c9eb4",
-    "requestTitle": "モカさんの読書会、しおりが足りない！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "モカさんの読書会で、しおりが一枚足りないみたい。フェリスちゃんが本を開いたら、ページの間からクッキーの包み紙が出てきたよ！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "しおりの代わりに包み紙を挟んでたカニ？パリパリでページが破れそうカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "包み紙はクッキー缶へ戻して、しおりはみんなで色紙から作ったよ。フェリスちゃんのしおりにはクッキーの絵を描こう♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "このしおりなら食べられないカニ！……でもクッキーの絵がリアルでお腹すいたカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "e754be20-628a-5af1-9496-0caceada82d4",
-    "requestTitle": "商店街の夏祭り、浴衣の帯がほどけた！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "商店街の夏祭りが始まるよ！くるみちゃんの浴衣の帯がほどけかけて、フェリスちゃんが手伝いに駆けつけたら、自分のはさみに帯が結ばれちゃった！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "くるくる巻いたらかわいくなるカニ！……あれ、僕が動けなくなったカニ！？"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "帯はきれいに結べたよ。フェリスちゃんはほどけたけど、はさみに小さなリボンが残ってるね。お祭りのおしゃれかな♪"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "このリボンなら大丈夫カニ！屋台を見て回る準備もできたカニ！"
+        "text": "あらら、あったかくて気持ちよさそう。おやつの時間になったら起こしてあげようね♪"
       }
     ]
   }

@@ -74,6 +74,64 @@ export const STORY_CHAPTER_20: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "430c8775-d934-4e9e-8f27-7f3345c7049f",
+    "requestTitle": "みんなで協力！お祭り門のスイッチと飾り仕上げ",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "お店のみんなで手分けして金庫に売上を入れつつ、広場入口のスイッチも踏んできてほしいの。全員が合流したら最後に飾りを仕上げてね！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "みんなで手分けしてスイッチを押して、最後にぼくがピカピカの飾りを届けるカニ！息ぴったりカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "誰ひとりぶつからずに合流して、飾りも綺麗に届いたわね！さすがのチームワークよ♪"
+      }
+    ]
+  },
+  {
+    "stageId": "4d0970b3-9a05-46e7-a8a8-f0299fdbe264",
+    "requestTitle": "開場直前の大ラッシュ！全員出動のフル回転",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "panic",
+        "text": "お祭りの開場まであとちょっと！焼き立てパンの注文も、お花の注文も、合図の受け渡しも一気に押し寄せてきたぞ〜！"
+      },
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "慌てないで。みんなへ役割を配って、報告の声も聞き逃さず、最後の片付けまで時間内にきっちりやり切ろう。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ダイヤル開けて！スイッチ踏んで！火花をよけて！忙しいほど腕が鳴るカニ〜！！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "ふぅ〜、開店ベルの直前に全部さばき切ったぞ！お客さんの笑顔がもう目の前だ〜！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "すごい大活躍だったね！さあ、いよいよ町中が集まるグランドフィナーレへ出発だよ！"
+      }
+    ]
+  },
+  {
     "stageId": "9f448eba-db6a-5cb2-b0e7-68f02e74f4e5",
     "requestTitle": "歯車町のお祭り、みんな大集合グランドフィナーレ！",
     "client": "kurumi",
@@ -98,7 +156,7 @@ export const STORY_CHAPTER_20: StageStoryEntry[] = [
       {
         "speaker": "moka",
         "emotion": "happy",
-        "text": "全384ステージもの頼みごと、本当にお疲れさま。今夜は喫茶店の特製ココアと焼き立てパンで、みんなで盛大に乾杯しようか。"
+        "text": "全400ステージもの頼みごと、本当にお疲れさま。今夜は喫茶店の特製ココアと焼き立てパンで、みんなで盛大に乾杯しようか。"
       },
       {
         "speaker": "ferris",

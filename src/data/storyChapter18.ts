@@ -2,6 +2,30 @@ import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_18: StageStoryEntry[] = [
   {
+    "stageId": "7e0db7bd-3d57-50a0-93b7-78ecaeff3f76",
+    "requestTitle": "配達ルートとおまけ賞品のすっきり整理",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "配達ルートのペア数字と、おまけ賞品が入ってるかどうかの確認をすっきり済ませて屋台へ運んでほしいわ。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "必ず入ってるルートとおまけの賞品を綺麗に分けて、L字の屋台まで一気にお届けしよう！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "賞品も配達もまとめて片付いて助かったわ♪"
+      }
+    ]
+  },
+  {
     "stageId": "a4e95ee9-d55c-5c3b-aa42-63d292e22a0e",
     "requestTitle": "福引きボックスの中身、ひと目でバラバラ仕分け",
     "client": "coppe",
@@ -26,26 +50,26 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "7e0db7bd-3d57-50a0-93b7-78ecaeff3f76",
-    "requestTitle": "配達ルートとおまけ賞品のすっきり整理",
-    "client": "mimosa",
+    "stageId": "a1bd41ee-e384-4a19-9e3f-4d8e3cacee5c",
+    "requestTitle": "あたり袋とおまけ券、ひとまとめにしてお届け！",
+    "client": "coppe",
     "intro": [
       {
-        "speaker": "mimosa",
+        "speaker": "coppe",
         "emotion": "normal",
-        "text": "配達ルートのペア数字と、おまけ賞品が入ってるかどうかの確認をすっきり済ませて屋台へ運んでほしいわ。"
+        "text": "福引きの袋に、進む歩数とおまけの景品券が入ってるんだ。中身を取り出して、スイッチも踏みながら屋台まで届けてほしいな！"
       },
       {
-        "speaker": "kurumi",
+        "speaker": "ferris",
         "emotion": "happy",
-        "text": "必ず入ってるルートとおまけの賞品を綺麗に分けて、L字の屋台まで一気にお届けしよう！"
+        "text": "おまけ券が入ってたらラッキーカニ！……あっ、中身はパンのおまけ券カニ！？"
       }
     ],
     "outro": [
       {
-        "speaker": "mimosa",
+        "speaker": "coppe",
         "emotion": "happy",
-        "text": "賞品も配達もまとめて片付いて助かったわ♪"
+        "text": "おまけのチョココロネ券もばっちり確認できたよ！ありがとう！"
       }
     ]
   },
@@ -74,6 +98,30 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "a3e7188d-e583-4a1f-93d2-25cfc17483df",
+    "requestTitle": "急ぎの仕分けコンベア！番号べつにスピード配達",
+    "client": "poppo",
+    "intro": [
+      {
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "コンベアから福引きの景品箱がどんどん流れてきます！番号を見て、どの棚に入れるかパッと振り分けていただけますか？"
+      },
+      {
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！番号がどのグループに入るか一目でわかるから、コンベアに乗ったままでもスムーズに仕分けられるよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "あっという間に景品棚がいっぱいになりました！まるで手品みたいですね！"
+      }
+    ]
+  },
+  {
     "stageId": "6032bb13-8be5-517d-95d7-784a910560e3",
     "requestTitle": "お祭り無線「3歩進め！」の合図を解読",
     "client": "moka",
@@ -94,6 +142,30 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
         "speaker": "moka",
         "emotion": "happy",
         "text": "聞き間違いかと思ったらちゃんと正確に動いたね。見事だよ。"
+      }
+    ]
+  },
+  {
+    "stageId": "6d8acf1f-5f21-46b9-8002-4f2af473e170",
+    "requestTitle": "くるっとUターン！落とし物迷路の案内係",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "お祭り広場の落とし物コーナー、U字の通路の奥までスイッチを踏みに行ってから、閉まった門の前で待って戻ってきてほしいの。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "行って戻ってUターンカニ！門が開くまでお行儀よく待ってから通るカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "折り返しも門の前での待機も、とってもエレガントで素敵だったわ♪"
       }
     ]
   },
@@ -170,6 +242,30 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "c408ec78-5ad3-4fe5-862b-b05b891fba3a",
+    "requestTitle": "偶数番号だけ大あたり！ダイヤル金庫の鍵開け",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "景品倉庫のダイヤル、届いた木箱の中から決まった範囲の偶数番号だけを拾い上げて合計すれば開くはずなんだが、頼めるかい？"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "箱の重さは気にせず、番号だけをよーく見分けて足し算しよう！ダイヤルも一発でカチャリと開くはず！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "カチッと小気味いい音で開いたね。お祭り当日の景品管理もこれで万全だよ。"
+      }
+    ]
+  },
+  {
     "stageId": "6881bf72-be99-592e-99bc-f6ad3df32748",
     "requestTitle": "福引き司令室からゲートへ突撃！",
     "client": "kurumi",
@@ -190,6 +286,40 @@ export const STORY_CHAPTER_18: StageStoryEntry[] = [
         "speaker": "kurumi",
         "emotion": "happy",
         "text": "完璧！次はいよいよ広場の大きなからくり時計を直しに行くよ！"
+      }
+    ]
+  },
+  {
+    "stageId": "6eb01978-7e5c-47c8-9833-2698e68587bb",
+    "requestTitle": "福引き倉庫の大掃除＆特急仕分けチャレンジ！",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "panic",
+        "text": "うわあ、お祭り用の注文箱と福引き券が倉庫いっぱいに届いちゃった！番号の選別に、ダイヤル開けに、飾りパーツの仕上げまで一気に片付けないと！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "落ち着いていこう、コッペさん！注文票のタグを見て必要な分だけ集計すれば、迷路の門もスイスイ開くはずだよ！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "スイッチも火花もぜんぶお見通しカニ！ピカピカのパーツまでしっかり抱えてゴールするカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "すっごいスピードで倉庫がすっきり片付いたぞ〜！特賞の黄金パンもこれで安心して並べられるよ！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "お礼にメロンパンの端っこをくれるって本当カニ！？やったカニ〜！！"
       }
     ]
   }

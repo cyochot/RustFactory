@@ -4,7 +4,7 @@ export const CHAPTER_19_STAGES: StageDefinition[] = [
   {
     "displayId": "19-1",
     "id": "63517659-1139-5cc9-9399-c16490d7cf29",
-    "index": 377,
+    "index": 389,
     "chapter": 19,
     "chapterTitle": "第19章 高度な機能",
     "title": "19-1. unsafe fn による危険関数の境界管理",
@@ -105,7 +105,7 @@ export const CHAPTER_19_STAGES: StageDefinition[] = [
   {
     "displayId": "19-2",
     "id": "7e58cc7c-831e-5f71-a098-53511a88fcf7",
-    "index": 378,
+    "index": 390,
     "chapter": 19,
     "chapterTitle": "第19章 高度な機能",
     "title": "19-2. 引数つき宣言的マクロ macro_rules!",
@@ -195,7 +195,7 @@ export const CHAPTER_19_STAGES: StageDefinition[] = [
   {
     "displayId": "19-3",
     "id": "62c16d48-5006-58eb-a279-15dc4fbab59e",
-    "index": 379,
+    "index": 391,
     "chapter": 19,
     "chapterTitle": "第19章 高度な機能",
     "title": "19-3. unsafe ブロックと生ポインタ調律",
@@ -283,11 +283,171 @@ export const CHAPTER_19_STAGES: StageDefinition[] = [
   },
   {
     "displayId": "19-4",
-    "id": "62a4650f-fe84-5fda-836a-c0036f5ffe9b",
-    "index": 380,
+    "id": "f9172fa9-d983-468d-878a-23e0877fb16e",
+    "index": 392,
     "chapter": 19,
     "chapterTitle": "第19章 高度な機能",
-    "title": "19-4. 第19章総合：精密時計台の unsafe＆マクロ調律",
+    "stageKind": "puzzle",
+    "title": "19-4. unsafe 読み取り＋安全歩行マクロでコア納品",
+    "topicTag": "unsafe fn + macro_rules! + 空間コア",
+    "kurumiIntro": "`raw_pointer_addr()` で得た基準アドレスを `unsafe fn` で読み取ってダイヤル(4)を解き、自分で定義したマクロ `safe_walk!($n)` で巡回スパークを見張りながら空間コアを検査・強化して納品しよう！",
+    "goalSummary": "unsafe 調律＋ダイヤル(4)＋マクロ歩行でコア検査＆強化⚡4+納品",
+    "bookSectionTitle": "19.1 & 19.5 安全境界と汎用マクロの実戦組み合わせ",
+    "bookSummary": "`unsafe fn` は必ず `unsafe { ... }` 内で呼び、繰り返し使う安全歩行ロジックは引数付き `macro_rules!` にまとめて見通し良く書きます。",
+    "bookKeyCode": "let code = unsafe { read_cal(ptr) };\nsafe_walk!(2);",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "unsafe fn read_cal(ptr: i32) -> i32 {\n    let v = *ptr;\n    v / 10\n}\n\nmacro_rules! safe_walk {\n    ($n:expr) => {\n        for _ in 0..$n {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    };\n}\n\nfn main() {\n    let ptr = raw_pointer_addr();\n    let code = unsafe { read_cal(ptr) };\n    try_dial(code);\n    safe_walk!(1);\n    let mut core = grab_core();\n    safe_walk!(1);\n    scan(&core);\n    safe_walk!(2);\n    boost(&mut core);\n    safe_walk!(1);\n    deliver(core);\n}",
+    "quickChips": [
+      {
+        "label": "unsafe { read_cal(ptr) }",
+        "insert": "unsafe { read_cal(ptr) }"
+      },
+      {
+        "label": "safe_walk!(2);",
+        "insert": "safe_walk!(2);"
+      }
+    ],
+    "hints": [
+      "`raw_pointer_addr()` のポインタを `unsafe` ブロック内で `read_cal` に渡して `42 / 10 = 4` でダイヤル解錠しよう。そのあと検査(2, 1)→スパーク(3, 1)待ち→強化(4, 1)⚡4+→納品(5, 1)へ！",
+      "`unsafe fn read_cal(ptr: i32) -> i32 { *ptr / 10 }` と `macro_rules! safe_walk` を定義し、`unsafe { read_cal(raw_pointer_addr()) }` で `try_dial` 後、`safe_walk!` で1歩取得→1歩 `scan`→2歩 `boost`→1歩 `deliver` しよう。",
+      "unsafe fn read_cal(ptr: i32) -> i32 {\n    let v = *ptr;\n    v / 10\n}\n\nmacro_rules! safe_walk {\n    ($n:expr) => {\n        for _ in 0..$n {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    };\n}\n\nfn main() {\n    let ptr = raw_pointer_addr();\n    let code = unsafe { read_cal(ptr) };\n    try_dial(code);\n    safe_walk!(1);\n    let mut core = grab_core();\n    safe_walk!(1);\n    scan(&core);\n    safe_walk!(2);\n    boost(&mut core);\n    safe_walk!(1);\n    deliver(core);\n}"
+    ],
+    "worldSetup": {
+      "width": 7,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "調律コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 3,
+              "y": 0
+            },
+            {
+              "x": 3,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ],
+      "chargers": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 5,
+          "y": 1
+        }
+      ],
+      "dial": {
+        "x": 1,
+        "y": 0,
+        "secret": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "dialSolved": true,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 11
+  },
+  {
+    "displayId": "19-5",
+    "id": "62a4650f-fe84-5fda-836a-c0036f5ffe9b",
+    "index": 393,
+    "chapter": 19,
+    "chapterTitle": "第19章 高度な機能",
+    "title": "19-5. 第19章総合：精密時計台の unsafe＆マクロ調律",
     "topicTag": "unsafe + マクロ総合",
     "kurumiIntro": "第19章の仕上げだよ！`unsafe` で生ポインタの調律値 `42` を確かめ、マクロ `boost_walk!` で一気にゲートを越えて時計台の調律を完成させよう！",
     "goalSummary": "unsafe 調律＋マクロ展開で出力 \"42\"・金庫⚡5・(5, 1) へ",
@@ -410,5 +570,209 @@ export const CHAPTER_19_STAGES: StageDefinition[] = [
       ]
     },
     "parTicks": 6
+  },
+  {
+    "displayId": "19-6",
+    "id": "b3d7741f-6177-4912-9bea-dfde3435ddf3",
+    "index": 394,
+    "chapter": 19,
+    "chapterTitle": "第19章 高度な機能",
+    "stageKind": "challenge",
+    "title": "19-6. 第19章マスター：時計台完全調律＆複数マクロ統合",
+    "topicTag": "第19章 最終チャレンジ",
+    "kurumiIntro": "第19章の最終チャレンジ！`raw_pointer_addr()` と `unsafe fn` で生ポインタ値を読み取り、`#[test]` と2種類の `macro_rules!` と `#[cfg(feature = \"fast\")]` を駆使して、ダイヤル(4)・金庫⚡42・スイッチ・ゲート・スパーク・空間コア納品を18ティック以内に決めよう！",
+    "goalSummary": "テスト合格・\"42\" 出力・ダイヤル(4)・金庫⚡42・全スイッチ・コア⚡4+納品を18ティック以内に達成",
+    "bookSectionTitle": "第19章マスター — Unsafe境界とマクロ抽象の頂点",
+    "bookSummary": "生ポインタ操作を `unsafe fn` の安全境界へ閉じ込め、複数の宣言的マクロでボイラープレートを排除し、テストと制限時間の中で高速動作を証明します。",
+    "bookKeyCode": "unsafe fn + setup_vault! + safe_advance! + #[test] + #[cfg(feature = \"fast\")]",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "unsafe fn sample(ptr: i32) -> i32 {\n    *ptr\n}\n\nfn dial_key(v: i32) -> i32 {\n    v / 10\n}\n\n#[test]\nfn t_key() {\n    assert_eq!(dial_key(42), 4);\n}\n\nmacro_rules! setup_vault {\n    ($v:expr) => {\n        add_vault($v);\n        println!(\"RAW: {}\", $v);\n    };\n}\n\nmacro_rules! safe_advance {\n    ($n:expr) => {\n        for _ in 0..$n {\n            while !is_gate_open() || is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    };\n}\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    let p = raw_pointer_addr();\n    let raw = unsafe { sample(p) };\n    setup_vault!(raw);\n    try_dial(dial_key(raw));\n    safe_advance!(1);\n    let mut core = grab_core();\n    safe_advance!(1);\n    scan(&core);\n    safe_advance!(4);\n    boost(&mut core);\n    safe_advance!(1);\n    deliver(core);\n}",
+    "quickChips": [
+      {
+        "label": "v / 10",
+        "insert": "v / 10"
+      },
+      {
+        "label": "unsafe { sample(p) }",
+        "insert": "unsafe { sample(p) }"
+      },
+      {
+        "label": "boost(&mut core);",
+        "insert": "boost(&mut core);\n    "
+      }
+    ],
+    "hints": [
+      "18ティック以内にクリアするため `#[cfg(feature = \"fast\")]` と `#[test]` を用意し、`unsafe` で生ポインタ値 `42` を読んで金庫⚡42＆ログ出力、さらに `42 / 10 = 4` でダイヤル(4)を解錠しよう。",
+      "`macro_rules! setup_vault`（`add_vault` と `println!(\"RAW: {}\", $v)`）と `macro_rules! safe_advance`（ゲート＆スパーク待機歩行）を作り、1歩取得→1歩 `scan`→4歩 `boost`→1歩 `deliver` しよう。",
+      "unsafe fn sample(ptr: i32) -> i32 {\n    *ptr\n}\n\nfn dial_key(v: i32) -> i32 {\n    v / 10\n}\n\n#[test]\nfn t_key() {\n    assert_eq!(dial_key(42), 4);\n}\n\nmacro_rules! setup_vault {\n    ($v:expr) => {\n        add_vault($v);\n        println!(\"RAW: {}\", $v);\n    };\n}\n\nmacro_rules! safe_advance {\n    ($n:expr) => {\n        for _ in 0..$n {\n            while !is_gate_open() || is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    };\n}\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    let p = raw_pointer_addr();\n    let raw = unsafe { sample(p) };\n    setup_vault!(raw);\n    try_dial(dial_key(raw));\n    safe_advance!(1);\n    let mut core = grab_core();\n    safe_advance!(1);\n    scan(&core);\n    safe_advance!(4);\n    boost(&mut core);\n    safe_advance!(1);\n    deliver(core);\n}"
+    ],
+    "worldSetup": {
+      "width": 8,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 7,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "極限コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 3,
+            "y": 1
+          }
+        }
+      ],
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 5,
+              "y": 0
+            },
+            {
+              "x": 5,
+              "y": 1
+            },
+            {
+              "x": 5,
+              "y": 2
+            },
+            {
+              "x": 5,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ],
+      "chargers": [
+        {
+          "x": 6,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 7,
+          "y": 1
+        }
+      ],
+      "dial": {
+        "x": 1,
+        "y": 0,
+        "secret": 4
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 42
+      },
+      "featureFastMaxTicks": 18
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "dialSolved": true,
+      "vaultTarget": 42,
+      "testsRequired": 1,
+      "stdoutIncludes": [
+        "42"
+      ],
+      "requireAllSwitches": true,
+      "requireSpatialCoreRules": true,
+      "maxTicks": 18
+    },
+    "parTicks": 16
   }
 ];

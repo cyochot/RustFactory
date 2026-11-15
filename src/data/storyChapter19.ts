@@ -2,30 +2,6 @@ import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_19: StageStoryEntry[] = [
   {
-    "stageId": "62c16d48-5006-58eb-a279-15dc4fbab59e",
-    "requestTitle": "広場の古いからくり時計、最後のネジ調整！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "お祭り広場の古いからくり時計、最後の微調整だけは安全カバーを外して歯車をそっと触る必要があるんだ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "panic",
-        "text": "ど、どきどき……ハサミが滑ってバネがビヨーンって飛び出さないよう、息を止めてそっと調整するカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "チクタク、カチッ……完璧なリズム！時計台の針もご機嫌に動き出したよ！"
-      }
-    ]
-  },
-  {
     "stageId": "63517659-1139-5cc9-9399-c16490d7cf29",
     "requestTitle": "熟練の時計調整、安全ラインの中で慎重に",
     "client": "moka",
@@ -74,6 +50,54 @@ export const STORY_CHAPTER_19: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "62c16d48-5006-58eb-a279-15dc4fbab59e",
+    "requestTitle": "広場の古いからくり時計、最後のネジ調整！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "お祭り広場の古いからくり時計、最後の微調整だけは安全カバーを外して歯車をそっと触る必要があるんだ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "panic",
+        "text": "ど、どきどき……ハサミが滑ってバネがビヨーンって飛び出さないよう、息を止めてそっと調整するカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "チクタク、カチッ……完璧なリズム！時計台の針もご機嫌に動き出したよ！"
+      }
+    ]
+  },
+  {
+    "stageId": "f9172fa9-d983-468d-878a-23e0877fb16e",
+    "requestTitle": "時計台の基準歯車を測って、安全かけ声で運ぼう！",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "時計台の奥にある基準パーツ、そっとカバーを外して数値を確認してから、火花に気をつけつつ大事な歯車パーツを仕上げて運んでくれるかい？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "「火花よ止まれ！」の秘密のかけ声でタイミングを測れば、時計台の廊下も怖くないカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "そっと測った数字も、かけ声での安全移動もバッチリだったね。時計の針も軽やかだよ。"
+      }
+    ]
+  },
+  {
     "stageId": "62a4650f-fe84-5fda-836a-c0036f5ffe9b",
     "requestTitle": "ボーン！広場の時計台グランドオープン！",
     "client": "kurumi",
@@ -94,6 +118,40 @@ export const STORY_CHAPTER_19: StageStoryEntry[] = [
         "speaker": "kurumi",
         "emotion": "happy",
         "text": "ボーン、ボーン！時計台の鐘が鳴り響いたよ！さあ、町の全員で最高のお祭りを始めよう！"
+      }
+    ]
+  },
+  {
+    "stageId": "b3d7741f-6177-4912-9bea-dfde3435ddf3",
+    "requestTitle": "時計塔の大時計、時間ぴったりの高速フィニッシュ！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "もうすぐお昼の鐘が鳴る時間！時計塔の古いメモリの値をそっと読み取って、2つの便利なかっこいい合図を使い分けて大急ぎで仕上げよう！"
+      },
+      {
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピッ！時間はギリギリだけど、準備も移動もまとめておけば無駄な動きゼロで間に合うよ！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "panic",
+        "text": "時計の針がもうすぐ真上カニ！ハサミをカチカチ鳴らして全速力で仕上げるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "ゴーン、ゴーン！お昼の鐘にコンマ1秒も狂わず間に合ったよ！すごい連携だったね！"
+      },
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "おお、時計塔の音が町中に響いて、お腹の時計までグーッと鳴っちゃいましたよ！"
       }
     ]
   }

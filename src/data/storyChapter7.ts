@@ -26,30 +26,6 @@ export const STORY_CHAPTER_7: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "5aba927d-c321-5c48-947d-6b2f02470cd8",
-    "requestTitle": "箱の中の小箱、カギが開かない！？",
-    "client": "mimosa",
-    "intro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "normal",
-        "text": "アトリエの大きな戸棚の中にある「車輪の小箱」から道具を取り出したいのに、途中の扉にカギがかかってるみたい。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "あっ、みるく号が几帳面すぎて二重にカギ掛けたんだ！表の扉も中の小箱も開けて取り出そうね！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "mimosa",
-        "emotion": "happy",
-        "text": "扉をぜんぶ通れるようにしたら、すんなり取り出せたわ！"
-      }
-    ]
-  },
-  {
     "stageId": "1fd4629d-d6fc-5324-87c3-2e3c62301d56",
     "requestTitle": "発電室と操縦室の伝言ゲーム",
     "client": "moka",
@@ -70,6 +46,30 @@ export const STORY_CHAPTER_7: StageStoryEntry[] = [
         "speaker": "moka",
         "emotion": "happy",
         "text": "道具の整理ができていると、お仕事のテンポまで良くなるね。"
+      }
+    ]
+  },
+  {
+    "stageId": "5aba927d-c321-5c48-947d-6b2f02470cd8",
+    "requestTitle": "箱の中の小箱、カギが開かない！？",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "アトリエの大きな戸棚の中にある「車輪の小箱」から道具を取り出したいのに、途中の扉にカギがかかってるみたい。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "あっ、みるく号が几帳面すぎて二重にカギ掛けたんだ！表の扉も中の小箱も開けて取り出そうね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "扉をぜんぶ通れるようにしたら、すんなり取り出せたわ！"
       }
     ]
   },
@@ -170,26 +170,31 @@ export const STORY_CHAPTER_7: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "42360a9a-65e1-5548-b488-2805d64d5ed5",
-    "requestTitle": "ピカピカ部品庫と隠しスイッチ攻略",
+    "stageId": "73562f8a-40ac-509e-8445-4d6ccc8298b4",
+    "requestTitle": "ポッポさんの郵便帽子を探せ！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "整理された棚から大事な道具をパッと取り出して、金庫と連動ゲートをきれいにクリアしよう！"
+        "emotion": "normal",
+        "text": "ポッポさんの帽子が郵便局の中で行方不明！机の下かな、それとも荷物の山に隠れちゃったかな？"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "お片づけの達人になった今なら、どんな道具もすぐ取り出せるカニ！"
+        "text": "郵便物の山はぼくに任せるカニ！……帽子をかぶった荷物を見つけたら、ぼくのだったカニ！"
       }
     ],
     "outro": [
       {
-        "speaker": "milk",
+        "speaker": "kurumi",
         "emotion": "happy",
-        "text": "ピピッ！フェリスちゃんも少しはお片づけ上手になったみたいだね！"
+        "text": "帽子は配達かばんの中にすっぽり入ってたよ。ポッポさん、今日は帽子をかばんに入れたまま出勤してたんだね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくの帽子もかばんに入れておくカニ！……あれ、頭がすーすーするカニ！"
       }
     ]
   },
@@ -252,35 +257,6 @@ export const STORY_CHAPTER_7: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "73562f8a-40ac-509e-8445-4d6ccc8298b4",
-    "requestTitle": "ポッポさんの郵便帽子を探せ！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "ポッポさんの帽子が郵便局の中で行方不明！机の下かな、それとも荷物の山に隠れちゃったかな？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "郵便物の山はぼくに任せるカニ！……帽子をかぶった荷物を見つけたら、ぼくのだったカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "帽子は配達かばんの中にすっぽり入ってたよ。ポッポさん、今日は帽子をかばんに入れたまま出勤してたんだね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぼくの帽子もかばんに入れておくカニ！……あれ、頭がすーすーするカニ！"
-      }
-    ]
-  },
-  {
     "stageId": "7273cc50-a9a7-5c71-a468-708caf117875",
     "requestTitle": "花屋さんとパン屋さんのおつかい競争",
     "client": "kurumi",
@@ -339,6 +315,35 @@ export const STORY_CHAPTER_7: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "0ac079f4-88b5-5189-bdc4-4d3a4e098701",
+    "requestTitle": "くるみちゃんの長いマフラーを編もう",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "寒くなる前に、くるみちゃんのマフラーを編もう！毛糸玉が荷物ベルトに転がらないよう、みんなで端を持っててね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぼくは端っこを持つカニ！あれ、ぼくの足にも毛糸が巻きついてるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "マフラーが完成！ベルトから救出した毛糸玉も使い切って、くるみちゃんとフェリスは二人でひとつの大きな毛糸玉みたい。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "あったかいけど身動きできないカニ！このままお茶会へ連れてってカニ！"
+      }
+    ]
+  },
+  {
     "stageId": "33c3ce56-0349-55bc-8a50-c15e47c87e4d",
     "requestTitle": "商店街の夕涼み会を準備しよう",
     "client": "kurumi",
@@ -368,31 +373,26 @@ export const STORY_CHAPTER_7: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "0ac079f4-88b5-5189-bdc4-4d3a4e098701",
-    "requestTitle": "くるみちゃんの長いマフラーを編もう",
+    "stageId": "42360a9a-65e1-5548-b488-2805d64d5ed5",
+    "requestTitle": "ピカピカ部品庫と隠しスイッチ攻略",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "寒くなる前に、くるみちゃんのマフラーを編もう！毛糸玉が荷物ベルトに転がらないよう、みんなで端を持っててね。"
+        "emotion": "happy",
+        "text": "整理された棚から大事な道具をパッと取り出して、金庫と連動ゲートをきれいにクリアしよう！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ぼくは端っこを持つカニ！あれ、ぼくの足にも毛糸が巻きついてるカニ！"
+        "text": "お片づけの達人になった今なら、どんな道具もすぐ取り出せるカニ！"
       }
     ],
     "outro": [
       {
-        "speaker": "kurumi",
+        "speaker": "milk",
         "emotion": "happy",
-        "text": "マフラーが完成！ベルトから救出した毛糸玉も使い切って、くるみちゃんとフェリスは二人でひとつの大きな毛糸玉みたい。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "あったかいけど身動きできないカニ！このままお茶会へ連れてってカニ！"
+        "text": "ピピッ！フェリスちゃんも少しはお片づけ上手になったみたいだね！"
       }
     ]
   },

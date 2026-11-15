@@ -74,6 +74,93 @@ export const STORY_CHAPTER_13: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "59f2ca3c-3c77-5b12-8f66-474c041a5c99",
+    "requestTitle": "フェリスのエプロン、ポケットがいっぱい！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "花屋さんへ光る飾り玉を運ぶお手伝い中なのに、フェリスちゃんのエプロンからスプーンや花の種や小さなボタンが次々出てくるよ！いったい何が入ってるの？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "いつか使うと思って入れたカニ！でも、種はいつ入れたか覚えてないカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "飾り玉を花屋さんに届けたあと、ポケットの底から出てきたのは去年なくしたと思ってたクッキー！フェリスちゃん、これいつのかな……？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今日のおやつにするカニ！……あ、カチカチカニ！これは植木鉢に入れるカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "d5ffd4a2-ae06-583a-b3cd-422db5999170",
+    "requestTitle": "フェリス、風車の羽根を数え間違える",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "丘の風車を見ながら、フェリスちゃんが羽根の数を数えてるよ。風が吹くたびに回るから、何度数えても違う数字になるみたい。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "一、二、三、四……あっ、回ったカニ！今のは五枚カニ？"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "風が止まったら羽根は四枚だったよ。フェリスちゃん、今度は風車の絵を描いて数える練習をしようか。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "絵なら回らないカニ！でも僕がくるくる回って数を増やすカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "2a6b45cc-30f6-5670-9d6b-7e9f85509232",
+    "requestTitle": "コッペさんのパン屋で、粉まみれの足あと",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "パン屋の床に、粉の足あとがぺたぺた！たどっていったら、棚の裏からフェリスちゃんが出てきたよ。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "パンのいい匂いを確かめてただけカニ！足あと？それは……僕の冒険の記録カニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "足あとをきれいに拭いたら、コッペさんが焼きたての小さなパンをくれたよ。粉の道はおいしい寄り道だったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "次は粉をつけずに味見するカニ！……どうやるカニ？"
+      }
+    ]
+  },
+  {
     "stageId": "e2bd512f-e44e-578d-9846-2df1fac16e1c",
     "requestTitle": "蒸気ゲートをリズミカルにポンポン突破！",
     "client": "poppo",
@@ -170,59 +257,6 @@ export const STORY_CHAPTER_13: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "8fb6421e-5d44-51e3-bca2-4842354cde9a",
-    "requestTitle": "流れ作業コンベヤーでティータイム間に合え！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "おやつの時間までに流れ作業で必要なパワーを集めて、スイッチ経由でゲートを突破しよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ティータイムに遅れたら大事件カニ！全速力でコンベヤーを回すカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "やった、ティータイムにぴったり間に合った！みんなでスコーンと紅茶でほっと一息だね！"
-      }
-    ]
-  },
-  {
-    "stageId": "59f2ca3c-3c77-5b12-8f66-474c041a5c99",
-    "requestTitle": "フェリスのエプロン、ポケットがいっぱい！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "花屋さんへ光る飾り玉を運ぶお手伝い中なのに、フェリスちゃんのエプロンからスプーンや花の種や小さなボタンが次々出てくるよ！いったい何が入ってるの？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "いつか使うと思って入れたカニ！でも、種はいつ入れたか覚えてないカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "飾り玉を花屋さんに届けたあと、ポケットの底から出てきたのは去年なくしたと思ってたクッキー！フェリスちゃん、これいつのかな……？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "今日のおやつにするカニ！……あ、カチカチカニ！これは植木鉢に入れるカニ！"
-      }
-    ]
-  },
-  {
     "stageId": "672ad5a0-6da4-58d4-b72a-407876b2bd76",
     "requestTitle": "花屋さんの看板、みんなで飾りつけ",
     "client": "kurumi",
@@ -248,64 +282,6 @@ export const STORY_CHAPTER_13: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "目立つ看板なら迷わないカニ！僕もリボンをつけてお店番するカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "d5ffd4a2-ae06-583a-b3cd-422db5999170",
-    "requestTitle": "フェリス、風車の羽根を数え間違える",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "丘の風車を見ながら、フェリスちゃんが羽根の数を数えてるよ。風が吹くたびに回るから、何度数えても違う数字になるみたい。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "一、二、三、四……あっ、回ったカニ！今のは五枚カニ？"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "風が止まったら羽根は四枚だったよ。フェリスちゃん、今度は風車の絵を描いて数える練習をしようか。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "絵なら回らないカニ！でも僕がくるくる回って数を増やすカニ！"
-      }
-    ]
-  },
-  {
-    "stageId": "2a6b45cc-30f6-5670-9d6b-7e9f85509232",
-    "requestTitle": "コッペさんのパン屋で、粉まみれの足あと",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "パン屋の床に、粉の足あとがぺたぺた！たどっていったら、棚の裏からフェリスちゃんが出てきたよ。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "パンのいい匂いを確かめてただけカニ！足あと？それは……僕の冒険の記録カニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "足あとをきれいに拭いたら、コッペさんが焼きたての小さなパンをくれたよ。粉の道はおいしい寄り道だったね。"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "次は粉をつけずに味見するカニ！……どうやるカニ？"
       }
     ]
   },
@@ -393,6 +369,30 @@ export const STORY_CHAPTER_13: StageStoryEntry[] = [
         "speaker": "ferris",
         "emotion": "happy",
         "text": "特等席カニ！お弁当箱の横なら、いい匂いも近いカニ！"
+      }
+    ]
+  },
+  {
+    "stageId": "8fb6421e-5d44-51e3-bca2-4842354cde9a",
+    "requestTitle": "流れ作業コンベヤーでティータイム間に合え！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "おやつの時間までに流れ作業で必要なパワーを集めて、スイッチ経由でゲートを突破しよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ティータイムに遅れたら大事件カニ！全速力でコンベヤーを回すカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "やった、ティータイムにぴったり間に合った！みんなでスコーンと紅茶でほっと一息だね！"
       }
     ]
   },

@@ -101,7 +101,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.1 Box<T> の計算結合と解放タイミング",
     "bookSummary": "複数の `Box<T>` から `*` で値を取り出して演算し、ベルトコンベアやスイッチを組み合わせた位置計算に活用します。",
     "bookKeyCode": "let total = *bx + *by;",
-    "starterCode": "fn main() {\n    let bx = Box::new(2);\n    let by = Box::new(3);\n    // *bx + *by で 5 を金庫に入れよう！\n    add_vault(*bx);\n    step(*bx);\n    step(1);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let bx = Box::new(2);\n    let by = Box::new(3);\n    add_vault(*bx + *by);\n    step(*bx);\n    step(1);\n}",
     "quickChips": [
       {
@@ -110,9 +110,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "(1,1) と (3,1) に右向きベルトがあるから、step(*bx) すると一気に (3,1) 付近まで運ばれるよ（正確には(0,1)->(1,1)[押(2,1)]->(3,1)[押(4,1)]で、さらに step(1) で (5,1)）！",
-      "金庫が足りないので `add_vault(*bx);` を `add_vault(*bx + *by);` に直そう！",
-      "add_vault(*bx + *by);"
+      "(1, 1) と (3, 1) の右向きコンベアに乗れば、合計3歩進めるだけでベルトの押し出し込みで (5, 1) へ着くよ。金庫目標は⚡5。",
+      "`let bx = Box::new(2); let by = Box::new(3);` を作り、`add_vault(*bx + *by); step(*bx); step(1);` を実行しよう。",
+      "fn main() {\n    let bx = Box::new(2);\n    let by = Box::new(3);\n    add_vault(*bx + *by);\n    step(*bx);\n    step(1);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -506,11 +506,11 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "title": "15-6. drop(box) 後の安全な値再利用とダイヤル",
     "topicTag": "drop() + ダイヤル",
     "kurumiIntro": "大きな `Box` は先に `drop()` でお片付けしつつ、取り出しておいた値で秘密ダイヤルを解錠し、L字のゴールへ進もう！",
-    "goalSummary": "Box を drop してから取り出した値でダイヤル(7)・金庫⚡7・(3, 3) へ",
+    "goalSummary": "Box を drop してから取り出した値で \"RELEASED\" 出力・ダイヤル(7)・金庫⚡7・(3, 3) へ",
     "bookSectionTitle": "15.3 早期解放 drop() と値の退避",
     "bookSummary": "ヒープ領域を `drop(box)` で早く解放したいときは、必要なプリミティブ値だけ先に変数へコピーしておけばコンパイルエラーになりません。",
     "bookKeyCode": "let val = *b;\ndrop(b);\ntry_dial(val);",
-    "starterCode": "fn main() {\n    let b = Box::new(7);\n    let val = *b;\n    drop(b);\n    // ↓ drop(b) のあとで *b を使うと所有権エラーになるよ！val を使おう\n    try_dial(*b);\n    add_vault(*b);\n    println!(\"RELEASED\");\n    step(3);\n    turn_right();\n    step(2);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let b = Box::new(7);\n    let val = *b;\n    drop(b);\n    try_dial(val);\n    add_vault(val);\n    println!(\"RELEASED\");\n    step(3);\n    turn_right();\n    step(2);\n}",
     "quickChips": [
       {
@@ -523,9 +523,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "drop(b) した後に *b を読もうとするとコンパイラが E0382 で止めてくれるよ！",
-      "try_dial(*b) と add_vault(*b) の両方を `val` に直せばクリア！",
-      "try_dial(val);\nadd_vault(val);"
+      "`Box::new(7)` を `drop` する前に中身を `val` にコピーしておき、`\"RELEASED\"` 出力・ダイヤル(7)・金庫⚡7を済ませて東3歩→右折→南2歩で (3, 3) へ。",
+      "`let b = Box::new(7); let val = *b; drop(b);` のあと `try_dial(val); add_vault(val); println!(\"RELEASED\"); step(3); turn_right(); step(2);` を実行しよう。",
+      "fn main() {\n    let b = Box::new(7);\n    let val = *b;\n    drop(b);\n    try_dial(val);\n    add_vault(val);\n    println!(\"RELEASED\");\n    step(3);\n    turn_right();\n    step(2);\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -714,7 +714,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.4 同じ設定値を複数の移動フェーズへ渡す",
     "bookSummary": "値を関数へ渡すたびに所有権が移動しても、`Rc::clone(&rc)` を渡せば呼び出し元に所有権を残したまま何度でも共有できます。",
     "bookKeyCode": "go(Rc::clone(&d));\nturn_right();\ngo(Rc::clone(&d));",
-    "starterCode": "fn go(d: Rc<i32>) {\n    step(*d);\n}\n\nfn main() {\n    let unit = Rc::new(2);\n    // そのまま unit を渡すと Move して2回目・3回目に使えなくなるよ！\n    go(unit);\n    step(1);\n    turn_right();\n    go(Rc::clone(&unit));\n    turn_right();\n    go(unit);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn go(d: Rc<i32>) {\n    step(*d);\n}\n\nfn main() {\n    let unit = Rc::new(2);\n    go(Rc::clone(&unit));\n    step(1);\n    turn_right();\n    go(Rc::clone(&unit));\n    turn_right();\n    go(unit);\n}",
     "quickChips": [
       {
@@ -723,9 +723,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "最初の `go(unit);` で所有権が移動してしまうため、次の `Rc::clone(&unit)` がエラーになるよ！",
-      "1回目の呼び出しを `go(Rc::clone(&unit));` に直せば解決！",
-      "go(Rc::clone(&unit));"
+      "`Rc::new(2)` を関数へ何度も渡すときは、`Rc::clone(&unit)` で参照カウントを増やして所有権を残そう。U字コースで2つのスイッチを踏んで (1, 3) へ。",
+      "`fn go(d: Rc<i32>) { step(*d); }` を用意し、`go(Rc::clone(&unit)); step(1); turn_right(); go(Rc::clone(&unit)); turn_right(); go(unit);` の順に進もう。",
+      "fn go(d: Rc<i32>) {\n    step(*d);\n}\n\nfn main() {\n    let unit = Rc::new(2);\n    go(Rc::clone(&unit));\n    step(1);\n    turn_right();\n    go(Rc::clone(&unit));\n    turn_right();\n    go(unit);\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -1039,7 +1039,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.4 スマートポインタ計算のユニットテスト検証",
     "bookSummary": "`Rc<i32>` を使った補助関数も通常の関数と同じように `#[test]` で事前に検証できます。",
     "bookKeyCode": "let r = Rc::new(3);\nlet r2 = Rc::clone(&r);",
-    "starterCode": "fn double_rc(v: Rc<i32>) -> i32 {\n    // 2倍を返すように直そう！\n    *v\n}\n\n#[test]\nfn t_rc() {\n    assert_eq!(double_rc(Rc::new(3)), 6);\n}\n\nfn main() {\n    let base = Rc::new(3);\n    let bonus = double_rc(Rc::clone(&base));\n    add_vault(bonus);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(1);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn double_rc(v: Rc<i32>) -> i32 {\n    *v * 2\n}\n\n#[test]\nfn t_rc() {\n    assert_eq!(double_rc(Rc::new(3)), 6);\n}\n\nfn main() {\n    let base = Rc::new(3);\n    let bonus = double_rc(Rc::clone(&base));\n    add_vault(bonus);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(1);\n}",
     "quickChips": [
       {
@@ -1048,9 +1048,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "コンベアが (1,1)→(2,1) [右向き]、(2,2)→(3,2) [下から来て右折？いや(2,2)右コンベアで(3,2)]、(4,2)右コンベアで(5,2) へ運んでくれるよ！",
-      "まず `double_rc` の中身を `*v * 2` に直してテストと金庫⚡6を通そう！",
-      "fn double_rc(v: Rc<i32>) -> i32 {\n    *v * 2\n}"
+      "金庫目標はちょうど⚡6！`#[test]` で `Rc<i32>` を2倍にする関数を検証し、ジグザグの3段コンベア（右1→右折1→左折1）で (5, 2) へ乗ろう。",
+      "`fn double_rc(v: Rc<i32>) -> i32 { *v * 2 }` と `#[test]` を作り、`add_vault(double_rc(Rc::clone(&base)));` のあと `step(1); turn_right(); step(1); turn_left(); step(1);` で進もう。",
+      "fn double_rc(v: Rc<i32>) -> i32 {\n    *v * 2\n}\n\n#[test]\nfn t_rc() {\n    assert_eq!(double_rc(Rc::new(3)), 6);\n}\n\nfn main() {\n    let base = Rc::new(3);\n    let bonus = double_rc(Rc::clone(&base));\n    add_vault(bonus);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(1);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1319,7 +1319,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.3 & 15.4 寿命の分離と共有参照",
     "bookSummary": "一時的なデータだけ明示的に `drop` し、生き残らせる共有データは `Rc` で安全に保持する設計です。",
     "bookKeyCode": "drop(temp);\nlet ok = Rc::clone(&real_code);",
-    "starterCode": "fn main() {\n    let temp = Box::new(2);\n    let real_code = Rc::new(8);\n    let shared = Rc::clone(&real_code);\n    drop(temp);\n    // ↓ 破棄済みの temp を読まず、shared を使ってダイヤルと金庫をクリアしよう！\n    try_dial(*temp);\n    add_vault(*shared);\n    step(2);\n    step(1);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let temp = Box::new(2);\n    let real_code = Rc::new(8);\n    let shared = Rc::clone(&real_code);\n    drop(temp);\n    try_dial(*shared);\n    add_vault(*shared);\n    step(2);\n    step(1);\n}",
     "quickChips": [
       {
@@ -1328,9 +1328,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "drop(temp) したあと *temp を使おうとして Move エラーが出ているよ！",
-      "try_dial(*temp); を `try_dial(*shared);` に直そう。ベルトも自動で運んでくれるよ！",
-      "try_dial(*shared);"
+      "仮の `Box` は `drop()` で破棄し、`Rc::new(8)` を `Rc::clone` で共有してダイヤル(8)・金庫⚡8をクリアしよう。ベルト経由で計3歩進めばゴールへ届くよ。",
+      "`let temp = Box::new(2); let real_code = Rc::new(8); let shared = Rc::clone(&real_code); drop(temp);` のあと `try_dial(*shared); add_vault(*shared); step(2); step(1);` を実行しよう。",
+      "fn main() {\n    let temp = Box::new(2);\n    let real_code = Rc::new(8);\n    let shared = Rc::clone(&real_code);\n    drop(temp);\n    try_dial(*shared);\n    add_vault(*shared);\n    step(2);\n    step(1);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1707,12 +1707,12 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "stageKind": "puzzle",
     "title": "15-17. RefCell 二重可変借用パニックの解消とスパーク横断",
     "topicTag": "RefCell パニック回避 + スパーク",
-    "kurumiIntro": "今は `RefCell` の可変借用を重ねて実行時パニックが起きているうえ、前方のスパーク待ちも足りないよ！借用ガードの整理とスパーク対策の両方を直そう。",
+    "kurumiIntro": "`RefCell` の可変借用スコープを短く保って実行時パニックを避けつつ、前方のスパークを待ちながら金庫⚡5＋ゴールへ進もう！",
     "goalSummary": "RefCell パニックを解消しスパーク(2, 1)を避けて金庫⚡5＋(4, 1)へ",
     "bookSectionTitle": "15.5 実行時借用ルールと安全な制御フロー",
     "bookSummary": "`borrow_mut()` の寿命を短く終えてから次の `borrow()` を呼ぶことで、実行時パニックを確実に回避します。",
     "bookKeyCode": "{ let mut w = rc.borrow_mut(); *w += 2; } let r = rc.borrow();",
-    "starterCode": "fn main() {\n    let cell = RefCell::new(3);\n    let mut r1 = cell.borrow_mut();\n    // ↓ 同時 borrow_mut() を消して、*r1 += 2 をスコープで分けよう！\n    let mut r2 = cell.borrow_mut();\n    *r1 += 2;\n    let val = cell.borrow();\n    add_vault(*val);\n    for _ in 0..4 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let cell = RefCell::new(3);\n    {\n        let mut r1 = cell.borrow_mut();\n        *r1 += 2;\n    }\n    let val = cell.borrow();\n    add_vault(*val);\n    for _ in 0..4 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
     "quickChips": [
       {
@@ -1721,9 +1721,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "二重の `r2` を消しただけでは、`r1` が生きているまま `cell.borrow()` を呼ぶとやはりパニックしちゃうよ！",
-      "let mut r1 = cell.borrow_mut(); *r1 += 2; を `{ ... }` ブロックで囲めば安全に 5 になるよ。",
-      "{\n    let mut r1 = cell.borrow_mut();\n    *r1 += 2;\n}"
+      "`RefCell` は `borrow_mut()` のガードが生きている間に再度 `borrow()` するとパニックするよ。ブロック `{ ... }` で先に解放し、スパーク(2, 1)を待ちながら4歩進もう。",
+      "`let cell = RefCell::new(3); { let mut r1 = cell.borrow_mut(); *r1 += 2; } add_vault(*cell.borrow());` のあと `for _ in 0..4 { while is_spark_ahead() { wait_tick(1); } step(); }` を実行しよう。",
+      "fn main() {\n    let cell = RefCell::new(3);\n    {\n        let mut r1 = cell.borrow_mut();\n        *r1 += 2;\n    }\n    let val = cell.borrow();\n    add_vault(*val);\n    for _ in 0..4 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    }\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1882,7 +1882,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.5 Rc<T> と RefCell<T> を組み合わせて可変データへの複数の所有者を持つ",
     "bookSummary": "「複数人で共有したい（`Rc`）」かつ「中身を書き換えたい（`RefCell`）」ときは、`Rc::new(RefCell::new(値))` が Rust シングルスレッドの王道パターンです。",
     "bookKeyCode": "let a = Rc::new(RefCell::new(2));\nlet b = Rc::clone(&a);\n{ *b.borrow_mut() += 5; }",
-    "starterCode": "fn add_energy(target: Rc<RefCell<i32>>, amt: i32) {\n    let mut g = target.borrow_mut();\n    *g += amt;\n}\n\nfn main() {\n    let shared = Rc::new(RefCell::new(2));\n    // ↓ shared をそのまま渡すと Move して次が使えないよ！Rc::clone(&shared) にしよう\n    add_energy(shared, 2);\n    add_energy(Rc::clone(&shared), 3);\n    let v = shared.borrow();\n    add_vault(*v);\n    step(4);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn add_energy(target: Rc<RefCell<i32>>, amt: i32) {\n    let mut g = target.borrow_mut();\n    *g += amt;\n}\n\nfn main() {\n    let shared = Rc::new(RefCell::new(2));\n    add_energy(Rc::clone(&shared), 2);\n    add_energy(Rc::clone(&shared), 3);\n    let v = shared.borrow();\n    add_vault(*v);\n    step(4);\n}",
     "quickChips": [
       {
@@ -1891,9 +1891,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "関数 `add_energy` が終わると中の借用ガード `g` は自動で抜けて安全に解放されるよ！",
-      "問題は `add_energy(shared, 2);` で所有権を渡しきっている点。`Rc::clone(&shared)` に変えよう！",
-      "add_energy(Rc::clone(&shared), 2);"
+      "共有更新する関数には `Rc<RefCell<i32>>` を `Rc::clone(&shared)` で渡そう。初期値2に2と3を足して金庫⚡7にし、4歩進んでスイッチとゴールへ。",
+      "`fn add_energy(target: Rc<RefCell<i32>>, amt: i32) { let mut g = target.borrow_mut(); *g += amt; }` を用意し、`add_energy(Rc::clone(&shared), 2); add_energy(Rc::clone(&shared), 3);` のあと `add_vault(*shared.borrow()); step(4);` しよう。",
+      "fn add_energy(target: Rc<RefCell<i32>>, amt: i32) {\n    let mut g = target.borrow_mut();\n    *g += amt;\n}\n\nfn main() {\n    let shared = Rc::new(RefCell::new(2));\n    add_energy(Rc::clone(&shared), 2);\n    add_energy(Rc::clone(&shared), 3);\n    let v = shared.borrow();\n    add_vault(*v);\n    step(4);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -2003,7 +2003,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.5 共有ログや計測カウンターとしての Rc<RefCell>",
     "bookSummary": "異なる処理ステップから共通の統計カウンターへ安全に加算する実戦的なパターンです。",
     "bookKeyCode": "{ *log.borrow_mut() += 1; }",
-    "starterCode": "fn tick_op(log: Rc<RefCell<i32>>) {\n    let mut g = log.borrow_mut();\n    *g += 1;\n}\n\nfn main() {\n    let ops = Rc::new(RefCell::new(0));\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    // ここで (3, 1) の強化台！boost(&mut c); と tick_op(Rc::clone(&ops)); を入れよう\n    \n    step(1);\n    deliver(c);\n    add_vault(*ops.borrow());\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn tick_op(log: Rc<RefCell<i32>>) {\n    let mut g = log.borrow_mut();\n    *g += 1;\n}\n\nfn main() {\n    let ops = Rc::new(RefCell::new(0));\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    boost(&mut c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    deliver(c);\n    add_vault(*ops.borrow());\n}",
     "quickChips": [
       {
@@ -2016,9 +2016,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "コアの元パワーは⚡3、目標は⚡5以上。強化台(3,1)で `boost(&mut c);` が必要だよ！",
-      "同時に `tick_op(Rc::clone(&ops));` も呼んで、金庫目標⚡2を満たそう！",
-      "boost(&mut c);\ntick_op(Rc::clone(&ops));"
+      "コア(初期⚡3)を (1,1)で拾い、(2,1)で `scan`、(3,1)で `boost`(⚡5+)して (4,1)で納品しよう。`scan` と `boost` のたびに `Rc<RefCell<i32>>` を+1すれば金庫⚡2も達成！",
+      "`fn tick_op(log: Rc<RefCell<i32>>)` を作り、`scan(&c); tick_op(Rc::clone(&ops));` と `boost(&mut c); tick_op(Rc::clone(&ops));` をそれぞれ該当タイルで呼んで最後に `add_vault(*ops.borrow());` しよう。",
+      "fn tick_op(log: Rc<RefCell<i32>>) {\n    let mut g = log.borrow_mut();\n    *g += 1;\n}\n\nfn main() {\n    let ops = Rc::new(RefCell::new(0));\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    boost(&mut c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    deliver(c);\n    add_vault(*ops.borrow());\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -2132,7 +2132,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.5 ループ内での短寿命 borrow_mut()",
     "bookSummary": "ループ内で毎回 `borrow_mut()` を呼ぶときは、1回ごとにすぐ解放されるブロック構造にすることで安全が保たれます。",
     "bookKeyCode": "for _ in 0..4 { { *steps.borrow_mut() += 1; } ... }",
-    "starterCode": "fn main() {\n    let steps = RefCell::new(0);\n    // ↓ ループの外で borrow_mut() を握りっぱなしにしているため中の borrow_mut() でパニックするよ！\n    let mut lock_leak = steps.borrow_mut();\n    for _ in 0..4 {\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut s = steps.borrow_mut();\n            *s += 1;\n        }\n    }\n    add_vault(*steps.borrow());\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let steps = RefCell::new(0);\n    for _ in 0..4 {\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut s = steps.borrow_mut();\n            *s += 1;\n        }\n    }\n    add_vault(*steps.borrow());\n}",
     "quickChips": [
       {
@@ -2141,9 +2141,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "3行目の `let mut lock_leak = steps.borrow_mut();` がずっと借用を手放していないせいで、ループ内の borrow_mut() が衝突するよ！",
-      "`let mut lock_leak = steps.borrow_mut();` の行を削除しよう！",
-      "let steps = RefCell::new(0);\nfor _ in 0..4 {"
+      "周期ゲート(2, 1)を `while !is_gate_open() { wait_tick(1); }` で待ちながら4歩進み、1歩ごとに短いスコープ `{ ... }` で `RefCell` に加算して金庫⚡4を作ろう。",
+      "`for _ in 0..4 { while !is_gate_open() { wait_tick(1); } step(); { let mut s = steps.borrow_mut(); *s += 1; } }` のあと `add_vault(*steps.borrow());` を実行しよう。",
+      "fn main() {\n    let steps = RefCell::new(0);\n    for _ in 0..4 {\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut s = steps.borrow_mut();\n            *s += 1;\n        }\n    }\n    add_vault(*steps.borrow());\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -2243,7 +2243,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.1 & 15.5 Box と RefCell を合わせた状態記録",
     "bookSummary": "ヒープ管理の構造体の中身を安全に更新しながら自律探索ループを回すパターンです。",
     "bookKeyCode": "{ let mut g = steps.borrow_mut(); *g += 1; }",
-    "starterCode": "fn main() {\n    let max_vault = Box::new(3);\n    let count = RefCell::new(0);\n    while !at_goal() {\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            // 行き止まり！右へ曲がって count を増やそう\n            wait_tick(1);\n        }\n    }\n    add_vault(*max_vault + *count.borrow());\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let max_vault = Box::new(3);\n    let count = RefCell::new(0);\n    while !at_goal() {\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            turn_right();\n            {\n                let mut g = count.borrow_mut();\n                *g += 1;\n            }\n        }\n    }\n    add_vault(*max_vault + *count.borrow());\n}",
     "quickChips": [
       {
@@ -2256,9 +2256,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "(3, 1) の角で右に1回だけ曲がる必要があるよ！目標金庫は 3 + 1 = 4。",
-      "else の中を `turn_right(); { let mut g = count.borrow_mut(); *g += 1; }` に直そう！",
-      "turn_right();\n{\n    let mut g = count.borrow_mut();\n    *g += 1;\n}"
+      "左手法（左が空なら左折＆前進→前が空なら前進→壁なら右折）で迷路を抜けよう。右折した回数(1)と `Box::new(3)` を足せば金庫⚡4も満たせるよ。",
+      "`while !at_goal()` 内で左手法を実行し、`else { turn_right(); { let mut g = count.borrow_mut(); *g += 1; } }` として最後に `add_vault(*max_vault + *count.borrow());` しよう。",
+      "fn main() {\n    let max_vault = Box::new(3);\n    let count = RefCell::new(0);\n    while !at_goal() {\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            turn_right();\n            {\n                let mut g = count.borrow_mut();\n                *g += 1;\n            }\n        }\n    }\n    add_vault(*max_vault + *count.borrow());\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -2376,7 +2376,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "15.1 & 15.5 ヒープ値と安全カウンターの連動",
     "bookSummary": "安全確認付きのループと `RefCell` スコープ更新を組み合わせて危険地帯を踏破します。",
     "bookKeyCode": "while is_spark_ahead() { wait_tick(1); } step();",
-    "starterCode": "fn main() {\n    let base = Box::new(2);\n    let passed = RefCell::new(0);\n    for _ in 0..5 {\n        // スパーク待ちがないので衝突しちゃうよ！\n        step();\n        {\n            let mut p = passed.borrow_mut();\n            *p += 1;\n        }\n    }\n    add_vault(*base);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let base = Box::new(2);\n    let passed = RefCell::new(0);\n    for _ in 0..5 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut p = passed.borrow_mut();\n            *p += 1;\n        }\n    }\n    add_vault(*base + 2);\n}",
     "quickChips": [
       {
@@ -2385,9 +2385,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "(1, 1) と (3, 1) を縦断するスパークがいるよ！",
-      "step(); の前に `while is_spark_ahead() { wait_tick(1); }` を入れよう！",
-      "while is_spark_ahead() {\n    wait_tick(1);\n}"
+      "金庫目標はちょうど⚡4！`Box::new(2)` の値と、スパーク2か所 `(1, 1)` と `(3, 1)` をやり過ごして歩いたあとの加算を組み合わせて⚡4にしよう。",
+      "`for _ in 0..5 { while is_spark_ahead() { wait_tick(1); } step(); { let mut p = passed.borrow_mut(); *p += 1; } }` のあと `add_vault(*base + 2);` しよう。",
+      "fn main() {\n    let base = Box::new(2);\n    let passed = RefCell::new(0);\n    for _ in 0..5 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut p = passed.borrow_mut();\n            *p += 1;\n        }\n    }\n    add_vault(*base + 2);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -2662,7 +2662,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第15章 総まとめ — メモリ管理と安全パターンの融合",
     "bookSummary": "所有・解放・共有・内部可変性を状況に応じて組み合わせ、複雑な工程でも破綻しない安全コードを実現します。",
     "bookKeyCode": "Box + drop + Rc::clone + Rc<RefCell>",
-    "starterCode": "fn main() {\n    let b = Box::new(2);\n    let b_val = *b;\n    drop(b);\n\n    let step_rc = Rc::new(1);\n    let total_vault = Rc::new(RefCell::new(b_val));\n\n    step(*Rc::clone(&step_rc));\n    let mut c = grab_core();\n    step(*Rc::clone(&step_rc));\n    scan(&c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*Rc::clone(&step_rc));\n    // ↓ 強化台(3,1) で boost(&mut c); しつつ total_vault に +2 しよう（まだ +0 だよ）！\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 0;\n    }\n    step(*step_rc);\n    deliver(c);\n    add_vault(*total_vault.borrow());\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let b = Box::new(2);\n    let b_val = *b;\n    drop(b);\n\n    let step_rc = Rc::new(1);\n    let total_vault = Rc::new(RefCell::new(b_val));\n\n    step(*Rc::clone(&step_rc));\n    let mut c = grab_core();\n    step(*Rc::clone(&step_rc));\n    scan(&c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*Rc::clone(&step_rc));\n    boost(&mut c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*step_rc);\n    deliver(c);\n    add_vault(*total_vault.borrow());\n}",
     "quickChips": [
       {
@@ -2675,9 +2675,9 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "(3, 1) で `boost(&mut c);` が呼べておらず、さらに `total_vault` の最後の加算が `*g += 0;` のままになっているよ！",
-      "boost(&mut c); を追加し、最後の `*g += 0;` を `*g += 2;` に直せば⚡6とコア⚡5+を達成できるよ！",
-      "boost(&mut c);\n{\n    let mut g = total_vault.borrow_mut();\n    *g += 2;\n}"
+      "`Box`・`drop`・`Rc`・`RefCell` を連携させて金庫⚡6を積み上げつつ、1歩目でコア取得→2歩目で `scan`→3歩目で `boost`(⚡5+)→4歩目で `deliver` しよう。",
+      "`b = Box::new(2)` を取り出して `drop(b)` し、`total_vault = Rc::new(RefCell::new(b_val))` に `scan` 後 +2・`boost` 後 +2 をそれぞれ `{ ... }` ブロックで加算して最後に `add_vault(*total_vault.borrow());` しよう。",
+      "fn main() {\n    let b = Box::new(2);\n    let b_val = *b;\n    drop(b);\n\n    let step_rc = Rc::new(1);\n    let total_vault = Rc::new(RefCell::new(b_val));\n\n    step(*Rc::clone(&step_rc));\n    let mut c = grab_core();\n    step(*Rc::clone(&step_rc));\n    scan(&c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*Rc::clone(&step_rc));\n    boost(&mut c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*step_rc);\n    deliver(c);\n    add_vault(*total_vault.borrow());\n}"
     ],
     "worldSetup": {
       "width": 5,

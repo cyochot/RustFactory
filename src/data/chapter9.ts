@@ -366,19 +366,115 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
   },
   {
     "displayId": "9-5",
-    "id": "347b5576-609f-5487-9baa-3c95ffef4880",
+    "id": "7b9aba47-b647-55a6-ac6f-bb5628471879",
     "index": 205,
     "chapter": 9,
     "chapterTitle": "第9章 エラー処理",
+    "title": "9-5. Err のときに安全な代替運転へ切替",
+    "topicTag": "match Result の Err 回復",
+    "kurumiIntro": "今度は `read_part(-3)` が `Err` を返す場面だよ！`Err(e)` の枝で `\"RECOVERY\"` と報告してから、予備パワーで金庫を満たして進もう。",
+    "goalSummary": "Err時に \"RECOVERY\" を出力し、金庫⚡3＋ゴール (3, 1) へ",
+    "bookSectionTitle": "9.2 エラーの種類に応じた回復処理",
+    "bookSummary": "`match` で `Err(e)` を受け取れば、エラー内容を表示してログを残しつつ、代替ルートで安全に処理を完遂できます。",
+    "bookKeyCode": "Err(e) => {\n    println!(\"RECOVERY: {}\", e);\n    step(3);\n}",
+    "starterCode": "fn main() {\n    match read_part(-3) {\n        Ok(v) => step(v / 10),\n        Err(e) => {\n            // \"RECOVERY\" を含むメッセージを表示して、金庫⚡3・3歩進もう！\n            println!(\"SKIP: {}\", e);\n            add_vault(3);\n            step(3);\n        },\n    }\n}",
+    "solutionCode": "fn main() {\n    match read_part(-3) {\n        Ok(v) => step(v / 10),\n        Err(e) => {\n            println!(\"RECOVERY: {}\", e);\n            add_vault(3);\n            step(3);\n        },\n    }\n}",
+    "quickChips": [
+      {
+        "label": "println!(\"RECOVERY: {}\", e);",
+        "insert": "println!(\"RECOVERY: {}\", e);"
+      }
+    ],
+    "hints": [
+      "println! の中身が \"SKIP: ...\" になっているから目標の \"RECOVERY\" が出力されていないよ！",
+      "println!(\"RECOVERY: {}\", e); に直してみよう。",
+      "println!(\"RECOVERY: {}\", e);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3,
+      "stdoutIncludes": [
+        "RECOVERY"
+      ]
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "9-6",
+    "id": "347b5576-609f-5487-9baa-3c95ffef4880",
+    "index": 206,
+    "chapter": 9,
+    "chapterTitle": "第9章 エラー処理",
     "stageKind": "puzzle",
-    "title": "9-5. 異常センサーは迂回！スパーク前安全判定",
+    "title": "9-6. 異常センサーは迂回！スパーク前安全判定",
     "topicTag": "match Result + スパーク回避",
     "kurumiIntro": "センサー検査が `Ok(v)` のときだけ直進し、`Err` なら 1 ティック待ってから安全確認付きで進もう！巡回スパークを越えてゴールを目指すよ。",
     "goalSummary": "Result の match 分岐と安全待機でスパークを越えて (5, 1) へ",
     "bookSectionTitle": "9.2 エラーとセンサー異常を組み合わせた回復",
     "bookSummary": "結果値 `Result` の判定と空間センサー（スパーク・ゲート）を組み合わせて、絶対に止まらない安全な制御を書きます。",
     "bookKeyCode": "match read_part(-2) { Ok(v) => ..., Err(_) => ... }",
-    "starterCode": "fn safe_step(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let steps = match read_part(-2) {\n        Ok(v) => v / 10,\n        // Err のときに代替歩数 5 を返すように直そう！今は 0 だよ\n        Err(_) => 0,\n    };\n    add_vault(steps);\n    safe_step(steps);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn safe_step(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let steps = match read_part(-2) {\n        Ok(v) => v / 10,\n        Err(_) => 5,\n    };\n    add_vault(steps);\n    safe_step(steps);\n}",
     "quickChips": [
       {
@@ -387,9 +483,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "Err(_) => 0 になっているため steps が 0 で一歩も進めないよ！",
-      "Err(_) => 5 にすれば金庫⚡5も(5,1)ゴールも一気に達成できるよ。",
-      "Err(_) => 5,"
+      "read_part(-1) のような異常センサーが Err を返したときは、match で安全値（例: Err(_) => 5）に切り替えて金庫⚡5を満たそう！",
+      "スパークが横切るので for _ in 0..steps { while is_spark_ahead() { wait_tick(1); } step(); } でゴール (5, 1) まで進もう！",
+      "fn safe_step(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let steps = match read_part(-2) {\n        Ok(v) => v / 10,\n        Err(_) => 5,\n    };\n    add_vault(steps);\n    safe_step(steps);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -555,102 +651,6 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "parTicks": 9
   },
   {
-    "displayId": "9-6",
-    "id": "7b9aba47-b647-55a6-ac6f-bb5628471879",
-    "index": 206,
-    "chapter": 9,
-    "chapterTitle": "第9章 エラー処理",
-    "title": "9-6. Err のときに安全な代替運転へ切替",
-    "topicTag": "match Result の Err 回復",
-    "kurumiIntro": "今度は `read_part(-3)` が `Err` を返す場面だよ！`Err(e)` の枝で `\"RECOVERY\"` と報告してから、予備パワーで金庫を満たして進もう。",
-    "goalSummary": "Err時に \"RECOVERY\" を出力し、金庫⚡3＋ゴール (3, 1) へ",
-    "bookSectionTitle": "9.2 エラーの種類に応じた回復処理",
-    "bookSummary": "`match` で `Err(e)` を受け取れば、エラー内容を表示してログを残しつつ、代替ルートで安全に処理を完遂できます。",
-    "bookKeyCode": "Err(e) => {\n    println!(\"RECOVERY: {}\", e);\n    step(3);\n}",
-    "starterCode": "fn main() {\n    match read_part(-3) {\n        Ok(v) => step(v / 10),\n        Err(e) => {\n            // \"RECOVERY\" を含むメッセージを表示して、金庫⚡3・3歩進もう！\n            println!(\"SKIP: {}\", e);\n            add_vault(3);\n            step(3);\n        },\n    }\n}",
-    "solutionCode": "fn main() {\n    match read_part(-3) {\n        Ok(v) => step(v / 10),\n        Err(e) => {\n            println!(\"RECOVERY: {}\", e);\n            add_vault(3);\n            step(3);\n        },\n    }\n}",
-    "quickChips": [
-      {
-        "label": "println!(\"RECOVERY: {}\", e);",
-        "insert": "println!(\"RECOVERY: {}\", e);"
-      }
-    ],
-    "hints": [
-      "println! の中身が \"SKIP: ...\" になっているから目標の \"RECOVERY\" が出力されていないよ！",
-      "println!(\"RECOVERY: {}\", e); に直してみよう。",
-      "println!(\"RECOVERY: {}\", e);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3,
-      "stdoutIncludes": [
-        "RECOVERY"
-      ]
-    },
-    "parTicks": 5
-  },
-  {
     "displayId": "9-7",
     "id": "190eda01-8414-5c6a-82d4-c243fb94df7d",
     "index": 207,
@@ -746,133 +746,11 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
   },
   {
     "displayId": "9-8",
-    "id": "2678885e-6411-58e7-aade-8435ea619487",
+    "id": "23405996-2992-5507-8492-e6961dbe4a43",
     "index": 208,
     "chapter": 9,
     "chapterTitle": "第9章 エラー処理",
-    "stageKind": "puzzle",
-    "title": "9-8. コア補強ステップの Result エラー検査",
-    "topicTag": "fn -> Result + 空間コア",
-    "kurumiIntro": "コアの現在パワーが目標に届いているかをチェックする関数 `verify_core(p)` を完成させよう！検査と強化を行ってから安全に納品台へ届けてね。",
-    "goalSummary": "verify_core で合格判定を出し、コア⚡5+を空間ルール通り納品",
-    "bookSectionTitle": "9.2 工程チェックとしての Result<i32, String>",
-    "bookSummary": "工程の条件を満たしているかを `Result` で検査し、満たしていなければ分かりやすいエラーを返すようにすると事故を防げます。",
-    "bookKeyCode": "fn verify_core(p: i32) -> Result<i32, String>",
-    "starterCode": "fn verify_core(p: i32) -> Result<i32, String> {\n    if p >= 5 { Ok(p) } else { Err(\"パワー不足\") }\n}\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    // (3,1)の強化台で boost(&mut c) してから verify_core(core_power()) しよう！\n    match verify_core(core_power()) {\n        Ok(p) => {\n            println!(\"CORE_OK: {}\", p);\n            step(1);\n            deliver(c);\n        },\n        Err(e) => println!(\"FAIL: {}\", e),\n    }\n}",
-    "solutionCode": "fn verify_core(p: i32) -> Result<i32, String> {\n    if p >= 5 { Ok(p) } else { Err(\"パワー不足\") }\n}\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    match verify_core(core_power()) {\n        Ok(p) => {\n            println!(\"CORE_OK: {}\", p);\n            step(1);\n            deliver(c);\n        },\n        Err(e) => println!(\"FAIL: {}\", e),\n    }\n}",
-    "quickChips": [
-      {
-        "label": "boost(&mut c);",
-        "insert": "boost(&mut c);\n    "
-      }
-    ],
-    "hints": [
-      "コアの初期パワーは⚡3だよ！verify_core は 5 以上を求めるから今のままだと Err になっちゃう。",
-      "match verify_core(c.power) の直前に `boost(&mut c);` を呼べば 3 + 2 = 5 で Ok になるよ！",
-      "boost(&mut c);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 3,
-          "label": "検査コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 5,
-      "scanCount": 1,
-      "stdoutIncludes": [
-        "CORE_OK"
-      ],
-      "requireSpatialCoreRules": true,
-      "requireSafeErrorHandling": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "9-9",
-    "id": "23405996-2992-5507-8492-e6961dbe4a43",
-    "index": 209,
-    "chapter": 9,
-    "chapterTitle": "第9章 エラー処理",
-    "title": "9-9. Result チェック付きコア納品パズル",
+    "title": "9-8. Result チェック付きコア納品パズル",
     "topicTag": "Result + コア納品実践",
     "kurumiIntro": "複数のパーツ検査結果を配列で受け取って、正常な `Ok` のパーツだけ金庫にチャージしよう！その後コアを拾ってゴールへ届けてね。",
     "goalSummary": "Result 配列から Ok の合計⚡3を貯めてコアを納品しよう",
@@ -976,6 +854,128 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "parTicks": 8
   },
   {
+    "displayId": "9-9",
+    "id": "2678885e-6411-58e7-aade-8435ea619487",
+    "index": 209,
+    "chapter": 9,
+    "chapterTitle": "第9章 エラー処理",
+    "stageKind": "puzzle",
+    "title": "9-9. コア補強ステップの Result エラー検査",
+    "topicTag": "fn -> Result + 空間コア",
+    "kurumiIntro": "コアの現在パワーが目標に届いているかをチェックする関数 `verify_core(p)` を完成させよう！検査と強化を行ってから安全に納品台へ届けてね。",
+    "goalSummary": "verify_core で \"CORE_OK\" 判定を出し、コア⚡5+を空間ルール通り納品",
+    "bookSectionTitle": "9.2 工程チェックとしての Result<i32, String>",
+    "bookSummary": "工程の条件を満たしているかを `Result` で検査し、満たしていなければ分かりやすいエラーを返すようにすると事故を防げます。",
+    "bookKeyCode": "fn verify_core(p: i32) -> Result<i32, String>",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "fn verify_core(p: i32) -> Result<i32, String> {\n    if p >= 5 { Ok(p) } else { Err(\"パワー不足\") }\n}\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    match verify_core(core_power()) {\n        Ok(p) => {\n            println!(\"CORE_OK: {}\", p);\n            step(1);\n            deliver(c);\n        },\n        Err(e) => println!(\"FAIL: {}\", e),\n    }\n}",
+    "quickChips": [
+      {
+        "label": "boost(&mut c);",
+        "insert": "boost(&mut c);\n    "
+      }
+    ],
+    "hints": [
+      "コアの初期パワーは⚡3だよ！verify_core(p: i32) -> Result<i32, String> が 5 以上で Ok(p) を返すようにし、(3,1)の強化台で boost(&mut c); を呼ぼう！",
+      "(1,1)でコア取得 → (2,1)で scan(&c) → (3,1)で boost(&mut c) → verify_core(core_power()) が Ok なら println!(\"CORE_OK: {}\", p); して (4,1)で deliver(c)！",
+      "fn verify_core(p: i32) -> Result<i32, String> {\n    if p >= 5 { Ok(p) } else { Err(\"パワー不足\") }\n}\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    match verify_core(core_power()) {\n        Ok(p) => {\n            println!(\"CORE_OK: {}\", p);\n            step(1);\n            deliver(c);\n        },\n        Err(e) => println!(\"FAIL: {}\", e),\n    }\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "検査コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 5,
+      "scanCount": 1,
+      "stdoutIncludes": [
+        "CORE_OK"
+      ],
+      "requireSpatialCoreRules": true,
+      "requireSafeErrorHandling": true
+    },
+    "parTicks": 10
+  },
+  {
     "displayId": "9-10",
     "id": "bb40b425-1e21-5e54-b451-89d99fcf5820",
     "index": 210,
@@ -989,7 +989,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 正常値の集計と異常値のログ分離",
     "bookSummary": "配列の `Result` を処理するとき、`Ok` だけを集計しつつ `Err` はログ出力や代替行動に回す実用的なパターンです。",
     "bookKeyCode": "match r { Ok(v) => sum += v, Err(_) => println!(\"WARN_PART\") }",
-    "starterCode": "fn main() {\n    let inputs = vec![read_part(2), read_part(-1), read_part(2)];\n    let mut sum = 0;\n    for r in inputs {\n        match r {\n            Ok(v) => sum += v / 10,\n            Err(_) => println!(\"SKIP\"),\n        }\n    }\n    add_vault(sum);\n    step(3);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let inputs = vec![read_part(2), read_part(-1), read_part(2)];\n    let mut sum = 0;\n    for r in inputs {\n        match r {\n            Ok(v) => sum += v / 10,\n            Err(_) => println!(\"WARN_PART\"),\n        }\n    }\n    add_vault(sum);\n    step(3);\n}",
     "quickChips": [
       {
@@ -998,9 +998,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "Err(_) のときのログ出力が \"SKIP\" になっているよ！目標は \"WARN_PART\" だよ。",
-      "コンベア(1,1)と(3,1)が押し出してくれるから step(3) で (5,1) のゴールに着くよ！",
-      "Err(_) => println!(\"WARN_PART\"),"
+      "parts をループで回し、read_part(p) が Ok(v) なら v / 10 を金庫へ、Err(_) なら eprintln!(\"WARN_PART\") または println!(\"WARN_PART\") を出力しよう！",
+      "コンベア (1,1) と (3,1) が押し出してくれるから、最後に step(3); で (5,1) のゴールに着くよ！",
+      "fn main() {\n    let inputs = vec![read_part(2), read_part(-1), read_part(2)];\n    let mut sum = 0;\n    for r in inputs {\n        match r {\n            Ok(v) => sum += v / 10,\n            Err(_) => println!(\"WARN_PART\"),\n        }\n    }\n    add_vault(sum);\n    step(3);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1103,7 +1103,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 回復と時間制限の両立",
     "bookSummary": "フォールバックを使って止まらず動きつつ、ベルトコンベアによる加速を活かして制限時間を達成するチャレンジです。",
     "bookKeyCode": "let s = read_part(-1).unwrap_or(1);",
-    "starterCode": "fn main() {\n    let a = read_part(1).unwrap_or(0) / 10;\n    // b は (2,2)コンベアに乗るため 1、c は最後の(3,3)コンベアの先まで届くよう 2 にしよう！\n    let b = read_part(-1).unwrap_or(0);\n    let c = read_part(-2).unwrap_or(0);\n    add_vault(a + b + c);\n    step(a);\n    turn_right();\n    step(b);\n    turn_left();\n    step(c);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn main() {\n    let a = read_part(1).unwrap_or(0) / 10;\n    let b = read_part(-1).unwrap_or(1);\n    let c = read_part(-2).unwrap_or(2);\n    add_vault(a + b + c);\n    step(a);\n    turn_right();\n    step(b);\n    turn_left();\n    step(c);\n}",
     "quickChips": [
       {
@@ -1116,9 +1116,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "a = 1 でコンベア(1,1)がスイッチ(2,1)へ押してくれるよ！",
-      "b = 1 にすれば右折後に(2,2)コンベアが(2,3)へ押し出し、c = 2 にすれば(3,3)コンベア経由で(5,3)に着くよ！",
-      "let b = read_part(-1).unwrap_or(1);\nlet c = read_part(-2).unwrap_or(2);"
+      "read_part(-1).unwrap_or(1) や read_part(-2).unwrap_or(2) で移動距離を取り出そう！東へ1歩でコンベア(1,1)がスイッチ(2,1)へ押してくれるよ！",
+      "右折して南へ1歩で(2,2)コンベアが(2,3)へ押し出し、左折して東へ2歩で(3,3)コンベア経由で(5,3)に着くよ！",
+      "fn main() {\n    let a = read_part(1).unwrap_or(0) / 10;\n    let b = read_part(-1).unwrap_or(1);\n    let c = read_part(-2).unwrap_or(2);\n    add_vault(a + b + c);\n    step(a);\n    turn_right();\n    step(b);\n    turn_left();\n    step(c);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1279,7 +1279,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 高信頼コア搬送パイプライン",
     "bookSummary": "センサー値が壊れていても代替計算へ切り替えてコアの検査・強化・納品を最後まで安全にやり切ります。",
     "bookKeyCode": "match read_part(-1) { Ok(v) => v, Err(_) => 5 }",
-    "starterCode": "fn safe_move(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let vault_val = read_part(3).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    scan(&c);\n    // (3,1)はスパーク巡回、(4,1)は強化台兼スイッチ、(5,1)は納品台だよ！\n    // この先を続けてゴールしよう\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn safe_move(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let vault_val = read_part(3).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    scan(&c);\n    safe_move(2);\n    boost(&mut c);\n    safe_move(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -1300,9 +1300,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "scan(&c) をした(2,1)から、スパーク通路(3,1)を越えて強化台(4,1)へ行くには `safe_move(2);` だよ！",
-      "(4,1) で `boost(&mut c);` してパワーを⚡5にしたら、あと `safe_move(1); deliver(c);` で(5,1)へ納品完了！",
-      "safe_move(2); boost(&mut c); safe_move(1); deliver(c);"
+      "read_part(-1).unwrap_or(5) で安全に金庫⚡5を満たし、スパーク待ち付きの safe_move 関数を作ろう！",
+      "(1,1)で grab_core() → (2,1)で scan(&c) → スパーク(3,1)を越えて (4,1) 強化台兼スイッチで boost(&mut c) → (5,1) で deliver(c)！",
+      "fn safe_move(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let vault_val = read_part(3).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    scan(&c);\n    safe_move(2);\n    boost(&mut c);\n    safe_move(1);\n    deliver(c);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1488,11 +1488,278 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
   },
   {
     "displayId": "9-13",
-    "id": "64c273dd-e5b8-5a07-b2ce-c8fc0e6505fd",
+    "id": "e191b416-e095-5ee1-9b79-8582cbfe3795",
     "index": 213,
     "chapter": 9,
     "chapterTitle": "第9章 エラー処理",
-    "title": "9-13. ? 演算子でスマートにエラー伝播",
+    "stageKind": "puzzle",
+    "title": "9-13. Result フォールバックとコンベア分岐",
+    "topicTag": "unwrap_or + コンベア",
+    "kurumiIntro": "センサーが故障してもロボットを止めちゃダメ！`.unwrap_or(値)` で予備の歩数に切り替えて、2つのコンベアを乗り継ぎながらスイッチを踏もう。",
+    "goalSummary": "Result フォールバックでパニックせずスイッチを踏み (5, 3) へ",
+    "bookSectionTitle": "9.1 & 9.2 現場機械を止めないフォールバック値",
+    "bookSummary": "異常系を受け取った際に安全な既定値へ切り替えることで、搬送ライン全体を停止させずに走り切れます。",
+    "bookKeyCode": "let dy = read_part(-1).unwrap_or(1);",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "fn main() {\n    let dx = read_part(1).unwrap_or(0) / 10;\n    let dy = read_part(-1).unwrap_or(1);\n    step(dx);\n    turn_right();\n    step(dy);\n    turn_left();\n    step(2);\n}",
+    "quickChips": [
+      {
+        "label": ".unwrap_or(1)",
+        "insert": ".unwrap_or(1)"
+      }
+    ],
+    "hints": [
+      "read_part(-1).unwrap_or(1) のようにフォールバック値を取り出そう！東1歩(dx=1)でコンベア(1,1)が(2,1)スイッチへ運ぶよ。",
+      "右折して南1歩(dy=1)で(2,2)コンベアが(2,3)へ押し出し、左折して step(2); で(3,3)コンベア経由で(5,3)へ！",
+      "fn main() {\n    let dx = read_part(1).unwrap_or(0) / 10;\n    let dy = read_part(-1).unwrap_or(1);\n    step(dx);\n    turn_right();\n    step(dy);\n    turn_left();\n    step(2);\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "dir": 1
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "dir": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "requireAllSwitches": true,
+      "requireSafeErrorHandling": true
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "9-14",
+    "id": "fecb5db3-4f07-5baf-acbe-87c4035235a5",
+    "index": 214,
+    "chapter": 9,
+    "chapterTitle": "第9章 エラー処理",
+    "title": "9-14. 非常停止スイッチと蒸気ゲート突破",
+    "topicTag": "panic! 制御 / 実践パズル",
+    "kurumiIntro": "安全運転の基本だよ！センサーの `Err` でパニックせずに `unwrap_or` で歩数を得たら、途中の蒸気ゲートを待ちながら進もう。",
+    "goalSummary": "パニックせずゲート (2, 1) を抜けてゴール (4, 1) へ",
+    "bookSectionTitle": "9.1 & 9.3 panic! すべき時・回復すべき時",
+    "bookSummary": "テストや絶対に起きてはいけない不整合では `panic!` を使いますが、センサー異常や入力ミスなど想定内のエラーは回復処理を書くのが原則です。",
+    "bookKeyCode": "let total = read_part(-5).unwrap_or(4);",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "fn main() {\n    let total = read_part(-5).unwrap_or(4);\n    for _ in 0..total {\n        if !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
+    "quickChips": [
+      {
+        "label": "wait_tick(1);",
+        "insert": "wait_tick(1);"
+      }
+    ],
+    "hints": [
+      "read_part(-5).unwrap_or(4) で歩数 4 を取り出そう。(2, 1) に蒸気ゲートがあるよ！",
+      "for _ in 0..total の中で、step() の前に if !is_gate_open() { wait_tick(1); } を入れてゲートを待とう！",
+      "fn main() {\n    let total = read_part(-5).unwrap_or(4);\n    for _ in 0..total {\n        if !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "gates": [
+        {
+          "x": 2,
+          "y": 1,
+          "openTicks": 2,
+          "closedTicks": 2,
+          "initialOffset": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "9-15",
+    "id": "64c273dd-e5b8-5a07-b2ce-c8fc0e6505fd",
+    "index": 215,
+    "chapter": 9,
+    "chapterTitle": "第9章 エラー処理",
+    "title": "9-15. ? 演算子でスマートにエラー伝播",
     "topicTag": "? 演算子",
     "kurumiIntro": "毎回 `match` を書くのが大変なときは、`?` 演算子が大活躍！`Ok` なら中身を取り出し、`Err` なら呼び出し元へそのまま返してくれるよ。",
     "goalSummary": "? 演算子を使って load_steps() を完成させゴールへ",
@@ -1571,258 +1838,6 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       "reachGoal": true
     },
     "parTicks": 3
-  },
-  {
-    "displayId": "9-14",
-    "id": "12b4325e-3fae-5070-b5cc-4ac200fee821",
-    "index": 214,
-    "chapter": 9,
-    "chapterTitle": "第9章 エラー処理",
-    "stageKind": "puzzle",
-    "title": "9-14. ? 連鎖関数とコア検査納品",
-    "topicTag": "? 演算子 + コア納品",
-    "kurumiIntro": "部品検査が1つでも `Err` ならすぐ中断して代替プランに切り替える関数を `?` で作ろう！コアを検査台→強化台→納品台へ安全に届けるよ。",
-    "goalSummary": "calc_vault() の ? 連鎖を修復して金庫⚡5・コア⚡4+納品へ",
-    "bookSectionTitle": "9.2 ? による複数バリデーションの結合",
-    "bookSummary": "複数の確認処理を `?` で連結すると、途中のエラーを漏れなくキャッチしつつ正常時のロジックを綺麗に並べられます。",
-    "bookKeyCode": "let a = validate(2)?;\nlet b = validate(3)?;",
-    "starterCode": "fn validate(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"無効\") }\n}\n\nfn calc_vault() -> Result<i32, String> {\n    let a = validate(2)?;\n    // ↓ -1 を渡すと Err で早期リターンしちゃう！3 に直して 2 + 3 = 5 を返そう\n    let b = validate(-1)?;\n    Ok(a + b)\n}\n\nfn main() {\n    let v = calc_vault().unwrap_or(0);\n    add_vault(v);\n    step(1);\n    let mut core = grab_core();\n    step(1);\n    scan(&core);\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}",
-    "solutionCode": "fn validate(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"無効\") }\n}\n\nfn calc_vault() -> Result<i32, String> {\n    let a = validate(2)?;\n    let b = validate(3)?;\n    Ok(a + b)\n}\n\nfn main() {\n    let v = calc_vault().unwrap_or(0);\n    add_vault(v);\n    step(1);\n    let mut core = grab_core();\n    step(1);\n    scan(&core);\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "validate(3)?",
-        "insert": "validate(3)?"
-      }
-    ],
-    "hints": [
-      "validate(-1)? が Err を返しているため、unwrap_or(0) で金庫に 0 しか入っていないよ！",
-      "validate(3)? に直すと a + b = 5 が返って金庫目標⚡5が達成できるよ。",
-      "let b = validate(3)?;"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "検査コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "vault": {
-        "x": 0,
-        "y": 0,
-        "initial": 0,
-        "target": 5
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "scanCount": 1,
-      "vaultTarget": 5,
-      "requireSpatialCoreRules": true,
-      "requireSafeErrorHandling": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "9-15",
-    "id": "83c80558-999e-5c81-8598-4de72b9acf09",
-    "index": 215,
-    "chapter": 9,
-    "chapterTitle": "第9章 エラー処理",
-    "stageKind": "puzzle",
-    "title": "9-15. 2つのダイヤル確認を Result でつなぐ",
-    "topicTag": "Result + ダイヤル解錠",
-    "kurumiIntro": "ダイヤルの暗証番号が条件を満たすか `check_dial(n) -> Result<i32, String>` で確かめてから解錠しよう！不正な値はしっかり `Err` で弾く安全設計だよ。",
-    "goalSummary": "Result 検証つきの値 5 でダイヤルを解きスイッチ先 (5, 1) へ",
-    "bookSectionTitle": "9.2 入力バリデーションを Result で表現する",
-    "bookSummary": "不正な引数が紛れ込む前に `Result` で範囲チェックを行い、有効な値だけをデバイス制御に渡す設計です。",
-    "bookKeyCode": "fn verify_dial(n: i32) -> Result<i32, String>",
-    "starterCode": "fn verify_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"範囲外\") }\n}\n\nfn solve_safe() -> Result<i32, String> {\n    // 秘密の数字は 5 だよ！今は -3 だから Err になっちゃう\n    let d = verify_dial(-3)?;\n    try_dial(d);\n    Ok(d)\n}\n\nfn main() {\n    match solve_safe() {\n        Ok(v) => {\n            add_vault(v);\n            step(5);\n        },\n        Err(e) => println!(\"DIAL_ERR: {}\", e),\n    }\n}",
-    "solutionCode": "fn verify_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"範囲外\") }\n}\n\nfn solve_safe() -> Result<i32, String> {\n    let d = verify_dial(5)?;\n    try_dial(d);\n    Ok(d)\n}\n\nfn main() {\n    match solve_safe() {\n        Ok(v) => {\n            add_vault(v);\n            step(5);\n        },\n        Err(e) => println!(\"DIAL_ERR: {}\", e),\n    }\n}",
-    "quickChips": [
-      {
-        "label": "verify_dial(5)?",
-        "insert": "verify_dial(5)?"
-      }
-    ],
-    "hints": [
-      "verify_dial(-3)? が範囲外エラーになって Err の枝に入ってしまっているよ！",
-      "verify_dial(5)? に変えるとダイヤルが解錠され、金庫⚡5と(5,1)ゴール両方がクリアできるよ！",
-      "let d = verify_dial(5)?;"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "dial": {
-        "secret": 5
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 5
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "vaultTarget": 5,
-      "requireAllSwitches": true,
-      "requireSafeErrorHandling": true
-    },
-    "parTicks": 8
   },
   {
     "displayId": "9-16",
@@ -2013,19 +2028,271 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
   },
   {
     "displayId": "9-18",
-    "id": "dd2b40aa-e38b-557a-9561-b4859e3a9a15",
+    "id": "12b4325e-3fae-5070-b5cc-4ac200fee821",
     "index": 218,
     "chapter": 9,
     "chapterTitle": "第9章 エラー処理",
     "stageKind": "puzzle",
-    "title": "9-18. エラー伝播関数で2段スイッチ迷路を解く",
+    "title": "9-18. ? 連鎖関数とコア検査納品",
+    "topicTag": "? 演算子 + コア納品",
+    "kurumiIntro": "部品検査が1つでも `Err` ならすぐ中断して代替プランに切り替える関数を `?` で作ろう！コアを検査台→強化台→納品台へ安全に届けるよ。",
+    "goalSummary": "calc_vault() の ? 連鎖を修復して金庫⚡5・コア⚡4+納品へ",
+    "bookSectionTitle": "9.2 ? による複数バリデーションの結合",
+    "bookSummary": "複数の確認処理を `?` で連結すると、途中のエラーを漏れなくキャッチしつつ正常時のロジックを綺麗に並べられます。",
+    "bookKeyCode": "let a = validate(2)?;\nlet b = validate(3)?;",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "fn validate(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"無効\") }\n}\n\nfn calc_vault() -> Result<i32, String> {\n    let a = validate(2)?;\n    let b = validate(3)?;\n    Ok(a + b)\n}\n\nfn main() {\n    let v = calc_vault().unwrap_or(0);\n    add_vault(v);\n    step(1);\n    let mut core = grab_core();\n    step(1);\n    scan(&core);\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}",
+    "quickChips": [
+      {
+        "label": "validate(3)?",
+        "insert": "validate(3)?"
+      }
+    ],
+    "hints": [
+      "read_part(2)? と read_part(3)? を ? 演算子でつなぐ関数 calc_vault() -> Result<i32, String> を作り、(a + b) / 10 で合計⚡5を返そう！",
+      "(1,1)でコア取得 → (2,1)で scan(&c) → (3,1)で boost(&mut c) → (4,1)で deliver(c) でクリア！",
+      "fn validate(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"無効\") }\n}\n\nfn calc_vault() -> Result<i32, String> {\n    let a = validate(2)?;\n    let b = validate(3)?;\n    Ok(a + b)\n}\n\nfn main() {\n    let v = calc_vault().unwrap_or(0);\n    add_vault(v);\n    step(1);\n    let mut core = grab_core();\n    step(1);\n    scan(&core);\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "検査コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "vaultTarget": 5,
+      "requireSpatialCoreRules": true,
+      "requireSafeErrorHandling": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "9-19",
+    "id": "83c80558-999e-5c81-8598-4de72b9acf09",
+    "index": 219,
+    "chapter": 9,
+    "chapterTitle": "第9章 エラー処理",
+    "stageKind": "puzzle",
+    "title": "9-19. 2つのダイヤル確認を Result でつなぐ",
+    "topicTag": "Result + ダイヤル解錠",
+    "kurumiIntro": "ダイヤルの暗証番号が条件を満たすか `check_dial(n) -> Result<i32, String>` で確かめてから解錠しよう！不正な値はしっかり `Err` で弾く安全設計だよ。",
+    "goalSummary": "Result 検証つきの値 5 でダイヤルを解きスイッチ先 (5, 1) へ",
+    "bookSectionTitle": "9.2 入力バリデーションを Result で表現する",
+    "bookSummary": "不正な引数が紛れ込む前に `Result` で範囲チェックを行い、有効な値だけをデバイス制御に渡す設計です。",
+    "bookKeyCode": "fn verify_dial(n: i32) -> Result<i32, String>",
+    "starterCode": "fn main() {\n    \n}",
+    "solutionCode": "fn verify_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"範囲外\") }\n}\n\nfn solve_safe() -> Result<i32, String> {\n    let d = verify_dial(5)?;\n    try_dial(d);\n    Ok(d)\n}\n\nfn main() {\n    match solve_safe() {\n        Ok(v) => {\n            add_vault(v);\n            step(5);\n        },\n        Err(e) => println!(\"DIAL_ERR: {}\", e),\n    }\n}",
+    "quickChips": [
+      {
+        "label": "verify_dial(5)?",
+        "insert": "verify_dial(5)?"
+      }
+    ],
+    "hints": [
+      "verify_dial(n: i32) -> Result<i32, String> で範囲チェックを行い、? を使って solve_safe() から try_dial(5) を呼ぼう！",
+      "match solve_safe() で Ok(v) が返ったら add_vault(v); と step(5); でスイッチ先の (5,1) へ進めるよ！",
+      "fn verify_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"範囲外\") }\n}\n\nfn solve_safe() -> Result<i32, String> {\n    let d = verify_dial(5)?;\n    try_dial(d);\n    Ok(d)\n}\n\nfn main() {\n    match solve_safe() {\n        Ok(v) => {\n            add_vault(v);\n            step(5);\n        },\n        Err(e) => println!(\"DIAL_ERR: {}\", e),\n    }\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "dial": {
+        "secret": 5
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "vaultTarget": 5,
+      "requireAllSwitches": true,
+      "requireSafeErrorHandling": true
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "9-20",
+    "id": "dd2b40aa-e38b-557a-9561-b4859e3a9a15",
+    "index": 220,
+    "chapter": 9,
+    "chapterTitle": "第9章 エラー処理",
+    "stageKind": "puzzle",
+    "title": "9-20. エラー伝播関数で2段スイッチ迷路を解く",
     "topicTag": "? + 2スイッチゲート",
     "kurumiIntro": "U字型通路の途中に2つのスイッチと連動ゲートがあるよ！`load_leg()` 関数で `?` を使って3区間の距離を計算し、見事にゴールへ戻ろう！",
     "goalSummary": "? 関数で各区間の歩数を出し全スイッチを踏んで (0, 3) へ",
     "bookSectionTitle": "9.2 ルート計算関数からのエラー伝播",
     "bookSummary": "計算関数を `?` でつないで安全なルート座標を取り出し、全区間を一気に走り抜けます。",
     "bookKeyCode": "let d1 = read_dist(4)?;",
-    "starterCode": "fn read_dist(n: i32) -> Result<i32, String> {\n    let v = read_part(n)?;\n    Ok(v / 10)\n}\n\nfn plan() -> Result<(i32, i32, i32), String> {\n    let e = read_dist(4)?;\n    let s = read_dist(2)?;\n    // 最後の西向き戻り距離を 4 にしよう！今は -1 でエラーになるよ\n    let w = read_dist(-1)?;\n    Ok((e, s, w))\n}\n\nfn main() {\n    let (e, s, w) = plan().unwrap_or((1, 1, 1));\n    step(e);\n    turn_right();\n    step(s);\n    turn_right();\n    step(w);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn read_dist(n: i32) -> Result<i32, String> {\n    let v = read_part(n)?;\n    Ok(v / 10)\n}\n\nfn plan() -> Result<(i32, i32, i32), String> {\n    let e = read_dist(4)?;\n    let s = read_dist(2)?;\n    let w = read_dist(4)?;\n    Ok((e, s, w))\n}\n\nfn main() {\n    let (e, s, w) = plan().unwrap_or((1, 1, 1));\n    step(e);\n    turn_right();\n    step(s);\n    turn_right();\n    step(w);\n}",
     "quickChips": [
       {
@@ -2034,9 +2301,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "w = read_dist(-1)? が Err を返すため、unwrap_or((1, 1, 1)) が使われてしまっているよ！",
-      "read_dist(4)? に直せば (4, 2, 4) で全スイッチを踏みつつ (0, 3) へ到着できるよ！",
-      "let w = read_dist(4)?;"
+      "read_dist(n) -> Result<i32, String> で read_part(n)? / 10 を返し、plan() 関数で ? を使って (4, 2, 4) のタプルを組もう！",
+      "東4歩でスイッチ(4,1) → 右折して南2歩でゲート(4,2)通過 → 右折して西4歩でスイッチ(2,3)を踏みつつゴール(0,3)へ！",
+      "fn read_dist(n: i32) -> Result<i32, String> {\n    let v = read_part(n)?;\n    Ok(v / 10)\n}\n\nfn plan() -> Result<(i32, i32, i32), String> {\n    let e = read_dist(4)?;\n    let s = read_dist(2)?;\n    let w = read_dist(4)?;\n    Ok((e, s, w))\n}\n\nfn main() {\n    let (e, s, w) = plan().unwrap_or((1, 1, 1));\n    step(e);\n    turn_right();\n    step(s);\n    turn_right();\n    step(w);\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -2159,20 +2426,20 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "parTicks": 13
   },
   {
-    "displayId": "9-19",
+    "displayId": "9-21",
     "id": "a095b4cf-0ea6-52e0-9488-b0f3af96c4af",
-    "index": 219,
+    "index": 221,
     "chapter": 9,
     "chapterTitle": "第9章 エラー処理",
     "stageKind": "challenge",
-    "title": "9-19. ダイヤル解錠＋?伝播の二重セキュリティ",
+    "title": "9-21. ダイヤル解錠＋?伝播の二重セキュリティ",
     "topicTag": "? + ダイヤル + 金庫",
     "kurumiIntro": "ダイヤル番号のチェックとエネルギーの合算を `?` で連係させた安全関数を作ろう！故障センサーは `unwrap_or` でしのいで、二重セキュリティ突破だ！",
     "goalSummary": "Result 回復でダイヤル解錠(6)・金庫⚡6・全スイッチ・(5, 1) へ",
     "bookSectionTitle": "9.2 複数のエラー源を組み合わせた回復設計",
     "bookSummary": "壊れうる設定読み取りは安全なバックアップ値で守りつつ、セキュリティ条件は `?` で厳密に検証します。",
     "bookKeyCode": "let secret = check(6)?;",
-    "starterCode": "fn check_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"不正ダイヤル\") }\n}\n\nfn run_mission() -> Result<(), String> {\n    let vault_val = read_part(4).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    // 秘密の数字 6 を check_dial に渡してダイヤルを解錠しよう！今は 1 だよ\n    let secret = check_dial(1)?;\n    try_dial(secret);\n    step(5);\n    Ok(())\n}\n\nfn main() {\n    if let Err(e) = run_mission() {\n        println!(\"ERR: {}\", e);\n    }\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn check_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"不正ダイヤル\") }\n}\n\nfn run_mission() -> Result<(), String> {\n    let vault_val = read_part(4).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    let secret = check_dial(6)?;\n    try_dial(secret);\n    step(5);\n    Ok(())\n}\n\nfn main() {\n    if let Err(e) = run_mission() {\n        println!(\"ERR: {}\", e);\n    }\n}",
     "quickChips": [
       {
@@ -2181,9 +2448,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "vault_val は 4 + 2 = 6 になっていて金庫⚡6はバッチリ！",
-      "ダイヤルの正解は 6 なので、check_dial(1)? を `check_dial(6)?` に変えて解錠しよう！",
-      "let secret = check_dial(6)?;"
+      "ダイヤルの正解は 6 だよ！check_dial(n: i32) -> Result<i32, String> を作り、? を使って try_dial(6) を解錠しよう。",
+      "read_part の unwrap_or も組み合わせて金庫⚡6を入れたら、step(5); でスイッチ経由で (5,1) へ！",
+      "fn check_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"不正ダイヤル\") }\n}\n\nfn run_mission() -> Result<(), String> {\n    let vault_val = read_part(4).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    let secret = check_dial(6)?;\n    try_dial(secret);\n    step(5);\n    Ok(())\n}\n\nfn main() {\n    if let Err(e) = run_mission() {\n        println!(\"ERR: {}\", e);\n    }\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -2285,273 +2552,6 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "parTicks": 9
   },
   {
-    "displayId": "9-20",
-    "id": "e191b416-e095-5ee1-9b79-8582cbfe3795",
-    "index": 220,
-    "chapter": 9,
-    "chapterTitle": "第9章 エラー処理",
-    "stageKind": "puzzle",
-    "title": "9-20. Result フォールバックとコンベア分岐",
-    "topicTag": "unwrap_or + コンベア",
-    "kurumiIntro": "センサーが故障してもロボットを止めちゃダメ！`.unwrap_or(値)` で予備の歩数に切り替えて、2つのコンベアを乗り継ぎながらスイッチを踏もう。",
-    "goalSummary": "Result フォールバックでパニックせずスイッチを踏み (5, 3) へ",
-    "bookSectionTitle": "9.1 & 9.2 現場機械を止めないフォールバック値",
-    "bookSummary": "異常系を受け取った際に安全な既定値へ切り替えることで、搬送ライン全体を停止させずに走り切れます。",
-    "bookKeyCode": "let dy = read_part(-1).unwrap_or(1);",
-    "starterCode": "fn main() {\n    let dx = read_part(1).unwrap_or(0) / 10;\n    // 故障センサー read_part(-1) は 1 歩になるようフォールバックしよう！今は unwrap() でパニックするよ\n    let dy = read_part(-1).unwrap();\n    step(dx);\n    turn_right();\n    step(dy);\n    turn_left();\n    step(2);\n}",
-    "solutionCode": "fn main() {\n    let dx = read_part(1).unwrap_or(0) / 10;\n    let dy = read_part(-1).unwrap_or(1);\n    step(dx);\n    turn_right();\n    step(dy);\n    turn_left();\n    step(2);\n}",
-    "quickChips": [
-      {
-        "label": ".unwrap_or(1)",
-        "insert": ".unwrap_or(1)"
-      }
-    ],
-    "hints": [
-      "read_part(-1).unwrap() を呼ぶとパニック停止しちゃうよ！",
-      "dx = 1 でコンベア(1,1)が(2,1)スイッチへ運ぶよ。dy は `.unwrap_or(1)` にして(2,2)コンベアに乗ろう！",
-      "let dy = read_part(-1).unwrap_or(1);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 3
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 3,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "conveyors": [
-        {
-          "x": 1,
-          "y": 1,
-          "dir": 0
-        },
-        {
-          "x": 2,
-          "y": 2,
-          "dir": 1
-        },
-        {
-          "x": 3,
-          "y": 3,
-          "dir": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "requireAllSwitches": true,
-      "requireSafeErrorHandling": true
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "9-21",
-    "id": "fecb5db3-4f07-5baf-acbe-87c4035235a5",
-    "index": 221,
-    "chapter": 9,
-    "chapterTitle": "第9章 エラー処理",
-    "title": "9-21. 非常停止スイッチと蒸気ゲート突破",
-    "topicTag": "panic! 制御 / 実践パズル",
-    "kurumiIntro": "安全運転の基本だよ！センサーの `Err` でパニックせずに `unwrap_or` で歩数を得たら、途中の蒸気ゲートを待ちながら進もう。",
-    "goalSummary": "パニックせずゲート (2, 1) を抜けてゴール (4, 1) へ",
-    "bookSectionTitle": "9.1 & 9.3 panic! すべき時・回復すべき時",
-    "bookSummary": "テストや絶対に起きてはいけない不整合では `panic!` を使いますが、センサー異常や入力ミスなど想定内のエラーは回復処理を書くのが原則です。",
-    "bookKeyCode": "let total = read_part(-5).unwrap_or(4);",
-    "starterCode": "fn main() {\n    let total = read_part(-5).unwrap_or(4);\n    for _ in 0..total {\n        // ゲートが閉じていたら 1ティック待とう！\n        if !is_gate_open() {\n            \n        }\n        step();\n    }\n}",
-    "solutionCode": "fn main() {\n    let total = read_part(-5).unwrap_or(4);\n    for _ in 0..total {\n        if !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
-    "quickChips": [
-      {
-        "label": "wait_tick(1);",
-        "insert": "wait_tick(1);"
-      }
-    ],
-    "hints": [
-      "(2, 1) に蒸気ゲートがあって、着いたときに閉まっているタイミングだよ！",
-      "if !is_gate_open() { wait_tick(1); } の中に wait_tick(1); を書こう。",
-      "if !is_gate_open() {\n    wait_tick(1);\n}"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "gates": [
-        {
-          "x": 2,
-          "y": 1,
-          "openTicks": 2,
-          "closedTicks": 2,
-          "initialOffset": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 6
-  },
-  {
     "displayId": "9-22",
     "id": "d2207f99-4376-534a-998a-71b6e795a295",
     "index": 222,
@@ -2565,7 +2565,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 起動前チェックを ? でまとめる",
     "bookSummary": "複数の起動前点検を `preflight()` に `?` で並べておけば、すべての点検を突破したときだけメイン動作を開始できます。",
     "bookKeyCode": "fn preflight() -> Result<i32, String> { let a = read_part(1)?; ... }",
-    "starterCode": "fn preflight() -> Result<i32, String> {\n    let a = read_part(2)?;\n    // ↓ 故障センサー(-1)になってるよ！正常な read_part(2)? に直そう\n    let b = read_part(-1)?;\n    Ok((a + b) / 10)\n}\n\nfn main() {\n    match preflight() {\n        Ok(v) => {\n            add_vault(v);\n            while !at_goal() {\n                if !is_wall_left() {\n                    turn_left();\n                    step();\n                } else if !is_wall_ahead() {\n                    step();\n                } else {\n                    turn_right();\n                }\n            }\n        },\n        Err(e) => println!(\"STOP: {}\", e),\n    }\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn preflight() -> Result<i32, String> {\n    let a = read_part(2)?;\n    let b = read_part(2)?;\n    Ok((a + b) / 10)\n}\n\nfn main() {\n    match preflight() {\n        Ok(v) => {\n            add_vault(v);\n            while !at_goal() {\n                if !is_wall_left() {\n                    turn_left();\n                    step();\n                } else if !is_wall_ahead() {\n                    step();\n                } else {\n                    turn_right();\n                }\n            }\n        },\n        Err(e) => println!(\"STOP: {}\", e),\n    }\n}",
     "quickChips": [
       {
@@ -2574,9 +2574,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "preflight() 内の `read_part(-1)?` が Err を返して発進できていないよ！",
-      "read_part(2)? に直すと (20 + 20) / 10 = 4 が返って発進し、金庫⚡4と迷路ゴール両方がクリアになるよ！",
-      "let b = read_part(2)?;"
+      "preflight() -> Result<i32, String> で read_part(2)? を2回呼び、(a + b) / 10 = 4 を返そう！",
+      "Ok(v) が返ったら add_vault(v); を呼び、while !at_goal() で左手法（!is_wall_left()→左折&step、!is_wall_ahead()→step、else→右折）を実行しよう！",
+      "fn preflight() -> Result<i32, String> {\n    let a = read_part(2)?;\n    let b = read_part(2)?;\n    Ok((a + b) / 10)\n}\n\nfn main() {\n    match preflight() {\n        Ok(v) => {\n            add_vault(v);\n            while !at_goal() {\n                if !is_wall_left() {\n                    turn_left();\n                    step();\n                } else if !is_wall_ahead() {\n                    step();\n                } else {\n                    turn_right();\n                }\n            }\n        },\n        Err(e) => println!(\"STOP: {}\", e),\n    }\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -2815,7 +2815,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第9章まとめ — 無停止フェイルセーフ制御",
     "bookSummary": "あらゆる失敗可能性を `Result` と `?` で明示し、適切な回復値へ着地させることで、止まらないシステムを組み上げました。",
     "bookKeyCode": "match run() { Ok(_) => ..., Err(_) => recover() }",
-    "starterCode": "fn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn check_batch() -> Result<i32, String> {\n    let p1 = read_part(3)?;\n    let p2 = read_part(3)?;\n    Ok((p1 + p2) / 10)\n}\n\nfn main() {\n    let energy = check_batch().unwrap_or(0);\n    add_vault(energy);\n    println!(\"SAFE_CLEAR\");\n    // (1,1)コア→(2,1)強化＆スイッチ1→(3,1)スパーク→(4,1)スイッチ2→(5,1)右折→(5,3)納品台！\n    safe_go(1);\n}",
+    "starterCode": "fn main() {\n    \n}",
     "solutionCode": "fn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn check_batch() -> Result<i32, String> {\n    let p1 = read_part(3)?;\n    let p2 = read_part(3)?;\n    Ok((p1 + p2) / 10)\n}\n\nfn main() {\n    let energy = check_batch().unwrap_or(0);\n    add_vault(energy);\n    println!(\"SAFE_CLEAR\");\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    boost(&mut c);\n    safe_go(3);\n    turn_right();\n    safe_go(2);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -2836,9 +2836,9 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "safe_go(1) で (1,1) に着いたら grab_core()、次の safe_go(1) で (2,1) 強化台兼スイッチで boost(&mut c) しよう！",
-      "その後 safe_go(3) でスパーク(3,1)とスイッチ(4,1)を通って(5,1)へ！",
-      "最後に turn_right(); safe_go(2); deliver(c); でゲート(5,2)を越えて(5,3)に納品完了！"
+      "check_batch() -> Result<i32, String> で ? を使って合計⚡6を計算し、add_vault(energy); と println!(\"SAFE_CLEAR\"); を実行しよう！",
+      "スパーク・ゲート待ちの safe_go を用意し、(1,1)コア取得 → (2,1)強化兼スイッチ → (3,1)スパーク → (4,1)スイッチ → (5,1)右折 → (5,3)納品！",
+      "fn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn check_batch() -> Result<i32, String> {\n    let p1 = read_part(3)?;\n    let p2 = read_part(3)?;\n    Ok((p1 + p2) / 10)\n}\n\nfn main() {\n    let energy = check_batch().unwrap_or(0);\n    add_vault(energy);\n    println!(\"SAFE_CLEAR\");\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    boost(&mut c);\n    safe_go(3);\n    turn_right();\n    safe_go(2);\n    deliver(c);\n}"
     ],
     "worldSetup": {
       "width": 6,

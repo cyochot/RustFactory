@@ -50,6 +50,35 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
     ]
   },
   {
+    "stageId": "cd6ee93f-2e76-53dc-9286-0b0e7c0188c3",
+    "requestTitle": "フェリス、パン屋の新作パンをつまみ食い？",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "コッペさんの新作パンが、工房のベルトに乗せるたび一個ずつ消えてるの！フェリスちゃん、ほっぺに粉がついてるけど……何か知ってる？"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "し、知らないカニ！この粉は……パンの香りを確認した証拠カニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "あれ？なくなったパンは、フェリスちゃんが味見用に別のお皿へ移してくれてたの？疑ってごめんね！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "一個だけ味見したつもりが、数えるたびにお皿が増えたカニ……！"
+      }
+    ]
+  },
+  {
     "stageId": "5b076c31-42b8-59b9-aabe-7805a786eac2",
     "requestTitle": "お花の栄養剤、濃さはバッチリかな？",
     "client": "mimosa",
@@ -146,83 +175,6 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "ae5f34d9-8b3d-5240-b03b-053ab713166e",
-    "requestTitle": "失敗理由もメモしてくれる賢い検査スタンプ",
-    "client": "moka",
-    "intro": [
-      {
-        "speaker": "moka",
-        "emotion": "normal",
-        "text": "ダメだったときに「ここがダメだよ」って一言添えて教えてくれる、ちょっと親切なチェック方法にしてみたいんだ。"
-      },
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "それ親切でいいね！原因がすぐわかれば直すのもあっという間だよ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "moka",
-        "emotion": "happy",
-        "text": "問題なく美しくパスしたね。おいしいコーヒーが淹れられそうだ。"
-      }
-    ]
-  },
-  {
-    "stageId": "9dc94aec-ccf0-5432-8846-c0c15b87b666",
-    "requestTitle": "合格スタンプを並べて堂々と出荷ゲートへ！",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "2つの点検チェックに全部合格したあと、スイッチを踏んで連動ゲートを堂々と突破しよう！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "ぴっかぴかの合格シールつきで出荷カニ！いってくるカニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "おつかれさま！これで町の品質検査はお墨付きだね！"
-      }
-    ]
-  },
-  {
-    "stageId": "cd6ee93f-2e76-53dc-9286-0b0e7c0188c3",
-    "requestTitle": "フェリス、パン屋の新作パンをつまみ食い？",
-    "client": "kurumi",
-    "intro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "normal",
-        "text": "コッペさんの新作パンが、工房のベルトに乗せるたび一個ずつ消えてるの！フェリスちゃん、ほっぺに粉がついてるけど……何か知ってる？"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "し、知らないカニ！この粉は……パンの香りを確認した証拠カニ！"
-      }
-    ],
-    "outro": [
-      {
-        "speaker": "kurumi",
-        "emotion": "happy",
-        "text": "あれ？なくなったパンは、フェリスちゃんが味見用に別のお皿へ移してくれてたの？疑ってごめんね！"
-      },
-      {
-        "speaker": "ferris",
-        "emotion": "happy",
-        "text": "一個だけ味見したつもりが、数えるたびにお皿が増えたカニ……！"
-      }
-    ]
-  },
-  {
     "stageId": "4a4bab84-ce14-50b1-9a7f-d1acadec111a",
     "requestTitle": "モカさんのカップ、泡ひげ事件！",
     "client": "kurumi",
@@ -310,31 +262,31 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "0b91ddc0-b6f7-5e13-912f-333b7f29bdb1",
-    "requestTitle": "ポッポの帽子が風でふわり！",
+    "stageId": "b4812899-7dd0-58bb-9d34-f53ab5d04515",
+    "requestTitle": "ミモザさんの寄せ植え、鉢が足りない！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "ポッポくんの帽子が風で飛んで、花屋さんの軒先に引っかかっちゃった！あの赤いリボン帽子、見失わないようにね。"
+        "text": "ミモザさんの寄せ植えが大きく育って、鉢からはみ出しそう！みんなで似合う鉢を探してあげよう。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "ぼ、僕の帽子です！風さん、返してください〜！"
+        "text": "この鉢なら余裕カニ！……と思ったら、僕が入る場所はないカニ？"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "帽子が無事に戻りました！お礼に花を一輪つけてもらったら、いつもよりおしゃれになりました！"
+        "text": "寄せ植えの鉢が決まったわ！フェリスちゃんは隣の小さな鉢で日なたぼっこ。花と一緒に並んで、すっかり温室の仲間ね♪"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "風さん、今度は僕の帽子じゃなくて紙吹雪を飛ばしてカニ〜！"
+        "text": "花の隣なら日なたぼっこできるカニ！鉢は……やっぱり窮屈カニ！"
       }
     ]
   },
@@ -368,31 +320,79 @@ export const STORY_CHAPTER_11: StageStoryEntry[] = [
     ]
   },
   {
-    "stageId": "b4812899-7dd0-58bb-9d34-f53ab5d04515",
-    "requestTitle": "ミモザさんの寄せ植え、鉢が足りない！",
+    "stageId": "ae5f34d9-8b3d-5240-b03b-053ab713166e",
+    "requestTitle": "失敗理由もメモしてくれる賢い検査スタンプ",
+    "client": "moka",
+    "intro": [
+      {
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "ダメだったときに「ここがダメだよ」って一言添えて教えてくれる、ちょっと親切なチェック方法にしてみたいんだ。"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "それ親切でいいね！原因がすぐわかれば直すのもあっという間だよ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "問題なく美しくパスしたね。おいしいコーヒーが淹れられそうだ。"
+      }
+    ]
+  },
+  {
+    "stageId": "0b91ddc0-b6f7-5e13-912f-333b7f29bdb1",
+    "requestTitle": "ポッポの帽子が風でふわり！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "ミモザさんの寄せ植えが大きく育って、鉢からはみ出しそう！みんなで似合う鉢を探してあげよう。"
+        "text": "ポッポくんの帽子が風で飛んで、花屋さんの軒先に引っかかっちゃった！あの赤いリボン帽子、見失わないようにね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "この鉢なら余裕カニ！……と思ったら、僕が入る場所はないカニ？"
+        "text": "ぼ、僕の帽子です！風さん、返してください〜！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "寄せ植えの鉢が決まったわ！フェリスちゃんは隣の小さな鉢で日なたぼっこ。花と一緒に並んで、すっかり温室の仲間ね♪"
+        "text": "帽子が無事に戻りました！お礼に花を一輪つけてもらったら、いつもよりおしゃれになりました！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "花の隣なら日なたぼっこできるカニ！鉢は……やっぱり窮屈カニ！"
+        "text": "風さん、今度は僕の帽子じゃなくて紙吹雪を飛ばしてカニ〜！"
+      }
+    ]
+  },
+  {
+    "stageId": "9dc94aec-ccf0-5432-8846-c0c15b87b666",
+    "requestTitle": "合格スタンプを並べて堂々と出荷ゲートへ！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "2つの点検チェックに全部合格したあと、スイッチを踏んで連動ゲートを堂々と突破しよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ぴっかぴかの合格シールつきで出荷カニ！いってくるカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "おつかれさま！これで町の品質検査はお墨付きだね！"
       }
     ]
   },
