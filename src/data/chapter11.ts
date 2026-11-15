@@ -3,29 +3,29 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_11_STAGES: StageDefinition[] = [
   {
     "displayId": "11-1",
-    "id": "9fd2a72f-a235-5928-849d-4fe8c447f483",
-    "index": 161,
+    "id": "0a19c51a-2f6c-5a4c-9247-29534bd93f8a",
+    "index": 249,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-1. mod と pub による公開設定",
-    "topicTag": "mod / pub 可視性",
-    "kurumiIntro": "工房の部品は `mod motor { ... }` に整理されているよ。でも外から呼ぶには `pub` を付けて公開してあげる必要があるんだ！",
-    "goalSummary": "motor モジュールの関数を pub にしてゴール (3, 1) へ",
-    "bookSectionTitle": "11.2 & 11.3 スコープとプライバシーの制御",
-    "bookSummary": "Rustではモジュール `mod` の中身はデフォルトで非公開（プライベート）です。外から使いたい関数や構造体には `pub` キーワードを付けます。",
-    "bookKeyCode": "mod motor {\n    pub fn go() { step(3); }\n}",
-    "starterCode": "mod motor {\n    // 外から呼べるように pub を付けよう！\n    fn go() {\n        step(3);\n    }\n}\n\nfn main() {\n    motor::go();\n}",
-    "solutionCode": "mod motor {\n    pub fn go() {\n        step(3);\n    }\n}\n\nfn main() {\n    motor::go();\n}",
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-1. #[test] と assert_eq! で品質チェック",
+    "topicTag": "#[test] / assert_eq!",
+    "kurumiIntro": "出荷前の品質チェックだよ！`#[test]` を付けたテスト関数の中で `assert_eq!` を使って計算が正しいことを自動検証しよう！",
+    "goalSummary": "#[test] を1つ合格させてからゴール (3, 1) へ進もう",
+    "bookSectionTitle": "11.1 テストの書き方 — #[test] と assert_eq!",
+    "bookSummary": "`#[test]` 属性を付けた関数はテスト実行時に自動で走ります。`assert_eq!(左, 右)` は2つの値が等しいか検証し、違えばテスト失敗を教えてくれます。",
+    "bookKeyCode": "#[test]\nfn test_add() {\n    assert_eq!(add(1, 2), 3);\n}",
+    "starterCode": "fn gear_sum(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn check_gear() {\n    // gear_sum(1, 2) が 3 になるか assert_eq! で確かめよう！\n    assert_eq!(gear_sum(1, 2), 0);\n}\n\nfn main() {\n    step(gear_sum(1, 2));\n}",
+    "solutionCode": "fn gear_sum(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn check_gear() {\n    assert_eq!(gear_sum(1, 2), 3);\n}\n\nfn main() {\n    step(gear_sum(1, 2));\n}",
     "quickChips": [
       {
-        "label": "pub ",
-        "insert": "pub "
+        "label": "assert_eq!(gear_sum(1, 2), 3);",
+        "insert": "assert_eq!(gear_sum(1, 2), 3);"
       }
     ],
     "hints": [
-      "このまま実行すると「関数 motor::go は非公開（プライベート）です」とエラーが出るよ！",
-      "3行目の `fn go()` を `pub fn go()` に変えよう。",
-      "pub fn go() {"
+      "check_gear テストの期待値が 0 になっているからテストが落ちちゃうよ！",
+      "assert_eq!(gear_sum(1, 2), 3); に直してテスト合格させよう。",
+      "#[test]\nfn check_gear() {\n    assert_eq!(gear_sum(1, 2), 3);\n}"
     ],
     "worldSetup": {
       "width": 5,
@@ -83,1079 +83,37 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
       }
     },
     "victoryCondition": {
-      "reachGoal": true
+      "reachGoal": true,
+      "testsRequired": 1
     },
     "parTicks": 3
   },
   {
     "displayId": "11-2",
-    "id": "5aba927d-c321-5c48-947d-6b2f02470cd8",
-    "index": 162,
+    "id": "cd6ee93f-2e76-53dc-9286-0b0e7c0188c3",
+    "index": 250,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-2. 入れ子モジュール mod とフルパス呼び出し",
-    "topicTag": "ネスト mod / :: パス",
-    "kurumiIntro": "`mod atelier { pub mod wheel { pub fn roll() ... } }` みたいにモジュールの中にさらにモジュールを入れ子にできるよ！2つの経路関数をどちらも公開しよう。",
-    "goalSummary": "入れ子モジュールの roll() と turn() を呼んで (2, 3) へ",
-    "bookSectionTitle": "11.3 モジュールツリーで要素を指し示すパス",
-    "bookSummary": "モジュールが何階層も分かれているときは `atelier::wheel::roll()` のように `::` でつないで辿ります。",
-    "bookKeyCode": "mod atelier {\n    pub mod wheel { pub fn roll() { step(2); } }\n}",
-    "starterCode": "mod atelier {\n    pub mod wheel {\n        // 両方 pub にして外から呼べるようにしよう！\n        fn roll() {\n            step(2);\n        }\n        pub fn turn() {\n            turn_right();\n        }\n    }\n}\n\nfn main() {\n    atelier::wheel::roll();\n    atelier::wheel::turn();\n    atelier::wheel::roll();\n}",
-    "solutionCode": "mod atelier {\n    pub mod wheel {\n        pub fn roll() {\n            step(2);\n        }\n        pub fn turn() {\n            turn_right();\n        }\n    }\n}\n\nfn main() {\n    atelier::wheel::roll();\n    atelier::wheel::turn();\n    atelier::wheel::roll();\n}",
-    "quickChips": [
-      {
-        "label": "pub fn roll()",
-        "insert": "pub fn roll()"
-      }
-    ],
-    "hints": [
-      "turn は pub になっているけれど、roll がまだ非公開だよ！",
-      "fn roll() を pub fn roll() に書き換えよう。",
-      "pub fn roll() {"
-    ],
-    "worldSetup": {
-      "width": 4,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 2,
-        "y": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 5
-  },
-  {
-    "displayId": "11-3",
-    "id": "73562f8a-40ac-509e-8445-4d6ccc8298b4",
-    "index": 163,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
+    "chapterTitle": "第11章 自動テストを書く",
     "stageKind": "puzzle",
-    "title": "11-3. 非公開モジュールを開放して迷路突破",
-    "topicTag": "入れ子 mod + pub 公開",
-    "kurumiIntro": "工房の案内システム `mod nav { mod sensor { ... } }` の中身が全部プライベートで呼べなくなってるよ！`pub` を適切に付けてセンサー移動を動かそう。",
-    "goalSummary": "入れ子のモジュールを公開して迷路のゴール (4, 3) へ到達",
-    "bookSectionTitle": "11.2 & 11.3 階層ごとの pub 可視性管理",
-    "bookSummary": "内側の関数に `pub` を付けるだけでなく、親モジュール（例：`pub mod sensor`）自体も外に見せたい場合は `pub` が必要です。",
-    "bookKeyCode": "mod nav { pub mod sensor { pub fn safe_step() { ... } } }",
-    "starterCode": "mod nav {\n    pub mod sensor {\n        // ↓ 外から呼べるように pub を付けよう！\n        fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    for _ in 0..4 {\n        go_safe();\n    }\n    turn_right();\n    for _ in 0..2 {\n        go_safe();\n    }\n}",
-    "solutionCode": "mod nav {\n    pub mod sensor {\n        pub fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    for _ in 0..4 {\n        go_safe();\n    }\n    turn_right();\n    for _ in 0..2 {\n        go_safe();\n    }\n}",
+    "title": "11-2. コンベア歩数計算のテスト駆動修正",
+    "topicTag": "#[test] + コンベア短縮",
+    "kurumiIntro": "ベルトコンベアが2箇所にあるコースで「必要な手動ステップ数」を求める関数にバグがあるよ！2つの `#[test]` をパスさせて 6ティック以内で走り切ろう。",
+    "goalSummary": "2つの #[test] を合格させコンベアで6ティック以内に (5, 1) へ",
+    "bookSectionTitle": "11.1 仕様を満たす計算関数のテスト駆動開発",
+    "bookSummary": "テストケースが求める数学的仕様（例：コンベア分の割引計算）に合わせて本体関数を修正し、同時に実戦コースも走らせます。",
+    "bookKeyCode": "#[test] fn t1() { assert_eq!(net_steps(5, 2), 3); }",
+    "starterCode": "fn net_steps(total_dist: i32, conv_count: i32) -> i32 {\n    // コンベア1つにつき1歩節約できる！今は引き算を忘れているよ\n    total_dist\n}\n\n#[test]\nfn t_two_conv() {\n    assert_eq!(net_steps(5, 2), 3);\n}\n\n#[test]\nfn t_zero_conv() {\n    assert_eq!(net_steps(4, 0), 4);\n}\n\nfn main() {\n    let s = net_steps(5, 2);\n    step(s);\n}",
+    "solutionCode": "fn net_steps(total_dist: i32, conv_count: i32) -> i32 {\n    total_dist - conv_count\n}\n\n#[test]\nfn t_two_conv() {\n    assert_eq!(net_steps(5, 2), 3);\n}\n\n#[test]\nfn t_zero_conv() {\n    assert_eq!(net_steps(4, 0), 4);\n}\n\nfn main() {\n    let s = net_steps(5, 2);\n    step(s);\n}",
     "quickChips": [
       {
-        "label": "pub fn go_safe()",
-        "insert": "pub fn go_safe()"
+        "label": "total_dist - conv_count",
+        "insert": "total_dist - conv_count"
       }
     ],
     "hints": [
-      "nav::sensor::go_safe が非公開になっているためコンパイルエラーになるよ！",
-      "fn go_safe() の前に `pub` を付ければ use と呼び出しが通って、スパークとスイッチゲートを越えて (4, 3) へ着くよ！",
-      "pub fn go_safe() {"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 3
-      },
-      "switches": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 2,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 3,
-            "y": 1
-          }
-        }
-      ],
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 2,
-              "y": 0
-            },
-            {
-              "x": 2,
-              "y": 1
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 1
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "requireAllSwitches": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "11-4",
-    "id": "116ceadb-8d15-54f0-ba3f-88b3f67ea44e",
-    "index": 164,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "puzzle",
-    "title": "11-4. 迷路ソルバーモジュール maze_lib",
-    "topicTag": "アルゴリズム mod 分離",
-    "kurumiIntro": "迷路探索の仕組みを `mod maze_lib` に隔離して、メイン関数からはたった1行 `use maze_lib::escape; escape();` だけで抜け出せる美しいコードを作ろう！",
-    "goalSummary": "maze_lib::escape() を公開・インポートして迷路を突破しよう",
-    "bookSectionTitle": "11.2 再利用可能なアルゴリズムをモジュール化",
-    "bookSummary": "汎用的な左手法迷路ソルバーなどをモジュールにまとめておけば、呼び出し元の `main` が劇的に簡潔になります。",
-    "bookKeyCode": "use maze_lib::escape;\nescape();",
-    "starterCode": "mod maze_lib {\n    // escape() に pub を付けよう！\n    fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}",
-    "solutionCode": "mod maze_lib {\n    pub fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}",
-    "quickChips": [
-      {
-        "label": "pub fn escape()",
-        "insert": "pub fn escape()"
-      }
-    ],
-    "hints": [
-      "mod maze_lib の中の escape() が非公開のままだと呼び出せないよ！",
-      "外から呼ぶ `escape()` の前に `pub` を付けよう。",
-      "pub fn escape() {"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 2,
-        "dir": 0
-      },
-      "goal": {
-        "x": 2,
-        "y": 1
-      },
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 3,
-              "y": 1
-            },
-            {
-              "x": 3,
-              "y": 2
-            },
-            {
-              "x": 3,
-              "y": 3
-            },
-            {
-              "x": 3,
-              "y": 2
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "11-5",
-    "id": "0908821d-5296-51dc-9388-cc0bd3f783f5",
-    "index": 165,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "puzzle",
-    "title": "11-5. ダイヤル解錠モジュール security",
-    "topicTag": "mod + ダイヤル解錠",
-    "kurumiIntro": "金庫室のカギを開ける `mod security` が用意されているよ。ダイヤル解錠関数を公開して呼んだあと、門を通ってゴールへ進もう！",
-    "goalSummary": "security::unlock() を公開・呼び出し、ダイヤル解錠＋金庫⚡3＋ゴールへ",
-    "bookSectionTitle": "11.2 セキュリティ処理のカプセル化",
-    "bookSummary": "ダイヤルの総当たりループのような少し複雑な処理も、モジュールに閉じ込めて `unlock()` として公開すれば安全に使えます。",
-    "bookKeyCode": "security::unlock();",
-    "starterCode": "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\n// use security::unlock; を書いて main から呼ぼう！\n\nfn main() {\n    step(4);\n}",
-    "solutionCode": "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\nuse security::unlock;\n\nfn main() {\n    unlock();\n    step(4);\n}",
-    "quickChips": [
-      {
-        "label": "use security::unlock;",
-        "insert": "use security::unlock;\n"
-      },
-      {
-        "label": "unlock();",
-        "insert": "unlock();\n    "
-      }
-    ],
-    "hints": [
-      "mod security の中の unlock() はもう完成しているよ！",
-      "`use security::unlock;` を宣言して、main() の最初に `unlock();` を呼ぼう！",
-      "use security::unlock;\nfn main() { unlock(); step(4); }"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "dial": {
-        "secret": 5
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "vaultTarget": 3,
-      "requireAllSwitches": true
-    },
-    "parTicks": 11
-  },
-  {
-    "displayId": "11-6",
-    "id": "1fd4629d-d6fc-5324-87c3-2e3c62301d56",
-    "index": 166,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-6. 複数モジュールの連携と金庫操作",
-    "topicTag": "複数 mod の使い分け",
-    "kurumiIntro": "「金庫係 `mod bank`」と「移動係 `mod engine`」にモジュールを分けてみよう！それぞれの関数を公開して呼び出せば、責務がスッキリ分かれるよ。",
-    "goalSummary": "bank::charge と engine::run を呼び金庫⚡3＋ゴールへ",
-    "bookSectionTitle": "11.2 関連するコードをモジュールにグループ化する",
-    "bookSummary": "機能ごとに `mod` を分けておくと、どこにどんな処理があるか一目で分かり、大きなプロジェクトでも迷いません。",
-    "bookKeyCode": "bank::charge(3);\nengine::run(3);",
-    "starterCode": "mod bank {\n    pub fn charge(n: i32) {\n        add_vault(n);\n    }\n}\n\nmod engine {\n    pub fn run(n: i32) {\n        step(n);\n    }\n}\n\nfn main() {\n    // bank::charge(3); と engine::run(3); を呼ぼう！\n    \n}",
-    "solutionCode": "mod bank {\n    pub fn charge(n: i32) {\n        add_vault(n);\n    }\n}\n\nmod engine {\n    pub fn run(n: i32) {\n        step(n);\n    }\n}\n\nfn main() {\n    bank::charge(3);\n    engine::run(3);\n}",
-    "quickChips": [
-      {
-        "label": "bank::charge(3);",
-        "insert": "bank::charge(3);\n    "
-      },
-      {
-        "label": "engine::run(3);",
-        "insert": "engine::run(3);\n    "
-      }
-    ],
-    "hints": [
-      "bank と engine の中身はもう公開（pub）されているよ！",
-      "main の中に bank::charge(3); と engine::run(3); を書こう。",
-      "bank::charge(3);\nengine::run(3);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "11-7",
-    "id": "2f2642fd-792f-527a-bd05-f3802fca0a1f",
-    "index": 167,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-7. モジュール内の構造体公開パズル",
-    "topicTag": "mod 内の struct と impl",
-    "kurumiIntro": "モジュールの中の構造体にもメソッドを持たせられるよ！金庫にチャージしつつ、U字コースのゴールまで移動する部品を組み上げよう。",
-    "goalSummary": "mod mech 内の関数を組み合わせてコア⚡1を納品＋ゴールへ",
-    "bookSectionTitle": "11.3 構造体と関数をモジュールで包む",
-    "bookSummary": "構造体や便利なヘルパー関数をモジュール内に整理し、外に公開する窓口だけを `pub` にすることで安全性を高められます。",
-    "bookKeyCode": "mod mech {\n    pub fn deliver_core() { ... }\n}",
-    "starterCode": "mod mech {\n    pub fn deliver_l(x: i32, y: i32) {\n        let c = grab_core();\n        step(x);\n        turn_right();\n        step(y);\n        deliver(c);\n    }\n}\n\nfn main() {\n    // ゴールは (3, 3) だよ！mech::deliver_l(3, 2) を呼ぼう\n    mech::deliver_l(1, 1);\n}",
-    "solutionCode": "mod mech {\n    pub fn deliver_l(x: i32, y: i32) {\n        let c = grab_core();\n        step(x);\n        turn_right();\n        step(y);\n        deliver(c);\n    }\n}\n\nfn main() {\n    mech::deliver_l(3, 2);\n}",
-    "quickChips": [
-      {
-        "label": "mech::deliver_l(3, 2);",
-        "insert": "mech::deliver_l(3, 2);"
-      }
-    ],
-    "hints": [
-      "今は mech::deliver_l(1, 1) を呼んでいるから壁や途中に止まっちゃうよ！",
-      "(0, 1) から東へ3、南へ2進めるよう `mech::deliver_l(3, 2);` に直そう。",
-      "mech::deliver_l(3, 2);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 3
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 2,
-          "label": "配送コア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 3
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "11-8",
-    "id": "139e5770-fd95-505e-8019-e90c224abd63",
-    "index": 168,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-8. use キーワードでパスをスッキリ",
-    "topicTag": "use パス導入",
-    "kurumiIntro": "長いモジュール名も `use kobo::drive;` でショートカットを作ればスッキリ呼び出せるよ！",
-    "goalSummary": "use を使って kobo::drive を呼び出しゴールへ進もう",
-    "bookSectionTitle": "11.4 パスを指し示すための use キーワード",
-    "bookSummary": "`use モジュール::項目;` を書いておくと、それ以降は短い名前だけで呼び出せるようになります。",
-    "bookKeyCode": "use kobo::drive;\ndrive();",
-    "starterCode": "mod kobo {\n    pub fn drive() {\n        step(3);\n    }\n}\n\n// ここに use kobo::drive; を書いてみよう！\n\nfn main() {\n    drive();\n}",
-    "solutionCode": "mod kobo {\n    pub fn drive() {\n        step(3);\n    }\n}\n\nuse kobo::drive;\n\nfn main() {\n    drive();\n}",
-    "quickChips": [
-      {
-        "label": "use kobo::drive;",
-        "insert": "use kobo::drive;\n"
-      }
-    ],
-    "hints": [
-      "mainの中で drive(); を呼んでいるけど、どのモジュールの drive かまだ分からない状態だよ。",
-      "fn main() の上に `use kobo::drive;` を追加しよう！",
-      "use kobo::drive;\n\nfn main() {\n    drive();\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 3
-  },
-  {
-    "displayId": "11-9",
-    "id": "2bb92ccf-f7f1-5c9b-b56c-4cbc9775004a",
-    "index": 169,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-9. 複数の use でショートカット整理",
-    "topicTag": "複数 use インポート",
-    "kurumiIntro": "2つの別々のモジュールからそれぞれ関数を `use` で呼び込んで、スッキリ組み合わせよう！",
-    "goalSummary": "use で charge と go を導入して金庫⚡3＋ゴール (3, 1) へ",
-    "bookSectionTitle": "11.4 慣例的な use パスの書き方",
-    "bookSummary": "よく使う関数やモジュールを先頭で `use` しておけば、コード本体が簡潔になって読みやすくなります。",
-    "bookKeyCode": "use power::charge;\nuse motion::go;",
-    "starterCode": "mod power {\n    pub fn charge() { add_vault(3); }\n}\n\nmod motion {\n    pub fn go() { step(3); }\n}\n\nuse power::charge;\n// motion::go も use で取り込もう！\n\nfn main() {\n    charge();\n    go();\n}",
-    "solutionCode": "mod power {\n    pub fn charge() { add_vault(3); }\n}\n\nmod motion {\n    pub fn go() { step(3); }\n}\n\nuse power::charge;\nuse motion::go;\n\nfn main() {\n    charge();\n    go();\n}",
-    "quickChips": [
-      {
-        "label": "use motion::go;",
-        "insert": "use motion::go;\n"
-      }
-    ],
-    "hints": [
-      "main で go(); を呼んでいるけど、`use motion::go;` がまだ書かれていないよ！",
-      "use power::charge; の次の行に `use motion::go;` を追加しよう！",
-      "use power::charge;\nuse motion::go;"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "11-10",
-    "id": "7273cc50-a9a7-5c71-a468-708caf117875",
-    "index": 170,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "puzzle",
-    "title": "11-10. 専門モジュール分業でコア納品",
-    "topicTag": "複数 mod + use 分業",
-    "kurumiIntro": "「金庫担当 `mod treasury`」と「輸送担当 `mod cargo`」を分けて、それぞれの関数を `use` で組み合わせてコア納品と金庫目標を両方達成しよう！",
-    "goalSummary": "2つのモジュールを呼び出し、金庫⚡4とコア⚡4以上納品を達成",
-    "bookSectionTitle": "11.4 異なるモジュールから機能を集める use",
-    "bookSummary": "役割ごとにモジュールを切り出し、`main` で `use` して流れを組み立てると、設計の見通しがとても良くなります。",
-    "bookKeyCode": "use treasury::store;\nuse cargo::deliver_l;",
-    "starterCode": "mod treasury {\n    pub fn store(v: i32) {\n        add_vault(v);\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nuse treasury::store;\n// cargo::carry も use で取り込もう！\n\nfn main() {\n    store(4);\n    carry();\n}",
-    "solutionCode": "mod treasury {\n    pub fn store(v: i32) {\n        add_vault(v);\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nuse treasury::store;\nuse cargo::carry;\n\nfn main() {\n    store(4);\n    carry();\n}",
-    "quickChips": [
-      {
-        "label": "use cargo::carry;",
-        "insert": "use cargo::carry;\n"
-      }
-    ],
-    "hints": [
-      "main で `carry()` を呼んでいるけれど、まだ `use cargo::carry;` が書かれていないよ！",
-      "use treasury::store; の次の行に `use cargo::carry;` を書き足そう。",
-      "use cargo::carry;"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "分業コア"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "vault": {
-        "x": 0,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "vaultTarget": 4,
-      "requireAllSwitches": true,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "11-11",
-    "id": "0ac079f4-88b5-5189-bdc4-4d3a4e098701",
-    "index": 171,
-    "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "puzzle",
-    "title": "11-11. ベルト制御モジュールと金庫連動",
-    "topicTag": "mod + コンベア時短",
-    "kurumiIntro": "ベルトコンベアに乗って最短ルートを走りつつ、途中の金庫チャージもモジュールの関数から呼んで、7ティック以内の高速配達を決めよう！",
-    "goalSummary": "turbo モジュールを使って金庫⚡4・全スイッチ・7ティック以内ゴールを達成",
-    "bookSectionTitle": "11.3 & 11.4 高速輸送モジュールの切り出し",
-    "bookSummary": "充電と移動のモジュールを整えて呼び出すことで、コンベア区間の最短ステップを正確に走らせます。",
-    "bookKeyCode": "turbo::boost_vault(4);\nturbo::dash();",
-    "starterCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        // コンベア(1,1)が(2,1)スイッチへ運ぶよ。さらに進んで(5,1)へ！\n        step(1);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}",
-    "solutionCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        step(3);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}",
-    "quickChips": [
-      {
-        "label": "step(3);",
-        "insert": "step(3);"
-      }
-    ],
-    "hints": [
-      "(1,1) と (3,1) がどちらも右向きコンベアだよ！",
-      "step(1) で (1,1)→(2,1)スイッチ、step(2) で (3,1)→(4,1)スイッチ、step(3) で (5,1)ゴールに着くよ！",
-      "dash() の中を `step(3);` に直そう！"
+      "t_two_conv は (5, 2) -> 3 を期待しているのに、今は 5 を返しているからテストが落ちているよ！",
+      "net_steps の中を `total_dist - conv_count` にすれば両方のテストに通って 3歩＋コンベア2個で (5, 1) に届くよ！",
+      "total_dist - conv_count"
     ],
     "worldSetup": {
       "width": 6,
@@ -1230,57 +188,40 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "y": 1,
           "dir": 0
         }
-      ],
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "vault": {
-        "x": 0,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      }
+      ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 4,
-      "requireAllSwitches": true,
-      "maxTicks": 7
+      "testsRequired": 2,
+      "maxTicks": 6
     },
-    "parTicks": 5
+    "parTicks": 4
   },
   {
-    "displayId": "11-12",
-    "id": "4e588275-2689-5c3b-adf5-77dad26fd8a3",
-    "index": 172,
+    "displayId": "11-3",
+    "id": "570bc484-898f-5e5f-91d9-3f80f7e43530",
+    "index": 251,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-12. 同じ名前の衝突を避ける親モジュール use",
-    "topicTag": "親モジュール名での区別",
-    "kurumiIntro": "パン屋モジュールにも花屋モジュールにも同じ `send()` という名前の関数があるよ！そんなときは親モジュール名をつけて `bakery::send()` のように呼び分けよう。",
-    "goalSummary": "bakery::send と florist::send を使い分けてゴール (4, 1) へ",
-    "bookSectionTitle": "11.4 同名の型や関数を親モジュールで区別する",
-    "bookSummary": "異なるモジュールに同じ名前の関数があるときは、親モジュール名を残して呼び出すことで名前の衝突を避けられます。",
-    "bookKeyCode": "bakery::send();\nflorist::send();",
-    "starterCode": "mod bakery {\n    pub fn send() {\n        println!(\"BREAD\");\n        step(2);\n    }\n}\n\nmod florist {\n    pub fn send() {\n        println!(\"FLOWER\");\n        step(2);\n    }\n}\n\nfn main() {\n    bakery::send();\n    // 次に florist::send(); を呼んで合計4歩＆両方出力しよう！\n    \n}",
-    "solutionCode": "mod bakery {\n    pub fn send() {\n        println!(\"BREAD\");\n        step(2);\n    }\n}\n\nmod florist {\n    pub fn send() {\n        println!(\"FLOWER\");\n        step(2);\n    }\n}\n\nfn main() {\n    bakery::send();\n    florist::send();\n}",
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-3. テストが落ちた関数のバグを直す",
+    "topicTag": "テスト駆動デバッグ",
+    "kurumiIntro": "テストが「バグがあるよ！」って教えてくれたみたい！`calc_ratio(n)` の計算式を直して、`#[test]` をパスさせてね。",
+    "goalSummary": "calc_ratio を直してテスト合格＋ゴール (4, 1) へ",
+    "bookSectionTitle": "11.1 テスト結果から関数のバグを修正する",
+    "bookSummary": "テストが失敗したときは、テストが期待する仕様に合うように本体関数のロジックを修正します。",
+    "bookKeyCode": "fn calc_ratio(n: i32) -> i32 { n * 2 }",
+    "starterCode": "fn calc_ratio(n: i32) -> i32 {\n    // 2倍にするつもりが +1 になってるよ！\n    n + 1\n}\n\n#[test]\nfn test_ratio() {\n    assert_eq!(calc_ratio(2), 4);\n}\n\nfn main() {\n    step(calc_ratio(2));\n}",
+    "solutionCode": "fn calc_ratio(n: i32) -> i32 {\n    n * 2\n}\n\n#[test]\nfn test_ratio() {\n    assert_eq!(calc_ratio(2), 4);\n}\n\nfn main() {\n    step(calc_ratio(2));\n}",
     "quickChips": [
       {
-        "label": "florist::send();",
-        "insert": "florist::send();"
+        "label": "n * 2",
+        "insert": "n * 2"
       }
     ],
     "hints": [
-      "bakery::send() だけだと 2歩しか進めないし \"FLOWER\" が出力されないよ！",
-      "main の最後に `florist::send();` を書こう。",
-      "bakery::send();\nflorist::send();"
+      "test_ratio は calc_ratio(2) == 4 を期待しているよ！",
+      "calc_ratio の中を `n * 2` に書き換えよう。",
+      "fn calc_ratio(n: i32) -> i32 {\n    n * 2\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1347,39 +288,475 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
-      "stdoutIncludes": [
-        "BREAD",
-        "FLOWER"
-      ]
+      "testsRequired": 1
     },
-    "parTicks": 6
+    "parTicks": 4
   },
   {
-    "displayId": "11-13",
-    "id": "5b6edd0d-a1bc-5c03-8ff9-024a867d04f0",
-    "index": 173,
+    "displayId": "11-4",
+    "id": "5b076c31-42b8-59b9-aabe-7805a786eac2",
+    "index": 252,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "puzzle",
-    "title": "11-13. 同名関数モジュールの衝突回避ナビ",
-    "topicTag": "親モジュール区別::act()",
-    "kurumiIntro": "パン屋モジュールと郵便屋モジュールの両方に `act()` 関数があるよ！同じ名前の関数を使い分けてスイッチ2つと合言葉2つをどちらもクリアしよう！",
-    "goalSummary": "\"BREAD_OK\" と \"POST_OK\" を出力し、全スイッチを踏んで (5, 1) へ",
-    "bookSectionTitle": "11.4 親モジュールを残して名前の衝突を回避",
-    "bookSummary": "`bakery::act()` と `post::act()` のように親モジュールを付けて呼び分けることで、同名の関数を混乱なく使えます。",
-    "bookKeyCode": "bakery::act();\npost::act();",
-    "starterCode": "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    bakery::act();\n    // 次に post::act(); を呼んでスイッチ2とゴール(5, 1)へ！\n}",
-    "solutionCode": "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    bakery::act();\n    post::act();\n}",
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-4. assert! マクロで真偽値条件を検証",
+    "topicTag": "assert! マクロ",
+    "kurumiIntro": "等しいか比べるだけじゃなく、「条件が `true` であること」を確かめたいときは `assert!(条件)` を使うよ！",
+    "goalSummary": "assert! で正のエネルギー判定テストに合格しゴールへ",
+    "bookSectionTitle": "11.1 assert! マクロで結果をチェックする",
+    "bookSummary": "`assert!(式)` は式が `true` なら通過、`false` ならテストを失敗させます。範囲チェックや状態フラグの検証に便利です。",
+    "bookKeyCode": "#[test]\nfn test_valid() { assert!(is_positive(3)); }",
+    "starterCode": "fn is_positive(n: i32) -> bool {\n    n > 0\n}\n\n#[test]\nfn check_pos() {\n    // true になる値（たとえば 3）を渡して assert! を通そう！\n    assert!(is_positive(-1));\n}\n\nfn main() {\n    if is_positive(3) {\n        add_vault(3);\n        step(3);\n    }\n}",
+    "solutionCode": "fn is_positive(n: i32) -> bool {\n    n > 0\n}\n\n#[test]\nfn check_pos() {\n    assert!(is_positive(3));\n}\n\nfn main() {\n    if is_positive(3) {\n        add_vault(3);\n        step(3);\n    }\n}",
     "quickChips": [
       {
-        "label": "post::act();",
-        "insert": "post::act();"
+        "label": "assert!(is_positive(3));",
+        "insert": "assert!(is_positive(3));"
       }
     ],
     "hints": [
-      "bakery::act() は (0,1) から 2歩進んで (2,1) のコンベア? いえ、スイッチ(1,1)を通って(2,1)に着くよ！",
-      "そのあと post::act() を呼べば (4,1) のスイッチを踏みつつゲート(3,1)を抜けて (5,1) に到達するよ！",
-      "post::act();"
+      "check_pos の中で `is_positive(-1)` を呼んでいるから false になってテストが失敗するよ！",
+      "is_positive(3) に変えてみよう。",
+      "assert!(is_positive(3));"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3,
+      "testsRequired": 1
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "11-5",
+    "id": "f7279691-407d-568c-8f17-97b5a23aad9b",
+    "index": 253,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-5. 境界条件を含むテスト追加",
+    "topicTag": "#[test] 追加作成",
+    "kurumiIntro": "今度は君の手で `#[test]` をもう1つ追加してみよう！`max_limit(n)` が上限をちゃんと抑えられるかテストを2つ揃えるんだ。",
+    "goalSummary": "2つの #[test] を合格させ L字ゴール (3, 2) へ進もう",
+    "bookSectionTitle": "11.2 テストの追加と実行",
+    "bookSummary": "正常系だけでなく、上限値を超えるケースなどのテストも並べて書くことで仕様の穴を防げます。",
+    "bookKeyCode": "#[test]\nfn cap_over() { assert_eq!(cap(10), 3); }",
+    "starterCode": "fn cap(n: i32) -> i32 {\n    if n > 3 { 3 } else { n }\n}\n\n#[test]\nfn cap_normal() {\n    assert_eq!(cap(1), 1);\n}\n\n#[test]\nfn cap_over() {\n    // cap(10) は上限 3 になるはず！期待値を 3 に直そう\n    assert_eq!(cap(10), 10);\n}\n\nfn main() {\n    step(cap(9));\n    turn_right();\n    step(cap(1));\n}",
+    "solutionCode": "fn cap(n: i32) -> i32 {\n    if n > 3 { 3 } else { n }\n}\n\n#[test]\nfn cap_normal() {\n    assert_eq!(cap(1), 1);\n}\n\n#[test]\nfn cap_over() {\n    assert_eq!(cap(10), 3);\n}\n\nfn main() {\n    step(cap(9));\n    turn_right();\n    step(cap(1));\n}",
+    "quickChips": [
+      {
+        "label": "assert_eq!(cap(10), 3);",
+        "insert": "assert_eq!(cap(10), 3);"
+      }
+    ],
+    "hints": [
+      "cap(10) を呼ぶと上限 3 に抑えられるから、期待値 10 ではテストが失敗するよ！",
+      "cap_over の中の `assert_eq!(cap(10), 10);` を `assert_eq!(cap(10), 3);` に直そう！",
+      "#[test]\nfn cap_over() {\n    assert_eq!(cap(10), 3);\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 4,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 2
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "testsRequired": 2
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "11-6",
+    "id": "4a4bab84-ce14-50b1-9a7f-d1acadec111a",
+    "index": 254,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "challenge",
+    "title": "11-6. テストを自分で追加してスパーク突破",
+    "topicTag": "#[test] 新規追加チャレンジ",
+    "kurumiIntro": "今はテストが1つしかなくて品質基準（2テスト合格）に足りないよ！境界条件の `#[test]` をもう1つ自分で書き足して、スパークの向こうへ進もう！",
+    "goalSummary": "2つ以上の #[test] 合格＋スパーク回避＋金庫⚡4＋(5, 1)へ",
+    "bookSectionTitle": "11.2 足りないテストケースを自ら補う",
+    "bookSummary": "既存のテストを直すだけでなく、抜けていたケース用の `#[test]` 関数を新規追加してテスト網羅度を引き上げます。",
+    "bookKeyCode": "#[test]\nfn t_clamp_min() { assert_eq!(clamp(1, 4), 4); }",
+    "starterCode": "fn clamp_min(v: i32, min_v: i32) -> i32 {\n    if v < min_v { min_v } else { v }\n}\n\n#[test]\nfn t_normal() {\n    assert_eq!(clamp_min(6, 4), 6);\n}\n\n// ここに 2つ目の #[test] 関数を書こう！例: clamp_min(1, 4) == 4\n\nfn main() {\n    let val = clamp_min(1, 4);\n    add_vault(val);\n    for _ in 0..5 {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}",
+    "solutionCode": "fn clamp_min(v: i32, min_v: i32) -> i32 {\n    if v < min_v { min_v } else { v }\n}\n\n#[test]\nfn t_normal() {\n    assert_eq!(clamp_min(6, 4), 6);\n}\n\n#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}\n\nfn main() {\n    let val = clamp_min(1, 4);\n    add_vault(val);\n    for _ in 0..5 {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}",
+    "quickChips": [
+      {
+        "label": "#[test] fn t_min() { assert_eq!(clamp_min(1, 4), 4); }",
+        "insert": "#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}\n"
+      }
+    ],
+    "hints": [
+      "プログラム自体は正しく動くけれど、テストが1つしか書かれていないよ！",
+      "`#[test]` を付けた2つ目の関数（例：`fn t_min() { assert_eq!(clamp_min(1, 4), 4); }`）を書き足そう！",
+      "#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "vault": {
+        "x": 4,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 2,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4,
+      "testsRequired": 2
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "11-7",
+    "id": "163a23b2-ec90-5f86-a31b-8bc41aa59448",
+    "index": 255,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-7. 複数テストの編成と境界値チェック",
+    "topicTag": "TDD / 複数テスト",
+    "kurumiIntro": "テストは1つだけじゃ足りないよ！`is_safe(n)` 関数を修正し、2つの `#[test]` テストをどちらも合格させて安全ゲートを開こう！",
+    "goalSummary": "2つの #[test] を合格させてゴール (3, 1) へ進もう",
+    "bookSectionTitle": "11.3 テストの編成 — 正常系と境界値",
+    "bookSummary": "複数のテスト関数を用意し、`assert!(条件)` と `assert_eq!` を組み合わせることで、仕様変更やリファクタリング時もバグを即座に発見できます。",
+    "bookKeyCode": "#[test]\nfn ok_case() { assert!(is_safe(3)); }",
+    "starterCode": "fn is_safe(n: i32) -> bool {\n    // 3 以上のとき true になるように直そう！\n    n > 10\n}\n\n#[test]\nfn test_three() {\n    assert!(is_safe(3));\n}\n\n#[test]\nfn test_zero() {\n    assert!(!is_safe(0));\n}\n\nfn main() {\n    if is_safe(3) { step(3); }\n}",
+    "solutionCode": "fn is_safe(n: i32) -> bool {\n    n >= 3\n}\n\n#[test]\nfn test_three() {\n    assert!(is_safe(3));\n}\n\n#[test]\nfn test_zero() {\n    assert!(!is_safe(0));\n}\n\nfn main() {\n    if is_safe(3) { step(3); }\n}",
+    "quickChips": [
+      {
+        "label": "n >= 3",
+        "insert": "n >= 3"
+      }
+    ],
+    "hints": [
+      "今の is_safe(n) は `n > 10` だから test_three が失敗するよ！",
+      "n >= 3 に直すと test_three も test_zero も両方パスするよ。",
+      "fn is_safe(n: i32) -> bool {\n    n >= 3\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "testsRequired": 2
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "11-8",
+    "id": "f904680c-0b52-5074-8b88-fc6ee3f21fdc",
+    "index": 256,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "puzzle",
+    "title": "11-8. ダイヤル計算モジュールの結合テスト",
+    "topicTag": "mod 結合テスト + ダイヤル",
+    "kurumiIntro": "秘密のダイヤル番号を組み立てるモジュール `mod cipher` の公開関数を2つのテストで確かめてから、ダイヤルとスイッチゲートを一気に開こう！",
+    "goalSummary": "2つの #[test] 合格＋ダイヤル(7)解錠＋全スイッチ＋(5, 1)へ",
+    "bookSectionTitle": "11.3 公開モジュールの結合テスト",
+    "bookSummary": "クレートの外側から公開API（`cipher::make_code`）を呼び出すテストで、モジュール同士のつながりを確認します。",
+    "bookKeyCode": "assert_eq!(cipher::make_code(3, 4), 7);",
+    "starterCode": "mod cipher {\n    pub fn make_code(a: i32, b: i32) -> i32 {\n        // a + b を返すよう直そう！（今は a だけ）\n        a\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(cipher::make_code(1, 2), 3); }\n\n#[test]\nfn t2() { assert_eq!(cipher::make_code(3, 4), 7); }\n\nfn main() {\n    let secret = cipher::make_code(3, 4);\n    try_dial(secret);\n    add_vault(secret);\n    step(5);\n}",
+    "solutionCode": "mod cipher {\n    pub fn make_code(a: i32, b: i32) -> i32 {\n        a + b\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(cipher::make_code(1, 2), 3); }\n\n#[test]\nfn t2() { assert_eq!(cipher::make_code(3, 4), 7); }\n\nfn main() {\n    let secret = cipher::make_code(3, 4);\n    try_dial(secret);\n    add_vault(secret);\n    step(5);\n}",
+    "quickChips": [
+      {
+        "label": "a + b",
+        "insert": "a + b"
+      }
+    ],
+    "hints": [
+      "cipher::make_code が a しか返していないためテストが失敗しているよ！",
+      "a + b に書き換えれば 3 + 4 = 7 でダイヤルも金庫⚡7も一発解錠！",
+      "pub fn make_code(a: i32, b: i32) -> i32 {\n    a + b\n}"
     ],
     "worldSetup": {
       "width": 6,
@@ -1443,13 +820,12 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 1
       },
+      "dial": {
+        "secret": 7
+      },
       "switches": [
         {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 4,
+          "x": 2,
           "y": 1
         }
       ],
@@ -1460,50 +836,150 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "openTicks": 1,
           "closedTicks": 1,
           "linkedSwitch": {
-            "x": 1,
+            "x": 2,
             "y": 1
           }
         }
-      ]
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 7
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "stdoutIncludes": [
-        "BREAD_OK",
-        "POST_OK"
-      ],
+      "dialSolved": true,
+      "vaultTarget": 7,
+      "testsRequired": 2,
       "requireAllSwitches": true
     },
     "parTicks": 8
   },
   {
-    "displayId": "11-14",
-    "id": "42360a9a-65e1-5548-b488-2805d64d5ed5",
-    "index": 174,
+    "displayId": "11-9",
+    "id": "6cdfbfb3-0af5-52c3-b817-05dbbbc623e5",
+    "index": 257,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "title": "11-14. 第11章まとめ：use とゲート制御モジュール",
-    "topicTag": "第11章 総合実践",
-    "kurumiIntro": "第11章の総仕上げ！工房の安全モジュール `safety` から `cross_gate` を `use` で取り込んで、2つの蒸気ゲートを越えた先のL字ゴールへ着こう！",
-    "goalSummary": "use safety::cross_gate; でゲート2つを越えて (4, 3) へ",
-    "bookSectionTitle": "第11章まとめ — mod・pub・use による整理",
-    "bookSummary": "適切なモジュール分割と `pub` / `use` によって、見通しのよいRustプロジェクト構造を保てます。",
-    "bookKeyCode": "use safety::cross_gate;\ncross_gate();",
-    "starterCode": "mod safety {\n    pub fn cross_gate() {\n        if !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}\n\n// use safety::cross_gate; を書いて、main を完成させよう！\n\nfn main() {\n    for _ in 0..4 {\n        cross_gate();\n    }\n    turn_right();\n    step(2);\n}",
-    "solutionCode": "mod safety {\n    pub fn cross_gate() {\n        if !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}\n\nuse safety::cross_gate;\n\nfn main() {\n    for _ in 0..4 {\n        cross_gate();\n    }\n    turn_right();\n    step(2);\n}",
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-9. 3つのテストケースで計算式を固める",
+    "topicTag": "単体テスト3種",
+    "kurumiIntro": "テストが3つ用意されているよ！`gear_power(base, mul)` が「ゼロの時」「通常の時」「大きい時」の全部に合格するよう実装を完成させてね。",
+    "goalSummary": "3つの #[test] を全合格させて金庫⚡6＋ゴール (3, 1) へ",
+    "bookSectionTitle": "11.3 複数のテストケースを揃える",
+    "bookSummary": "0倍や上限など性質の異なるテストケースを3つ以上並べることで、仕様変更で壊れにくい頑丈な関数になります。",
+    "bookKeyCode": "fn gear_power(b: i32, m: i32) -> i32 { b * m }",
+    "starterCode": "fn gear_power(base: i32, mul: i32) -> i32 {\n    // base * mul を返すように直そう！\n    base + mul\n}\n\n#[test]\nfn test_zero() { assert_eq!(gear_power(0, 5), 0); }\n\n#[test]\nfn test_one() { assert_eq!(gear_power(2, 1), 2); }\n\n#[test]\nfn test_double() { assert_eq!(gear_power(2, 3), 6); }\n\nfn main() {\n    add_vault(gear_power(2, 3));\n    step(3);\n}",
+    "solutionCode": "fn gear_power(base: i32, mul: i32) -> i32 {\n    base * mul\n}\n\n#[test]\nfn test_zero() { assert_eq!(gear_power(0, 5), 0); }\n\n#[test]\nfn test_one() { assert_eq!(gear_power(2, 1), 2); }\n\n#[test]\nfn test_double() { assert_eq!(gear_power(2, 3), 6); }\n\nfn main() {\n    add_vault(gear_power(2, 3));\n    step(3);\n}",
     "quickChips": [
       {
-        "label": "use safety::cross_gate;",
-        "insert": "use safety::cross_gate;\n"
+        "label": "base * mul",
+        "insert": "base * mul"
       }
     ],
     "hints": [
-      "main の中ではもう cross_gate() を呼ぶループができているよ！",
-      "fn main() の前に `use safety::cross_gate;` を1行書けばOK！",
-      "use safety::cross_gate;"
+      "今は `base + mul` になっているから 3つのテストが全部落ちているよ！",
+      "`base * mul` に直すと一発で3つ全部グリーンになるよ！",
+      "fn gear_power(base: i32, mul: i32) -> i32 {\n    base * mul\n}"
     ],
     "worldSetup": {
-      "width": 6,
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 6,
+      "testsRequired": 3
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "11-10",
+    "id": "ba9a9ab0-13b7-56aa-888e-5528cf88b85f",
+    "index": 258,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "puzzle",
+    "title": "11-10. ルート長テストとL字スイッチ迷路",
+    "topicTag": "Vec 集計テスト + L字迷路",
+    "kurumiIntro": "配列の合計を求める `sum_legs(v: Vec<i32>)` 関数を3つのテストで鍛えてから、そのL字ルートを実際に歩いてスイッチを踏もう！",
+    "goalSummary": "3つのテスト合格＋全スイッチ＋金庫⚡5＋ゴール (3, 3) へ",
+    "bookSectionTitle": "11.3 コレクション入力の単体テスト",
+    "bookSummary": "空配列・1要素・複数要素の3パターンを `#[test]` で検証し、コレクションを扱う関数のバグを防ぎます。",
+    "bookKeyCode": "#[test] fn t_empty() { assert_eq!(sum_legs(vec![]), 0); }",
+    "starterCode": "fn sum_legs(legs: Vec<i32>) -> i32 {\n    let mut s = 0;\n    for x in legs {\n        // s += x に直そう！今は 1 しか足せてないよ\n        s += 1;\n    }\n    s\n}\n\n#[test]\nfn t_empty() { assert_eq!(sum_legs(vec![]), 0); }\n\n#[test]\nfn t_one() { assert_eq!(sum_legs(vec![4]), 4); }\n\n#[test]\nfn t_pair() { assert_eq!(sum_legs(vec![3, 2]), 5); }\n\nfn main() {\n    let total = sum_legs(vec![3, 2]);\n    add_vault(total);\n    step(3);\n    turn_right();\n    step(2);\n}",
+    "solutionCode": "fn sum_legs(legs: Vec<i32>) -> i32 {\n    let mut s = 0;\n    for x in legs {\n        s += x;\n    }\n    s\n}\n\n#[test]\nfn t_empty() { assert_eq!(sum_legs(vec![]), 0); }\n\n#[test]\nfn t_one() { assert_eq!(sum_legs(vec![4]), 4); }\n\n#[test]\nfn t_pair() { assert_eq!(sum_legs(vec![3, 2]), 5); }\n\nfn main() {\n    let total = sum_legs(vec![3, 2]);\n    add_vault(total);\n    step(3);\n    turn_right();\n    step(2);\n}",
+    "quickChips": [
+      {
+        "label": "s += x;",
+        "insert": "s += x;"
+      }
+    ],
+    "hints": [
+      "for ループの中が `s += 1;` になっているから要素の値を正しく足せていないよ！",
+      "`s += x;` に直せば3つのテストすべて合格＋金庫⚡5が貯まるよ！",
+      "for x in legs {\n    s += x;\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
       "height": 5,
       "walls": [
         {
@@ -1527,10 +1003,6 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
-          "x": 5,
-          "y": 0
-        },
-        {
           "x": 0,
           "y": 2
         },
@@ -1543,19 +1015,15 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 5,
+          "x": 4,
           "y": 1
         },
         {
-          "x": 5,
+          "x": 4,
           "y": 2
         },
         {
-          "x": 5,
+          "x": 4,
           "y": 3
         }
       ],
@@ -1565,64 +1033,71 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 4,
+        "x": 3,
         "y": 3
       },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
       "gates": [
         {
-          "x": 1,
-          "y": 1,
-          "openTicks": 2,
-          "closedTicks": 2,
-          "initialOffset": 2
-        },
-        {
           "x": 3,
-          "y": 1,
-          "openTicks": 2,
-          "closedTicks": 2,
-          "initialOffset": 0
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
         }
-      ]
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
     },
     "victoryCondition": {
-      "reachGoal": true
+      "reachGoal": true,
+      "vaultTarget": 5,
+      "testsRequired": 3,
+      "requireAllSwitches": true
     },
     "parTicks": 8
   },
   {
-    "displayId": "11-15",
-    "id": "33c3ce56-0349-55bc-8a50-c15e47c87e4d",
-    "index": 175,
+    "displayId": "11-11",
+    "id": "0b91ddc0-b6f7-5e13-912f-333b7f29bdb1",
+    "index": 259,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "challenge",
-    "title": "11-15. モジュール・パイプラインで全工程走破",
-    "topicTag": "3モジュール連携チャレンジ",
-    "kurumiIntro": "「合言葉・金庫 `mod auth`」「コア操作 `mod core_ops`」「移動制御 `mod pilot`」の3モジュールを統合して、スパークとスイッチを越えよう！",
-    "goalSummary": "3モジュール連携で \"MODULE_CLEAR\"・金庫⚡5・コア⚡5+納品・ゴールへ",
-    "bookSectionTitle": "11.4 複数サブシステムの連携",
-    "bookSummary": "責務を明確に分けた3つのモジュールを `use` で呼び込み、安全確実にゴールまでのパイプラインを構築します。",
-    "bookKeyCode": "auth::verify(); pilot::move_safe(2);",
-    "starterCode": "mod auth {\n    pub fn verify() {\n        println!(\"MODULE_CLEAR\");\n        add_vault(5);\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        // コア(1,1)→検査(2,1)→強化(3,1)\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        while is_spark_ahead() { wait_tick(1); }\n        step(1);\n    }\n}\n\nfn main() {\n    // auth::verify(), pilot::go_to_core(), core_ops::process() を順に呼ぼう！\n    auth::verify();\n}",
-    "solutionCode": "mod auth {\n    pub fn verify() {\n        println!(\"MODULE_CLEAR\");\n        add_vault(5);\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        while is_spark_ahead() { wait_tick(1); }\n        step(1);\n    }\n}\n\nfn main() {\n    auth::verify();\n    pilot::go_to_core();\n    core_ops::process();\n}",
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "puzzle",
+    "title": "11-11. Result 計算テスト3本勝負",
+    "topicTag": "3テスト合格 + Result",
+    "kurumiIntro": "正の数だけ受け付けて2倍にする安全関数 `double_positive(n) -> Result<i32, String>` を書いて、用意された3つのテスト全部に通そう！",
+    "goalSummary": "3つのテスト（正・0・負）すべて合格して金庫⚡6＋(3, 1)へ",
+    "bookSectionTitle": "11.3 Result 関数の正常・境界・異常テスト",
+    "bookSummary": "正の正常ケース、境界のゼロ、負の異常ケースの3種類をテストすることで関数の品質を保証します。",
+    "bookKeyCode": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }",
+    "starterCode": "fn double_positive(n: i32) -> Result<i32, String> {\n    // n > 0 のとき Ok(n * 2)、0以下は Err(\"無効\") を返そう！\n    Err(\"未完成\")\n}\n\n#[test]\nfn t_pos() { assert_eq!(double_positive(3).unwrap(), 6); }\n\n#[test]\nfn t_zero() { assert_eq!(double_positive(0).unwrap_or(-1), -1); }\n\n#[test]\nfn t_neg() { assert_eq!(double_positive(-2).unwrap_or(-1), -1); }\n\nfn main() {\n    let val = double_positive(3).unwrap_or(0);\n    add_vault(val);\n    step(3);\n}",
+    "solutionCode": "fn double_positive(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n * 2) } else { Err(\"無効\") }\n}\n\n#[test]\nfn t_pos() { assert_eq!(double_positive(3).unwrap(), 6); }\n\n#[test]\nfn t_zero() { assert_eq!(double_positive(0).unwrap_or(-1), -1); }\n\n#[test]\nfn t_neg() { assert_eq!(double_positive(-2).unwrap_or(-1), -1); }\n\nfn main() {\n    let val = double_positive(3).unwrap_or(0);\n    add_vault(val);\n    step(3);\n}",
     "quickChips": [
       {
-        "label": "pilot::go_to_core();",
-        "insert": "pilot::go_to_core();\n    "
-      },
-      {
-        "label": "core_ops::process();",
-        "insert": "core_ops::process();"
+        "label": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }",
+        "insert": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }"
       }
     ],
     "hints": [
-      "auth::verify() で合言葉と金庫⚡5が済むよ。次は (1,1) にあるコアまで `pilot::go_to_core();` で移動しよう！",
-      "その後 `core_ops::process();` を呼ぶと、ピックアップ→検査(2,1)→強化兼スイッチ(3,1)→ゲート通過→納品(5,1)まで一気に完了するよ！",
-      "auth::verify();\npilot::go_to_core();\ncore_ops::process();"
+      "今は double_positive が常に Err(\"未完成\") を返しているため t_pos が落ちているよ！",
+      "if n > 0 { Ok(n * 2) } else { Err(\"無効\") } を書けば3つのテスト全合格＋金庫⚡6達成！",
+      "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }"
     ],
     "worldSetup": {
-      "width": 6,
+      "width": 5,
       "height": 3,
       "walls": [
         {
@@ -1646,7 +1121,98 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
-          "x": 5,
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 6,
+      "testsRequired": 3
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "11-12",
+    "id": "35e89f94-e94e-5719-a257-93db17b70a38",
+    "index": 260,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "challenge",
+    "title": "11-12. モジュール結合テスト＋コア納品チャレンジ",
+    "topicTag": "3テスト + コア空間納品",
+    "kurumiIntro": "公開モジュール `mod core_calc` に書かれたパワー強化式を直して3つのテストに全部合格し、実際の現場でも検査・強化・納品を成し遂げよう！",
+    "goalSummary": "3テスト合格・金庫⚡5・コア⚡5+納品（空間ルール）を達成",
+    "bookSectionTitle": "11.3 リファクタリングしてもテストが守ってくれる安心感",
+    "bookSummary": "ロジックと現場の操作をつなぐ計算部分をテストで固めることで、自信を持って複雑な手順を走らせられます。",
+    "bookKeyCode": "pub fn boost_calc(p: i32) -> i32 { p + 2 }",
+    "starterCode": "mod core_calc {\n    pub fn boost_calc(p: i32) -> i32 {\n        // +2 するはずが +1 になってるよ！\n        p + 1\n    }\n}\n\n#[test]\nfn t_base1() { assert_eq!(core_calc::boost_calc(1), 3); }\n\n#[test]\nfn t_base3() { assert_eq!(core_calc::boost_calc(3), 5); }\n\n#[test]\nfn t_zero() { assert!(core_calc::boost_calc(0) == 2); }\n\nfn main() {\n    let target = core_calc::boost_calc(3);\n    add_vault(target);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
+    "solutionCode": "mod core_calc {\n    pub fn boost_calc(p: i32) -> i32 {\n        p + 2\n    }\n}\n\n#[test]\nfn t_base1() { assert_eq!(core_calc::boost_calc(1), 3); }\n\n#[test]\nfn t_base3() { assert_eq!(core_calc::boost_calc(3), 5); }\n\n#[test]\nfn t_zero() { assert!(core_calc::boost_calc(0) == 2); }\n\nfn main() {\n    let target = core_calc::boost_calc(3);\n    add_vault(target);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
+    "quickChips": [
+      {
+        "label": "p + 2",
+        "insert": "p + 2"
+      }
+    ],
+    "hints": [
+      "core_calc::boost_calc の中が `p + 1` のままだと 3つのテスト全部が落ちちゃうよ！",
+      "`p + 2` に直すだけで 3テスト全合格＋金庫⚡5＋コア納品が一気に成功するよ！",
+      "pub fn boost_calc(p: i32) -> i32 {\n    p + 2\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
           "y": 0
         },
         {
@@ -1668,10 +1234,6 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
         {
           "x": 4,
           "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
         }
       ],
       "botStart": {
@@ -1680,7 +1242,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 5,
+        "x": 4,
         "y": 1
       },
       "cores": [
@@ -1689,7 +1251,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "x": 1,
           "y": 1,
           "power": 3,
-          "label": "モジュールコア"
+          "label": "テストコア"
         }
       ],
       "scanners": [
@@ -1704,27 +1266,9 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "y": 1
         }
       ],
-      "switches": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 3,
-            "y": 1
-          }
-        }
-      ],
       "deliveries": [
         {
-          "x": 5,
+          "x": 4,
           "y": 1
         }
       ],
@@ -1741,56 +1285,41 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
       "minCorePower": 5,
       "scanCount": 1,
       "vaultTarget": 5,
-      "stdoutIncludes": [
-        "MODULE_CLEAR"
-      ],
-      "requireAllSwitches": true,
+      "testsRequired": 3,
       "requireSpatialCoreRules": true
     },
-    "parTicks": 12
+    "parTicks": 10
   },
   {
-    "displayId": "11-16",
-    "id": "d56b1292-ec0c-50a3-a42d-d1f5b4340960",
-    "index": 176,
+    "displayId": "11-13",
+    "id": "b4812899-7dd0-58bb-9d34-f53ab5d04515",
+    "index": 261,
     "chapter": 11,
-    "chapterTitle": "第11章 モジュールとパス",
-    "stageKind": "challenge",
-    "title": "11-16. 第11章挑戦：工房アーキテクチャ総合迷宮",
-    "topicTag": "第11章 最終チャレンジ",
-    "kurumiIntro": "第11章の集大成！階層モジュール `factory::nav` と `factory::vault` を整理して公開し、2つのスイッチ・周期ゲート・巡回スパークの迷宮を抜け出そう！",
-    "goalSummary": "階層モジュールを公開利用し、金庫⚡6・全スイッチ・ゴール (5, 3) へ",
-    "bookSectionTitle": "第11章まとめ — モジュール分割と可視性設計の極意",
-    "bookSummary": "複雑なロボットの制御システムも、適切なモジュール階層と `pub` / `use` の境界設計によりすっきり見通せるようになります。",
-    "bookKeyCode": "use factory::nav::step_safe;",
-    "starterCode": "mod factory {\n    pub mod vault {\n        pub fn fill() { add_vault(6); }\n    }\n    pub mod nav {\n        // pub を付けて公開しよう！\n        fn step_safe(n: i32) {\n            for _ in 0..n {\n                while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                step();\n            }\n        }\n    }\n}\n\nuse factory::vault::fill;\nuse factory::nav::step_safe;\n\nfn main() {\n    fill();\n    step_safe(3);\n}",
-    "solutionCode": "mod factory {\n    pub mod vault {\n        pub fn fill() { add_vault(6); }\n    }\n    pub mod nav {\n        pub fn step_safe(n: i32) {\n            for _ in 0..n {\n                while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                step();\n            }\n        }\n    }\n}\n\nuse factory::vault::fill;\nuse factory::nav::step_safe;\n\nfn main() {\n    fill();\n    step_safe(5);\n    turn_right();\n    step_safe(2);\n}",
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "puzzle",
+    "title": "11-13. 金庫目標チェックと assert! テスト",
+    "topicTag": "assert! + コア検証",
+    "kurumiIntro": "コアの目標パワーに達しているか確かめる関数 `can_deliver(p)` を実装して、テスト2つに合格してから現場のコア強化＆納品をこなそう！",
+    "goalSummary": "2テスト合格＋コア⚡4以上を検査・強化して納品しよう",
+    "bookSectionTitle": "11.1 & 11.3 条件判定と空間ルールの一致",
+    "bookSummary": "プログラム上の検査関数と実際の現場ルールを一致させることで、出荷前のミスをゼロにできます。",
+    "bookKeyCode": "assert!(can_deliver(4));",
+    "starterCode": "fn can_deliver(power: i32) -> bool {\n    // パワー 4 以上で true になるよう直そう！\n    power >= 99\n}\n\n#[test]\nfn t_ok() { assert!(can_deliver(4)); }\n\n#[test]\nfn t_low() { assert!(!can_deliver(2)); }\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    if can_deliver(core_power()) {\n        step(1);\n        deliver(c);\n    }\n}",
+    "solutionCode": "fn can_deliver(power: i32) -> bool {\n    power >= 4\n}\n\n#[test]\nfn t_ok() { assert!(can_deliver(4)); }\n\n#[test]\nfn t_low() { assert!(!can_deliver(2)); }\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    if can_deliver(core_power()) {\n        step(1);\n        deliver(c);\n    }\n}",
     "quickChips": [
       {
-        "label": "pub fn step_safe(n: i32)",
-        "insert": "pub fn step_safe(n: i32)"
-      },
-      {
-        "label": "step_safe(5);",
-        "insert": "step_safe(5);\n    "
-      },
-      {
-        "label": "turn_right();",
-        "insert": "turn_right();\n    "
-      },
-      {
-        "label": "step_safe(2);",
-        "insert": "step_safe(2);"
+        "label": "power >= 4",
+        "insert": "power >= 4"
       }
     ],
     "hints": [
-      "まずは `fn step_safe` に `pub` を付けて呼び出せるようにしよう！",
-      "上の廊下にはスイッチ (1,1)・スパーク (2,1)・スイッチ (4,1) があるよ。`step_safe(5);` で (5,1) の角まで一気に進もう！",
-      "そこから `turn_right(); step_safe(2);` で下のゲート (5,2) を越えて (5,3) のゴールへ到着するよ！"
+      "t_ok は can_deliver(4) == true を期待しているよ！",
+      "can_deliver の中身を `power >= 4` に直せば 2つのテストに合格して納品まで自動実行されるよ！",
+      "power >= 4"
     ],
     "worldSetup": {
-      "width": 6,
-      "height": 5,
+      "width": 5,
+      "height": 3,
       "walls": [
         {
           "x": 0,
@@ -1798,6 +1327,128 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
         },
         {
           "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "試験コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "testsRequired": 2,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 9
+  },
+  {
+    "displayId": "11-14",
+    "id": "ae5f34d9-8b3d-5240-b03b-053ab713166e",
+    "index": 262,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-14. Result を返す関数をテストする",
+    "topicTag": "Result のテスト",
+    "kurumiIntro": "エラーを返す可能性がある関数 `parse_code(n)` もテストできるよ！`match` を使って `Ok` のときと `Err` のときをそれぞれテストしよう。",
+    "goalSummary": "Okケースと Errケースの2テストを合格させゴールへ",
+    "bookSectionTitle": "11.1 & 11.3 Result の単体テスト",
+    "bookSummary": "エラーになるべき入力を与えてちゃんと `Err` が返ることをテストする「異常系テスト」も、高品質なソフトウェアには欠かせません。",
+    "bookKeyCode": "match parse_code(3) { Ok(v) => assert_eq!(v, 3), Err(_) => panic!() }",
+    "starterCode": "fn parse_code(n: i32) -> Result<i32, String> {\n    // n > 0 のとき Ok(n)、それ以外は Err(\"負の値はNG\") にしよう！\n    Err(\"未実装\")\n}\n\n#[test]\nfn test_ok() {\n    assert_eq!(parse_code(4).unwrap(), 4);\n}\n\n#[test]\nfn test_err() {\n    let fallback = parse_code(-1).unwrap_or(99);\n    assert_eq!(fallback, 99);\n}\n\nfn main() {\n    step(parse_code(4).unwrap_or(1));\n}",
+    "solutionCode": "fn parse_code(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"負の値はNG\") }\n}\n\n#[test]\nfn test_ok() {\n    assert_eq!(parse_code(4).unwrap(), 4);\n}\n\n#[test]\nfn test_err() {\n    let fallback = parse_code(-1).unwrap_or(99);\n    assert_eq!(fallback, 99);\n}\n\nfn main() {\n    step(parse_code(4).unwrap_or(1));\n}",
+    "quickChips": [
+      {
+        "label": "if n > 0 { Ok(n) } else { Err(\"負\") }",
+        "insert": "if n > 0 { Ok(n) } else { Err(\"負の値はNG\") }"
+      }
+    ],
+    "hints": [
+      "test_ok では 4 を渡したときに Ok(4) が返ってきてほしいよ。",
+      "if n > 0 { Ok(n) } else { Err(\"負の値はNG\") } を書こう！",
+      "fn parse_code(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"負の値はNG\") }\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
           "y": 0
         },
         {
@@ -1821,7 +1472,219 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
+          "x": 2,
+          "y": 2
+        },
+        {
           "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "testsRequired": 2
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "11-15",
+    "id": "9dc94aec-ccf0-5432-8846-c0c15b87b666",
+    "index": 263,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "title": "11-15. 第11章まとめ：結合テスト付きスイッチ突破",
+    "topicTag": "第11章 総合実践",
+    "kurumiIntro": "第11章の総仕上げ！公開モジュール `mod calc` の関数を呼び出す結合テスト（2つ）をパスさせてから、スイッチ連動ゲートを越えてゴールしよう！",
+    "goalSummary": "2つの #[test] を合格させ、金庫⚡4＋スイッチ突破でゴールへ",
+    "bookSectionTitle": "第11章まとめ — 単体テストと結合テスト",
+    "bookSummary": "モジュールの公開APIを通したテスト（結合テスト）と内部ロジックのテストを組み合わせれば、自信を持ってロボットを出荷できます。",
+    "bookKeyCode": "#[test]\nfn integration() { assert_eq!(calc::total(2, 2), 4); }",
+    "starterCode": "mod calc {\n    pub fn total(a: i32, b: i32) -> i32 {\n        // a + b を返すように直そう！\n        a\n    }\n}\n\n#[test]\nfn t_one() { assert_eq!(calc::total(1, 2), 3); }\n\n#[test]\nfn t_two() { assert_eq!(calc::total(2, 2), 4); }\n\nfn main() {\n    let dist = calc::total(2, 2);\n    add_vault(dist);\n    step(dist);\n}",
+    "solutionCode": "mod calc {\n    pub fn total(a: i32, b: i32) -> i32 {\n        a + b\n    }\n}\n\n#[test]\nfn t_one() { assert_eq!(calc::total(1, 2), 3); }\n\n#[test]\nfn t_two() { assert_eq!(calc::total(2, 2), 4); }\n\nfn main() {\n    let dist = calc::total(2, 2);\n    add_vault(dist);\n    step(dist);\n}",
+    "quickChips": [
+      {
+        "label": "a + b",
+        "insert": "a + b"
+      }
+    ],
+    "hints": [
+      "calc::total が a しか返していないから t_one と t_two の両方が落ちているよ！",
+      "calc::total の中を `a + b` に直そう。",
+      "pub fn total(a: i32, b: i32) -> i32 {\n    a + b\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4,
+      "testsRequired": 2
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "11-16",
+    "id": "d50a425c-2aac-553f-a6c3-87f3bfa09626",
+    "index": 264,
+    "chapter": 11,
+    "chapterTitle": "第11章 自動テストを書く",
+    "stageKind": "challenge",
+    "title": "11-16. 第11章挑戦：完全品質保証の迷宮突破",
+    "topicTag": "第11章 最終チャレンジ",
+    "kurumiIntro": "第11章の最終チャレンジ！設計モジュール `mod spec` の計算バグを直して3つの結合テストに合格したら、2スイッチ・スパーク・ゲート・金庫⚡6の迷宮を駆け抜けよう！",
+    "goalSummary": "3テスト合格＋\"TEST_PASS\"＋金庫⚡6・全スイッチ・(5, 3) へ",
+    "bookSectionTitle": "第11章まとめ — テストに裏打ちされた安心の発進",
+    "bookSummary": "3つ以上の単体・結合テストで検証された計算モジュールを使い、障害物だらけのコースを確実に突破します。",
+    "bookKeyCode": "#[test] × 3 + 迷宮攻略",
+    "starterCode": "mod spec {\n    pub fn energy(a: i32, b: i32) -> i32 {\n        // (a + b) * 2 に直そう！今は a + b だよ\n        a + b\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(spec::energy(1, 2), 6); }\n\n#[test]\nfn t2() { assert_eq!(spec::energy(0, 3), 6); }\n\n#[test]\nfn t3() { assert!(spec::energy(2, 2) == 8); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let e = spec::energy(1, 2);\n    add_vault(e);\n    println!(\"TEST_PASS\");\n    safe_go(5);\n    turn_right();\n    safe_go(2);\n}",
+    "solutionCode": "mod spec {\n    pub fn energy(a: i32, b: i32) -> i32 {\n        (a + b) * 2\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(spec::energy(1, 2), 6); }\n\n#[test]\nfn t2() { assert_eq!(spec::energy(0, 3), 6); }\n\n#[test]\nfn t3() { assert!(spec::energy(2, 2) == 8); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let e = spec::energy(1, 2);\n    add_vault(e);\n    println!(\"TEST_PASS\");\n    safe_go(5);\n    turn_right();\n    safe_go(2);\n}",
+    "quickChips": [
+      {
+        "label": "(a + b) * 2",
+        "insert": "(a + b) * 2"
+      }
+    ],
+    "hints": [
+      "t1 は energy(1, 2) == 6、t3 は energy(2, 2) == 8 を期待しているよ！",
+      "spec::energy の中身を `(a + b) * 2` に直せば、テスト3つ全合格＆金庫⚡6でゴールまで一気に進めるよ！",
+      "pub fn energy(a: i32, b: i32) -> i32 {\n    (a + b) * 2\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
           "y": 2
         },
         {
@@ -1915,19 +1778,27 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
           "id": "sp1",
           "path": [
             {
-              "x": 2,
+              "x": 3,
               "y": 0
             },
             {
-              "x": 2,
+              "x": 3,
               "y": 1
             },
             {
-              "x": 2,
+              "x": 3,
               "y": 2
             },
             {
-              "x": 2,
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
               "y": 1
             }
           ],
@@ -1938,10 +1809,12 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "victoryCondition": {
       "reachGoal": true,
       "vaultTarget": 6,
+      "testsRequired": 3,
+      "stdoutIncludes": [
+        "TEST_PASS"
+      ],
       "requireAllSwitches": true
     },
-    "parTicks": 12
+    "parTicks": 13
   }
 ];
-
-

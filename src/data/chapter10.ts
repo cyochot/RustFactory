@@ -3,29 +3,33 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_10_STAGES: StageDefinition[] = [
   {
     "displayId": "10-1",
-    "id": "1395d0fb-100f-5691-bb36-d711fd1986a4",
-    "index": 137,
+    "id": "814eb34c-a41c-5c6b-8eea-651e248a469b",
+    "index": 225,
     "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-1. enum とデータ付きバリアント",
-    "topicTag": "enum 列挙型",
-    "kurumiIntro": "「右へ曲がる」や「2歩進む」みたいなコマンドの種類を `enum` で表現しよう！データ付きのバリアントも作れるんだよ。",
-    "goalSummary": "enum Command::Move(3) を使ってゴール (3, 1) へ進もう",
-    "bookSectionTitle": "10.1 enum を定義する",
-    "bookSummary": "`enum` は「いくつかの決まった選択肢のどれか1つ」を表します。さらに `Move(i32)` のように、選択肢ごとにデータを持たせることもできる強力な仕組みです。",
-    "bookKeyCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}",
-    "starterCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    let c = Command::Move(1);\n    run_cmd(c);\n}",
-    "solutionCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    let c = Command::Move(3);\n    run_cmd(c);\n}",
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-1. ジェネリック型 <T> で共通部品化",
+    "topicTag": "ジェネリクス <T>",
+    "kurumiIntro": "どんな型でも受け取れる万能ホルダー `<T>` を作ろう！同じ仕組みを何度も書き直す手間がなくなるよ。",
+    "goalSummary": "ジェネリック関数 pass_through<T> を使ってゴール (3, 1) へ",
+    "bookSectionTitle": "10.1 ジェネリックなデータ型",
+    "bookSummary": "`fn 名前<T>(x: T) -> T` のように `<T>` を使うと、具体的な型を決めずに共通のロジックを書くことができます。",
+    "bookKeyCode": "fn pass_through<T>(item: T) -> T {\n    item\n}",
+    "starterCode": "fn pass_through<T>(item: T) -> T {\n    item\n}\n\nfn main() {\n    let steps = pass_through(3);\n    let core = pass_through(grab_core());\n    // steps 歩進んで core を届けよう！\n    \n}",
+    "solutionCode": "fn pass_through<T>(item: T) -> T {\n    item\n}\n\nfn main() {\n    let steps = pass_through(3);\n    let core = pass_through(grab_core());\n    step(steps);\n    deliver(core);\n}",
     "quickChips": [
       {
-        "label": "Command::Move(3)",
-        "insert": "Command::Move(3)"
+        "label": "step(steps);",
+        "insert": "step(steps);\n    "
+      },
+      {
+        "label": "deliver(core);",
+        "insert": "deliver(core);\n    "
       }
     ],
     "hints": [
-      "main関数の中で渡している Command::Move(1) を変更してみよう！",
-      "Command::Move(3) にすると 3歩進んでゴールに着くよ。",
-      "let c = Command::Move(3);\nrun_cmd(c);"
+      "pass_through は i32 も EnergyCore も同じ関数でそのまま通せるよ！",
+      "step(steps); のあとに deliver(core); を書こう。",
+      "step(steps);\ndeliver(core);"
     ],
     "worldSetup": {
       "width": 5,
@@ -80,42 +84,58 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
       "goal": {
         "x": 3,
         "y": 1
-      }
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 0,
+          "y": 1,
+          "power": 2,
+          "label": "汎用コア"
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ]
     },
     "victoryCondition": {
-      "reachGoal": true
+      "reachGoal": true,
+      "deliverCores": 1
     },
-    "parTicks": 3
+    "parTicks": 5
   },
   {
     "displayId": "10-2",
-    "id": "5cec4f53-25c5-5d1a-9e73-5237c34fab1b",
-    "index": 138,
+    "id": "a9910c82-84a5-5e5e-abcf-75706a78d6eb",
+    "index": 226,
     "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-2. 複数バリアントのコマンド列でL字攻略",
-    "topicTag": "enum コマンド列",
-    "kurumiIntro": "今度は `Move` だけじゃなく `TurnRight` と `TurnLeft` も並べて、リストにまとめた `enum` コマンド列を実行してみよう！",
-    "goalSummary": "enum Command の配列を実行してゴール (3, 3) へ",
-    "bookSectionTitle": "10.1 異なるデータを1つの配列にまとめる enum",
-    "bookSummary": "配列は同じ型しか入れられませんが、`enum` で包めば「歩数付き移動」と「回転」を1つの `vec!` リストに並べて順番に実行できます。",
-    "bookKeyCode": "let cmds = vec![Command::Move(3), Command::TurnRight];",
-    "starterCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn main() {\n    let cmds = vec![\n        Command::Move(3),\n        Command::TurnRight,\n        // 下へ2歩進むコマンドを追加しよう！\n        \n    ];\n    for c in cmds {\n        match c {\n            Command::Move(n) => step(n),\n            Command::TurnRight => turn_right(),\n        }\n    }\n}",
-    "solutionCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn main() {\n    let cmds = vec![\n        Command::Move(3),\n        Command::TurnRight,\n        Command::Move(2),\n    ];\n    for c in cmds {\n        match c {\n            Command::Move(n) => step(n),\n            Command::TurnRight => turn_right(),\n        }\n    }\n}",
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-2. ジェネリック構造体 Pair<T>",
+    "topicTag": "struct Pair<T>",
+    "kurumiIntro": "構造体の定義にも `<T>` を使えるよ！縦と横の歩数でも、2つのエネルギーでも入れられる汎用コンテナ `Pair<T>` を使ってみよう。",
+    "goalSummary": "Pair<T> の first, second を使って L字ゴール (3, 2) へ",
+    "bookSectionTitle": "10.1 構造体定義でのジェネリクス",
+    "bookSummary": "`struct Pair<T> { first: T, second: T }` のように書くと、任意の型 `T` を2つ保持する柔軟な構造体を作れます。",
+    "bookKeyCode": "struct Pair<T> { first: T, second: T }",
+    "starterCode": "struct Pair<T> {\n    first: T,\n    second: T,\n}\n\nfn main() {\n    let p = Pair { first: 3, second: 1 };\n    step(p.first);\n    turn_right();\n    // あと p.second 歩だけ進もう！\n    \n}",
+    "solutionCode": "struct Pair<T> {\n    first: T,\n    second: T,\n}\n\nfn main() {\n    let p = Pair { first: 3, second: 1 };\n    step(p.first);\n    turn_right();\n    step(p.second);\n}",
     "quickChips": [
       {
-        "label": "Command::Move(2),",
-        "insert": "Command::Move(2),"
+        "label": "step(p.second);",
+        "insert": "step(p.second);"
       }
     ],
     "hints": [
-      "東に3歩 → 右折（南向き）まで書かれているよ。あと2歩進めば (3, 3) のゴールだね！",
-      "cmds の最後に `Command::Move(2),` を書き足そう。",
-      "Command::Move(3),\nCommand::TurnRight,\nCommand::Move(2),"
+      "p.first は 3、p.second は 1 だよ。",
+      "turn_right(); のあとに step(p.second); を書こう！",
+      "step(p.first);\nturn_right();\nstep(p.second);"
     ],
     "worldSetup": {
       "width": 5,
-      "height": 5,
+      "height": 4,
       "walls": [
         {
           "x": 0,
@@ -156,10 +176,6 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
         {
           "x": 4,
           "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
         }
       ],
       "botStart": {
@@ -169,2407 +185,40 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
       },
       "goal": {
         "x": 3,
-        "y": 3
+        "y": 2
       }
     },
     "victoryCondition": {
       "reachGoal": true
     },
-    "parTicks": 6
+    "parTicks": 5
   },
   {
     "displayId": "10-3",
-    "id": "34266106-3321-5c2d-9168-172c91df8523",
-    "index": 139,
+    "id": "8b3d8b50-360b-5151-aed0-ad7cc476ab70",
+    "index": 227,
     "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
     "stageKind": "puzzle",
-    "title": "10-3. 複数バリアント enum でコア納品",
-    "topicTag": "enum + 空間コア納品",
-    "kurumiIntro": "歩いたり、コアを拾ったり、強化したりする一連の手順を全部 `enum Op` に書き出して、順番に実行してみよう！",
-    "goalSummary": "enum Op 列でコアを拾い、検査・強化して (4, 1) で納品しよう",
-    "bookSectionTitle": "10.1 操作のミニ言語（DSL）を enum で作る",
-    "bookSummary": "異なる種類の操作（移動・コア操作）を1つの `enum` 型として定義し、実行エンジン側で解釈させることができます。",
-    "bookKeyCode": "enum Op { Walk(i32), Grab, Scan, Boost, Deliver }",
-    "starterCode": "enum Op {\n    Walk(i32),\n    Grab,\n    Scan,\n    Boost,\n    Deliver,\n}\n\nfn main() {\n    // コア(1,1) -> 検査(2,1) -> 強化(3,1) -> 納品(4,1) だよ！\n    let ops = vec![\n        Op::Walk(1),\n        Op::Grab,\n    ];\n    let mut held = grab_core(); // ← 仮置き。実際は(1,1)で拾うよ\n    for op in ops {\n        match op {\n            Op::Walk(n) => step(n),\n            Op::Grab => held = grab_core(),\n            Op::Scan => scan(&held),\n            Op::Boost => boost(&mut held),\n            Op::Deliver => deliver(held),\n        }\n    }\n}",
-    "solutionCode": "enum Op {\n    Walk(i32),\n    Grab,\n    Scan,\n    Boost,\n    Deliver,\n}\n\nfn main() {\n    let ops = vec![\n        Op::Walk(1),\n        Op::Grab,\n        Op::Walk(1),\n        Op::Scan,\n        Op::Walk(1),\n        Op::Boost,\n        Op::Walk(1),\n        Op::Deliver,\n    ];\n    let mut has = false;\n    let mut held = None;\n    for op in ops {\n        match op {\n            Op::Walk(n) => step(n),\n            Op::Grab => {\n                held = Some(grab_core());\n                has = true;\n            },\n            Op::Scan => {\n                if let Some(c) = held {\n                    scan(&c);\n                }\n            },\n            Op::Boost => {\n                if let Some(mut c) = held {\n                    boost(&mut c);\n                    held = Some(c);\n                }\n            },\n            Op::Deliver => {\n                if let Some(c) = held {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
+    "title": "10-3. ジェネリック構造体 VecHolder<T> でルート保存",
+    "topicTag": "struct Holder<T> + コンベア",
+    "kurumiIntro": "横・縦・最後の3つの距離をジェネリック構造体 `Route<T>` にしまって、ベルトコンベアをつなぎながら 7ティック以内にゴールしよう！",
+    "goalSummary": "ジェネリック構造体 Route<T> でスイッチとコンベアを突破し (5, 3) へ",
+    "bookSectionTitle": "10.1 型パラメータを複数フィールドに持つ構造体",
+    "bookSummary": "共通の型 `T` を持つフィールドをまとめることで、将来の数値精度変更（`i32` -> `f64` など）にも強い構造体になります。",
+    "bookKeyCode": "struct Route<T> { a: T, b: T, c: T }",
+    "starterCode": "struct Route<T> {\n    a: T,\n    b: T,\n    c: T,\n}\n\nfn main() {\n    // 地図のコンベアに合わせて (a, b, c) を設定しよう！\n    let r = Route { a: 1, b: 0, c: 0 };\n    step(r.a);\n    turn_right();\n    step(r.b);\n    turn_left();\n    step(r.c);\n}",
+    "solutionCode": "struct Route<T> {\n    a: T,\n    b: T,\n    c: T,\n}\n\nfn main() {\n    let r = Route { a: 1, b: 1, c: 2 };\n    step(r.a);\n    turn_right();\n    step(r.b);\n    turn_left();\n    step(r.c);\n}",
     "quickChips": [
       {
-        "label": "Op::Scan,",
-        "insert": "Op::Scan,\n        "
-      },
-      {
-        "label": "Op::Boost,",
-        "insert": "Op::Boost,\n        "
-      },
-      {
-        "label": "Op::Deliver,",
-        "insert": "Op::Deliver,\n        "
+        "label": "Route { a: 1, b: 1, c: 2 }",
+        "insert": "Route { a: 1, b: 1, c: 2 }"
       }
     ],
     "hints": [
-      "最初の Walk(1) の前に `grab_core()` を呼んでしまわないよう、`let mut held = None;` にしよう！",
-      "ops には Walk(1) → Grab → Walk(1) → Scan → Walk(1) → Boost → Walk(1) → Deliver を並べよう。",
-      "Option の `if let Some(c)` を使えば安全に Scan / Boost / Deliver できるよ！"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "指示コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "10-4",
-    "id": "3bf874e0-1b14-507d-ab3e-f9bab2d94df7",
-    "index": 140,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-4. enum にも impl メソッドが書ける！",
-    "topicTag": "enum + impl",
-    "kurumiIntro": "実は `struct` だけじゃなくて `enum` にも `impl` ブロックでメソッドを定義できるんだよ！`Action::Charge(3).apply()` みたいに動かしてみよう。",
-    "goalSummary": "impl Action 内の apply(&self) を完成させて金庫⚡3＋ゴールへ",
-    "bookSectionTitle": "10.1 enum 上のメソッド定義",
-    "bookSummary": "`enum` に `impl` でメソッドを定義し、内部で `match self` を使うと、オブジェクト指向のようなきれいな命令実行器を作れます。",
-    "bookKeyCode": "impl Action {\n    fn apply(&self) { match self { ... } }\n}",
-    "starterCode": "enum Action {\n    Walk(i32),\n    Charge(i32),\n}\n\nimpl Action {\n    fn apply(&self) {\n        match self {\n            Action::Walk(n) => step(*n),\n            // Charge(v) のときに add_vault(*v) するよう書こう！\n            Action::Charge(v) => {},\n        }\n    }\n}\n\nfn main() {\n    Action::Charge(3).apply();\n    Action::Walk(3).apply();\n}",
-    "solutionCode": "enum Action {\n    Walk(i32),\n    Charge(i32),\n}\n\nimpl Action {\n    fn apply(&self) {\n        match self {\n            Action::Walk(n) => step(*n),\n            Action::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    Action::Charge(3).apply();\n    Action::Walk(3).apply();\n}",
-    "quickChips": [
-      {
-        "label": "add_vault(*v)",
-        "insert": "add_vault(*v)"
-      }
-    ],
-    "hints": [
-      "Action::Charge(v) の処理が空 `{}` になっているよ！",
-      "Action::Charge(v) => add_vault(*v), に書き換えよう。",
-      "Action::Charge(v) => add_vault(*v),"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "10-5",
-    "id": "b7414456-bea4-51ca-94bb-093e5d09772c",
-    "index": 141,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-5. enum impl メソッドと時計仕掛けスイッチ",
-    "topicTag": "enum への impl + コンベア",
-    "kurumiIntro": "`enum StepAction` に `impl StepAction` で `run(&self)` メソッドを持たせよう！コンベアの押し出しを計算して最短歩数で両方のスイッチを回収してね。",
-    "goalSummary": "enum Action::run() で全スイッチを踏んで 8ティック以内に (5, 1) へ",
-    "bookSectionTitle": "10.1 & 10.2 enum メソッドと最短パス",
-    "bookSummary": "振る舞いまで `enum` 自身に `impl` しておくと、配列をループで回しながら `.run()` を呼ぶだけで済みます。",
-    "bookKeyCode": "impl StepAction { fn run(&self) { match self { ... } } }",
-    "starterCode": "enum StepAction {\n    SafeStep,\n    Charge(i32),\n}\n\nimpl StepAction {\n    fn run(&self) {\n        match self {\n            StepAction::SafeStep => {\n                while !is_gate_open() { wait_tick(1); }\n                step();\n            },\n            StepAction::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    // コンベア(1,1)で(2,1)のスイッチへ。さらに進んでゴール(5,1)へ！\n    let list = vec![StepAction::Charge(1), StepAction::SafeStep];\n    for a in list {\n        a.run();\n    }\n}",
-    "solutionCode": "enum StepAction {\n    SafeStep,\n    Charge(i32),\n}\n\nimpl StepAction {\n    fn run(&self) {\n        match self {\n            StepAction::SafeStep => {\n                while !is_gate_open() { wait_tick(1); }\n                step();\n            },\n            StepAction::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    let list = vec![\n        StepAction::Charge(3),\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n    ];\n    for a in list {\n        a.run();\n    }\n}",
-    "quickChips": [
-      {
-        "label": "StepAction::Charge(3),",
-        "insert": "StepAction::Charge(3),\n        "
-      },
-      {
-        "label": "StepAction::SafeStep,",
-        "insert": "StepAction::SafeStep,\n        "
-      }
-    ],
-    "hints": [
-      "コンベア (1,1) が 1マス押し出してくれるから、SafeStep 1回で (2,1) のスイッチに到達するよ！",
-      "そこから SafeStep をあと3回（(3,1)ゲート→(4,1)スイッチ→(5,1)ゴール）実行しよう。金庫目標は⚡3だよ！",
-      "Charge(3) と SafeStep × 4 回を list に並べて実行しよう！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "conveyors": [
-        {
-          "x": 1,
-          "y": 1,
-          "dir": 0
-        }
-      ],
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3,
-      "requireAllSwitches": true,
-      "maxTicks": 8
-    },
-    "parTicks": 6
-  },
-  {
-    "displayId": "10-6",
-    "id": "39d37ecf-45a1-554c-a739-37b5aac62d84",
-    "index": 142,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-6. Option<T> 型の Some と None",
-    "topicTag": "Option<T> / Some / None",
-    "kurumiIntro": "Rustには「null（ぬる）」の代わりに、値がある `Some(値)` か、空っぽの `None` を表す標準の `enum Option<T>` があるんだ！",
-    "goalSummary": "Option 値を match で取り出してゴール (4, 1) へ",
-    "bookSectionTitle": "10.1 Option enum と Null よりも優れた利点",
-    "bookSummary": "値が存在しない可能性を型として表すのが `Option<T>` です。使うときに必ず `Some` と `None` を意識するため、ぬるぽ（Null参照エラー）が起きません。",
-    "bookKeyCode": "let opt = Some(4);\nmatch opt {\n    Some(n) => step(n),\n    None => {},\n}",
-    "starterCode": "fn get_bonus(ok: bool) -> Option<i32> {\n    if ok { Some(4) } else { None }\n}\n\nfn main() {\n    // false を true にして Some(4) を受け取ろう！\n    let bonus = get_bonus(false);\n    match bonus {\n        Some(n) => step(n),\n        None => println!(\"ボーナスなし!\"),\n    }\n}",
-    "solutionCode": "fn get_bonus(ok: bool) -> Option<i32> {\n    if ok { Some(4) } else { None }\n}\n\nfn main() {\n    let bonus = get_bonus(true);\n    match bonus {\n        Some(n) => step(n),\n        None => println!(\"ボーナスなし!\"),\n    }\n}",
-    "quickChips": [
-      {
-        "label": "true",
-        "insert": "true"
-      }
-    ],
-    "hints": [
-      "今は get_bonus(false) を呼んでいるから None になって進まないよ。",
-      "get_bonus(true) に変えてみよう！",
-      "let bonus = get_bonus(true);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "10-7",
-    "id": "d14868f8-8cbf-530d-a93d-a98815a08d63",
-    "index": 143,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-7. match 演算子と網羅性",
-    "topicTag": "match の網羅性",
-    "kurumiIntro": "Rustの `match` は enum の選択肢を1つでも書き忘れるとコンパイルエラーで教えてくれるんだ！全部のパターンを埋めてね。",
-    "goalSummary": "欠けている Signal::Stop を追加して match を完成させよう",
-    "bookSectionTitle": "10.2 match 制御フロー演算子",
-    "bookSummary": "`match` はすべての可能性を漏れなくチェック（網羅性検査）します。書き漏れがなくなるため、想定外の状態でバグる心配がありません。",
-    "bookKeyCode": "match sig {\n    Signal::Go => step(3),\n    Signal::Stop => wait_tick(1),\n}",
-    "starterCode": "enum Signal {\n    Go,\n    Stop,\n}\n\nfn main() {\n    let sig = Signal::Go;\n    // Stop のパターンが抜けているのでコンパイルエラーになるよ！\n    match sig {\n        Signal::Go => step(3),\n    }\n}",
-    "solutionCode": "enum Signal {\n    Go,\n    Stop,\n}\n\nfn main() {\n    let sig = Signal::Go;\n    match sig {\n        Signal::Go => step(3),\n        Signal::Stop => wait_tick(1),\n    }\n}",
-    "quickChips": [
-      {
-        "label": "Signal::Stop => wait_tick(1),",
-        "insert": "Signal::Stop => wait_tick(1),"
-      }
-    ],
-    "hints": [
-      "そのまま実行すると「網羅性が不足しています（不足: Stop）」と表示されるよ！",
-      "match sig { ... } の中に `Signal::Stop => wait_tick(1),` を書き足そう。",
-      "match sig {\n    Signal::Go => step(3),\n    Signal::Stop => wait_tick(1),\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 3
-  },
-  {
-    "displayId": "10-8",
-    "id": "b8cacf70-a74c-57ea-bdaf-d5c24934b111",
-    "index": 144,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-8. enum 命令インタプリタ迷路",
-    "topicTag": "enum + match インタプリタ",
-    "kurumiIntro": "`Go(n)`・`TurnR`・`TurnL` を並べて、ジグザグの壁とスイッチを抜けながらコンベアへ乗り込むプログラムを `enum` で組もう！",
-    "goalSummary": "enum Cmd 列を正しく組んでスイッチとコンベア経由で (5, 3) へ",
-    "bookSectionTitle": "10.1 命令を配列で並べて解釈する enum",
-    "bookSummary": "ロボットの一連の動きをデータ（`enum` の配列）として表現すると、ルート編集や拡張がとてもやりやすくなります。",
-    "bookKeyCode": "vec![Cmd::Go(2), Cmd::TurnR, Cmd::Go(2)]",
-    "starterCode": "enum Cmd {\n    Go(i32),\n    TurnR,\n    TurnL,\n}\n\nfn main() {\n    let script = vec![\n        Cmd::Go(2),\n        // ここから先を埋めよう（ゴールは (5, 3) だよ！）\n    ];\n    for c in script {\n        match c {\n            Cmd::Go(n) => step(n),\n            Cmd::TurnR => turn_right(),\n            Cmd::TurnL => turn_left(),\n        }\n    }\n}",
-    "solutionCode": "enum Cmd {\n    Go(i32),\n    TurnR,\n    TurnL,\n}\n\nfn main() {\n    let script = vec![\n        Cmd::Go(2),\n        Cmd::TurnR,\n        Cmd::Go(2),\n        Cmd::TurnL,\n        Cmd::Go(2),\n    ];\n    for c in script {\n        match c {\n            Cmd::Go(n) => step(n),\n            Cmd::TurnR => turn_right(),\n            Cmd::TurnL => turn_left(),\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "Cmd::TurnR,",
-        "insert": "Cmd::TurnR,\n        "
-      },
-      {
-        "label": "Cmd::TurnL,",
-        "insert": "Cmd::TurnL,\n        "
-      },
-      {
-        "label": "Cmd::Go(2),",
-        "insert": "Cmd::Go(2),\n        "
-      }
-    ],
-    "hints": [
-      "Cmd::Go(2) で (2,1) のスイッチを踏みつつ角へ着くよ！",
-      "右折して Cmd::Go(2) で南へ (2,3) まで下りよう！",
-      "最後に左折して Cmd::Go(2) でコンベア (3,3)->(4,3) を抜けて (5,3) へ！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 3
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 3,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "conveyors": [
-        {
-          "x": 3,
-          "y": 3,
-          "dir": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "requireAllSwitches": true,
-      "maxTicks": 10
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "10-9",
-    "id": "a9d69c8c-39e3-58dc-b93f-074d77f1b9d2",
-    "index": 145,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-9. センサー状態 enum で自律ルート選択",
-    "topicTag": "enum + match 分岐",
-    "kurumiIntro": "周りの壁センサーを見て「右に行くか・左に行くか・前に進むか」を `enum Sense { FrontClear, LeftClear, Blocked }` にまとめて選ぼう！",
-    "goalSummary": "enum Sense で迷路を自律判定してゴール (4, 4) へ",
-    "bookSectionTitle": "10.2 状態を enum にして match で分岐",
-    "bookSummary": "複雑な条件判定の結果をいったん分かりやすい `enum` 値へ変換してから `match` で行動を決めると、ミスが激減します。",
-    "bookKeyCode": "match sense_tile() { Sense::Left => turn_left(), ... }",
-    "starterCode": "enum Sense {\n    LeftOpen,\n    FrontOpen,\n    Blocked,\n}\n\nfn check_env() -> Sense {\n    if !is_wall_left() {\n        Sense::LeftOpen\n    } else if !is_wall_ahead() {\n        Sense::FrontOpen\n    } else {\n        Sense::Blocked\n    }\n}\n\nfn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        // check_env() の結果で LeftOpen->左折&step, FrontOpen->step, Blocked->右折しよう！\n        step();\n    }\n}",
-    "solutionCode": "enum Sense {\n    LeftOpen,\n    FrontOpen,\n    Blocked,\n}\n\nfn check_env() -> Sense {\n    if !is_wall_left() {\n        Sense::LeftOpen\n    } else if !is_wall_ahead() {\n        Sense::FrontOpen\n    } else {\n        Sense::Blocked\n    }\n}\n\nfn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        match check_env() {\n            Sense::LeftOpen => { turn_left(); step(); },\n            Sense::FrontOpen => step(),\n            Sense::Blocked => turn_right(),\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "match check_env() { ... }",
-        "insert": "match check_env() {\n            Sense::LeftOpen => { turn_left(); step(); },\n            Sense::FrontOpen => step(),\n            Sense::Blocked => turn_right(),\n        }"
-      }
-    ],
-    "hints": [
-      "check_env() 関数はもう用意されているよ！あとは main で `match check_env()` を書くだけ。",
-      "LeftOpen なら左を向いて1歩、FrontOpen なら1歩前進、Blocked なら右折しよう！",
-      "match check_env() { Sense::LeftOpen => { turn_left(); step(); }, Sense::FrontOpen => step(), Sense::Blocked => turn_right(), }"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 6,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        },
-        {
-          "x": 0,
-          "y": 5
-        },
-        {
-          "x": 1,
-          "y": 5
-        },
-        {
-          "x": 2,
-          "y": 5
-        },
-        {
-          "x": 3,
-          "y": 5
-        },
-        {
-          "x": 4,
-          "y": 5
-        },
-        {
-          "x": 5,
-          "y": 5
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 4
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "10-10",
-    "id": "bd45fe4b-97ce-51ea-a3b3-aa112c3af960",
-    "index": 146,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-10. 出力チェック付き enum ログ設計",
-    "topicTag": "enum + stdout 検証",
-    "kurumiIntro": "どの工程を実行したかが工房のログにしっかり残るように、移動とコア強化で別々のメッセージを表示する `enum Event` を動かそう！",
-    "goalSummary": "\"SCAN_DONE\" と \"BOOST_DONE\" を出力し、コア⚡4以上を納品しよう",
-    "bookSectionTitle": "10.2 ログ出力と処理実行をセットにする enum",
-    "bookSummary": "ログ印字とロボット動作を `match` の同じ腕（アーム）に書けば、動いた記録の取りこぼしがなくなります。",
-    "bookKeyCode": "match ev { Ev::Scan => { println!(\"SCAN_DONE\"); scan(&c); } ... }",
-    "starterCode": "enum StepJob {\n    Move(i32),\n    Inspect,\n    PowerUp,\n    Finish,\n}\n\nfn main() {\n    step(1);\n    let mut core = grab_core();\n    let jobs = vec![StepJob::Move(1), StepJob::Inspect, StepJob::Move(1), StepJob::PowerUp, StepJob::Move(1), StepJob::Finish];\n    for j in jobs {\n        match j {\n            StepJob::Move(n) => step(n),\n            StepJob::Inspect => {\n                // \"SCAN_DONE\" を出力して scan(&core) を呼ぼう！\n                scan(&core);\n            },\n            StepJob::PowerUp => {\n                // \"BOOST_DONE\" を出力して boost(&mut core) を呼ぼう！\n                boost(&mut core);\n            },\n            StepJob::Finish => deliver(core),\n        }\n    }\n}",
-    "solutionCode": "enum StepJob {\n    Move(i32),\n    Inspect,\n    PowerUp,\n    Finish,\n}\n\nfn main() {\n    step(1);\n    let mut core = grab_core();\n    let jobs = vec![StepJob::Move(1), StepJob::Inspect, StepJob::Move(1), StepJob::PowerUp, StepJob::Move(1), StepJob::Finish];\n    for j in jobs {\n        match j {\n            StepJob::Move(n) => step(n),\n            StepJob::Inspect => {\n                println!(\"SCAN_DONE\");\n                scan(&core);\n            },\n            StepJob::PowerUp => {\n                println!(\"BOOST_DONE\");\n                boost(&mut core);\n            },\n            StepJob::Finish => deliver(core),\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "println!(\"SCAN_DONE\");",
-        "insert": "println!(\"SCAN_DONE\");\n                "
-      },
-      {
-        "label": "println!(\"BOOST_DONE\");",
-        "insert": "println!(\"BOOST_DONE\");\n                "
-      }
-    ],
-    "hints": [
-      "Inspect の枝に `println!(\"SCAN_DONE\");`、PowerUp の枝に `println!(\"BOOST_DONE\");` を追加しよう！",
-      "scan や boost、deliver 自体はすでに正しいマスにいる状態で呼ばれるよ！",
-      "println!(\"SCAN_DONE\");\nscan(&core); / println!(\"BOOST_DONE\");\nboost(&mut core);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "記録コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "scanCount": 1,
-      "stdoutIncludes": [
-        "SCAN_DONE",
-        "BOOST_DONE"
-      ],
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 12
-  },
-  {
-    "displayId": "10-11",
-    "id": "0abe7860-9851-59fc-a65f-b3773dcbc1e4",
-    "index": 147,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-11. match で値を返す（式としての match）",
-    "topicTag": "let x = match ...",
-    "kurumiIntro": "`match` も `if` と同じように結果を値として返せるんだ！信号の色に合わせて金庫へチャージするパワーを決めよう。",
-    "goalSummary": "match が返す数値で金庫⚡3を満たし、ゴール (3, 1) へ",
-    "bookSectionTitle": "10.2 パターンに束縛して値を返す match",
-    "bookSummary": "各アーム（腕）が同じ型の値を返すなら、`let power = match lamp { ... };` のように変数へ直接代入できます。",
-    "bookKeyCode": "let p = match lamp {\n    Lamp::Gold => 3,\n    _ => 1,\n};",
-    "starterCode": "enum Lamp {\n    Red,\n    Blue,\n    Gold,\n}\n\nfn main() {\n    let lamp = Lamp::Gold;\n    let power = match lamp {\n        Lamp::Red => 1,\n        Lamp::Blue => 2,\n        // Gold のときは 3 を返そう！\n        Lamp::Gold => 0,\n    };\n    add_vault(power);\n    step(power);\n}",
-    "solutionCode": "enum Lamp {\n    Red,\n    Blue,\n    Gold,\n}\n\nfn main() {\n    let lamp = Lamp::Gold;\n    let power = match lamp {\n        Lamp::Red => 1,\n        Lamp::Blue => 2,\n        Lamp::Gold => 3,\n    };\n    add_vault(power);\n    step(power);\n}",
-    "quickChips": [
-      {
-        "label": "Lamp::Gold => 3,",
-        "insert": "Lamp::Gold => 3,"
-      }
-    ],
-    "hints": [
-      "Lamp::Gold => 0 になっているから金庫も歩数も足りなくなっているよ！",
-      "Lamp::Gold => 3 に変えればOK！",
-      "Lamp::Gold => 3,"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "10-12",
-    "id": "aaf4d7e9-f870-51f1-adf1-33c70b50c739",
-    "index": 148,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-12. ワイルドカード _ プレースホルダー",
-    "topicTag": "match と _ ワイルドカード",
-    "kurumiIntro": "たくさんの種類のうち、特定の1つだけ特別扱いして「それ以外は全部同じ処理でいいよ」というときは `_ => ...` が超便利！",
-    "goalSummary": "ワイルドカード _ を追加してエラーを直し、ゴール (4, 1) へ",
-    "bookSectionTitle": "10.2 _ プレースホルダーによる網羅",
-    "bookSummary": "パターン `_` はどんな値にも一致します。`match` の最後に `_ => {}` を置くことで残りの全パターンを一括で処理できます。",
-    "bookKeyCode": "match num {\n    4 => step(4),\n    _ => {},\n}",
-    "starterCode": "enum Gear {\n    Small,\n    Medium,\n    Large,\n    Mega,\n}\n\nfn main() {\n    let g = Gear::Large;\n    // Small と Medium しか書いていないから未網羅エラーになるよ！_ を足そう\n    match g {\n        Gear::Large => step(4),\n    }\n}",
-    "solutionCode": "enum Gear {\n    Small,\n    Medium,\n    Large,\n    Mega,\n}\n\nfn main() {\n    let g = Gear::Large;\n    match g {\n        Gear::Large => step(4),\n        _ => step(1),\n    }\n}",
-    "quickChips": [
-      {
-        "label": "_ => step(1),",
-        "insert": "_ => step(1),"
-      }
-    ],
-    "hints": [
-      "4種類のバリアントがあるのに Gear::Large しか書かれていないよ。",
-      "`_ => step(1),` を追加すれば残りの3つを一気にカバーできるよ！",
-      "match g {\n    Gear::Large => step(4),\n    _ => step(1),\n}"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "10-13",
-    "id": "a642e260-2f26-5f89-8ee0-9f27405ba456",
-    "index": 149,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-13. match 網羅性＋ワイルドカードでスパーク警戒",
-    "topicTag": "match 網羅性と _ 制御",
-    "kurumiIntro": "4種類の警告レベル `Warn { Clear, GateClosed, SparkNear, Emergency }` を `match` でさばこう！大切な1つだけ特別扱いして、残りを `_` でまとめることもできるよ。",
-    "goalSummary": "enum Warn を完全に網羅して、スパークとゲートを安全突破しよう",
-    "bookSectionTitle": "10.2 match の網羅性とワイルドカード _",
-    "bookSummary": "すべてのケースを書くか、残りを `_` で受けることでコンパイル時に漏れを防ぎます。",
-    "bookKeyCode": "match status { Status::Go => step(), _ => wait_tick(1) }",
-    "starterCode": "enum Warn {\n    Clear,\n    GateClosed,\n    SparkNear,\n    Emergency,\n}\n\nfn sense() -> Warn {\n    if !is_gate_open() {\n        Warn::GateClosed\n    } else if is_spark_ahead() {\n        Warn::SparkNear\n    } else {\n        Warn::Clear\n    }\n}\n\nfn main() {\n    while !at_goal() {\n        // 網羅性エラーが起きないよう _ => wait_tick(1) を追加しよう！\n        match sense() {\n            Warn::Clear => step(),\n        }\n    }\n}",
-    "solutionCode": "enum Warn {\n    Clear,\n    GateClosed,\n    SparkNear,\n    Emergency,\n}\n\nfn sense() -> Warn {\n    if !is_gate_open() {\n        Warn::GateClosed\n    } else if is_spark_ahead() {\n        Warn::SparkNear\n    } else {\n        Warn::Clear\n    }\n}\n\nfn main() {\n    while !at_goal() {\n        match sense() {\n            Warn::Clear => step(),\n            _ => wait_tick(1),\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "_ => wait_tick(1),",
-        "insert": "_ => wait_tick(1),"
-      }
-    ],
-    "hints": [
-      "Warn::Clear 以外の3つ（GateClosed, SparkNear, Emergency）は全部「1ティック待つ」で安全だよ！",
-      "match sense() の中に `_ => wait_tick(1),` を足せば網羅性も動作も完璧になるよ。",
-      "Warn::Clear => step(),\n            _ => wait_tick(1),"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 2,
-          "closedTicks": 2,
-          "initialOffset": 0
-        }
-      ],
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 2,
-              "y": 0
-            },
-            {
-              "x": 2,
-              "y": 1
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 3
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 1
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 8
-  },
-  {
-    "displayId": "10-14",
-    "id": "e8facaca-88b5-5973-98f1-4248dcdad4d0",
-    "index": 150,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-14. enum ダイヤル探索機",
-    "topicTag": "enum Ordering + ダイヤル解錠",
-    "kurumiIntro": "秘宝ダイヤルの判定結果 `Ordering` も実は `enum` だよ！`Ordering::Less`, `Greater`, `Equal` を `match` で振り分けて秘密の番号を探り当て、ゲートを開いて進もう！",
-    "goalSummary": "while loop と match try_dial(g) でダイヤルを解錠しゴール (5, 1) へ",
-    "bookSectionTitle": "10.2 標準 enum Ordering のパターンマッチング",
-    "bookSummary": "比較結果を表す `Ordering::{Less, Greater, Equal}` を `match` で受けるのは Rust でとてもよく見る定番パターンです。",
-    "bookKeyCode": "match try_dial(g) { Ordering::Equal => { break; }, ... }",
-    "starterCode": "fn main() {\n    let mut guess = 1;\n    loop {\n        match try_dial(guess) {\n            Ordering::Less => guess += 1,\n            Ordering::Greater => guess -= 1,\n            // Equal のときに { break; } しよう！\n            Ordering::Equal => wait_tick(1),\n        }\n    }\n    step(5);\n}",
-    "solutionCode": "fn main() {\n    let mut guess = 1;\n    loop {\n        match try_dial(guess) {\n            Ordering::Less => guess += 1,\n            Ordering::Greater => guess -= 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(5);\n}",
-    "quickChips": [
-      {
-        "label": "Ordering::Equal => { break; },",
-        "insert": "Ordering::Equal => { break; },"
-      }
-    ],
-    "hints": [
-      "Ordering::Equal のときにループを抜けられていないよ！",
-      "match アームの中で break を使うときは `{ break; }` のように波カッコをつけよう。",
-      "Ordering::Equal => { break; },"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "dial": {
-        "secret": 4
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "requireAllSwitches": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "10-15",
-    "id": "670de184-8b92-50de-9968-d8c01ebcb71a",
-    "index": 151,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-15. match と蒸気ゲート・ジグザグ実践",
-    "topicTag": "enum + ゲート突破パズル",
-    "kurumiIntro": "コマンドの配列に `Wait` や `Turn` も混ぜて、途中の蒸気ゲートを待ちながら曲がり角の先のゴールへ辿り着こう！",
-    "goalSummary": "enum 指令列でゲートを安全に抜けて (3, 3) へ",
-    "bookSectionTitle": "10.2 パターンマッチング実践パズル",
-    "bookSummary": "複数のアクションを `enum` で表現してループ＋`match` で解釈する設計は、インタプリタやゲーム制御の基本構造です。",
-    "bookKeyCode": "match step_cmd {\n    Cmd::WaitOrGo => ...,\n}",
-    "starterCode": "enum Cmd {\n    SafeStep,\n    TurnR,\n}\n\nfn main() {\n    let plan = vec![\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::TurnR,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n    ];\n    for c in plan {\n        match c {\n            Cmd::SafeStep => {\n                // ゲートが閉じていれば wait_tick(1) してから step() しよう！\n                if !is_gate_open() {\n                    \n                }\n                step();\n            },\n            Cmd::TurnR => turn_right(),\n        }\n    }\n}",
-    "solutionCode": "enum Cmd {\n    SafeStep,\n    TurnR,\n}\n\nfn main() {\n    let plan = vec![\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::TurnR,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n    ];\n    for c in plan {\n        match c {\n            Cmd::SafeStep => {\n                if !is_gate_open() {\n                    wait_tick(1);\n                }\n                step();\n            },\n            Cmd::TurnR => turn_right(),\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "wait_tick(1);",
-        "insert": "wait_tick(1);"
-      }
-    ],
-    "hints": [
-      "(2, 1) に蒸気ゲートがあって、ちょうど到着するタイミングで閉まっているよ！",
-      "if !is_gate_open() { wait_tick(1); } の中に wait_tick(1); を入れよう。",
-      "if !is_gate_open() {\n    wait_tick(1);\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 3
-      },
-      "gates": [
-        {
-          "x": 2,
-          "y": 1,
-          "openTicks": 2,
-          "closedTicks": 2,
-          "initialOffset": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "10-16",
-    "id": "b8655651-9707-54d9-9fdf-78b6aa2502b1",
-    "index": 152,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-16. if let による簡潔な制御フロー",
-    "topicTag": "if let / Option",
-    "kurumiIntro": "「1つのパターンだけ取り出したい！」ときは `match` より短く書ける `if let Some(n) = ...` がぴったりだよ！",
-    "goalSummary": "if let Some(steps) で Option から歩数を取り出してゴールへ",
-    "bookSectionTitle": "10.3 if let による簡潔な制御フロー",
-    "bookSummary": "値が `Some(x)` のときだけ処理し、`None` のときは何もしないような場合、`match` の代わりに `if let Some(x) = 値 { ... }` と簡潔に書けます。",
-    "bookKeyCode": "if let Some(n) = maybe_steps {\n    step(n);\n}",
-    "starterCode": "fn main() {\n    let maybe_steps = Some(3);\n    // if let Some(n) = maybe_steps { ... } を書いてみよう！\n    \n}",
-    "solutionCode": "fn main() {\n    let maybe_steps = Some(3);\n    if let Some(n) = maybe_steps {\n        step(n);\n    }\n}",
-    "quickChips": [
-      {
-        "label": "if let Some(n) = maybe_steps { step(n); }",
-        "insert": "if let Some(n) = maybe_steps {\n        step(n);\n    }"
-      }
-    ],
-    "hints": [
-      "maybe_steps の中には Some(3) が入っているよ。",
-      "if let Some(n) = maybe_steps { step(n); } で中の 3 を取り出せるよ！",
-      "if let Some(n) = maybe_steps {\n    step(n);\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 3
-  },
-  {
-    "displayId": "10-17",
-    "id": "d9880bf2-1382-506d-9278-982f6a23b006",
-    "index": 153,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-17. if let ... else で空だった時の代案",
-    "topicTag": "if let ... else",
-    "kurumiIntro": "`if let` には `else` もくっつけられるんだ！予備ボックスが空（`None`）だったときは、代わりに `else` の中で予備ルートを動かそう。",
-    "goalSummary": "if let ... else で予備の3歩を使ってゴール (3, 1) へ",
-    "bookSectionTitle": "10.3 if let と else の組み合わせ",
-    "bookSummary": "`if let Some(v) = opt { ... } else { ... }` と書くと、一致した時の処理と、それ以外のフォールバック処理を簡潔に書けます。",
-    "bookKeyCode": "if let Some(n) = box_val {\n    step(n);\n} else {\n    step(3);\n}",
-    "starterCode": "fn main() {\n    let box_val: Option<i32> = None;\n    if let Some(n) = box_val {\n        step(n);\n    } else {\n        // None だったときに予備の 3歩を進んで、金庫にも 3 入れよう！\n        \n    }\n}",
-    "solutionCode": "fn main() {\n    let box_val: Option<i32> = None;\n    if let Some(n) = box_val {\n        step(n);\n    } else {\n        add_vault(3);\n        step(3);\n    }\n}",
-    "quickChips": [
-      {
-        "label": "add_vault(3);",
-        "insert": "add_vault(3);\n        "
-      },
-      {
-        "label": "step(3);",
-        "insert": "step(3);\n        "
-      }
-    ],
-    "hints": [
-      "box_val は None だから else ブロックが実行されるよ。",
-      "else の中に add_vault(3); と step(3); を書こう！",
-      "else {\n    add_vault(3);\n    step(3);\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "10-18",
-    "id": "a0ccee25-7aa9-5139-9e29-5bb6b8fe7012",
-    "index": 154,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-18. Option と match 式で動的分岐ルート",
-    "topicTag": "let val = match opt",
-    "kurumiIntro": "「次の歩数はいくらか？」を `Option` で返す関数 `next_hop(x)` と `match` 式を使って、L字の曲がり角でちょうど向きを変えよう！",
-    "goalSummary": "match 式が返す距離を使って L字コース (3, 4) へ到達しよう",
-    "bookSectionTitle": "10.2 & 10.3 Option を返す関数と match 式",
-    "bookSummary": "`match` は値を返す「式」なので、直接関数の戻り値を受け取って変数の計算に組み込めます。",
-    "bookKeyCode": "let d = match get_hop(pos) { Some(n) => n, None => 0 };",
-    "starterCode": "fn plan_leg(is_first: bool) -> Option<i32> {\n    if is_first { Some(3) } else { Some(3) }\n}\n\nfn main() {\n    let dx = match plan_leg(true) {\n        Some(n) => n,\n        None => 0,\n    };\n    let dy = match plan_leg(false) {\n        // ここは下へ 3歩行きたい！でもスイッチを踏む位置を確認してね\n        Some(n) => 1,\n        None => 0,\n    };\n    step(dx);\n    turn_right();\n    step(dy);\n}",
-    "solutionCode": "fn plan_leg(is_first: bool) -> Option<i32> {\n    if is_first { Some(3) } else { Some(3) }\n}\n\nfn main() {\n    let dx = match plan_leg(true) {\n        Some(n) => n,\n        None => 0,\n    };\n    let dy = match plan_leg(false) {\n        Some(n) => n,\n        None => 0,\n    };\n    step(dx);\n    turn_right();\n    step(dy);\n}",
-    "quickChips": [
-      {
-        "label": "Some(n) => n,",
-        "insert": "Some(n) => n,"
-      }
-    ],
-    "hints": [
-      "dx = 3 で (3,1) のスイッチを踏みつつ右折できるよ！",
-      "dy も plan_leg(false) が返す Some(3) の値 `n` をそのまま使えば、ゲート (3,2) を抜けて (3,4) へ到着するよ！",
-      "Some(n) => n,"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 6,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 0,
-          "y": 5
-        },
-        {
-          "x": 1,
-          "y": 5
-        },
-        {
-          "x": 2,
-          "y": 5
-        },
-        {
-          "x": 3,
-          "y": 5
-        },
-        {
-          "x": 4,
-          "y": 5
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 4
-      },
-      "switches": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 2,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 3,
-            "y": 1
-          }
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "requireAllSwitches": true
-    },
-    "parTicks": 8
-  },
-  {
-    "displayId": "10-19",
-    "id": "64c45e7d-03c6-56a7-907d-ce965a9b5065",
-    "index": 155,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-19. Option のリストから Some だけ拾う",
-    "topicTag": "for + if let Some",
-    "kurumiIntro": "リストの中に `Some(2)` や `None` が混ざっているよ！`for` と `if let Some(x)` を組み合わせると、有効なデータだけを安全に拾い上げられるんだ。",
-    "goalSummary": "Some の値だけを足して合計 4歩進みゴール (4, 1) へ",
-    "bookSectionTitle": "10.3 ループ内での if let 活用",
-    "bookSummary": "欠損データ（`None`）を含むリストから有効な値（`Some`）だけを抽出して合計する定番イディオムです。",
-    "bookKeyCode": "for item in items {\n    if let Some(n) = item { step(n); }\n}",
-    "starterCode": "fn main() {\n    let packets = vec![Some(2), None, Some(2), None];\n    for p in packets {\n        // if let Some(n) = p を使って、Some のときだけ n歩進もう！\n        \n    }\n}",
-    "solutionCode": "fn main() {\n    let packets = vec![Some(2), None, Some(2), None];\n    for p in packets {\n        if let Some(n) = p {\n            step(n);\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "if let Some(n) = p { step(n); }",
-        "insert": "if let Some(n) = p {\n            step(n);\n        }"
-      }
-    ],
-    "hints": [
-      "packets の中の Some(2) と Some(2) を合わせるとちょうど 4歩になるよ！",
-      "for の中に `if let Some(n) = p { step(n); }` を書こう。",
-      "if let Some(n) = p {\n    step(n);\n}"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "10-20",
-    "id": "9675f3b2-9098-5081-baa8-a36a4ec53ab4",
-    "index": 156,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "puzzle",
-    "title": "10-20. Option<i32> の宝石（ボーナス電力）集め",
-    "topicTag": "Option<T> / Some / None",
-    "kurumiIntro": "金庫への追加入力が `Option<i32>` として届くよ！`Some(v)` のときだけ金庫へ入れて、`None` のときはスキップして先に進もう。",
-    "goalSummary": "Option 配列の Some 値だけ合計⚡6を金庫に入れ、ゲートを越えて (4, 1) へ",
-    "bookSectionTitle": "10.1 & 10.3 Option<T> をリストで扱う",
-    "bookSummary": "値が存在しない場合があるデータは `Option<T>` のリストにまとめておき、`if let Some(v)` や `match` で安全に取り出します。",
-    "bookKeyCode": "for opt in bonuses { if let Some(v) = opt { add_vault(v); } }",
-    "starterCode": "fn main() {\n    let items = vec![Some(2), None, Some(4), None];\n    // if let Some(v) で Some の値だけを金庫に入れよう！\n    for item in items {\n        add_vault(1);\n    }\n    step(4);\n}",
-    "solutionCode": "fn main() {\n    let items = vec![Some(2), None, Some(4), None];\n    for item in items {\n        if let Some(v) = item {\n            add_vault(v);\n        }\n    }\n    step(4);\n}",
-    "quickChips": [
-      {
-        "label": "if let Some(v) = item { add_vault(v); }",
-        "insert": "if let Some(v) = item {\n            add_vault(v);\n        }"
-      }
-    ],
-    "hints": [
-      "items の中に入っている数値は 2 と 4 で、合計すると ⚡6 になるよ！",
-      "for ループの中を `if let Some(v) = item { add_vault(v); }` に直そう。",
-      "for item in items { if let Some(v) = item { add_vault(v); } }"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 6
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 6,
-      "requireAllSwitches": true
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "10-21",
-    "id": "0dc09086-c946-5991-ac3e-0f967d5ad0e8",
-    "index": 157,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "challenge",
-    "title": "10-21. 迷路探索＋if let ボーナス金庫",
-    "topicTag": "enum + if let + 迷路探索",
-    "kurumiIntro": "道中のチェックポイントごとに金庫エネルギーを受け取りつつ、スイッチを踏んでコの字の迷路を抜けていこう！",
-    "goalSummary": "全スイッチを踏んで金庫⚡6を満たし、(0, 3) のゴールへ到達",
-    "bookSectionTitle": "10.3 if let と自律迷路走破の融合",
-    "bookSummary": "重要な1パターンだけを手早く拾う `if let` と、網羅性が要る移動判定 `match` を両方適材適所で使い分けましょう。",
-    "bookKeyCode": "if let Bonus::Gold(v) = cell { add_vault(v); }",
-    "starterCode": "enum Bonus {\n    Gold(i32),\n    Empty,\n}\n\nfn main() {\n    let rewards = vec![Bonus::Gold(2), Bonus::Empty, Bonus::Gold(4)];\n    for r in rewards {\n        if let Bonus::Gold(v) = r {\n            add_vault(v);\n        }\n    }\n    // コの字の道：(0,1)->(4,1)スイッチ->(4,3)->(0,3)ゴール！\n    step(4);\n}",
-    "solutionCode": "enum Bonus {\n    Gold(i32),\n    Empty,\n}\n\nfn main() {\n    let rewards = vec![Bonus::Gold(2), Bonus::Empty, Bonus::Gold(4)];\n    for r in rewards {\n        if let Bonus::Gold(v) = r {\n            add_vault(v);\n        }\n    }\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
-    "quickChips": [
-      {
-        "label": "turn_right();",
-        "insert": "turn_right();\n    "
-      },
-      {
-        "label": "step(2);",
-        "insert": "step(2);\n    "
-      },
-      {
-        "label": "step(4);",
-        "insert": "step(4);\n    "
-      }
-    ],
-    "hints": [
-      "上の廊下で step(4) をすると (4,1) のスイッチを踏みつつ行き止まりまで来るよ！",
-      "そこから turn_right() → step(2) でゲート (4,2) を抜けて (4,3) へ！",
-      "さらに turn_right() → step(4) で (0,3) のゴールに着くよ（途中 (2,3) のスイッチも踏めるね）。"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 0,
-        "y": 3
-      },
-      "switches": [
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 3
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 2,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 4,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 6
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 6,
-      "requireAllSwitches": true
-    },
-    "parTicks": 15
-  },
-  {
-    "displayId": "10-22",
-    "id": "e9eb0507-342b-51a4-835f-29d3b7e4a845",
-    "index": 158,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "title": "10-22. 第10章まとめ：独自 enum と if let 実践",
-    "topicTag": "第10章 総合実践",
-    "kurumiIntro": "第10章の総まとめ！独自の `enum Task { Boost(i32), Wait }` に対して `if let Task::Boost(v) = t` で強化を抜き出しつつ、残りは `match` で実行しよう！",
-    "goalSummary": "enum Task を処理して金庫⚡4＋ゴール (4, 1) を達成",
-    "bookSectionTitle": "第10章まとめ — enum・match・if let",
-    "bookSummary": "網羅性チェックの `match` と簡潔な `if let` を使い分けることで、状態の抜け漏れゼロで読みやすいコードが書けます。",
-    "bookKeyCode": "if let Task::Boost(v) = t {\n    add_vault(v);\n}",
-    "starterCode": "enum Task {\n    Boost(i32),\n    Move(i32),\n}\n\nfn main() {\n    let list = vec![Task::Boost(2), Task::Boost(2), Task::Move(4)];\n    for t in list {\n        if let Task::Boost(v) = t {\n            add_vault(v);\n        }\n        // match で Task::Move(n) のときに step(n) を実行しよう！\n        \n    }\n}",
-    "solutionCode": "enum Task {\n    Boost(i32),\n    Move(i32),\n}\n\nfn main() {\n    let list = vec![Task::Boost(2), Task::Boost(2), Task::Move(4)];\n    for t in list {\n        if let Task::Boost(v) = t {\n            add_vault(v);\n        }\n        match t {\n            Task::Move(n) => step(n),\n            _ => {},\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "Task::Move(n) => step(n),",
-        "insert": "match t {\n            Task::Move(n) => step(n),\n            _ => {},\n        }"
-      }
-    ],
-    "hints": [
-      "if let Task::Boost(v) = t で金庫には 4 が入るよ。あとは Task::Move(n) のとき一歩も動いていないんだ！",
-      "for ループの中に `match t { Task::Move(n) => step(n), _ => {}, }` を追加してスイッチ(2, 1)を踏みながら(4, 1)へ進もう！",
-      "match t {\n    Task::Move(n) => step(n),\n    _ => {},\n}"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 4
-    },
-    "parTicks": 6
-  },
-  {
-    "displayId": "10-23",
-    "id": "3d5f336d-5d5a-5a55-bb0b-0f06f14d372c",
-    "index": 159,
-    "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "challenge",
-    "title": "10-23. 二重スイッチと enum コマンド短縮チャレンジ",
-    "topicTag": "enum + コンベア短縮チャレンジ",
-    "kurumiIntro": "コマンド列を工夫して、2箇所のコンベアを連続で乗り継ぎながら制限ティック以内にスイッチもゴールも決めよう！",
-    "goalSummary": "enum 指令でコンベアとスイッチを抜け 9ティック以内に (5, 3) へ",
-    "bookSectionTitle": "10.2 & 10.3 コンベア連鎖を enum で操る",
-    "bookSummary": "コンベアが自動で移動を補ってくれる場所を見抜き、最小限のバリアント列を組むパズルです。",
-    "bookKeyCode": "vec![Inst::Go(1), Inst::Right, ...]",
-    "starterCode": "enum Inst {\n    Go(i32),\n    Right,\n    Left,\n}\n\nfn main() {\n    let prog = vec![\n        Inst::Go(1),\n    ];\n    for p in prog {\n        match p {\n            Inst::Go(n) => step(n),\n            Inst::Right => turn_right(),\n            Inst::Left => turn_left(),\n        }\n    }\n}",
-    "solutionCode": "enum Inst {\n    Go(i32),\n    Right,\n    Left,\n}\n\nfn main() {\n    let prog = vec![\n        Inst::Go(1),\n        Inst::Right,\n        Inst::Go(1),\n        Inst::Left,\n        Inst::Go(2),\n    ];\n    for p in prog {\n        match p {\n            Inst::Go(n) => step(n),\n            Inst::Right => turn_right(),\n            Inst::Left => turn_left(),\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "Inst::Right,",
-        "insert": "Inst::Right,\n        "
-      },
-      {
-        "label": "Inst::Left,",
-        "insert": "Inst::Left,\n        "
-      },
-      {
-        "label": "Inst::Go(1),",
-        "insert": "Inst::Go(1),\n        "
-      },
-      {
-        "label": "Inst::Go(2),",
-        "insert": "Inst::Go(2),\n        "
-      }
-    ],
-    "hints": [
-      "(1,1) の東向きコンベアで (2,1) のスイッチに乗れるよ！まずは `Inst::Go(1)` だね。",
-      "右折して `Inst::Go(1)` を実行すると (2,2) の南向きコンベアが (2,3) へ押し出してくれるよ！",
-      "さらに左折して `Inst::Go(2)` を実行すると (3,3) の東コンベアで (4,3) へ押され、もう1歩で (5,3) ゴールへ着くよ！"
+      "(1,1) の東向きコンベアでスイッチ(2,1)に乗るから a = 1 だよ！",
+      "右折して b = 1 で(2,2)の南向きコンベアに乗って(2,3)へ！最後に左折して c = 2 で(3,3)コンベア経由で(5,3)に届くよ！",
+      "let r = Route { a: 1, b: 1, c: 2 };"
     ],
     "worldSetup": {
       "width": 6,
@@ -2704,48 +353,436 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "victoryCondition": {
       "reachGoal": true,
       "requireAllSwitches": true,
-      "maxTicks": 8
+      "maxTicks": 7
     },
     "parTicks": 7
   },
   {
-    "displayId": "10-24",
-    "id": "0173493a-1743-5f71-b043-68a133bce3ce",
-    "index": 160,
+    "displayId": "10-4",
+    "id": "581e38ad-f1a7-5277-bd7d-5df7a4769556",
+    "index": 228,
     "chapter": 10,
-    "chapterTitle": "第10章 enumとパターンマッチング",
-    "stageKind": "challenge",
-    "title": "10-24. 第10章挑戦：ハイブリッド安全ステート制御",
-    "topicTag": "第10章 最終チャレンジ",
-    "kurumiIntro": "第10章のラスボス課題！`enum Task` のコマンドに、スパーク検知・ゲート待機・ダイヤル解錠・コア納品のすべてを組み込んで迷宮を一気に攻略しよう！",
-    "goalSummary": "enum Task でダイヤル解錠・スパーク突破・コア⚡5+納品・ゴールを達成",
-    "bookSectionTitle": "第10章まとめ — enum・match・Option の完全統合",
-    "bookSummary": "すべての行動と状態を型安全な `enum` で表現し、漏れのない `match` で実行することで複雑なミッションを完璧に制御できます。",
-    "bookKeyCode": "match task { Task::SolveDial => ..., Task::SafeGo(n) => ... }",
-    "starterCode": "enum Task {\n    SolveDial,\n    SafeGo(i32),\n    Pick,\n    Upgrade,\n    Ship,\n}\n\nfn main() {\n    let plan = vec![\n        Task::SolveDial,\n        Task::SafeGo(1),\n        Task::Pick,\n    ];\n    let mut core = None;\n    for t in plan {\n        match t {\n            Task::SolveDial => {\n                let mut g = 1;\n                loop {\n                    match try_dial(g) {\n                        Ordering::Less => g += 1,\n                        Ordering::Greater => g -= 1,\n                        Ordering::Equal => { break; },\n                    }\n                }\n            },\n            Task::SafeGo(n) => {\n                for _ in 0..n {\n                    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                    step();\n                }\n            },\n            Task::Pick => {\n                core = Some(grab_core());\n            },\n            Task::Upgrade => {\n                if let Some(mut c) = core {\n                    boost(&mut c);\n                    core = Some(c);\n                }\n            },\n            Task::Ship => {\n                if let Some(c) = core {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
-    "solutionCode": "enum Task {\n    SolveDial,\n    SafeGo(i32),\n    Pick,\n    Upgrade,\n    Ship,\n}\n\nfn main() {\n    let plan = vec![\n        Task::SolveDial,\n        Task::SafeGo(1),\n        Task::Pick,\n        Task::SafeGo(2),\n        Task::Upgrade,\n        Task::SafeGo(2),\n        Task::Ship,\n    ];\n    let mut core = None;\n    for t in plan {\n        match t {\n            Task::SolveDial => {\n                let mut g = 1;\n                loop {\n                    match try_dial(g) {\n                        Ordering::Less => g += 1,\n                        Ordering::Greater => g -= 1,\n                        Ordering::Equal => { break; },\n                    }\n                }\n            },\n            Task::SafeGo(n) => {\n                for _ in 0..n {\n                    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                    step();\n                }\n            },\n            Task::Pick => {\n                core = Some(grab_core());\n            },\n            Task::Upgrade => {\n                if let Some(mut c) = core {\n                    boost(&mut c);\n                    core = Some(c);\n                }\n            },\n            Task::Ship => {\n                if let Some(c) = core {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-4. impl<T> メソッド定義",
+    "topicTag": "impl<T> / メソッド",
+    "kurumiIntro": "ジェネリック構造体 `BoxUnit<T>` にメソッドを付けるときは `impl<T> BoxUnit<T>` と書くよ！中身の値を金庫と移動の両方に活かそう。",
+    "goalSummary": "impl<T> の value(&self) を使って金庫⚡4＋ゴール (4, 1) へ",
+    "bookSectionTitle": "10.1 メソッド定義でのジェネリクス",
+    "bookSummary": "`impl<T> 型名<T>` のように `impl` の後ろにも `<T>` を宣言することで、どんな型 `T` を持つインスタンスにも使えるメソッドを定義できます。",
+    "bookKeyCode": "impl<T> BoxUnit<T> {\n    fn value(&self) -> &T { &self.val }\n}",
+    "starterCode": "struct BoxUnit<T> {\n    val: T,\n}\n\nimpl<T> BoxUnit<T> {\n    fn get(&self) -> &T {\n        &self.val\n    }\n}\n\nfn main() {\n    let unit = BoxUnit { val: 4 };\n    let n = *unit.get();\n    // 金庫に n を入れ、n 歩進もう！\n    \n}",
+    "solutionCode": "struct BoxUnit<T> {\n    val: T,\n}\n\nimpl<T> BoxUnit<T> {\n    fn get(&self) -> &T {\n        &self.val\n    }\n}\n\nfn main() {\n    let unit = BoxUnit { val: 4 };\n    let n = *unit.get();\n    add_vault(n);\n    step(n);\n}",
     "quickChips": [
       {
-        "label": "Task::SafeGo(2),",
-        "insert": "Task::SafeGo(2),\n        "
+        "label": "add_vault(n);",
+        "insert": "add_vault(n);\n    "
       },
       {
-        "label": "Task::Upgrade,",
-        "insert": "Task::Upgrade,\n        "
-      },
-      {
-        "label": "Task::Ship,",
-        "insert": "Task::Ship,\n        "
+        "label": "step(n);",
+        "insert": "step(n);\n    "
       }
     ],
     "hints": [
-      "(1,1)でコアを拾い、(2,1)にはスパークがいるから SafeGo(2) で (3,1)の強化台兼スイッチまで進むよ！",
-      "(3,1)で Upgrade（boost）したら、また SafeGo(2) でゲート (4,1) を抜けて (5,1) の納品台へ！",
-      "plan に Task::SafeGo(2), Task::Upgrade, Task::SafeGo(2), Task::Ship を書き足そう！"
+      "*unit.get() から 4 が取り出されているよ！",
+      "add_vault(n); と step(n); を書き足そう。",
+      "add_vault(n);\nstep(n);"
     ],
     "worldSetup": {
       "width": 6,
       "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "10-5",
+    "id": "dcacc81e-6cfa-53a1-ab53-9c2ecc9e4126",
+    "index": 229,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-5. 異なる型ペア Duo<T, U> の活用",
+    "topicTag": "複数型引数 <T, U>",
+    "kurumiIntro": "型引数は `<T, U>` のように2つ以上並べられるよ！数字（歩数）とメッセージ（文字列）をセットにした `Duo<T, U>` で合図を出しつつ進もう。",
+    "goalSummary": "Duo<i32, String> で \"GO\" を出力しゴール (3, 1) へ",
+    "bookSectionTitle": "10.1 複数のジェネリック型パラメータ",
+    "bookSummary": "`struct Duo<T, U>` のように異なる複数の型パラメータを使うと、柔軟でありながらコンパイル時の型安全性が保たれます。",
+    "bookKeyCode": "struct Duo<T, U> { a: T, b: U }",
+    "starterCode": "struct Duo<T, U> {\n    steps: T,\n    tag: U,\n}\n\nfn main() {\n    let d = Duo { steps: 3, tag: \"WAIT\" };\n    println!(\"SIGNAL: {}\", d.tag);\n    step(d.steps);\n}",
+    "solutionCode": "struct Duo<T, U> {\n    steps: T,\n    tag: U,\n}\n\nfn main() {\n    let d = Duo { steps: 3, tag: \"GO\" };\n    println!(\"SIGNAL: {}\", d.tag);\n    step(d.steps);\n}",
+    "quickChips": [
+      {
+        "label": "\"GO\"",
+        "insert": "\"GO\""
+      }
+    ],
+    "hints": [
+      "println! の出力に \"GO\" という合図を含めよう！",
+      "d の tag を \"WAIT\" から \"GO\" に書き換えよう。",
+      "let d = Duo { steps: 3, tag: \"GO\" };"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "GO"
+      ]
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "10-6",
+    "id": "d39e7fc6-3812-56fd-bce7-72c69cd529bf",
+    "index": 230,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-6. トレイト trait で共通のふるまい",
+    "topicTag": "trait / impl for",
+    "kurumiIntro": "「歩く能力」や「充電能力」など、型が持つ共通の約束ごとを `trait` で定義しよう！",
+    "goalSummary": "trait PowerUnit を MiniCrab に実装して金庫⚡3＋ゴールへ",
+    "bookSectionTitle": "10.2 トレイト: 共通の振る舞いを定義する",
+    "bookSummary": "`trait 名前 { fn ...; }` でメソッドの約束を決め、`impl トレイト名 for 型名 { ... }` で具体的な動きを実装します。",
+    "bookKeyCode": "trait PowerUnit {\n    fn power(&self) -> i32;\n}",
+    "starterCode": "trait PowerUnit {\n    fn power(&self) -> i32;\n}\n\nstruct MiniCrab { level: i32 }\n\nimpl PowerUnit for MiniCrab {\n    fn power(&self) -> i32 {\n        // level を 3倍にして返してみよう！\n        self.level\n    }\n}\n\nfn main() {\n    let crab = MiniCrab { level: 1 };\n    let p = crab.power();\n    add_vault(p);\n    step(p);\n}",
+    "solutionCode": "trait PowerUnit {\n    fn power(&self) -> i32;\n}\n\nstruct MiniCrab { level: i32 }\n\nimpl PowerUnit for MiniCrab {\n    fn power(&self) -> i32 {\n        self.level * 3\n    }\n}\n\nfn main() {\n    let crab = MiniCrab { level: 1 };\n    let p = crab.power();\n    add_vault(p);\n    step(p);\n}",
+    "quickChips": [
+      {
+        "label": "self.level * 3",
+        "insert": "self.level * 3"
+      }
+    ],
+    "hints": [
+      "MiniCrab の level は 1 だよ。power() が 3 を返せば金庫もゴールも達成できる！",
+      "self.level * 3 に直してみよう。",
+      "fn power(&self) -> i32 {\n    self.level * 3\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "10-7",
+    "id": "2ffed195-378d-5077-b5bd-d451e2930f47",
+    "index": 231,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-7. 複数の型に同じトレイトを実装する",
+    "topicTag": "多態性 impl Trait for A, B",
+    "kurumiIntro": "太陽光歯車 `Solar` と風力歯車 `Wind`、中身はちがっても同じ `trait Energy` を実装すれば、共通のメソッド名 `.watt()` で呼べるようになるよ！",
+    "goalSummary": "Solar と Wind の合計ワット数で金庫⚡5＋ゴール (5, 1) へ",
+    "bookSectionTitle": "10.2 異なる型へのトレイト実装",
+    "bookSummary": "1つの `trait` を複数の構造体に実装することで、それぞれの特性に合わせた計算をしつつ、使う側は同じインターフェースで扱えます。",
+    "bookKeyCode": "impl Energy for Solar { ... }\nimpl Energy for Wind { ... }",
+    "starterCode": "trait Energy {\n    fn watt(&self) -> i32;\n}\n\nstruct Solar { sun: i32 }\nstruct Wind { rpm: i32 }\n\nimpl Energy for Solar {\n    fn watt(&self) -> i32 { self.sun * 2 }\n}\n\nimpl Energy for Wind {\n    // rpm に 1 を足した値を返すよう直そう！（rpm=2 なら 3）\n    fn watt(&self) -> i32 { self.rpm }\n}\n\nfn main() {\n    let s = Solar { sun: 1 };\n    let w = Wind { rpm: 2 };\n    let total = s.watt() + w.watt();\n    add_vault(total);\n    step(total);\n}",
+    "solutionCode": "trait Energy {\n    fn watt(&self) -> i32;\n}\n\nstruct Solar { sun: i32 }\nstruct Wind { rpm: i32 }\n\nimpl Energy for Solar {\n    fn watt(&self) -> i32 { self.sun * 2 }\n}\n\nimpl Energy for Wind {\n    fn watt(&self) -> i32 { self.rpm + 1 }\n}\n\nfn main() {\n    let s = Solar { sun: 1 };\n    let w = Wind { rpm: 2 };\n    let total = s.watt() + w.watt();\n    add_vault(total);\n    step(total);\n}",
+    "quickChips": [
+      {
+        "label": "self.rpm + 1",
+        "insert": "self.rpm + 1"
+      }
+    ],
+    "hints": [
+      "s.watt() は 1 * 2 = 2 だよ。合計を 5 にするには w.watt() が 3 になればいいね！",
+      "impl Energy for Wind の中を `{ self.rpm + 1 }` にしよう。",
+      "fn watt(&self) -> i32 { self.rpm + 1 }"
+    ],
+    "worldSetup": {
+      "width": 7,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "10-8",
+    "id": "8f71099b-27eb-5844-b594-aed9c6e540eb",
+    "index": 232,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-8. トレイトで異なる移動機を切り替える",
+    "topicTag": "trait + スパーク警戒",
+    "kurumiIntro": "「直線型 `DashUnit`」と「安全確認型 `SafeUnit`」に同じ `trait Walker` を実装しよう！スパークが横切る通路では安全型の出番だよ。",
+    "goalSummary": "SafeUnit に Walker を実装してスパークを避け (5, 1) へ",
+    "bookSectionTitle": "10.2 同じトレイトでも実装ごとに安全性を変える",
+    "bookSummary": "共通のメソッド名 `walk(&self, n)` でありながら、型によって安全確認の有無など異なる振る舞いを実装できます。",
+    "bookKeyCode": "impl Walker for SafeUnit { fn walk(&self, n: i32) { ... } }",
+    "starterCode": "trait Walker {\n    fn walk(&self, n: i32);\n}\n\nstruct SafeUnit {\n    tag: i32,\n}\n\nimpl Walker for SafeUnit {\n    fn walk(&self, n: i32) {\n        for _ in 0..n {\n            // スパークや閉じているゲートがあれば wait_tick(1) で待とう！\n            step();\n        }\n    }\n}\n\nfn go<T: Walker>(u: &T, n: i32) {\n    u.walk(n);\n}\n\nfn main() {\n    let unit = SafeUnit { tag: 1 };\n    go(&unit, 5);\n}",
+    "solutionCode": "trait Walker {\n    fn walk(&self, n: i32);\n}\n\nstruct SafeUnit {\n    tag: i32,\n}\n\nimpl Walker for SafeUnit {\n    fn walk(&self, n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nfn go<T: Walker>(u: &T, n: i32) {\n    u.walk(n);\n}\n\nfn main() {\n    let unit = SafeUnit { tag: 1 };\n    go(&unit, 5);\n}",
+    "quickChips": [
+      {
+        "label": "while is_spark_ahead() || !is_gate_open() { wait_tick(1); }",
+        "insert": "while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            "
+      }
+    ],
+    "hints": [
+      "(2,1) に横断スパークがいて、(3,1) にスイッチ連動ゲートがあるよ！",
+      "walk メソッドの中の `step();` の前に `while is_spark_ahead() || !is_gate_open() { wait_tick(1); }` を入れよう。",
+      "while is_spark_ahead() || !is_gate_open() {\n    wait_tick(1);\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
       "walls": [
         {
           "x": 0,
@@ -2786,6 +823,50 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
         {
           "x": 5,
           "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
         }
       ],
       "botStart": {
@@ -2797,16 +878,251 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 1
       },
-      "dial": {
-        "secret": 3
+      "switches": [
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 1,
+            "y": 1
+          }
+        }
+      ],
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 2,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 1
+            }
+          ],
+          "initialIndex": 3
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "requireAllSwitches": true
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "10-9",
+    "id": "9488c624-3fd3-54cf-a8a1-8490c9c47af7",
+    "index": 233,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-9. トレイト境界 <T: Driveable> で関数に制約を",
+    "topicTag": "トレイト境界 T: Trait",
+    "kurumiIntro": "「`Driveable` トレイトを持っている型だけ受け付ける」関数 `launch<T: Driveable>(unit: &T)` を動かしてみよう！安全な部品だけが発進できる仕組みだよ。",
+    "goalSummary": "トレイト境界を持つ launch で WheelDrive を動かし (3, 3) へ",
+    "bookSectionTitle": "10.2 引数としてのトレイト・トレイト境界構文",
+    "bookSummary": "`fn launch<T: Driveable>(u: &T)` のように書くと、`Driveable` トレイトを実装した型だけを渡せる汎用関数を作れます。",
+    "bookKeyCode": "fn launch<T: Driveable>(u: &T) { u.drive(); }",
+    "starterCode": "trait Driveable {\n    fn drive(&self);\n}\n\nstruct WheelDrive {\n    dx: i32,\n    dy: i32,\n}\n\nimpl Driveable for WheelDrive {\n    fn drive(&self) {\n        step(self.dx);\n        turn_right();\n        step(self.dy);\n    }\n}\n\nfn launch<T: Driveable>(unit: &T) {\n    unit.drive();\n}\n\nfn main() {\n    let w = WheelDrive { dx: 1, dy: 2 };\n    // dx を 3 にして L字の奥 (3, 3) へ到着しよう！\n    launch(&w);\n}",
+    "solutionCode": "trait Driveable {\n    fn drive(&self);\n}\n\nstruct WheelDrive {\n    dx: i32,\n    dy: i32,\n}\n\nimpl Driveable for WheelDrive {\n    fn drive(&self) {\n        step(self.dx);\n        turn_right();\n        step(self.dy);\n    }\n}\n\nfn launch<T: Driveable>(unit: &T) {\n    unit.drive();\n}\n\nfn main() {\n    let w = WheelDrive { dx: 3, dy: 2 };\n    launch(&w);\n}",
+    "quickChips": [
+      {
+        "label": "dx: 3",
+        "insert": "dx: 3"
+      }
+    ],
+    "hints": [
+      "WheelDrive { dx: 1, dy: 2 } だと右に1歩しか進めないよ！",
+      "dx: 3 に直すと右に3歩、下に2歩進んでゴール (3, 3) に着くよ。",
+      "let w = WheelDrive { dx: 3, dy: 2 };"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "10-10",
+    "id": "28016ab7-3c5e-5472-bc4c-631fcb94ecd1",
+    "index": 234,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-10. 空間ルール対応のトレイト境界関数",
+    "topicTag": "T: CoreOps + 空間コア",
+    "kurumiIntro": "検査と強化の2つができる部品だけをトレイト境界 `T: ProcessCore` で受け付ける納品関数を使おう！正しい場所で `scan` と `boost` を行ってね。",
+    "goalSummary": "トレイト境界関数でコア検査・強化(⚡4+)・納品・ゴールへ",
+    "bookSectionTitle": "10.2 トレイト境界による処理能力の保証",
+    "bookSummary": "`fn mission<T: Trait>(u: &T)` は「このトレイトを満たす型しか渡せない」ことをコンパイル時に保証する仕組みです。",
+    "bookKeyCode": "fn mission<T: CoreStage>(m: &T)",
+    "starterCode": "trait CoreStage {\n    fn run(&self);\n}\n\nstruct LineWorker {\n    bonus: i32,\n}\n\nimpl CoreStage for LineWorker {\n    fn run(&self) {\n        add_vault(self.bonus);\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        // (3,1)強化台へ進んで boost(&mut c)、さらに(4,1)納品台で deliver(c) しよう！\n    }\n}\n\nfn dispatch<T: CoreStage>(worker: &T) {\n    worker.run();\n}\n\nfn main() {\n    let w = LineWorker { bonus: 4 };\n    dispatch(&w);\n}",
+    "solutionCode": "trait CoreStage {\n    fn run(&self);\n}\n\nstruct LineWorker {\n    bonus: i32,\n}\n\nimpl CoreStage for LineWorker {\n    fn run(&self) {\n        add_vault(self.bonus);\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(1);\n        deliver(c);\n    }\n}\n\nfn dispatch<T: CoreStage>(worker: &T) {\n    worker.run();\n}\n\nfn main() {\n    let w = LineWorker { bonus: 4 };\n    dispatch(&w);\n}",
+    "quickChips": [
+      {
+        "label": "step(1); boost(&mut c);",
+        "insert": "step(1);\n        boost(&mut c);\n        "
+      },
+      {
+        "label": "step(1); deliver(c);",
+        "insert": "step(1);\n        deliver(c);"
+      }
+    ],
+    "hints": [
+      "scan(&c) した位置は (2,1) だよ。1歩進むと (3,1) の強化台があるから `boost(&mut c);` しよう！",
+      "さらにもう1歩で (4,1) の納品台に着くから `deliver(c);` で完了！",
+      "step(1); boost(&mut c); step(1); deliver(c);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
       },
       "cores": [
         {
           "id": "c1",
           "x": 1,
           "y": 1,
-          "power": 3,
-          "label": "究極コア"
+          "power": 2,
+          "label": "境界コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
         }
       ],
       "chargers": [
@@ -2815,7 +1131,575 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
           "y": 1
         }
       ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "vaultTarget": 4,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "10-11",
+    "id": "dc872ad3-345b-5f25-95d4-1d780fd8a7eb",
+    "index": 235,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-11. トレイトと switch ゲートの制御パズル",
+    "topicTag": "trait + ゲート実践",
+    "kurumiIntro": "トレイト `GateBreaker` を持つロボットを動かして、途中のスイッチを踏んで連動ゲートを開きながらゴールまで突っ走ろう！",
+    "goalSummary": "trait GateBreaker を使って金庫⚡4＋連動ゲートを突破しよう",
+    "bookSectionTitle": "10.2 トレイトによる行動抽象化",
+    "bookSummary": "役割ごとの手順をトレイトメソッドに閉じ込めることで、制御ロジックを見通しよく保てます。",
+    "bookKeyCode": "impl GateBreaker for TurboBot { fn charge(&self) { ... } }",
+    "starterCode": "trait GateBreaker {\n    fn charge(&self) -> i32;\n    fn cross(&self);\n}\n\nstruct TurboBot { val: i32 }\n\nimpl GateBreaker for TurboBot {\n    fn charge(&self) -> i32 { self.val }\n    fn cross(&self) {\n        // スイッチ(2, 1)を通ってゴール(4, 1)へ4歩進もう！\n        step(2);\n    }\n}\n\nfn main() {\n    let b = TurboBot { val: 4 };\n    add_vault(b.charge());\n    b.cross();\n}",
+    "solutionCode": "trait GateBreaker {\n    fn charge(&self) -> i32;\n    fn cross(&self);\n}\n\nstruct TurboBot { val: i32 }\n\nimpl GateBreaker for TurboBot {\n    fn charge(&self) -> i32 { self.val }\n    fn cross(&self) {\n        step(4);\n    }\n}\n\nfn main() {\n    let b = TurboBot { val: 4 };\n    add_vault(b.charge());\n    b.cross();\n}",
+    "quickChips": [
+      {
+        "label": "step(4);",
+        "insert": "step(4);"
+      }
+    ],
+    "hints": [
+      "(2, 1) のスイッチを踏めば (3, 1) のゲートが開くから、合計4歩直進できるよ！",
+      "cross の中の step(2); を step(4); にしよう。",
+      "fn cross(&self) {\n    step(4);\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
       "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "10-12",
+    "id": "07f2c040-9791-54e8-8788-09370c49cc5b",
+    "index": 236,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-12. ジェネリック＋トレイトで自動迷路脱出",
+    "topicTag": "trait Solver + 左手法迷路",
+    "kurumiIntro": "左手法の迷路アルゴリズムをトレイト `MazeSolver` として定義し、ジェネリック関数 `run_solver<T: MazeSolver>` から起動して迷路を脱出しよう！",
+    "goalSummary": "MazeSolver 実装を完成させ行き止まりを右折して迷路ゴール (3, 3) へ",
+    "bookSectionTitle": "10.2 トレイトによるアルゴリズム差し替え設計",
+    "bookSummary": "探索手法をトレイトとして抽象化しておけば、呼び出し元の `run_solver` を一切変えずに別の探索策略へ差し替えられます。",
+    "bookKeyCode": "fn run_solver<T: MazeSolver>(s: &T) { s.solve(); }",
+    "starterCode": "trait MazeSolver {\n    fn solve(&self);\n}\n\nstruct LeftWallBot {\n    vault: i32,\n}\n\nimpl MazeSolver for LeftWallBot {\n    fn solve(&self) {\n        add_vault(self.vault);\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                // 行き止まりで右折しよう！今は wait_tick だけだよ\n                wait_tick(1);\n            }\n        }\n    }\n}\n\nfn run_solver<T: MazeSolver>(s: &T) {\n    s.solve();\n}\n\nfn main() {\n    let bot = LeftWallBot { vault: 4 };\n    run_solver(&bot);\n}",
+    "solutionCode": "trait MazeSolver {\n    fn solve(&self);\n}\n\nstruct LeftWallBot {\n    vault: i32,\n}\n\nimpl MazeSolver for LeftWallBot {\n    fn solve(&self) {\n        add_vault(self.vault);\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nfn run_solver<T: MazeSolver>(s: &T) {\n    s.solve();\n}\n\nfn main() {\n    let bot = LeftWallBot { vault: 4 };\n    run_solver(&bot);\n}",
+    "quickChips": [
+      {
+        "label": "turn_right();",
+        "insert": "turn_right();"
+      }
+    ],
+    "hints": [
+      "左も前も壁のときの `else` が `wait_tick(1);` になっているため動けなくなっているよ！",
+      "`turn_right();` に書き換えよう！",
+      "else {\n    turn_right();\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "10-13",
+    "id": "08ae2516-d978-50bb-a1af-ded3ae253058",
+    "index": 237,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "challenge",
+    "title": "10-13. トレイト＋コンベア最短7ティック挑戦",
+    "topicTag": "trait + コンベア最短",
+    "kurumiIntro": "2種類のエンジン構造体 `BoostA` と `BoostB` に同じトレイト `PowerSpec` を実装して合計⚡5を作り、コンベアを使って 7ティック以内に走り抜けよう！",
+    "goalSummary": "トレイト合計⚡5＋全スイッチ＋コンベアで7ティック以内に (5, 3) へ",
+    "bookSectionTitle": "10.2 トレイト計算と最短コンベアパス",
+    "bookSummary": "トレイトメソッドで必要なエネルギーを算出しつつ、最短ステップでゴールを目指します。",
+    "bookKeyCode": "impl PowerSpec for BoostA { ... }",
+    "starterCode": "trait PowerSpec {\n    fn power(&self) -> i32;\n}\n\nstruct BoostA { v: i32 }\nstruct BoostB { v: i32 }\n\nimpl PowerSpec for BoostA { fn power(&self) -> i32 { self.v * 2 } }\nimpl PowerSpec for BoostB {\n    // v + 1 を返すよう直そう！（v=2 なら 3、合わせて 2 + 3 = 5）\n    fn power(&self) -> i32 { self.v }\n}\n\nfn main() {\n    let a = BoostA { v: 1 };\n    let b = BoostB { v: 2 };\n    add_vault(a.power() + b.power());\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(2);\n}",
+    "solutionCode": "trait PowerSpec {\n    fn power(&self) -> i32;\n}\n\nstruct BoostA { v: i32 }\nstruct BoostB { v: i32 }\n\nimpl PowerSpec for BoostA { fn power(&self) -> i32 { self.v * 2 } }\nimpl PowerSpec for BoostB {\n    fn power(&self) -> i32 { self.v + 1 }\n}\n\nfn main() {\n    let a = BoostA { v: 1 };\n    let b = BoostB { v: 2 };\n    add_vault(a.power() + b.power());\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(2);\n}",
+    "quickChips": [
+      {
+        "label": "self.v + 1",
+        "insert": "self.v + 1"
+      }
+    ],
+    "hints": [
+      "移動ルートは完璧！でも今の b.power() は 2 だから金庫が 2 + 2 = 4 しか入らないよ。",
+      "BoostB の power() を `{ self.v + 1 }` にすれば 2 + 3 = 5 で金庫もクリア！",
+      "impl PowerSpec for BoostB {\n    fn power(&self) -> i32 { self.v + 1 }\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "dir": 1
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "dir": 0
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5,
+      "requireAllSwitches": true,
+      "maxTicks": 8
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "10-14",
+    "id": "2eccc816-7f2d-5d01-af35-7bccdb1aa496",
+    "index": 238,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "challenge",
+    "title": "10-14. ジェネリック機構×スイッチ連動迷路",
+    "topicTag": "<T> + トレイト境界迷路",
+    "kurumiIntro": "トレイト境界 `<T: Pilot>` で操縦ロボを受け入れ、途中の2つのスイッチと周期ゲートを抜けて下の階層 `(4, 3)` へたどり着こう！",
+    "goalSummary": "トレイト境界の操縦ロボで金庫⚡5・全スイッチ・周期ゲートを突破し (4, 3) へ",
+    "bookSectionTitle": "10.2 ジェネリック設計で複雑な経路を攻略する",
+    "bookSummary": "安全移動能力をトレイトに定義し、ジェネリック関数を通してミッションを実行します。",
+    "bookKeyCode": "fn launch_bot<T: Pilot>(p: &T)",
+    "starterCode": "trait Pilot {\n    fn fly(&self);\n}\n\nstruct SmartPilot<T> {\n    vault_amt: T,\n}\n\nimpl Pilot for SmartPilot<i32> {\n    fn fly(&self) {\n        add_vault(self.vault_amt);\n        // (1,1)スイッチ1 -> (2,1)スパーク -> (3,1)スイッチ2 -> (4,1)右折 -> (4,2)ゲート -> (4,3)ゴール！\n        for _ in 0..2 {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nfn launch_bot<T: Pilot>(p: &T) {\n    p.fly();\n}\n\nfn main() {\n    let sp = SmartPilot { vault_amt: 5 };\n    launch_bot(&sp);\n}",
+    "solutionCode": "trait Pilot {\n    fn fly(&self);\n}\n\nstruct SmartPilot<T> {\n    vault_amt: T,\n}\n\nimpl Pilot for SmartPilot<i32> {\n    fn fly(&self) {\n        add_vault(self.vault_amt);\n        for _ in 0..4 {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n        turn_right();\n        for _ in 0..2 {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nfn launch_bot<T: Pilot>(p: &T) {\n    p.fly();\n}\n\nfn main() {\n    let sp = SmartPilot { vault_amt: 5 };\n    launch_bot(&sp);\n}",
+    "quickChips": [
+      {
+        "label": "0..4",
+        "insert": "0..4"
+      },
+      {
+        "label": "turn_right();",
+        "insert": "turn_right();\n        "
+      }
+    ],
+    "hints": [
+      "東へ 4歩（for _ in 0..4）進みながら(1,1)と(3,1)のスイッチを踏み、(2,1)のスパークを待って(4,1)へ！",
+      "その後 `turn_right();` してから、さらに `for _ in 0..2` でゲート(4,2)を通って(4,3)へ！",
+      "for _ in 0..4 { ... } turn_right(); for _ in 0..2 { ... }"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 1,
+          "y": 1
+        },
         {
           "x": 3,
           "y": 1
@@ -2824,7 +1708,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
       "gates": [
         {
           "x": 4,
-          "y": 1,
+          "y": 2,
           "openTicks": 1,
           "closedTicks": 1,
           "linkedSwitch": {
@@ -2833,12 +1717,12 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
           }
         }
       ],
-      "deliveries": [
-        {
-          "x": 5,
-          "y": 1
-        }
-      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      },
       "sparks": [
         {
           "id": "sp1",
@@ -2860,6 +1744,1330 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
               "y": 1
             }
           ],
+          "initialIndex": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5,
+      "requireAllSwitches": true
+    },
+    "parTicks": 11
+  },
+  {
+    "displayId": "10-15",
+    "id": "31e70608-d2d8-5714-8eee-3fba590ecdb3",
+    "index": 239,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-15. impl<T> でダイヤルと金庫を両方扱う器",
+    "topicTag": "impl<T> + ダイヤル解錠",
+    "kurumiIntro": "金庫の値でもダイヤルの答えでも入れられる汎用ホルダ `VaultKey<T>` に、値を2つとも活かして扉を開けるメソッドを使おう！",
+    "goalSummary": "VaultKey<T> から暗証番号 4 と金庫⚡4を取り出して (4, 1) へ",
+    "bookSectionTitle": "10.1 & 10.2 ジェネリック型の使い回し",
+    "bookSummary": "同じ `Holder<T>` の定義を使って、ダイヤル番号用・歩数用・金庫チャージ用といった異なる目的のデータを綺麗に扱います。",
+    "bookKeyCode": "impl<T> Holder<T> { fn inner(&self) -> &T { &self.v } }",
+    "starterCode": "struct Holder<T> {\n    v: T,\n}\n\nimpl<T> Holder<T> {\n    fn read(&self) -> &T {\n        &self.v\n    }\n}\n\nfn main() {\n    let key = Holder { v: 4 };\n    let dist = Holder { v: 4 };\n    // *key.read() でダイヤルを解き、*dist.read() で金庫と移動を行おう！\n    add_vault(*dist.read());\n    step(*dist.read());\n}",
+    "solutionCode": "struct Holder<T> {\n    v: T,\n}\n\nimpl<T> Holder<T> {\n    fn read(&self) -> &T {\n        &self.v\n    }\n}\n\nfn main() {\n    let key = Holder { v: 4 };\n    let dist = Holder { v: 4 };\n    try_dial(*key.read());\n    add_vault(*dist.read());\n    step(*dist.read());\n}",
+    "quickChips": [
+      {
+        "label": "try_dial(*key.read());",
+        "insert": "try_dial(*key.read());\n    "
+      }
+    ],
+    "hints": [
+      "key には秘密の番号 4 が入っているのに、まだ `try_dial(...)` を呼んでいないよ！",
+      "add_vault の前に `try_dial(*key.read());` を追加しよう。",
+      "try_dial(*key.read());"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "dial": {
+        "secret": 4
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "vaultTarget": 4,
+      "requireAllSwitches": true
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "10-16",
+    "id": "501b44e2-7067-5e83-8742-ecb185d3add7",
+    "index": 240,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-16. ライフタイム注釈 'a で参照の寿命を守る",
+    "topicTag": "ライフタイム 'a",
+    "kurumiIntro": "2つの参照を受け取ってどちらかを返す関数では、参照が途中で消えないことを `'a`（ライフタイム）でコンパイラに教えてあげるんだ！",
+    "goalSummary": "pick_max<'a> を使って大きい方の歩数 3 でゴールへ",
+    "bookSectionTitle": "10.3 ライフタイムで参照を検証する",
+    "bookSummary": "参照同士の寿命関係を `fn f<'a>(x: &'a i32, y: &'a i32) -> &'a i32` のように表します。これにより、無効になった参照（ダングリングポインタ）を絶対に作らせません。",
+    "bookKeyCode": "fn pick_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
+    "starterCode": "fn pick_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let small = 1;\n    let big = 3;\n    // pick_max に &small と &big を渡して大きい方を歩こう！\n    let chosen = pick_max(&small, &small);\n    step(*chosen);\n}",
+    "solutionCode": "fn pick_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let small = 1;\n    let big = 3;\n    let chosen = pick_max(&small, &big);\n    step(*chosen);\n}",
+    "quickChips": [
+      {
+        "label": "&big",
+        "insert": "&big"
+      }
+    ],
+    "hints": [
+      "今は pick_max(&small, &small) を呼んでいるから 1 しか返ってこないよ！",
+      "2つ目の引数を `&big` にして 3 を選んでもらおう。",
+      "let chosen = pick_max(&small, &big);\nstep(*chosen);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "10-17",
+    "id": "c0fd3332-442d-55fc-838d-c594d61eb5cc",
+    "index": 241,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-17. 最小値を選ぶライフタイム関数",
+    "topicTag": "ライフタイム比較関数",
+    "kurumiIntro": "今度は2つの参照から「小さい方」を選ぶ `pick_min<'a>` 関数を使おう！安全な制限速度（小さい方＝4）を選んでゴールへ進んでね。",
+    "goalSummary": "pick_min<'a> で制限速度 4 を選んでゴール (4, 1) へ",
+    "bookSectionTitle": "10.3 関数内のジェネリックライフタイム",
+    "bookSummary": "引数の寿命と同じ範囲でしか返り値の参照を生かさないという約束が `<'a>` です。",
+    "bookKeyCode": "fn pick_min<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
+    "starterCode": "fn pick_min<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    // 小さい方を返すように > を < に直そう！\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let limit = 4;\n    let over = 10;\n    let safe = pick_min(&limit, &over);\n    step(*safe);\n}",
+    "solutionCode": "fn pick_min<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a < *b { a } else { b }\n}\n\nfn main() {\n    let limit = 4;\n    let over = 10;\n    let safe = pick_min(&limit, &over);\n    step(*safe);\n}",
+    "quickChips": [
+      {
+        "label": "if *a < *b",
+        "insert": "if *a < *b"
+      }
+    ],
+    "hints": [
+      "今は *a > *b だから大きい方の 10 を返して壁にぶつかっちゃうよ！",
+      "if *a < *b { a } else { b } に直そう。",
+      "if *a < *b { a } else { b }"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "10-18",
+    "id": "843c371a-ec86-5cad-9cbb-279b2feaee78",
+    "index": 242,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-18. ライフタイム 'a で2つのセンサー値から選別",
+    "topicTag": "ライフタイム + スイッチ",
+    "kurumiIntro": "2つの参照値 `&a` と `&b` の中から「ちょうどゴールに届く歩数」をライフタイム注釈付き関数 `choose_exact<'a>` で選び出そう！",
+    "goalSummary": "ライフタイム付き pick 関数でスイッチを踏み (4, 1) へ",
+    "bookSectionTitle": "10.3 複数の参照を安全に比較・返却する関数",
+    "bookSummary": "同じライフタイム `'a` を持つ2つの参照を受け取り、条件に合う方の参照だけを安全に呼び出し元へ返します。",
+    "bookKeyCode": "fn choose<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
+    "starterCode": "fn choose<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    // a と b のうち 4 に等しい方（あるいは大きい方）を返そう！今は常に a を返してるよ\n    a\n}\n\nfn main() {\n    let wrong = 1;\n    let right = 4;\n    let dist = choose(&wrong, &right);\n    add_vault(*dist);\n    step(*dist);\n}",
+    "solutionCode": "fn choose<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let wrong = 1;\n    let right = 4;\n    let dist = choose(&wrong, &right);\n    add_vault(*dist);\n    step(*dist);\n}",
+    "quickChips": [
+      {
+        "label": "if *a > *b { a } else { b }",
+        "insert": "if *a > *b { a } else { b }"
+      }
+    ],
+    "hints": [
+      "wrong = 1、right = 4 だよ！今の choose() は常に a (=1) を返しているね。",
+      "if *a > *b { a } else { b } に直すと大きい方 4 の参照が返ってスイッチ経由でゴールできるよ！",
+      "if *a > *b { a } else { b }"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4,
+      "requireAllSwitches": true
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "10-19",
+    "id": "11ff3b4b-9609-535e-9aa0-286223f193a5",
+    "index": 243,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-19. 構造体の中の参照とライフタイム注釈",
+    "topicTag": "struct Guide<'a>",
+    "kurumiIntro": "構造体が数値の「参照 `&i32`」を持つときも、`struct Guide<'a> { target: &'a i32 }` のようにライフタイムを明記するよ！",
+    "goalSummary": "構造体 Guide<'a> が指す参照を読み取って金庫⚡3＋ゴールへ",
+    "bookSectionTitle": "10.3 構造体定義のライフタイム注釈",
+    "bookSummary": "構造体が所有権ではなく参照を保持する場合は、「その参照先よりも構造体の方が長生きしない」ことを `<'a>` で宣言します。",
+    "bookKeyCode": "struct Guide<'a> {\n    target: &'a i32,\n}",
+    "starterCode": "struct Guide<'a> {\n    target: &'a i32,\n}\n\nfn main() {\n    let dist = 3;\n    let g = Guide { target: &dist };\n    // *g.target で中身を取り出して金庫と移動に使おう！\n    add_vault(*g.target);\n    \n}",
+    "solutionCode": "struct Guide<'a> {\n    target: &'a i32,\n}\n\nfn main() {\n    let dist = 3;\n    let g = Guide { target: &dist };\n    add_vault(*g.target);\n    step(*g.target);\n}",
+    "quickChips": [
+      {
+        "label": "step(*g.target);",
+        "insert": "step(*g.target);"
+      }
+    ],
+    "hints": [
+      "*g.target は参照先の 3 を読み取るよ！",
+      "最後の行に step(*g.target); を追加しよう。",
+      "add_vault(*g.target);\nstep(*g.target);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "10-20",
+    "id": "49691899-0b21-5dcf-be1b-4c3a581670c6",
+    "index": 244,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-20. 構造体 RefGuide<'a> と2つの参照ナビ",
+    "topicTag": "struct RefGuide<'a>",
+    "kurumiIntro": "「横の参照」と「縦の参照」を両方フィールドに持つ構造体 `RefGuide<'a>` を使って、U字・L字の先のゴール `(3, 3)` へ到着しよう！",
+    "goalSummary": "RefGuide<'a> が指す2つの参照を読み取り金庫⚡5＋(3, 3)へ",
+    "bookSectionTitle": "10.3 複数参照フィールドを持つ構造体とライフタイム",
+    "bookSummary": "同じライフタイムパラメータ `'a` を2つの参照フィールドへ割り当てることで、どちらの参照も構造体より長生きすることを保証します。",
+    "bookKeyCode": "struct RefGuide<'a> { x: &'a i32, y: &'a i32 }",
+    "starterCode": "struct RefGuide<'a> {\n    x: &'a i32,\n    y: &'a i32,\n}\n\nfn main() {\n    let east = 3;\n    let south = 2;\n    let g = RefGuide { x: &east, y: &south };\n    // *g.x + *g.y で金庫⚡5を満たし、L字の(3, 3)へ進もう！\n    step(*g.x);\n}",
+    "solutionCode": "struct RefGuide<'a> {\n    x: &'a i32,\n    y: &'a i32,\n}\n\nfn main() {\n    let east = 3;\n    let south = 2;\n    let g = RefGuide { x: &east, y: &south };\n    add_vault(*g.x + *g.y);\n    step(*g.x);\n    turn_right();\n    step(*g.y);\n}",
+    "quickChips": [
+      {
+        "label": "add_vault(*g.x + *g.y);",
+        "insert": "add_vault(*g.x + *g.y);\n    "
+      },
+      {
+        "label": "turn_right(); step(*g.y);",
+        "insert": "turn_right();\n    step(*g.y);"
+      }
+    ],
+    "hints": [
+      "g.x は &3、g.y は &2 を指しているよ！",
+      "`add_vault(*g.x + *g.y);` で⚡5を貯め、東に3歩のあと `turn_right(); step(*g.y);` で(3,3)へ！",
+      "add_vault(*g.x + *g.y); step(*g.x); turn_right(); step(*g.y);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "10-21",
+    "id": "73901717-26d9-5611-a9ef-6d36f09050ed",
+    "index": 245,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "challenge",
+    "title": "10-21. ライフタイム＋空間コア＋スパーク回避",
+    "topicTag": "ライフタイム + コア納品",
+    "kurumiIntro": "ライフタイム関数 `pick_target<'a>` で目標金庫⚡6を選び出し、スパークが守る強化台を経由してコアを納品しよう！",
+    "goalSummary": "pick_target<'a> で金庫⚡6・スパーク突破・コア⚡5+納品を達成",
+    "bookSectionTitle": "10.3 ライフタイム参照値と空間工程の結合",
+    "bookSummary": "参照から安全に受け取った数値を現場のエネルギー目標へ使いながら、巡回障害物とコア操作を完遂します。",
+    "bookKeyCode": "fn pick_target<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
+    "starterCode": "fn pick_target<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let low = 2;\n    let high = 6;\n    let target = pick_target(&low, &high);\n    add_vault(*target);\n    // (1,1)コア→(2,1)検査→(3,1)スパーク→(4,1)強化＆スイッチ→(5,1)納品台へ！\n    safe_go(1);\n}",
+    "solutionCode": "fn pick_target<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let low = 2;\n    let high = 6;\n    let target = pick_target(&low, &high);\n    add_vault(*target);\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    scan(&c);\n    safe_go(2);\n    boost(&mut c);\n    safe_go(1);\n    deliver(c);\n}",
+    "quickChips": [
+      {
+        "label": "let mut c = grab_core();",
+        "insert": "let mut c = grab_core();\n    "
+      },
+      {
+        "label": "scan(&c);",
+        "insert": "scan(&c);\n    "
+      },
+      {
+        "label": "boost(&mut c);",
+        "insert": "boost(&mut c);\n    "
+      },
+      {
+        "label": "deliver(c);",
+        "insert": "deliver(c);"
+      }
+    ],
+    "hints": [
+      "safe_go(1) で (1,1) に着いたら grab_core()、次の safe_go(1) で (2,1) 検査台で scan(&c) しよう！",
+      "safe_go(2) でスパーク(3,1)を越えて (4,1) 強化台で boost(&mut c)＋スイッチを踏み、safe_go(1); deliver(c); で (5,1) へ！",
+      "safe_go(1); scan(&c); safe_go(2); boost(&mut c); safe_go(1); deliver(c);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "寿命コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 5,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 3,
+              "y": 0
+            },
+            {
+              "x": 3,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 5,
+      "scanCount": 1,
+      "vaultTarget": 6,
+      "requireAllSwitches": true,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 13
+  },
+  {
+    "displayId": "10-22",
+    "id": "455cf048-9f16-530c-9359-1bb15e4b9236",
+    "index": 246,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "puzzle",
+    "title": "10-22. Duo<T, U> + ライフタイムで二重スイッチ解錠",
+    "topicTag": "<T, U> + <'a> + ダイヤル",
+    "kurumiIntro": "異なる2型を持つ `Pair<T, U>` とライフタイム選択関数を合わせて、秘密のダイヤル番号を選び出し、U字コースのスイッチを2つとも踏もう！",
+    "goalSummary": "Pair<T, U> と pick<'a> でダイヤル解錠(5)＋全スイッチ＋(0, 3)へ",
+    "bookSectionTitle": "10.1 & 10.3 ジェネリクスとライフタイムの組み合わせ",
+    "bookSummary": "ジェネリックコンテナで受け取った値の中から、ライフタイム付きの比較関数で最適な参照を選び出す総合演習です。",
+    "bookKeyCode": "struct Pair<T, U> { label: T, val: U }",
+    "starterCode": "struct Packet<T, U> {\n    tag: T,\n    val: U,\n}\n\nfn pick_big<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let p = Packet { tag: \"DIAL_OK\", val: 5 };\n    let fallback = 2;\n    let code = pick_big(&p.val, &fallback);\n    println!(\"{}\", p.tag);\n    try_dial(*code);\n    // (0,1)->東4(4,1)スイッチ->右折->南2(4,3)->右折->西4(0,3)へ！今は途中だよ\n    step(4);\n}",
+    "solutionCode": "struct Packet<T, U> {\n    tag: T,\n    val: U,\n}\n\nfn pick_big<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let p = Packet { tag: \"DIAL_OK\", val: 5 };\n    let fallback = 2;\n    let code = pick_big(&p.val, &fallback);\n    println!(\"{}\", p.tag);\n    try_dial(*code);\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "turn_right(); step(2);",
+        "insert": "turn_right();\n    step(2);\n    "
+      },
+      {
+        "label": "turn_right(); step(4);",
+        "insert": "turn_right();\n    step(4);"
+      }
+    ],
+    "hints": [
+      "step(4) でスイッチ(4,1)を踏んでゲート(4,2)が開くよ！",
+      "そこから `turn_right(); step(2);` で(4,3)に下りて、`turn_right(); step(4);` でスイッチ(2,3)を踏みながら(0,3)のゴールへ！",
+      "turn_right(); step(2); turn_right(); step(4);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 0,
+        "y": 3
+      },
+      "dial": {
+        "secret": 5
+      },
+      "switches": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 4,
+            "y": 1
+          }
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "stdoutIncludes": [
+        "DIAL_OK"
+      ],
+      "requireAllSwitches": true
+    },
+    "parTicks": 15
+  },
+  {
+    "displayId": "10-23",
+    "id": "0bd720eb-7730-583a-a337-672efa528996",
+    "index": 247,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "title": "10-23. 第10章まとめ：ジェネリクス・トレイト・ライフタイム融合",
+    "topicTag": "第10章 総合実践",
+    "kurumiIntro": "第10章の集大成！ジェネリクス `<T>`・トレイト `Planner`・ライフタイム `<'a>` の3本柱を全部使って、コア納品＋金庫目標を同時にクリアしよう！",
+    "goalSummary": "3本柱の設計でコア納品・金庫⚡3・ゴール (3, 1) を達成",
+    "bookSectionTitle": "第10章まとめ — 3つの抽象化と安全性",
+    "bookSummary": "ジェネリクスで重複をなくし、トレイトで振る舞いを保証し、ライフタイムで参照の安全を守るのがRustの強みです。",
+    "bookKeyCode": "fn select<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
+    "starterCode": "trait CoreCarrier {\n    fn carry(&self, steps: i32);\n}\n\nstruct CarrierBot<T> {\n    power: T,\n}\n\nimpl<T> CoreCarrier for CarrierBot<T> {\n    fn carry(&self, steps: i32) {\n        let c = grab_core();\n        step(steps);\n        deliver(c);\n    }\n}\n\nfn best<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let p1 = 2;\n    let p2 = 3;\n    let top = *best(&p1, &p2);\n    let bot = CarrierBot { power: top };\n    add_vault(bot.power);\n    // bot.carry(top); を呼んでコアを運ぼう！\n    \n}",
+    "solutionCode": "trait CoreCarrier {\n    fn carry(&self, steps: i32);\n}\n\nstruct CarrierBot<T> {\n    power: T,\n}\n\nimpl<T> CoreCarrier for CarrierBot<T> {\n    fn carry(&self, steps: i32) {\n        let c = grab_core();\n        step(steps);\n        deliver(c);\n    }\n}\n\nfn best<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let p1 = 2;\n    let p2 = 3;\n    let top = *best(&p1, &p2);\n    let bot = CarrierBot { power: top };\n    add_vault(bot.power);\n    bot.carry(top);\n}",
+    "quickChips": [
+      {
+        "label": "bot.carry(top);",
+        "insert": "bot.carry(top);"
+      }
+    ],
+    "hints": [
+      "top には best(&p1, &p2) で選ばれた 3 が入っているよ！",
+      "最後の行に bot.carry(top); を追加しよう。",
+      "add_vault(bot.power);\nbot.carry(top);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 0,
+          "y": 1,
+          "power": 3,
+          "label": "極上コア"
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "vaultTarget": 3
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "10-24",
+    "id": "3d87fe8b-b0c2-53a1-bb42-215675cc5c53",
+    "index": 248,
+    "chapter": 10,
+    "chapterTitle": "第10章 ジェネリック型、トレイト、ライフタイム",
+    "stageKind": "challenge",
+    "title": "10-24. 第10章挑戦：3本柱グランドマスター試験",
+    "topicTag": "第10章 最終チャレンジ",
+    "kurumiIntro": "第10章の最終試験！`<T>`・`trait`・`impl<T>`・`<'a>` すべてを1つのコードに集結させ、ダイヤル解錠・スパーク回避・全スイッチ・コア⚡5+納品・金庫⚡7を完全達成しよう！",
+    "goalSummary": "3本柱でダイヤル(3)・\"CH10_PRO\"・金庫⚡7・コア⚡5+納品・全スイッチを達成",
+    "bookSectionTitle": "第10章まとめ — Rust の型抽象の完成形",
+    "bookSummary": "ジェネリクス・トレイト・ライフタイムの3つが合わさることで、高い再利用性と絶対的な安全性を両立した設計が完成します。",
+    "bookKeyCode": "struct + trait + impl + <'a> 統合",
+    "starterCode": "trait MasterMission {\n    fn execute(&self);\n}\n\nstruct Champion<T> {\n    vault_goal: T,\n}\n\nfn select_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn move_safe(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nimpl MasterMission for Champion<i32> {\n    fn execute(&self) {\n        add_vault(self.vault_goal);\n        println!(\"CH10_PRO\");\n        let k1 = 1;\n        let k2 = 3;\n        try_dial(*select_max(&k1, &k2));\n        // ここから (1,1)コア→(2,1)強化＆スイッチ1→(3,1)スパーク→(4,1)スイッチ2→(5,1)右折→(5,3)納品台へ！\n        move_safe(1);\n    }\n}\n\nfn start<T: MasterMission>(m: &T) {\n    m.execute();\n}\n\nfn main() {\n    let champ = Champion { vault_goal: 7 };\n    start(&champ);\n}",
+    "solutionCode": "trait MasterMission {\n    fn execute(&self);\n}\n\nstruct Champion<T> {\n    vault_goal: T,\n}\n\nfn select_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn move_safe(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nimpl MasterMission for Champion<i32> {\n    fn execute(&self) {\n        add_vault(self.vault_goal);\n        println!(\"CH10_PRO\");\n        let k1 = 1;\n        let k2 = 3;\n        try_dial(*select_max(&k1, &k2));\n        move_safe(1);\n        let mut c = grab_core();\n        move_safe(1);\n        boost(&mut c);\n        move_safe(3);\n        turn_right();\n        move_safe(2);\n        deliver(c);\n    }\n}\n\nfn start<T: MasterMission>(m: &T) {\n    m.execute();\n}\n\nfn main() {\n    let champ = Champion { vault_goal: 7 };\n    start(&champ);\n}",
+    "quickChips": [
+      {
+        "label": "let mut c = grab_core();",
+        "insert": "let mut c = grab_core();\n        "
+      },
+      {
+        "label": "boost(&mut c);",
+        "insert": "boost(&mut c);\n        "
+      },
+      {
+        "label": "move_safe(3);",
+        "insert": "move_safe(3);\n        "
+      },
+      {
+        "label": "deliver(c);",
+        "insert": "deliver(c);"
+      }
+    ],
+    "hints": [
+      "ダイヤルと金庫⚡7はすでにOK！あとは移動とコア操作を `execute` に書こう！",
+      "move_safe(1) でコア取得、(2,1) で boost(&mut c) しつつスイッチ1を踏み、move_safe(3) でスパーク(3,1)とスイッチ2(4,1)を越えて(5,1)へ！",
+      "最後は `turn_right(); move_safe(2); deliver(c);` で(5,3)に納品完了だよ！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "dial": {
+        "secret": 3
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "極限コア"
+        }
+      ],
+      "chargers": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 5,
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 4,
+            "y": 1
+          }
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 7
+      },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 3,
+              "y": 0
+            },
+            {
+              "x": 3,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 1
+            }
+          ],
           "initialIndex": 0
         }
       ]
@@ -2869,10 +3077,13 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
       "dialSolved": true,
       "deliverCores": 1,
       "minCorePower": 5,
+      "vaultTarget": 7,
+      "stdoutIncludes": [
+        "CH10_PRO"
+      ],
       "requireAllSwitches": true,
       "requireSpatialCoreRules": true
     },
-    "parTicks": 14
+    "parTicks": 17
   }
 ];
-

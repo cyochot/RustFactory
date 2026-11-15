@@ -1,294 +1,216 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_14: StageStoryEntry[] = [
-  // ===== 第14章：なんでも運べる魔法のトレイ (14-1 〜 14-12) =====
   {
-    stageId: '814eb34c-a41c-5c6b-8eea-651e248a469b',
-    requestTitle: 'お花もパンも乗る万能おぼん',
-    client: 'mimosa',
-    intro: [
+    "stageId": "20649eef-f71c-5821-b966-a1e23b920e2f",
+    "requestTitle": "お急ぎダッシュ！最短コースをかけ抜けろ",
+    "client": "poppo",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: 'お花用のトレイと、パン用のトレイ、形はおんなじなのに別々に用意するのはもったいないわよね。',
+        "speaker": "poppo",
+        "emotion": "panic",
+        "text": "お祭りのチラシ配りが遅れそうです！今日は「お急ぎオプション」をオンにして最短歩数で駆け抜けたいです！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'それなら「何を乗せてもぴったり収まる万能トレイ」を1つ作っちゃえば解決だね！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "お急ぎモード発動カニ！ハサミを後ろに流して空気抵抗を減らすロボ〜！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'お花も光の玉もすっぽり運べるわね！洗い物も減ってエコだわ〜。',
-      },
-    ],
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "スイスイ進んで新記録達成です！これならお昼寝の時間もたっぷり確保できます〜。"
+      }
+    ]
   },
   {
-    stageId: 'a9910c82-84a5-5e5e-abcf-75706a78d6eb',
-    requestTitle: 'おそろいパン2個入りの仲良しボックス',
-    client: 'coppe',
-    intro: [
+    "stageId": "1d1d1eae-a488-5133-9fdd-a0b378a96eaa",
+    "requestTitle": "店の奥から「お急ぎ窓口」を開放せよ！",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: 'おそろいの2つをセットで入れる箱を作って、それぞれの数だけ右と下へ歩いてほしいんだ！',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "店の奥に隠れている便利な道具を、玄関からひと声かけるだけで使えるように表へ出しておいてくれるかい？"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'クリームパン2個入りボックスカニ！？おそろいで見た目もかわいいし、なんだかおめでたいロボ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "受け渡し窓口を玄関にポンッと移しておけば、走ってきたまま立ち止まらず受け取れるよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'ペアセットでばっちりゴールできたね！お土産にもぴったりだ！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "見た目もシンプルで速い！いいお店番になってきたね。"
+      }
+    ]
   },
   {
-    stageId: '581e38ad-f1a7-5277-bd7d-5df7a4769556',
-    requestTitle: '万能トレイに便利な取り出し口をつけよう',
-    client: 'moka',
-    intro: [
+    "stageId": "9de2fcd1-59e3-5e8c-85a5-46e76c89a7c2",
+    "requestTitle": "数え役と走り役の二人三脚リレー",
+    "client": "coppe",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: 'どんなものでも入る箱に、いつでも同じ手順で中身を取り出せる小窓をつけられるかい？',
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "「計算する係」と「走る係」のふたりで協力して、確認チェックもしながらパンを届けてみよう！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'おやすいごよう！中身がコーヒー豆でもお菓子でも、同じ「取り出す」ボタン1つでスッと出せるようにしておくよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "僕が走る係カニ！計算はしっかり者の誰かにお願いするロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '中身を気にせず同じ手つきで扱えるのはとても気持ちがいいね。',
-      },
-    ],
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "チェック合格も配達もバッチリ！息の合ったチームワークだね！"
+      }
+    ]
   },
   {
-    stageId: 'dcacc81e-6cfa-53a1-ab53-9c2ecc9e4126',
-    requestTitle: '手紙とキャラメル、ちがう種類の仲良しコンビ',
-    client: 'poppo',
-    intro: [
+    "stageId": "12c1af9f-0396-5ba7-826d-d039f93befd9",
+    "requestTitle": "制限時間内にゴール！かけっこ大会！",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '「お届け先の名前」と「歩数」みたいに、違う種類の2つをセットにして落とさないよう持ち歩きたいんです！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "町内かけっこ大会のタイムアタックだよ！ムダな寄り道をぜんぶ省いて、制限時間内にゴールへ飛び込もう！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '「左のポケットに手紙、右のポケットにオヤツ」みたいに合体セットにすれば絶対バラバラにならないカニ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "一等賞の金メダル（チョコ味）は僕のものカニ！よーいドンロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: '宛先と歩数がズレずにずっと一緒だから迷子ゼロですね！',
-      },
-    ],
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "すごいスピードで新記録！はい、お約束のチョコレート金メダルだよ！"
+      }
+    ]
   },
   {
-    stageId: 'd39e7fc6-3812-56fd-bce7-72c69cd529bf',
-    requestTitle: 'フェリスとみるく号、おそろいの号令！',
-    client: 'kurumi',
-    intro: [
+    "stageId": "a47779e1-d34b-5350-879c-9f257d73aec7",
+    "requestTitle": "タイムアタック！ベルト加速＋#[cfg(feature=\"fast\")]の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '僕とみるく号、見た目はちょっと違うけど「せーの！」の合図で同じお仕事をできるようになりたいカニ！',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「cfg(fast) + ベルト加速」を使う依頼が届いたよ。環境側の加速（搬送ベルト）とプログラム側のリリース最適化（#[cfg(feature = \"fast\")]）を合わせると極限の短時間航行が可能になります。"
       },
       {
-        speaker: 'milk',
-        emotion: 'happy',
-        text: 'ピピ！共通のお約束を決めておけば、ふたりで息ぴったりに動けるよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'お揃いの合図で息ぴったりカニ！これぞ最強コンビロボ！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！fast 最適化とコンベア利用で 4ティック以内にゴール (5, 1) へ。教わった「cfg(fast) + ベルト加速」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '2ffed195-378d-5077-b5bd-d451e2930f47',
-    requestTitle: '花屋ロボとパン屋ロボの合同充電',
-    client: 'mimosa',
-    intro: [
+    "stageId": "cdecc4e1-f218-52f7-8f00-8c8273122a40",
+    "requestTitle": "2クレート協調タイムアタック（ダイヤル＋L字）の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '私の花屋ロボとコッペさんのパン屋ロボ、両方から同じやり方でエネルギーを集めて金庫に届けたいの。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「ワークスペース + ダイヤル + fast」を使う依頼が届いたよ。複数モジュールの計算結果をそのまま最短移動へつなぎ、余計なウェイトなしで目標を達成します。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'お店がちがっても「元気をわける」っていう同じお約束を覚えさせれば、力を合わせて金庫をいっぱいにできるよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'お店がちがっても力を合わせられるなんて素敵だわ！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！2テスト合格＋ダイヤル(5)＋L字ゴール (3, 3) を 9ティック以内で達成。教わった「ワークスペース + ダイヤル + fast」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '9488c624-3fd3-54cf-a8a1-8490c9c47af7',
-    requestTitle: '「走れる約束」がある車だけ発進ゲート！',
-    client: 'coppe',
-    intro: [
+    "stageId": "d7f2d369-4988-5e3c-a141-7effcf5a3db9",
+    "requestTitle": "第14章マスター：最短リリース便＋全設備制覇の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '車輪のついてない植木鉢を間違えて発進させないように、「ちゃんと走れる約束」がある子だけ通す発進台を作りたいんだ！',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「第14章 パズル総仕上げ」を使う依頼が届いたよ。不要な待ち時間を削りつつ必須の安全検査とテストをすべてパスさせるリリース品質の設計です。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '足のないパン箱がブーンって走り出したらホラーカニ！しっかりチェックして発進するロボ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'お約束を守れる子だけを通すから、事故の心配ゼロだね！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！fast 最適化でコア検査・強化⚡4+・スイッチ突破を 10ティック以内に達成。教わった「第14章 パズル総仕上げ」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: 'dc872ad3-345b-5f25-95d4-1d780fd8a7eb',
-    requestTitle: 'ゲート突破の名人、颯爽と駆け抜ける！',
-    client: 'poppo',
-    intro: [
+    "stageId": "dbacae9d-d4be-50b7-b0c8-74faf457c401",
+    "requestTitle": "再エクスポートクレート＋テスト＋スイッチ高速突破の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '門開け名人のお約束を持った特製ロボで、途中のスイッチを踏みながらゲートの奥まで突っ走ってください！',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「mod pub + #[test] + maxTicks」を使う依頼が届いたよ。ライブラリの公開APIを単体テストで検証したうえで、fast ビルドで制限時間内にタスクを完了させます。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '金庫チャージも移動もバッチリ準備したよ！かっこよく駆け抜けよう！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: '風がビューッと吹くくらい颯爽と駆け抜けて行きましたね！かっこいいです！',
-      },
-    ],
-  },
-  {
-    stageId: '501b44e2-7067-5e83-8742-ecb185d3add7',
-    requestTitle: '喫茶店の貸出ブック、返却期限を守ろう！',
-    client: 'moka',
-    intro: [
-      {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: 'お店の貸出本、持ち主が帰ったあともしおりだけ残ってたら困るだろう？返却期限をしっかり合わせたいんだ。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！テスト合格＋スイッチ連動ゲート通過を 6ティック以内で達成。教わった「mod pub + #[test] + maxTicks」が役に立ったね。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'panic',
-        text: 'えっ、僕がこの前借りた絵本……たしかベッドの下に……じゃなくて今すぐ返却しに走るカニ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: 'ははは、期限を守ってくれてありがとう。これで喫茶店の本棚もずっと平和だ。',
-      },
-    ],
-  },
-  {
-    stageId: 'c0fd3332-442d-55fc-838d-c594d61eb5cc',
-    requestTitle: '2つの見積もりメモ、期限切れにご注意！',
-    client: 'mimosa',
-    intro: [
-      {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '2つのお花の見積もりを比べて短い方の歩数を使いたいんだけど、どっちを借りても期限が切れないように気をつけたいわ。',
-      },
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '2つとも「お返しするまでずっとここにあるよ！」って約束しておけば、安心して比べられるね！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'どちらを選んでも期限切れにならないから安心ね！',
-      },
-    ],
-  },
-  {
-    stageId: '11ff3b4b-9609-535e-9aa0-286223f193a5',
-    requestTitle: '案内メモに「借りた数字の有効期限」シール',
-    client: 'coppe',
-    intro: [
-      {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: 'パン屋の案内メモに別の人から借りた歩数を書き留めたいんだけど、元の人が帰る前までに使い切らないとダメなんだよね？',
-      },
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'その通り！案内メモにも「この数字がある間だけ有効」ってシールを貼っておけば完璧だよ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: '案内メモにも有効期限をつけられるんだね！賢いなあ！',
-      },
-    ],
-  },
-  {
-    stageId: '0bd720eb-7730-583a-a337-672efa528996',
-    requestTitle: '魔法のトレイとお約束、全部まとめて大活躍！',
-    client: 'kurumi',
-    intro: [
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'どんな荷物も運べて、誰とでも同じ合図で動けて、お約束の期限も守れる！集大成のおてつだいを決めよう！',
-      },
-      {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '難しそうに見えたお約束も、慣れたらとっても快適カニ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'お見事！よし、明日はみんなで出荷まえの味見チェックに挑戦だよ！',
-      },
-    ],
-  },
-
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
+  }
 ];

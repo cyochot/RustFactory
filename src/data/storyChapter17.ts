@@ -1,198 +1,196 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_17: StageStoryEntry[] = [
-  // ===== 第17章：くるくる仕分けとティータイム (17-1 〜 17-8) =====
   {
-    stageId: 'f1594c5f-7e74-5a6c-858d-2a806801e85a',
-    requestTitle: 'エプロンのポケット計算機でパン作り',
-    client: 'coppe',
-    intro: [
+    "stageId": "cc3aa3b6-256c-5917-8355-bdb415791494",
+    "requestTitle": "いろんなお店のお祭りロボ大集合！",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '手元にある小麦粉の量に合わせて、その場でサッと砂糖の量を決める小さいお手伝いメモを使いたいんだ！',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "お祭り実行委員でね、パン屋・花屋・喫茶店の出し物ロボットを同じステージ上に並べてパレードしたいの！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'ポケットからサッと取り出して計算するカニ！ついでにお砂糖ひとさじ味見してもいいロボ？',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "形はちがっても「お祭りを盛り上げるぞ！」って気持ちはみんな同じカニ！並んで行進ロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'お手軽でいいね！メロンパンの焼き加減も甘さもバッチリ決まったよ！',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "わぁ、いろんなお店のロボが仲良く順番に動いて素敵なお祭りになりそう！"
+      }
+    ]
   },
   {
-    stageId: '8e873b83-e9e8-50cc-b7e6-cbc2226e18e1',
-    requestTitle: 'ミルクとお砂糖、黄金バランスの魔法',
-    client: 'moka',
-    intro: [
+    "stageId": "c419f437-352b-5f1d-8298-e4c37e52a12a",
+    "requestTitle": "バネ式と歯車式、仲良く屋台を動かそう",
+    "client": "coppe",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: 'ミルクとお砂糖の2つを合わせてちょうどいい甘さを計算しながら、L字のカウンターへ届けてくれるかい？',
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "ビヨーンと跳ねるバネ式と、カチカチ回る歯車式、仕組みは全然ちがうけど両方合わせて屋台を動かしたいんだ！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'モカさん特製カフェオレの黄金比だね！2つの数字を受け取ってササッと混ぜ合わせちゃうよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "バネも歯車も力を合わせれば100人力カニ！……って、バネが跳ねすぎて屋根に届きそうロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: 'まろやかで完璧なバランスだ。ありがとう。',
-      },
-    ],
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "ちがうパーツの合体パワーで金庫もゴールもスッキリ達成だ〜！"
+      }
+    ]
   },
   {
-    stageId: '8e146ba4-7fe7-51b3-a24f-8f16f3c60bad',
-    requestTitle: 'お花の香りスパイスをひと振り！',
-    client: 'mimosa',
-    intro: [
+    "stageId": "7a5d0c50-d5f6-588f-9f29-ae1174a234f5",
+    "requestTitle": "ひみつのレジ箱、中を勝手に触らないで！",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: 'さっき決めた香りポイントを覚えたまま、今日のお花にぴったりなエネルギーを金庫へ入れたいわ。',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "屋台の売上箱、外から勝手に中身をいじられないように「入れる」「合計を見る」だけの小窓から使いたいんだ。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'そばにあるお気に入りスパイスをそのままポケットに入れて使えるから、日替わりアレンジも自由自在だね！',
-      },
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！大事な中身は箱の中にしっかり隠して、決まった小窓からだけ出し入れすれば計算間違いもゼロだよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'ふんわり優しいハーブの仕上がりね♪',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "これなら誰がレジ番をしても計算が狂わなくて安心だね。"
+      }
+    ]
   },
   {
-    stageId: 'e2bd512f-e44e-578d-9846-2df1fac16e1c',
-    requestTitle: '蒸気ゲートをリズミカルにポンポン突破！',
-    client: 'poppo',
-    intro: [
+    "stageId": "8cb63b66-a58b-569e-ae65-433de5ecea2a",
+    "requestTitle": "充電して発進！お祭り屋台トラック",
+    "client": "poppo",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '蒸気ゲートの様子を確かめながら進む動きをワンセットにして、テンポよく通り抜けられますか？',
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "「準備して充電する」「L字に走る」の2つの仕事ができる屋台カートで、広場までお届けお願いできますか？"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'シュッシュッのリズムに合わせて跳ねて進むカニ！なんだか縄跳びみたいで楽しいロボ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "手順どおりに充電して、屋台がひっくり返らないようゆっくりカーブを曲がろうね！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'スッスッと迷いなく通り抜けました！すごいです！',
-      },
-    ],
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "手順通りに充電して曲がって、ぴったり屋台に届きました！"
+      }
+    ]
   },
   {
-    stageId: '3c608b20-614b-5590-b0a8-3b0e88916620',
-    requestTitle: '喫茶店のコーヒー豆、選別コンベヤー大回転！',
-    client: 'moka',
-    intro: [
+    "stageId": "0ab6754a-d4df-54ac-a77f-e80fc746a157",
+    "requestTitle": "「よし、出発！」の承認ハンコ待ち",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: '届いたコーヒー豆の中から、いい粒だけを選んで、焙煎して、合計の重さを出したいんだ。',
+        "speaker": "ferris",
+        "emotion": "panic",
+        "text": "あっ！準備中の屋台を勝手に動かそうとしたら「まだハンコが押されてないよ！」ってブレーキがかかったカニ！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '「選んで→磨いて→合計！」って流れ作業にしたら、まるで小さな工場のベルトコンベヤーみたいに美しいね！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "あはは、安全ブレーキが効いてるね！まずは「準備OK」のハンコを押してから発進しよう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: 'ムダがなくて美しい流れだね。おかげで今日のブレンドは香り高く仕上がりそうだ。',
-      },
-    ],
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "「確認ヨシ！」でカチッと発進するの、プロっぽくてかっこいいカニ！"
+      }
+    ]
   },
   {
-    stageId: '369417a9-c001-5e62-9e19-8b7764132ded',
-    requestTitle: '2倍サイズのパン詰め合わせボックス完成！',
-    client: 'coppe',
-    intro: [
+    "stageId": "bee5e43c-ba0a-5915-a8bd-4412c17f2ead",
+    "requestTitle": "広場の大ランタン、点灯までの3ステップ",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '並んだパンの数を全部2倍に増やして、新しい詰め合わせボックスとして手元にまとめたいんだよね！',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "広場の大ランタン、「下書き」→「審査中」→「点灯許可」の順番を飛ばさずに、きちんと手順を踏んで明かりをともしたいんだ。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '2倍カニ！？そしたら僕のおやつも2倍になるロボ！？大急ぎで詰めるカニ〜！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "せっかちに順番を飛ばそうとしてもダメな仕掛けだね！一歩ずつ確実に点灯まで進めよう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: '特大サイズの詰め合わせセット、一瞬で完成したよ〜！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "あたたかい灯りがともったね。夜の広場がぐっと華やかになったよ。"
+      }
+    ]
   },
   {
-    stageId: '764fd1a2-ae86-530d-937d-be03f7ec61f9',
-    requestTitle: '大きいつぼみだけ集める選別ネット',
-    client: 'mimosa',
-    intro: [
+    "stageId": "661f50ef-b06b-5e02-b076-2228c88a0e8e",
+    "requestTitle": "省エネお散歩＆ターボダッシュの二段階！",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '決めたサイズ以上の大きいつぼみだけを集めて、その合計パワーでL字の温室を一周したいの。',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "最初はのんびり2歩だけ、角を曲がったらターボに切り替えて3歩進んでほしいわ。気分で切り替えられるかしら？"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'ちっちゃいつぼみはもう少しお日さまの下で待ってもらって、大きな子だけをカゴに集めようね！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "のんびり〜からの、ターボ全開カニ！！切り替えタイミングを見逃さないロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: '元気なつぼみばかりが集まったわ！咲くのが楽しみね。',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "滑らかなギアチェンジで、ぴったりゴールにおさまったわね♪"
+      }
+    ]
   },
   {
-    stageId: '8fb6421e-5d44-51e3-bca2-4842354cde9a',
-    requestTitle: '流れ作業コンベヤーでティータイム間に合え！',
-    client: 'kurumi',
-    intro: [
+    "stageId": "70cb7557-cf2f-57ca-8b60-541cbead8dc1",
+    "requestTitle": "屋台パレードの安全確認＆ゲート開放！",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'おやつの時間までに流れ作業で必要なパワーを集めて、スイッチ経由でゲートを突破しよう！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "屋台準備の総まとめ！出発ハンコを押してからみんなで走り出して、スイッチを踏んでゲートをくぐろう！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'ティータイムに遅れたら大事件カニ！全速力でコンベヤーを回すロボ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "お祭りの屋台、どれもおいしそうでヨダレが垂れそうカニ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'やった、ティータイムにぴったり間に合った！みんなでスコーンと紅茶でほっと一息だね！',
-      },
-    ],
-  },
-
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "屋台の準備は完璧！さあ、お楽しみの福引き大会の準備に行こう！"
+      }
+    ]
+  }
 ];

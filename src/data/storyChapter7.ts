@@ -1,582 +1,428 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_7: StageStoryEntry[] = [
-  // ===== 第7章：おつかい三昧の春らんまん (7-1 〜 7-24) =====
   {
-    stageId: '6e466d1c-6446-50a6-9f20-5713b0f001bc',
-    requestTitle: 'ひなたぼっこ争奪戦！鉢植えのお引越し',
-    client: 'mimosa',
-    intro: [
+    "stageId": "9fd2a72f-a235-5928-849d-4fe8c447f483",
+    "requestTitle": "みるく号登場！工房のお片づけ大作戦",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '春の日差しが気持ちいいから、日当たりのいい角のむこうまで、同じ歩数ずつ鉢植えを運んでほしいの。',
+        "speaker": "milk",
+        "emotion": "normal",
+        "text": "ピピッ！はじめまして、しっかり者の「みるく号」だよ！工房の道具が散らかってるから、部屋ごとに分けて整理しよう！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '日向ぼっこは僕も大好物カニ！鉢植えのとなりで一緒にお昼寝したいロボ〜！',
-      },
+        "speaker": "ferris",
+        "emotion": "panic",
+        "text": "うわっ、お片づけ警察がやってきたカニ！？隠してたおやつのクッキーがバレちゃうロボ〜！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'わあ、ぴったり日向におさまったわ。……ってフェリスちゃん、本当に寝ちゃったの！？',
-      },
-    ],
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！棚がスッキリ整頓されたよ！フェリスちゃんの秘密のクッキーも「おやつ箱」にしまっておいたからね！"
+      }
+    ]
   },
   {
-    stageId: 'ee29dcf5-b86c-5d88-a78c-bcadf4f31c38',
-    requestTitle: '駅前と公園、どっちが遠い？暗算大失敗',
-    client: 'poppo',
-    intro: [
+    "stageId": "5aba927d-c321-5c48-947d-6b2f02470cd8",
+    "requestTitle": "箱の中の小箱、カギが開かない！？",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'panic',
-        text: '駅前までの歩数と公園までの歩数を足して一気に歩こうとしたら、指が足りなくなって数え間違えちゃいました！',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "アトリエの大きな戸棚の中にある「車輪の小箱」から道具を取り出したいのに、途中の扉にカギがかかってるみたい。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'ポッポさん、靴を脱いで足の指まで使おうとしないで！ちゃんとメモしてきっちり届けようね！',
-      },
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "あっ、みるく号が几帳面すぎて二重にカギ掛けたんだ！表の扉も中の小箱も開けて取り出そうね！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'ぴったり目的のポストに着きました！これで靴下を脱がずに済みます！',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "扉をぜんぶ通れるようにしたら、すんなり取り出せたわ！"
+      }
+    ]
   },
   {
-    stageId: 'c039a435-cf9f-5b6d-87cf-6bc49c25ab78',
-    requestTitle: '工房の「絶対動かしちゃダメ」な定規',
-    client: 'kurumi',
-    intro: [
+    "stageId": "1fd4629d-d6fc-5324-87c3-2e3c62301d56",
+    "requestTitle": "発電室と操縦室の伝言ゲーム",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'ferris',
-        emotion: 'normal',
-        text: 'ねえくるみちゃん、このピカピカの「基準の定規」、おやつのかき氷を測るのに借りてもいいカニ？',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "電力を作る部屋とロボットを動かす部屋、2つの作業場に分けてお仕事を進めるとスッキリしそうだね。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'panic',
-        text: 'ダメに決まってるでしょ！シロップでベタベタになったら棚の幅が計れなくなるよ！大事な基準は絶対そのまま！',
-      },
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！役割ごとに部屋を分けておけば、探し物も1秒で見つかるよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'ベタベタにせずお仕事できたカニ！……じゃあ次は定規の代わりにスプーン借りるロボ！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "道具の整理ができていると、お仕事のテンポまで良くなるね。"
+      }
+    ]
   },
   {
-    stageId: 'b4247893-4f8e-55a6-bf4b-bfd93240b2f4',
-    requestTitle: '石段ガーデンで花びらチャレンジ',
-    client: 'mimosa',
-    intro: [
+    "stageId": "2f2642fd-792f-527a-bd05-f3802fca0a1f",
+    "requestTitle": "パン箱の「秘密の引き出し」問題",
+    "client": "coppe",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '階段みたいな石畳の上を、お花を揺らさずにゴールまで運んでくれる？落ちたらお花の妖精が怒るかも♪',
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "倉庫の外から特製のパン箱を使いたいんだけど、箱だけじゃなくて中身の引き出しも見えないように封印されてるみたいでさ。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'panic',
-        text: 'お、お花の妖精！？そっとそろりそろり歩くカニ〜！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "外から触っていい引き出しだけ「どうぞ！」って札をつけて公開しておこうね！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: '花びら1枚こぼさず登りきったわね！実は妖精の話は冗談よ、ふふっ♪',
-      },
-    ],
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "見せていいところだけ見せてくれるなんて、よくできてるなあ！"
+      }
+    ]
   },
   {
-    stageId: '039e4a88-0c87-5c92-8e17-3cf0b2f296ca',
-    requestTitle: '小銭貯金箱の「あと2コイン」事件',
-    client: 'coppe',
-    intro: [
+    "stageId": "139e5770-fd95-505e-8019-e90c224abd63",
+    "requestTitle": "長〜い町内住所のニックネーム作り",
+    "client": "poppo",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'panic',
-        text: '新しいバターを買うのに、貯金箱の中身があと2コイン足りないんだ！でもフタが固くて増やせないよ〜！',
+        "speaker": "poppo",
+        "emotion": "panic",
+        "text": "「歯車町三丁目・裏路地・ひなたパン屋横・青いポストの前」って毎回フルネームで書くのに手がプルプル震えます！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'normal',
-        text: 'それ、「開けられない秘密の貯金箱」じゃなくて、ただフタがジャムでくっついてるだけじゃ……？',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "それ、最初に手帳の表紙へ省略名をメモしておけば、あとは「パン屋横」の一言で済むよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'ぱかっ！ほんとだ、イチゴジャムが糊になってた！バッチリ貯まったからバター買ってくるね！',
-      },
-    ],
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "わあ、短くて書きやすい！インク代も半分で済みそうです！"
+      }
+    ]
   },
   {
-    stageId: '377498db-d9ab-5616-bbb4-224392d3567f',
-    requestTitle: 'おかわりコーヒーとカップのすり替え',
-    client: 'moka',
-    intro: [
+    "stageId": "2bb92ccf-f7f1-5c9b-b56c-4cbc9775004a",
+    "requestTitle": "お気に入り道具2つを手元に引き寄せ",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: '最初は小さい見本カップ、おかわりが来たら同じ銘柄のまま大きいカップに差し替えたいんだがね。',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "充電の道具とお散歩の道具、どっちも別の棚にあるから両方とも作業台の手前に並べておきたいわ。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '同じ名前でも中身が大きくなるマジックカニ！僕のおやつのお皿もそうしてほしいロボ！',
-      },
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！よく使う道具を最初から手元に並べておけば、作業効率が3倍アップだよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: 'よし、たっぷりのおかわりを出せたよ。フェリスにはちっちゃいビスケットをあげよう。',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "お気に入り道具が一列に並んで、作業台がすっきりしたわ！"
+      }
+    ]
   },
   {
-    stageId: 'f15cf767-4a5e-5cc3-a583-ef9a0b9066c1',
-    requestTitle: 'スタンプカード3回分のパン屋さん',
-    client: 'coppe',
-    intro: [
+    "stageId": "4e588275-2689-5c3b-adf5-77dad26fd8a3",
+    "requestTitle": "同じ名前の「太郎くん」がふたり！？",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'パンを1斤焼くごとにスタンプを1個ずつ押して、3個貯まったら景品ボックスを満たしたいんだ！',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "右の棚にも左の棚にも「おまかせボタン」って名前の同じボタンがあってね。呼び間違えない工夫はあるかい？"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'スタンプ3個でメロンパン1個おまけカニ！？僕が全力でポンポン押しちゃうロボ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "それなら「右の棚のおまかせ！」「左の棚のおまかせ！」って部屋の名前ごと読べばバッチリ見分けられるよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'スタンプ3つ満タンだ〜！……ってフェリス、自分の甲羅にもスタンプ押してるじゃないか！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "名前のカブりもスマートにかわせるんだね。なるほど。"
+      }
+    ]
   },
   {
-    stageId: 'f7b3e4bb-0166-575d-a501-a676dfc374f0',
-    requestTitle: '2回に分けて荷物積み！坂道お届け',
-    client: 'poppo',
-    intro: [
+    "stageId": "42360a9a-65e1-5548-b488-2805d64d5ed5",
+    "requestTitle": "ピカピカ部品庫と隠しスイッチ攻略",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '最初から重いと転びそうなので、途中で荷物を2回に分けて積み増ししながら曲がり角の先まで行けますか？',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "整理された棚から大事な道具をパッと取り出して、金庫と連動ゲートをきれいにクリアしよう！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'なるほど、賢い作戦！フェリスちゃん、途中で荷物が重くなってもふらつかないでね！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "お片づけの達人になった今なら、どんな道具もすぐ取り出せるカニ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'ちょうどいい重さでピタッと到着しました！これで坂道も怖くありません！',
-      },
-    ],
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピッ！フェリスちゃんも少しはお片づけ上手になったみたいだね！"
+      }
+    ]
   },
   {
-    stageId: 'd1c509c8-ae38-50bc-a8fa-ab48455d6760',
-    requestTitle: '晴れスイッチがオフのまま雨具装備！？',
-    client: 'mimosa',
-    intro: [
+    "stageId": "116ceadb-8d15-54f0-ba3f-88b3f67ea44e",
+    "requestTitle": "迷路ソルバーモジュール maze_libの依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '今日は雲ひとつない青空なのに、お庭の「お出かけスイッチ」がオフのまま動かないみたいなの。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「アルゴリズム mod 分離」を使う依頼が届いたよ。汎用的な左手法迷路ソルバーなどをモジュールにまとめておけば、呼び出し元の main が劇的に簡潔になります。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'panic',
-        text: 'あわわ！僕は雨の日用のカッパを着て待機中カニ！外はカンカン照りで蒸れ蒸れロボ〜！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'スイッチを入れてお庭をピッカピカに掃除できたわ！カッパを脱いだら風が涼しいわね♪',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！maze_lib::escape() を公開・インポートして迷路を突破しよう。教わった「アルゴリズム mod 分離」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: 'b11c3a34-ea38-54b2-8739-ab0bb02b4dfe',
-    requestTitle: '地図メモが破れた！？縦横ペアの解読',
-    client: 'poppo',
-    intro: [
+    "stageId": "0908821d-5296-51dc-9388-cc0bd3f783f5",
+    "requestTitle": "ダイヤル解錠モジュール securityの依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '地図の端に「右にいくつ、下にいくつ」ってペアでメモしてあるんですが、急いでると見分けがつかなくて……。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「mod + ダイヤル解錠」を使う依頼が届いたよ。ダイヤルの総当たりループのような少し複雑な処理も、モジュールに閉じ込めて unlock() として公開すれば安全に使えます。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'メモのペアを落ち着いて読み解けば一発だよ！ほら、ちゃんと右と下を順番に見てみよう！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'おお〜っ、もう迷子になりません！メモ帳の達人ですね！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！security::unlock() を公開・呼び出し、ダイヤル解錠＋金庫⚡3＋ゴールへ。教わった「mod + ダイヤル解錠」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '8ad7a0c6-1726-556b-ba4d-308098dc63b2',
-    requestTitle: '焼きたてトレーの「2番目」つまみ食い未遂',
-    client: 'coppe',
-    intro: [
+    "stageId": "73562f8a-40ac-509e-8445-4d6ccc8298b4",
+    "requestTitle": "非公開モジュールを開放して迷路突破の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: 'トレーに3つ並んだパンのうち、左から数えて2番目の数だけ取り出して金庫に入れたいんだ。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「入れ子 mod + pub 公開」を使う依頼が届いたよ。内側の関数に pub を付けるだけでなく、親モジュール（例：pub mod sensor）自体も外に見せたい場合は pub が必要です。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'panic',
-        text: 'えっ、「0番目、1番目、2番目」って数えるから……あっ、うっかり3番目のチョココロネに手が伸びちゃうカニ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'ばっちり真ん中が取れたよ！コロネはあとでオヤツに分けてあげるからね。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！入れ子のモジュールを公開して迷路のゴール (4, 3) へ到達。教わった「入れ子 mod + pub 公開」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '627e9a97-0fe4-5eea-b8d4-b8130c2b866c',
-    requestTitle: '秘密の豆リストと喫茶店の開錠スイッチ',
-    client: 'moka',
-    intro: [
+    "stageId": "7273cc50-a9a7-5c71-a468-708caf117875",
+    "requestTitle": "専門モジュール分業でコア納品の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: '豆の配分メモと「準備よし」の合図を組み合わせて、奥の倉庫まで運んでもらえるかい？',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「複数 mod + use 分業」を使う依頼が届いたよ。役割ごとにモジュールを切り出し、main で use して流れを組み立てると、設計の見通しがとても良くなります。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '任せてモカさん！フェリスちゃん、いい香りに釣られて勝手に豆をガリガリ食べちゃダメだよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '香りも仕事ぶりも文句なしだ。ごほうびに甘いカフェオレを淹れてあげよう。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！2つのモジュールを呼び出し、金庫⚡4とコア⚡4以上納品を達成。教わった「複数 mod + use 分業」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: 'ad8723b7-9cb3-5a23-a8e0-f0ddc061b223',
-    requestTitle: 'おねむの郵便屋さんと倍速配達',
-    client: 'poppo',
-    intro: [
+    "stageId": "5b6edd0d-a1bc-5c03-8ff9-024a867d04f0",
+    "requestTitle": "同名関数モジュールの衝突回避ナビの依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: 'ふぁ〜あ……今日はいつもの2倍の距離まで配達なんです。歩きながら寝ちゃいそうで……。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「親モジュール区別::act()」を使う依頼が届いたよ。bakery::act() と post::act() のように親モジュールを付けて呼び分けることで、同名の関数を混乱なく使えます。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'ポッポさん、歩き寝は危ないよ！倍の歩数を計算するおまじないを決めて、一気に配達してきちゃおう！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'ぴったり到着！これなら夢の中に行く前に帰り着けそうです……Zzz。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！\"BREAD_OK\" と \"POST_OK\" を出力し、全スイッチを踏んで (5, 1) へ。教わった「親モジュール区別::act()」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '0a3c9f77-c645-5cd5-af0e-bbc385222479',
-    requestTitle: '花束お出かけメモの1行まとめ術',
-    client: 'mimosa',
-    intro: [
+    "stageId": "33c3ce56-0349-55bc-8a50-c15e47c87e4d",
+    "requestTitle": "モジュール・パイプラインで全工程走破の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '「右へ何歩、曲がって下へ何歩」って、お花の配達メモを毎回同じ形式でササッとまとめられたら楽なのにね。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「3モジュール連携チャレンジ」を使う依頼が届いたよ。責務を明確に分けた3つのモジュールを use で呼び込み、安全確実にゴールまでのパイプラインを構築します。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'お決まりのルートを手帳に「お出かけセット」として登録しちゃえば、次からは一言で呼び出せるよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'まあ素敵！これなら忙しい朝でもサッとお願いできるわ♪',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！3モジュール連携で \"MODULE_CLEAR\"・金庫⚡5・コア⚡5+納品・ゴールへ。教わった「3モジュール連携チャレンジ」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '041cf963-f0ba-508c-92a4-f44dac3db59d',
-    requestTitle: '屋根裏の粉倉庫！同じ階段を何度も往復',
-    client: 'coppe',
-    intro: [
+    "stageId": "0ac079f4-88b5-5189-bdc4-4d3a4e098701",
+    "requestTitle": "ベルト制御モジュールと金庫連動の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '屋根裏へ上がるカクカク階段、毎回おんなじ段差を登るのが大変でさ。リズミカルにポンポン登れないかな？',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「mod + コンベア時短」を使う依頼が届いたよ。充電と移動のモジュールを整えて呼び出すことで、コンベア区間の最短ステップを正確に走らせます。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '「右！左！右！」って掛け声をかけながら登れば楽しくなるカニ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'テンポが良すぎてダンスみたいだったね！粉袋もあっという間に運べたよ！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！turbo モジュールを使って金庫⚡4・全スイッチ・7ティック以内ゴールを達成。教わった「mod + コンベア時短」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: 'f734e8a9-cba0-5a6b-814c-dc38fc85ee09',
-    requestTitle: '準備係と出発係のバタバタ連携',
-    client: 'kurumi',
-    intro: [
+    "stageId": "d56b1292-ec0c-50a3-a42d-d1f5b4340960",
+    "requestTitle": "第7章挑戦：工房アーキテクチャ総合迷宮の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'ferris',
-        emotion: 'normal',
-        text: 'くるみちゃん、僕ひとりであれもこれもやるより、作業を「準備係」と「走る係」に分けたらカッコいいカニ？',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「第7章 最終チャレンジ」を使う依頼が届いたよ。複雑なロボットの制御システムも、適切なモジュール階層と pub / use の境界設計によりすっきり見通せるようになります。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'いいね！役割分担を決めておけば、どっちも慌てずにスマートにこなせるよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '役割分担ばっちりカニ！……あれ、でも結局どっちも僕が動いてる気がするロボ？',
-      },
-    ],
-  },
-  {
-    stageId: 'e41c8968-0b68-5dca-a17c-0cdd5b6ac63d',
-    requestTitle: 'パン窯の蒸気ドアで焦らずひと休み',
-    client: 'coppe',
-    intro: [
-      {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '通路の蒸気ドアがシューッと閉まってるときがあるんだ。焦って突っ込むとパンがペチャンコになるから待ってね！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！階層モジュールを公開利用し、金庫⚡6・全スイッチ・ゴール (5, 3) へ。教わった「第7章 最終チャレンジ」が役に立ったね。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'panic',
-        text: 'わっ、ドアが閉まってる間にパンのいい匂いを嗅いで我慢大会カニ〜！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: '焦らず待ったおかげでふわふわのまま届いたよ！我慢したごほうびに端っこあげるね！',
-      },
-    ],
-  },
-  {
-    stageId: '8adb3fdd-da52-5b73-a97b-ccffec78fe4f',
-    requestTitle: '小包の重さチェック！3つの仕分けコース',
-    client: 'poppo',
-    intro: [
-      {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '小包が「軽い」「ふつう」「重い」のどれかで、運ぶ棚を分けたいんです！まちがえると棚がギシギシ鳴っちゃって……。',
-      },
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '重さをしっかり測って3つのコースに振り分けよう！フェリスちゃん、ついでに自分の体重測っちゃダメだよ？',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'ぴったりの棚へスッと収まりました！棚もご機嫌そうです！',
-      },
-    ],
-  },
-  {
-    stageId: 'a90971e7-5050-5236-ba1f-7abfe3891ba7',
-    requestTitle: '急ぎ足？のんびり？お天気しだいのお散歩',
-    client: 'moka',
-    intro: [
-      {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: '急いでるときは大股で、のんびりのときは小股で歩くように、お出かけ前に気分で歩幅を決めたいんだ。',
-      },
-      {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '僕はいつでもお菓子が見えたら超ダッシュカニ！お天気が良ければお散歩日和ロボ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: 'スマートな歩き分けだね。これなら雨上がりの水たまりも避けられそうだ。',
-      },
-    ],
-  },
-  {
-    stageId: 'f66e8848-d720-552b-905d-bc7647dd47fa',
-    requestTitle: '秘密の踏み石でゲートを開けよう',
-    client: 'mimosa',
-    intro: [
-      {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '温室の通路の先に足踏みスイッチがあるの。先にそれをギュッと踏まないと、向こうの大きな門が開かない仕掛けなのよ。',
-      },
-      {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '体重には自信があるカニ！……いや、ちょっとだけ増えたかもだからそっと踏むロボ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'ガシャンと気持ちよく門が開いたわ！フェリスちゃんの体重、ちょうど良かったみたいね♪',
-      },
-    ],
-  },
-  {
-    stageId: '91c103b3-4b14-5702-825b-17ba9f9def66',
-    requestTitle: '2つの蒸気ゲートでタイミング勝負',
-    client: 'mimosa',
-    intro: [
-      {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '温室の奥に蒸気ゲートが2つ並んでいて、開くリズムがバラバラなの。リズムに乗って通り抜けられるかしら？',
-      },
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '「イチ、ニ、今だ！」ってよく見て進もう！急がば回れ、安全第一だよ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: 'わぁ、まるでダンスみたいにスイスイ抜けていったわね！',
-      },
-    ],
-  },
-  {
-    stageId: '3164f81c-a2e0-50c3-8b9c-ed58da4e0c6b',
-    requestTitle: 'ビリビリ巡回ロボットにご用心！',
-    client: 'kurumi',
-    intro: [
-      {
-        speaker: 'ferris',
-        emotion: 'panic',
-        text: 'うわわっ！廊下をビリビリ光るお掃除スパークが行ったり来たりしてるカニ！あたったら髪の毛チリチリになっちゃう〜！',
-      },
-      {
-        speaker: 'kurumi',
-        emotion: 'normal',
-        text: 'フェリスちゃん、髪の毛ないでしょ！落ち着いて通り過ぎるのを待ってからまっすぐ駆け抜けよう！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'シビれずにすり抜けられたカニ！甲羅もつやつやのままロボ！',
-      },
-    ],
-  },
-  {
-    stageId: '156c1e98-7679-5841-bb20-4bc9e0bd9ea6',
-    requestTitle: '広場のぐるぐるパトロールで目が回る〜',
-    client: 'poppo',
-    intro: [
-      {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '広場の四隅にあるポストを順番に回って、忘れ物がないかパトロールしたいんです！',
-      },
-      {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'ぐるっと四角く回るだけカニ？お手のものロボ……あれ、4回まわったら目がぐるぐるしてきたカニ〜！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'きれいな四角形で戻ってきました！忘れ物もゼロで完璧です！',
-      },
-    ],
-  },
-  {
-    stageId: '4197175c-0415-5922-90de-969c839b1e44',
-    requestTitle: '商店街の合同大そうじリレー！',
-    client: 'kurumi',
-    intro: [
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'これまでのお手伝いの総まとめ！3つの蒸気ゲートを抜けて、町の金庫をいっぱいにしよう！',
-      },
-      {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '全部やりきったら、きっとコッペさんが特大メロンパン焼いてくれるカニ！気合マシマシで行くロボ！',
-      },
-    ],
-    outro: [
-      {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '大成功！町の頼まれごともすっかり板についてきたね。さあ、明日からも楽しくおてつだいしよう！',
-      },
-    ],
-  },
-
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
+  }
 ];

@@ -108,6 +108,13 @@ for (const story of ALL_STAGE_STORIES) {
   if (storyIds.has(story.stageId)) failures.push(`${story.stageId}: duplicate story reference.`);
   storyIds.add(story.stageId);
   if (!ids.has(story.stageId)) failures.push(`${story.stageId}: story references an unknown stage UUID.`);
+  if (story.intro.length === 0 || story.outro.length === 0) {
+    failures.push(`${story.stageId}: story must have at least one intro and outro line.`);
+  }
+}
+
+for (const stage of ALL_STAGES) {
+  if (!storyIds.has(stage.id)) failures.push(`${stage.id}: missing story reference.`);
 }
 
 if (failures.length > 0) {

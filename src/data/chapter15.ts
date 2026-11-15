@@ -3,29 +3,29 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_15_STAGES: StageDefinition[] = [
   {
     "displayId": "15-1",
-    "id": "0a19c51a-2f6c-5a4c-9247-29534bd93f8a",
-    "index": 249,
+    "id": "5745f0f2-7b62-5d82-a59e-c01c09ac7b17",
+    "index": 305,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-1. #[test] と assert_eq! で品質チェック",
-    "topicTag": "#[test] / assert_eq!",
-    "kurumiIntro": "出荷前の品質チェックだよ！`#[test]` を付けたテスト関数の中で `assert_eq!` を使って計算が正しいことを自動検証しよう！",
-    "goalSummary": "#[test] を1つ合格させてからゴール (3, 1) へ進もう",
-    "bookSectionTitle": "15.1 テストの書き方 — #[test] と assert_eq!",
-    "bookSummary": "`#[test]` 属性を付けた関数はテスト実行時に自動で走ります。`assert_eq!(左, 右)` は2つの値が等しいか検証し、違えばテスト失敗を教えてくれます。",
-    "bookKeyCode": "#[test]\nfn test_add() {\n    assert_eq!(add(1, 2), 3);\n}",
-    "starterCode": "fn gear_sum(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn check_gear() {\n    // gear_sum(1, 2) が 3 になるか assert_eq! で確かめよう！\n    assert_eq!(gear_sum(1, 2), 0);\n}\n\nfn main() {\n    step(gear_sum(1, 2));\n}",
-    "solutionCode": "fn gear_sum(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn check_gear() {\n    assert_eq!(gear_sum(1, 2), 3);\n}\n\nfn main() {\n    step(gear_sum(1, 2));\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-1. Box<T> でヒープ上のデータを持つ",
+    "topicTag": "Box<T> / Deref",
+    "kurumiIntro": "大きなデータや再帰的な歯車ツリーは `Box::new(値)` でヒープという広い棚に置いて、スマートポインターで指すことができるよ！",
+    "goalSummary": "Box::new(3) を作って *boxed で中身を取り出しゴールへ",
+    "bookSectionTitle": "15.1 ヒープ上のデータを指す Box<T>",
+    "bookSummary": "`Box<T>` はデータをヒープ領域に確保するもっともシンプルなスマートポインターです。参照外し演算子 `*` で中身を取り出して使えます。",
+    "bookKeyCode": "let b = Box::new(3);\nstep(*b);",
+    "starterCode": "fn main() {\n    let b = Box::new(1);\n    // Box の中の値を 3 にして *b で進もう！\n    step(*b);\n}",
+    "solutionCode": "fn main() {\n    let b = Box::new(3);\n    step(*b);\n}",
     "quickChips": [
       {
-        "label": "assert_eq!(gear_sum(1, 2), 3);",
-        "insert": "assert_eq!(gear_sum(1, 2), 3);"
+        "label": "Box::new(3)",
+        "insert": "Box::new(3)"
       }
     ],
     "hints": [
-      "check_gear テストの期待値が 0 になっているからテストが落ちちゃうよ！",
-      "assert_eq!(gear_sum(1, 2), 3); に直してテスト合格させよう。",
-      "#[test]\nfn check_gear() {\n    assert_eq!(gear_sum(1, 2), 3);\n}"
+      "Box::new(1) になっているから 1歩しか進まないよ。",
+      "Box::new(3) に書き換えてみよう！",
+      "let b = Box::new(3);\nstep(*b);"
     ],
     "worldSetup": {
       "width": 5,
@@ -83,37 +83,36 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     },
     "victoryCondition": {
-      "reachGoal": true,
-      "testsRequired": 1
+      "reachGoal": true
     },
     "parTicks": 3
   },
   {
     "displayId": "15-2",
-    "id": "cd6ee93f-2e76-53dc-9286-0b0e7c0188c3",
-    "index": 250,
+    "id": "1f4e58fb-4cfe-5cd5-ba57-5aa128266ec5",
+    "index": 306,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
+    "chapterTitle": "第15章 スマートポインタ",
     "stageKind": "puzzle",
-    "title": "15-2. コンベア歩数計算のテスト駆動修正",
-    "topicTag": "#[test] + コンベア短縮",
-    "kurumiIntro": "ベルトコンベアが2箇所にあるコースで「必要な手動ステップ数」を求める関数にバグがあるよ！2つの `#[test]` をパスさせて 6ティック以内で走り切ろう。",
-    "goalSummary": "2つの #[test] を合格させコンベアで6ティック以内に (5, 1) へ",
-    "bookSectionTitle": "15.1 仕様を満たす計算関数のテスト駆動開発",
-    "bookSummary": "テストケースが求める数学的仕様（例：コンベア分の割引計算）に合わせて本体関数を修正し、同時に実戦コースも走らせます。",
-    "bookKeyCode": "#[test] fn t1() { assert_eq!(net_steps(5, 2), 3); }",
-    "starterCode": "fn net_steps(total_dist: i32, conv_count: i32) -> i32 {\n    // コンベア1つにつき1歩節約できる！今は引き算を忘れているよ\n    total_dist\n}\n\n#[test]\nfn t_two_conv() {\n    assert_eq!(net_steps(5, 2), 3);\n}\n\n#[test]\nfn t_zero_conv() {\n    assert_eq!(net_steps(4, 0), 4);\n}\n\nfn main() {\n    let s = net_steps(5, 2);\n    step(s);\n}",
-    "solutionCode": "fn net_steps(total_dist: i32, conv_count: i32) -> i32 {\n    total_dist - conv_count\n}\n\n#[test]\nfn t_two_conv() {\n    assert_eq!(net_steps(5, 2), 3);\n}\n\n#[test]\nfn t_zero_conv() {\n    assert_eq!(net_steps(4, 0), 4);\n}\n\nfn main() {\n    let s = net_steps(5, 2);\n    step(s);\n}",
+    "title": "15-2. Box<Command> でコンベア越え歩数計算",
+    "topicTag": "Box<i32> + コンベア",
+    "kurumiIntro": "ヒープ上の `Box` 2つを組み合わせて目標エネルギーと歩数を決め、搬送ベルトの助けを借りてスイッチの先のゴール (5, 1) まで一っ飛びしよう！",
+    "goalSummary": "Box 2つで金庫⚡5を作り、ベルトを利用してスイッチ先 (5, 1) へ",
+    "bookSectionTitle": "15.1 Box<T> の計算結合と解放タイミング",
+    "bookSummary": "複数の `Box<T>` から `*` で値を取り出して演算し、ベルトコンベアやスイッチを組み合わせた位置計算に活用します。",
+    "bookKeyCode": "let total = *bx + *by;",
+    "starterCode": "fn main() {\n    let bx = Box::new(2);\n    let by = Box::new(3);\n    // *bx + *by で 5 を金庫に入れよう！\n    add_vault(*bx);\n    step(*bx);\n    step(1);\n}",
+    "solutionCode": "fn main() {\n    let bx = Box::new(2);\n    let by = Box::new(3);\n    add_vault(*bx + *by);\n    step(*bx);\n    step(1);\n}",
     "quickChips": [
       {
-        "label": "total_dist - conv_count",
-        "insert": "total_dist - conv_count"
+        "label": "add_vault(*bx + *by);",
+        "insert": "add_vault(*bx + *by);"
       }
     ],
     "hints": [
-      "t_two_conv は (5, 2) -> 3 を期待しているのに、今は 5 を返しているからテストが落ちているよ！",
-      "net_steps の中を `total_dist - conv_count` にすれば両方のテストに通って 3歩＋コンベア2個で (5, 1) に届くよ！",
-      "total_dist - conv_count"
+      "(1,1) と (3,1) に右向きベルトがあるから、step(*bx) すると一気に (3,1) 付近まで運ばれるよ（正確には(0,1)->(1,1)[押(2,1)]->(3,1)[押(4,1)]で、さらに step(1) で (5,1)）！",
+      "金庫が足りないので `add_vault(*bx);` を `add_vault(*bx + *by);` に直そう！",
+      "add_vault(*bx + *by);"
     ],
     "worldSetup": {
       "width": 6,
@@ -188,40 +187,64 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 1,
           "dir": 0
         }
-      ]
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 3,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "testsRequired": 2,
-      "maxTicks": 6
+      "vaultTarget": 5,
+      "requireAllSwitches": true
     },
-    "parTicks": 4
+    "parTicks": 5
   },
   {
     "displayId": "15-3",
-    "id": "570bc484-898f-5e5f-91d9-3f80f7e43530",
-    "index": 251,
+    "id": "b901a04c-139c-52fd-9d85-acc046a59495",
+    "index": 307,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-3. テストが落ちた関数のバグを直す",
-    "topicTag": "テスト駆動デバッグ",
-    "kurumiIntro": "テストが「バグがあるよ！」って教えてくれたみたい！`calc_ratio(n)` の計算式を直して、`#[test]` をパスさせてね。",
-    "goalSummary": "calc_ratio を直してテスト合格＋ゴール (4, 1) へ",
-    "bookSectionTitle": "15.1 テスト結果から関数のバグを修正する",
-    "bookSummary": "テストが失敗したときは、テストが期待する仕様に合うように本体関数のロジックを修正します。",
-    "bookKeyCode": "fn calc_ratio(n: i32) -> i32 { n * 2 }",
-    "starterCode": "fn calc_ratio(n: i32) -> i32 {\n    // 2倍にするつもりが +1 になってるよ！\n    n + 1\n}\n\n#[test]\nfn test_ratio() {\n    assert_eq!(calc_ratio(2), 4);\n}\n\nfn main() {\n    step(calc_ratio(2));\n}",
-    "solutionCode": "fn calc_ratio(n: i32) -> i32 {\n    n * 2\n}\n\n#[test]\nfn test_ratio() {\n    assert_eq!(calc_ratio(2), 4);\n}\n\nfn main() {\n    step(calc_ratio(2));\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-3. Deref 参照外しで Box の中身を読む",
+    "topicTag": "*b 参照外し / 計算",
+    "kurumiIntro": "2つの `Box<i32>` の中身をそれぞれ `*`（参照外し）で取り出して足し合わせよう！金庫のエネルギーと歩数をどちらも満たしてね。",
+    "goalSummary": "2つの Box の合計 4 で金庫⚡4＋ゴール (4, 1) へ",
+    "bookSectionTitle": "15.2 Deref トレイトでスマートポインタを普通の参照のように扱う",
+    "bookSummary": "`Deref` トレイトのおかげで、`Box<T>` や `Rc<T>` に `*ポインタ` 演算子を使って、普通の参照とまったく同じ感覚で値を取り出せます。",
+    "bookKeyCode": "let sum = *b1 + *b2;",
+    "starterCode": "fn main() {\n    let b1 = Box::new(1);\n    let b2 = Box::new(3);\n    // *b1 + *b2 で中身を足し算しよう！\n    let total = *b1;\n    add_vault(total);\n    step(total);\n}",
+    "solutionCode": "fn main() {\n    let b1 = Box::new(1);\n    let b2 = Box::new(3);\n    let total = *b1 + *b2;\n    add_vault(total);\n    step(total);\n}",
     "quickChips": [
       {
-        "label": "n * 2",
-        "insert": "n * 2"
+        "label": "*b1 + *b2",
+        "insert": "*b1 + *b2"
       }
     ],
     "hints": [
-      "test_ratio は calc_ratio(2) == 4 を期待しているよ！",
-      "calc_ratio の中を `n * 2` に書き換えよう。",
-      "fn calc_ratio(n: i32) -> i32 {\n    n * 2\n}"
+      "今は total が *b1（1）だけになっているよ！",
+      "let total = *b1 + *b2; にすると 1 + 3 = 4 になるよ。",
+      "let total = *b1 + *b2;"
     ],
     "worldSetup": {
       "width": 6,
@@ -284,39 +307,331 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       "goal": {
         "x": 4,
         "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 4
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "testsRequired": 1
+      "vaultTarget": 4
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "15-4",
+    "id": "a5eb96f6-5132-5eff-afab-00ba03aaa75f",
+    "index": 308,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-4. Box の中身に構造体をしまってL字移動",
+    "topicTag": "Box<Struct>",
+    "kurumiIntro": "大きな構造体 `PathData { dx, dy }` を `Box::new(...)` に入れておけば、受け渡ししても軽くて安全！中身を `(*b).dx` で取り出そう。",
+    "goalSummary": "Box<PathData> から dx, dy を読み取り L字ゴール (3, 2) へ",
+    "bookSectionTitle": "15.1 & 15.2 大きなデータを Box で管理する",
+    "bookSummary": "大きな構造体をヒープ上の `Box<Struct>` に置くと、ポインタサイズ（数バイト）のまま扱えてスタック消費を抑えられます。",
+    "bookKeyCode": "let boxed = Box::new(PathData { dx: 3, dy: 1 });",
+    "starterCode": "struct PathData {\n    dx: i32,\n    dy: i32,\n}\n\nfn main() {\n    let boxed = Box::new(PathData { dx: 3, dy: 1 });\n    let data = *boxed;\n    step(data.dx);\n    turn_right();\n    // あと data.dy 歩進んで (3, 2) へ！\n    \n}",
+    "solutionCode": "struct PathData {\n    dx: i32,\n    dy: i32,\n}\n\nfn main() {\n    let boxed = Box::new(PathData { dx: 3, dy: 1 });\n    let data = *boxed;\n    step(data.dx);\n    turn_right();\n    step(data.dy);\n}",
+    "quickChips": [
+      {
+        "label": "step(data.dy);",
+        "insert": "step(data.dy);"
+      }
+    ],
+    "hints": [
+      "data = *boxed で Box の中身 PathData を取り出せたよ！",
+      "最後に step(data.dy); を追加しよう。",
+      "turn_right();\nstep(data.dy);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 4,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 2
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "15-5",
+    "id": "6df8d4cc-5e97-58e3-b339-01c6055e64de",
+    "index": 309,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-5. Drop トレイトと drop() による明示解放",
+    "topicTag": "Drop / drop(x)",
+    "kurumiIntro": "スマートポインターは不要になると自動でお片付け（`Drop`）されるよ！途中で早く手放したいときは `drop(箱);` を呼ぶんだ。解放した後に二重使用しないよう注意してね。",
+    "goalSummary": "Box を先にお片付け(drop)しつつ \"DROPPED\" を出してゴールへ",
+    "bookSectionTitle": "15.3 Drop トレイトで片付け時のコードを実行する",
+    "bookSummary": "Rustではスコープを抜けると自動的に `drop` が呼ばれます。また `std::mem::drop(x)` 関数を使えば、スコープの途中でも所有権を手放して解放できます。",
+    "bookKeyCode": "let b = Box::new(3);\nlet val = *b;\ndrop(b);\nprintln!(\"DROPPED\");",
+    "starterCode": "fn main() {\n    let b = Box::new(3);\n    let n = *b;\n    drop(b);\n    // drop(b) のあとに *b を読もうとすると Move済みエラーになるよ！\n    // かわりに n を使って進み、\"DROPPED\" を表示しよう\n    println!(\"DROPPED\");\n    step(*b);\n}",
+    "solutionCode": "fn main() {\n    let b = Box::new(3);\n    let n = *b;\n    drop(b);\n    println!(\"DROPPED\");\n    step(n);\n}",
+    "quickChips": [
+      {
+        "label": "step(n);",
+        "insert": "step(n);"
+      }
+    ],
+    "hints": [
+      "試しに実行すると「所有権が移動（Move）済みの変数 b は使えません」と教えてくれるよ！",
+      "drop(b) のあとでは `step(*b);` の代わりに事前コピーしておいた `step(n);` を使おう！",
+      "println!(\"DROPPED\");\nstep(n);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "DROPPED"
+      ]
     },
     "parTicks": 4
   },
   {
-    "displayId": "15-4",
-    "id": "5b076c31-42b8-59b9-aabe-7805a786eac2",
-    "index": 252,
+    "displayId": "15-6",
+    "id": "007f4c05-dd69-51b7-b3ee-e80303a04656",
+    "index": 310,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-4. assert! マクロで真偽値条件を検証",
-    "topicTag": "assert! マクロ",
-    "kurumiIntro": "等しいか比べるだけじゃなく、「条件が `true` であること」を確かめたいときは `assert!(条件)` を使うよ！",
-    "goalSummary": "assert! で正のエネルギー判定テストに合格しゴールへ",
-    "bookSectionTitle": "15.1 assert! マクロで結果をチェックする",
-    "bookSummary": "`assert!(式)` は式が `true` なら通過、`false` ならテストを失敗させます。範囲チェックや状態フラグの検証に便利です。",
-    "bookKeyCode": "#[test]\nfn test_valid() { assert!(is_positive(3)); }",
-    "starterCode": "fn is_positive(n: i32) -> bool {\n    n > 0\n}\n\n#[test]\nfn check_pos() {\n    // true になる値（たとえば 3）を渡して assert! を通そう！\n    assert!(is_positive(-1));\n}\n\nfn main() {\n    if is_positive(3) {\n        add_vault(3);\n        step(3);\n    }\n}",
-    "solutionCode": "fn is_positive(n: i32) -> bool {\n    n > 0\n}\n\n#[test]\nfn check_pos() {\n    assert!(is_positive(3));\n}\n\nfn main() {\n    if is_positive(3) {\n        add_vault(3);\n        step(3);\n    }\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-6. drop(box) 後の安全な値再利用とダイヤル",
+    "topicTag": "drop() + ダイヤル",
+    "kurumiIntro": "大きな `Box` は先に `drop()` でお片付けしつつ、取り出しておいた値で秘密ダイヤルを解錠し、L字のゴールへ進もう！",
+    "goalSummary": "Box を drop してから取り出した値でダイヤル(7)・金庫⚡7・(3, 3) へ",
+    "bookSectionTitle": "15.3 早期解放 drop() と値の退避",
+    "bookSummary": "ヒープ領域を `drop(box)` で早く解放したいときは、必要なプリミティブ値だけ先に変数へコピーしておけばコンパイルエラーになりません。",
+    "bookKeyCode": "let val = *b;\ndrop(b);\ntry_dial(val);",
+    "starterCode": "fn main() {\n    let b = Box::new(7);\n    let val = *b;\n    drop(b);\n    // ↓ drop(b) のあとで *b を使うと所有権エラーになるよ！val を使おう\n    try_dial(*b);\n    add_vault(*b);\n    println!(\"RELEASED\");\n    step(3);\n    turn_right();\n    step(2);\n}",
+    "solutionCode": "fn main() {\n    let b = Box::new(7);\n    let val = *b;\n    drop(b);\n    try_dial(val);\n    add_vault(val);\n    println!(\"RELEASED\");\n    step(3);\n    turn_right();\n    step(2);\n}",
     "quickChips": [
       {
-        "label": "assert!(is_positive(3));",
-        "insert": "assert!(is_positive(3));"
+        "label": "try_dial(val);",
+        "insert": "try_dial(val);"
+      },
+      {
+        "label": "add_vault(val);",
+        "insert": "add_vault(val);"
       }
     ],
     "hints": [
-      "check_pos の中で `is_positive(-1)` を呼んでいるから false になってテストが失敗するよ！",
-      "is_positive(3) に変えてみよう。",
-      "assert!(is_positive(3));"
+      "drop(b) した後に *b を読もうとするとコンパイラが E0382 で止めてくれるよ！",
+      "try_dial(*b) と add_vault(*b) の両方を `val` に直せばクリア！",
+      "try_dial(val);\nadd_vault(val);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "dial": {
+        "x": 1,
+        "y": 0,
+        "secret": 7
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 7
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "vaultTarget": 7,
+      "stdoutIncludes": [
+        "RELEASED"
+      ]
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "15-7",
+    "id": "bb17e121-9dc5-594a-ace4-b233fef8e9d4",
+    "index": 311,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-7. Rc<T> で複数の所有者を作る",
+    "topicTag": "Rc<T> / Rc::clone",
+    "kurumiIntro": "1つの値を複数の場所で同時に所有したいときは参照カウント `Rc::new` と `Rc::clone(&rc)` を使うよ！参照カウントが増える様子をモニターで見てね！",
+    "goalSummary": "Rc::clone で共有して金庫⚡3とゴール (3, 1) を達成しよう",
+    "bookSectionTitle": "15.4 Rc<T> 参照カウント方式スマートポインター",
+    "bookSummary": "`Rc<T>`（Reference Counting）は「何箇所から所有されているか」を数え、みんなが使い終わったときにだけ安全に片付けます（シングルスレッド用）。",
+    "bookKeyCode": "let a = Rc::new(3);\nlet b = Rc::clone(&a);",
+    "starterCode": "fn main() {\n    let master = Rc::new(3);\n    // Rc::clone(&master) で2つめの所有者 share を作ろう！\n    let share = Rc::clone(&master);\n    add_vault(*master);\n    // share の値を使ってゴールへ進もう\n    \n}",
+    "solutionCode": "fn main() {\n    let master = Rc::new(3);\n    let share = Rc::clone(&master);\n    add_vault(*master);\n    step(*share);\n}",
+    "quickChips": [
+      {
+        "label": "step(*share);",
+        "insert": "step(*share);\n    "
+      }
+    ],
+    "hints": [
+      "master と share が同じ 3 を共有しているよ！",
+      "最後の行に `step(*share);` を書いてみよう。",
+      "add_vault(*master);\nstep(*share);"
     ],
     "worldSetup": {
       "width": 5,
@@ -381,246 +696,39 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 3,
-      "testsRequired": 1
+      "vaultTarget": 3
     },
     "parTicks": 4
   },
   {
-    "displayId": "15-5",
-    "id": "b4812899-7dd0-58bb-9d34-f53ab5d04515",
-    "index": 253,
+    "displayId": "15-8",
+    "id": "3e9730a7-1de7-5c4c-a484-74c7ebfb0bf6",
+    "index": 312,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
+    "chapterTitle": "第15章 スマートポインタ",
     "stageKind": "puzzle",
-    "title": "15-5. 金庫目標チェックと assert! テスト",
-    "topicTag": "assert! + コア検証",
-    "kurumiIntro": "コアの目標パワーに達しているか確かめる関数 `can_deliver(p)` を実装して、テスト2つに合格してから現場のコア強化＆納品をこなそう！",
-    "goalSummary": "2テスト合格＋コア⚡4以上を検査・強化して納品しよう",
-    "bookSectionTitle": "15.1 & 15.3 条件判定と空間ルールの一致",
-    "bookSummary": "プログラム上の検査関数と実際の現場ルールを一致させることで、出荷前のミスをゼロにできます。",
-    "bookKeyCode": "assert!(can_deliver(4));",
-    "starterCode": "fn can_deliver(power: i32) -> bool {\n    // パワー 4 以上で true になるよう直そう！\n    power >= 99\n}\n\n#[test]\nfn t_ok() { assert!(can_deliver(4)); }\n\n#[test]\nfn t_low() { assert!(!can_deliver(2)); }\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    if can_deliver(core_power()) {\n        step(1);\n        deliver(c);\n    }\n}",
-    "solutionCode": "fn can_deliver(power: i32) -> bool {\n    power >= 4\n}\n\n#[test]\nfn t_ok() { assert!(can_deliver(4)); }\n\n#[test]\nfn t_low() { assert!(!can_deliver(2)); }\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    if can_deliver(core_power()) {\n        step(1);\n        deliver(c);\n    }\n}",
+    "title": "15-8. Rc 共有データで2箇所のスイッチ折り返し",
+    "topicTag": "Rc::clone + U字スイッチ",
+    "kurumiIntro": "共有歩数 `Rc::new(2)` を `Rc::clone` で複製しながら渡して、U字コース上の2つのスイッチを踏んでゴールへ戻ってこよう！",
+    "goalSummary": "Rc::clone で移動パラメータを共有し全スイッチ＋(1, 3) へ",
+    "bookSectionTitle": "15.4 同じ設定値を複数の移動フェーズへ渡す",
+    "bookSummary": "値を関数へ渡すたびに所有権が移動しても、`Rc::clone(&rc)` を渡せば呼び出し元に所有権を残したまま何度でも共有できます。",
+    "bookKeyCode": "go(Rc::clone(&d));\nturn_right();\ngo(Rc::clone(&d));",
+    "starterCode": "fn go(d: Rc<i32>) {\n    step(*d);\n}\n\nfn main() {\n    let unit = Rc::new(2);\n    // そのまま unit を渡すと Move して2回目・3回目に使えなくなるよ！\n    go(unit);\n    step(1);\n    turn_right();\n    go(Rc::clone(&unit));\n    turn_right();\n    go(unit);\n}",
+    "solutionCode": "fn go(d: Rc<i32>) {\n    step(*d);\n}\n\nfn main() {\n    let unit = Rc::new(2);\n    go(Rc::clone(&unit));\n    step(1);\n    turn_right();\n    go(Rc::clone(&unit));\n    turn_right();\n    go(unit);\n}",
     "quickChips": [
       {
-        "label": "power >= 4",
-        "insert": "power >= 4"
+        "label": "go(Rc::clone(&unit));",
+        "insert": "go(Rc::clone(&unit));"
       }
     ],
     "hints": [
-      "t_ok は can_deliver(4) == true を期待しているよ！",
-      "can_deliver の中身を `power >= 4` に直せば 2つのテストに合格して納品まで自動実行されるよ！",
-      "power >= 4"
+      "最初の `go(unit);` で所有権が移動してしまうため、次の `Rc::clone(&unit)` がエラーになるよ！",
+      "1回目の呼び出しを `go(Rc::clone(&unit));` に直せば解決！",
+      "go(Rc::clone(&unit));"
     ],
     "worldSetup": {
       "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "試験コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "scanCount": 1,
-      "testsRequired": 2,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "15-6",
-    "id": "f7279691-407d-568c-8f17-97b5a23aad9b",
-    "index": 254,
-    "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-6. 境界条件を含むテスト追加",
-    "topicTag": "#[test] 追加作成",
-    "kurumiIntro": "今度は君の手で `#[test]` をもう1つ追加してみよう！`max_limit(n)` が上限をちゃんと抑えられるかテストを2つ揃えるんだ。",
-    "goalSummary": "2つの #[test] を合格させ L字ゴール (3, 2) へ進もう",
-    "bookSectionTitle": "15.2 テストの追加と実行",
-    "bookSummary": "正常系だけでなく、上限値を超えるケースなどのテストも並べて書くことで仕様の穴を防げます。",
-    "bookKeyCode": "#[test]\nfn cap_over() { assert_eq!(cap(10), 3); }",
-    "starterCode": "fn cap(n: i32) -> i32 {\n    if n > 3 { 3 } else { n }\n}\n\n#[test]\nfn cap_normal() {\n    assert_eq!(cap(1), 1);\n}\n\n#[test]\nfn cap_over() {\n    // cap(10) は上限 3 になるはず！期待値を 3 に直そう\n    assert_eq!(cap(10), 10);\n}\n\nfn main() {\n    step(cap(9));\n    turn_right();\n    step(cap(1));\n}",
-    "solutionCode": "fn cap(n: i32) -> i32 {\n    if n > 3 { 3 } else { n }\n}\n\n#[test]\nfn cap_normal() {\n    assert_eq!(cap(1), 1);\n}\n\n#[test]\nfn cap_over() {\n    assert_eq!(cap(10), 3);\n}\n\nfn main() {\n    step(cap(9));\n    turn_right();\n    step(cap(1));\n}",
-    "quickChips": [
-      {
-        "label": "assert_eq!(cap(10), 3);",
-        "insert": "assert_eq!(cap(10), 3);"
-      }
-    ],
-    "hints": [
-      "cap(10) を呼ぶと上限 3 に抑えられるから、期待値 10 ではテストが失敗するよ！",
-      "cap_over の中の `assert_eq!(cap(10), 10);` を `assert_eq!(cap(10), 3);` に直そう！",
-      "#[test]\nfn cap_over() {\n    assert_eq!(cap(10), 3);\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 4,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 2
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "testsRequired": 2
-    },
-    "parTicks": 5
-  },
-  {
-    "displayId": "15-7",
-    "id": "4a4bab84-ce14-50b1-9a7f-d1acadec111a",
-    "index": 255,
-    "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "stageKind": "challenge",
-    "title": "15-7. テストを自分で追加してスパーク突破",
-    "topicTag": "#[test] 新規追加チャレンジ",
-    "kurumiIntro": "今はテストが1つしかなくて品質基準（2テスト合格）に足りないよ！境界条件の `#[test]` をもう1つ自分で書き足して、スパークの向こうへ進もう！",
-    "goalSummary": "2つ以上の #[test] 合格＋スパーク回避＋金庫⚡4＋(5, 1)へ",
-    "bookSectionTitle": "15.2 足りないテストケースを自ら補う",
-    "bookSummary": "既存のテストを直すだけでなく、抜けていたケース用の `#[test]` 関数を新規追加してテスト網羅度を引き上げます。",
-    "bookKeyCode": "#[test]\nfn t_clamp_min() { assert_eq!(clamp(1, 4), 4); }",
-    "starterCode": "fn clamp_min(v: i32, min_v: i32) -> i32 {\n    if v < min_v { min_v } else { v }\n}\n\n#[test]\nfn t_normal() {\n    assert_eq!(clamp_min(6, 4), 6);\n}\n\n// ここに 2つ目の #[test] 関数を書こう！例: clamp_min(1, 4) == 4\n\nfn main() {\n    let val = clamp_min(1, 4);\n    add_vault(val);\n    for _ in 0..5 {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}",
-    "solutionCode": "fn clamp_min(v: i32, min_v: i32) -> i32 {\n    if v < min_v { min_v } else { v }\n}\n\n#[test]\nfn t_normal() {\n    assert_eq!(clamp_min(6, 4), 6);\n}\n\n#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}\n\nfn main() {\n    let val = clamp_min(1, 4);\n    add_vault(val);\n    for _ in 0..5 {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}",
-    "quickChips": [
-      {
-        "label": "#[test] fn t_min() { assert_eq!(clamp_min(1, 4), 4); }",
-        "insert": "#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}\n"
-      }
-    ],
-    "hints": [
-      "プログラム自体は正しく動くけれど、テストが1つしか書かれていないよ！",
-      "`#[test]` を付けた2つ目の関数（例：`fn t_min() { assert_eq!(clamp_min(1, 4), 4); }`）を書き足そう！",
-      "#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}"
-    ],
-    "worldSetup": {
-      "width": 6,
       "height": 5,
       "walls": [
         {
@@ -632,15 +740,15 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
+          "x": 2,
+          "y": 0
+        },
+        {
           "x": 3,
           "y": 0
         },
         {
           "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
           "y": 0
         },
         {
@@ -652,35 +760,19 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
-          "x": 3,
+          "x": 2,
           "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
         },
         {
           "x": 4,
           "y": 2
         },
         {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
           "x": 4,
-          "y": 3
-        },
-        {
-          "x": 5,
           "y": 3
         },
         {
@@ -702,10 +794,6 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         {
           "x": 4,
           "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
         }
       ],
       "botStart": {
@@ -714,168 +802,63 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 5,
-        "y": 1
+        "x": 1,
+        "y": 3
       },
-      "vault": {
-        "x": 4,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      },
-      "sparks": [
+      "switches": [
         {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 2,
-              "y": 0
-            },
-            {
-              "x": 2,
-              "y": 1
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 3
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 1
-            }
-          ],
-          "initialIndex": 0
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "gates": [
+        {
+          "x": 2,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
         }
       ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 4,
-      "testsRequired": 2
+      "requireAllSwitches": true
     },
-    "parTicks": 8
-  },
-  {
-    "displayId": "15-8",
-    "id": "163a23b2-ec90-5f86-a31b-8bc41aa59448",
-    "index": 256,
-    "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-8. 複数テストの編成と境界値チェック",
-    "topicTag": "TDD / 複数テスト",
-    "kurumiIntro": "テストは1つだけじゃ足りないよ！`is_safe(n)` 関数を修正し、2つの `#[test]` テストをどちらも合格させて安全ゲートを開こう！",
-    "goalSummary": "2つの #[test] を合格させてゴール (3, 1) へ進もう",
-    "bookSectionTitle": "15.3 テストの編成 — 正常系と境界値",
-    "bookSummary": "複数のテスト関数を用意し、`assert!(条件)` と `assert_eq!` を組み合わせることで、仕様変更やリファクタリング時もバグを即座に発見できます。",
-    "bookKeyCode": "#[test]\nfn ok_case() { assert!(is_safe(3)); }",
-    "starterCode": "fn is_safe(n: i32) -> bool {\n    // 3 以上のとき true になるように直そう！\n    n > 10\n}\n\n#[test]\nfn test_three() {\n    assert!(is_safe(3));\n}\n\n#[test]\nfn test_zero() {\n    assert!(!is_safe(0));\n}\n\nfn main() {\n    if is_safe(3) { step(3); }\n}",
-    "solutionCode": "fn is_safe(n: i32) -> bool {\n    n >= 3\n}\n\n#[test]\nfn test_three() {\n    assert!(is_safe(3));\n}\n\n#[test]\nfn test_zero() {\n    assert!(!is_safe(0));\n}\n\nfn main() {\n    if is_safe(3) { step(3); }\n}",
-    "quickChips": [
-      {
-        "label": "n >= 3",
-        "insert": "n >= 3"
-      }
-    ],
-    "hints": [
-      "今の is_safe(n) は `n > 10` だから test_three が失敗するよ！",
-      "n >= 3 に直すと test_three も test_zero も両方パスするよ。",
-      "fn is_safe(n: i32) -> bool {\n    n >= 3\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "testsRequired": 2
-    },
-    "parTicks": 3
+    "parTicks": 10
   },
   {
     "displayId": "15-9",
-    "id": "f904680c-0b52-5074-8b88-fc6ee3f21fdc",
-    "index": 257,
+    "id": "89fad8cc-d58d-5e7b-b0d8-b9c93b216b4f",
+    "index": 313,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "stageKind": "puzzle",
-    "title": "15-9. ダイヤル計算モジュールの結合テスト",
-    "topicTag": "mod 結合テスト + ダイヤル",
-    "kurumiIntro": "秘密のダイヤル番号を組み立てるモジュール `mod cipher` の公開関数を2つのテストで確かめてから、ダイヤルとスイッチゲートを一気に開こう！",
-    "goalSummary": "2つの #[test] 合格＋ダイヤル(7)解錠＋全スイッチ＋(5, 1)へ",
-    "bookSectionTitle": "15.3 公開モジュールの結合テスト",
-    "bookSummary": "クレートの外側から公開API（`cipher::make_code`）を呼び出すテストで、モジュール同士のつながりを確認します。",
-    "bookKeyCode": "assert_eq!(cipher::make_code(3, 4), 7);",
-    "starterCode": "mod cipher {\n    pub fn make_code(a: i32, b: i32) -> i32 {\n        // a + b を返すよう直そう！（今は a だけ）\n        a\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(cipher::make_code(1, 2), 3); }\n\n#[test]\nfn t2() { assert_eq!(cipher::make_code(3, 4), 7); }\n\nfn main() {\n    let secret = cipher::make_code(3, 4);\n    try_dial(secret);\n    add_vault(secret);\n    step(5);\n}",
-    "solutionCode": "mod cipher {\n    pub fn make_code(a: i32, b: i32) -> i32 {\n        a + b\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(cipher::make_code(1, 2), 3); }\n\n#[test]\nfn t2() { assert_eq!(cipher::make_code(3, 4), 7); }\n\nfn main() {\n    let secret = cipher::make_code(3, 4);\n    try_dial(secret);\n    add_vault(secret);\n    step(5);\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-9. 3箇所に共有を広げる Rc::clone",
+    "topicTag": "Rc::clone × 3",
+    "kurumiIntro": "共有の輪を広げよう！1つの `Rc::new(2)` を `owner_a`・`owner_b`・`owner_c` の3つで共有して、合計⚡6と4歩の移動に使ってみよう。",
+    "goalSummary": "3つの Rc 所有者を使って金庫⚡6＋ゴール (4, 1) へ",
+    "bookSectionTitle": "15.4 参照カウントの増加と共有",
+    "bookSummary": "`Rc::clone` はデータ本体を丸ごとコピーするのではなく、参照カウントを +1 増やすだけなので非常に高速です。",
+    "bookKeyCode": "let b = Rc::clone(&a);\nlet c = Rc::clone(&a);",
+    "starterCode": "fn main() {\n    let a = Rc::new(2);\n    let b = Rc::clone(&a);\n    // 3つ目の所有者 c も Rc::clone(&a) で作ろう！\n    let c = Rc::clone(&a);\n    add_vault(*a + *b + *c);\n    // *a + *b 歩進んで (4, 1) へ着こう！\n    \n}",
+    "solutionCode": "fn main() {\n    let a = Rc::new(2);\n    let b = Rc::clone(&a);\n    let c = Rc::clone(&a);\n    add_vault(*a + *b + *c);\n    step(*a + *b);\n}",
     "quickChips": [
       {
-        "label": "a + b",
-        "insert": "a + b"
+        "label": "step(*a + *b);",
+        "insert": "step(*a + *b);"
       }
     ],
     "hints": [
-      "cipher::make_code が a しか返していないためテストが失敗しているよ！",
-      "a + b に書き換えれば 3 + 4 = 7 でダイヤルも金庫⚡7も一発解錠！",
-      "pub fn make_code(a: i32, b: i32) -> i32 {\n    a + b\n}"
+      "*a, *b, *c はそれぞれ 2 だよ！合計 6 が金庫に入って、あとは東へ 4歩進めばゴール。",
+      "最後の行に `step(*a + *b);` を書こう！",
+      "add_vault(*a + *b + *c);\nstep(*a + *b);"
     ],
     "worldSetup": {
       "width": 6,
@@ -936,124 +919,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "dial": {
-        "secret": 7
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 7
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "vaultTarget": 7,
-      "testsRequired": 2,
-      "requireAllSwitches": true
-    },
-    "parTicks": 8
-  },
-  {
-    "displayId": "15-10",
-    "id": "6cdfbfb3-0af5-52c3-b817-05dbbbc623e5",
-    "index": 258,
-    "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-10. 3つのテストケースで計算式を固める",
-    "topicTag": "単体テスト3種",
-    "kurumiIntro": "テストが3つ用意されているよ！`gear_power(base, mul)` が「ゼロの時」「通常の時」「大きい時」の全部に合格するよう実装を完成させてね。",
-    "goalSummary": "3つの #[test] を全合格させて金庫⚡6＋ゴール (3, 1) へ",
-    "bookSectionTitle": "15.3 複数のテストケースを揃える",
-    "bookSummary": "0倍や上限など性質の異なるテストケースを3つ以上並べることで、仕様変更で壊れにくい頑丈な関数になります。",
-    "bookKeyCode": "fn gear_power(b: i32, m: i32) -> i32 { b * m }",
-    "starterCode": "fn gear_power(base: i32, mul: i32) -> i32 {\n    // base * mul を返すように直そう！\n    base + mul\n}\n\n#[test]\nfn test_zero() { assert_eq!(gear_power(0, 5), 0); }\n\n#[test]\nfn test_one() { assert_eq!(gear_power(2, 1), 2); }\n\n#[test]\nfn test_double() { assert_eq!(gear_power(2, 3), 6); }\n\nfn main() {\n    add_vault(gear_power(2, 3));\n    step(3);\n}",
-    "solutionCode": "fn gear_power(base: i32, mul: i32) -> i32 {\n    base * mul\n}\n\n#[test]\nfn test_zero() { assert_eq!(gear_power(0, 5), 0); }\n\n#[test]\nfn test_one() { assert_eq!(gear_power(2, 1), 2); }\n\n#[test]\nfn test_double() { assert_eq!(gear_power(2, 3), 6); }\n\nfn main() {\n    add_vault(gear_power(2, 3));\n    step(3);\n}",
-    "quickChips": [
-      {
-        "label": "base * mul",
-        "insert": "base * mul"
-      }
-    ],
-    "hints": [
-      "今は `base + mul` になっているから 3つのテストが全部落ちているよ！",
-      "`base * mul` に直すと一発で3つ全部グリーンになるよ！",
-      "fn gear_power(base: i32, mul: i32) -> i32 {\n    base * mul\n}"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
+        "x": 4,
         "y": 1
       },
       "vault": {
@@ -1065,37 +931,35 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 6,
-      "testsRequired": 3
+      "vaultTarget": 6
     },
-    "parTicks": 4
+    "parTicks": 5
   },
   {
-    "displayId": "15-11",
-    "id": "ba9a9ab0-13b7-56aa-888e-5528cf88b85f",
-    "index": 259,
+    "displayId": "15-10",
+    "id": "e2eb4f07-4104-50a4-82ba-f7f105174fe4",
+    "index": 314,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "stageKind": "puzzle",
-    "title": "15-11. ルート長テストとL字スイッチ迷路",
-    "topicTag": "Vec 集計テスト + L字迷路",
-    "kurumiIntro": "配列の合計を求める `sum_legs(v: Vec<i32>)` 関数を3つのテストで鍛えてから、そのL字ルートを実際に歩いてスイッチを踏もう！",
-    "goalSummary": "3つのテスト合格＋全スイッチ＋金庫⚡5＋ゴール (3, 3) へ",
-    "bookSectionTitle": "15.3 コレクション入力の単体テスト",
-    "bookSummary": "空配列・1要素・複数要素の3パターンを `#[test]` で検証し、コレクションを扱う関数のバグを防ぎます。",
-    "bookKeyCode": "#[test] fn t_empty() { assert_eq!(sum_legs(vec![]), 0); }",
-    "starterCode": "fn sum_legs(legs: Vec<i32>) -> i32 {\n    let mut s = 0;\n    for x in legs {\n        // s += x に直そう！今は 1 しか足せてないよ\n        s += 1;\n    }\n    s\n}\n\n#[test]\nfn t_empty() { assert_eq!(sum_legs(vec![]), 0); }\n\n#[test]\nfn t_one() { assert_eq!(sum_legs(vec![4]), 4); }\n\n#[test]\nfn t_pair() { assert_eq!(sum_legs(vec![3, 2]), 5); }\n\nfn main() {\n    let total = sum_legs(vec![3, 2]);\n    add_vault(total);\n    step(3);\n    turn_right();\n    step(2);\n}",
-    "solutionCode": "fn sum_legs(legs: Vec<i32>) -> i32 {\n    let mut s = 0;\n    for x in legs {\n        s += x;\n    }\n    s\n}\n\n#[test]\nfn t_empty() { assert_eq!(sum_legs(vec![]), 0); }\n\n#[test]\nfn t_one() { assert_eq!(sum_legs(vec![4]), 4); }\n\n#[test]\nfn t_pair() { assert_eq!(sum_legs(vec![3, 2]), 5); }\n\nfn main() {\n    let total = sum_legs(vec![3, 2]);\n    add_vault(total);\n    step(3);\n    turn_right();\n    step(2);\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-10. 複数枝で同じ Rc データを共有して歩く",
+    "topicTag": "Rc データの再利用",
+    "kurumiIntro": "同じ設計図 `Rc<i32>` を、横移動の部品と縦移動の部品の両方に渡してL字ルートを走ってみよう！所有権が移動しても元の側でもう1回使えるのが `Rc` の強みだよ。",
+    "goalSummary": "Rc::clone で共有した歩数を使って (3, 3) のゴールへ",
+    "bookSectionTitle": "15.4 グラフ・共有構造での Rc<T>",
+    "bookSummary": "複数の箇所から同じデータを所有する必要があるとき、値を複製せずに安全に共有を保てるのが `Rc<T>` です。",
+    "bookKeyCode": "let p1 = Rc::clone(&shared);\nlet p2 = Rc::clone(&shared);",
+    "starterCode": "fn walk_side(dist: Rc<i32>) {\n    step(*dist);\n}\n\nfn main() {\n    let unit = Rc::new(3);\n    // ↓ unit をそのまま渡すと Move して2回目に使えないよ！Rc::clone(&unit) にしよう\n    walk_side(unit);\n    turn_right();\n    // 最後に残った unit から 1 減らした 2 歩分を歩こう\n    let y_unit = Rc::new(*unit - 1);\n    walk_side(y_unit);\n}",
+    "solutionCode": "fn walk_side(dist: Rc<i32>) {\n    step(*dist);\n}\n\nfn main() {\n    let unit = Rc::new(3);\n    walk_side(Rc::clone(&unit));\n    turn_right();\n    let y_unit = Rc::new(*unit - 1);\n    walk_side(y_unit);\n}",
     "quickChips": [
       {
-        "label": "s += x;",
-        "insert": "s += x;"
+        "label": "Rc::clone(&unit)",
+        "insert": "Rc::clone(&unit)"
       }
     ],
     "hints": [
-      "for ループの中が `s += 1;` になっているから要素の値を正しく足せていないよ！",
-      "`s += x;` に直せば3つのテストすべて合格＋金庫⚡5が貯まるよ！",
-      "for x in legs {\n    s += x;\n}"
+      "今は walk_side(unit); で所有権が移動しているため、あとから *unit を読もうとすると E0382 エラーが出るよ！",
+      "`walk_side(unit);` を `walk_side(Rc::clone(&unit));` に直すと、元の unit を手元に残したまま渡せるよ！",
+      "walk_side(Rc::clone(&unit));"
     ],
     "worldSetup": {
       "width": 5,
@@ -1154,7 +1018,261 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       "goal": {
         "x": 3,
         "y": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "15-11",
+    "id": "bda5e013-6d70-5ae8-a991-b576407822e8",
+    "index": 315,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-11. 3段ベルト＋Rc::clone パイプラインテスト",
+    "topicTag": "Rc + テスト + 3連コンベア",
+    "kurumiIntro": "共有値 `Rc` の計算を `#[test]` で確認したら、3つの搬送コンベアでジグザグ・直線加速して一発でゴール (5, 2) に乗り込もう！",
+    "goalSummary": "テスト合格＋Rc 計算で金庫⚡6＋コンベア加速ゴール (5, 2) へ",
+    "bookSectionTitle": "15.4 スマートポインタ計算のユニットテスト検証",
+    "bookSummary": "`Rc<i32>` を使った補助関数も通常の関数と同じように `#[test]` で事前に検証できます。",
+    "bookKeyCode": "let r = Rc::new(3);\nlet r2 = Rc::clone(&r);",
+    "starterCode": "fn double_rc(v: Rc<i32>) -> i32 {\n    // 2倍を返すように直そう！\n    *v\n}\n\n#[test]\nfn t_rc() {\n    assert_eq!(double_rc(Rc::new(3)), 6);\n}\n\nfn main() {\n    let base = Rc::new(3);\n    let bonus = double_rc(Rc::clone(&base));\n    add_vault(bonus);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(1);\n}",
+    "solutionCode": "fn double_rc(v: Rc<i32>) -> i32 {\n    *v * 2\n}\n\n#[test]\nfn t_rc() {\n    assert_eq!(double_rc(Rc::new(3)), 6);\n}\n\nfn main() {\n    let base = Rc::new(3);\n    let bonus = double_rc(Rc::clone(&base));\n    add_vault(bonus);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(1);\n}",
+    "quickChips": [
+      {
+        "label": "*v * 2",
+        "insert": "*v * 2"
+      }
+    ],
+    "hints": [
+      "コンベアが (1,1)→(2,1) [右向き]、(2,2)→(3,2) [下から来て右折？いや(2,2)右コンベアで(3,2)]、(4,2)右コンベアで(5,2) へ運んでくれるよ！",
+      "まず `double_rc` の中身を `*v * 2` に直してテストと金庫⚡6を通そう！",
+      "fn double_rc(v: Rc<i32>) -> i32 {\n    *v * 2\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 4,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
       },
+      "goal": {
+        "x": 5,
+        "y": 2
+      },
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "dir": 0
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "dir": 0
+        }
+      ],
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 6,
+      "vaultExact": 6,
+      "testsRequired": 1
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "15-12",
+    "id": "fb8c2141-1beb-5df9-a172-a207752b4715",
+    "index": 316,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-12. Rc<EnergyCore> 風の共有とコア納品パズル",
+    "topicTag": "Rc + スイッチゲート実践",
+    "kurumiIntro": "共有エネルギー値 `Rc<i32>` を金庫と移動歩数の両方で参照しながら、スイッチを踏んでコアを納品しよう！",
+    "goalSummary": "Rc::clone を使って金庫⚡4・コア納品・スイッチ突破を達成",
+    "bookSectionTitle": "15.4 共有読み取りデータの統合実践",
+    "bookSummary": "不変な共有値を `Rc<T>` で配ることで、誰がいつ読み取っても安全に同じ参照値を使えます。",
+    "bookKeyCode": "let shared = Rc::new(4);\nlet copy = Rc::clone(&shared);",
+    "starterCode": "fn main() {\n    let dist = Rc::new(4);\n    let vault_ref = Rc::clone(&dist);\n    // まず金庫に *vault_ref を預けて、コアを拾おう！\n    add_vault(*vault_ref);\n    let core = grab_core();\n    // あと *dist 歩進んで core を納品しよう！\n    \n}",
+    "solutionCode": "fn main() {\n    let dist = Rc::new(4);\n    let vault_ref = Rc::clone(&dist);\n    add_vault(*vault_ref);\n    let core = grab_core();\n    step(*dist);\n    deliver(core);\n}",
+    "quickChips": [
+      {
+        "label": "step(*dist);",
+        "insert": "step(*dist);\n    "
+      },
+      {
+        "label": "deliver(core);",
+        "insert": "deliver(core);\n    "
+      }
+    ],
+    "hints": [
+      "スイッチ(2, 1)を踏むと連動ゲート(3, 1)が開くから、*dist (4歩) で一直線にゴール(4, 1)へ着けるよ！",
+      "step(*dist); と deliver(core); を書き足そう。",
+      "step(*dist);\ndeliver(core);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 0,
+          "y": 1,
+          "power": 2,
+          "label": "共有コア"
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
       "switches": [
         {
           "x": 2,
@@ -1164,7 +1282,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       "gates": [
         {
           "x": 3,
-          "y": 2,
+          "y": 1,
           "openTicks": 1,
           "closedTicks": 1,
           "linkedSwitch": {
@@ -1177,42 +1295,340 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         "x": 1,
         "y": 0,
         "initial": 0,
-        "target": 5
+        "target": 4
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 5,
-      "testsRequired": 3,
-      "requireAllSwitches": true
+      "deliverCores": 1,
+      "vaultTarget": 4
     },
-    "parTicks": 8
+    "parTicks": 7
   },
   {
-    "displayId": "15-12",
-    "id": "ae5f34d9-8b3d-5240-b03b-053ab713166e",
-    "index": 260,
+    "displayId": "15-13",
+    "id": "e3cedf2e-58b8-55c4-ab2d-4c8bd0f5fee6",
+    "index": 317,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-12. Result を返す関数をテストする",
-    "topicTag": "Result のテスト",
-    "kurumiIntro": "エラーを返す可能性がある関数 `parse_code(n)` もテストできるよ！`match` を使って `Ok` のときと `Err` のときをそれぞれテストしよう。",
-    "goalSummary": "Okケースと Errケースの2テストを合格させゴールへ",
-    "bookSectionTitle": "15.1 & 15.3 Result の単体テスト",
-    "bookSummary": "エラーになるべき入力を与えてちゃんと `Err` が返ることをテストする「異常系テスト」も、高品質なソフトウェアには欠かせません。",
-    "bookKeyCode": "match parse_code(3) { Ok(v) => assert_eq!(v, 3), Err(_) => panic!() }",
-    "starterCode": "fn parse_code(n: i32) -> Result<i32, String> {\n    // n > 0 のとき Ok(n)、それ以外は Err(\"負の値はNG\") にしよう！\n    Err(\"未実装\")\n}\n\n#[test]\nfn test_ok() {\n    assert_eq!(parse_code(4).unwrap(), 4);\n}\n\n#[test]\nfn test_err() {\n    let fallback = parse_code(-1).unwrap_or(99);\n    assert_eq!(fallback, 99);\n}\n\nfn main() {\n    step(parse_code(4).unwrap_or(1));\n}",
-    "solutionCode": "fn parse_code(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"負の値はNG\") }\n}\n\n#[test]\nfn test_ok() {\n    assert_eq!(parse_code(4).unwrap(), 4);\n}\n\n#[test]\nfn test_err() {\n    let fallback = parse_code(-1).unwrap_or(99);\n    assert_eq!(fallback, 99);\n}\n\nfn main() {\n    step(parse_code(4).unwrap_or(1));\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-13. drop() で古いゲート指令を破棄しダイヤル解除",
+    "topicTag": "drop + Rc + ダイヤル",
+    "kurumiIntro": "テスト用の仮データ `temp_box` は `drop()` で破棄し、本番共有データ `Rc` から読み取った値で秘密ダイヤルを解除しよう！",
+    "goalSummary": "仮 Box を drop し、Rc の値(8)でダイヤル解除＋コンベア突破",
+    "bookSectionTitle": "15.3 & 15.4 寿命の分離と共有参照",
+    "bookSummary": "一時的なデータだけ明示的に `drop` し、生き残らせる共有データは `Rc` で安全に保持する設計です。",
+    "bookKeyCode": "drop(temp);\nlet ok = Rc::clone(&real_code);",
+    "starterCode": "fn main() {\n    let temp = Box::new(2);\n    let real_code = Rc::new(8);\n    let shared = Rc::clone(&real_code);\n    drop(temp);\n    // ↓ 破棄済みの temp を読まず、shared を使ってダイヤルと金庫をクリアしよう！\n    try_dial(*temp);\n    add_vault(*shared);\n    step(2);\n    step(1);\n}",
+    "solutionCode": "fn main() {\n    let temp = Box::new(2);\n    let real_code = Rc::new(8);\n    let shared = Rc::clone(&real_code);\n    drop(temp);\n    try_dial(*shared);\n    add_vault(*shared);\n    step(2);\n    step(1);\n}",
     "quickChips": [
       {
-        "label": "if n > 0 { Ok(n) } else { Err(\"負\") }",
-        "insert": "if n > 0 { Ok(n) } else { Err(\"負の値はNG\") }"
+        "label": "try_dial(*shared);",
+        "insert": "try_dial(*shared);"
       }
     ],
     "hints": [
-      "test_ok では 4 を渡したときに Ok(4) が返ってきてほしいよ。",
-      "if n > 0 { Ok(n) } else { Err(\"負の値はNG\") } を書こう！",
-      "fn parse_code(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"負の値はNG\") }\n}"
+      "drop(temp) したあと *temp を使おうとして Move エラーが出ているよ！",
+      "try_dial(*temp); を `try_dial(*shared);` に直そう。ベルトも自動で運んでくれるよ！",
+      "try_dial(*shared);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "dir": 0
+        }
+      ],
+      "dial": {
+        "x": 2,
+        "y": 0,
+        "secret": 8
+      },
+      "vault": {
+        "x": 3,
+        "y": 0,
+        "initial": 0,
+        "target": 8
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "vaultTarget": 8
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "15-14",
+    "id": "e54dc38b-c506-5de5-b893-6ffe329eb759",
+    "index": 318,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-14. RefCell<T> と内部可変性パターン",
+    "topicTag": "RefCell<T> / 実行時借用",
+    "kurumiIntro": "`RefCell` を使うと不変な外見のまま中身を書き換えられるけど、`borrow_mut()` を2回同時に呼ぶと実行時にパニックしちゃうよ！安全に直してね。",
+    "goalSummary": "RefCell の二重借用パニックを直してゴール (3, 1) へ",
+    "bookSectionTitle": "15.5 RefCell<T> と内部可変性パターン",
+    "bookSummary": "`RefCell<T>` は借用ルールを「コンパイル時」ではなく「実行時」に検査します。同じタイミングで `borrow_mut()` を2つ作るとパニックして安全を守ります。",
+    "bookKeyCode": "let cell = RefCell::new(3);\nlet v = cell.borrow();",
+    "starterCode": "fn main() {\n    let cell = RefCell::new(3);\n    let mut r1 = cell.borrow_mut();\n    // ↓ 2回目の borrow_mut() を同時に呼ぶと実行時パニックするよ！\n    let mut r2 = cell.borrow_mut();\n    step(*r1);\n}",
+    "solutionCode": "fn main() {\n    let cell = RefCell::new(3);\n    let mut r1 = cell.borrow_mut();\n    step(*r1);\n}",
+    "quickChips": [
+      {
+        "label": "step(*r1);",
+        "insert": "step(*r1);"
+      }
+    ],
+    "hints": [
+      "まずはそのまま実行して RefCell の実行時パニックを体験してみよう！",
+      "重複している `let mut r2 = cell.borrow_mut();` の行を消せば安全に動くよ。",
+      "let cell = RefCell::new(3);\nlet mut r1 = cell.borrow_mut();\nstep(*r1);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "15-15",
+    "id": "4f384d79-8afd-55ea-b24f-1048346a3680",
+    "index": 319,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-15. スコープを分けて RefCell の中身を書き換える",
+    "topicTag": "RefCell スコープ分離",
+    "kurumiIntro": "`borrow_mut()` で書き換える処理を `{ ... }` ブロックで囲って先に終わらせてしまえば、そのあと安全に `cell.borrow()` で読み取れるよ！",
+    "goalSummary": "スコープ内で RefCell を +2 増やし、金庫⚡3＋ゴールへ",
+    "bookSectionTitle": "15.5 borrow_mut() とスコープによる借用解放",
+    "bookSummary": "可変借用のガードがスコープ `{ ... }` を抜けてドロップされた後なら、次の `borrow()` や `borrow_mut()` をパニックなしで安全に呼べます。",
+    "bookKeyCode": "{\n    let mut r = cell.borrow_mut();\n    *r += 2;\n}\nlet v = cell.borrow();",
+    "starterCode": "fn main() {\n    let cell = RefCell::new(1);\n    {\n        let mut r = cell.borrow_mut();\n        // 中身を +2 増やして 3 にしよう！\n        *r += 0;\n    }\n    // スコープを抜けたので borrow() してもパニックしないよ！\n    let val = cell.borrow();\n    add_vault(*val);\n    step(*val);\n}",
+    "solutionCode": "fn main() {\n    let cell = RefCell::new(1);\n    {\n        let mut r = cell.borrow_mut();\n        *r += 2;\n    }\n    let val = cell.borrow();\n    add_vault(*val);\n    step(*val);\n}",
+    "quickChips": [
+      {
+        "label": "*r += 2;",
+        "insert": "*r += 2;"
+      }
+    ],
+    "hints": [
+      "cell の初期値は 1 だよ。金庫目標も歩数も 3 だから +2 増やしたいね！",
+      "*r += 0; を *r += 2; に書き換えよう。",
+      "*r += 2;"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "15-16",
+    "id": "ffd83129-76d5-5bed-bef0-56d280dbddab",
+    "index": 320,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-16. borrow_mut() と borrow() がぶつからない順番",
+    "topicTag": "borrow_mut 順序管理",
+    "kurumiIntro": "今は `borrow_mut()` を握りっぱなしのまま `cell.borrow()` を呼んでパニックしちゃってるよ！`{ ... }` で囲って順番を守ろう。",
+    "goalSummary": "パニックを直して RefCell を 4 に更新し、ゴール (4, 1) へ",
+    "bookSectionTitle": "15.5 実行時借用ルール（1つの可変借用 OR 複数の不変借用）",
+    "bookSummary": "不変の `borrow()` と可変の `borrow_mut()` は同時には存在できません。短いブロックで可変借用を終わらせるのが鉄則です。",
+    "bookKeyCode": "{ let mut w = c.borrow_mut(); *w = 4; }\nlet r = c.borrow();",
+    "starterCode": "fn main() {\n    let c = RefCell::new(1);\n    let mut w = c.borrow_mut();\n    *w = 4;\n    // ↓ w が生きているまま c.borrow() を呼ぶとパニックするよ！\n    // *w = 4; の周りを { ... } ブロックで囲もう！\n    let r = c.borrow();\n    step(*r);\n}",
+    "solutionCode": "fn main() {\n    let c = RefCell::new(1);\n    {\n        let mut w = c.borrow_mut();\n        *w = 4;\n    }\n    let r = c.borrow();\n    step(*r);\n}",
+    "quickChips": [
+      {
+        "label": "{ let mut w = c.borrow_mut(); *w = 4; }",
+        "insert": "{\n        let mut w = c.borrow_mut();\n        *w = 4;\n    }"
+      }
+    ],
+    "hints": [
+      "このまま実行すると「RefCell が可変借用中のまま borrow() を呼んだため実行時パニック」と出るよ！",
+      "let mut w = c.borrow_mut(); と *w = 4; を `{ ... }` ブロックで囲もう。",
+      "{\n    let mut w = c.borrow_mut();\n    *w = 4;\n}\nlet r = c.borrow();"
     ],
     "worldSetup": {
       "width": 6,
@@ -1278,41 +1694,40 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       }
     },
     "victoryCondition": {
-      "reachGoal": true,
-      "testsRequired": 2
+      "reachGoal": true
     },
     "parTicks": 4
   },
   {
-    "displayId": "15-13",
-    "id": "0b91ddc0-b6f7-5e13-912f-333b7f29bdb1",
-    "index": 261,
+    "displayId": "15-17",
+    "id": "b3705f70-1c20-5a33-9028-eb14333e6ae3",
+    "index": 321,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
+    "chapterTitle": "第15章 スマートポインタ",
     "stageKind": "puzzle",
-    "title": "15-13. Result 計算テスト3本勝負",
-    "topicTag": "3テスト合格 + Result",
-    "kurumiIntro": "正の数だけ受け付けて2倍にする安全関数 `double_positive(n) -> Result<i32, String>` を書いて、用意された3つのテスト全部に通そう！",
-    "goalSummary": "3つのテスト（正・0・負）すべて合格して金庫⚡6＋(3, 1)へ",
-    "bookSectionTitle": "15.3 Result 関数の正常・境界・異常テスト",
-    "bookSummary": "正の正常ケース、境界のゼロ、負の異常ケースの3種類をテストすることで関数の品質を保証します。",
-    "bookKeyCode": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }",
-    "starterCode": "fn double_positive(n: i32) -> Result<i32, String> {\n    // n > 0 のとき Ok(n * 2)、0以下は Err(\"無効\") を返そう！\n    Err(\"未完成\")\n}\n\n#[test]\nfn t_pos() { assert_eq!(double_positive(3).unwrap(), 6); }\n\n#[test]\nfn t_zero() { assert_eq!(double_positive(0).unwrap_or(-1), -1); }\n\n#[test]\nfn t_neg() { assert_eq!(double_positive(-2).unwrap_or(-1), -1); }\n\nfn main() {\n    let val = double_positive(3).unwrap_or(0);\n    add_vault(val);\n    step(3);\n}",
-    "solutionCode": "fn double_positive(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n * 2) } else { Err(\"無効\") }\n}\n\n#[test]\nfn t_pos() { assert_eq!(double_positive(3).unwrap(), 6); }\n\n#[test]\nfn t_zero() { assert_eq!(double_positive(0).unwrap_or(-1), -1); }\n\n#[test]\nfn t_neg() { assert_eq!(double_positive(-2).unwrap_or(-1), -1); }\n\nfn main() {\n    let val = double_positive(3).unwrap_or(0);\n    add_vault(val);\n    step(3);\n}",
+    "title": "15-17. RefCell 二重可変借用パニックの解消とスパーク横断",
+    "topicTag": "RefCell パニック回避 + スパーク",
+    "kurumiIntro": "今は `RefCell` の可変借用を重ねて実行時パニックが起きているうえ、前方のスパーク待ちも足りないよ！借用ガードの整理とスパーク対策の両方を直そう。",
+    "goalSummary": "RefCell パニックを解消しスパーク(2, 1)を避けて金庫⚡5＋(4, 1)へ",
+    "bookSectionTitle": "15.5 実行時借用ルールと安全な制御フロー",
+    "bookSummary": "`borrow_mut()` の寿命を短く終えてから次の `borrow()` を呼ぶことで、実行時パニックを確実に回避します。",
+    "bookKeyCode": "{ let mut w = rc.borrow_mut(); *w += 2; } let r = rc.borrow();",
+    "starterCode": "fn main() {\n    let cell = RefCell::new(3);\n    let mut r1 = cell.borrow_mut();\n    // ↓ 同時 borrow_mut() を消して、*r1 += 2 をスコープで分けよう！\n    let mut r2 = cell.borrow_mut();\n    *r1 += 2;\n    let val = cell.borrow();\n    add_vault(*val);\n    for _ in 0..4 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
+    "solutionCode": "fn main() {\n    let cell = RefCell::new(3);\n    {\n        let mut r1 = cell.borrow_mut();\n        *r1 += 2;\n    }\n    let val = cell.borrow();\n    add_vault(*val);\n    for _ in 0..4 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
     "quickChips": [
       {
-        "label": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }",
-        "insert": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }"
+        "label": "{ let mut r1 = cell.borrow_mut(); *r1 += 2; }",
+        "insert": "{\n        let mut r1 = cell.borrow_mut();\n        *r1 += 2;\n    }"
       }
     ],
     "hints": [
-      "今は double_positive が常に Err(\"未完成\") を返しているため t_pos が落ちているよ！",
-      "if n > 0 { Ok(n * 2) } else { Err(\"無効\") } を書けば3つのテスト全合格＋金庫⚡6達成！",
-      "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }"
+      "二重の `r2` を消しただけでは、`r1` が生きているまま `cell.borrow()` を呼ぶとやはりパニックしちゃうよ！",
+      "let mut r1 = cell.borrow_mut(); *r1 += 2; を `{ ... }` ブロックで囲めば安全に 5 になるよ。",
+      "{\n    let mut r1 = cell.borrow_mut();\n    *r1 += 2;\n}"
     ],
     "worldSetup": {
-      "width": 5,
-      "height": 3,
+      "width": 6,
+      "height": 5,
       "walls": [
         {
           "x": 0,
@@ -1323,15 +1738,15 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
-          "x": 2,
-          "y": 0
-        },
-        {
           "x": 3,
           "y": 0
         },
         {
           "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
           "y": 0
         },
         {
@@ -1343,16 +1758,60 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
-          "x": 2,
-          "y": 2
-        },
-        {
           "x": 3,
           "y": 2
         },
         {
           "x": 4,
           "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
         }
       ],
       "botStart": {
@@ -1361,48 +1820,80 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 3,
+        "x": 4,
         "y": 1
       },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 2,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ],
       "vault": {
-        "x": 2,
+        "x": 1,
         "y": 0,
         "initial": 0,
-        "target": 6
+        "target": 5
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 6,
-      "testsRequired": 3
+      "vaultTarget": 5
     },
-    "parTicks": 5
+    "parTicks": 8
   },
   {
-    "displayId": "15-14",
-    "id": "9dc94aec-ccf0-5432-8846-c0c15b87b666",
-    "index": 262,
+    "displayId": "15-18",
+    "id": "ee0aadfe-6a0f-57db-8537-873e31cd4349",
+    "index": 322,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "title": "15-14. 第15章まとめ：結合テスト付きスイッチ突破",
-    "topicTag": "第15章 総合実践",
-    "kurumiIntro": "第15章の総仕上げ！公開モジュール `mod calc` の関数を呼び出す結合テスト（2つ）をパスさせてから、スイッチ連動ゲートを越えてゴールしよう！",
-    "goalSummary": "2つの #[test] を合格させ、金庫⚡4＋スイッチ突破でゴールへ",
-    "bookSectionTitle": "第15章まとめ — 単体テストと結合テスト",
-    "bookSummary": "モジュールの公開APIを通したテスト（結合テスト）と内部ロジックのテストを組み合わせれば、自信を持ってロボットを出荷できます。",
-    "bookKeyCode": "#[test]\nfn integration() { assert_eq!(calc::total(2, 2), 4); }",
-    "starterCode": "mod calc {\n    pub fn total(a: i32, b: i32) -> i32 {\n        // a + b を返すように直そう！\n        a\n    }\n}\n\n#[test]\nfn t_one() { assert_eq!(calc::total(1, 2), 3); }\n\n#[test]\nfn t_two() { assert_eq!(calc::total(2, 2), 4); }\n\nfn main() {\n    let dist = calc::total(2, 2);\n    add_vault(dist);\n    step(dist);\n}",
-    "solutionCode": "mod calc {\n    pub fn total(a: i32, b: i32) -> i32 {\n        a + b\n    }\n}\n\n#[test]\nfn t_one() { assert_eq!(calc::total(1, 2), 3); }\n\n#[test]\nfn t_two() { assert_eq!(calc::total(2, 2), 4); }\n\nfn main() {\n    let dist = calc::total(2, 2);\n    add_vault(dist);\n    step(dist);\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-18. Rc<RefCell<i32>> パターンで複数箇所から状態更新",
+    "topicTag": "Rc + RefCell 共有可変状態",
+    "kurumiIntro": "共有できる `Rc` と書き換えできる `RefCell` を組み合わせた定番コンビ `Rc<RefCell<i32>>` に挑戦！別々の所有者から順番に加算しよう。",
+    "goalSummary": "Rc::clone 経由で同じ RefCell を2回更新し金庫⚡7＋(4, 1)へ",
+    "bookSectionTitle": "15.5 Rc<T> と RefCell<T> を組み合わせて可変データへの複数の所有者を持つ",
+    "bookSummary": "「複数人で共有したい（`Rc`）」かつ「中身を書き換えたい（`RefCell`）」ときは、`Rc::new(RefCell::new(値))` が Rust シングルスレッドの王道パターンです。",
+    "bookKeyCode": "let a = Rc::new(RefCell::new(2));\nlet b = Rc::clone(&a);\n{ *b.borrow_mut() += 5; }",
+    "starterCode": "fn add_energy(target: Rc<RefCell<i32>>, amt: i32) {\n    let mut g = target.borrow_mut();\n    *g += amt;\n}\n\nfn main() {\n    let shared = Rc::new(RefCell::new(2));\n    // ↓ shared をそのまま渡すと Move して次が使えないよ！Rc::clone(&shared) にしよう\n    add_energy(shared, 2);\n    add_energy(Rc::clone(&shared), 3);\n    let v = shared.borrow();\n    add_vault(*v);\n    step(4);\n}",
+    "solutionCode": "fn add_energy(target: Rc<RefCell<i32>>, amt: i32) {\n    let mut g = target.borrow_mut();\n    *g += amt;\n}\n\nfn main() {\n    let shared = Rc::new(RefCell::new(2));\n    add_energy(Rc::clone(&shared), 2);\n    add_energy(Rc::clone(&shared), 3);\n    let v = shared.borrow();\n    add_vault(*v);\n    step(4);\n}",
     "quickChips": [
       {
-        "label": "a + b",
-        "insert": "a + b"
+        "label": "Rc::clone(&shared)",
+        "insert": "Rc::clone(&shared)"
       }
     ],
     "hints": [
-      "calc::total が a しか返していないから t_one と t_two の両方が落ちているよ！",
-      "calc::total の中を `a + b` に直そう。",
-      "pub fn total(a: i32, b: i32) -> i32 {\n    a + b\n}"
+      "関数 `add_energy` が終わると中の借用ガード `g` は自動で抜けて安全に解放されるよ！",
+      "問題は `add_energy(shared, 2);` で所有権を渡しきっている点。`Rc::clone(&shared)` に変えよう！",
+      "add_energy(Rc::clone(&shared), 2);"
     ],
     "worldSetup": {
       "width": 6,
@@ -1485,45 +1976,49 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         }
       ],
       "vault": {
-        "x": 1,
+        "x": 2,
         "y": 0,
         "initial": 0,
-        "target": 4
+        "target": 7
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 4,
-      "testsRequired": 2
+      "vaultTarget": 7,
+      "requireAllSwitches": true
     },
-    "parTicks": 5
+    "parTicks": 6
   },
   {
-    "displayId": "15-15",
-    "id": "35e89f94-e94e-5719-a257-93db17b70a38",
-    "index": 263,
+    "displayId": "15-19",
+    "id": "54ab4b3c-0663-52b5-8dc8-0e8f7687938e",
+    "index": 323,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "stageKind": "challenge",
-    "title": "15-15. モジュール結合テスト＋コア納品チャレンジ",
-    "topicTag": "3テスト + コア空間納品",
-    "kurumiIntro": "公開モジュール `mod core_calc` に書かれたパワー強化式を直して3つのテストに全部合格し、実際の現場でも検査・強化・納品を成し遂げよう！",
-    "goalSummary": "3テスト合格・金庫⚡5・コア⚡5+納品（空間ルール）を達成",
-    "bookSectionTitle": "15.3 リファクタリングしてもテストが守ってくれる安心感",
-    "bookSummary": "ロジックと現場の操作をつなぐ計算部分をテストで固めることで、自信を持って複雑な手順を走らせられます。",
-    "bookKeyCode": "pub fn boost_calc(p: i32) -> i32 { p + 2 }",
-    "starterCode": "mod core_calc {\n    pub fn boost_calc(p: i32) -> i32 {\n        // +2 するはずが +1 になってるよ！\n        p + 1\n    }\n}\n\n#[test]\nfn t_base1() { assert_eq!(core_calc::boost_calc(1), 3); }\n\n#[test]\nfn t_base3() { assert_eq!(core_calc::boost_calc(3), 5); }\n\n#[test]\nfn t_zero() { assert!(core_calc::boost_calc(0) == 2); }\n\nfn main() {\n    let target = core_calc::boost_calc(3);\n    add_vault(target);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
-    "solutionCode": "mod core_calc {\n    pub fn boost_calc(p: i32) -> i32 {\n        p + 2\n    }\n}\n\n#[test]\nfn t_base1() { assert_eq!(core_calc::boost_calc(1), 3); }\n\n#[test]\nfn t_base3() { assert_eq!(core_calc::boost_calc(3), 5); }\n\n#[test]\nfn t_zero() { assert!(core_calc::boost_calc(0) == 2); }\n\nfn main() {\n    let target = core_calc::boost_calc(3);\n    add_vault(target);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-19. 空間ルール＋Rc<RefCell> で検査・強化・納品",
+    "topicTag": "Rc<RefCell> + 空間コア",
+    "kurumiIntro": "進捗カウンターを `Rc<RefCell<i32>>` で記録しながら、コアの拾得・検査・強化・納品を一気に行おう！",
+    "goalSummary": "進捗カウンター⚡2（検査・強化の計2回）＋コア⚡5+納品を達成",
+    "bookSectionTitle": "15.5 共有ログや計測カウンターとしての Rc<RefCell>",
+    "bookSummary": "異なる処理ステップから共通の統計カウンターへ安全に加算する実戦的なパターンです。",
+    "bookKeyCode": "{ *log.borrow_mut() += 1; }",
+    "starterCode": "fn tick_op(log: Rc<RefCell<i32>>) {\n    let mut g = log.borrow_mut();\n    *g += 1;\n}\n\nfn main() {\n    let ops = Rc::new(RefCell::new(0));\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    // ここで (3, 1) の強化台！boost(&mut c); と tick_op(Rc::clone(&ops)); を入れよう\n    \n    step(1);\n    deliver(c);\n    add_vault(*ops.borrow());\n}",
+    "solutionCode": "fn tick_op(log: Rc<RefCell<i32>>) {\n    let mut g = log.borrow_mut();\n    *g += 1;\n}\n\nfn main() {\n    let ops = Rc::new(RefCell::new(0));\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    boost(&mut c);\n    tick_op(Rc::clone(&ops));\n    step(1);\n    deliver(c);\n    add_vault(*ops.borrow());\n}",
     "quickChips": [
       {
-        "label": "p + 2",
-        "insert": "p + 2"
+        "label": "boost(&mut c);",
+        "insert": "boost(&mut c);\n    "
+      },
+      {
+        "label": "tick_op(Rc::clone(&ops));",
+        "insert": "tick_op(Rc::clone(&ops));\n    "
       }
     ],
     "hints": [
-      "core_calc::boost_calc の中が `p + 1` のままだと 3つのテスト全部が落ちちゃうよ！",
-      "`p + 2` に直すだけで 3テスト全合格＋金庫⚡5＋コア納品が一気に成功するよ！",
-      "pub fn boost_calc(p: i32) -> i32 {\n    p + 2\n}"
+      "コアの元パワーは⚡3、目標は⚡5以上。強化台(3,1)で `boost(&mut c);` が必要だよ！",
+      "同時に `tick_op(Rc::clone(&ops));` も呼んで、金庫目標⚡2を満たそう！",
+      "boost(&mut c);\ntick_op(Rc::clone(&ops));"
     ],
     "worldSetup": {
       "width": 5,
@@ -1585,7 +2080,7 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "x": 1,
           "y": 1,
           "power": 3,
-          "label": "テストコア"
+          "label": "計測コア"
         }
       ],
       "scanners": [
@@ -1607,10 +2102,10 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         }
       ],
       "vault": {
-        "x": 0,
+        "x": 1,
         "y": 0,
         "initial": 0,
-        "target": 5
+        "target": 2
       }
     },
     "victoryCondition": {
@@ -1618,42 +2113,41 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       "deliverCores": 1,
       "minCorePower": 5,
       "scanCount": 1,
-      "vaultTarget": 5,
-      "testsRequired": 3,
+      "vaultTarget": 2,
       "requireSpatialCoreRules": true
     },
     "parTicks": 10
   },
   {
-    "displayId": "15-16",
-    "id": "d50a425c-2aac-553f-a6c3-87f3bfa09626",
-    "index": 264,
+    "displayId": "15-20",
+    "id": "1bef7c21-c2cb-5cf1-84c3-65e120ca0c9f",
+    "index": 324,
     "chapter": 15,
-    "chapterTitle": "第15章 自動テスト",
-    "stageKind": "challenge",
-    "title": "15-16. 第15章挑戦：完全品質保証の迷宮突破",
-    "topicTag": "第15章 最終チャレンジ",
-    "kurumiIntro": "第15章の最終チャレンジ！設計モジュール `mod spec` の計算バグを直して3つの結合テストに合格したら、2スイッチ・スパーク・ゲート・金庫⚡6の迷宮を駆け抜けよう！",
-    "goalSummary": "3テスト合格＋\"TEST_PASS\"＋金庫⚡6・全スイッチ・(5, 3) へ",
-    "bookSectionTitle": "第15章まとめ — テストに裏打ちされた安心の発進",
-    "bookSummary": "3つ以上の単体・結合テストで検証された計算モジュールを使い、障害物だらけのコースを確実に突破します。",
-    "bookKeyCode": "#[test] × 3 + 迷宮攻略",
-    "starterCode": "mod spec {\n    pub fn energy(a: i32, b: i32) -> i32 {\n        // (a + b) * 2 に直そう！今は a + b だよ\n        a + b\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(spec::energy(1, 2), 6); }\n\n#[test]\nfn t2() { assert_eq!(spec::energy(0, 3), 6); }\n\n#[test]\nfn t3() { assert!(spec::energy(2, 2) == 8); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let e = spec::energy(1, 2);\n    add_vault(e);\n    println!(\"TEST_PASS\");\n    safe_go(5);\n    turn_right();\n    safe_go(2);\n}",
-    "solutionCode": "mod spec {\n    pub fn energy(a: i32, b: i32) -> i32 {\n        (a + b) * 2\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(spec::energy(1, 2), 6); }\n\n#[test]\nfn t2() { assert_eq!(spec::energy(0, 3), 6); }\n\n#[test]\nfn t3() { assert!(spec::energy(2, 2) == 8); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let e = spec::energy(1, 2);\n    add_vault(e);\n    println!(\"TEST_PASS\");\n    safe_go(5);\n    turn_right();\n    safe_go(2);\n}",
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-20. RefCell 書き換え中にガードを持ちすぎない設計",
+    "topicTag": "RefCell スコープ + ゲート待機",
+    "kurumiIntro": "蒸気ゲートが一定周期で開閉する通路を抜けながら、`RefCell` に歩数カウントを貯めよう！借用パニックを起こさないよう必ずブロック `{ ... }` を閉じてね。",
+    "goalSummary": "RefCell パニックを回避し周期ゲート(2,1)を抜け金庫⚡4＋(4,1)へ",
+    "bookSectionTitle": "15.5 ループ内での短寿命 borrow_mut()",
+    "bookSummary": "ループ内で毎回 `borrow_mut()` を呼ぶときは、1回ごとにすぐ解放されるブロック構造にすることで安全が保たれます。",
+    "bookKeyCode": "for _ in 0..4 { { *steps.borrow_mut() += 1; } ... }",
+    "starterCode": "fn main() {\n    let steps = RefCell::new(0);\n    // ↓ ループの外で borrow_mut() を握りっぱなしにしているため中の borrow_mut() でパニックするよ！\n    let mut lock_leak = steps.borrow_mut();\n    for _ in 0..4 {\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut s = steps.borrow_mut();\n            *s += 1;\n        }\n    }\n    add_vault(*steps.borrow());\n}",
+    "solutionCode": "fn main() {\n    let steps = RefCell::new(0);\n    for _ in 0..4 {\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut s = steps.borrow_mut();\n            *s += 1;\n        }\n    }\n    add_vault(*steps.borrow());\n}",
     "quickChips": [
       {
-        "label": "(a + b) * 2",
-        "insert": "(a + b) * 2"
+        "label": "for _ in 0..4 {",
+        "insert": "for _ in 0..4 {"
       }
     ],
     "hints": [
-      "t1 は energy(1, 2) == 6、t3 は energy(2, 2) == 8 を期待しているよ！",
-      "spec::energy の中身を `(a + b) * 2` に直せば、テスト3つ全合格＆金庫⚡6でゴールまで一気に進めるよ！",
-      "pub fn energy(a: i32, b: i32) -> i32 {\n    (a + b) * 2\n}"
+      "3行目の `let mut lock_leak = steps.borrow_mut();` がずっと借用を手放していないせいで、ループ内の borrow_mut() が衝突するよ！",
+      "`let mut lock_leak = steps.borrow_mut();` の行を削除しよう！",
+      "let steps = RefCell::new(0);\nfor _ in 0..4 {"
     ],
     "worldSetup": {
       "width": 6,
-      "height": 5,
+      "height": 3,
       "walls": [
         {
           "x": 0,
@@ -1665,6 +2159,10 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
         },
         {
           "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
           "y": 0
         },
         {
@@ -1688,7 +2186,243 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
+          "x": 3,
+          "y": 2
+        },
+        {
           "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "gates": [
+        {
+          "x": 2,
+          "y": 1,
+          "openTicks": 2,
+          "closedTicks": 2,
+          "initialOffset": 1
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "15-21",
+    "id": "73b33189-827b-51b7-976a-c6ea1b476074",
+    "index": 325,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-21. Box 構造体と RefCell の連携（迷路折り返し）",
+    "topicTag": "Box<Struct> + RefCell + 左手法",
+    "kurumiIntro": "`Box<MazeStats>` に記録用 `RefCell` を組み合わせて、曲がり角を数えながら迷路を抜けよう！スイッチの真上で曲がれたらバッチリだよ。",
+    "goalSummary": "左手法迷路でコーナーを通ってスイッチを踏み (3, 3) へ",
+    "bookSectionTitle": "15.1 & 15.5 Box と RefCell を合わせた状態記録",
+    "bookSummary": "ヒープ管理の構造体の中身を安全に更新しながら自律探索ループを回すパターンです。",
+    "bookKeyCode": "{ let mut g = steps.borrow_mut(); *g += 1; }",
+    "starterCode": "fn main() {\n    let max_vault = Box::new(3);\n    let count = RefCell::new(0);\n    while !at_goal() {\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            // 行き止まり！右へ曲がって count を増やそう\n            wait_tick(1);\n        }\n    }\n    add_vault(*max_vault + *count.borrow());\n}",
+    "solutionCode": "fn main() {\n    let max_vault = Box::new(3);\n    let count = RefCell::new(0);\n    while !at_goal() {\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            turn_right();\n            {\n                let mut g = count.borrow_mut();\n                *g += 1;\n            }\n        }\n    }\n    add_vault(*max_vault + *count.borrow());\n}",
+    "quickChips": [
+      {
+        "label": "turn_right();",
+        "insert": "turn_right();\n            "
+      },
+      {
+        "label": "{ let mut g = count.borrow_mut(); *g += 1; }",
+        "insert": "{\n                let mut g = count.borrow_mut();\n                *g += 1;\n            }"
+      }
+    ],
+    "hints": [
+      "(3, 1) の角で右に1回だけ曲がる必要があるよ！目標金庫は 3 + 1 = 4。",
+      "else の中を `turn_right(); { let mut g = count.borrow_mut(); *g += 1; }` に直そう！",
+      "turn_right();\n{\n    let mut g = count.borrow_mut();\n    *g += 1;\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4,
+      "requireAllSwitches": true
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "15-22",
+    "id": "91449bb9-4dc7-549f-8a66-54a36fe8d430",
+    "index": 326,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-22. 二重スパーク防衛線と Box・RefCell 協調",
+    "topicTag": "Box + RefCell + スパーク2連続",
+    "kurumiIntro": "2か所の横断スパークを越えてゴールへ！`Box` に目標値を預け、`RefCell` で通過回数を記録しながら安全に進もう。",
+    "goalSummary": "Box＋RefCell で金庫⚡4を作り2つのスパークを越えて (5, 1) へ",
+    "bookSectionTitle": "15.1 & 15.5 ヒープ値と安全カウンターの連動",
+    "bookSummary": "安全確認付きのループと `RefCell` スコープ更新を組み合わせて危険地帯を踏破します。",
+    "bookKeyCode": "while is_spark_ahead() { wait_tick(1); } step();",
+    "starterCode": "fn main() {\n    let base = Box::new(2);\n    let passed = RefCell::new(0);\n    for _ in 0..5 {\n        // スパーク待ちがないので衝突しちゃうよ！\n        step();\n        {\n            let mut p = passed.borrow_mut();\n            *p += 1;\n        }\n    }\n    add_vault(*base);\n}",
+    "solutionCode": "fn main() {\n    let base = Box::new(2);\n    let passed = RefCell::new(0);\n    for _ in 0..5 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n        {\n            let mut p = passed.borrow_mut();\n            *p += 1;\n        }\n    }\n    add_vault(*base + 2);\n}",
+    "quickChips": [
+      {
+        "label": "while is_spark_ahead() { wait_tick(1); }",
+        "insert": "while is_spark_ahead() {\n            wait_tick(1);\n        }\n        "
+      }
+    ],
+    "hints": [
+      "(1, 1) と (3, 1) を縦断するスパークがいるよ！",
+      "step(); の前に `while is_spark_ahead() { wait_tick(1); }` を入れよう！",
+      "while is_spark_ahead() {\n    wait_tick(1);\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
           "y": 2
         },
         {
@@ -1696,19 +2430,15 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
           "y": 3
         },
         {
-          "x": 1,
-          "y": 3
-        },
-        {
           "x": 2,
           "y": 3
         },
         {
-          "x": 3,
+          "x": 4,
           "y": 3
         },
         {
-          "x": 4,
+          "x": 5,
           "y": 3
         },
         {
@@ -1743,39 +2473,41 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
       },
       "goal": {
         "x": 5,
-        "y": 3
-      },
-      "switches": [
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 5,
-          "y": 2,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 4,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 0,
-        "y": 0,
-        "initial": 0,
-        "target": 6
+        "y": 1
       },
       "sparks": [
         {
           "id": "sp1",
+          "path": [
+            {
+              "x": 1,
+              "y": 0
+            },
+            {
+              "x": 1,
+              "y": 1
+            },
+            {
+              "x": 1,
+              "y": 2
+            },
+            {
+              "x": 1,
+              "y": 3
+            },
+            {
+              "x": 1,
+              "y": 2
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "initialIndex": 1
+        },
+        {
+          "id": "sp2",
           "path": [
             {
               "x": 3,
@@ -1802,21 +2534,254 @@ export const CHAPTER_15_STAGES: StageDefinition[] = [
               "y": 1
             }
           ],
-          "initialIndex": 0
+          "initialIndex": 3
         }
-      ]
+      ],
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 6,
-      "testsRequired": 3,
-      "stdoutIncludes": [
-        "TEST_PASS"
-      ],
-      "requireAllSwitches": true
+      "vaultTarget": 4,
+      "vaultExact": 4
     },
-    "parTicks": 13
+    "parTicks": 10
+  },
+  {
+    "displayId": "15-23",
+    "id": "451659e2-c700-5579-a149-c060ef9f5d3a",
+    "index": 327,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "title": "15-23. 第15章まとめ：Box・Rc・RefCell 総合工房",
+    "topicTag": "第15章 総合実践",
+    "kurumiIntro": "第15章の総決算！`Box`（横歩数）、`Rc`（縦歩数共有）、`RefCell`（金庫チャージ計算）の3種類のスマートポインターを組み合わせてL字ゴールへ！",
+    "goalSummary": "Box・Rc・RefCell の3つを使って金庫⚡5＋ゴール (3, 3) へ",
+    "bookSectionTitle": "第15章まとめ — スマートポインターの適材適所",
+    "bookSummary": "単独所有のヒープ確保は `Box`、複数共有は `Rc`、内部の書き換えには `RefCell` と役割を分けて組み合わせます。",
+    "bookKeyCode": "Box::new(...) / Rc::clone(...) / cell.borrow_mut()",
+    "starterCode": "fn main() {\n    let b_dx = Box::new(3);\n    let rc_dy = Rc::new(2);\n    let rc_dy_copy = Rc::clone(&rc_dy);\n    let cell = RefCell::new(2);\n    {\n        let mut g = cell.borrow_mut();\n        *g += *b_dx; // 2 + 3 = 5\n    }\n    add_vault(*cell.borrow());\n    step(*b_dx);\n    turn_right();\n    // あと *rc_dy_copy 歩進んで (3, 3) へ着こう！\n    \n}",
+    "solutionCode": "fn main() {\n    let b_dx = Box::new(3);\n    let rc_dy = Rc::new(2);\n    let rc_dy_copy = Rc::clone(&rc_dy);\n    let cell = RefCell::new(2);\n    {\n        let mut g = cell.borrow_mut();\n        *g += *b_dx;\n    }\n    add_vault(*cell.borrow());\n    step(*b_dx);\n    turn_right();\n    step(*rc_dy_copy);\n}",
+    "quickChips": [
+      {
+        "label": "step(*rc_dy_copy);",
+        "insert": "step(*rc_dy_copy);"
+      }
+    ],
+    "hints": [
+      "cell の中は 2 + 3 = 5 になって金庫に入り、東に3歩進んで南を向いているよ！",
+      "最後の行に `step(*rc_dy_copy);` を書き足そう。",
+      "turn_right();\nstep(*rc_dy_copy);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "15-24",
+    "id": "92eb75db-c24c-55fd-a983-832ad103d8c1",
+    "index": 328,
+    "chapter": 15,
+    "chapterTitle": "第15章 スマートポインタ",
+    "stageKind": "puzzle",
+    "title": "15-24. 第15章マスター：全スマートポインタ総動員コア納品",
+    "topicTag": "第15章 パズル総仕上げ",
+    "kurumiIntro": "第15章の最終パズル！`Box`・`drop`・`Rc`・`RefCell` のすべてを使いこなし、スイッチでゲートを開き、空間ルール通りコアを検査・強化して納品しよう！",
+    "goalSummary": "全スマートポインタ活用で金庫⚡6・全スイッチ・空間コア⚡5+納品を達成",
+    "bookSectionTitle": "第15章 総まとめ — メモリ管理と安全パターンの融合",
+    "bookSummary": "所有・解放・共有・内部可変性を状況に応じて組み合わせ、複雑な工程でも破綻しない安全コードを実現します。",
+    "bookKeyCode": "Box + drop + Rc::clone + Rc<RefCell>",
+    "starterCode": "fn main() {\n    let b = Box::new(2);\n    let b_val = *b;\n    drop(b);\n\n    let step_rc = Rc::new(1);\n    let total_vault = Rc::new(RefCell::new(b_val));\n\n    step(*Rc::clone(&step_rc));\n    let mut c = grab_core();\n    step(*Rc::clone(&step_rc));\n    scan(&c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*Rc::clone(&step_rc));\n    // ↓ 強化台(3,1) で boost(&mut c); しつつ total_vault に +2 しよう（まだ +0 だよ）！\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 0;\n    }\n    step(*step_rc);\n    deliver(c);\n    add_vault(*total_vault.borrow());\n}",
+    "solutionCode": "fn main() {\n    let b = Box::new(2);\n    let b_val = *b;\n    drop(b);\n\n    let step_rc = Rc::new(1);\n    let total_vault = Rc::new(RefCell::new(b_val));\n\n    step(*Rc::clone(&step_rc));\n    let mut c = grab_core();\n    step(*Rc::clone(&step_rc));\n    scan(&c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*Rc::clone(&step_rc));\n    boost(&mut c);\n    {\n        let mut g = total_vault.borrow_mut();\n        *g += 2;\n    }\n    step(*step_rc);\n    deliver(c);\n    add_vault(*total_vault.borrow());\n}",
+    "quickChips": [
+      {
+        "label": "boost(&mut c);",
+        "insert": "boost(&mut c);\n    "
+      },
+      {
+        "label": "*g += 2;",
+        "insert": "*g += 2;"
+      }
+    ],
+    "hints": [
+      "(3, 1) で `boost(&mut c);` が呼べておらず、さらに `total_vault` の最後の加算が `*g += 0;` のままになっているよ！",
+      "boost(&mut c); を追加し、最後の `*g += 0;` を `*g += 2;` に直せば⚡6とコア⚡5+を達成できるよ！",
+      "boost(&mut c);\n{\n    let mut g = total_vault.borrow_mut();\n    *g += 2;\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "極上コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 5,
+      "scanCount": 1,
+      "vaultTarget": 6,
+      "requireAllSwitches": true,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 11
   }
 ];
-
-

@@ -1,102 +1,196 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_18: StageStoryEntry[] = [
-  // ===== 第18章：お急ぎ便とかけっこ勝負 (18-1 〜 18-4) =====
   {
-    stageId: '20649eef-f71c-5821-b966-a1e23b920e2f',
-    requestTitle: 'お急ぎダッシュ！最短コースをかけ抜けろ',
-    client: 'poppo',
-    intro: [
+    "stageId": "a4e95ee9-d55c-5c3b-aa42-63d292e22a0e",
+    "requestTitle": "福引きボックスの中身、ひと目でバラバラ仕分け",
+    "client": "coppe",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'panic',
-        text: 'お祭りのチラシ配りが遅れそうです！今日は「お急ぎオプション」をオンにして最短歩数で駆け抜けたいです！',
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "お祭りの福引きボックスに、賞品の数やら歩く数やらがいっぱい詰まってるんだ。一気に取り出して整理したいな！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'お急ぎモード発動カニ！ハサミを後ろに流して空気抵抗を減らすロボ〜！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "箱をパカッと開けて中身を仕分けるカニ！……あっ、特賞の黄金パン券がキラッと光ってるロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: 'スイスイ進んで新記録達成です！これならお昼寝の時間もたっぷり確保できます〜。',
-      },
-    ],
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "特賞の「黄金クロワッサン券」もばっちり揃ったよ！みんな喜んでくれるぞ〜！"
+      }
+    ]
   },
   {
-    stageId: '1d1d1eae-a488-5133-9fdd-a0b378a96eaa',
-    requestTitle: '店の奥から「お急ぎ窓口」を開放せよ！',
-    client: 'moka',
-    intro: [
+    "stageId": "7e0db7bd-3d57-50a0-93b7-78ecaeff3f76",
+    "requestTitle": "配達ルートとおまけ賞品のすっきり整理",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: '店の奥に隠れている便利な道具を、玄関からひと声かけるだけで使えるように表へ出しておいてくれるかい？',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "配達ルートのペア数字と、おまけ賞品が入ってるかどうかの確認をすっきり済ませて屋台へ運んでほしいわ。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '受け渡し窓口を玄関にポンッと移しておけば、走ってきたまま立ち止まらず受け取れるよ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "必ず入ってるルートとおまけの賞品を綺麗に分けて、L字の屋台まで一気にお届けしよう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '見た目もシンプルで速い！いいお店番になってきたね。',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "賞品も配達もまとめて片付いて助かったわ♪"
+      }
+    ]
   },
   {
-    stageId: '9de2fcd1-59e3-5e8c-85a5-46e76c89a7c2',
-    requestTitle: '数え役と走り役の二人三脚リレー',
-    client: 'coppe',
-    intro: [
+    "stageId": "2408bb72-9259-5dd6-ba85-f9857cf291a5",
+    "requestTitle": "「1か2」と「3から5」、福引きの点数を一気分け！",
+    "client": "poppo",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '「計算する係」と「走る係」のふたりで協力して、確認チェックもしながらパンを届けてみよう！',
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "抽選チケットの番号が「1か2」のときと「3から5」のときで景品を分けたいんですが、パッと見で振り分けられますか？"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '僕が走る係カニ！計算はしっかり者の誰かにお願いするロボ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "グループごとにまとめて箱を用意しておけば、何百枚チケットが来ても一瞬でさばけるよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: 'チェック合格も配達もバッチリ！息の合ったチームワークだね！',
-      },
-    ],
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "福引き会場の集計がびっくりするほど速くなりました！行列もスイスイです！"
+      }
+    ]
   },
   {
-    stageId: '12c1af9f-0396-5ba7-826d-d039f93befd9',
-    requestTitle: '制限時間内にゴール！かけっこ大会！',
-    client: 'kurumi',
-    intro: [
+    "stageId": "6032bb13-8be5-517d-95d7-784a910560e3",
+    "requestTitle": "お祭り無線「3歩進め！」の合図を解読",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '町内かけっこ大会のタイムアタックだよ！ムダな寄り道をぜんぶ省いて、制限時間内にゴールへ飛び込もう！',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "お祭り会場から飛んでくる無線メッセージの数字を読み取って、その場でロボットを動かしてくれるかい？"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '一等賞の金メダル（チョコ味）は僕のものカニ！よーいドンロボ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ピピガガッ……「パンを3つ食べろ」って聞こえたカニ！？……うそ、「3歩進め」だったロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: 'すごいスピードで新記録！はい、お約束のチョコレート金メダルだよ！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "聞き間違いかと思ったらちゃんと正確に動いたね。見事だよ。"
+      }
+    ]
   },
-
+  {
+    "stageId": "7bafe10a-2ef4-517f-b48f-9256122665f4",
+    "requestTitle": "迷子札のぴったり条件探し！落とし物係",
+    "client": "poppo",
+    "intro": [
+      {
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "お祭りの落とし物係を任されたんですが、「番号が範囲内で、しかも条件つき」の札だけ拾い出したいんです！"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "細かい条件のフィルターを掛けながらお目当ての番号をキャッチしよう！これでお祭り当日の迷子もすぐ見つかるね！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "お目当ての落とし物札が一瞬で見つかりました！安心です！"
+      }
+    ]
+  },
+  {
+    "stageId": "331c57e3-ad96-5e04-b779-c1c7a378c808",
+    "requestTitle": "あたり番号3〜5だけ金庫へぽいぽい回収！",
+    "client": "coppe",
+    "intro": [
+      {
+        "speaker": "coppe",
+        "emotion": "normal",
+        "text": "並んだ番号札の中から「3から5」の当たり番号だけをそのまま受け取って金庫に入れ、L字ゴールへ向かってほしいんだ！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "3と4と5だけ拾うカニ！ほかの数字には見向きもせずクールに素通りするロボ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "当たりだけの合計パワーがバッチリ貯まったよ！景品も豪華にできそうだ！"
+      }
+    ]
+  },
+  {
+    "stageId": "b4374fe3-6426-5e4b-ab02-e93453235b97",
+    "requestTitle": "長い荷物伝票、いるところだけチラ見！",
+    "client": "mimosa",
+    "intro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "大きな荷物伝票の中で、本当に必要なのは最初の数字だけなの。残りの飾りは読み飛ばして受け取れるかしら？"
+      },
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "いらない所は「見ないよ〜！」ってサッと飛ばして、欲しい数字だけ受け取っちゃおう！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "余計な情報に惑わされず、本当に欲しい数字だけ取れたわね！"
+      }
+    ]
+  },
+  {
+    "stageId": "6881bf72-be99-592e-99bc-f6ad3df32748",
+    "requestTitle": "福引き司令室からゲートへ突撃！",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "複雑な伝票も番号札も一瞬で仕分けられるようになったね！条件をぜんぶ見極めて連動ゲートをカッコよく突破しよう！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "福引き会場のマスター、フェリスちゃんにおまかせカニ！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "完璧！次はいよいよ広場の大きなからくり時計を直しに行くよ！"
+      }
+    ]
+  }
 ];

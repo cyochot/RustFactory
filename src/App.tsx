@@ -34,9 +34,9 @@ import { StoryNovelOverlay } from './components/StoryNovelOverlay';
 import { StoryLogModal } from './components/StoryLogModal';
 import { CheckCircle2 } from 'lucide-react';
 
-const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v4';
-const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v4';
-const STORAGE_KEY_STORY_SEEN = 'kobo_rust_story_seen_v4';
+const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v5';
+const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v5';
+const STORAGE_KEY_STORY_SEEN = 'kobo_rust_story_seen_v5';
 
 function buildInitialTick0Snapshot(stage: StageDefinition): TickSnapshot {
   const s = stage.worldSetup;

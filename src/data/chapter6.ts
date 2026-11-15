@@ -3,33 +3,241 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_6_STAGES: StageDefinition[] = [
   {
     "displayId": "6-1",
-    "id": "c7db5262-fe5d-5bd7-ada8-b547ecb72e20",
-    "index": 29,
+    "id": "1395d0fb-100f-5691-bb36-d711fd1986a4",
+    "index": 137,
     "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "title": "6-1. ひみつダイヤルと Ordering 比較",
-    "topicTag": "Ordering / match",
-    "kurumiIntro": "工房のダイヤル錠を当てよう！1〜10の数字を試して `try_dial(guess)` の結果（Less / Greater / Equal）で当たりを見つけてね！",
-    "goalSummary": "try_dial() で秘密の数字（Equal）を当ててゴール (3, 1) へ",
-    "bookSectionTitle": "第6章 数当てゲーム — Ordering と match 比較",
-    "bookSummary": "Rustで2つの数を比べる `.cmp()` や判定結果には `Ordering::Less`（小さい）、`Ordering::Greater`（大きい）、`Ordering::Equal`（一致）が使われます。`match` で3通りを漏れなく扱えます。",
-    "bookKeyCode": "match try_dial(n) {\n    Ordering::Less => {},\n    Ordering::Greater => {},\n    Ordering::Equal => { break; },\n}",
-    "starterCode": "fn main() {\n    for guess in 1..=10 {\n        match try_dial(guess) {\n            Ordering::Less => println!(\"小さい!\"),\n            Ordering::Greater => println!(\"大きい!\"),\n            // Equal のときゴールへ進もう！\n            Ordering::Equal => {\n                \n            },\n        }\n    }\n}",
-    "solutionCode": "fn main() {\n    for guess in 1..=10 {\n        match try_dial(guess) {\n            Ordering::Less => println!(\"小さい!\"),\n            Ordering::Greater => println!(\"大きい!\"),\n            Ordering::Equal => {\n                step(3);\n                break;\n            },\n        }\n    }\n}",
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-1. enum とデータ付きバリアント",
+    "topicTag": "enum 列挙型",
+    "kurumiIntro": "「右へ曲がる」や「2歩進む」みたいなコマンドの種類を `enum` で表現しよう！データ付きのバリアントも作れるんだよ。",
+    "goalSummary": "enum Command::Move(3) を使ってゴール (3, 1) へ進もう",
+    "bookSectionTitle": "6.1 enum を定義する",
+    "bookSummary": "`enum` は「いくつかの決まった選択肢のどれか1つ」を表します。さらに `Move(i32)` のように、選択肢ごとにデータを持たせることもできる強力な仕組みです。",
+    "bookKeyCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}",
+    "starterCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    let c = Command::Move(1);\n    run_cmd(c);\n}",
+    "solutionCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    let c = Command::Move(3);\n    run_cmd(c);\n}",
     "quickChips": [
       {
-        "label": "step(歩数);",
-        "insert": "step(/* 歩数 */);\n                "
-      },
-      {
-        "label": "break;",
-        "insert": "break;\n                "
+        "label": "Command::Move(3)",
+        "insert": "Command::Move(3)"
       }
     ],
     "hints": [
-      "Ordering::Equal が見つかったとき、ゴールまで3歩進む命令と break; を書こう！",
-      "Equal の { } の中に step(3); と break; を入れればOKだよ。",
-      "Ordering::Equal => {\n    step(3);\n    break;\n}"
+      "main関数の中で渡している Command::Move(1) を変更してみよう！",
+      "Command::Move(3) にすると 3歩進んでゴールに着くよ。",
+      "let c = Command::Move(3);\nrun_cmd(c);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "6-2",
+    "id": "34266106-3321-5c2d-9168-172c91df8523",
+    "index": 138,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-2. 複数バリアント enum でコア納品",
+    "topicTag": "enum + 空間コア納品",
+    "kurumiIntro": "歩いたり、コアを拾ったり、強化したりする一連の手順を全部 `enum Op` に書き出して、順番に実行してみよう！",
+    "goalSummary": "enum Op 列でコアを拾い、検査・強化して (4, 1) で納品しよう",
+    "bookSectionTitle": "6.1 操作のミニ言語（DSL）を enum で作る",
+    "bookSummary": "異なる種類の操作（移動・コア操作）を1つの `enum` 型として定義し、実行エンジン側で解釈させることができます。",
+    "bookKeyCode": "enum Op { Walk(i32), Grab, Scan, Boost, Deliver }",
+    "starterCode": "enum Op {\n    Walk(i32),\n    Grab,\n    Scan,\n    Boost,\n    Deliver,\n}\n\nfn main() {\n    // コア(1,1) -> 検査(2,1) -> 強化(3,1) -> 納品(4,1) だよ！\n    let ops = vec![\n        Op::Walk(1),\n        Op::Grab,\n    ];\n    let mut held = grab_core(); // ← 仮置き。実際は(1,1)で拾うよ\n    for op in ops {\n        match op {\n            Op::Walk(n) => step(n),\n            Op::Grab => held = grab_core(),\n            Op::Scan => scan(&held),\n            Op::Boost => boost(&mut held),\n            Op::Deliver => deliver(held),\n        }\n    }\n}",
+    "solutionCode": "enum Op {\n    Walk(i32),\n    Grab,\n    Scan,\n    Boost,\n    Deliver,\n}\n\nfn main() {\n    let ops = vec![\n        Op::Walk(1),\n        Op::Grab,\n        Op::Walk(1),\n        Op::Scan,\n        Op::Walk(1),\n        Op::Boost,\n        Op::Walk(1),\n        Op::Deliver,\n    ];\n    let mut has = false;\n    let mut held = None;\n    for op in ops {\n        match op {\n            Op::Walk(n) => step(n),\n            Op::Grab => {\n                held = Some(grab_core());\n                has = true;\n            },\n            Op::Scan => {\n                if let Some(c) = held {\n                    scan(&c);\n                }\n            },\n            Op::Boost => {\n                if let Some(mut c) = held {\n                    boost(&mut c);\n                    held = Some(c);\n                }\n            },\n            Op::Deliver => {\n                if let Some(c) = held {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "Op::Scan,",
+        "insert": "Op::Scan,\n        "
+      },
+      {
+        "label": "Op::Boost,",
+        "insert": "Op::Boost,\n        "
+      },
+      {
+        "label": "Op::Deliver,",
+        "insert": "Op::Deliver,\n        "
+      }
+    ],
+    "hints": [
+      "最初の Walk(1) の前に `grab_core()` を呼んでしまわないよう、`let mut held = None;` にしよう！",
+      "ops には Walk(1) → Grab → Walk(1) → Scan → Walk(1) → Boost → Walk(1) → Deliver を並べよう。",
+      "Option の `if let Some(c)` を使えば安全に Scan / Boost / Deliver できるよ！"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "指示コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "6-3",
+    "id": "3bf874e0-1b14-507d-ab3e-f9bab2d94df7",
+    "index": 139,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-3. enum にも impl メソッドが書ける！",
+    "topicTag": "enum + impl",
+    "kurumiIntro": "実は `struct` だけじゃなくて `enum` にも `impl` ブロックでメソッドを定義できるんだよ！`Action::Charge(3).apply()` みたいに動かしてみよう。",
+    "goalSummary": "impl Action 内の apply(&self) を完成させて金庫⚡3＋ゴールへ",
+    "bookSectionTitle": "6.1 enum 上のメソッド定義",
+    "bookSummary": "`enum` に `impl` でメソッドを定義し、内部で `match self` を使うと、オブジェクト指向のようなきれいな命令実行器を作れます。",
+    "bookKeyCode": "impl Action {\n    fn apply(&self) { match self { ... } }\n}",
+    "starterCode": "enum Action {\n    Walk(i32),\n    Charge(i32),\n}\n\nimpl Action {\n    fn apply(&self) {\n        match self {\n            Action::Walk(n) => step(*n),\n            // Charge(v) のときに add_vault(*v) するよう書こう！\n            Action::Charge(v) => {},\n        }\n    }\n}\n\nfn main() {\n    Action::Charge(3).apply();\n    Action::Walk(3).apply();\n}",
+    "solutionCode": "enum Action {\n    Walk(i32),\n    Charge(i32),\n}\n\nimpl Action {\n    fn apply(&self) {\n        match self {\n            Action::Walk(n) => step(*n),\n            Action::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    Action::Charge(3).apply();\n    Action::Walk(3).apply();\n}",
+    "quickChips": [
+      {
+        "label": "add_vault(*v)",
+        "insert": "add_vault(*v)"
+      }
+    ],
+    "hints": [
+      "Action::Charge(v) の処理が空 `{}` になっているよ！",
+      "Action::Charge(v) => add_vault(*v), に書き換えよう。",
+      "Action::Charge(v) => add_vault(*v),"
     ],
     "worldSetup": {
       "width": 5,
@@ -85,50 +293,150 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
         "x": 3,
         "y": 1
       },
-      "dial": {
-        "x": 1,
+      "vault": {
+        "x": 2,
         "y": 0,
-        "secret": 4
+        "initial": 0,
+        "target": 3
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "dialSolved": true
+      "vaultTarget": 3
     },
-    "parTicks": 7
+    "parTicks": 4
   },
   {
-    "displayId": "6-2",
-    "id": "7fd4e25e-40fb-5133-adee-a1a0221e491d",
-    "index": 30,
+    "displayId": "6-4",
+    "id": "39d37ecf-45a1-554c-a739-37b5aac62d84",
+    "index": 140,
     "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "title": "6-2. 範囲探索と当たり後のL字移動",
-    "topicTag": "for ..= / Ordering",
-    "kurumiIntro": "今度の秘密の数字は6〜10のどこかにあるみたい！範囲 `6..=10` で探して、開いた扉の先のL字通路を通ってゴールしよう！",
-    "goalSummary": "6..=10 でダイヤル（secret: 7）を解錠しゴール (2, 3) へ",
-    "bookSectionTitle": "6.2 範囲式 6..=10 と比較ループ",
-    "bookSummary": "`a..=b` は `b` を含む範囲を表します。探索範囲を絞ることで試行回数を減らし、当たったら `break;` で素早く抜け出せます。",
-    "bookKeyCode": "for guess in 6..=10 {\n    if ... { break; }\n}",
-    "starterCode": "fn main() {\n    // 秘密の数字は 7 だよ！今は 1..=5 までしか探していないよ\n    for guess in 1..=5 {\n        match try_dial(guess) {\n            Ordering::Equal => {\n                step(2);\n                turn_right();\n                step(2);\n                break;\n            },\n            _ => {},\n        }\n    }\n}",
-    "solutionCode": "fn main() {\n    for guess in 6..=10 {\n        match try_dial(guess) {\n            Ordering::Equal => {\n                step(2);\n                turn_right();\n                step(2);\n                break;\n            },\n            _ => {},\n        }\n    }\n}",
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-4. Option<T> 型の Some と None",
+    "topicTag": "Option<T> / Some / None",
+    "kurumiIntro": "Rustには「null（ぬる）」の代わりに、値がある `Some(値)` か、空っぽの `None` を表す標準の `enum Option<T>` があるんだ！",
+    "goalSummary": "Option 値を match で取り出してゴール (4, 1) へ",
+    "bookSectionTitle": "6.1 Option enum と Null よりも優れた利点",
+    "bookSummary": "値が存在しない可能性を型として表すのが `Option<T>` です。使うときに必ず `Some` と `None` を意識するため、ぬるぽ（Null参照エラー）が起きません。",
+    "bookKeyCode": "let opt = Some(4);\nmatch opt {\n    Some(n) => step(n),\n    None => {},\n}",
+    "starterCode": "fn get_bonus(ok: bool) -> Option<i32> {\n    if ok { Some(4) } else { None }\n}\n\nfn main() {\n    // false を true にして Some(4) を受け取ろう！\n    let bonus = get_bonus(false);\n    match bonus {\n        Some(n) => step(n),\n        None => println!(\"ボーナスなし!\"),\n    }\n}",
+    "solutionCode": "fn get_bonus(ok: bool) -> Option<i32> {\n    if ok { Some(4) } else { None }\n}\n\nfn main() {\n    let bonus = get_bonus(true);\n    match bonus {\n        Some(n) => step(n),\n        None => println!(\"ボーナスなし!\"),\n    }\n}",
     "quickChips": [
       {
-        "label": "6..=10",
-        "insert": "6..=10"
-      },
-      {
-        "label": "break;",
-        "insert": "break;\n"
+        "label": "true",
+        "insert": "true"
       }
     ],
     "hints": [
-      "1..=5 の範囲だと 7 に届く前にループが終わってしまうよ！",
-      "for guess in 6..=10 に変えてみよう。",
-      "for guess in 6..=10 {"
+      "今は get_bonus(false) を呼んでいるから None になって進まないよ。",
+      "get_bonus(true) に変えてみよう！",
+      "let bonus = get_bonus(true);"
     ],
     "worldSetup": {
-      "width": 4,
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "6-5",
+    "id": "b8cacf70-a74c-57ea-bdaf-d5c24934b111",
+    "index": 141,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-5. enum 命令インタプリタ迷路",
+    "topicTag": "enum + match インタプリタ",
+    "kurumiIntro": "`Go(n)`・`TurnR`・`TurnL` を並べて、ジグザグの壁とスイッチを抜けながらコンベアへ乗り込むプログラムを `enum` で組もう！",
+    "goalSummary": "enum Cmd 列を正しく組んでスイッチとコンベア経由で (5, 3) へ",
+    "bookSectionTitle": "6.1 命令を配列で並べて解釈する enum",
+    "bookSummary": "ロボットの一連の動きをデータ（`enum` の配列）として表現すると、ルート編集や拡張がとてもやりやすくなります。",
+    "bookKeyCode": "vec![Cmd::Go(2), Cmd::TurnR, Cmd::Go(2)]",
+    "starterCode": "enum Cmd {\n    Go(i32),\n    TurnR,\n    TurnL,\n}\n\nfn main() {\n    let script = vec![\n        Cmd::Go(2),\n        // ここから先を埋めよう（ゴールは (5, 3) だよ！）\n    ];\n    for c in script {\n        match c {\n            Cmd::Go(n) => step(n),\n            Cmd::TurnR => turn_right(),\n            Cmd::TurnL => turn_left(),\n        }\n    }\n}",
+    "solutionCode": "enum Cmd {\n    Go(i32),\n    TurnR,\n    TurnL,\n}\n\nfn main() {\n    let script = vec![\n        Cmd::Go(2),\n        Cmd::TurnR,\n        Cmd::Go(2),\n        Cmd::TurnL,\n        Cmd::Go(2),\n    ];\n    for c in script {\n        match c {\n            Cmd::Go(n) => step(n),\n            Cmd::TurnR => turn_right(),\n            Cmd::TurnL => turn_left(),\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "Cmd::TurnR,",
+        "insert": "Cmd::TurnR,\n        "
+      },
+      {
+        "label": "Cmd::TurnL,",
+        "insert": "Cmd::TurnL,\n        "
+      },
+      {
+        "label": "Cmd::Go(2),",
+        "insert": "Cmd::Go(2),\n        "
+      }
+    ],
+    "hints": [
+      "Cmd::Go(2) で (2,1) のスイッチを踏みつつ角へ着くよ！",
+      "右折して Cmd::Go(2) で南へ (2,3) まで下りよう！",
+      "最後に左折して Cmd::Go(2) でコンベア (3,3)->(4,3) を抜けて (5,3) へ！"
+    ],
+    "worldSetup": {
+      "width": 6,
       "height": 5,
       "walls": [
         {
@@ -148,16 +456,12 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
-          "x": 3,
-          "y": 1
+          "x": 4,
+          "y": 0
         },
         {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 3
+          "x": 5,
+          "y": 0
         },
         {
           "x": 0,
@@ -168,8 +472,36 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
           "x": 1,
-          "y": 3
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
         }
       ],
       "botStart": {
@@ -178,51 +510,317 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 2,
+        "x": 5,
         "y": 3
       },
-      "dial": {
-        "x": 1,
-        "y": 0,
-        "secret": 7
-      }
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "conveyors": [
+        {
+          "x": 3,
+          "y": 3,
+          "dir": 0
+        }
+      ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "dialSolved": true
+      "requireAllSwitches": true,
+      "maxTicks": 10
     },
-    "parTicks": 7
+    "parTicks": 9
   },
   {
-    "displayId": "6-3",
-    "id": "bffca818-f6e4-50f8-b50f-4ff61be8ee4e",
-    "index": 31,
+    "displayId": "6-6",
+    "id": "d14868f8-8cbf-530d-a93d-a98815a08d63",
+    "index": 142,
     "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "stageKind": "puzzle",
-    "title": "6-3. 二分探索ダイヤルと角曲がり",
-    "topicTag": "match Ordering / 二分探索パズル",
-    "kurumiIntro": "ダイヤルの正解は 1〜20 のどこか！毎回 1 ずつ足すと制限ティックに間に合わないから、`low` と `high` の真ん中で割る「二分探索」で素早く見破ろう！",
-    "goalSummary": "10ティック以内にダイヤル(13)を解き、ゴール (4, 1) へ到達",
-    "bookSectionTitle": "2章 二分探索 — Ordering で探索範囲を半分に",
-    "bookSummary": "`Ordering::Less` なら `low = guess + 1`、`Ordering::Greater` なら `high = guess - 1` に更新して中央値 `guess = (low + high) / 2` を試すと超高速に当たります！",
-    "bookKeyCode": "let mid = (low + high) / 2;",
-    "starterCode": "fn main() {\n    let mut low = 1;\n    let mut high = 20;\n    loop {\n        let guess = (low + high) / 2;\n        match try_dial(guess) {\n            // Less, Greater, Equal のときの処理を書こう！\n            Ordering::Equal => { break; },\n            _ => {},\n        }\n    }\n    step(4);\n}",
-    "solutionCode": "fn main() {\n    let mut low = 1;\n    let mut high = 20;\n    loop {\n        let guess = (low + high) / 2;\n        match try_dial(guess) {\n            Ordering::Less => low = guess + 1,\n            Ordering::Greater => high = guess - 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(4);\n}",
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-6. match 演算子と網羅性",
+    "topicTag": "match の網羅性",
+    "kurumiIntro": "Rustの `match` は enum の選択肢を1つでも書き忘れるとコンパイルエラーで教えてくれるんだ！全部のパターンを埋めてね。",
+    "goalSummary": "欠けている Signal::Stop を追加して match を完成させよう",
+    "bookSectionTitle": "6.2 match 制御フロー演算子",
+    "bookSummary": "`match` はすべての可能性を漏れなくチェック（網羅性検査）します。書き漏れがなくなるため、想定外の状態でバグる心配がありません。",
+    "bookKeyCode": "match sig {\n    Signal::Go => step(3),\n    Signal::Stop => wait_tick(1),\n}",
+    "starterCode": "enum Signal {\n    Go,\n    Stop,\n}\n\nfn main() {\n    let sig = Signal::Go;\n    // Stop のパターンが抜けているのでコンパイルエラーになるよ！\n    match sig {\n        Signal::Go => step(3),\n    }\n}",
+    "solutionCode": "enum Signal {\n    Go,\n    Stop,\n}\n\nfn main() {\n    let sig = Signal::Go;\n    match sig {\n        Signal::Go => step(3),\n        Signal::Stop => wait_tick(1),\n    }\n}",
     "quickChips": [
       {
-        "label": "Ordering::Less =>",
-        "insert": "Ordering::Less => low = guess + 1,\n            "
-      },
-      {
-        "label": "Ordering::Greater =>",
-        "insert": "Ordering::Greater => high = guess - 1,\n            "
+        "label": "Signal::Stop => wait_tick(1),",
+        "insert": "Signal::Stop => wait_tick(1),"
       }
     ],
     "hints": [
-      "guess が小さい（Less）なら、正解は guess より大きいから `low = guess + 1` だよ！",
-      "guess が大きい（Greater）なら、`high = guess - 1` に狭めよう！",
-      "Ordering::Less => low = guess + 1,\nOrdering::Greater => high = guess - 1,\nOrdering::Equal => { break; },"
+      "そのまま実行すると「網羅性が不足しています（不足: Stop）」と表示されるよ！",
+      "match sig { ... } の中に `Signal::Stop => wait_tick(1),` を書き足そう。",
+      "match sig {\n    Signal::Go => step(3),\n    Signal::Stop => wait_tick(1),\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "6-7",
+    "id": "a9d69c8c-39e3-58dc-b93f-074d77f1b9d2",
+    "index": 143,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-7. センサー状態 enum で自律ルート選択",
+    "topicTag": "enum + match 分岐",
+    "kurumiIntro": "周りの壁センサーを見て「右に行くか・左に行くか・前に進むか」を `enum Sense { FrontClear, LeftClear, Blocked }` にまとめて選ぼう！",
+    "goalSummary": "enum Sense で迷路を自律判定してゴール (4, 4) へ",
+    "bookSectionTitle": "6.2 状態を enum にして match で分岐",
+    "bookSummary": "複雑な条件判定の結果をいったん分かりやすい `enum` 値へ変換してから `match` で行動を決めると、ミスが激減します。",
+    "bookKeyCode": "match sense_tile() { Sense::Left => turn_left(), ... }",
+    "starterCode": "enum Sense {\n    LeftOpen,\n    FrontOpen,\n    Blocked,\n}\n\nfn check_env() -> Sense {\n    if !is_wall_left() {\n        Sense::LeftOpen\n    } else if !is_wall_ahead() {\n        Sense::FrontOpen\n    } else {\n        Sense::Blocked\n    }\n}\n\nfn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        // check_env() の結果で LeftOpen->左折&step, FrontOpen->step, Blocked->右折しよう！\n        step();\n    }\n}",
+    "solutionCode": "enum Sense {\n    LeftOpen,\n    FrontOpen,\n    Blocked,\n}\n\nfn check_env() -> Sense {\n    if !is_wall_left() {\n        Sense::LeftOpen\n    } else if !is_wall_ahead() {\n        Sense::FrontOpen\n    } else {\n        Sense::Blocked\n    }\n}\n\nfn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        match check_env() {\n            Sense::LeftOpen => { turn_left(); step(); },\n            Sense::FrontOpen => step(),\n            Sense::Blocked => turn_right(),\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "match check_env() { ... }",
+        "insert": "match check_env() {\n            Sense::LeftOpen => { turn_left(); step(); },\n            Sense::FrontOpen => step(),\n            Sense::Blocked => turn_right(),\n        }"
+      }
+    ],
+    "hints": [
+      "check_env() 関数はもう用意されているよ！あとは main で `match check_env()` を書くだけ。",
+      "LeftOpen なら左を向いて1歩、FrontOpen なら1歩前進、Blocked なら右折しよう！",
+      "match check_env() { Sense::LeftOpen => { turn_left(); step(); }, Sense::FrontOpen => step(), Sense::Blocked => turn_right(), }"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 6,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 5
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "6-8",
+    "id": "bd45fe4b-97ce-51ea-a3b3-aa112c3af960",
+    "index": 144,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-8. 出力チェック付き enum ログ設計",
+    "topicTag": "enum + stdout 検証",
+    "kurumiIntro": "どの工程を実行したかが工房のログにしっかり残るように、移動とコア強化で別々のメッセージを表示する `enum Event` を動かそう！",
+    "goalSummary": "\"SCAN_DONE\" と \"BOOST_DONE\" を出力し、コア⚡4以上を納品しよう",
+    "bookSectionTitle": "6.2 ログ出力と処理実行をセットにする enum",
+    "bookSummary": "ログ印字とロボット動作を `match` の同じ腕（アーム）に書けば、動いた記録の取りこぼしがなくなります。",
+    "bookKeyCode": "match ev { Ev::Scan => { println!(\"SCAN_DONE\"); scan(&c); } ... }",
+    "starterCode": "enum StepJob {\n    Move(i32),\n    Inspect,\n    PowerUp,\n    Finish,\n}\n\nfn main() {\n    step(1);\n    let mut core = grab_core();\n    let jobs = vec![StepJob::Move(1), StepJob::Inspect, StepJob::Move(1), StepJob::PowerUp, StepJob::Move(1), StepJob::Finish];\n    for j in jobs {\n        match j {\n            StepJob::Move(n) => step(n),\n            StepJob::Inspect => {\n                // \"SCAN_DONE\" を出力して scan(&core) を呼ぼう！\n                scan(&core);\n            },\n            StepJob::PowerUp => {\n                // \"BOOST_DONE\" を出力して boost(&mut core) を呼ぼう！\n                boost(&mut core);\n            },\n            StepJob::Finish => deliver(core),\n        }\n    }\n}",
+    "solutionCode": "enum StepJob {\n    Move(i32),\n    Inspect,\n    PowerUp,\n    Finish,\n}\n\nfn main() {\n    step(1);\n    let mut core = grab_core();\n    let jobs = vec![StepJob::Move(1), StepJob::Inspect, StepJob::Move(1), StepJob::PowerUp, StepJob::Move(1), StepJob::Finish];\n    for j in jobs {\n        match j {\n            StepJob::Move(n) => step(n),\n            StepJob::Inspect => {\n                println!(\"SCAN_DONE\");\n                scan(&core);\n            },\n            StepJob::PowerUp => {\n                println!(\"BOOST_DONE\");\n                boost(&mut core);\n            },\n            StepJob::Finish => deliver(core),\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "println!(\"SCAN_DONE\");",
+        "insert": "println!(\"SCAN_DONE\");\n                "
+      },
+      {
+        "label": "println!(\"BOOST_DONE\");",
+        "insert": "println!(\"BOOST_DONE\");\n                "
+      }
+    ],
+    "hints": [
+      "Inspect の枝に `println!(\"SCAN_DONE\");`、PowerUp の枝に `println!(\"BOOST_DONE\");` を追加しよう！",
+      "scan や boost、deliver 自体はすでに正しいマスにいる状態で呼ばれるよ！",
+      "println!(\"SCAN_DONE\");\nscan(&core); / println!(\"BOOST_DONE\");\nboost(&mut core);"
     ],
     "worldSetup": {
       "width": 5,
@@ -278,177 +876,72 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
         "x": 4,
         "y": 1
       },
-      "dial": {
-        "x": 1,
-        "y": 1,
-        "secret": 13
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "maxTicks": 10
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "6-4",
-    "id": "1df14795-f8d1-5b67-80ef-75c29087e00d",
-    "index": 32,
-    "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "stageKind": "puzzle",
-    "title": "6-4. 逆算ダイヤルとスイッチの鍵",
-    "topicTag": "Ordering + スイッチパズル",
-    "kurumiIntro": "まずは下のスイッチを踏んでゲートを開けよう。ダイヤルの答えは「最初より小さい数字」だから、`Ordering::Greater` のときの引き算幅を工夫して素早く当ててね！",
-    "goalSummary": "スイッチを踏み、ダイヤル(11)を解いて 15ティック以内にゴール (4, 1) へ",
-    "bookSectionTitle": "2章 数当て応用 — 減算ステップと経路",
-    "bookSummary": "目的地の順序に応じて「スイッチを踏みゲートを開く」「ダイヤルを解く」「ゴールへ向かう」の順番をプログラム内で組み立てましょう。",
-    "bookKeyCode": "Ordering::Greater => guess -= 3,",
-    "starterCode": "fn main() {\n    // スイッチを踏んでからダイヤル(11)を解こう！\n    let mut guess = 20;\n}",
-    "solutionCode": "fn main() {\n    turn_right();\n    step();\n    turn_left();\n    step(2);\n    turn_left();\n    step();\n    turn_right();\n    let mut guess = 20;\n    loop {\n        match try_dial(guess) {\n            Ordering::Greater => guess -= 3,\n            Ordering::Less => guess += 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(2);\n}",
-    "quickChips": [
-      {
-        "label": "try_dial(guess)",
-        "insert": "try_dial(guess)"
-      },
-      {
-        "label": "Ordering::Greater =>",
-        "insert": "Ordering::Greater => guess -= 3,"
-      },
-      {
-        "label": "Ordering::Less =>",
-        "insert": "Ordering::Less => guess += 1,"
-      }
-    ],
-    "hints": [
-      "スタート (0,1) から 南1→東2→北1→東向き にすると (2,1) に着いてスイッチ (2,2) を通れるよ！",
-      "guess = 20 から Ordering::Greater なら guess -= 3、Less なら guess += 1 で 20→17→14→11 と一発（4手）で当たるよ！",
-      "ダイヤルを解いたあと step(2) でゲート (3,1) を抜けて (4,1) へ！"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 4,
-      "walls": [
+      "cores": [
         {
-          "x": 0,
-          "y": 0
-        },
-        {
+          "id": "c1",
           "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 2
-        }
-      ],
-      "dial": {
-        "x": 2,
-        "y": 1,
-        "secret": 11
-      },
-      "gates": [
-        {
-          "x": 3,
           "y": 1,
-          "openTicks": 1,
-          "closedTicks": 0,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 2
-          }
+          "power": 2,
+          "label": "記録コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
         }
       ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "dialSolved": true,
-      "requireAllSwitches": true,
-      "maxTicks": 16
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "stdoutIncludes": [
+        "SCAN_DONE",
+        "BOOST_DONE"
+      ],
+      "requireSpatialCoreRules": true
     },
-    "parTicks": 15
+    "parTicks": 12
   },
   {
-    "displayId": "6-5",
-    "id": "d9193199-6424-5df5-b90b-3fd3665c6a67",
-    "index": 33,
+    "displayId": "6-9",
+    "id": "0abe7860-9851-59fc-a65f-b3773dcbc1e4",
+    "index": 145,
     "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "title": "6-5. .cmp() メソッドで数字比べ",
-    "topicTag": ".cmp(&target) / Ordering",
-    "kurumiIntro": "本物の数当てゲームみたいに、2つの数字を `guess.cmp(&secret)` で直接比べてみよう！一致（Equal）した数字をダイヤルに入力してね！",
-    "goalSummary": "cmp で目標 5 を見つけて \"MATCH: 5\" を出力しゴールへ",
-    "bookSectionTitle": "6.3 cmp メソッドと参照渡し &secret",
-    "bookSummary": "`a.cmp(&b)` は `a` と `b` を比較して `Ordering` を返します。比べる相手の数字を所有権ごと渡さなくて済むよう `&b` と参照で渡すのがRust流です。",
-    "bookKeyCode": "match guess.cmp(&secret) {\n    Ordering::Equal => ...,\n    _ => {},\n}",
-    "starterCode": "fn main() {\n    let secret = 5;\n    for guess in 1..=8 {\n        match guess.cmp(&secret) {\n            Ordering::Less => {},\n            Ordering::Greater => {},\n            Ordering::Equal => {\n                // try_dial(guess) を呼んで、MATCH を出力し、ゴールへ進もう！\n                try_dial(guess);\n                println!(\"MATCH: {}\", 0);\n                step(3);\n                break;\n            },\n        }\n    }\n}",
-    "solutionCode": "fn main() {\n    let secret = 5;\n    for guess in 1..=8 {\n        match guess.cmp(&secret) {\n            Ordering::Less => {},\n            Ordering::Greater => {},\n            Ordering::Equal => {\n                try_dial(guess);\n                println!(\"MATCH: {}\", guess);\n                step(3);\n                break;\n            },\n        }\n    }\n}",
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-9. match で値を返す（式としての match）",
+    "topicTag": "let x = match ...",
+    "kurumiIntro": "`match` も `if` と同じように結果を値として返せるんだ！信号の色に合わせて金庫へチャージするパワーを決めよう。",
+    "goalSummary": "match が返す数値で金庫⚡3を満たし、ゴール (3, 1) へ",
+    "bookSectionTitle": "6.2 パターンに束縛して値を返す match",
+    "bookSummary": "各アーム（腕）が同じ型の値を返すなら、`let power = match lamp { ... };` のように変数へ直接代入できます。",
+    "bookKeyCode": "let p = match lamp {\n    Lamp::Gold => 3,\n    _ => 1,\n};",
+    "starterCode": "enum Lamp {\n    Red,\n    Blue,\n    Gold,\n}\n\nfn main() {\n    let lamp = Lamp::Gold;\n    let power = match lamp {\n        Lamp::Red => 1,\n        Lamp::Blue => 2,\n        // Gold のときは 3 を返そう！\n        Lamp::Gold => 0,\n    };\n    add_vault(power);\n    step(power);\n}",
+    "solutionCode": "enum Lamp {\n    Red,\n    Blue,\n    Gold,\n}\n\nfn main() {\n    let lamp = Lamp::Gold;\n    let power = match lamp {\n        Lamp::Red => 1,\n        Lamp::Blue => 2,\n        Lamp::Gold => 3,\n    };\n    add_vault(power);\n    step(power);\n}",
     "quickChips": [
       {
-        "label": "guess.cmp(&secret)",
-        "insert": "guess.cmp(&secret)"
-      },
-      {
-        "label": "println!(\"MATCH: {}\", guess);",
-        "insert": "println!(\"MATCH: {}\", guess);"
+        "label": "Lamp::Gold => 3,",
+        "insert": "Lamp::Gold => 3,"
       }
     ],
     "hints": [
-      "println!(\"MATCH: {}\", 0); になっているから、見つかった数字 guess が表示されないよ！",
-      "0 を guess に書き換えてみよう！",
-      "println!(\"MATCH: {}\", guess);"
+      "Lamp::Gold => 0 になっているから金庫も歩数も足りなくなっているよ！",
+      "Lamp::Gold => 3 に変えればOK！",
+      "Lamp::Gold => 3,"
     ],
     "worldSetup": {
       "width": 5,
@@ -504,50 +997,1237 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
         "x": 3,
         "y": 1
       },
-      "dial": {
+      "vault": {
         "x": 2,
         "y": 0,
-        "secret": 5
+        "initial": 0,
+        "target": 3
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "dialSolved": true,
-      "stdoutIncludes": [
-        "MATCH: 5"
+      "vaultTarget": 3
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "6-10",
+    "id": "aaf4d7e9-f870-51f1-adf1-33c70b50c739",
+    "index": 146,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-10. ワイルドカード _ プレースホルダー",
+    "topicTag": "match と _ ワイルドカード",
+    "kurumiIntro": "たくさんの種類のうち、特定の1つだけ特別扱いして「それ以外は全部同じ処理でいいよ」というときは `_ => ...` が超便利！",
+    "goalSummary": "ワイルドカード _ を追加してエラーを直し、ゴール (4, 1) へ",
+    "bookSectionTitle": "6.2 _ プレースホルダーによる網羅",
+    "bookSummary": "パターン `_` はどんな値にも一致します。`match` の最後に `_ => {}` を置くことで残りの全パターンを一括で処理できます。",
+    "bookKeyCode": "match num {\n    4 => step(4),\n    _ => {},\n}",
+    "starterCode": "enum Gear {\n    Small,\n    Medium,\n    Large,\n    Mega,\n}\n\nfn main() {\n    let g = Gear::Large;\n    // Small と Medium しか書いていないから未網羅エラーになるよ！_ を足そう\n    match g {\n        Gear::Large => step(4),\n    }\n}",
+    "solutionCode": "enum Gear {\n    Small,\n    Medium,\n    Large,\n    Mega,\n}\n\nfn main() {\n    let g = Gear::Large;\n    match g {\n        Gear::Large => step(4),\n        _ => step(1),\n    }\n}",
+    "quickChips": [
+      {
+        "label": "_ => step(1),",
+        "insert": "_ => step(1),"
+      }
+    ],
+    "hints": [
+      "4種類のバリアントがあるのに Gear::Large しか書かれていないよ。",
+      "`_ => step(1),` を追加すれば残りの3つを一気にカバーできるよ！",
+      "match g {\n    Gear::Large => step(4),\n    _ => step(1),\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "6-11",
+    "id": "a642e260-2f26-5f89-8ee0-9f27405ba456",
+    "index": 147,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-11. match 網羅性＋ワイルドカードでスパーク警戒",
+    "topicTag": "match 網羅性と _ 制御",
+    "kurumiIntro": "4種類の警告レベル `Warn { Clear, GateClosed, SparkNear, Emergency }` を `match` でさばこう！大切な1つだけ特別扱いして、残りを `_` でまとめることもできるよ。",
+    "goalSummary": "enum Warn を完全に網羅して、スパークとゲートを安全突破しよう",
+    "bookSectionTitle": "6.2 match の網羅性とワイルドカード _",
+    "bookSummary": "すべてのケースを書くか、残りを `_` で受けることでコンパイル時に漏れを防ぎます。",
+    "bookKeyCode": "match status { Status::Go => step(), _ => wait_tick(1) }",
+    "starterCode": "enum Warn {\n    Clear,\n    GateClosed,\n    SparkNear,\n    Emergency,\n}\n\nfn sense() -> Warn {\n    if !is_gate_open() {\n        Warn::GateClosed\n    } else if is_spark_ahead() {\n        Warn::SparkNear\n    } else {\n        Warn::Clear\n    }\n}\n\nfn main() {\n    while !at_goal() {\n        // 網羅性エラーが起きないよう _ => wait_tick(1) を追加しよう！\n        match sense() {\n            Warn::Clear => step(),\n        }\n    }\n}",
+    "solutionCode": "enum Warn {\n    Clear,\n    GateClosed,\n    SparkNear,\n    Emergency,\n}\n\nfn sense() -> Warn {\n    if !is_gate_open() {\n        Warn::GateClosed\n    } else if is_spark_ahead() {\n        Warn::SparkNear\n    } else {\n        Warn::Clear\n    }\n}\n\nfn main() {\n    while !at_goal() {\n        match sense() {\n            Warn::Clear => step(),\n            _ => wait_tick(1),\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "_ => wait_tick(1),",
+        "insert": "_ => wait_tick(1),"
+      }
+    ],
+    "hints": [
+      "Warn::Clear 以外の3つ（GateClosed, SparkNear, Emergency）は全部「1ティック待つ」で安全だよ！",
+      "match sense() の中に `_ => wait_tick(1),` を足せば網羅性も動作も完璧になるよ。",
+      "Warn::Clear => step(),\n            _ => wait_tick(1),"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 2,
+          "closedTicks": 2,
+          "initialOffset": 0
+        }
+      ],
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 2,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
       ]
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "6-12",
+    "id": "e8facaca-88b5-5973-98f1-4248dcdad4d0",
+    "index": 148,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-12. enum ダイヤル探索機",
+    "topicTag": "enum Ordering + ダイヤル解錠",
+    "kurumiIntro": "秘宝ダイヤルの判定結果 `Ordering` も実は `enum` だよ！`Ordering::Less`, `Greater`, `Equal` を `match` で振り分けて秘密の番号を探り当て、ゲートを開いて進もう！",
+    "goalSummary": "while loop と match try_dial(g) でダイヤルを解錠しゴール (5, 1) へ",
+    "bookSectionTitle": "6.2 標準 enum Ordering のパターンマッチング",
+    "bookSummary": "比較結果を表す `Ordering::{Less, Greater, Equal}` を `match` で受けるのは Rust でとてもよく見る定番パターンです。",
+    "bookKeyCode": "match try_dial(g) { Ordering::Equal => { break; }, ... }",
+    "starterCode": "fn main() {\n    let mut guess = 1;\n    loop {\n        match try_dial(guess) {\n            Ordering::Less => guess += 1,\n            Ordering::Greater => guess -= 1,\n            // Equal のときに { break; } しよう！\n            Ordering::Equal => wait_tick(1),\n        }\n    }\n    step(5);\n}",
+    "solutionCode": "fn main() {\n    let mut guess = 1;\n    loop {\n        match try_dial(guess) {\n            Ordering::Less => guess += 1,\n            Ordering::Greater => guess -= 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(5);\n}",
+    "quickChips": [
+      {
+        "label": "Ordering::Equal => { break; },",
+        "insert": "Ordering::Equal => { break; },"
+      }
+    ],
+    "hints": [
+      "Ordering::Equal のときにループを抜けられていないよ！",
+      "match アームの中で break を使うときは `{ break; }` のように波カッコをつけよう。",
+      "Ordering::Equal => { break; },"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "dial": {
+        "secret": 4
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "requireAllSwitches": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "6-13",
+    "id": "670de184-8b92-50de-9968-d8c01ebcb71a",
+    "index": 149,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-13. match と蒸気ゲート・ジグザグ実践",
+    "topicTag": "enum + ゲート突破パズル",
+    "kurumiIntro": "コマンドの配列に `Wait` や `Turn` も混ぜて、途中の蒸気ゲートを待ちながら曲がり角の先のゴールへ辿り着こう！",
+    "goalSummary": "enum 指令列でゲートを安全に抜けて (3, 3) へ",
+    "bookSectionTitle": "6.2 パターンマッチング実践パズル",
+    "bookSummary": "複数のアクションを `enum` で表現してループ＋`match` で解釈する設計は、インタプリタやゲーム制御の基本構造です。",
+    "bookKeyCode": "match step_cmd {\n    Cmd::WaitOrGo => ...,\n}",
+    "starterCode": "enum Cmd {\n    SafeStep,\n    TurnR,\n}\n\nfn main() {\n    let plan = vec![\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::TurnR,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n    ];\n    for c in plan {\n        match c {\n            Cmd::SafeStep => {\n                // ゲートが閉じていれば wait_tick(1) してから step() しよう！\n                if !is_gate_open() {\n                    \n                }\n                step();\n            },\n            Cmd::TurnR => turn_right(),\n        }\n    }\n}",
+    "solutionCode": "enum Cmd {\n    SafeStep,\n    TurnR,\n}\n\nfn main() {\n    let plan = vec![\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::TurnR,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n    ];\n    for c in plan {\n        match c {\n            Cmd::SafeStep => {\n                if !is_gate_open() {\n                    wait_tick(1);\n                }\n                step();\n            },\n            Cmd::TurnR => turn_right(),\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "wait_tick(1);",
+        "insert": "wait_tick(1);"
+      }
+    ],
+    "hints": [
+      "(2, 1) に蒸気ゲートがあって、ちょうど到着するタイミングで閉まっているよ！",
+      "if !is_gate_open() { wait_tick(1); } の中に wait_tick(1); を入れよう。",
+      "if !is_gate_open() {\n    wait_tick(1);\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "gates": [
+        {
+          "x": 2,
+          "y": 1,
+          "openTicks": 2,
+          "closedTicks": 2,
+          "initialOffset": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "6-14",
+    "id": "b7414456-bea4-51ca-94bb-093e5d09772c",
+    "index": 150,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-14. enum impl メソッドと時計仕掛けスイッチ",
+    "topicTag": "enum への impl + コンベア",
+    "kurumiIntro": "`enum StepAction` に `impl StepAction` で `run(&self)` メソッドを持たせよう！コンベアの押し出しを計算して最短歩数で両方のスイッチを回収してね。",
+    "goalSummary": "enum Action::run() で全スイッチを踏んで 8ティック以内に (5, 1) へ",
+    "bookSectionTitle": "6.1 & 6.2 enum メソッドと最短パス",
+    "bookSummary": "振る舞いまで `enum` 自身に `impl` しておくと、配列をループで回しながら `.run()` を呼ぶだけで済みます。",
+    "bookKeyCode": "impl StepAction { fn run(&self) { match self { ... } } }",
+    "starterCode": "enum StepAction {\n    SafeStep,\n    Charge(i32),\n}\n\nimpl StepAction {\n    fn run(&self) {\n        match self {\n            StepAction::SafeStep => {\n                while !is_gate_open() { wait_tick(1); }\n                step();\n            },\n            StepAction::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    // コンベア(1,1)で(2,1)のスイッチへ。さらに進んでゴール(5,1)へ！\n    let list = vec![StepAction::Charge(1), StepAction::SafeStep];\n    for a in list {\n        a.run();\n    }\n}",
+    "solutionCode": "enum StepAction {\n    SafeStep,\n    Charge(i32),\n}\n\nimpl StepAction {\n    fn run(&self) {\n        match self {\n            StepAction::SafeStep => {\n                while !is_gate_open() { wait_tick(1); }\n                step();\n            },\n            StepAction::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    let list = vec![\n        StepAction::Charge(3),\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n    ];\n    for a in list {\n        a.run();\n    }\n}",
+    "quickChips": [
+      {
+        "label": "StepAction::Charge(3),",
+        "insert": "StepAction::Charge(3),\n        "
+      },
+      {
+        "label": "StepAction::SafeStep,",
+        "insert": "StepAction::SafeStep,\n        "
+      }
+    ],
+    "hints": [
+      "コンベア (1,1) が 1マス押し出してくれるから、SafeStep 1回で (2,1) のスイッチに到達するよ！",
+      "そこから SafeStep をあと3回（(3,1)ゲート→(4,1)スイッチ→(5,1)ゴール）実行しよう。金庫目標は⚡3だよ！",
+      "Charge(3) と SafeStep × 4 回を list に並べて実行しよう！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        }
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3,
+      "requireAllSwitches": true,
+      "maxTicks": 8
     },
     "parTicks": 6
   },
   {
-    "displayId": "6-6",
-    "id": "eb488e99-3eeb-56ad-8db6-716fca47d7b3",
-    "index": 34,
+    "displayId": "6-15",
+    "id": "b8655651-9707-54d9-9fdf-78b6aa2502b1",
+    "index": 151,
     "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "title": "6-6. 第6章まとめ：ゲート越しダイヤル解錠",
-    "topicTag": "第6章 総合実践",
-    "kurumiIntro": "ダイヤルを当てたあと、前にある蒸気ゲートが開いているかも確認して進もう！`is_gate_open()` が閉じていたら `wait_tick(1)` してね。",
-    "goalSummary": "ダイヤル(secret: 3)を解錠し、蒸気ゲートを抜けて (4, 1) へ",
-    "bookSectionTitle": "第6章まとめ — Ordering・match・制御の組み合わせ",
-    "bookSummary": "数当ての `match` 比較と、ループ中の状態チェックを組み合わせることで、仕掛け付きの扉を安全に突破できるようになります。",
-    "bookKeyCode": "match try_dial(n) {\n    Ordering::Equal => { ... break; },\n    _ => {},\n}",
-    "starterCode": "fn main() {\n    for n in 1..=5 {\n        match try_dial(n) {\n            Ordering::Equal => {\n                step(1);\n                // ここでゲートが閉まっていたら 1拍待ってから 3歩進もう！\n                if !is_gate_open() {\n                    \n                }\n                step(3);\n                break;\n            },\n            _ => {},\n        }\n    }\n}",
-    "solutionCode": "fn main() {\n    for n in 1..=5 {\n        match try_dial(n) {\n            Ordering::Equal => {\n                step(1);\n                if !is_gate_open() {\n                    wait_tick(1);\n                }\n                step(3);\n                break;\n            },\n            _ => {},\n        }\n    }\n}",
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-15. if let による簡潔な制御フロー",
+    "topicTag": "if let / Option",
+    "kurumiIntro": "「1つのパターンだけ取り出したい！」ときは `match` より短く書ける `if let Some(n) = ...` がぴったりだよ！",
+    "goalSummary": "if let Some(steps) で Option から歩数を取り出してゴールへ",
+    "bookSectionTitle": "6.3 if let による簡潔な制御フロー",
+    "bookSummary": "値が `Some(x)` のときだけ処理し、`None` のときは何もしないような場合、`match` の代わりに `if let Some(x) = 値 { ... }` と簡潔に書けます。",
+    "bookKeyCode": "if let Some(n) = maybe_steps {\n    step(n);\n}",
+    "starterCode": "fn main() {\n    let maybe_steps = Some(3);\n    // if let Some(n) = maybe_steps { ... } を書いてみよう！\n    \n}",
+    "solutionCode": "fn main() {\n    let maybe_steps = Some(3);\n    if let Some(n) = maybe_steps {\n        step(n);\n    }\n}",
     "quickChips": [
       {
-        "label": "wait_tick(1);",
-        "insert": "wait_tick(1);\n                "
-      },
-      {
-        "label": "is_gate_open()",
-        "insert": "is_gate_open()"
+        "label": "if let Some(n) = maybe_steps { step(n); }",
+        "insert": "if let Some(n) = maybe_steps {\n        step(n);\n    }"
       }
     ],
     "hints": [
-      "try_dial を3回試したあと step(1) すると、ちょうどゲート(2, 1)の手前で閉まっているかも！",
-      "if !is_gate_open() { wait_tick(1); } の中に wait_tick(1); を書こう！",
-      "if !is_gate_open() {\n    wait_tick(1);\n}"
+      "maybe_steps の中には Some(3) が入っているよ。",
+      "if let Some(n) = maybe_steps { step(n); } で中の 3 を取り出せるよ！",
+      "if let Some(n) = maybe_steps {\n    step(n);\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "6-16",
+    "id": "d9880bf2-1382-506d-9278-982f6a23b006",
+    "index": 152,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-16. if let ... else で空だった時の代案",
+    "topicTag": "if let ... else",
+    "kurumiIntro": "`if let` には `else` もくっつけられるんだ！予備ボックスが空（`None`）だったときは、代わりに `else` の中で予備ルートを動かそう。",
+    "goalSummary": "if let ... else で予備の3歩を使ってゴール (3, 1) へ",
+    "bookSectionTitle": "6.3 if let と else の組み合わせ",
+    "bookSummary": "`if let Some(v) = opt { ... } else { ... }` と書くと、一致した時の処理と、それ以外のフォールバック処理を簡潔に書けます。",
+    "bookKeyCode": "if let Some(n) = box_val {\n    step(n);\n} else {\n    step(3);\n}",
+    "starterCode": "fn main() {\n    let box_val: Option<i32> = None;\n    if let Some(n) = box_val {\n        step(n);\n    } else {\n        // None だったときに予備の 3歩を進んで、金庫にも 3 入れよう！\n        \n    }\n}",
+    "solutionCode": "fn main() {\n    let box_val: Option<i32> = None;\n    if let Some(n) = box_val {\n        step(n);\n    } else {\n        add_vault(3);\n        step(3);\n    }\n}",
+    "quickChips": [
+      {
+        "label": "add_vault(3);",
+        "insert": "add_vault(3);\n        "
+      },
+      {
+        "label": "step(3);",
+        "insert": "step(3);\n        "
+      }
+    ],
+    "hints": [
+      "box_val は None だから else ブロックが実行されるよ。",
+      "else の中に add_vault(3); と step(3); を書こう！",
+      "else {\n    add_vault(3);\n    step(3);\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "6-17",
+    "id": "64c45e7d-03c6-56a7-907d-ce965a9b5065",
+    "index": 153,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-17. Option のリストから Some だけ拾う",
+    "topicTag": "for + if let Some",
+    "kurumiIntro": "リストの中に `Some(2)` や `None` が混ざっているよ！`for` と `if let Some(x)` を組み合わせると、有効なデータだけを安全に拾い上げられるんだ。",
+    "goalSummary": "Some の値だけを足して合計 4歩進みゴール (4, 1) へ",
+    "bookSectionTitle": "6.3 ループ内での if let 活用",
+    "bookSummary": "欠損データ（`None`）を含むリストから有効な値（`Some`）だけを抽出して合計する定番イディオムです。",
+    "bookKeyCode": "for item in items {\n    if let Some(n) = item { step(n); }\n}",
+    "starterCode": "fn main() {\n    let packets = vec![Some(2), None, Some(2), None];\n    for p in packets {\n        // if let Some(n) = p を使って、Some のときだけ n歩進もう！\n        \n    }\n}",
+    "solutionCode": "fn main() {\n    let packets = vec![Some(2), None, Some(2), None];\n    for p in packets {\n        if let Some(n) = p {\n            step(n);\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "if let Some(n) = p { step(n); }",
+        "insert": "if let Some(n) = p {\n            step(n);\n        }"
+      }
+    ],
+    "hints": [
+      "packets の中の Some(2) と Some(2) を合わせるとちょうど 4歩になるよ！",
+      "for の中に `if let Some(n) = p { step(n); }` を書こう。",
+      "if let Some(n) = p {\n    step(n);\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "6-18",
+    "id": "0dc09086-c946-5991-ac3e-0f967d5ad0e8",
+    "index": 154,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "challenge",
+    "title": "6-18. 迷路探索＋if let ボーナス金庫",
+    "topicTag": "enum + if let + 迷路探索",
+    "kurumiIntro": "道中のチェックポイントごとに金庫エネルギーを受け取りつつ、スイッチを踏んでコの字の迷路を抜けていこう！",
+    "goalSummary": "全スイッチを踏んで金庫⚡6を満たし、(0, 3) のゴールへ到達",
+    "bookSectionTitle": "6.3 if let と自律迷路走破の融合",
+    "bookSummary": "重要な1パターンだけを手早く拾う `if let` と、網羅性が要る移動判定 `match` を両方適材適所で使い分けましょう。",
+    "bookKeyCode": "if let Bonus::Gold(v) = cell { add_vault(v); }",
+    "starterCode": "enum Bonus {\n    Gold(i32),\n    Empty,\n}\n\nfn main() {\n    let rewards = vec![Bonus::Gold(2), Bonus::Empty, Bonus::Gold(4)];\n    for r in rewards {\n        if let Bonus::Gold(v) = r {\n            add_vault(v);\n        }\n    }\n    // コの字の道：(0,1)->(4,1)スイッチ->(4,3)->(0,3)ゴール！\n    step(4);\n}",
+    "solutionCode": "enum Bonus {\n    Gold(i32),\n    Empty,\n}\n\nfn main() {\n    let rewards = vec![Bonus::Gold(2), Bonus::Empty, Bonus::Gold(4)];\n    for r in rewards {\n        if let Bonus::Gold(v) = r {\n            add_vault(v);\n        }\n    }\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "turn_right();",
+        "insert": "turn_right();\n    "
+      },
+      {
+        "label": "step(2);",
+        "insert": "step(2);\n    "
+      },
+      {
+        "label": "step(4);",
+        "insert": "step(4);\n    "
+      }
+    ],
+    "hints": [
+      "上の廊下で step(4) をすると (4,1) のスイッチを踏みつつ行き止まりまで来るよ！",
+      "そこから turn_right() → step(2) でゲート (4,2) を抜けて (4,3) へ！",
+      "さらに turn_right() → step(4) で (0,3) のゴールに着くよ（途中 (2,3) のスイッチも踏めるね）。"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 0,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 4,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 6,
+      "requireAllSwitches": true
+    },
+    "parTicks": 15
+  },
+  {
+    "displayId": "6-19",
+    "id": "a0ccee25-7aa9-5139-9e29-5bb6b8fe7012",
+    "index": 155,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-19. Option と match 式で動的分岐ルート",
+    "topicTag": "let val = match opt",
+    "kurumiIntro": "「次の歩数はいくらか？」を `Option` で返す関数 `next_hop(x)` と `match` 式を使って、L字の曲がり角でちょうど向きを変えよう！",
+    "goalSummary": "match 式が返す距離を使って L字コース (3, 4) へ到達しよう",
+    "bookSectionTitle": "6.2 & 6.3 Option を返す関数と match 式",
+    "bookSummary": "`match` は値を返す「式」なので、直接関数の戻り値を受け取って変数の計算に組み込めます。",
+    "bookKeyCode": "let d = match get_hop(pos) { Some(n) => n, None => 0 };",
+    "starterCode": "fn plan_leg(is_first: bool) -> Option<i32> {\n    if is_first { Some(3) } else { Some(3) }\n}\n\nfn main() {\n    let dx = match plan_leg(true) {\n        Some(n) => n,\n        None => 0,\n    };\n    let dy = match plan_leg(false) {\n        // ここは下へ 3歩行きたい！でもスイッチを踏む位置を確認してね\n        Some(n) => 1,\n        None => 0,\n    };\n    step(dx);\n    turn_right();\n    step(dy);\n}",
+    "solutionCode": "fn plan_leg(is_first: bool) -> Option<i32> {\n    if is_first { Some(3) } else { Some(3) }\n}\n\nfn main() {\n    let dx = match plan_leg(true) {\n        Some(n) => n,\n        None => 0,\n    };\n    let dy = match plan_leg(false) {\n        Some(n) => n,\n        None => 0,\n    };\n    step(dx);\n    turn_right();\n    step(dy);\n}",
+    "quickChips": [
+      {
+        "label": "Some(n) => n,",
+        "insert": "Some(n) => n,"
+      }
+    ],
+    "hints": [
+      "dx = 3 で (3,1) のスイッチを踏みつつ右折できるよ！",
+      "dy も plan_leg(false) が返す Some(3) の値 `n` をそのまま使えば、ゲート (3,2) を抜けて (3,4) へ到着するよ！",
+      "Some(n) => n,"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 6,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 4
+      },
+      "switches": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 3,
+            "y": 1
+          }
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "requireAllSwitches": true
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "6-20",
+    "id": "9675f3b2-9098-5081-baa8-a36a4ec53ab4",
+    "index": 156,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "puzzle",
+    "title": "6-20. Option<i32> の宝石（ボーナス電力）集め",
+    "topicTag": "Option<T> / Some / None",
+    "kurumiIntro": "金庫への追加入力が `Option<i32>` として届くよ！`Some(v)` のときだけ金庫へ入れて、`None` のときはスキップして先に進もう。",
+    "goalSummary": "Option 配列の Some 値だけ合計⚡6を金庫に入れ、ゲートを越えて (4, 1) へ",
+    "bookSectionTitle": "6.1 & 6.3 Option<T> をリストで扱う",
+    "bookSummary": "値が存在しない場合があるデータは `Option<T>` のリストにまとめておき、`if let Some(v)` や `match` で安全に取り出します。",
+    "bookKeyCode": "for opt in bonuses { if let Some(v) = opt { add_vault(v); } }",
+    "starterCode": "fn main() {\n    let items = vec![Some(2), None, Some(4), None];\n    // if let Some(v) で Some の値だけを金庫に入れよう！\n    for item in items {\n        add_vault(1);\n    }\n    step(4);\n}",
+    "solutionCode": "fn main() {\n    let items = vec![Some(2), None, Some(4), None];\n    for item in items {\n        if let Some(v) = item {\n            add_vault(v);\n        }\n    }\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "if let Some(v) = item { add_vault(v); }",
+        "insert": "if let Some(v) = item {\n            add_vault(v);\n        }"
+      }
+    ],
+    "hints": [
+      "items の中に入っている数値は 2 と 4 で、合計すると ⚡6 になるよ！",
+      "for ループの中を `if let Some(v) = item { add_vault(v); }` に直そう。",
+      "for item in items { if let Some(v) = item { add_vault(v); } }"
     ],
     "worldSetup": {
       "width": 6,
@@ -611,65 +2291,80 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
         "x": 4,
         "y": 1
       },
-      "dial": {
-        "x": 1,
-        "y": 0,
-        "secret": 3
-      },
-      "gates": [
+      "switches": [
         {
           "x": 2,
-          "y": 1,
-          "openTicks": 2,
-          "closedTicks": 2,
-          "initialOffset": 2
+          "y": 1
         }
-      ]
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "dialSolved": true
+      "vaultTarget": 6,
+      "requireAllSwitches": true
     },
-    "parTicks": 9
+    "parTicks": 7
   },
   {
-    "displayId": "6-7",
-    "id": "d78a5e8c-49cf-5a67-85b6-81d77e50f861",
-    "index": 47,
+    "displayId": "6-21",
+    "id": "3d5f336d-5d5a-5a55-bb0b-0f06f14d372c",
+    "index": 157,
     "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "stageKind": "puzzle",
-    "title": "6-7. 変数の影（シャドーイング）と座標比較",
-    "topicTag": "cmp(&target) / 変数計算",
-    "kurumiIntro": "同じ変数名 `steps` を `let steps = ...;` で新しく作り直す「シャドーイング」と `.cmp()` を組み合わせて、火花に気をつけながら進もう！",
-    "goalSummary": "ダイヤル(18)を解いたあと、5歩進んでゴール (5, 1) に到達",
-    "bookSectionTitle": "2章 & 6.1 シャドーイングと cmp",
-    "bookSummary": "Rustでは `let x = x * 2;` のように同じ名前で変数を上書き（シャドーイング）して型や値を整理できます。",
-    "bookKeyCode": "let guess = base * 2;\nmatch guess.cmp(&target) { ... }",
-    "starterCode": "fn main() {\n    let base = 9;\n    // base をシャドーイングして 2倍 (18) にし、ダイヤルへ入れよう！\n    \n}",
-    "solutionCode": "fn main() {\n    let base = 9;\n    let base = base * 2;\n    match try_dial(base) {\n        Ordering::Equal => println!(\"OPEN!\"),\n        _ => {},\n    }\n    step(2);\n    wait_tick(1);\n    step(3);\n}",
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "challenge",
+    "title": "6-21. 二重スイッチと enum コマンド短縮チャレンジ",
+    "topicTag": "enum + コンベア短縮チャレンジ",
+    "kurumiIntro": "コマンド列を工夫して、2箇所のコンベアを連続で乗り継ぎながら制限ティック以内にスイッチもゴールも決めよう！",
+    "goalSummary": "enum 指令でコンベアとスイッチを抜け 9ティック以内に (5, 3) へ",
+    "bookSectionTitle": "6.2 & 6.3 コンベア連鎖を enum で操る",
+    "bookSummary": "コンベアが自動で移動を補ってくれる場所を見抜き、最小限のバリアント列を組むパズルです。",
+    "bookKeyCode": "vec![Inst::Go(1), Inst::Right, ...]",
+    "starterCode": "enum Inst {\n    Go(i32),\n    Right,\n    Left,\n}\n\nfn main() {\n    let prog = vec![\n        Inst::Go(1),\n    ];\n    for p in prog {\n        match p {\n            Inst::Go(n) => step(n),\n            Inst::Right => turn_right(),\n            Inst::Left => turn_left(),\n        }\n    }\n}",
+    "solutionCode": "enum Inst {\n    Go(i32),\n    Right,\n    Left,\n}\n\nfn main() {\n    let prog = vec![\n        Inst::Go(1),\n        Inst::Right,\n        Inst::Go(1),\n        Inst::Left,\n        Inst::Go(2),\n    ];\n    for p in prog {\n        match p {\n            Inst::Go(n) => step(n),\n            Inst::Right => turn_right(),\n            Inst::Left => turn_left(),\n        }\n    }\n}",
     "quickChips": [
       {
-        "label": "let base = base * 2;",
-        "insert": "let base = base * 2;\n    "
+        "label": "Inst::Right,",
+        "insert": "Inst::Right,\n        "
       },
       {
-        "label": "try_dial(base)",
-        "insert": "try_dial(base)"
+        "label": "Inst::Left,",
+        "insert": "Inst::Left,\n        "
       },
       {
-        "label": "wait_tick(1);",
-        "insert": "wait_tick(1);\n    "
+        "label": "Inst::Go(1),",
+        "insert": "Inst::Go(1),\n        "
+      },
+      {
+        "label": "Inst::Go(2),",
+        "insert": "Inst::Go(2),\n        "
       }
     ],
     "hints": [
-      "base は 9 だから、let base = base * 2; で 18 になるよ！",
-      "try_dial(base) のあとは x=3 の巡回スパークを避けるために step(2); wait_tick(1); step(3); で進もう！",
-      "let base = base * 2;\nmatch try_dial(base) { Ordering::Equal => println!(\"OPEN!\"), _ => {} }\nstep(2); wait_tick(1); step(3);"
+      "(1,1) の東向きコンベアで (2,1) のスイッチに乗れるよ！まずは `Inst::Go(1)` だね。",
+      "右折して `Inst::Go(1)` を実行すると (2,2) の南向きコンベアが (2,3) へ押し出してくれるよ！",
+      "さらに左折して `Inst::Go(2)` を実行すると (3,3) の東コンベアで (4,3) へ押され、もう1歩で (5,3) ゴールへ着くよ！"
     ],
     "worldSetup": {
       "width": 6,
-      "height": 4,
+      "height": 5,
       "walls": [
         {
           "x": 0,
@@ -684,6 +2379,263 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "dir": 1
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "dir": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "requireAllSwitches": true,
+      "maxTicks": 8
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "6-22",
+    "id": "5cec4f53-25c5-5d1a-9e73-5237c34fab1b",
+    "index": 158,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-22. 複数バリアントのコマンド列でL字攻略",
+    "topicTag": "enum コマンド列",
+    "kurumiIntro": "今度は `Move` だけじゃなく `TurnRight` と `TurnLeft` も並べて、リストにまとめた `enum` コマンド列を実行してみよう！",
+    "goalSummary": "enum Command の配列を実行してゴール (3, 3) へ",
+    "bookSectionTitle": "6.1 異なるデータを1つの配列にまとめる enum",
+    "bookSummary": "配列は同じ型しか入れられませんが、`enum` で包めば「歩数付き移動」と「回転」を1つの `vec!` リストに並べて順番に実行できます。",
+    "bookKeyCode": "let cmds = vec![Command::Move(3), Command::TurnRight];",
+    "starterCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn main() {\n    let cmds = vec![\n        Command::Move(3),\n        Command::TurnRight,\n        // 下へ2歩進むコマンドを追加しよう！\n        \n    ];\n    for c in cmds {\n        match c {\n            Command::Move(n) => step(n),\n            Command::TurnRight => turn_right(),\n        }\n    }\n}",
+    "solutionCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn main() {\n    let cmds = vec![\n        Command::Move(3),\n        Command::TurnRight,\n        Command::Move(2),\n    ];\n    for c in cmds {\n        match c {\n            Command::Move(n) => step(n),\n            Command::TurnRight => turn_right(),\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "Command::Move(2),",
+        "insert": "Command::Move(2),"
+      }
+    ],
+    "hints": [
+      "東に3歩 → 右折（南向き）まで書かれているよ。あと2歩進めば (3, 3) のゴールだね！",
+      "cmds の最後に `Command::Move(2),` を書き足そう。",
+      "Command::Move(3),\nCommand::TurnRight,\nCommand::Move(2),"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "6-23",
+    "id": "e9eb0507-342b-51a4-835f-29d3b7e4a845",
+    "index": 159,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "title": "6-23. 第6章まとめ：独自 enum と if let 実践",
+    "topicTag": "第6章 総合実践",
+    "kurumiIntro": "第6章の総まとめ！独自の `enum Task { Boost(i32), Wait }` に対して `if let Task::Boost(v) = t` で強化を抜き出しつつ、残りは `match` で実行しよう！",
+    "goalSummary": "enum Task を処理して金庫⚡4＋ゴール (4, 1) を達成",
+    "bookSectionTitle": "第6章まとめ — enum・match・if let",
+    "bookSummary": "網羅性チェックの `match` と簡潔な `if let` を使い分けることで、状態の抜け漏れゼロで読みやすいコードが書けます。",
+    "bookKeyCode": "if let Task::Boost(v) = t {\n    add_vault(v);\n}",
+    "starterCode": "enum Task {\n    Boost(i32),\n    Move(i32),\n}\n\nfn main() {\n    let list = vec![Task::Boost(2), Task::Boost(2), Task::Move(4)];\n    for t in list {\n        if let Task::Boost(v) = t {\n            add_vault(v);\n        }\n        // match で Task::Move(n) のときに step(n) を実行しよう！\n        \n    }\n}",
+    "solutionCode": "enum Task {\n    Boost(i32),\n    Move(i32),\n}\n\nfn main() {\n    let list = vec![Task::Boost(2), Task::Boost(2), Task::Move(4)];\n    for t in list {\n        if let Task::Boost(v) = t {\n            add_vault(v);\n        }\n        match t {\n            Task::Move(n) => step(n),\n            _ => {},\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "Task::Move(n) => step(n),",
+        "insert": "match t {\n            Task::Move(n) => step(n),\n            _ => {},\n        }"
+      }
+    ],
+    "hints": [
+      "if let Task::Boost(v) = t で金庫には 4 が入るよ。あとは Task::Move(n) のとき一歩も動いていないんだ！",
+      "for ループの中に `match t { Task::Move(n) => step(n), _ => {}, }` を追加してスイッチ(2, 1)を踏みながら(4, 1)へ進もう！",
+      "match t {\n    Task::Move(n) => step(n),\n    _ => {},\n}"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
           "x": 4,
           "y": 0
         },
@@ -704,32 +2656,136 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
+          "x": 3,
+          "y": 2
+        },
+        {
           "x": 4,
           "y": 2
         },
         {
           "x": 5,
           "y": 2
-        },
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "6-24",
+    "id": "0173493a-1743-5f71-b043-68a133bce3ce",
+    "index": 160,
+    "chapter": 6,
+    "chapterTitle": "第6章 Enumとパターンマッチング",
+    "stageKind": "challenge",
+    "title": "6-24. 第6章挑戦：ハイブリッド安全ステート制御",
+    "topicTag": "第6章 最終チャレンジ",
+    "kurumiIntro": "第6章のラスボス課題！`enum Task` のコマンドに、スパーク検知・ゲート待機・ダイヤル解錠・コア納品のすべてを組み込んで迷宮を一気に攻略しよう！",
+    "goalSummary": "enum Task でダイヤル解錠・スパーク突破・コア⚡5+納品・ゴールを達成",
+    "bookSectionTitle": "第6章まとめ — enum・match・Option の完全統合",
+    "bookSummary": "すべての行動と状態を型安全な `enum` で表現し、漏れのない `match` で実行することで複雑なミッションを完璧に制御できます。",
+    "bookKeyCode": "match task { Task::SolveDial => ..., Task::SafeGo(n) => ... }",
+    "starterCode": "enum Task {\n    SolveDial,\n    SafeGo(i32),\n    Pick,\n    Upgrade,\n    Ship,\n}\n\nfn main() {\n    let plan = vec![\n        Task::SolveDial,\n        Task::SafeGo(1),\n        Task::Pick,\n    ];\n    let mut core = None;\n    for t in plan {\n        match t {\n            Task::SolveDial => {\n                let mut g = 1;\n                loop {\n                    match try_dial(g) {\n                        Ordering::Less => g += 1,\n                        Ordering::Greater => g -= 1,\n                        Ordering::Equal => { break; },\n                    }\n                }\n            },\n            Task::SafeGo(n) => {\n                for _ in 0..n {\n                    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                    step();\n                }\n            },\n            Task::Pick => {\n                core = Some(grab_core());\n            },\n            Task::Upgrade => {\n                if let Some(mut c) = core {\n                    boost(&mut c);\n                    core = Some(c);\n                }\n            },\n            Task::Ship => {\n                if let Some(c) = core {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
+    "solutionCode": "enum Task {\n    SolveDial,\n    SafeGo(i32),\n    Pick,\n    Upgrade,\n    Ship,\n}\n\nfn main() {\n    let plan = vec![\n        Task::SolveDial,\n        Task::SafeGo(1),\n        Task::Pick,\n        Task::SafeGo(2),\n        Task::Upgrade,\n        Task::SafeGo(2),\n        Task::Ship,\n    ];\n    let mut core = None;\n    for t in plan {\n        match t {\n            Task::SolveDial => {\n                let mut g = 1;\n                loop {\n                    match try_dial(g) {\n                        Ordering::Less => g += 1,\n                        Ordering::Greater => g -= 1,\n                        Ordering::Equal => { break; },\n                    }\n                }\n            },\n            Task::SafeGo(n) => {\n                for _ in 0..n {\n                    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                    step();\n                }\n            },\n            Task::Pick => {\n                core = Some(grab_core());\n            },\n            Task::Upgrade => {\n                if let Some(mut c) = core {\n                    boost(&mut c);\n                    core = Some(c);\n                }\n            },\n            Task::Ship => {\n                if let Some(c) = core {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "Task::SafeGo(2),",
+        "insert": "Task::SafeGo(2),\n        "
+      },
+      {
+        "label": "Task::Upgrade,",
+        "insert": "Task::Upgrade,\n        "
+      },
+      {
+        "label": "Task::Ship,",
+        "insert": "Task::Ship,\n        "
+      }
+    ],
+    "hints": [
+      "(1,1)でコアを拾い、(2,1)にはスパークがいるから SafeGo(2) で (3,1)の強化台兼スイッチまで進むよ！",
+      "(3,1)で Upgrade（boost）したら、また SafeGo(2) でゲート (4,1) を抜けて (5,1) の納品台へ！",
+      "plan に Task::SafeGo(2), Task::Upgrade, Task::SafeGo(2), Task::Ship を書き足そう！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
         {
           "x": 0,
-          "y": 3
+          "y": 0
         },
         {
           "x": 1,
-          "y": 3
+          "y": 0
         },
         {
-          "x": 2,
-          "y": 3
+          "x": 3,
+          "y": 0
         },
         {
           "x": 4,
-          "y": 3
+          "y": 0
         },
         {
           "x": 5,
-          "y": 3
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
         }
       ],
       "botStart": {
@@ -742,28 +2798,65 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
         "y": 1
       },
       "dial": {
-        "x": 1,
-        "y": 1,
-        "secret": 18
+        "secret": 3
       },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "究極コア"
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 3,
+            "y": 1
+          }
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 5,
+          "y": 1
+        }
+      ],
       "sparks": [
         {
           "id": "sp1",
           "path": [
             {
-              "x": 3,
+              "x": 2,
               "y": 0
             },
             {
-              "x": 3,
+              "x": 2,
               "y": 1
             },
             {
-              "x": 3,
+              "x": 2,
               "y": 2
             },
             {
-              "x": 3,
+              "x": 2,
               "y": 1
             }
           ],
@@ -774,182 +2867,11 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "victoryCondition": {
       "reachGoal": true,
       "dialSolved": true,
-      "stdoutIncludes": [
-        "OPEN!"
-      ]
+      "deliverCores": 1,
+      "minCorePower": 5,
+      "requireAllSwitches": true,
+      "requireSpatialCoreRules": true
     },
-    "parTicks": 9
-  },
-  {
-    "displayId": "6-8",
-    "id": "7ba5c375-80ef-52b3-bf2c-e4c386b2aab2",
-    "index": 48,
-    "chapter": 6,
-    "chapterTitle": "第6章 数当てゲーム",
-    "stageKind": "challenge",
-    "title": "6-8. 第6章マスター：二分探索とコンベア回廊",
-    "topicTag": "第6章最終チャレンジ",
-    "kurumiIntro": "1〜50の大きなダイヤル（答えは27）を二分探索で見抜き、コンベアと巡回スパークを越えて制限ティック内にゴールする第6章最終試験だよ！",
-    "goalSummary": "1〜50を二分探索し、コンベア＆スパークを越えて 14ティック以内にゴール (6, 2) へ",
-    "bookSectionTitle": "2章マスター — アルゴリズムとコース攻略の融合",
-    "bookSummary": "探索アルゴリズムでティック数を抑えることで、後続の移動・スパーク待ちにも十分な余裕が生まれます。",
-    "bookKeyCode": "while low <= high { ... }",
-    "starterCode": "fn main() {\n    let mut low = 1;\n    let mut high = 50;\n    // 二分探索で 27 を当てて、コンベアでゴールしよう！\n}",
-    "solutionCode": "fn main() {\n    let mut low = 1;\n    let mut high = 50;\n    loop {\n        let guess = (low + high) / 2;\n        match try_dial(guess) {\n            Ordering::Less => low = guess + 1,\n            Ordering::Greater => high = guess - 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(2);\n    wait_tick(1);\n    step(2);\n}",
-    "quickChips": [
-      {
-        "label": "let guess = (low + high) / 2;",
-        "insert": "let guess = (low + high) / 2;\n        "
-      },
-      {
-        "label": "match try_dial(guess)",
-        "insert": "match try_dial(guess) {\n            Ordering::Less => low = guess + 1,\n            Ordering::Greater => high = guess - 1,\n            Ordering::Equal => { break; },\n        }\n"
-      },
-      {
-        "label": "wait_tick(1);",
-        "insert": "wait_tick(1);\n    "
-      }
-    ],
-    "hints": [
-      "1〜50の二分探索なら 25 → 38 → 31 → 28 → 26 → 27 の6回で当たるよ！",
-      "ダイヤル後、step(2) すると (1,2)のコンベアで (2,2) へ、さらに step() で (3,2) に着くよ。",
-      "x=4 のスパークの動きを見て wait_tick(1) を1回入れ、step(2) で (5,2)コンベア経由で (6,2) ゴール！"
-    ],
-    "worldSetup": {
-      "width": 7,
-      "height": 4,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 6,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 2,
-        "dir": 0
-      },
-      "goal": {
-        "x": 6,
-        "y": 2
-      },
-      "dial": {
-        "x": 0,
-        "y": 2,
-        "secret": 27
-      },
-      "conveyors": [
-        {
-          "x": 1,
-          "y": 2,
-          "dir": 0
-        },
-        {
-          "x": 5,
-          "y": 2,
-          "dir": 0
-        }
-      ],
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 4,
-              "y": 1
-            },
-            {
-              "x": 4,
-              "y": 2
-            },
-            {
-              "x": 4,
-              "y": 3
-            },
-            {
-              "x": 4,
-              "y": 2
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "maxTicks": 14
-    },
-    "parTicks": 12
+    "parTicks": 14
   }
 ];
-
-

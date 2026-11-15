@@ -3,33 +3,29 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_8_STAGES: StageDefinition[] = [
   {
     "displayId": "8-1",
-    "id": "50da55a5-9f54-56a0-9ca7-ad9d72ff3541",
-    "index": 97,
+    "id": "c0581340-c3c5-5377-b453-7ef58d8eecfe",
+    "index": 177,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-1. 所有権と Move（お引っ越し）",
-    "topicTag": "所有権 / Move",
-    "kurumiIntro": "いよいよRustの看板ルール「所有権」だよ！`grab_core()` で拾ったコアを `deliver(core)` に渡すと所有権が移動して、元の変数は空っぽになるんだ。",
-    "goalSummary": "Moveエラーを直して、コアを1つゴールへ正しく届けよう",
-    "bookSectionTitle": "8.1 所有権とは何か？ — 値のムーブ（Move）",
-    "bookSummary": "Rustでは各値に「所有者が1人だけ」存在します。関数へ値を渡したり別変数へ代入すると所有権が移動（Move）し、元の変数は二度と使えなくなります。これにより二重解放バグを防ぎます。",
-    "bookKeyCode": "let core = grab_core();\ndeliver(core); // 所有権が移動！",
-    "starterCode": "fn main() {\n    let core = grab_core();\n    step(3);\n    deliver(core);\n    // ↓ もう渡した後の core を使おうとしているのでエラーになるよ！\n    println!(\"使ったコア: {}\", core);\n}",
-    "solutionCode": "fn main() {\n    let core = grab_core();\n    println!(\"拾ったコア: {}\", core);\n    step(3);\n    deliver(core);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-1. ベクタ Vec<T> でリスト操作",
+    "topicTag": "Vec<T> / push / for",
+    "kurumiIntro": "いくつでも中身を増やせる便利なリスト `Vec`（ベクタ）を使おう！`push` で歩数リストを作って合計分だけ歩いてみて！",
+    "goalSummary": "Vec に歩数を追加して合計3歩進み、ゴール (3, 1) へ",
+    "bookSectionTitle": "8.1 ベクタでリストの値を保存する",
+    "bookSummary": "`vec![1, 2]` や `Vec::new()` で作る可変長リストがベクタです。`.push(値)` で末尾に追加でき、`for x in list` で順番に取り出せます。",
+    "bookKeyCode": "let mut list = vec![1, 1];\nlist.push(1);",
+    "starterCode": "fn main() {\n    let mut steps = vec![1, 1];\n    // ここにもう1歩 push しよう！\n    \n    for s in steps {\n        step(s);\n    }\n}",
+    "solutionCode": "fn main() {\n    let mut steps = vec![1, 1];\n    steps.push(1);\n    for s in steps {\n        step(s);\n    }\n}",
     "quickChips": [
       {
-        "label": "println!(\"{}\", 変数);",
-        "insert": "println!(\"{}\", /* 変数 */);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
+        "label": "steps.push(1);",
+        "insert": "steps.push(1);\n    "
       }
     ],
     "hints": [
-      "まずはそのまま実行して、「所有権が移動（Move）済み」のエラーを体験してみよう！",
-      "println! を deliver(core); より「前」に動かすか、余計な行を消せばOKだよ。",
-      "let core = grab_core();\nprintln!(\"拾ったコア: {}\", core);\nstep(3);\ndeliver(core);"
+      "今 steps には [1, 1] の合計2歩しか入っていないよ。",
+      "`steps.push(1);` を書いて3歩にしよう！",
+      "let mut steps = vec![1, 1];\nsteps.push(1);"
     ],
     "worldSetup": {
       "width": 5,
@@ -84,263 +80,38 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
       "goal": {
         "x": 3,
         "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "オレンジコア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ]
+      }
     },
     "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1
+      "reachGoal": true
     },
-    "parTicks": 6
+    "parTicks": 3
   },
   {
     "displayId": "8-2",
-    "id": "2cd33dd4-9627-54ce-97b8-a711e77061e4",
-    "index": 98,
+    "id": "8b57d218-9e07-5421-a27f-e7d227d78e80",
+    "index": 178,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-2. 変数代入での Move に気をつけよう",
-    "topicTag": "代入による Move",
-    "kurumiIntro": "コアを `let backup = core;` と別変数に代入しただけでも所有権はお引っ越し（Move）するよ！新しく所有した `backup` の方を納品してあげよう。",
-    "goalSummary": "所有権が移った backup を使って納品＋ゴールへ",
-    "bookSectionTitle": "8.1 変数とデータのやりとり: ムーブ",
-    "bookSummary": "整数 `i32` のような単純な型はコピー（`Copy`）されますが、`Core` や `String` などのリソースは代入時に所有権が移動（Move）します。",
-    "bookKeyCode": "let backup = core; // core → backup へ Move\ndeliver(backup);",
-    "starterCode": "fn main() {\n    let core = grab_core();\n    let backup = core;\n    step(3);\n    // core はもう空っぽなので、新しい所有者 backup を渡そう！\n    deliver(core);\n}",
-    "solutionCode": "fn main() {\n    let core = grab_core();\n    let backup = core;\n    step(3);\n    deliver(backup);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-2. Vec::new() から空のリストを育てる",
+    "topicTag": "Vec::new() / push",
+    "kurumiIntro": "最初は空っぽの `Vec::new()` を作って、必要な数だけ `.push(...)` で積み上げてから金庫と移動に使ってみよう！",
+    "goalSummary": "Vec::new() に 2 と 2 を push して金庫⚡4＋ゴールへ",
+    "bookSectionTitle": "8.1 Vec::new による生成と追加",
+    "bookSummary": "空のベクタは `let mut v = Vec::new();` で作り、あとから `.push(値)` でどんどん要素を追加できます。",
+    "bookKeyCode": "let mut v = Vec::new();\nv.push(2);\nv.push(2);",
+    "starterCode": "fn main() {\n    let mut list = Vec::new();\n    list.push(2);\n    // もう1つ 2 を push しよう！\n    \n    for x in list {\n        add_vault(x);\n        step(x);\n    }\n}",
+    "solutionCode": "fn main() {\n    let mut list = Vec::new();\n    list.push(2);\n    list.push(2);\n    for x in list {\n        add_vault(x);\n        step(x);\n    }\n}",
     "quickChips": [
       {
-        "label": "deliver(backup);",
-        "insert": "deliver(backup);"
+        "label": "list.push(2);",
+        "insert": "list.push(2);\n    "
       }
     ],
     "hints": [
-      "そのまま実行すると「所有権が移動（Move）済みの変数 core は使えません」と怒られるよ。",
-      "deliver(core); を deliver(backup); に書き換えよう！",
-      "deliver(backup);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "バックアップコア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1
-    },
-    "parTicks": 5
-  },
-  {
-    "displayId": "8-3",
-    "id": "3bfa7dd4-ab23-5565-9b0f-a597d3e73d62",
-    "index": 99,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-3. 関数から所有権を返してもらう",
-    "topicTag": "所有権と戻り値",
-    "kurumiIntro": "関数へ渡したコアをもう1回使いたいときは、関数の戻り値で「所有権を返してもらう」ことができるんだよ！",
-    "goalSummary": "inspect_and_return が返したコアを受け取って納品しよう",
-    "bookSectionTitle": "8.1 戻り値とスコープ — 所有権を返す",
-    "bookSummary": "値を引数として受け取った関数が最後にその値をそのまま返せば、呼び出し元が再び所有権を受け取って処理を続けられます。",
-    "bookKeyCode": "fn pass_back(c: Core) -> Core {\n    c\n}",
-    "starterCode": "fn inspect_and_return(c: Core) -> Core {\n    println!(\"点検OK: {}\", c);\n    // c をそのまま返そう！\n    c\n}\n\nfn main() {\n    let core1 = grab_core();\n    let core2 = inspect_and_return(core1);\n    step(3);\n    // 返ってきた core2 を deliver() しよう！\n    \n}",
-    "solutionCode": "fn inspect_and_return(c: Core) -> Core {\n    println!(\"点検OK: {}\", c);\n    c\n}\n\nfn main() {\n    let core1 = grab_core();\n    let core2 = inspect_and_return(core1);\n    step(3);\n    deliver(core2);\n}",
-    "quickChips": [
-      {
-        "label": "deliver(core2);",
-        "insert": "deliver(core2);"
-      }
-    ],
-    "hints": [
-      "core1 の所有権は inspect_and_return に入って、戻り値として core2 に返ってきているよ！",
-      "最後に deliver(core2); を書き足そう。",
-      "step(3);\ndeliver(core2);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 2,
-          "label": "点検コア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1
-    },
-    "parTicks": 6
-  },
-  {
-    "displayId": "8-4",
-    "id": "f1fea5fa-191c-5269-8dc8-e4d3486dbbe9",
-    "index": 100,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-4. 所有権を関数で返してもらう",
-    "topicTag": "関数への Move と返却",
-    "kurumiIntro": "別の関数 `prepare(mut c: Core) -> Core` にコアの所有権を渡して中で強化（`boost`）し、戻り値として手元へ戻してもらってから自分で届けよう！",
-    "goalSummary": "補助関数に所有権を渡して戻してもらい、検査後に納品(⚡3以上)しよう",
-    "bookSectionTitle": "8.1 所有権の移動と返却",
-    "bookSummary": "関数に値を渡すと所有権が移りますが、関数が `-> Core` としてその値を返せば、呼び出し元が再び所有権を受け取って次の処理へ進めます。",
-    "bookKeyCode": "fn enhance(mut c: Core) -> Core {\n    boost(&mut c);\n    c\n}",
-    "starterCode": "fn enhance(mut c: Core) -> Core {\n    // ここで強化して c を返そう（セミコロンなしで返すよ）\n    c\n}\n\nfn main() {\n    step();\n    let core = grab_core();\n    step(2);\n    // enhance(core) で強化を受け取り、検査台(4,1)と納品台(5,1)へ！\n}",
-    "solutionCode": "fn enhance(mut c: Core) -> Core {\n    boost(&mut c);\n    c\n}\n\nfn main() {\n    step();\n    let core = grab_core();\n    step(2);\n    let core = enhance(core);\n    step();\n    scan(&core);\n    step();\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "let core = enhance(core);",
-        "insert": "let core = enhance(core);\n    "
-      },
-      {
-        "label": "boost(&mut c);",
-        "insert": "boost(&mut c);\n    "
-      }
-    ],
-    "hints": [
-      "enhance 関数の中に `boost(&mut c);` を書いて最後に `c` を返そう。",
-      "(3,1) の強化台の上で `let core = enhance(core);` を呼び、所有権を新しい `core` に受け取ろう！",
-      "その後 (4,1) で `scan(&core);`、(5,1) で `deliver(core);` でクリア！"
+      "今は 2 が1個しか入っていないから合計 2 しか増えないよ。",
+      "list.push(2); をもう1行追加して [2, 2] にしよう！",
+      "list.push(2);\nlist.push(2);"
     ],
     "worldSetup": {
       "width": 6,
@@ -393,380 +164,6 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         {
           "x": 5,
           "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "返却コア"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "scanners": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 5,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 3,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "8-5",
-    "id": "05bf262f-5786-5234-b6cc-9de582a1a776",
-    "index": 101,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-5. 2つのコアを順番に回収＆納品",
-    "topicTag": "Move と 複数コア実践",
-    "kurumiIntro": "道すがらにコアが2個落ちているよ！1個目も2個目も、それぞれの変数の所有権を大切に運びきって納品台へ届けよう！",
-    "goalSummary": "2つのコア（c1, c2）を拾ってL字先のゴール (3, 3) へ納品",
-    "bookSectionTitle": "8.1 複数の所有者の管理実践",
-    "bookSummary": "異なる2つの値を別々の変数に束縛すれば、それぞれの所有権が独立して管理され、安全に両方を取り扱えます。",
-    "bookKeyCode": "let c1 = grab_core();\nstep(2);\nlet c2 = grab_core();\ndeliver(c1); deliver(c2);",
-    "starterCode": "fn main() {\n    let c1 = grab_core();\n    step(2);\n    let c2 = grab_core();\n    step(1);\n    turn_right();\n    step(2);\n    deliver(c1);\n    // c2 も忘れずに deliver しよう！\n    \n}",
-    "solutionCode": "fn main() {\n    let c1 = grab_core();\n    step(2);\n    let c2 = grab_core();\n    step(1);\n    turn_right();\n    step(2);\n    deliver(c1);\n    deliver(c2);\n}",
-    "quickChips": [
-      {
-        "label": "deliver(c2);",
-        "insert": "deliver(c2);"
-      }
-    ],
-    "hints": [
-      "c1 と c2 は別々の変数だから、順番に 1つずつ deliver できるよ！",
-      "最後の行に deliver(c2); を追加しよう！",
-      "deliver(c1);\ndeliver(c2);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 3
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "Aコア"
-        },
-        {
-          "id": "c2",
-          "x": 2,
-          "y": 1,
-          "power": 1,
-          "label": "Bコア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 3
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 2
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "8-6",
-    "id": "839a50b3-0e8d-5eab-8a16-e61279527412",
-    "index": 102,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-6. 実地搬入！歩いて拾って届けよう",
-    "topicTag": "所有権 Move / 空間ルーティング",
-    "kurumiIntro": "今回から本当に現地まで歩いてコアを拾い（`grab_core()`）、検査台に乗って `scan(&core)` し、納品台まで運んで `deliver(core)` する必要があるよ！手順を組み立ててね。",
-    "goalSummary": "コア(1,1)を拾い、検査台(3,1)で scan(&core) してゴール(5,1)へ deliver",
-    "bookSectionTitle": "8.1 & 8.2 空間ルーティング × 所有権",
-    "bookSummary": "コアのある場所・検査台（`&T検査`）・納品台それぞれに実際に移動してから命令を呼ばないとエラーになります。`deliver(core)` は最後に呼びましょう！",
-    "bookKeyCode": "step(); let core = grab_core();\nstep(2); scan(&core);\nstep(2); deliver(core);",
-    "starterCode": "fn main() {\n    // (1,1)でコアを拾い、(3,1)の検査台で scan(&core) して、(5,1)へ deliver しよう！\n    step();\n}",
-    "solutionCode": "fn main() {\n    step();\n    let core = grab_core();\n    step(2);\n    scan(&core);\n    step(2);\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "let core = grab_core();",
-        "insert": "let core = grab_core();\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
-      }
-    ],
-    "hints": [
-      "(0,1) から1歩で (1,1) のコアを拾えるよ。そのあと2歩進んで (3,1) の `&T検査` 台の上に乗ろう！",
-      "検査台で `scan(&core);` したら所有権はまだ手元にあるから、あと2歩進んで (5,1) で `deliver(core);`！",
-      "step(); let core = grab_core(); step(2); scan(&core); step(2); deliver(core);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "空間コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 5,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "8-7",
-    "id": "c2034a35-446f-5458-861a-e8845be95e9d",
-    "index": 103,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-7. 2つのコアを連続シャトル配送",
-    "topicTag": "複数所有権管理 / シャトルルート",
-    "kurumiIntro": "今度はコアが2つ！左の部屋と真ん中の部屋にあるコアを順番に拾って、納品台 (4, 2) に2つとも運び込もう。最初のコアを納品してから2つ目を拾ってね！",
-    "goalSummary": "2つのコアを別々に拾って納品台 (4, 2) へ deliver し、ゴールへ",
-    "bookSectionTitle": "8.1 値のライフタイムと再利用",
-    "bookSummary": "変数 `c1` を `deliver(c1)` で手放したあと、新しく `let c2 = grab_core();` として次のコアの所有権を受け取ることで連続輸送ができます。",
-    "bookKeyCode": "let c1 = grab_core();\ndeliver(c1);\nlet c2 = grab_core();\ndeliver(c2);",
-    "starterCode": "fn main() {\n    // (1,1) の Aコアを (4,1) に納品するか、(4,2) 納品台に2つとも届けよう！\n    step();\n}",
-    "solutionCode": "fn main() {\n    step();\n    let c1 = grab_core();\n    step(3);\n    turn_right();\n    step();\n    deliver(c1);\n    turn_right();\n    step(2);\n    let c2 = grab_core();\n    turn_right();\n    turn_right();\n    step(2);\n    deliver(c2);\n}",
-    "quickChips": [
-      {
-        "label": "let c1 = grab_core();",
-        "insert": "let c1 = grab_core();\n    "
-      },
-      {
-        "label": "let c2 = grab_core();",
-        "insert": "let c2 = grab_core();\n    "
-      },
-      {
-        "label": "deliver(c1);",
-        "insert": "deliver(c1);\n    "
-      }
-    ],
-    "hints": [
-      "Aコア (1,1) を拾ったら、東へ3歩・南へ1歩で納品台 (4,2) に届けて `deliver(c1);` しよう！",
-      "そこから西向きに2歩歩くと (2,2) のBコアがあるので拾い、反転（turn_right 2回）して東へ2歩戻ろう！",
-      "step(); let c1 = grab_core(); step(3); turn_right(); step(); deliver(c1); turn_right(); step(2); let c2 = grab_core(); turn_right(); turn_right(); step(2); deliver(c2);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 4,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
         }
       ],
       "botStart": {
@@ -776,70 +173,49 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
       },
       "goal": {
         "x": 4,
-        "y": 2
+        "y": 1
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "Aコア"
-        },
-        {
-          "id": "c2",
-          "x": 2,
-          "y": 2,
-          "power": 1,
-          "label": "Bコア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 2
-        }
-      ]
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "deliverCores": 2,
-      "requireSpatialCoreRules": true
+      "vaultTarget": 4
     },
-    "parTicks": 19
+    "parTicks": 6
   },
   {
-    "displayId": "8-8",
-    "id": "982d2f3c-0ac0-53b8-a8c4-e8d038dd8fa4",
-    "index": 104,
+    "displayId": "8-3",
+    "id": "da6c9668-2286-5537-b079-941dd62655fb",
+    "index": 179,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-8. 参照と借用（&T と &mut T）",
-    "topicTag": "&T 不変借用 / &mut T 可変借用",
-    "kurumiIntro": "コアを渡さずにスキャン（`scan(&core)`）したり、許可付きで強化（`boost(&mut core)`）したりしよう！借用すれば所有権は手元に残るよ！",
-    "goalSummary": "コアを1回スキャンし、⚡3以上に強化してゴールへ届けよう",
-    "bookSectionTitle": "8.2 参照と借用 — & と &mut のルール",
-    "bookSummary": "`&x` は「見るだけの一時貸出（不変借用）」、`&mut x` は「書き換えOKの一時貸出（可変借用）」です。`&mut` は同時に1つしか作れないため、安全にデータを変更できます。",
-    "bookKeyCode": "let mut core = grab_core();\nscan(&core);\nboost(&mut core);\ndeliver(core);",
-    "starterCode": "fn main() {\n    let mut core = grab_core();\n    // 1) &core でスキャンして、2) &mut core で強化しよう！\n    scan(&core);\n    \n    step(3);\n    deliver(core);\n}",
-    "solutionCode": "fn main() {\n    let mut core = grab_core();\n    scan(&core);\n    boost(&mut core);\n    step(3);\n    deliver(core);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-3. ベクタの .get(index) で安全に読む",
+    "topicTag": "Vec::get / Option",
+    "kurumiIntro": "`v[99]` みたいに存在しない番号を読むとパニックするけど、`v.get(index)` なら `Option`（`Some` か `None`）を返してくれるから安全なんだ！",
+    "goalSummary": "v.get(2) で3番目の歩数 4 を取り出してゴール (4, 1) へ",
+    "bookSectionTitle": "8.1 ベクタの要素を読む — [] と .get()",
+    "bookSummary": "`.get(i)` メソッドは範囲外なら `None`、範囲内なら `Some(値)` を返すため、安全に要素を取り出せます。",
+    "bookKeyCode": "if let Some(n) = v.get(2) {\n    step(n);\n}",
+    "starterCode": "fn main() {\n    let v = vec![1, 2, 4];\n    // v.get(0) だと 1 しか取れないよ。2番目(添字2)の 4 を取り出そう！\n    if let Some(n) = v.get(0) {\n        step(n);\n    }\n}",
+    "solutionCode": "fn main() {\n    let v = vec![1, 2, 4];\n    if let Some(n) = v.get(2) {\n        step(n);\n    }\n}",
     "quickChips": [
       {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
+        "label": "v.get(2)",
+        "insert": "v.get(2)"
       }
     ],
     "hints": [
-      "scan(&core); のあとに、可変借用（&mut）を使ってコアを強化する関数を呼ぼう！",
-      "mut が付いているおかげで &mut core を作れるよ。boost(&mut core); を書いてみよう。",
-      "scan(&core);\nboost(&mut core);"
+      "添字は 0 から始まるから、vec![1, 2, 4] の 4 は添字 2 にあるよ！",
+      "v.get(0) を v.get(2) に変えてみよう。",
+      "if let Some(n) = v.get(2) {"
     ],
     "worldSetup": {
-      "width": 5,
+      "width": 6,
       "height": 3,
       "walls": [
         {
@@ -863,6 +239,10 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
+          "x": 5,
+          "y": 0
+        },
+        {
           "x": 0,
           "y": 2
         },
@@ -881,6 +261,10 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         {
           "x": 4,
           "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
         }
       ],
       "botStart": {
@@ -889,73 +273,44 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 3,
+        "x": 4,
         "y": 1
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "強化コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 0
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ]
+      }
     },
     "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 1,
-      "deliverCores": 1,
-      "minCorePower": 3
+      "reachGoal": true
     },
-    "parTicks": 7
+    "parTicks": 4
   },
   {
-    "displayId": "8-9",
-    "id": "780244e4-ee33-5914-93ed-d60d1bf06489",
-    "index": 105,
+    "displayId": "8-4",
+    "id": "056db8f2-5847-5e13-9b61-f1d6f9ec7501",
+    "index": 180,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-9. 不変借用 & は何度でもOK！",
-    "topicTag": "複数回の不変借用 &T",
-    "kurumiIntro": "見るだけの不変借用 `&core` なら、所有権を奪わないから3回連続でスキャンしても大丈夫なんだよ！試してみよう！",
-    "goalSummary": "同じコアを 3回 scan(&core) してから納品しよう",
-    "bookSectionTitle": "8.2 不変参照はいくつでも同時に作れる",
-    "bookSummary": "中身を書き換えない `&T` 参照は読み取り専用なので、何度でも・同時に何箇所からでも安全に借りることができます。",
-    "bookKeyCode": "scan(&core);\nscan(&core);\nscan(&core);",
-    "starterCode": "fn main() {\n    let core = grab_core();\n    scan(&core);\n    // あと2回スキャンしてからゴールへ届けよう！\n    \n    step(3);\n    deliver(core);\n}",
-    "solutionCode": "fn main() {\n    let core = grab_core();\n    scan(&core);\n    scan(&core);\n    scan(&core);\n    step(3);\n    deliver(core);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-4. Vec::get() で境界外を安全ガード",
+    "topicTag": "Vec::get + スパーク回避",
+    "kurumiIntro": "指示配列の「範囲外」を読んでパニックしちゃうバグを `.get(i)` の安全なパターンに書き換えて、金庫⚡6とゴールへの配達を決めよう！",
+    "goalSummary": "Vec::get で安全に値を集計し、金庫⚡6＋全スイッチで (5, 1) へ",
+    "bookSectionTitle": "8.1 範囲外アクセスを防ぐ .get() と unwrap_or",
+    "bookSummary": "添字がベクタの長さを超える可能性があるときは `list.get(i)` で `Option` として受け取ると安全です。",
+    "bookKeyCode": "let val = cmds.get(i).unwrap_or(0);",
+    "starterCode": "fn main() {\n    let cmds = vec![2, 4];\n    let mut sum = 0;\n    for i in 0..4 {\n        // cmds の長さは2！cmds.get(i).unwrap_or(0) で全要素を安全に足そう（今は先頭1個だけ）\n        if i == 0 {\n            sum += cmds[i];\n        }\n    }\n    add_vault(sum);\n    step(5);\n}",
+    "solutionCode": "fn main() {\n    let cmds = vec![2, 4];\n    let mut sum = 0;\n    for i in 0..4 {\n        sum += cmds.get(i).unwrap_or(0);\n    }\n    add_vault(sum);\n    step(5);\n}",
     "quickChips": [
       {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
+        "label": "cmds.get(i).unwrap_or(0)",
+        "insert": "cmds.get(i).unwrap_or(0)"
       }
     ],
     "hints": [
-      "scan(&core); は所有権を動かさないから、続けて何度でも呼べるよ！",
-      "scan(&core); を合計3回並べてみよう。",
-      "scan(&core);\nscan(&core);\nscan(&core);"
+      "for i in 0..4 は 0, 1, 2, 3 を回すけど cmds の要素は 2 個しかないよ！",
+      "cmds[i] を `cmds.get(i).unwrap_or(0)` に変えれば、安全に 2 + 4 + 0 + 0 = 6 が得られるよ！",
+      "sum += cmds.get(i).unwrap_or(0);"
     ],
     "worldSetup": {
-      "width": 5,
+      "width": 6,
       "height": 3,
       "walls": [
         {
@@ -979,6 +334,10 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
+          "x": 5,
+          "y": 0
+        },
+        {
           "x": 0,
           "y": 2
         },
@@ -997,6 +356,10 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         {
           "x": 4,
           "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
         }
       ],
       "botStart": {
@@ -1005,68 +368,811 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 3,
+        "x": 5,
         "y": 1
       },
-      "cores": [
+      "switches": [
         {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "検査コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
+          "x": 2,
           "y": 1
         }
-      ]
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "scanCount": 3,
-      "deliverCores": 1
+      "vaultTarget": 6,
+      "requireAllSwitches": true
     },
     "parTicks": 8
   },
   {
-    "displayId": "8-10",
-    "id": "c24b0e4e-1143-56af-9b3f-e27b805160e5",
-    "index": 106,
+    "displayId": "8-5",
+    "id": "5da5c53a-688d-5247-bb6f-5080b1a23189",
+    "index": 181,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-10. 複数回の不変借用（&T は何個でもOK）",
-    "topicTag": "複数回の不変借用 &core",
-    "kurumiIntro": "途中の検査台が2箇所あり、合計3回のスキャンが必要だよ！同じ `&core` は書き換えない限り何度貸してもOKなRustのルールを活かして通過しよう！",
-    "goalSummary": "2つの検査台で合計3回 scan(&core) して納品台 (5, 1) へ届けよう",
-    "bookSectionTitle": "8.2 借用規則 — 複数の不変参照は同時に存在できる",
-    "bookSummary": "データを読み取るだけの不変借用（`&T`）は何度でも、いくつでも安全に作れます。",
-    "bookKeyCode": "scan(&core);\nscan(&core);",
-    "starterCode": "fn main() {\n    // (1,1)の検査台で2回、(3,1)の検査台で1回 scan(&core) して (5,1) へ届けよう！\n    let core = grab_core();\n}",
-    "solutionCode": "fn main() {\n    let core = grab_core();\n    step();\n    scan(&core);\n    scan(&core);\n    step(2);\n    scan(&core);\n    step(2);\n    deliver(core);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-5. ベクタの要素を変換してL字＋金庫",
+    "topicTag": "Vec 実践パズル",
+    "kurumiIntro": "配列に入った2つの数字を使って、1つめは「横移動」、2つめは「金庫に足して縦移動」してみよう！",
+    "goalSummary": "Vec の要素を使って金庫⚡2＋L字ゴール (3, 3) へ",
+    "bookSectionTitle": "8.1 ベクタの反復とインデックス活用",
+    "bookSummary": "リストの長さと要素を活用することで、定型ルートやパラメータを柔軟に管理できます。",
+    "bookKeyCode": "let legs = vec![3, 2];\nstep(legs[0]); turn_right(); step(legs[1]);",
+    "starterCode": "fn main() {\n    let mut legs = vec![3];\n    // legs に 2 を push して、横 legs[0]、縦 legs[1]、金庫にも legs[1] を入れよう！\n    \n    step(legs[0]);\n    turn_right();\n    add_vault(legs[1]);\n    step(legs[1]);\n}",
+    "solutionCode": "fn main() {\n    let mut legs = vec![3];\n    legs.push(2);\n    step(legs[0]);\n    turn_right();\n    add_vault(legs[1]);\n    step(legs[1]);\n}",
     "quickChips": [
       {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
+        "label": "legs.push(2);",
+        "insert": "legs.push(2);\n    "
       }
     ],
     "hints": [
-      "(0,1) で grab_core() したあと 1歩で (1,1) の検査台へ。ここで scan(&core); を2回呼ぼう！",
-      "あと2歩で (3,1) の検査台に着いたらもう1回 scan(&core); して、最後に2歩進んで deliver(core);！",
-      "let core = grab_core(); step(); scan(&core); scan(&core); step(2); scan(&core); step(2); deliver(core);"
+      "legs には今 3 しか入っていないから legs[1] が取れないよ！",
+      "legs.push(2); を2行目に追加しよう！",
+      "let mut legs = vec![3];\nlegs.push(2);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 2
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 2
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "8-6",
+    "id": "0ef458ae-a34d-580a-a67b-888e8ed83efe",
+    "index": 182,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-6. Vec で記録するステップと折り返し移動",
+    "topicTag": "Vec<i32> / 折り返し設計",
+    "kurumiIntro": "U字やS字の折れ曲がったコースを、1つの `Vec<i32>` リストに詰めた歩数と左右のターン規則だけで走破しよう！",
+    "goalSummary": "Vec に4区間の歩数を登録してスイッチを踏み、ゴール (5, 3) へ",
+    "bookSectionTitle": "8.1 Vec による柔軟なルートパラメータ化",
+    "bookSummary": "各直進区間の長さを `Vec` に格納しておけば、同じループ構造で異なるマップも簡単に走らせられます。",
+    "bookKeyCode": "let segs = vec![2, 2, 2, 1];",
+    "starterCode": "fn main() {\n    let mut segs = vec![2, 2];\n    // あと2つ数値を push して「東2→右折→南2→左折→東3」を作ろう！\n    // 注意: (3,3)と(4,3)にコンベアがあるから最後の1歩だけでゴールするかも？\n    step(segs[0]);\n    turn_right();\n    step(segs[1]);\n}",
+    "solutionCode": "fn main() {\n    let mut segs = vec![2, 2];\n    segs.push(2);\n    step(segs[0]);\n    turn_right();\n    step(segs[1]);\n    turn_left();\n    step(segs[2]);\n}",
+    "quickChips": [
+      {
+        "label": "segs.push(2);",
+        "insert": "segs.push(2);\n    "
+      },
+      {
+        "label": "turn_left();\n    step(segs[2]);",
+        "insert": "turn_left();\n    step(segs[2]);"
+      }
+    ],
+    "hints": [
+      "(0,1) から東2で (2,1)スイッチを踏み、右折して南2で (2,3) へ着くよ！",
+      "最後は左折して東へ進むとき、(3,3)に右向きコンベアがあるから 2 歩分（実質3マス進める）で (5,3) のゴールにぴったり届くよ！",
+      "segs.push(2);\n... turn_left();\nstep(segs[2]);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "conveyors": [
+        {
+          "x": 3,
+          "y": 3,
+          "dir": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "requireAllSwitches": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "8-7",
+    "id": "2f8e6a17-235e-55d7-b8af-33443c7435b2",
+    "index": 183,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "challenge",
+    "title": "8-7. Vec ログ記録＆最大スピードコンベア",
+    "topicTag": "Vec + コンベア最短タイム",
+    "kurumiIntro": "移動ログを `Vec` に集めつつ、ベルトコンベアの加速を使って7ティック以内にスイッチ＋金庫＋ゴールをすべて決めよう！",
+    "goalSummary": "Vec の移動データで7ティック以内に金庫⚡6＋全スイッチ＋(5, 3) へ",
+    "bookSectionTitle": "8.1 最短手順リストを Vec で組む",
+    "bookSummary": "コンベアによって稼げるマス数を計算し、最小限の `Vec` ステップを組み立てるタイムアタックパズルです。",
+    "bookKeyCode": "let moves = vec![1, 1, 1];",
+    "starterCode": "fn main() {\n    let mut bonuses = Vec::new();\n    bonuses.push(3);\n    bonuses.push(3);\n    let mut total = 0;\n    for b in bonuses { total += b; }\n    add_vault(total);\n    // 7ティック以内に行きたい！コンベア(1,1),(2,2),(3,3),(4,3)を見よう\n    step(2);\n}",
+    "solutionCode": "fn main() {\n    let mut bonuses = Vec::new();\n    bonuses.push(3);\n    bonuses.push(3);\n    let mut total = 0;\n    for b in bonuses { total += b; }\n    add_vault(total);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(2);\n}",
+    "quickChips": [
+      {
+        "label": "step(1);",
+        "insert": "step(1);\n    "
+      },
+      {
+        "label": "step(2);",
+        "insert": "step(2);"
+      },
+      {
+        "label": "turn_right();",
+        "insert": "turn_right();\n    "
+      },
+      {
+        "label": "turn_left();",
+        "insert": "turn_left();\n    "
+      }
+    ],
+    "hints": [
+      "(1,1) の東向きコンベアに乗れば 1 歩でスイッチのある (2,1) に着くよ！",
+      "そこから右折して 1 歩で (2,2) の南向きコンベアに乗り (2,3) へ！",
+      "さらに左折して `step(2);` で (3,3) コンベア→(4,3)→(5,3) へ！合計8ティック以内にクリア！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 3,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "conveyors": [
+        {
+          "x": 1,
+          "y": 1,
+          "dir": 0
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "dir": 1
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "dir": 0
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 6
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 6,
+      "requireAllSwitches": true,
+      "maxTicks": 8
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "8-8",
+    "id": "a854babb-ef5d-5c32-9762-d2ca6ff15c51",
+    "index": 184,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-8. String 荷札の文字列組み立てと検証",
+    "topicTag": "String::push_str + コア納品",
+    "kurumiIntro": "チェックポイントを1つ越えるごとに `String` のスタンプ台に荷札を追記して、最終的に `\"CORE_SCANNED_BOOSTED\"` を表示してから納品台へ届けよう！",
+    "goalSummary": "\"CORE_SCANNED_BOOSTED\" を出力し、コア⚡4以上を空間ルール通り納品",
+    "bookSectionTitle": "8.2 String の段階的な追記",
+    "bookSummary": "処理が1ステップ完了するたびに `.push_str()` で状態ラベルを追記していくパターンです。",
+    "bookKeyCode": "log.push_str(\"_SCANNED\");",
+    "starterCode": "fn main() {\n    let mut tag = String::from(\"CORE\");\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tag.push_str(\"_SCANNED\");\n    step(1);\n    boost(&mut c);\n    // ここで \"_BOOSTED\" を push_str し、println! してから(4,1)へ運ぼう！\n    println!(\"{}\", tag);\n    step(1);\n    deliver(c);\n}",
+    "solutionCode": "fn main() {\n    let mut tag = String::from(\"CORE\");\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tag.push_str(\"_SCANNED\");\n    step(1);\n    boost(&mut c);\n    tag.push_str(\"_BOOSTED\");\n    println!(\"{}\", tag);\n    step(1);\n    deliver(c);\n}",
+    "quickChips": [
+      {
+        "label": "tag.push_str(\"_BOOSTED\");",
+        "insert": "tag.push_str(\"_BOOSTED\");\n    "
+      }
+    ],
+    "hints": [
+      "boost(&mut c) の直後に `tag.push_str(\"_BOOSTED\");` が抜けているよ！",
+      "それだけで `\"CORE_SCANNED_BOOSTED\"` が完成して出力されるよ。",
+      "tag.push_str(\"_BOOSTED\");"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "荷札コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "stdoutIncludes": [
+        "CORE_SCANNED_BOOSTED"
+      ],
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "8-9",
+    "id": "d6a7bb8f-68d7-5a00-aa96-3acd02299e6a",
+    "index": 185,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-9. + 演算子で文字列を合体しよう",
+    "topicTag": "String の + 連結",
+    "kurumiIntro": "`String::from(\"KOBO_\") + \"GO\"` のように `+` で文字をつなげることもできるよ！つなげた文字の長さ（`.len()`）や合言葉で出発しよう。",
+    "goalSummary": "String を + で結合して \"KOBO_GO\" を出力しゴールへ",
+    "bookSectionTitle": "8.2 + 演算子での文字列結合",
+    "bookSummary": "`let s = String::from(\"A\") + \"B\";` のように `+` で結合すると左辺の所有権を取り込みつつ連結した `String` を作れます。",
+    "bookKeyCode": "let word = String::from(\"KOBO_\") + \"GO\";",
+    "starterCode": "fn main() {\n    let prefix = String::from(\"KOBO_\");\n    // \"GO\" を + で足して \"KOBO_GO\" にしよう！\n    let label = prefix + \"...\";\n    println!(\"{}\", label);\n    step(4);\n}",
+    "solutionCode": "fn main() {\n    let prefix = String::from(\"KOBO_\");\n    let label = prefix + \"GO\";\n    println!(\"{}\", label);\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "\"GO\"",
+        "insert": "\"GO\""
+      }
+    ],
+    "hints": [
+      "\"...\" の部分がそのまま出力されてしまっているよ！",
+      "\"...\" を \"GO\" に直して \"KOBO_GO\" を出力しよう！",
+      "let label = prefix + \"GO\";"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "KOBO_GO"
+      ]
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "8-10",
+    "id": "fd9002e9-f055-5419-9d4e-7df7295beebc",
+    "index": 186,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-10. 文字列の長さと日本語UTF-8の安全さ",
+    "topicTag": "String::new / push_str",
+    "kurumiIntro": "空の `String::new()` に何度も `push_str` を重ねて、合言葉 `\"OPEN_SESAME\"` を作ってからゲートを開けよう！",
+    "goalSummary": "\"OPEN_SESAME\" を組み立てて出力し、ゴール (3, 1) へ",
+    "bookSectionTitle": "8.2 String::new と連続 push_str",
+    "bookSummary": "`String::new()` で空文字列を作り、条件に応じて少しずつ文字を足していくのは実践的な文字列構築パターンです。",
+    "bookKeyCode": "let mut s = String::new();\ns.push_str(\"OPEN\");\ns.push_str(\"_SESAME\");",
+    "starterCode": "fn main() {\n    let mut key = String::new();\n    key.push_str(\"OPEN\");\n    // \"_SESAME\" を後ろに足して println! しよう\n    \n    println!(\"{}\", key);\n    step(3);\n}",
+    "solutionCode": "fn main() {\n    let mut key = String::new();\n    key.push_str(\"OPEN\");\n    key.push_str(\"_SESAME\");\n    println!(\"{}\", key);\n    step(3);\n}",
+    "quickChips": [
+      {
+        "label": "key.push_str(\"_SESAME\");",
+        "insert": "key.push_str(\"_SESAME\");\n    "
+      }
+    ],
+    "hints": [
+      "key には今 \"OPEN\" しか入っていないよ。",
+      "key.push_str(\"_SESAME\"); を追加しよう！",
+      "key.push_str(\"OPEN\");\nkey.push_str(\"_SESAME\");"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "OPEN_SESAME"
+      ]
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "8-11",
+    "id": "e7b903f4-ca79-5791-8042-61ec29eb9a3b",
+    "index": 187,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-11. 文字列の長さ .len() で歩数決定",
+    "topicTag": "String::len() 活用",
+    "kurumiIntro": "メッセージの文字数（`.len()`）がそのまま「進む歩数」になる暗号指令だよ！半角英字で作った合言葉の文字数を計算して、スイッチとゲートを抜けよう！",
+    "goalSummary": "String の文字数 5 を使ってスイッチ経由でゴール (5, 1) へ",
+    "bookSectionTitle": "8.2 .len() による長さ取得",
+    "bookSummary": "ASCII文字列なら `s.len()` で文字数がそのまま数値として取得できるため、設定値やチェックに活用できます。",
+    "bookKeyCode": "let dist = code.len();",
+    "starterCode": "fn main() {\n    let mut code = String::from(\"KOBO\");\n    // ゴールは 5 歩先！あと 1 文字 push_str して長さ 5 の合言葉にしよう（例: \"!\"）\n    let dist = code.len();\n    add_vault(dist);\n    step(dist);\n}",
+    "solutionCode": "fn main() {\n    let mut code = String::from(\"KOBO\");\n    code.push_str(\"!\");\n    let dist = code.len();\n    add_vault(dist);\n    step(dist);\n}",
+    "quickChips": [
+      {
+        "label": "code.push_str(\"!\");",
+        "insert": "code.push_str(\"!\");\n    "
+      }
+    ],
+    "hints": [
+      "\"KOBO\" は 4 文字だから、1文字足せば 5 文字になるよ！",
+      "たとえば `code.push_str(\"!\");` を追加すると dist = 5 になって金庫⚡5と (5,1) のゴール両方がクリアになるよ！",
+      "code.push_str(\"!\");"
     ],
     "worldSetup": {
       "width": 6,
@@ -1130,69 +1236,736 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 1
       },
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5,
+      "requireAllSwitches": true
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "8-12",
+    "id": "1eb1e04b-a566-559e-b5bc-1a3bac25a608",
+    "index": 188,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-12. 文字列ラベル比較でコア納品ルート分岐",
+    "topicTag": "String 比較実践",
+    "kurumiIntro": "荷札の文字 `tag` が `\"DELIVER\"` ならコアを運んでL字ゴールへ！合言葉もログに出してから届けよう。",
+    "goalSummary": "String を組み立てて \"DELIVER_OK\" を出力しコア納品へ",
+    "bookSectionTitle": "8.2 文字列の比較と利用",
+    "bookSummary": "`String` 同士を `==` で安全に比較したり、フォーマットして出力したりできます。",
+    "bookKeyCode": "if tag == \"DELIVER\" { ... }",
+    "starterCode": "fn main() {\n    let mut tag = String::from(\"DELIVER\");\n    if tag == \"DELIVER\" {\n        let core = grab_core();\n        tag.push_str(\"_OK\");\n        println!(\"{}\", tag);\n        step(3);\n        turn_right();\n        step(2);\n        // コアを deliver(core) しよう！\n        \n    }\n}",
+    "solutionCode": "fn main() {\n    let mut tag = String::from(\"DELIVER\");\n    if tag == \"DELIVER\" {\n        let core = grab_core();\n        tag.push_str(\"_OK\");\n        println!(\"{}\", tag);\n        step(3);\n        turn_right();\n        step(2);\n        deliver(core);\n    }\n}",
+    "quickChips": [
+      {
+        "label": "deliver(core);",
+        "insert": "deliver(core);"
+      }
+    ],
+    "hints": [
+      "移動と文字列出力はバッチリできているよ！あとは掴んだ core を納品するだけ。",
+      "step(2); のあとに deliver(core); を書き足そう！",
+      "step(2);\ndeliver(core);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
       "cores": [
         {
           "id": "c1",
           "x": 0,
           "y": 1,
           "power": 2,
-          "label": "精密コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
+          "label": "荷札コア"
         }
       ],
       "deliveries": [
         {
-          "x": 5,
-          "y": 1
+          "x": 3,
+          "y": 3
         }
       ]
     },
     "victoryCondition": {
       "reachGoal": true,
       "deliverCores": 1,
-      "scanCount": 3,
-      "requireSpatialCoreRules": true
+      "stdoutIncludes": [
+        "DELIVER_OK"
+      ]
     },
-    "parTicks": 11
+    "parTicks": 9
   },
   {
-    "displayId": "8-11",
-    "id": "93d94563-e767-55af-911d-43a5c6a17067",
-    "index": 107,
+    "displayId": "8-13",
+    "id": "4af280a8-2c53-54a9-bd94-b10ddce67661",
+    "index": 189,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-11. 可変借用 &mut のぶつかり回避",
-    "topicTag": "E0499 / &mut の排他性",
-    "kurumiIntro": "同じ行で同時に `&mut core` と `&core` を渡そうとすると「書き換え中に読んじゃダメ！」ってコンパイラが止めてくれるよ。1つずつ順番に借りよう！",
-    "goalSummary": "同時借用エラーを直し、強化(⚡3)＋スキャン1回＋納品へ",
-    "bookSectionTitle": "8.2 借用の規則 — 1つの可変参照 vs 複数の不変参照",
-    "bookSummary": "同じデータに対し「書き換え用 `&mut` が生きている間は、他の `&` も `&mut` も作れない」のがRustの鉄則です。順番に行を分ければ安全に使えます。",
-    "bookKeyCode": "boost(&mut core);\nscan(&core);",
-    "starterCode": "fn dual_check(a: &mut Core, b: &Core) {\n    boost(a);\n    scan(b);\n}\n\nfn main() {\n    let mut core = grab_core();\n    // ↓ 同じ変数の &mut と & を同時に渡すと競合エラーになるよ！\n    dual_check(&mut core, &core);\n    step(3);\n    deliver(core);\n}",
-    "solutionCode": "fn main() {\n    let mut core = grab_core();\n    boost(&mut core);\n    scan(&core);\n    step(3);\n    deliver(core);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-13. String と文字列の連結",
+    "topicTag": "String / push_str",
+    "kurumiIntro": "認証合言葉 `\"RUST_OK\"` を `String` で組み立てて出力しよう！`push_str` で文字列をつなげられるよ。",
+    "goalSummary": "\"RUST_OK\" を出力してゴール (3, 1) に着こう",
+    "bookSectionTitle": "8.2 UTF-8エンコードされた文字列を String で保持する",
+    "bookSummary": "所有権を持つ書き換え可能な文字列が `String` です。`String::from(\"...\")` で作り、`.push_str(\"...\")` で後ろに文字をつなげられます（日本語UTF-8も安全に扱えます）。",
+    "bookKeyCode": "let mut s = String::from(\"RUST\");\ns.push_str(\"_OK\");",
+    "starterCode": "fn main() {\n    let mut msg = String::from(\"RUST\");\n    // \"_OK\" を後ろにつなげて println! しよう\n    msg.push_str(\"...\");\n    println!(\"{}\", msg);\n    step(3);\n}",
+    "solutionCode": "fn main() {\n    let mut msg = String::from(\"RUST\");\n    msg.push_str(\"_OK\");\n    println!(\"{}\", msg);\n    step(3);\n}",
     "quickChips": [
       {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
+        "label": "msg.push_str(\"_OK\");",
+        "insert": "msg.push_str(\"_OK\");"
       }
     ],
     "hints": [
-      "まずはそのまま実行して E0499 エラー（同時借用エラー）を見てみよう！",
-      "dual_check(&mut core, &core); を消して、代わりに boost(&mut core); と scan(&core); を順番に書こう！",
-      "boost(&mut core);\nscan(&core);"
+      "今は msg.push_str(\"...\"); になっているよ。",
+      "\"...\" を \"_OK\" に書き換えると \"RUST_OK\" が完成するよ！",
+      "msg.push_str(\"_OK\");"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "RUST_OK"
+      ]
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "8-14",
+    "id": "77e7ce27-a4fd-5c15-99d0-bb64128a16b5",
+    "index": 190,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-14. Vec 経由で2方向コマンド分岐",
+    "topicTag": "Vec<String> コマンド解釈",
+    "kurumiIntro": "コマンド名を `Vec<String>` に並べて順番に解釈しよう！`\"R\"` なら右折、`\"F\"` ならスパーク待ち付きの安全前進、`\"S\"` なら2歩進むルールにして迷路を抜けよう！",
+    "goalSummary": "Vec 文字列コマンドを実行して全スイッチ＋ゴール (4, 3) へ",
+    "bookSectionTitle": "8.1 & 8.2 文字列配列をそのままスクリプトに",
+    "bookSummary": "文字列のリストをループして `if cmd == \"...\"` で振り分けると、シンプルなスクリプトインタプリタが作れます。",
+    "bookKeyCode": "for c in cmds { if c == \"F\" { ... } }",
+    "starterCode": "fn main() {\n    let cmds = vec![\n        String::from(\"F\"),\n        String::from(\"F\"),\n        // ここから迷路に合わせて追加しよう！\n    ];\n    for c in cmds {\n        if c == \"F\" {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        } else if c == \"R\" {\n            turn_right();\n        } else if c == \"L\" {\n            turn_left();\n        }\n    }\n}",
+    "solutionCode": "fn main() {\n    let cmds = vec![\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"R\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n    ];\n    for c in cmds {\n        if c == \"F\" {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        } else if c == \"R\" {\n            turn_right();\n        } else if c == \"L\" {\n            turn_left();\n        }\n    }\n}",
+    "quickChips": [
+      {
+        "label": "String::from(\"F\"),",
+        "insert": "String::from(\"F\"),\n        "
+      },
+      {
+        "label": "String::from(\"R\"),",
+        "insert": "String::from(\"R\"),\n        "
+      }
+    ],
+    "hints": [
+      "上の廊下は (0,1) から東へ4歩で (4,1) の角まで届くよ！途中 (1,1) にスイッチ、(2,1) にスパーク、(3,1) にスイッチ連動ゲートがあるけど、\"F\" が自動で待って進めるよ！",
+      "角 (4,1) で `\"R\"` で右折して、`\"F\"` をあと2回実行すれば (4,3) へ着くよ！",
+      "cmds を F × 4 → R → F × 2 の順に並べよう！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 1,
+            "y": 1
+          }
+        }
+      ],
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 2,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "requireAllSwitches": true
+    },
+    "parTicks": 9
+  },
+  {
+    "displayId": "8-15",
+    "id": "7af4a668-eb8f-519c-b356-0338ccbea270",
+    "index": 191,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-15. HashMap で鍵と値を照合",
+    "topicTag": "HashMap<K, V>",
+    "kurumiIntro": "道具箱のラベルから個数を取り出そう！`HashMap` に `\"crab\"` → `3` を登録して、取り出した数だけ進んでみてね！",
+    "goalSummary": "HashMap から取り出した数 3 でゴール (3, 1) へ",
+    "bookSectionTitle": "8.3 ハッシュマップにキーと値を保持する",
+    "bookSummary": "`HashMap` はキーと値をペアで保存する辞書です。`.insert(k, v)` で登録し、`.get(&k)` で `Option` として値を取り出します。",
+    "bookKeyCode": "let mut map = HashMap::new();\nmap.insert(\"kobo\", 3);",
+    "starterCode": "fn main() {\n    let mut map = HashMap::new();\n    map.insert(\"crab\", 1);\n    // \"crab\" の値を 3 に登録しなおしてみよう！\n    \n    if let Some(n) = map.get(\"crab\") {\n        step(n);\n    }\n}",
+    "solutionCode": "fn main() {\n    let mut map = HashMap::new();\n    map.insert(\"crab\", 3);\n    if let Some(n) = map.get(\"crab\") {\n        step(n);\n    }\n}",
+    "quickChips": [
+      {
+        "label": "map.insert(\"crab\", 3);",
+        "insert": "map.insert(\"crab\", 3);\n    "
+      }
+    ],
+    "hints": [
+      "同じキーでもう一度 insert すると値が上書きされるよ！",
+      "map.insert(\"crab\", 3); に書き換えるか追記しよう。",
+      "map.insert(\"crab\", 3);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true
+    },
+    "parTicks": 3
+  },
+  {
+    "displayId": "8-16",
+    "id": "7a589476-6bbc-5804-bf17-4e28397fdf75",
+    "index": 192,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-16. HashMap 暗号テーブルとダイヤル解錠",
+    "topicTag": "HashMap + ダイヤル",
+    "kurumiIntro": "扉の合言葉テーブルが `HashMap` に入っているよ！`\"alpha\"` や `\"beta\"` から取り出した値を足し合わせて、秘密のダイヤル番号を一発で当てよう！",
+    "goalSummary": "HashMap から取り出した合計 6 でダイヤルを解錠しゴール (4, 1) へ",
+    "bookSectionTitle": "8.3 HashMap を設定テーブルとして使う",
+    "bookSummary": "名前をキーにして値を引く辞書は、複数パーツのパスワードや係数を管理するときにとても便利です。",
+    "bookKeyCode": "let code = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);",
+    "starterCode": "fn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"alpha\", 2);\n    dict.insert(\"beta\", 4);\n    dict.insert(\"gamma\", 9);\n    // \"alpha\" と \"beta\" を取り出して足そう（目標のダイヤルは 6 だよ！）\n    let secret = dict.get(\"alpha\").unwrap_or(0);\n    try_dial(secret);\n    step(4);\n}",
+    "solutionCode": "fn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"alpha\", 2);\n    dict.insert(\"beta\", 4);\n    dict.insert(\"gamma\", 9);\n    let secret = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);\n    try_dial(secret);\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "+ dict.get(\"beta\").unwrap_or(0)",
+        "insert": " + dict.get(\"beta\").unwrap_or(0)"
+      }
+    ],
+    "hints": [
+      "dict の `\"alpha\"` が 2、`\"beta\"` が 4 だよ。足すと 6 になるね！",
+      "secret の計算式に `+ dict.get(\"beta\").unwrap_or(0)` を足そう。",
+      "let secret = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "dial": {
+        "secret": 6
+      },
+      "switches": [
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 1,
+            "y": 1
+          }
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "requireAllSwitches": true
+    },
+    "parTicks": 7
+  },
+  {
+    "displayId": "8-17",
+    "id": "a2fc03f5-86ff-517d-8bf9-a0250c01b161",
+    "index": 193,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-17. 複数のキーを辞書から引いて合算",
+    "topicTag": "HashMap 複数キー参照",
+    "kurumiIntro": "パンの注文リストを `HashMap` に保存したよ！`\"milk\"` と `\"honey\"` の注文数をそれぞれ引き出して合計し、金庫へチャージしよう。",
+    "goalSummary": "\"milk\" と \"honey\" を合計して金庫⚡4＋ゴール (4, 1) へ",
+    "bookSectionTitle": "8.3 ハッシュマップの値へのアクセス",
+    "bookSummary": "複数のキーに対して `.get(key)` を使い、見つかった値同士を組み合わせて計算できます。",
+    "bookKeyCode": "let a = map.get(\"milk\").unwrap_or(0);\nlet b = map.get(\"honey\").unwrap_or(0);",
+    "starterCode": "fn main() {\n    let mut order = HashMap::new();\n    order.insert(\"milk\", 1);\n    order.insert(\"honey\", 3);\n    let a = order.get(\"milk\").unwrap_or(0);\n    // \"honey\" も get して a + b を使おう！\n    let b = order.get(\"missing\").unwrap_or(0);\n    add_vault(a + b);\n    step(a + b);\n}",
+    "solutionCode": "fn main() {\n    let mut order = HashMap::new();\n    order.insert(\"milk\", 1);\n    order.insert(\"honey\", 3);\n    let a = order.get(\"milk\").unwrap_or(0);\n    let b = order.get(\"honey\").unwrap_or(0);\n    add_vault(a + b);\n    step(a + b);\n}",
+    "quickChips": [
+      {
+        "label": "order.get(\"honey\")",
+        "insert": "order.get(\"honey\")"
+      }
+    ],
+    "hints": [
+      "b が `order.get(\"missing\")` になっているから 0 になっちゃっているよ！",
+      "`order.get(\"honey\")` に直せば 1 + 3 = 4 になるよ！",
+      "let b = order.get(\"honey\").unwrap_or(0);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "8-18",
+    "id": "6090b7ba-d154-55d5-92ab-a275029fda2c",
+    "index": 194,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-18. 古い値を元にした更新パターン",
+    "topicTag": "HashMap の累積更新",
+    "kurumiIntro": "すでに辞書に入っている値を取り出して、さらに `+ 2` してから上書き保存しよう！お店の在庫カウンターと同じ仕組みだね。",
+    "goalSummary": "在庫を 1 → 3 に更新し、金庫⚡3＋ゴール (3, 1) へ",
+    "bookSectionTitle": "8.3 古い値に基づいて値を更新する",
+    "bookSummary": "辞書にある値を読み出し、加算した結果を同じキーに `.insert` し直すことでカウントアップができます。",
+    "bookKeyCode": "let cur = map.get(\"gear\").unwrap_or(0);\nmap.insert(\"gear\", cur + 2);",
+    "starterCode": "fn main() {\n    let mut stock = HashMap::new();\n    stock.insert(\"gear\", 1);\n    let cur = stock.get(\"gear\").unwrap_or(0);\n    // stock に cur + 2 を再登録しよう！\n    \n    let final_val = stock.get(\"gear\").unwrap_or(0);\n    add_vault(final_val);\n    step(final_val);\n}",
+    "solutionCode": "fn main() {\n    let mut stock = HashMap::new();\n    stock.insert(\"gear\", 1);\n    let cur = stock.get(\"gear\").unwrap_or(0);\n    stock.insert(\"gear\", cur + 2);\n    let final_val = stock.get(\"gear\").unwrap_or(0);\n    add_vault(final_val);\n    step(final_val);\n}",
+    "quickChips": [
+      {
+        "label": "stock.insert(\"gear\", cur + 2);",
+        "insert": "stock.insert(\"gear\", cur + 2);\n    "
+      }
+    ],
+    "hints": [
+      "cur には元の在庫 1 が取り出されているよ！",
+      "stock.insert(\"gear\", cur + 2); を書けば在庫が 3 になるね。",
+      "stock.insert(\"gear\", cur + 2);"
     ],
     "worldSetup": {
       "width": 5,
@@ -1248,358 +2021,49 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         "x": 3,
         "y": 1
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "二重借用コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 0
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 1,
-      "deliverCores": 1,
-      "minCorePower": 3
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "8-12",
-    "id": "b93e4f37-2a9d-5313-84f8-af74f2395f5e",
-    "index": 108,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-12. 2回ブーストで⚡5超強力コア納品",
-    "topicTag": "&mut 連続強化実践",
-    "kurumiIntro": "`boost(&mut core)` は1回で⚡+2されるよ！初期⚡1のコアを2回連続で可変借用して⚡5にして、L字通路先の納品台へ運ぼう！",
-    "goalSummary": "コアを2回 boost して⚡5以上にし、スキャン＋L字納品へ",
-    "bookSectionTitle": "8.2 可変借用の順次実行パターン",
-    "bookSummary": "1回目の `&mut core` の使用が終われば借用期間は終了するので、次の行で再び `&mut core` を安全に作成できます。",
-    "bookKeyCode": "boost(&mut core);\nboost(&mut core);\nscan(&core);",
-    "starterCode": "fn main() {\n    let mut core = grab_core();\n    boost(&mut core);\n    // もう1回 boost して、スキャンもしてから (2, 3) へ届けよう！\n    \n    step(2);\n    turn_right();\n    step(2);\n    deliver(core);\n}",
-    "solutionCode": "fn main() {\n    let mut core = grab_core();\n    boost(&mut core);\n    boost(&mut core);\n    scan(&core);\n    step(2);\n    turn_right();\n    step(2);\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      }
-    ],
-    "hints": [
-      "必要なパワーは⚡5以上（初期1 + 2 + 2 = 5）と、スキャン1回だよ！",
-      "boost(&mut core); と scan(&core); を追加しよう。",
-      "boost(&mut core);\nboost(&mut core);\nscan(&core);"
-    ],
-    "worldSetup": {
-      "width": 4,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
+      "vault": {
         "x": 2,
-        "y": 3
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "高出力コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 0
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 2,
-          "y": 3
-        }
-      ]
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "scanCount": 1,
-      "deliverCores": 1,
-      "minCorePower": 5
+      "vaultTarget": 3
     },
-    "parTicks": 10
+    "parTicks": 4
   },
   {
-    "displayId": "8-13",
-    "id": "48754d16-9caf-509c-8aa7-b0042f4d82d9",
-    "index": 109,
+    "displayId": "8-19",
+    "id": "1af1c991-6dca-5b76-a75d-9cf99273c780",
+    "index": 195,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
+    "chapterTitle": "第8章 一般的なコレクション",
     "stageKind": "puzzle",
-    "title": "8-13. 拾って→強化して→検査して→納品",
-    "topicTag": "&mut T ＆ &T / 空間ルート",
-    "kurumiIntro": "コアを拾ってから強化台（`&mut強化`）へ、そして検査台（`&T検査`）へ寄り道しながらゴールに届けよう！変数の `mut` を忘れないでね！",
-    "goalSummary": "コア(1,1)を拾い、強化台(1,3)と検査台(3,3)を経てゴール(4,3)へ deliver(⚡3以上)",
-    "bookSectionTitle": "8.2 可変借用と不変借用の順番",
-    "bookSummary": "1つの `let mut core` に対して、まず `&mut core` で強化を終わらせてから、あとで `&core` で検査すれば借用の衝突は起きません。",
-    "bookKeyCode": "let mut core = grab_core();\nboost(&mut core);\nscan(&core);",
-    "starterCode": "fn main() {\n    // 強化台 (1,3) -> 検査台 (3,3) -> ゴール (4,3) の順に進もう！\n    step();\n}",
-    "solutionCode": "fn main() {\n    step();\n    let mut core = grab_core();\n    turn_right();\n    step(2);\n    boost(&mut core);\n    turn_left();\n    step(2);\n    scan(&core);\n    step();\n    deliver(core);\n}",
+    "title": "8-19. HashMap 在庫集計とコンベア出荷",
+    "topicTag": "HashMap 更新ループ",
+    "kurumiIntro": "出荷タグの配列から種類ごとに個数を数えて `HashMap` に積み上げよう！合計のエネルギーを金庫に入れたら、コンベアを使って最短でゴールへ向かおう。",
+    "goalSummary": "Vec のタグを HashMap で集計し金庫⚡5＋6ティック以内にゴールへ",
+    "bookSectionTitle": "8.3 リストの要素を HashMap でカウントする",
+    "bookSummary": "配列の要素を1つずつ確認しながら `map.insert(k, cur + 1)` のように回数を積み上げて集計します。",
+    "bookKeyCode": "let c = counts.get(k).unwrap_or(0); counts.insert(k, c + 1);",
+    "starterCode": "fn main() {\n    let tags = vec![\"gear\", \"spring\", \"gear\", \"gear\", \"bolt\"];\n    let mut counts = HashMap::new();\n    for t in tags {\n        let prev = counts.get(t).unwrap_or(0);\n        counts.insert(t, prev + 1);\n    }\n    // \"gear\" と \"spring\" と \"bolt\" の数を足して金庫⚡5を入れよう！今は gear だけだよ\n    let total = counts.get(\"gear\").unwrap_or(0);\n    add_vault(total);\n    step(2);\n}",
+    "solutionCode": "fn main() {\n    let tags = vec![\"gear\", \"spring\", \"gear\", \"gear\", \"bolt\"];\n    let mut counts = HashMap::new();\n    for t in tags {\n        let prev = counts.get(t).unwrap_or(0);\n        counts.insert(t, prev + 1);\n    }\n    let total = counts.get(\"gear\").unwrap_or(0)\n        + counts.get(\"spring\").unwrap_or(0)\n        + counts.get(\"bolt\").unwrap_or(0);\n    add_vault(total);\n    step(3);\n}",
     "quickChips": [
       {
-        "label": "let mut core = grab_core();",
-        "insert": "let mut core = grab_core();\n    "
+        "label": "+ counts.get(\"spring\").unwrap_or(0) + counts.get(\"bolt\").unwrap_or(0)",
+        "insert": " + counts.get(\"spring\").unwrap_or(0) + counts.get(\"bolt\").unwrap_or(0)"
       },
       {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
+        "label": "step(3);",
+        "insert": "step(3);"
       }
     ],
     "hints": [
-      "(1,1) で `let mut core = grab_core();` を呼んだら、右折して2歩南の (1,3) 強化台に乗ろう！",
-      "`boost(&mut core);` のあと左折して東へ2歩の (3,3) で `scan(&core);`、最後に1歩進んで `deliver(core);`！",
-      "step(); let mut core = grab_core(); turn_right(); step(2); boost(&mut core); turn_left(); step(2); scan(&core); step(); deliver(core);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 3
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "改良コア"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 1,
-          "y": 3
-        }
-      ],
-      "scanners": [
-        {
-          "x": 3,
-          "y": 3
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 3
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 3,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 13
-  },
-  {
-    "displayId": "8-14",
-    "id": "7038a61a-393c-5fcc-b7ba-9108ba9d831b",
-    "index": 110,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-14. コンベア上の検査＆強化ライン",
-    "topicTag": "コンベア + 借用タイミング",
-    "kurumiIntro": "通路にコンベアが敷かれているよ！どのマスを通り過ぎる前に `grab_core()` と `boost(&mut core)` と `scan(&core)` を呼ぶか、立ち位置をパズルしよう！",
-    "goalSummary": "コンベアで短縮しつつ強化(⚡3)・検査・納品を 10ティック以内に完了",
-    "bookSectionTitle": "8.2 借用タイミングの設計",
-    "bookSummary": "コンベアのマスに乗ると自動で押し出されるため、検査台や強化台はコンベアの前後に配置されています。足元を見極めて呼び出しましょう。",
-    "bookKeyCode": "step(); boost(&mut core);",
-    "starterCode": "fn main() {\n    // (1,1)は東コンベア！押された先の(2,1)からどう動くか考えよう\n    let mut core = grab_core();\n}",
-    "solutionCode": "fn main() {\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    step();\n    scan(&core);\n    step();\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
-      }
-    ],
-    "hints": [
-      "スタート (0,1) にコアがあるよ！すぐ `let mut core = grab_core();` しよう。",
-      "step() 1回で (1,1) のコンベアに乗って (2,1) の強化台へ着くから `boost(&mut core);`！次の step() で (3,1) コンベアから (4,1) 検査台へ、さらに step() で (5,1) 納品台！",
-      "let mut core = grab_core(); step(); boost(&mut core); step(); scan(&core); step(); deliver(core);"
+      "gear=3, spring=1, bolt=1 なので、3つを全部足せば合計⚡5になるよ！",
+      "(1,1) と (3,1) が右向きコンベアだから、step(3) で (5,1) へ着けるよ！",
+      "total に spring と bolt も足して、`step(3);` で進もう。"
     ],
     "worldSetup": {
       "width": 6,
@@ -1663,15 +2127,6 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 1
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "高速コア"
-        }
-      ],
       "conveyors": [
         {
           "x": 1,
@@ -1684,69 +2139,192 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
           "dir": 0
         }
       ],
-      "chargers": [
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 5,
+      "maxTicks": 6
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "8-20",
+    "id": "57500e74-d953-58fd-9776-75f205d6ebd6",
+    "index": 196,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "puzzle",
+    "title": "8-20. HashMap でスイッチ座標とゲート連動計画",
+    "topicTag": "HashMap ルート計画",
+    "kurumiIntro": "区間ごとの方向転換とステップ数を `HashMap` 辞書から引いて、スイッチを順に2つ踏んでU字型の地下通路を攻略しよう！",
+    "goalSummary": "辞書からルートを引いて全スイッチを踏み (0, 3) へ到達しよう",
+    "bookSectionTitle": "8.3 HashMap から段階的パラメータを引き出す",
+    "bookSummary": "文字列キー `\"leg1\"`, `\"leg2\"`, `\"leg3\"` に距離を登録して取り出すと、各フェーズの意味が明確になります。",
+    "bookKeyCode": "step(map.get(\"leg1\").unwrap_or(0));",
+    "starterCode": "fn main() {\n    let mut route = HashMap::new();\n    route.insert(\"east\", 4);\n    route.insert(\"south\", 2);\n    // \"west\" キーに 4 を登録して、最後の戻り区間に使おう！\n    step(route.get(\"east\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"south\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"west\").unwrap_or(0));\n}",
+    "solutionCode": "fn main() {\n    let mut route = HashMap::new();\n    route.insert(\"east\", 4);\n    route.insert(\"south\", 2);\n    route.insert(\"west\", 4);\n    step(route.get(\"east\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"south\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"west\").unwrap_or(0));\n}",
+    "quickChips": [
+      {
+        "label": "route.insert(\"west\", 4);",
+        "insert": "route.insert(\"west\", 4);\n    "
+      }
+    ],
+    "hints": [
+      "上の廊下を東に 4 歩で (4,1) スイッチを踏み、右折して南へ 2 歩でゲート (4,2) を抜けるよ！",
+      "最後は右折して西へ 4 歩戻るとスイッチ (2,3) を踏みながら (0,3) のゴールへ着くよ！",
+      "route.insert(\"west\", 4);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
         {
           "x": 2,
-          "y": 1
-        }
-      ],
-      "scanners": [
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
         {
           "x": 4,
-          "y": 1
-        }
-      ],
-      "deliveries": [
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
         {
           "x": 5,
           "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 0,
+        "y": 3
+      },
+      "switches": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "gates": [
+        {
+          "x": 4,
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 4,
+            "y": 1
+          }
         }
       ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 3,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true,
-      "maxTicks": 9
+      "requireAllSwitches": true
     },
-    "parTicks": 8
+    "parTicks": 13
   },
   {
-    "displayId": "8-15",
-    "id": "ee757951-5d2f-5c76-ada5-6791b35593b6",
-    "index": 111,
+    "displayId": "8-21",
+    "id": "80000176-efda-5bc0-8fe2-07fb165a0beb",
+    "index": 197,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
+    "chapterTitle": "第8章 一般的なコレクション",
     "stageKind": "puzzle",
-    "title": "8-15. ダブル・ブーストで⚡5以上を目指せ！",
-    "topicTag": "連続可変借用 &mut",
-    "kurumiIntro": "この納品先ではパワー ⚡5 以上の超強力コアが必要だよ！初期パワー1のコアに `boost(&mut core);` を2回かけてパワーを +4 しよう！（ただし1回ずつ順番にね！）",
-    "goalSummary": "強化台で2回 boost(&mut core) して ⚡5 にし、ゴール (4, 1) へ納品",
-    "bookSectionTitle": "8.2 借用のスコープ — 1回ずつ順番に &mut する",
-    "bookSummary": "同じ行の中で2つの `&mut core` を同時に作ることはできませんが、1行ずつ順番に呼べば前の可変借用が終わってから次の可変借用を始められます。",
-    "bookKeyCode": "boost(&mut core);\nboost(&mut core);",
-    "starterCode": "fn main() {\n    let mut core = grab_core();\n    step();\n    // 強化台の上で2回ブーストし、検査と納品をしよう！\n}",
-    "solutionCode": "fn main() {\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    boost(&mut core);\n    step();\n    scan(&core);\n    step(2);\n    deliver(core);\n}",
+    "title": "8-21. Vec + String + HashMap コア納品",
+    "topicTag": "コレクション3種連携",
+    "kurumiIntro": "部品ごとのパワー表 `HashMap` から目標パワーを計算して金庫に入れ、コアの納品と合言葉ログも同時にクリアしよう！",
+    "goalSummary": "コレクション3種を使い \"ORDER_OK\"・金庫⚡5・コア⚡4+納品を達成",
+    "bookSectionTitle": "8.1〜8.3 3大コレクションの実践連携",
+    "bookSummary": "リスト（`Vec`）、ラベル（`String`）、設定表（`HashMap`）を組み合わせることで複雑な業務処理が組めます。",
+    "bookKeyCode": "let p = menu.get(k).unwrap_or(0);",
+    "starterCode": "fn main() {\n    let mut menu = HashMap::new();\n    menu.insert(\"bread\", 2);\n    menu.insert(\"coffee\", 3);\n\n    let orders = vec![\"bread\", \"coffee\"];\n    let mut sum = 0;\n    for o in orders {\n        sum += menu.get(o).unwrap_or(0);\n    }\n    add_vault(sum);\n\n    let mut label = String::from(\"ORDER\");\n    // label に \"_OK\" を付けて println! しよう！\n    println!(\"{}\", label);\n\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    boost(&mut c);\n    step(2);\n    deliver(c);\n}",
+    "solutionCode": "fn main() {\n    let mut menu = HashMap::new();\n    menu.insert(\"bread\", 2);\n    menu.insert(\"coffee\", 3);\n\n    let orders = vec![\"bread\", \"coffee\"];\n    let mut sum = 0;\n    for o in orders {\n        sum += menu.get(o).unwrap_or(0);\n    }\n    add_vault(sum);\n\n    let mut label = String::from(\"ORDER\");\n    label.push_str(\"_OK\");\n    println!(\"{}\", label);\n\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    boost(&mut c);\n    step(2);\n    deliver(c);\n}",
     "quickChips": [
       {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
+        "label": "label.push_str(\"_OK\");",
+        "insert": "label.push_str(\"_OK\");\n    "
       }
     ],
     "hints": [
-      "step() で (1,1) の強化台に乗ったら `boost(&mut core);` を2行に分けて2回呼ぼう（パワー 1→3→5！）。",
-      "そのあと (2,1) で `scan(&core);` して (4,1) で `deliver(core);` だよ。",
-      "let mut core = grab_core(); step(); boost(&mut core); boost(&mut core); step(); scan(&core); step(2); deliver(core);"
+      "menu と orders で金庫⚡5が入るよ。コア操作も完璧！",
+      "足りないのは `label.push_str(\"_OK\");` の 1 行だけだよ。",
+      "label.push_str(\"_OK\");"
     ],
     "worldSetup": {
       "width": 5,
@@ -1805,16 +2383,157 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
       "cores": [
         {
           "id": "c1",
-          "x": 0,
+          "x": 1,
           "y": 1,
-          "power": 1,
-          "label": "高出力コア"
+          "power": 2,
+          "label": "注文コア"
         }
       ],
       "chargers": [
         {
-          "x": 1,
+          "x": 2,
           "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "vaultTarget": 5,
+      "stdoutIncludes": [
+        "ORDER_OK"
+      ],
+      "requireAllSwitches": true,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 10
+  },
+  {
+    "displayId": "8-22",
+    "id": "22c0ba77-9cf6-5294-a052-97e578c28c55",
+    "index": 198,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "challenge",
+    "title": "8-22. コアと文字と辞書の大迷宮チャレンジ",
+    "topicTag": "コレクション + スパーク迷宮",
+    "kurumiIntro": "巡回スパークの先の迷路へ挑もう！`HashMap` の合言葉でダイヤルを解き、`String` に経過を記録しつつ、コアを拾って検査・強化・納品まで一気に決めよう！",
+    "goalSummary": "ダイヤル解錠・\"COLLECTIONS_PRO\" 出力・コア⚡4+納品・全スイッチ・ゴール達成",
+    "bookSectionTitle": "8.1〜8.3 コレクションの複合パズル",
+    "bookSummary": "データ構造を使い分けながら、現実の空間ルールと危険物をすべてコントロールする総合演習です。",
+    "bookKeyCode": "HashMap / String / Vec + 空間コア操作",
+    "starterCode": "fn main() {\n    let mut book = HashMap::new();\n    book.insert(\"dial\", 5);\n    try_dial(book.get(\"dial\").unwrap_or(0));\n\n    let mut msg = String::from(\"COLLECTIONS\");\n    println!(\"{}\", msg);\n\n    // (1,1)コア→(2,1)検査→(3,1)スパーク注意！→(4,1)強化＆スイッチ→(5,1)納品\n    step(1);\n}",
+    "solutionCode": "fn main() {\n    let mut book = HashMap::new();\n    book.insert(\"dial\", 5);\n    try_dial(book.get(\"dial\").unwrap_or(0));\n\n    let mut msg = String::from(\"COLLECTIONS\");\n     msg.push_str(\"_PRO\");\n    println!(\"{}\", msg);\n\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    let mut c = grab_core();\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    scan(&c);\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    boost(&mut c);\n    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n    step(1);\n    deliver(c);\n}",
+    "quickChips": [
+      {
+        "label": "msg.push_str(\"_PRO\");",
+        "insert": "msg.push_str(\"_PRO\");\n    "
+      },
+      {
+        "label": "while is_spark_ahead() { wait_tick(1); }",
+        "insert": "while is_spark_ahead() { wait_tick(1); }\n    "
+      }
+    ],
+    "hints": [
+      "msg に `msg.push_str(\"_PRO\");` を足すのを忘れないでね！",
+      "(1,1)でコア取得 → (2,1)で scan(&c) → (3,1)はスパーク横断なので `while is_spark_ahead() { wait_tick(1); }` で待ってから越えよう！",
+      "(4,1)で boost(&mut c) しつつスイッチを踏み、(5,1) で deliver(c) すればコンプリートだよ！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "dial": {
+        "secret": 5
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 2,
+          "label": "総括コア"
         }
       ],
       "scanners": [
@@ -1823,10 +2542,267 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
           "y": 1
         }
       ],
-      "deliveries": [
+      "chargers": [
         {
           "x": 4,
           "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 5,
+          "y": 1
+        }
+      ],
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 3,
+              "y": 0
+            },
+            {
+              "x": 3,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "dialSolved": true,
+      "deliverCores": 1,
+      "minCorePower": 4,
+      "scanCount": 1,
+      "stdoutIncludes": [
+        "COLLECTIONS_PRO"
+      ],
+      "requireAllSwitches": true,
+      "requireSpatialCoreRules": true
+    },
+    "parTicks": 15
+  },
+  {
+    "displayId": "8-23",
+    "id": "3b8c3958-3f0b-5049-881c-0663cb6f152c",
+    "index": 199,
+    "chapter": 8,
+    "chapterTitle": "第8章 一般的なコレクション",
+    "stageKind": "challenge",
+    "title": "8-23. コレクション総合パズル：迷宮制覇",
+    "topicTag": "コレクションの最終チャレンジ",
+    "kurumiIntro": "コレクションの総合チャレンジ！`Vec`・`String`・`HashMap`・`struct`・`enum`・`mod` すべての知識が詰まった大迷宮だよ。2つのスイッチ、スパーク、コンベア、金庫、コア納品をすべて制覇しよう！",
+    "goalSummary": "知識を総動員！\"CHALLENGE_COMPLETE\"・金庫⚡7・コア⚡5+納品・全スイッチ・ゴール (5, 3) へ",
+    "bookSectionTitle": "総まとめ — 設計図・列挙型・モジュール・コレクション",
+    "bookSummary": "構造体や列挙型でプログラムの骨格を作り、モジュールで整理し、コレクションでデータを自在に扱う力が身に着きました！",
+    "bookKeyCode": "struct + enum + mod + HashMap + Vec + String",
+    "starterCode": "mod helper {\n    pub fn safe_move(n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nuse helper::safe_move;\n\nfn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"part1\", 3);\n    dict.insert(\"part2\", 4);\n    let keys = vec![\"part1\", \"part2\"];\n    let mut vault_sum = 0;\n    for k in keys {\n        vault_sum += dict.get(k).unwrap_or(0);\n    }\n    add_vault(vault_sum);\n\n    println!(\"IN_PROGRESS\");\n\n    // ここから (1,1)コア→(2,1)強化＆スイッチ→(4,1)スイッチ→(5,1)右折→(5,3)納品台へ進もう！\n    safe_move(1);\n}",
+    "solutionCode": "mod helper {\n    pub fn safe_move(n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nuse helper::safe_move;\n\nfn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"part1\", 3);\n    dict.insert(\"part2\", 4);\n    let keys = vec![\"part1\", \"part2\"];\n    let mut vault_sum = 0;\n    for k in keys {\n        vault_sum += dict.get(k).unwrap_or(0);\n    }\n    add_vault(vault_sum);\n\n    let mut badge = String::from(\"CHALLENGE\");\n    badge.push_str(\"_COMPLETE\");\n    println!(\"{}\", badge);\n\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    boost(&mut c);\n    safe_move(3);\n    turn_right();\n    safe_move(2);\n    deliver(c);\n}",
+    "quickChips": [
+      {
+        "label": "let mut c = grab_core();",
+        "insert": "let mut c = grab_core();\n    "
+      },
+      {
+        "label": "boost(&mut c);",
+        "insert": "boost(&mut c);\n    "
+      },
+      {
+        "label": "safe_move(3);",
+        "insert": "safe_move(3);\n    "
+      },
+      {
+        "label": "deliver(c);",
+        "insert": "deliver(c);"
+      }
+    ],
+    "hints": [
+      "(1,1)で `let mut c = grab_core();`、次の `(2,1)` が強化台兼スイッチ1だから `boost(&mut c);` しよう！",
+      "その後 `safe_move(3);` で(3,1)のスパークを待って越え、(4,1)のスイッチ2を踏み、(5,1)へ！",
+      "最後は `turn_right(); safe_move(2); deliver(c);` でゲート (5,2) を抜けて (5,3) に納品完了だよ！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 3
+      },
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "最終コア"
+        }
+      ],
+      "chargers": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 5,
+          "y": 2,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 4,
+            "y": 1
+          }
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 7
+      },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 3,
+              "y": 0
+            },
+            {
+              "x": 3,
+              "y": 1
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
         }
       ]
     },
@@ -1834,1214 +2810,43 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
       "reachGoal": true,
       "deliverCores": 1,
       "minCorePower": 5,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "8-16",
-    "id": "0c595cd1-d38e-5bce-8a42-e6c45af0dd2b",
-    "index": 112,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-16. スイッチでゲートを開いてコアを運べ",
-    "topicTag": "スイッチ連動 + コア搬送",
-    "kurumiIntro": "エネルギーコアと納品台のあいだを閉じられたゲートが塞いでいるよ！先にコアを拾うか、先にスイッチを押すか――順番を間違えるとゲートにぶつかっちゃうパズルだよ！",
-    "goalSummary": "スイッチ(1,3)とコア(2,1)を回り、強化・検査してゴール(5,1)へ納品",
-    "bookSectionTitle": "8.1 & 8.2 手順の組み立て（依存関係パズル）",
-    "bookSummary": "すべての条件（スイッチ、コア拾得、強化、検査、納品）を1回の走行で満たすための空間ルートを逆算しましょう。",
-    "bookKeyCode": "step();\nturn_right();\nstep(2);",
-    "starterCode": "fn main() {\n    // 先にスイッチ(1,3)を押す？ それともコア(2,1)を拾う？ 盤面を見て組み立てよう！\n    step();\n}",
-    "solutionCode": "fn main() {\n    step();\n    turn_right();\n    step(2);\n    turn_left();\n    turn_left();\n    step(2);\n    turn_right();\n    step();\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    step(2);\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "let mut core = grab_core();",
-        "insert": "let mut core = grab_core();\n    "
-      },
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
-      }
-    ],
-    "hints": [
-      "(1,1) まで来たらまず南へ2歩降りて (1,3) のスイッチを踏んでから北へ2歩戻ろう！",
-      "北へ戻って東を向き、1歩進んだ (2,1) でコアを拾い、次の (3,1) の強化台で `boost(&mut core);`！",
-      "開いたゲート (4,1) を通り、(5,1) で `deliver(core);` でクリアだよ！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
+      "vaultTarget": 7,
+      "stdoutIncludes": [
+        "CHALLENGE_COMPLETE"
       ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "switches": [
-        {
-          "x": 1,
-          "y": 3
-        }
-      ],
-      "cores": [
-        {
-          "id": "c1",
-          "x": 2,
-          "y": 1,
-          "power": 1,
-          "label": "扉向こうコア"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 0,
-          "linkedSwitch": {
-            "x": 1,
-            "y": 3
-          }
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 5,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 3,
       "requireAllSwitches": true,
       "requireSpatialCoreRules": true
     },
-    "parTicks": 17
-  },
-  {
-    "displayId": "8-17",
-    "id": "5565fbf6-40de-53c4-912d-bd215afe50f2",
-    "index": 113,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-17. 火花の廊下でコアを守り抜け",
-    "topicTag": "借用 + スパーク回避パズル",
-    "kurumiIntro": "大切なエネルギーコアを抱えたまま、巡回スパークが守る狭い廊下を通り抜けるよ！`is_spark_ahead()` でスパークを見張りながら運ぼう！",
-    "goalSummary": "スパークをかわしつつコア(0,2)を検査台(3,2)と強化台(4,2)へ運び(6,2)へ納品",
-    "bookSectionTitle": "8.2 所有権 × 安全センサーの組み合わせ",
-    "bookSummary": "センサー待機 `while is_spark_ahead() { wait_tick(1); }` を補助関数にまとめておくと、運搬コードがぐっと見やすくなります。",
-    "bookKeyCode": "while is_spark_ahead() { wait_tick(1); }\nstep();",
-    "starterCode": "fn step_avoid() {\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    // コアを拾って、スパークをかわしながら検査・強化・納品しよう！\n}",
-    "solutionCode": "fn step_avoid() {\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    let mut core = grab_core();\n    step_avoid();\n    step_avoid();\n    step_avoid();\n    scan(&core);\n    step_avoid();\n    boost(&mut core);\n    step_avoid();\n    step_avoid();\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "step_avoid();",
-        "insert": "step_avoid();\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      },
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
-      }
-    ],
-    "hints": [
-      "(0,2) で `let mut core = grab_core();` を呼ぼう。",
-      "step_avoid() を3回で (3,2) 検査台(`scan(&core)`)、もう1回で (4,2) 強化台(`boost(&mut core)`)、あと2回で (6,2) 納品台(`deliver(core)`)！",
-      "let mut core = grab_core(); step_avoid(); step_avoid(); step_avoid(); scan(&core); step_avoid(); boost(&mut core); step_avoid(); step_avoid(); deliver(core);"
-    ],
-    "worldSetup": {
-      "width": 7,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 6,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        },
-        {
-          "x": 6,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 2,
-        "dir": 0
-      },
-      "goal": {
-        "x": 6,
-        "y": 2
-      },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 2,
-          "power": 1,
-          "label": "輸送コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 3,
-          "y": 2
-        }
-      ],
-      "chargers": [
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 6,
-          "y": 2
-        }
-      ],
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 2,
-              "y": 1
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 3
-            },
-            {
-              "x": 2,
-              "y": 2
-            }
-          ],
-          "initialIndex": 1
-        },
-        {
-          "id": "sp2",
-          "path": [
-            {
-              "x": 5,
-              "y": 3
-            },
-            {
-              "x": 5,
-              "y": 2
-            },
-            {
-              "x": 5,
-              "y": 1
-            },
-            {
-              "x": 5,
-              "y": 2
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 3,
-      "scanCount": 1,
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 12
-  },
-  {
-    "displayId": "8-18",
-    "id": "f5a0f239-cfc0-553b-8c39-f24be2137f2e",
-    "index": 114,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-18. スライス記法（&arr[1..3]）",
-    "topicTag": "スライス &[T]",
-    "kurumiIntro": "配列の全部じゃなく「1番目から2番目までの2個だけ」を切り出して検査機 `inspect_slice(...)` に渡そう！`&batch[1..3]` がスライスだよ。",
-    "goalSummary": "スライスで2個だけ検査してゴール (3, 1) へ進もう",
-    "bookSectionTitle": "8.3 スライス型 — コレクションの一部への参照",
-    "bookSummary": "スライス `&vec[開始..終了]` を使うと、データをコピーすることなく配列の一部だけを指し示すことができます（`1..3` は添字1と2の2要素を指します）。",
-    "bookKeyCode": "let slice = &batch[1..3];\ninspect_slice(slice);",
-    "starterCode": "fn main() {\n    let batch = conveyor_batch();\n    // batch の [1..3] をスライスで切り出して検査しよう！\n    let part = &batch[0..1];\n    inspect_slice(part);\n    step(3);\n}",
-    "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let part = &batch[1..3];\n    inspect_slice(part);\n    step(3);\n}",
-    "quickChips": [
-      {
-        "label": "&batch[1..3]",
-        "insert": "&batch[1..3]"
-      },
-      {
-        "label": "inspect_slice(part);",
-        "insert": "inspect_slice(part);\n    "
-      }
-    ],
-    "hints": [
-      "今は &batch[0..1] になっているから1個しか検査されていないよ！",
-      "&batch[1..3] に変えると2個分（長さ2）のスライスになるよ。",
-      "let part = &batch[1..3];"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "conveyorItems": [
-        10,
-        20,
-        30,
-        40
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 2
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "8-19",
-    "id": "be100168-6dd5-54c6-b965-8e2b5f48f2bd",
-    "index": 115,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-19. 省略スライス &arr[..3] と &arr[2..]",
-    "topicTag": "範囲の開始・終了省略",
-    "kurumiIntro": "先頭から切り出すときは `0` を省略して `&batch[..3]`、最後まで切り出すときは `&batch[2..]` って書けるんだよ！3個ぶん検査して進んでみよう。",
-    "goalSummary": "省略スライスで 3個検査し、ゴール (3, 1) へ",
-    "bookSectionTitle": "8.3 スライスの省略記法",
-    "bookSummary": "`&s[0..3]` は `&s[..3]` と同じ意味です。同様に末尾まで指すときは `&s[2..]`、全体を指すときは `&s[..]` と書けます。",
-    "bookKeyCode": "let front = &batch[..3];\nlet back = &batch[1..];",
-    "starterCode": "fn main() {\n    let batch = conveyor_batch();\n    // 先頭から3個（..3）をスライスして検査しよう！\n    let part = &batch[..1];\n    inspect_slice(part);\n    step(3);\n}",
-    "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let part = &batch[..3];\n    inspect_slice(part);\n    step(3);\n}",
-    "quickChips": [
-      {
-        "label": "&batch[..3]",
-        "insert": "&batch[..3]"
-      }
-    ],
-    "hints": [
-      "&batch[..1] だと1個しか入っていないよ！",
-      "&batch[..3] にすれば先頭の3個がスライスされるよ。",
-      "let part = &batch[..3];"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "conveyorItems": [
-        10,
-        20,
-        30,
-        40
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 3
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "8-20",
-    "id": "9ba6d447-0926-51b4-b323-bcd6e3074cc8",
-    "index": 116,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-20. スライスの長さ .len() で歩行",
-    "topicTag": "slice.len() / 検査戻り値",
-    "kurumiIntro": "切り出したスライスは `.len()` や `inspect_slice(part)` の戻り値で「何個あるか」が分かるんだ！その個数だけ歩いてゴールしてみよう！",
-    "goalSummary": "スライス検査の個数 4 をそのまま step() に渡して (4, 1) へ",
-    "bookSectionTitle": "8.3 スライスの長さとデータ共有",
-    "bookSummary": "スライスは開始位置と長さ情報だけを借りて持つため、軽量で高速です。`.len()` で要素数を調べられます。",
-    "bookKeyCode": "let part = &batch[1..5];\nlet count = inspect_slice(part);\nstep(count);",
-    "starterCode": "fn main() {\n    let batch = conveyor_batch();\n    // batch は5個あるよ。[1..5] をスライスすると長さ 4 になる！\n    let part = &batch[1..3];\n    let count = inspect_slice(part);\n    step(count);\n}",
-    "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let part = &batch[1..5];\n    let count = inspect_slice(part);\n    step(count);\n}",
-    "quickChips": [
-      {
-        "label": "&batch[1..5]",
-        "insert": "&batch[1..5]"
-      }
-    ],
-    "hints": [
-      "今は [1..3] なので count が 2 になっているよ。ゴールは (4, 1) だから4個必要だね！",
-      "&batch[1..5] に変えて 4個ぶん検査＋4歩移動しよう！",
-      "let part = &batch[1..5];"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "conveyorItems": [
-        10,
-        20,
-        30,
-        40,
-        50
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 4
-    },
-    "parTicks": 5
-  },
-  {
-    "displayId": "8-21",
-    "id": "e059ebd7-5f3d-55e8-afda-279711b587a2",
-    "index": 117,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "puzzle",
-    "title": "8-21. スライス &[i32] で区間検査＆コンベア",
-    "topicTag": "スライス &[T] / インデックス",
-    "kurumiIntro": "`conveyor_batch()` から取り出したベクタの一部だけを `&batch[1..4]` のようにスライスで切り出して検査しよう！コンベアの押し出しを計算して `(n + 1)` 歩でぴったりゴールしよう！",
-    "goalSummary": "スライスを長さ3で inspect_slice し、スイッチ経由でゴール (5, 1) へ",
-    "bookSectionTitle": "8.3 スライス型 — 所有権を持たずに一部分を参照する",
-    "bookSummary": "`&vec[1..4]` は配列のインデックス1〜3（合計3要素）をコピーなしで指し示すスライス参照です。",
-    "bookKeyCode": "let batch = conveyor_batch();\nlet n = inspect_slice(&batch[1..4]);",
-    "starterCode": "fn main() {\n    let batch = conveyor_batch();\n    // 長さ3のスライスを inspect_slice して、コンベア分の歩数を調整して進もう！\n    let part = &batch[0..1];\n    let n = inspect_slice(part);\n    step(n);\n}",
-    "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let part = &batch[1..4];\n    let n = inspect_slice(part);\n    step(n + 1);\n}",
-    "quickChips": [
-      {
-        "label": "&batch[1..4]",
-        "insert": "&batch[1..4]"
-      },
-      {
-        "label": "step(n + 1);",
-        "insert": "step(n + 1);\n    "
-      }
-    ],
-    "hints": [
-      "part を `&batch[1..4]` に変えると要素数が 3 になって `scanCount: 3` の条件を満たすよ！",
-      "(2,1) の東コンベアに乗ると自動で (3,1) のスイッチに運ばれるため、5マス先のゴールには4歩（n + 1）で着くよ！",
-      "let part = &batch[1..4];\nlet n = inspect_slice(part);\nstep(n + 1);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "conveyorItems": [
-        4,
-        7,
-        10,
-        12,
-        15
-      ],
-      "conveyors": [
-        {
-          "x": 2,
-          "y": 1,
-          "dir": 0
-        }
-      ],
-      "switches": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 0,
-          "linkedSwitch": {
-            "x": 3,
-            "y": 1
-          }
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 3,
-      "requireAllSwitches": true
-    },
-    "parTicks": 6
-  },
-  {
-    "displayId": "8-22",
-    "id": "ebdddaaf-e4ed-5151-a9a4-dd654d3c9eb4",
-    "index": 118,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "challenge",
-    "title": "8-22. 文字列スライス & コア納品の二重借用パズル",
-    "topicTag": "スライス + &core / &mut core",
-    "kurumiIntro": "スライス検査（2要素以上）と、コアの強化・スキャン・納品をすべて順番通りにこなす実戦パズルだよ！どの順番なら所有権エラーにならず最短で着けるかな？",
-    "goalSummary": "スライス2要素以上を検査し、コア(1,1)を⚡3以上・スキャンして(5,1)へ納品",
-    "bookSectionTitle": "8.3 借用とスライスの総合応用",
-    "bookSummary": "スライス `&batch[..2]` とコアの借用 `&core` / `&mut core` を正しく組み合わせ、Move 前に必要な検査を完了させましょう。",
-    "bookKeyCode": "inspect_slice(&batch[0..2]);\nboost(&mut core);\nscan(&core);",
-    "starterCode": "fn main() {\n    let batch = conveyor_batch();\n    // batch の先頭2要素を検査し、コア(1,1)を強化・検査・納品しよう！\n    step();\n}",
-    "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    inspect_slice(&batch[0..2]);\n    step();\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    step();\n    scan(&core);\n    step();\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "inspect_slice(&batch[0..2]);",
-        "insert": "inspect_slice(&batch[0..2]);\n    "
-      },
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "scan(&core);",
-        "insert": "scan(&core);\n    "
-      }
-    ],
-    "hints": [
-      "最初に `inspect_slice(&batch[0..2]);` で2要素検査し、step() して (1,1) で `let mut core = grab_core();` しよう！",
-      "次は (2,1) で `boost(&mut core);`、step() 1歩で (3,1) コンベアに乗って (4,1) 検査台へ着くからそこで `scan(&core);`！",
-      "最後に step() で (5,1) へ着き、`deliver(core);` でクリア！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "conveyorItems": [
-        10,
-        20,
-        30,
-        40
-      ],
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "出荷コア"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "conveyors": [
-        {
-          "x": 3,
-          "y": 1,
-          "dir": 0
-        }
-      ],
-      "scanners": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 5,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 3,
-      "scanCount": 3,
-      "requireSpatialCoreRules": true,
-      "maxTicks": 11
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "8-23",
-    "id": "9173a523-fa9e-5b50-adc2-b98d38e4c2a7",
-    "index": 119,
-    "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "title": "8-23. 所有権の総仕上げ：借用・強化・スライス",
-    "topicTag": "第8章 総合実践",
-    "kurumiIntro": "所有権の総合課題だよ！コンベアのスライス検査（2個）と、コアの強化（&mut で⚡3以上）＆納品を全部組み合わせて、U字コースのゴールへ！",
-    "goalSummary": "スライス検査2個＋コア強化(⚡3)＋納品＋U字ゴール (0, 3) へ",
-    "bookSectionTitle": "第8章まとめ — 所有権・借用・スライス",
-    "bookSummary": "Move（所有権の移動）、`&T`（不変借用）、`&mut T`（可変借用）、`&[T]`（スライス）はRustの核となる4つの概念です。",
-    "bookKeyCode": "inspect_slice(&batch[..2]);\nboost(&mut core);\ndeliver(core);",
-    "starterCode": "fn main() {\n    let batch = conveyor_batch();\n    inspect_slice(&batch[..2]);\n    let mut core = grab_core();\n    // core を &mut で強化してから U字コースを進んで納品しよう！\n    \n    step(3);\n    turn_right();\n    step(2);\n    turn_right();\n    step(3);\n    deliver(core);\n}",
-    "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    inspect_slice(&batch[..2]);\n    let mut core = grab_core();\n    boost(&mut core);\n    step(3);\n    turn_right();\n    step(2);\n    turn_right();\n    step(3);\n    deliver(core);\n}",
-    "quickChips": [
-      {
-        "label": "boost(&mut core);",
-        "insert": "boost(&mut core);\n    "
-      },
-      {
-        "label": "deliver(core);",
-        "insert": "deliver(core);\n    "
-      }
-    ],
-    "hints": [
-      "スライス検査（2個）と U字移動・納品は書かれているよ！あとはコアのパワーを⚡3以上にするだけ。",
-      "step(3); の前に `boost(&mut core);` を追加しよう！",
-      "let mut core = grab_core();\nboost(&mut core);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 0,
-        "y": 3
-      },
-      "conveyorItems": [
-        10,
-        20,
-        30
-      ],
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 1,
-          "label": "所有権コア"
-        }
-      ],
-      "scanners": [
-        {
-          "x": 1,
-          "y": 0
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 0
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 0,
-          "y": 3
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "scanCount": 2,
-      "deliverCores": 1,
-      "minCorePower": 3
-    },
-    "parTicks": 12
+    "parTicks": 15
   },
   {
     "displayId": "8-24",
-    "id": "e754be20-628a-5af1-9496-0caceada82d4",
-    "index": 120,
+    "id": "5cc099ac-9b4a-5d44-95b0-608fb71d08f7",
+    "index": 200,
     "chapter": 8,
-    "chapterTitle": "第8章 所有権を理解する",
-    "stageKind": "challenge",
-    "title": "8-24. 第8章マスター：所有権グランドチャレンジ",
-    "topicTag": "所有権の最終チャレンジ / 所有権完成",
-    "kurumiIntro": "所有権の最終関門だよ！2つのコアを回収して、スイッチ連動ゲートを解き、強化と検査とスパーク回避をすべてこなして2つとも納品しよう！所有権マスターへの第一歩だ！",
-    "goalSummary": "\"CHALLENGE_COMPLETE\" を出力し、2つのコアを強化・検査して(6,3)へ納品",
-    "bookSectionTitle": "4章マスター — 所有権の総合実習",
-    "bookSummary": "ここまで学んだ制御フロー・関数・所有権・可変/不変借用のすべてを使って2連続の精密輸送ミッションを達成します。",
-    "bookKeyCode": "println!(\"CHALLENGE_COMPLETE\");",
-    "starterCode": "fn step_wait() {\n    while !is_gate_open() || is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    println!(\"CHALLENGE_COMPLETE\");\n    // 左のAコア(1,1)と下のBコア(4,3)を両方 (6,3) の納品台へ運ぼう！\n}",
-    "solutionCode": "fn step_wait() {\n    while !is_gate_open() || is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    println!(\"CHALLENGE_COMPLETE\");\n    step_wait();\n    let mut c1 = grab_core();\n    step_wait();\n    boost(&mut c1);\n    step_wait();\n    scan(&c1);\n    turn_right();\n    step_wait();\n    step_wait();\n    turn_left();\n    step_wait();\n    step_wait();\n    step_wait();\n    deliver(c1);\n    turn_right();\n    turn_right();\n    step_wait();\n    step_wait();\n    let c2 = grab_core();\n    turn_right();\n    turn_right();\n    step_wait();\n    step_wait();\n    deliver(c2);\n}",
+    "chapterTitle": "第8章 一般的なコレクション",
+    "title": "8-24. コレクション3種の総合課題",
+    "topicTag": "第8章 総合実践",
+    "kurumiIntro": "コレクションの総合課題！`Vec` のルート、`String` の合言葉、`HashMap` の金庫エネルギーを全部連携させて、L字の先のゴールへ着こう！",
+    "goalSummary": "Vec・String・HashMap を使い \"CHALLENGE_COMPLETE\" 出力＋金庫⚡3＋ゴールへ",
+    "bookSectionTitle": "第8章まとめ — Vec・String・HashMap",
+    "bookSummary": "リストには `Vec`、可変テキストには `String`、キー検索には `HashMap` を使うのがRustコレクションの基本3点セットです。",
+    "bookKeyCode": "let mut msg = String::from(\"CHALLENGE\");\nmsg.push_str(\"_COMPLETE\");",
+    "starterCode": "fn main() {\n    let mut msg = String::from(\"CHALLENGE\");\n    msg.push_str(\"_COMPLETE\");\n    println!(\"{}\", msg);\n\n    let mut map = HashMap::new();\n    map.insert(\"vault\", 3);\n    add_vault(map.get(\"vault\").unwrap_or(0));\n\n    let moves = vec![3, 2];\n    step(moves[0]);\n    turn_right();\n    // moves[1] 歩だけ進んでゴール (3, 3) へ！\n    \n}",
+    "solutionCode": "fn main() {\n    let mut msg = String::from(\"CHALLENGE\");\n    msg.push_str(\"_COMPLETE\");\n    println!(\"{}\", msg);\n\n    let mut map = HashMap::new();\n    map.insert(\"vault\", 3);\n    add_vault(map.get(\"vault\").unwrap_or(0));\n\n    let moves = vec![3, 2];\n    step(moves[0]);\n    turn_right();\n    step(moves[1]);\n}",
     "quickChips": [
       {
-        "label": "step_wait();",
-        "insert": "step_wait();\n    "
-      },
-      {
-        "label": "let mut c1 = grab_core();",
-        "insert": "let mut c1 = grab_core();\n    "
-      },
-      {
-        "label": "boost(&mut c1);",
-        "insert": "boost(&mut c1);\n    "
-      },
-      {
-        "label": "scan(&c1);",
-        "insert": "scan(&c1);\n    "
-      },
-      {
-        "label": "deliver(c1);",
-        "insert": "deliver(c1);\n    "
+        "label": "step(moves[1]);",
+        "insert": "step(moves[1]);"
       }
     ],
     "hints": [
-      "上の廊下：`(1,1)`でAコア取得→`(2,1)`強化台で`boost(&mut c1)`→`(3,1)`検査台で`scan(&c1)`兼スイッチON！",
-      "右折して下の廊下`(3,3)`へ降りたら、東へ3歩の`(6,3)`まで行って`deliver(c1)`！",
-      "そこから西へ2歩戻って`(4,3)`のBコアを拾い、反転して`(6,3)`へ`deliver(c2)`しよう！"
+      "msg と map と moves[0] までは準備完了！あとは最後の曲がった先の2歩だよ。",
+      "最後の行に step(moves[1]); を書こう！",
+      "turn_right();\nstep(moves[1]);"
     ],
     "worldSetup": {
-      "width": 7,
+      "width": 5,
       "height": 5,
       "walls": [
         {
@@ -3065,26 +2870,6 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
           "y": 0
         },
         {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
           "x": 0,
           "y": 2
         },
@@ -3098,47 +2883,15 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         },
         {
           "x": 4,
-          "y": 2
-        },
-        {
-          "x": 6,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
+          "y": 1
         },
         {
           "x": 4,
-          "y": 4
+          "y": 2
         },
         {
-          "x": 6,
-          "y": 4
+          "x": 4,
+          "y": 3
         }
       ],
       "botStart": {
@@ -3147,99 +2900,23 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 6,
+        "x": 3,
         "y": 3
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 1,
-          "label": "コアA"
-        },
-        {
-          "id": "c2",
-          "x": 4,
-          "y": 3,
-          "power": 3,
-          "label": "コアB"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "scanners": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "switches": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 3,
-          "openTicks": 1,
-          "closedTicks": 0,
-          "linkedSwitch": {
-            "x": 3,
-            "y": 1
-          }
-        }
-      ],
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 5,
-              "y": 2
-            },
-            {
-              "x": 5,
-              "y": 3
-            },
-            {
-              "x": 5,
-              "y": 4
-            },
-            {
-              "x": 5,
-              "y": 3
-            }
-          ],
-          "initialIndex": 0
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 6,
-          "y": 3
-        }
-      ]
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "deliverCores": 2,
-      "minCorePower": 3,
-      "scanCount": 1,
-      "requireAllSwitches": true,
-      "requireSpatialCoreRules": true,
+      "vaultTarget": 3,
       "stdoutIncludes": [
         "CHALLENGE_COMPLETE"
       ]
     },
-    "parTicks": 29
+    "parTicks": 8
   }
 ];
-
-

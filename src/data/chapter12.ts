@@ -3,533 +3,30 @@ import { StageDefinition } from '../types/game';
 export const CHAPTER_12_STAGES: StageDefinition[] = [
   {
     "displayId": "12-1",
-    "id": "c0581340-c3c5-5377-b453-7ef58d8eecfe",
-    "index": 177,
+    "id": "d7653986-119c-5386-ae39-f3e78c4799f6",
+    "index": 265,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-1. ベクタ Vec<T> でリスト操作",
-    "topicTag": "Vec<T> / push / for",
-    "kurumiIntro": "いくつでも中身を増やせる便利なリスト `Vec`（ベクタ）を使おう！`push` で歩数リストを作って合計分だけ歩いてみて！",
-    "goalSummary": "Vec に歩数を追加して合計3歩進み、ゴール (3, 1) へ",
-    "bookSectionTitle": "12.1 ベクタでリストの値を保存する",
-    "bookSummary": "`vec![1, 2]` や `Vec::new()` で作る可変長リストがベクタです。`.push(値)` で末尾に追加でき、`for x in list` で順番に取り出せます。",
-    "bookKeyCode": "let mut list = vec![1, 1];\nlist.push(1);",
-    "starterCode": "fn main() {\n    let mut steps = vec![1, 1];\n    // ここにもう1歩 push しよう！\n    \n    for s in steps {\n        step(s);\n    }\n}",
-    "solutionCode": "fn main() {\n    let mut steps = vec![1, 1];\n    steps.push(1);\n    for s in steps {\n        step(s);\n    }\n}",
-    "quickChips": [
-      {
-        "label": "steps.push(1);",
-        "insert": "steps.push(1);\n    "
-      }
-    ],
-    "hints": [
-      "今 steps には [1, 1] の合計2歩しか入っていないよ。",
-      "`steps.push(1);` を書いて3歩にしよう！",
-      "let mut steps = vec![1, 1];\nsteps.push(1);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 3
-  },
-  {
-    "displayId": "12-2",
-    "id": "8b57d218-9e07-5421-a27f-e7d227d78e80",
-    "index": 178,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-2. Vec::new() から空のリストを育てる",
-    "topicTag": "Vec::new() / push",
-    "kurumiIntro": "最初は空っぽの `Vec::new()` を作って、必要な数だけ `.push(...)` で積み上げてから金庫と移動に使ってみよう！",
-    "goalSummary": "Vec::new() に 2 と 2 を push して金庫⚡4＋ゴールへ",
-    "bookSectionTitle": "12.1 Vec::new による生成と追加",
-    "bookSummary": "空のベクタは `let mut v = Vec::new();` で作り、あとから `.push(値)` でどんどん要素を追加できます。",
-    "bookKeyCode": "let mut v = Vec::new();\nv.push(2);\nv.push(2);",
-    "starterCode": "fn main() {\n    let mut list = Vec::new();\n    list.push(2);\n    // もう1つ 2 を push しよう！\n    \n    for x in list {\n        add_vault(x);\n        step(x);\n    }\n}",
-    "solutionCode": "fn main() {\n    let mut list = Vec::new();\n    list.push(2);\n    list.push(2);\n    for x in list {\n        add_vault(x);\n        step(x);\n    }\n}",
-    "quickChips": [
-      {
-        "label": "list.push(2);",
-        "insert": "list.push(2);\n    "
-      }
-    ],
-    "hints": [
-      "今は 2 が1個しか入っていないから合計 2 しか増えないよ。",
-      "list.push(2); をもう1行追加して [2, 2] にしよう！",
-      "list.push(2);\nlist.push(2);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 4
-    },
-    "parTicks": 6
-  },
-  {
-    "displayId": "12-3",
-    "id": "da6c9668-2286-5537-b079-941dd62655fb",
-    "index": 179,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-3. ベクタの .get(index) で安全に読む",
-    "topicTag": "Vec::get / Option",
-    "kurumiIntro": "`v[99]` みたいに存在しない番号を読むとパニックするけど、`v.get(index)` なら `Option`（`Some` か `None`）を返してくれるから安全なんだ！",
-    "goalSummary": "v.get(2) で3番目の歩数 4 を取り出してゴール (4, 1) へ",
-    "bookSectionTitle": "12.1 ベクタの要素を読む — [] と .get()",
-    "bookSummary": "`.get(i)` メソッドは範囲外なら `None`、範囲内なら `Some(値)` を返すため、安全に要素を取り出せます。",
-    "bookKeyCode": "if let Some(n) = v.get(2) {\n    step(n);\n}",
-    "starterCode": "fn main() {\n    let v = vec![1, 2, 4];\n    // v.get(0) だと 1 しか取れないよ。2番目(添字2)の 4 を取り出そう！\n    if let Some(n) = v.get(0) {\n        step(n);\n    }\n}",
-    "solutionCode": "fn main() {\n    let v = vec![1, 2, 4];\n    if let Some(n) = v.get(2) {\n        step(n);\n    }\n}",
-    "quickChips": [
-      {
-        "label": "v.get(2)",
-        "insert": "v.get(2)"
-      }
-    ],
-    "hints": [
-      "添字は 0 から始まるから、vec![1, 2, 4] の 4 は添字 2 にあるよ！",
-      "v.get(0) を v.get(2) に変えてみよう。",
-      "if let Some(n) = v.get(2) {"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "12-4",
-    "id": "056db8f2-5847-5e13-9b61-f1d6f9ec7501",
-    "index": 180,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
     "stageKind": "puzzle",
-    "title": "12-4. Vec::get() で境界外を安全ガード",
-    "topicTag": "Vec::get + スパーク回避",
-    "kurumiIntro": "指示配列の「範囲外」を読んでパニックしちゃうバグを `.get(i)` の安全なパターンに書き換えて、金庫⚡6とゴールへの配達を決めよう！",
-    "goalSummary": "Vec::get で安全に値を集計し、金庫⚡6＋全スイッチで (5, 1) へ",
-    "bookSectionTitle": "12.1 範囲外アクセスを防ぐ .get() と unwrap_or",
-    "bookSummary": "添字がベクタの長さを超える可能性があるときは `list.get(i)` で `Option` として受け取ると安全です。",
-    "bookKeyCode": "let val = cmds.get(i).unwrap_or(0);",
-    "starterCode": "fn main() {\n    let cmds = vec![2, 4];\n    let mut sum = 0;\n    for i in 0..4 {\n        // cmds の長さは2！cmds.get(i).unwrap_or(0) で全要素を安全に足そう（今は先頭1個だけ）\n        if i == 0 {\n            sum += cmds[i];\n        }\n    }\n    add_vault(sum);\n    step(5);\n}",
-    "solutionCode": "fn main() {\n    let cmds = vec![2, 4];\n    let mut sum = 0;\n    for i in 0..4 {\n        sum += cmds.get(i).unwrap_or(0);\n    }\n    add_vault(sum);\n    step(5);\n}",
+    "title": "12-1. CLI引数ルート分岐とコンベア走破",
+    "topicTag": "cli_args() + ルート分岐",
+    "kurumiIntro": "コマンドライン引数 `cli_args()` の指示 `\"FAST\"` を読み取ってログに出力し、コンベアを乗り継いでスイッチとゴール `(5, 3)` を 8ティック以内で駆け抜けよう！",
+    "goalSummary": "cli_args() から \"FAST\" を出力し、スイッチ＋コンベアで8ティック以内に (5, 3) へ",
+    "bookSectionTitle": "12.1 CLI引数を実行モードに反映する",
+    "bookSummary": "起動時の引数 `args[1]` の内容を見て処理を切り替え、標準出力へ実行モードをログ記録します。",
+    "bookKeyCode": "let args = cli_args();\nif args[1] == \"FAST\" { ... }",
+    "starterCode": "fn main() {\n    let args = cli_args();\n    // args[1] には \"FAST\" が入っているよ！出力しつつルートを走ろう\n    println!(\"MODE: {}\", args[0]);\n    if args[1] == \"FAST\" {\n        step(1);\n        turn_right();\n        step(1);\n        turn_left();\n        step(2);\n    }\n}",
+    "solutionCode": "fn main() {\n    let args = cli_args();\n    println!(\"MODE: {}\", args[1]);\n    if args[1] == \"FAST\" {\n        step(1);\n        turn_right();\n        step(1);\n        turn_left();\n        step(2);\n    }\n}",
     "quickChips": [
       {
-        "label": "cmds.get(i).unwrap_or(0)",
-        "insert": "cmds.get(i).unwrap_or(0)"
+        "label": "args[1]",
+        "insert": "args[1]"
       }
     ],
     "hints": [
-      "for i in 0..4 は 0, 1, 2, 3 を回すけど cmds の要素は 2 個しかないよ！",
-      "cmds[i] を `cmds.get(i).unwrap_or(0)` に変えれば、安全に 2 + 4 + 0 + 0 = 6 が得られるよ！",
-      "sum += cmds.get(i).unwrap_or(0);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 6
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 6,
-      "requireAllSwitches": true
-    },
-    "parTicks": 8
-  },
-  {
-    "displayId": "12-5",
-    "id": "5da5c53a-688d-5247-bb6f-5080b1a23189",
-    "index": 181,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-5. ベクタの要素を変換してL字＋金庫",
-    "topicTag": "Vec 実践パズル",
-    "kurumiIntro": "配列に入った2つの数字を使って、1つめは「横移動」、2つめは「金庫に足して縦移動」してみよう！",
-    "goalSummary": "Vec の要素を使って金庫⚡2＋L字ゴール (3, 3) へ",
-    "bookSectionTitle": "12.1 ベクタの反復とインデックス活用",
-    "bookSummary": "リストの長さと要素を活用することで、定型ルートやパラメータを柔軟に管理できます。",
-    "bookKeyCode": "let legs = vec![3, 2];\nstep(legs[0]); turn_right(); step(legs[1]);",
-    "starterCode": "fn main() {\n    let mut legs = vec![3];\n    // legs に 2 を push して、横 legs[0]、縦 legs[1]、金庫にも legs[1] を入れよう！\n    \n    step(legs[0]);\n    turn_right();\n    add_vault(legs[1]);\n    step(legs[1]);\n}",
-    "solutionCode": "fn main() {\n    let mut legs = vec![3];\n    legs.push(2);\n    step(legs[0]);\n    turn_right();\n    add_vault(legs[1]);\n    step(legs[1]);\n}",
-    "quickChips": [
-      {
-        "label": "legs.push(2);",
-        "insert": "legs.push(2);\n    "
-      }
-    ],
-    "hints": [
-      "legs には今 3 しか入っていないから legs[1] が取れないよ！",
-      "legs.push(2); を2行目に追加しよう！",
-      "let mut legs = vec![3];\nlegs.push(2);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 3
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 2
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 2
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "12-6",
-    "id": "0ef458ae-a34d-580a-a67b-888e8ed83efe",
-    "index": 182,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "puzzle",
-    "title": "12-6. Vec で記録するステップと折り返し移動",
-    "topicTag": "Vec<i32> / 折り返し設計",
-    "kurumiIntro": "U字やS字の折れ曲がったコースを、1つの `Vec<i32>` リストに詰めた歩数と左右のターン規則だけで走破しよう！",
-    "goalSummary": "Vec に4区間の歩数を登録してスイッチを踏み、ゴール (5, 3) へ",
-    "bookSectionTitle": "12.1 Vec による柔軟なルートパラメータ化",
-    "bookSummary": "各直進区間の長さを `Vec` に格納しておけば、同じループ構造で異なるマップも簡単に走らせられます。",
-    "bookKeyCode": "let segs = vec![2, 2, 2, 1];",
-    "starterCode": "fn main() {\n    let mut segs = vec![2, 2];\n    // あと2つ数値を push して「東2→右折→南2→左折→東3」を作ろう！\n    // 注意: (3,3)と(4,3)にコンベアがあるから最後の1歩だけでゴールするかも？\n    step(segs[0]);\n    turn_right();\n    step(segs[1]);\n}",
-    "solutionCode": "fn main() {\n    let mut segs = vec![2, 2];\n    segs.push(2);\n    step(segs[0]);\n    turn_right();\n    step(segs[1]);\n    turn_left();\n    step(segs[2]);\n}",
-    "quickChips": [
-      {
-        "label": "segs.push(2);",
-        "insert": "segs.push(2);\n    "
-      },
-      {
-        "label": "turn_left();\n    step(segs[2]);",
-        "insert": "turn_left();\n    step(segs[2]);"
-      }
-    ],
-    "hints": [
-      "(0,1) から東2で (2,1)スイッチを踏み、右折して南2で (2,3) へ着くよ！",
-      "最後は左折して東へ進むとき、(3,3)に右向きコンベアがあるから 2 歩分（実質3マス進める）で (5,3) のゴールにぴったり届くよ！",
-      "segs.push(2);\n... turn_left();\nstep(segs[2]);"
+      "println! が args[0]（\"kobo\"）を出力しているため目標の \"FAST\" が含まれていないよ！",
+      "args[0] を `args[1]` に変えれば \"FAST\" が出力され、コンベア経由で8ティック以内にクリアできるよ！",
+      "println!(\"MODE: {}\", args[1]);"
     ],
     "worldSetup": {
       "width": 6,
@@ -625,171 +122,10 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 3
       },
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
+      "cliArgs": [
+        "kobo",
+        "FAST"
       ],
-      "gates": [
-        {
-          "x": 4,
-          "y": 3,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "conveyors": [
-        {
-          "x": 3,
-          "y": 3,
-          "dir": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "requireAllSwitches": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "12-7",
-    "id": "2f8e6a17-235e-55d7-b8af-33443c7435b2",
-    "index": 183,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "challenge",
-    "title": "12-7. Vec ログ記録＆最大スピードコンベア",
-    "topicTag": "Vec + コンベア最短タイム",
-    "kurumiIntro": "移動ログを `Vec` に集めつつ、ベルトコンベアの加速を使って7ティック以内にスイッチ＋金庫＋ゴールをすべて決めよう！",
-    "goalSummary": "Vec の移動データで7ティック以内に金庫⚡6＋全スイッチ＋(5, 3) へ",
-    "bookSectionTitle": "12.1 最短手順リストを Vec で組む",
-    "bookSummary": "コンベアによって稼げるマス数を計算し、最小限の `Vec` ステップを組み立てるタイムアタックパズルです。",
-    "bookKeyCode": "let moves = vec![1, 1, 1];",
-    "starterCode": "fn main() {\n    let mut bonuses = Vec::new();\n    bonuses.push(3);\n    bonuses.push(3);\n    let mut total = 0;\n    for b in bonuses { total += b; }\n    add_vault(total);\n    // 7ティック以内に行きたい！コンベア(1,1),(2,2),(3,3),(4,3)を見よう\n    step(2);\n}",
-    "solutionCode": "fn main() {\n    let mut bonuses = Vec::new();\n    bonuses.push(3);\n    bonuses.push(3);\n    let mut total = 0;\n    for b in bonuses { total += b; }\n    add_vault(total);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(2);\n}",
-    "quickChips": [
-      {
-        "label": "step(1);",
-        "insert": "step(1);\n    "
-      },
-      {
-        "label": "step(2);",
-        "insert": "step(2);"
-      },
-      {
-        "label": "turn_right();",
-        "insert": "turn_right();\n    "
-      },
-      {
-        "label": "turn_left();",
-        "insert": "turn_left();\n    "
-      }
-    ],
-    "hints": [
-      "(1,1) の東向きコンベアに乗れば 1 歩でスイッチのある (2,1) に着くよ！",
-      "そこから右折して 1 歩で (2,2) の南向きコンベアに乗り (2,3) へ！",
-      "さらに左折して `step(2);` で (3,3) コンベア→(4,3)→(5,3) へ！合計8ティック以内にクリア！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 3
-      },
       "switches": [
         {
           "x": 2,
@@ -824,137 +160,44 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
           "y": 3,
           "dir": 0
         }
-      ],
-      "vault": {
-        "x": 0,
-        "y": 0,
-        "initial": 0,
-        "target": 6
-      }
+      ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "vaultTarget": 6,
+      "stdoutIncludes": [
+        "FAST"
+      ],
       "requireAllSwitches": true,
       "maxTicks": 8
     },
     "parTicks": 8
   },
   {
-    "displayId": "12-8",
-    "id": "4af280a8-2c53-54a9-bd94-b10ddce67661",
-    "index": 184,
+    "displayId": "12-2",
+    "id": "986e5ff1-ac6c-57dc-90f1-74296736adc1",
+    "index": 266,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-8. String と文字列の連結",
-    "topicTag": "String / push_str",
-    "kurumiIntro": "認証合言葉 `\"RUST_OK\"` を `String` で組み立てて出力しよう！`push_str` で文字列をつなげられるよ。",
-    "goalSummary": "\"RUST_OK\" を出力してゴール (3, 1) に着こう",
-    "bookSectionTitle": "12.2 UTF-8エンコードされた文字列を String で保持する",
-    "bookSummary": "所有権を持つ書き換え可能な文字列が `String` です。`String::from(\"...\")` で作り、`.push_str(\"...\")` で後ろに文字をつなげられます（日本語UTF-8も安全に扱えます）。",
-    "bookKeyCode": "let mut s = String::from(\"RUST\");\ns.push_str(\"_OK\");",
-    "starterCode": "fn main() {\n    let mut msg = String::from(\"RUST\");\n    // \"_OK\" を後ろにつなげて println! しよう\n    msg.push_str(\"...\");\n    println!(\"{}\", msg);\n    step(3);\n}",
-    "solutionCode": "fn main() {\n    let mut msg = String::from(\"RUST\");\n    msg.push_str(\"_OK\");\n    println!(\"{}\", msg);\n    step(3);\n}",
-    "quickChips": [
-      {
-        "label": "msg.push_str(\"_OK\");",
-        "insert": "msg.push_str(\"_OK\");"
-      }
-    ],
-    "hints": [
-      "今は msg.push_str(\"...\"); になっているよ。",
-      "\"...\" を \"_OK\" に書き換えると \"RUST_OK\" が完成するよ！",
-      "msg.push_str(\"_OK\");"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "stdoutIncludes": [
-        "RUST_OK"
-      ]
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "12-9",
-    "id": "a854babb-ef5d-5c32-9762-d2ca6ff15c51",
-    "index": 185,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
     "stageKind": "puzzle",
-    "title": "12-9. String 荷札の文字列組み立てと検証",
-    "topicTag": "String::push_str + コア納品",
-    "kurumiIntro": "チェックポイントを1つ越えるごとに `String` のスタンプ台に荷札を追記して、最終的に `\"CORE_SCANNED_BOOSTED\"` を表示してから納品台へ届けよう！",
-    "goalSummary": "\"CORE_SCANNED_BOOSTED\" を出力し、コア⚡4以上を空間ルール通り納品",
-    "bookSectionTitle": "12.2 String の段階的な追記",
-    "bookSummary": "処理が1ステップ完了するたびに `.push_str()` で状態ラベルを追記していくパターンです。",
-    "bookKeyCode": "log.push_str(\"_SCANNED\");",
-    "starterCode": "fn main() {\n    let mut tag = String::from(\"CORE\");\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tag.push_str(\"_SCANNED\");\n    step(1);\n    boost(&mut c);\n    // ここで \"_BOOSTED\" を push_str し、println! してから(4,1)へ運ぼう！\n    println!(\"{}\", tag);\n    step(1);\n    deliver(c);\n}",
-    "solutionCode": "fn main() {\n    let mut tag = String::from(\"CORE\");\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tag.push_str(\"_SCANNED\");\n    step(1);\n    boost(&mut c);\n    tag.push_str(\"_BOOSTED\");\n    println!(\"{}\", tag);\n    step(1);\n    deliver(c);\n}",
+    "title": "12-2. Config 構造体＋ダイヤル番号の結合",
+    "topicTag": "Config::build + ダイヤル解錠",
+    "kurumiIntro": "CLI引数 `\"5\"` や環境設定から読み取った設定を `Config` 構造体に格納して、ダイヤル解錠と金庫チャージ、出力ログをまとめて決めよう！",
+    "goalSummary": "Config で \"CONFIG_OK\" 出力・ダイヤル(5)解錠・金庫⚡5・(4, 1)へ",
+    "bookSectionTitle": "12.3 設定構造体 Config による情報一元化",
+    "bookSummary": "引数と環境設定の両方を `Config` 構造体にまとめ、`Result<Config, String>` で安全に構築してから実行部へ渡します。",
+    "bookKeyCode": "struct Config { tag: String, dial: i32 }",
+    "starterCode": "struct Config {\n    tag: String,\n    dial: i32,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Result<Config, String> {\n        if args.len() < 2 {\n            return Err(\"引数不足\");\n        }\n        // dial を秘密の番号 5 にしよう！今は 1 だよ\n        Ok(Config { tag: args[1], dial: 1 })\n    }\n}\n\nfn main() {\n    match Config::build(cli_args()) {\n        Ok(cfg) => {\n            println!(\"TAG: {}\", cfg.tag);\n            try_dial(cfg.dial);\n            add_vault(cfg.dial);\n            step(4);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
+    "solutionCode": "struct Config {\n    tag: String,\n    dial: i32,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Result<Config, String> {\n        if args.len() < 2 {\n            return Err(\"引数不足\");\n        }\n        Ok(Config { tag: args[1], dial: 5 })\n    }\n}\n\nfn main() {\n    match Config::build(cli_args()) {\n        Ok(cfg) => {\n            println!(\"TAG: {}\", cfg.tag);\n            try_dial(cfg.dial);\n            add_vault(cfg.dial);\n            step(4);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
     "quickChips": [
       {
-        "label": "tag.push_str(\"_BOOSTED\");",
-        "insert": "tag.push_str(\"_BOOSTED\");\n    "
+        "label": "dial: 5",
+        "insert": "dial: 5"
       }
     ],
     "hints": [
-      "boost(&mut c) の直後に `tag.push_str(\"_BOOSTED\");` が抜けているよ！",
-      "それだけで `\"CORE_SCANNED_BOOSTED\"` が完成して出力されるよ。",
-      "tag.push_str(\"_BOOSTED\");"
+      "args[1] に \"CONFIG_OK\" が入っているから、tag はすでにバッチリ！",
+      "dial: 1 を `dial: 5` に変えるとダイヤル解錠も金庫⚡5も一発でクリアになるよ！",
+      "Ok(Config { tag: args[1], dial: 5 })"
     ],
     "worldSetup": {
       "width": 5,
@@ -1010,320 +253,12 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         "x": 4,
         "y": 1
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "荷札コア"
-        }
+      "cliArgs": [
+        "kobo",
+        "CONFIG_OK"
       ],
-      "scanners": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "chargers": [
-        {
-          "x": 3,
-          "y": 1
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "scanCount": 1,
-      "stdoutIncludes": [
-        "CORE_SCANNED_BOOSTED"
-      ],
-      "requireSpatialCoreRules": true
-    },
-    "parTicks": 10
-  },
-  {
-    "displayId": "12-10",
-    "id": "d6a7bb8f-68d7-5a00-aa96-3acd02299e6a",
-    "index": 186,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-10. + 演算子で文字列を合体しよう",
-    "topicTag": "String の + 連結",
-    "kurumiIntro": "`String::from(\"KOBO_\") + \"GO\"` のように `+` で文字をつなげることもできるよ！つなげた文字の長さ（`.len()`）や合言葉で出発しよう。",
-    "goalSummary": "String を + で結合して \"KOBO_GO\" を出力しゴールへ",
-    "bookSectionTitle": "12.2 + 演算子での文字列結合",
-    "bookSummary": "`let s = String::from(\"A\") + \"B\";` のように `+` で結合すると左辺の所有権を取り込みつつ連結した `String` を作れます。",
-    "bookKeyCode": "let word = String::from(\"KOBO_\") + \"GO\";",
-    "starterCode": "fn main() {\n    let prefix = String::from(\"KOBO_\");\n    // \"GO\" を + で足して \"KOBO_GO\" にしよう！\n    let label = prefix + \"...\";\n    println!(\"{}\", label);\n    step(4);\n}",
-    "solutionCode": "fn main() {\n    let prefix = String::from(\"KOBO_\");\n    let label = prefix + \"GO\";\n    println!(\"{}\", label);\n    step(4);\n}",
-    "quickChips": [
-      {
-        "label": "\"GO\"",
-        "insert": "\"GO\""
-      }
-    ],
-    "hints": [
-      "\"...\" の部分がそのまま出力されてしまっているよ！",
-      "\"...\" を \"GO\" に直して \"KOBO_GO\" を出力しよう！",
-      "let label = prefix + \"GO\";"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "stdoutIncludes": [
-        "KOBO_GO"
-      ]
-    },
-    "parTicks": 5
-  },
-  {
-    "displayId": "12-11",
-    "id": "fd9002e9-f055-5419-9d4e-7df7295beebc",
-    "index": 187,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-11. 文字列の長さと日本語UTF-8の安全さ",
-    "topicTag": "String::new / push_str",
-    "kurumiIntro": "空の `String::new()` に何度も `push_str` を重ねて、合言葉 `\"OPEN_SESAME\"` を作ってからゲートを開けよう！",
-    "goalSummary": "\"OPEN_SESAME\" を組み立てて出力し、ゴール (3, 1) へ",
-    "bookSectionTitle": "12.2 String::new と連続 push_str",
-    "bookSummary": "`String::new()` で空文字列を作り、条件に応じて少しずつ文字を足していくのは実践的な文字列構築パターンです。",
-    "bookKeyCode": "let mut s = String::new();\ns.push_str(\"OPEN\");\ns.push_str(\"_SESAME\");",
-    "starterCode": "fn main() {\n    let mut key = String::new();\n    key.push_str(\"OPEN\");\n    // \"_SESAME\" を後ろに足して println! しよう\n    \n    println!(\"{}\", key);\n    step(3);\n}",
-    "solutionCode": "fn main() {\n    let mut key = String::new();\n    key.push_str(\"OPEN\");\n    key.push_str(\"_SESAME\");\n    println!(\"{}\", key);\n    step(3);\n}",
-    "quickChips": [
-      {
-        "label": "key.push_str(\"_SESAME\");",
-        "insert": "key.push_str(\"_SESAME\");\n    "
-      }
-    ],
-    "hints": [
-      "key には今 \"OPEN\" しか入っていないよ。",
-      "key.push_str(\"_SESAME\"); を追加しよう！",
-      "key.push_str(\"OPEN\");\nkey.push_str(\"_SESAME\");"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "stdoutIncludes": [
-        "OPEN_SESAME"
-      ]
-    },
-    "parTicks": 4
-  },
-  {
-    "displayId": "12-12",
-    "id": "e7b903f4-ca79-5791-8042-61ec29eb9a3b",
-    "index": 188,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "puzzle",
-    "title": "12-12. 文字列の長さ .len() で歩数決定",
-    "topicTag": "String::len() 活用",
-    "kurumiIntro": "メッセージの文字数（`.len()`）がそのまま「進む歩数」になる暗号指令だよ！半角英字で作った合言葉の文字数を計算して、スイッチとゲートを抜けよう！",
-    "goalSummary": "String の文字数 5 を使ってスイッチ経由でゴール (5, 1) へ",
-    "bookSectionTitle": "12.2 .len() による長さ取得",
-    "bookSummary": "ASCII文字列なら `s.len()` で文字数がそのまま数値として取得できるため、設定値やチェックに活用できます。",
-    "bookKeyCode": "let dist = code.len();",
-    "starterCode": "fn main() {\n    let mut code = String::from(\"KOBO\");\n    // ゴールは 5 歩先！あと 1 文字 push_str して長さ 5 の合言葉にしよう（例: \"!\"）\n    let dist = code.len();\n    add_vault(dist);\n    step(dist);\n}",
-    "solutionCode": "fn main() {\n    let mut code = String::from(\"KOBO\");\n    code.push_str(\"!\");\n    let dist = code.len();\n    add_vault(dist);\n    step(dist);\n}",
-    "quickChips": [
-      {
-        "label": "code.push_str(\"!\");",
-        "insert": "code.push_str(\"!\");\n    "
-      }
-    ],
-    "hints": [
-      "\"KOBO\" は 4 文字だから、1文字足せば 5 文字になるよ！",
-      "たとえば `code.push_str(\"!\");` を追加すると dist = 5 になって金庫⚡5と (5,1) のゴール両方がクリアになるよ！",
-      "code.push_str(\"!\");"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
+      "dial": {
+        "secret": 5
       },
       "switches": [
         {
@@ -1352,40 +287,44 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
+      "dialSolved": true,
       "vaultTarget": 5,
+      "stdoutIncludes": [
+        "CONFIG_OK"
+      ],
       "requireAllSwitches": true
     },
     "parTicks": 8
   },
   {
-    "displayId": "12-13",
-    "id": "1eb1e04b-a566-559e-b5bc-1a3bac25a608",
-    "index": 189,
+    "displayId": "12-3",
+    "id": "cf512ac5-9221-505e-870c-1d52ec940528",
+    "index": 267,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-13. 文字列ラベル比較でコア納品ルート分岐",
-    "topicTag": "String 比較実践",
-    "kurumiIntro": "荷札の文字 `tag` が `\"DELIVER\"` ならコアを運んでL字ゴールへ！合言葉もログに出してから届けよう。",
-    "goalSummary": "String を組み立てて \"DELIVER_OK\" を出力しコア納品へ",
-    "bookSectionTitle": "12.2 文字列の比較と利用",
-    "bookSummary": "`String` 同士を `==` で安全に比較したり、フォーマットして出力したりできます。",
-    "bookKeyCode": "if tag == \"DELIVER\" { ... }",
-    "starterCode": "fn main() {\n    let mut tag = String::from(\"DELIVER\");\n    if tag == \"DELIVER\" {\n        let core = grab_core();\n        tag.push_str(\"_OK\");\n        println!(\"{}\", tag);\n        step(3);\n        turn_right();\n        step(2);\n        // コアを deliver(core) しよう！\n        \n    }\n}",
-    "solutionCode": "fn main() {\n    let mut tag = String::from(\"DELIVER\");\n    if tag == \"DELIVER\" {\n        let core = grab_core();\n        tag.push_str(\"_OK\");\n        println!(\"{}\", tag);\n        step(3);\n        turn_right();\n        step(2);\n        deliver(core);\n    }\n}",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-3. Config::build のエラーチェック",
+    "topicTag": "Result を返す build()",
+    "kurumiIntro": "引数が足りないときはパニックではなく `Err(\"引数不足\")` を返すようにしよう！安全な CLI の第一歩だよ。",
+    "goalSummary": "Config::build の Result を扱って \"OK_CLI\" を出力しゴールへ",
+    "bookSectionTitle": "12.3 エラー処理の改善 — Config::build -> Result",
+    "bookSummary": "引数チェックを `Result<Config, String>` にすることで、呼び出し元が優雅にエラーメッセージを出して終了できます。",
+    "bookKeyCode": "if args.len() < 2 { return Err(\"引数不足\"); }",
+    "starterCode": "struct Config {\n    cmd: String,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Result<Config, String> {\n        if args.len() < 2 {\n            return Err(\"引数が足りません\");\n        }\n        Ok(Config { cmd: args[1] })\n    }\n}\n\nfn main() {\n    match Config::build(cli_args()) {\n        Ok(c) => {\n            // c.cmd (\"OK_CLI\") を println! で出力して 3歩進もう！\n            step(3);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
+    "solutionCode": "struct Config {\n    cmd: String,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Result<Config, String> {\n        if args.len() < 2 {\n            return Err(\"引数が足りません\");\n        }\n        Ok(Config { cmd: args[1] })\n    }\n}\n\nfn main() {\n    match Config::build(cli_args()) {\n        Ok(c) => {\n            println!(\"CMD: {}\", c.cmd);\n            step(3);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
     "quickChips": [
       {
-        "label": "deliver(core);",
-        "insert": "deliver(core);"
+        "label": "println!(\"CMD: {}\", c.cmd);",
+        "insert": "println!(\"CMD: {}\", c.cmd);\n            "
       }
     ],
     "hints": [
-      "移動と文字列出力はバッチリできているよ！あとは掴んだ core を納品するだけ。",
-      "step(2); のあとに deliver(core); を書き足そう！",
-      "step(2);\ndeliver(core);"
+      "cli_args() の 1番目には \"OK_CLI\" が入っているよ！",
+      "Ok(c) の中で `println!(\"CMD: {}\", c.cmd);` を出力してから step(3); しよう。",
+      "Ok(c) => {\n    println!(\"CMD: {}\", c.cmd);\n    step(3);\n},"
     ],
     "worldSetup": {
       "width": 5,
-      "height": 5,
+      "height": 3,
       "walls": [
         {
           "x": 0,
@@ -1420,16 +359,12 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
           "y": 2
         },
         {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
+          "x": 3,
           "y": 2
         },
         {
           "x": 4,
-          "y": 3
+          "y": 2
         }
       ],
       "botStart": {
@@ -1439,746 +374,46 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
       },
       "goal": {
         "x": 3,
-        "y": 3
+        "y": 1
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 0,
-          "y": 1,
-          "power": 2,
-          "label": "荷札コア"
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 3,
-          "y": 3
-        }
+      "cliArgs": [
+        "kobo",
+        "OK_CLI"
       ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "deliverCores": 1,
       "stdoutIncludes": [
-        "DELIVER_OK"
+        "OK_CLI"
       ]
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "12-14",
-    "id": "77e7ce27-a4fd-5c15-99d0-bb64128a16b5",
-    "index": 190,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "puzzle",
-    "title": "12-14. Vec 経由で2方向コマンド分岐",
-    "topicTag": "Vec<String> コマンド解釈",
-    "kurumiIntro": "コマンド名を `Vec<String>` に並べて順番に解釈しよう！`\"R\"` なら右折、`\"F\"` ならスパーク待ち付きの安全前進、`\"S\"` なら2歩進むルールにして迷路を抜けよう！",
-    "goalSummary": "Vec 文字列コマンドを実行して全スイッチ＋ゴール (4, 3) へ",
-    "bookSectionTitle": "12.1 & 12.2 文字列配列をそのままスクリプトに",
-    "bookSummary": "文字列のリストをループして `if cmd == \"...\"` で振り分けると、シンプルなスクリプトインタプリタが作れます。",
-    "bookKeyCode": "for c in cmds { if c == \"F\" { ... } }",
-    "starterCode": "fn main() {\n    let cmds = vec![\n        String::from(\"F\"),\n        String::from(\"F\"),\n        // ここから迷路に合わせて追加しよう！\n    ];\n    for c in cmds {\n        if c == \"F\" {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        } else if c == \"R\" {\n            turn_right();\n        } else if c == \"L\" {\n            turn_left();\n        }\n    }\n}",
-    "solutionCode": "fn main() {\n    let cmds = vec![\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"R\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n    ];\n    for c in cmds {\n        if c == \"F\" {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        } else if c == \"R\" {\n            turn_right();\n        } else if c == \"L\" {\n            turn_left();\n        }\n    }\n}",
-    "quickChips": [
-      {
-        "label": "String::from(\"F\"),",
-        "insert": "String::from(\"F\"),\n        "
-      },
-      {
-        "label": "String::from(\"R\"),",
-        "insert": "String::from(\"R\"),\n        "
-      }
-    ],
-    "hints": [
-      "上の廊下は (0,1) から東へ4歩で (4,1) の角まで届くよ！途中 (1,1) にスイッチ、(2,1) にスパーク、(3,1) にスイッチ連動ゲートがあるけど、\"F\" が自動で待って進めるよ！",
-      "角 (4,1) で `\"R\"` で右折して、`\"F\"` をあと2回実行すれば (4,3) へ着くよ！",
-      "cmds を F × 4 → R → F × 2 の順に並べよう！"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 3
-      },
-      "switches": [
-        {
-          "x": 1,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 1,
-            "y": 1
-          }
-        }
-      ],
-      "sparks": [
-        {
-          "id": "sp1",
-          "path": [
-            {
-              "x": 2,
-              "y": 0
-            },
-            {
-              "x": 2,
-              "y": 1
-            },
-            {
-              "x": 2,
-              "y": 2
-            },
-            {
-              "x": 2,
-              "y": 1
-            }
-          ],
-          "initialIndex": 0
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "requireAllSwitches": true
-    },
-    "parTicks": 9
-  },
-  {
-    "displayId": "12-15",
-    "id": "7af4a668-eb8f-519c-b356-0338ccbea270",
-    "index": 191,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-15. HashMap で鍵と値を照合",
-    "topicTag": "HashMap<K, V>",
-    "kurumiIntro": "道具箱のラベルから個数を取り出そう！`HashMap` に `\"crab\"` → `3` を登録して、取り出した数だけ進んでみてね！",
-    "goalSummary": "HashMap から取り出した数 3 でゴール (3, 1) へ",
-    "bookSectionTitle": "12.3 ハッシュマップにキーと値を保持する",
-    "bookSummary": "`HashMap` はキーと値をペアで保存する辞書です。`.insert(k, v)` で登録し、`.get(&k)` で `Option` として値を取り出します。",
-    "bookKeyCode": "let mut map = HashMap::new();\nmap.insert(\"kobo\", 3);",
-    "starterCode": "fn main() {\n    let mut map = HashMap::new();\n    map.insert(\"crab\", 1);\n    // \"crab\" の値を 3 に登録しなおしてみよう！\n    \n    if let Some(n) = map.get(\"crab\") {\n        step(n);\n    }\n}",
-    "solutionCode": "fn main() {\n    let mut map = HashMap::new();\n    map.insert(\"crab\", 3);\n    if let Some(n) = map.get(\"crab\") {\n        step(n);\n    }\n}",
-    "quickChips": [
-      {
-        "label": "map.insert(\"crab\", 3);",
-        "insert": "map.insert(\"crab\", 3);\n    "
-      }
-    ],
-    "hints": [
-      "同じキーでもう一度 insert すると値が上書きされるよ！",
-      "map.insert(\"crab\", 3); に書き換えるか追記しよう。",
-      "map.insert(\"crab\", 3);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true
-    },
-    "parTicks": 3
-  },
-  {
-    "displayId": "12-16",
-    "id": "7a589476-6bbc-5804-bf17-4e28397fdf75",
-    "index": 192,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "puzzle",
-    "title": "12-16. HashMap 暗号テーブルとダイヤル解錠",
-    "topicTag": "HashMap + ダイヤル",
-    "kurumiIntro": "扉の合言葉テーブルが `HashMap` に入っているよ！`\"alpha\"` や `\"beta\"` から取り出した値を足し合わせて、秘密のダイヤル番号を一発で当てよう！",
-    "goalSummary": "HashMap から取り出した合計 6 でダイヤルを解錠しゴール (4, 1) へ",
-    "bookSectionTitle": "12.3 HashMap を設定テーブルとして使う",
-    "bookSummary": "名前をキーにして値を引く辞書は、複数パーツのパスワードや係数を管理するときにとても便利です。",
-    "bookKeyCode": "let code = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);",
-    "starterCode": "fn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"alpha\", 2);\n    dict.insert(\"beta\", 4);\n    dict.insert(\"gamma\", 9);\n    // \"alpha\" と \"beta\" を取り出して足そう（目標のダイヤルは 6 だよ！）\n    let secret = dict.get(\"alpha\").unwrap_or(0);\n    try_dial(secret);\n    step(4);\n}",
-    "solutionCode": "fn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"alpha\", 2);\n    dict.insert(\"beta\", 4);\n    dict.insert(\"gamma\", 9);\n    let secret = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);\n    try_dial(secret);\n    step(4);\n}",
-    "quickChips": [
-      {
-        "label": "+ dict.get(\"beta\").unwrap_or(0)",
-        "insert": " + dict.get(\"beta\").unwrap_or(0)"
-      }
-    ],
-    "hints": [
-      "dict の `\"alpha\"` が 2、`\"beta\"` が 4 だよ。足すと 6 になるね！",
-      "secret の計算式に `+ dict.get(\"beta\").unwrap_or(0)` を足そう。",
-      "let secret = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "dial": {
-        "secret": 6
-      },
-      "switches": [
-        {
-          "x": 1,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 1,
-            "y": 1
-          }
-        }
-      ]
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "dialSolved": true,
-      "requireAllSwitches": true
-    },
-    "parTicks": 7
-  },
-  {
-    "displayId": "12-17",
-    "id": "a2fc03f5-86ff-517d-8bf9-a0250c01b161",
-    "index": 193,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-17. 複数のキーを辞書から引いて合算",
-    "topicTag": "HashMap 複数キー参照",
-    "kurumiIntro": "パンの注文リストを `HashMap` に保存したよ！`\"milk\"` と `\"honey\"` の注文数をそれぞれ引き出して合計し、金庫へチャージしよう。",
-    "goalSummary": "\"milk\" と \"honey\" を合計して金庫⚡4＋ゴール (4, 1) へ",
-    "bookSectionTitle": "12.3 ハッシュマップの値へのアクセス",
-    "bookSummary": "複数のキーに対して `.get(key)` を使い、見つかった値同士を組み合わせて計算できます。",
-    "bookKeyCode": "let a = map.get(\"milk\").unwrap_or(0);\nlet b = map.get(\"honey\").unwrap_or(0);",
-    "starterCode": "fn main() {\n    let mut order = HashMap::new();\n    order.insert(\"milk\", 1);\n    order.insert(\"honey\", 3);\n    let a = order.get(\"milk\").unwrap_or(0);\n    // \"honey\" も get して a + b を使おう！\n    let b = order.get(\"missing\").unwrap_or(0);\n    add_vault(a + b);\n    step(a + b);\n}",
-    "solutionCode": "fn main() {\n    let mut order = HashMap::new();\n    order.insert(\"milk\", 1);\n    order.insert(\"honey\", 3);\n    let a = order.get(\"milk\").unwrap_or(0);\n    let b = order.get(\"honey\").unwrap_or(0);\n    add_vault(a + b);\n    step(a + b);\n}",
-    "quickChips": [
-      {
-        "label": "order.get(\"honey\")",
-        "insert": "order.get(\"honey\")"
-      }
-    ],
-    "hints": [
-      "b が `order.get(\"missing\")` になっているから 0 になっちゃっているよ！",
-      "`order.get(\"honey\")` に直せば 1 + 3 = 4 になるよ！",
-      "let b = order.get(\"honey\").unwrap_or(0);"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 4,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 4
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 4
-    },
-    "parTicks": 5
-  },
-  {
-    "displayId": "12-18",
-    "id": "6090b7ba-d154-55d5-92ab-a275029fda2c",
-    "index": 194,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-18. 古い値を元にした更新パターン",
-    "topicTag": "HashMap の累積更新",
-    "kurumiIntro": "すでに辞書に入っている値を取り出して、さらに `+ 2` してから上書き保存しよう！お店の在庫カウンターと同じ仕組みだね。",
-    "goalSummary": "在庫を 1 → 3 に更新し、金庫⚡3＋ゴール (3, 1) へ",
-    "bookSectionTitle": "12.3 古い値に基づいて値を更新する",
-    "bookSummary": "辞書にある値を読み出し、加算した結果を同じキーに `.insert` し直すことでカウントアップができます。",
-    "bookKeyCode": "let cur = map.get(\"gear\").unwrap_or(0);\nmap.insert(\"gear\", cur + 2);",
-    "starterCode": "fn main() {\n    let mut stock = HashMap::new();\n    stock.insert(\"gear\", 1);\n    let cur = stock.get(\"gear\").unwrap_or(0);\n    // stock に cur + 2 を再登録しよう！\n    \n    let final_val = stock.get(\"gear\").unwrap_or(0);\n    add_vault(final_val);\n    step(final_val);\n}",
-    "solutionCode": "fn main() {\n    let mut stock = HashMap::new();\n    stock.insert(\"gear\", 1);\n    let cur = stock.get(\"gear\").unwrap_or(0);\n    stock.insert(\"gear\", cur + 2);\n    let final_val = stock.get(\"gear\").unwrap_or(0);\n    add_vault(final_val);\n    step(final_val);\n}",
-    "quickChips": [
-      {
-        "label": "stock.insert(\"gear\", cur + 2);",
-        "insert": "stock.insert(\"gear\", cur + 2);\n    "
-      }
-    ],
-    "hints": [
-      "cur には元の在庫 1 が取り出されているよ！",
-      "stock.insert(\"gear\", cur + 2); を書けば在庫が 3 になるね。",
-      "stock.insert(\"gear\", cur + 2);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 1
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3
     },
     "parTicks": 4
   },
   {
-    "displayId": "12-19",
-    "id": "1af1c991-6dca-5b76-a75d-9cf99273c780",
-    "index": 195,
+    "displayId": "12-4",
+    "id": "06f4c9fa-5322-5af9-81f8-2f52695e366d",
+    "index": 268,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "puzzle",
-    "title": "12-19. HashMap 在庫集計とコンベア出荷",
-    "topicTag": "HashMap 更新ループ",
-    "kurumiIntro": "出荷タグの配列から種類ごとに個数を数えて `HashMap` に積み上げよう！合計のエネルギーを金庫に入れたら、コンベアを使って最短でゴールへ向かおう。",
-    "goalSummary": "Vec のタグを HashMap で集計し金庫⚡5＋6ティック以内にゴールへ",
-    "bookSectionTitle": "12.3 リストの要素を HashMap でカウントする",
-    "bookSummary": "配列の要素を1つずつ確認しながら `map.insert(k, cur + 1)` のように回数を積み上げて集計します。",
-    "bookKeyCode": "let c = counts.get(k).unwrap_or(0); counts.insert(k, c + 1);",
-    "starterCode": "fn main() {\n    let tags = vec![\"gear\", \"spring\", \"gear\", \"gear\", \"bolt\"];\n    let mut counts = HashMap::new();\n    for t in tags {\n        let prev = counts.get(t).unwrap_or(0);\n        counts.insert(t, prev + 1);\n    }\n    // \"gear\" と \"spring\" と \"bolt\" の数を足して金庫⚡5を入れよう！今は gear だけだよ\n    let total = counts.get(\"gear\").unwrap_or(0);\n    add_vault(total);\n    step(2);\n}",
-    "solutionCode": "fn main() {\n    let tags = vec![\"gear\", \"spring\", \"gear\", \"gear\", \"bolt\"];\n    let mut counts = HashMap::new();\n    for t in tags {\n        let prev = counts.get(t).unwrap_or(0);\n        counts.insert(t, prev + 1);\n    }\n    let total = counts.get(\"gear\").unwrap_or(0)\n        + counts.get(\"spring\").unwrap_or(0)\n        + counts.get(\"bolt\").unwrap_or(0);\n    add_vault(total);\n    step(3);\n}",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-4. テスト付き検索モジュール lib.rs 風分離",
+    "topicTag": "lib風検索ロジック + #[test]",
+    "kurumiIntro": "ミニgrepプロジェクトの要！検索ロジックを `mod minigrep` の `search` 関数に切り出して、`#[test]` で正しさを確かめてから実行しよう。",
+    "goalSummary": "#[test] を合格させ、検索一致数で金庫⚡2＋ゴールへ",
+    "bookSectionTitle": "12.4 テスト駆動開発でライブラリの機能を開発する",
+    "bookSummary": "コマンドの処理本体をライブラリモジュールへ分離すると、単体テストをとても書きやすくなります。",
+    "bookKeyCode": "mod minigrep {\n    pub fn count_match(target: i32, list: Vec<i32>) -> i32 { ... }\n}",
+    "starterCode": "mod minigrep {\n    pub fn count_ge(limit: i32, list: Vec<i32>) -> i32 {\n        let mut n = 0;\n        for x in list {\n            if x >= limit {\n                n += 1;\n            }\n        }\n        n\n    }\n}\n\n#[test]\nfn test_search() {\n    // [5, 10, 20] のうち 10以上は 2個！期待値を 2 に直そう\n    assert_eq!(minigrep::count_ge(10, vec![5, 10, 20]), 0);\n}\n\nfn main() {\n    let found = minigrep::count_ge(10, conveyor_batch());\n    add_vault(found);\n    println!(\"MATCH: {}\", found);\n    step(3);\n}",
+    "solutionCode": "mod minigrep {\n    pub fn count_ge(limit: i32, list: Vec<i32>) -> i32 {\n        let mut n = 0;\n        for x in list {\n            if x >= limit {\n                n += 1;\n            }\n        }\n        n\n    }\n}\n\n#[test]\nfn test_search() {\n    assert_eq!(minigrep::count_ge(10, vec![5, 10, 20]), 2);\n}\n\nfn main() {\n    let found = minigrep::count_ge(10, conveyor_batch());\n    add_vault(found);\n    println!(\"MATCH: {}\", found);\n    step(3);\n}",
     "quickChips": [
       {
-        "label": "+ counts.get(\"spring\").unwrap_or(0) + counts.get(\"bolt\").unwrap_or(0)",
-        "insert": " + counts.get(\"spring\").unwrap_or(0) + counts.get(\"bolt\").unwrap_or(0)"
-      },
-      {
-        "label": "step(3);",
-        "insert": "step(3);"
+        "label": "2);",
+        "insert": "2);"
       }
     ],
     "hints": [
-      "gear=3, spring=1, bolt=1 なので、3つを全部足せば合計⚡5になるよ！",
-      "(1,1) と (3,1) が右向きコンベアだから、step(3) で (5,1) へ着けるよ！",
-      "total に spring と bolt も足して、`step(3);` で進もう。"
-    ],
-    "worldSetup": {
-      "width": 6,
-      "height": 3,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 2
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 5,
-        "y": 1
-      },
-      "conveyors": [
-        {
-          "x": 1,
-          "y": 1,
-          "dir": 0
-        },
-        {
-          "x": 3,
-          "y": 1,
-          "dir": 0
-        }
-      ],
-      "vault": {
-        "x": 1,
-        "y": 0,
-        "initial": 0,
-        "target": 5
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 5,
-      "maxTicks": 6
-    },
-    "parTicks": 6
-  },
-  {
-    "displayId": "12-20",
-    "id": "80000176-efda-5bc0-8fe2-07fb165a0beb",
-    "index": 196,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "puzzle",
-    "title": "12-20. Vec + String + HashMap コア納品",
-    "topicTag": "コレクション3種連携",
-    "kurumiIntro": "部品ごとのパワー表 `HashMap` から目標パワーを計算して金庫に入れ、コアの納品と合言葉ログも同時にクリアしよう！",
-    "goalSummary": "コレクション3種を使い \"ORDER_OK\"・金庫⚡5・コア⚡4+納品を達成",
-    "bookSectionTitle": "12.1〜12.3 3大コレクションの実践連携",
-    "bookSummary": "リスト（`Vec`）、ラベル（`String`）、設定表（`HashMap`）を組み合わせることで複雑な業務処理が組めます。",
-    "bookKeyCode": "let p = menu.get(k).unwrap_or(0);",
-    "starterCode": "fn main() {\n    let mut menu = HashMap::new();\n    menu.insert(\"bread\", 2);\n    menu.insert(\"coffee\", 3);\n\n    let orders = vec![\"bread\", \"coffee\"];\n    let mut sum = 0;\n    for o in orders {\n        sum += menu.get(o).unwrap_or(0);\n    }\n    add_vault(sum);\n\n    let mut label = String::from(\"ORDER\");\n    // label に \"_OK\" を付けて println! しよう！\n    println!(\"{}\", label);\n\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    boost(&mut c);\n    step(2);\n    deliver(c);\n}",
-    "solutionCode": "fn main() {\n    let mut menu = HashMap::new();\n    menu.insert(\"bread\", 2);\n    menu.insert(\"coffee\", 3);\n\n    let orders = vec![\"bread\", \"coffee\"];\n    let mut sum = 0;\n    for o in orders {\n        sum += menu.get(o).unwrap_or(0);\n    }\n    add_vault(sum);\n\n    let mut label = String::from(\"ORDER\");\n    label.push_str(\"_OK\");\n    println!(\"{}\", label);\n\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    boost(&mut c);\n    step(2);\n    deliver(c);\n}",
-    "quickChips": [
-      {
-        "label": "label.push_str(\"_OK\");",
-        "insert": "label.push_str(\"_OK\");\n    "
-      }
-    ],
-    "hints": [
-      "menu と orders で金庫⚡5が入るよ。コア操作も完璧！",
-      "足りないのは `label.push_str(\"_OK\");` の 1 行だけだよ。",
-      "label.push_str(\"_OK\");"
+      "test_search の期待値が 0 になっているからテストが失敗しているよ！",
+      "10 と 20 の 2個が条件に合うので、期待値を `2` に直そう。",
+      "assert_eq!(minigrep::count_ge(10, vec![5, 10, 20]), 2);"
     ],
     "worldSetup": {
       "width": 5,
@@ -2231,94 +466,180 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         "dir": 0
       },
       "goal": {
-        "x": 4,
+        "x": 3,
         "y": 1
       },
-      "cores": [
-        {
-          "id": "c1",
-          "x": 1,
-          "y": 1,
-          "power": 2,
-          "label": "注文コア"
-        }
-      ],
-      "chargers": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "switches": [
-        {
-          "x": 2,
-          "y": 1
-        }
-      ],
-      "gates": [
-        {
-          "x": 3,
-          "y": 1,
-          "openTicks": 1,
-          "closedTicks": 1,
-          "linkedSwitch": {
-            "x": 2,
-            "y": 1
-          }
-        }
-      ],
-      "deliveries": [
-        {
-          "x": 4,
-          "y": 1
-        }
+      "conveyorItems": [
+        5,
+        10,
+        20
       ],
       "vault": {
-        "x": 0,
+        "x": 2,
         "y": 0,
         "initial": 0,
-        "target": 5
+        "target": 2
       }
     },
     "victoryCondition": {
       "reachGoal": true,
-      "deliverCores": 1,
-      "minCorePower": 4,
-      "vaultTarget": 5,
+      "vaultTarget": 2,
+      "testsRequired": 1,
       "stdoutIncludes": [
-        "ORDER_OK"
-      ],
-      "requireAllSwitches": true,
-      "requireSpatialCoreRules": true
+        "MATCH: 2"
+      ]
     },
-    "parTicks": 10
+    "parTicks": 5
   },
   {
-    "displayId": "12-21",
-    "id": "57500e74-d953-58fd-9776-75f205d6ebd6",
-    "index": 197,
+    "displayId": "12-5",
+    "id": "b87d47fc-af3a-5703-8836-a76d69a54774",
+    "index": 269,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
     "stageKind": "puzzle",
-    "title": "12-21. HashMap でスイッチ座標とゲート連動計画",
-    "topicTag": "HashMap ルート計画",
-    "kurumiIntro": "区間ごとの方向転換とステップ数を `HashMap` 辞書から引いて、スイッチを順に2つ踏んでU字型の地下通路を攻略しよう！",
-    "goalSummary": "辞書からルートを引いて全スイッチを踏み (0, 3) へ到達しよう",
-    "bookSectionTitle": "12.3 HashMap から段階的パラメータを引き出す",
-    "bookSummary": "文字列キー `\"leg1\"`, `\"leg2\"`, `\"leg3\"` に距離を登録して取り出すと、各フェーズの意味が明確になります。",
-    "bookKeyCode": "step(map.get(\"leg1\").unwrap_or(0));",
-    "starterCode": "fn main() {\n    let mut route = HashMap::new();\n    route.insert(\"east\", 4);\n    route.insert(\"south\", 2);\n    // \"west\" キーに 4 を登録して、最後の戻り区間に使おう！\n    step(route.get(\"east\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"south\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"west\").unwrap_or(0));\n}",
-    "solutionCode": "fn main() {\n    let mut route = HashMap::new();\n    route.insert(\"east\", 4);\n    route.insert(\"south\", 2);\n    route.insert(\"west\", 4);\n    step(route.get(\"east\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"south\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"west\").unwrap_or(0));\n}",
+    "title": "12-5. CLI設定から自律迷路ソルバー起動",
+    "topicTag": "CLI + 左手法迷路",
+    "kurumiIntro": "CLI引数 `args[1]` が `\"MAZE\"` であることを確かめてログを出したら、左手法の自律ループで迷路を抜けよう！",
+    "goalSummary": "CLI 起動ログ \"MAZE\" とテスト合格で迷路の (3, 3) へ",
+    "bookSectionTitle": "12.4 CLIランチャーからライブラリロジックを呼ぶ",
+    "bookSummary": "CLI層で引数と環境変数を解釈し、検証済みの設定でモジュールの自律制御ロジックを起動する綺麗なアーキテクチャです。",
+    "bookKeyCode": "if args[1] == \"MAZE\" { cli_lib::solve(); }",
+    "starterCode": "mod cli_lib {\n    pub fn check_mode(s: String) -> bool {\n        s == \"MAZE\"\n    }\n}\n\n#[test]\nfn t_mode() {\n    assert!(cli_lib::check_mode(\"MAZE\"));\n}\n\nfn main() {\n    let args = cli_args();\n    if cli_lib::check_mode(args[1]) {\n        println!(\"START: {}\", args[1]);\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                // 壁で止まったら turn_right(); しよう！今は動かないよ\n                wait_tick(1);\n            }\n        }\n    }\n}",
+    "solutionCode": "mod cli_lib {\n    pub fn check_mode(s: String) -> bool {\n        s == \"MAZE\"\n    }\n}\n\n#[test]\nfn t_mode() {\n    assert!(cli_lib::check_mode(\"MAZE\"));\n}\n\nfn main() {\n    let args = cli_args();\n    if cli_lib::check_mode(args[1]) {\n        println!(\"START: {}\", args[1]);\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}",
     "quickChips": [
       {
-        "label": "route.insert(\"west\", 4);",
-        "insert": "route.insert(\"west\", 4);\n    "
+        "label": "turn_right();",
+        "insert": "turn_right();"
       }
     ],
     "hints": [
-      "上の廊下を東に 4 歩で (4,1) スイッチを踏み、右折して南へ 2 歩でゲート (4,2) を抜けるよ！",
-      "最後は右折して西へ 4 歩戻るとスイッチ (2,3) を踏みながら (0,3) のゴールへ着くよ！",
-      "route.insert(\"west\", 4);"
+      "左手法の最後の `else` が `wait_tick(1);` になっているよ！",
+      "`turn_right();` に直せば迷路を自動で抜けてゴール(3,3)に着くよ！",
+      "else {\n    turn_right();\n}"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 3
+      },
+      "cliArgs": [
+        "kobo",
+        "MAZE"
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "testsRequired": 1,
+      "stdoutIncludes": [
+        "MAZE"
+      ]
+    },
+    "parTicks": 8
+  },
+  {
+    "displayId": "12-6",
+    "id": "c831c1c1-a891-53bd-aff3-1a64ff93dec1",
+    "index": 270,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "stageKind": "challenge",
+    "title": "12-6. minigrep フィルタ＋二重スイッチU字ルート",
+    "topicTag": "minigrep + 二重スイッチ",
+    "kurumiIntro": "コンベア部品から指定条件を満たす数を集計するライブラリ関数を完成させ、2つのテストに合格してU字型のスイッチ2箇所を踏み抜こう！",
+    "goalSummary": "2テスト合格＋\"BATCH_3\"＋金庫⚡3＋全スイッチ＋(0, 3)へ",
+    "bookSectionTitle": "12.4 TDD でフィルタ機能とルート実行を分離",
+    "bookSummary": "集計・フィルタ処理のテストを済ませた上で、U字の複合スイッチ経路を走り切ります。",
+    "bookKeyCode": "mod filter { pub fn count_between(a: i32, b: i32, list: Vec<i32>) -> i32 }",
+    "starterCode": "mod filter {\n    pub fn count_range(min_v: i32, max_v: i32, list: Vec<i32>) -> i32 {\n        let mut n = 0;\n        for x in list {\n            // min_v 以上 かつ max_v 以下（x >= min_v && x <= max_v）を数えよう！\n            if x >= min_v { n += 1; }\n        }\n        n\n    }\n}\n\n#[test]\nfn t_in() { assert_eq!(filter::count_range(5, 15, vec![3, 5, 12, 20]), 2); }\n\n#[test]\nfn t_all() { assert_eq!(filter::count_range(1, 10, vec![2, 5, 9]), 3); }\n\nfn main() {\n    let c = filter::count_range(5, 15, conveyor_batch());\n    add_vault(c);\n    println!(\"BATCH_{}\", c);\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
+    "solutionCode": "mod filter {\n    pub fn count_range(min_v: i32, max_v: i32, list: Vec<i32>) -> i32 {\n        let mut n = 0;\n        for x in list {\n            if x >= min_v && x <= max_v { n += 1; }\n        }\n        n\n    }\n}\n\n#[test]\nfn t_in() { assert_eq!(filter::count_range(5, 15, vec![3, 5, 12, 20]), 2); }\n\n#[test]\nfn t_all() { assert_eq!(filter::count_range(1, 10, vec![2, 5, 9]), 3); }\n\nfn main() {\n    let c = filter::count_range(5, 15, conveyor_batch());\n    add_vault(c);\n    println!(\"BATCH_{}\", c);\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "&& x <= max_v",
+        "insert": " && x <= max_v"
+      }
+    ],
+    "hints": [
+      "今の条件だと上限 `max_v` をチェックしていないため 20 まで数えてしまい t_in が落ちているよ！",
+      "`if x >= min_v && x <= max_v` に直せば 2つのテストも通り、\"BATCH_3\" と金庫⚡3も一気に達成！",
+      "if x >= min_v && x <= max_v { n += 1; }"
     ],
     "worldSetup": {
       "width": 6,
@@ -2410,6 +731,13 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         "x": 0,
         "y": 3
       },
+      "conveyorItems": [
+        2,
+        6,
+        10,
+        15,
+        30
+      ],
       "switches": [
         {
           "x": 4,
@@ -2431,48 +759,478 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
             "y": 1
           }
         }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3,
+      "testsRequired": 2,
+      "stdoutIncludes": [
+        "BATCH_3"
+      ],
+      "requireAllSwitches": true
+    },
+    "parTicks": 15
+  },
+  {
+    "displayId": "12-7",
+    "id": "cdcc5256-5359-5cce-a2aa-61ab4a272fc1",
+    "index": 271,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-7. 環境変数 env_flag による挙動の切替",
+    "topicTag": "環境変数による分岐",
+    "kurumiIntro": "環境変数 `env_flag()` が `\"TURBO_MODE\"` のときは金庫に多めにチャージする設定切り替えを作ろう！",
+    "goalSummary": "env_flag() == \"TURBO_MODE\" を判定して金庫⚡4＋ゴールへ",
+    "bookSectionTitle": "12.5 環境変数を使った動作モード切替",
+    "bookSummary": "環境変数で設定を切り替えるようにすると、コードを変更せずに本番・デバッグ・省電力モードなどを切り替えられます。",
+    "bookKeyCode": "if env_flag() == \"TURBO_MODE\" { add_vault(4); }",
+    "starterCode": "fn main() {\n    let mode = env_flag();\n    // mode が \"TURBO_MODE\" なら 4、そうでなければ 1 を金庫に入れよう！\n    let boost = if mode == \"SLEEP\" { 4 } else { 1 };\n    add_vault(boost);\n    step(3);\n}",
+    "solutionCode": "fn main() {\n    let mode = env_flag();\n    let boost = if mode == \"TURBO_MODE\" { 4 } else { 1 };\n    add_vault(boost);\n    step(3);\n}",
+    "quickChips": [
+      {
+        "label": "\"TURBO_MODE\"",
+        "insert": "\"TURBO_MODE\""
+      }
+    ],
+    "hints": [
+      "今の判定は `mode == \"SLEEP\"` になっているから 1 しか入らないよ。",
+      "`\"TURBO_MODE\"` に直すと boost が 4 になるよ！",
+      "let boost = if mode == \"TURBO_MODE\" { 4 } else { 1 };"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "envFlag": "TURBO_MODE",
+      "vault": {
+        "x": 2,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "12-8",
+    "id": "71bac323-56c1-54c5-a7b2-4d7db7c3abf3",
+    "index": 272,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "stageKind": "puzzle",
+    "title": "12-8. env_flag 切替でコア検査・納品フロー変更",
+    "topicTag": "env_flag() + 空間コア",
+    "kurumiIntro": "環境変数 `env_flag()` が `\"STRICT\"` モードのときは、納品前に必ず検査台 `scan(&c)` と強化台 `boost(&mut c)` の両方を通す厳格ルールでコアを届けよう！",
+    "goalSummary": "STRICT モードで \"STRICT_OK\" 出力・コア検査＆強化(⚡5+)・納品",
+    "bookSectionTitle": "12.5 環境変数による安全工程の切り替え",
+    "bookSummary": "`env_flag()` の値に応じて厳密検査モードをオンにし、空間上の検査台・強化台を経由するフローを実行します。",
+    "bookKeyCode": "if env_flag() == \"STRICT\" { scan(&c); }",
+    "starterCode": "fn main() {\n    let mode = env_flag();\n    println!(\"ENV: {}\", mode);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    if mode == \"STRICT\" {\n        // STRICT モード！まずここで scan(&c); して、\"STRICT_OK\" を出力しよう\n        println!(\"NORMAL_OK\");\n    }\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
+    "solutionCode": "fn main() {\n    let mode = env_flag();\n    println!(\"ENV: {}\", mode);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    if mode == \"STRICT\" {\n        scan(&c);\n        println!(\"STRICT_OK\");\n    }\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
+    "quickChips": [
+      {
+        "label": "scan(&c);",
+        "insert": "scan(&c);\n        "
+      },
+      {
+        "label": "\"STRICT_OK\"",
+        "insert": "\"STRICT_OK\""
+      }
+    ],
+    "hints": [
+      "(2,1) が検査台だから、if mode == \"STRICT\" の中に `scan(&c);` を追加しよう！",
+      "さらに println! の出力も `\"STRICT_OK\"` に変えればクリアだよ！",
+      "scan(&c);\nprintln!(\"STRICT_OK\");"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "envFlag": "STRICT",
+      "cores": [
+        {
+          "id": "c1",
+          "x": 1,
+          "y": 1,
+          "power": 3,
+          "label": "検査コア"
+        }
+      ],
+      "scanners": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "chargers": [
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "deliveries": [
+        {
+          "x": 4,
+          "y": 1
+        }
       ]
     },
     "victoryCondition": {
       "reachGoal": true,
-      "requireAllSwitches": true
+      "deliverCores": 1,
+      "minCorePower": 5,
+      "scanCount": 1,
+      "stdoutIncludes": [
+        "STRICT_OK"
+      ],
+      "requireSpatialCoreRules": true
     },
-    "parTicks": 13
+    "parTicks": 11
   },
   {
-    "displayId": "12-22",
-    "id": "22c0ba77-9cf6-5294-a052-97e578c28c55",
-    "index": 198,
+    "displayId": "12-9",
+    "id": "cb19db0b-240d-50ed-be38-89c3fe355fee",
+    "index": 273,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "stageKind": "challenge",
-    "title": "12-22. コアと文字と辞書の大迷宮チャレンジ",
-    "topicTag": "コレクション + スパーク迷宮",
-    "kurumiIntro": "巡回スパークの先の迷路へ挑もう！`HashMap` の合言葉でダイヤルを解き、`String` に経過を記録しつつ、コアを拾って検査・強化・納品まで一気に決めよう！",
-    "goalSummary": "ダイヤル解錠・\"COLLECTIONS_PRO\" 出力・コア⚡4+納品・全スイッチ・ゴール達成",
-    "bookSectionTitle": "12.1〜12.3 コレクションの複合パズル",
-    "bookSummary": "データ構造を使い分けながら、現実の空間ルールと危険物をすべてコントロールする総合演習です。",
-    "bookKeyCode": "HashMap / String / Vec + 空間コア操作",
-    "starterCode": "fn main() {\n    let mut book = HashMap::new();\n    book.insert(\"dial\", 5);\n    try_dial(book.get(\"dial\").unwrap_or(0));\n\n    let mut msg = String::from(\"COLLECTIONS\");\n    println!(\"{}\", msg);\n\n    // (1,1)コア→(2,1)検査→(3,1)スパーク注意！→(4,1)強化＆スイッチ→(5,1)納品\n    step(1);\n}",
-    "solutionCode": "fn main() {\n    let mut book = HashMap::new();\n    book.insert(\"dial\", 5);\n    try_dial(book.get(\"dial\").unwrap_or(0));\n\n    let mut msg = String::from(\"COLLECTIONS\");\n     msg.push_str(\"_PRO\");\n    println!(\"{}\", msg);\n\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    let mut c = grab_core();\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    scan(&c);\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    boost(&mut c);\n    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n    step(1);\n    deliver(c);\n}",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-9. コマンド引数と環境設定の読み込み",
+    "topicTag": "CLI引数 / 環境変数",
+    "kurumiIntro": "工房のコマンドライン指令機を作ろう！`cli_args()` と `env_flag()` を読み取って、指定どおりの合図 `\"TURBO\"` を表示して進んでね！",
+    "goalSummary": "引数を受け取って \"TURBO\" を出力し、ゴールへ着こう",
+    "bookSectionTitle": "12.1 & 12.5 コマンドライン引数と環境変数",
+    "bookSummary": "CLIプログラムでは起動時の引数リストや環境変数を読み取り、`Config` 構造体などに整理してから処理を実行するのが定番パターンです。",
+    "bookKeyCode": "let args = cli_args();\nlet mode = env_flag();",
+    "starterCode": "fn main() {\n    let args = cli_args();\n    let flag = env_flag();\n    println!(\"MODE: {}\", flag);\n    // args[1] に入っている合図 \"turbo\" か \"TURBO\" を出力しよう\n    println!(\"...\");\n    step(3);\n}",
+    "solutionCode": "fn main() {\n    let args = cli_args();\n    let flag = env_flag();\n    println!(\"MODE: {}\", flag);\n    println!(\"TURBO: {}\", args[1]);\n    step(3);\n}",
     "quickChips": [
       {
-        "label": "msg.push_str(\"_PRO\");",
-        "insert": "msg.push_str(\"_PRO\");\n    "
-      },
-      {
-        "label": "while is_spark_ahead() { wait_tick(1); }",
-        "insert": "while is_spark_ahead() { wait_tick(1); }\n    "
+        "label": "println!(\"TURBO: {}\", args[1]);",
+        "insert": "println!(\"TURBO: {}\", args[1]);"
       }
     ],
     "hints": [
-      "msg に `msg.push_str(\"_PRO\");` を足すのを忘れないでね！",
-      "(1,1)でコア取得 → (2,1)で scan(&c) → (3,1)はスパーク横断なので `while is_spark_ahead() { wait_tick(1); }` で待ってから越えよう！",
-      "(4,1)で boost(&mut c) しつつスイッチを踏み、(5,1) で deliver(c) すればコンプリートだよ！"
+      "println! の出力に \"TURBO\" という文字を含める必要があるよ！",
+      "println!(\"TURBO: {}\", args[1]); に書き換えてみよう。",
+      "println!(\"TURBO: {}\", args[1]);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      },
+      "cliArgs": [
+        "kobo",
+        "turbo",
+        "3"
+      ],
+      "envFlag": "SAFE_MODE"
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "TURBO"
+      ]
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "12-10",
+    "id": "98bb6489-186b-53c3-828e-0cf6576d9cb5",
+    "index": 274,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-10. 正常ログ println! とエラーログ eprintln! の両立",
+    "topicTag": "stdout と stderr の分離",
+    "kurumiIntro": "コマンドの結果 `\"FOUND\"` は `println!` で標準出力へ、警告 `\"WARN\"` は `eprintln!` で標準エラー出力へ分けて流そう！",
+    "goalSummary": "println! に \"FOUND\"、eprintln! に \"WARN\" を出してゴールへ",
+    "bookSectionTitle": "12.6 標準出力と標準エラー出力の使い分け",
+    "bookSummary": "出力をファイルにリダイレクトしたときでも、エラー表示だけは画面に残るように `eprintln!` を使い分けます。",
+    "bookKeyCode": "println!(\"FOUND\");\neprintln!(\"WARN\");",
+    "starterCode": "fn main() {\n    println!(\"FOUND: gear_01\");\n    // 警告ログは eprintln! で \"WARN: low battery\" を出そう！\n    println!(\"WARN: low battery\");\n    step(4);\n}",
+    "solutionCode": "fn main() {\n    println!(\"FOUND: gear_01\");\n    eprintln!(\"WARN: low battery\");\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "eprintln!",
+        "insert": "eprintln!"
+      }
+    ],
+    "hints": [
+      "2行目が `println!(\"WARN: ...\")` になっているから標準エラー出力に入っていないよ！",
+      "`eprintln!(\"WARN: low battery\");` に変えよう。",
+      "eprintln!(\"WARN: low battery\");"
     ],
     "worldSetup": {
       "width": 6,
       "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "FOUND"
+      ],
+      "stderrIncludes": [
+        "WARN"
+      ]
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "12-11",
+    "id": "023ce4f0-00a6-583a-9c3a-a016b2f8dc2e",
+    "index": 275,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "stageKind": "challenge",
+    "title": "12-11. コア工場CLI：エラー分離＆検査強化",
+    "topicTag": "CLI + stdout/stderr + コア",
+    "kurumiIntro": "CLIツールの実践運用！環境変数 `\"TURBO\"` で金庫目標を計算し、正常ログ `\"CORE_DELIVERED\"` は `println!`、注意ログ `\"WARN_SPARK\"` は `eprintln!` に出力しながらコアを運ぼう！",
+    "goalSummary": "テスト合格・stdout \"CORE_DELIVERED\"・stderr \"WARN_SPARK\"・コア⚡5+納品・全スイッチ",
+    "bookSectionTitle": "12.6 本番CLIにおける標準出力と標準エラー出力の運用",
+    "bookSummary": "出力ストリームの分離と単体テスト、そして現実の安全操縦（スパーク待機・コア操作）をすべて統合します。",
+    "bookKeyCode": "println!(\"CORE_DELIVERED\"); eprintln!(\"WARN_SPARK\");",
+    "starterCode": "mod cli {\n    pub fn bonus(mode: String) -> i32 {\n        if mode == \"TURBO\" { 5 } else { 1 }\n    }\n}\n\n#[test]\nfn t_turbo() { assert_eq!(cli::bonus(\"TURBO\"), 5); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    add_vault(cli::bonus(env_flag()));\n    eprintln!(\"WARN_SPARK\");\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    scan(&c);\n    // (3,1)スパーク→(4,1)強化＆スイッチ→(5,1)納品台へ進み、最後に \"CORE_DELIVERED\" を出力しよう！\n}",
+    "solutionCode": "mod cli {\n    pub fn bonus(mode: String) -> i32 {\n        if mode == \"TURBO\" { 5 } else { 1 }\n    }\n}\n\n#[test]\nfn t_turbo() { assert_eq!(cli::bonus(\"TURBO\"), 5); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    add_vault(cli::bonus(env_flag()));\n    eprintln!(\"WARN_SPARK\");\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    scan(&c);\n    safe_go(2);\n    boost(&mut c);\n    safe_go(1);\n    deliver(c);\n    println!(\"CORE_DELIVERED\");\n}",
+    "quickChips": [
+      {
+        "label": "safe_go(2); boost(&mut c);",
+        "insert": "safe_go(2);\n    boost(&mut c);\n    "
+      },
+      {
+        "label": "safe_go(1); deliver(c);",
+        "insert": "safe_go(1);\n    deliver(c);\n    "
+      },
+      {
+        "label": "println!(\"CORE_DELIVERED\");",
+        "insert": "println!(\"CORE_DELIVERED\");"
+      }
+    ],
+    "hints": [
+      "scan(&c) の場所 (2,1) からスパーク通路(3,1)を抜けるには `safe_go(2);` だよ！",
+      "強化台兼スイッチ (4,1) で `boost(&mut c);` し、`safe_go(1); deliver(c);` で(5,1)へ納品しよう！",
+      "忘れずに `println!(\"CORE_DELIVERED\");` を書けば全条件クリア！"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
       "walls": [
         {
           "x": 0,
@@ -2513,6 +1271,50 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         {
           "x": 5,
           "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
         }
       ],
       "botStart": {
@@ -2524,16 +1326,14 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 1
       },
-      "dial": {
-        "secret": 5
-      },
+      "envFlag": "TURBO",
       "cores": [
         {
           "id": "c1",
           "x": 1,
           "y": 1,
-          "power": 2,
-          "label": "総括コア"
+          "power": 3,
+          "label": "CLIコア"
         }
       ],
       "scanners": [
@@ -2560,6 +1360,12 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
           "y": 1
         }
       ],
+      "vault": {
+        "x": 0,
+        "y": 0,
+        "initial": 0,
+        "target": 5
+      },
       "sparks": [
         {
           "id": "sp1",
@@ -2578,6 +1384,14 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
             },
             {
               "x": 3,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
               "y": 1
             }
           ],
@@ -2587,12 +1401,16 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
-      "dialSolved": true,
       "deliverCores": 1,
-      "minCorePower": 4,
+      "minCorePower": 5,
       "scanCount": 1,
+      "vaultTarget": 5,
+      "testsRequired": 1,
       "stdoutIncludes": [
-        "COLLECTIONS_PRO"
+        "CORE_DELIVERED"
+      ],
+      "stderrIncludes": [
+        "WARN_SPARK"
       ],
       "requireAllSwitches": true,
       "requireSpatialCoreRules": true
@@ -2600,33 +1418,554 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "parTicks": 15
   },
   {
-    "displayId": "12-23",
-    "id": "3b8c3958-3f0b-5049-881c-0663cb6f152c",
-    "index": 199,
+    "displayId": "12-12",
+    "id": "c7c95c3c-4f38-5cdc-9522-57b0cea1a312",
+    "index": 276,
     "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-12. リファクタリングと eprintln! 標準エラー出力",
+    "topicTag": "eprintln! / エラー分離",
+    "kurumiIntro": "通常の出力（`println!`）とエラーの報告（`eprintln!`）は分けて出すのがプロの設計だよ！異常時に `eprintln!(\"ERR\");` を出してみよう。",
+    "goalSummary": "Err時に eprintln!(\"ERR\"); を出し、予備歩数でゴールへ",
+    "bookSectionTitle": "12.3 & 12.6 モジュール分割と標準エラー出力",
+    "bookSummary": "ロジックを小さな関数へ分け、エラーメッセージは標準エラー出力 `eprintln!` に書き出すことで、本物の出力ログとエラーが混ざるのを防げます。",
+    "bookKeyCode": "if let Err(e) = run() {\n    eprintln!(\"ERR: {}\", e);\n}",
+    "starterCode": "fn run_job() -> Result<i32, String> {\n    let v = read_part(-1)?;\n    Ok(v)\n}\n\nfn main() {\n    match run_job() {\n        Ok(n) => step(n),\n        Err(e) => {\n            // ここで eprintln! を使って \"ERR\" を報告し、3歩進もう！\n            println!(\"ERR: {}\", e);\n            step(3);\n        },\n    }\n}",
+    "solutionCode": "fn run_job() -> Result<i32, String> {\n    let v = read_part(-1)?;\n    Ok(v)\n}\n\nfn main() {\n    match run_job() {\n        Ok(n) => step(n),\n        Err(e) => {\n            eprintln!(\"ERR: {}\", e);\n            step(3);\n        },\n    }\n}",
+    "quickChips": [
+      {
+        "label": "eprintln!(\"ERR: {}\", e);",
+        "insert": "eprintln!(\"ERR: {}\", e);"
+      }
+    ],
+    "hints": [
+      "今は Err の中で普通の `println!` を使っているよ。",
+      "`println!` を `eprintln!` に変えるだけで標準エラー出力になるよ！",
+      "eprintln!(\"ERR: {}\", e);"
+    ],
+    "worldSetup": {
+      "width": 5,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stderrIncludes": [
+        "ERR"
+      ]
+    },
+    "parTicks": 4
+  },
+  {
+    "displayId": "12-13",
+    "id": "990fa11d-9836-56be-9f70-6e2e77edde16",
+    "index": 277,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "stageKind": "puzzle",
+    "title": "12-13. minigrep 検索結果＋スパーク警告 eprintln!",
+    "topicTag": "minigrep + stderr 分離",
+    "kurumiIntro": "パーツ配列からしきい値以上のものを数えて標準出力 `\"FOUND\"` へ、通路の異常警告は標準エラー出力 `eprintln!(\"WARN\")` へ送りながらスパーク通路を抜けよう！",
+    "goalSummary": "テスト合格・stdout \"FOUND\"・stderr \"WARN\"・金庫⚡3・(5, 1)へ",
+    "bookSectionTitle": "12.4 & 12.6 ライブラリ検索＋エラー出力分離",
+    "bookSummary": "検索結果などの正常データは標準出力（`println!`）、安全警告やエラー報告は標準エラー出力（`eprintln!`）へ分けるのがUNIX/CLIの鉄則です。",
+    "bookKeyCode": "println!(\"FOUND: {}\", n);\neprintln!(\"WARN: spark\");",
+    "starterCode": "mod grep {\n    pub fn count_ge(limit: i32, list: Vec<i32>) -> i32 {\n        let mut c = 0;\n        for x in list {\n            if x >= limit { c += 1; }\n        }\n        c\n    }\n}\n\n#[test]\nfn t_grep() {\n    assert_eq!(grep::count_ge(10, vec![2, 10, 15, 20]), 3);\n}\n\nfn main() {\n    let found = grep::count_ge(10, conveyor_batch());\n    add_vault(found);\n    println!(\"FOUND: {}\", found);\n    // 警告は eprintln! で \"WARN\" を出そう！今は普通の println! だよ\n    println!(\"WARN: spark ahead\");\n    for _ in 0..5 {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}",
+    "solutionCode": "mod grep {\n    pub fn count_ge(limit: i32, list: Vec<i32>) -> i32 {\n        let mut c = 0;\n        for x in list {\n            if x >= limit { c += 1; }\n        }\n        c\n    }\n}\n\n#[test]\nfn t_grep() {\n    assert_eq!(grep::count_ge(10, vec![2, 10, 15, 20]), 3);\n}\n\nfn main() {\n    let found = grep::count_ge(10, conveyor_batch());\n    add_vault(found);\n    println!(\"FOUND: {}\", found);\n    eprintln!(\"WARN: spark ahead\");\n    for _ in 0..5 {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}",
+    "quickChips": [
+      {
+        "label": "eprintln!(\"WARN: spark ahead\");",
+        "insert": "eprintln!(\"WARN: spark ahead\");"
+      }
+    ],
+    "hints": [
+      "2つ目のログが `println!` になっていて標準エラー出力（stderr）に出力されていないよ！",
+      "`println!(\"WARN: spark ahead\");` を `eprintln!(\"WARN: spark ahead\");` に直そう！",
+      "eprintln!(\"WARN: spark ahead\");"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 5,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 5,
+        "y": 1
+      },
+      "conveyorItems": [
+        4,
+        10,
+        12,
+        20
+      ],
+      "switches": [
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 1,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 4,
+        "y": 0,
+        "initial": 0,
+        "target": 3
+      },
+      "sparks": [
+        {
+          "id": "sp1",
+          "path": [
+            {
+              "x": 2,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 1
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 2,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 1
+            }
+          ],
+          "initialIndex": 0
+        }
+      ]
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 3,
+      "testsRequired": 1,
+      "stdoutIncludes": [
+        "FOUND: 3"
+      ],
+      "stderrIncludes": [
+        "WARN"
+      ],
+      "requireAllSwitches": true
+    },
+    "parTicks": 11
+  },
+  {
+    "displayId": "12-14",
+    "id": "82b69a1f-ff10-522f-b41d-dc663fc6fa3f",
+    "index": 278,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-14. 引数パーサー Config::new の設計",
+    "topicTag": "Config 構造体",
+    "kurumiIntro": "受け取った引数配列 `args` を構造体 `Config { query, target }` にまとめるとプログラムがぐっと読みやすくなるよ！",
+    "goalSummary": "Config 構造体を作って \"GEAR\" を出力しゴール (4, 1) へ",
+    "bookSectionTitle": "12.3 引数解析を Config にまとめる",
+    "bookSummary": "コマンドライン引数の意味が後から分かるように、構造体 `Config` にフィールド名を付けて整理するリファクタリング手法です。",
+    "bookKeyCode": "struct Config { query: String }\nimpl Config { fn build(args: Vec<String>) -> Config { ... } }",
+    "starterCode": "struct Config {\n    query: String,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Config {\n        // args[1] を query に入れよう！今は args[0] になってるよ\n        Config { query: args[0] }\n    }\n}\n\nfn main() {\n    let cfg = Config::build(cli_args());\n    println!(\"QUERY: {}\", cfg.query);\n    step(4);\n}",
+    "solutionCode": "struct Config {\n    query: String,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Config {\n        Config { query: args[1] }\n    }\n}\n\nfn main() {\n    let cfg = Config::build(cli_args());\n    println!(\"QUERY: {}\", cfg.query);\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "args[1]",
+        "insert": "args[1]"
+      }
+    ],
+    "hints": [
+      "cliArgs の 0番目はプログラム名 \"kobo\" で、1番目に検索語 \"GEAR\" が入っているよ！",
+      "args[0] を args[1] に書き換えよう。",
+      "Config { query: args[1] }"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cliArgs": [
+        "kobo",
+        "GEAR"
+      ],
+      "envFlag": "NORMAL"
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "stdoutIncludes": [
+        "GEAR"
+      ]
+    },
+    "parTicks": 5
+  },
+  {
+    "displayId": "12-15",
+    "id": "1ebcf4e6-6bc1-5f61-9487-faa01683ed43",
+    "index": 279,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
+    "title": "12-15. 第12章まとめ：完全CLIコマンド＆スイッチ連動",
+    "topicTag": "第12章 総合実践",
+    "kurumiIntro": "CLIの総合課題！引数解析・環境変数・`#[test]`・`println!`/`eprintln!` すべてを組み合わせた本格CLIロボットを動かそう！",
+    "goalSummary": "テスト合格＋\"CLI_DONE\" 出力＋金庫⚡4＋スイッチ突破でゴールへ",
+    "bookSectionTitle": "第12章まとめ — テスト・設定・エラー処理を備えたCLI",
+    "bookSummary": "小さなライブラリ関数、設定構造体、自動テスト、標準/標準エラー出力の分離が揃った実用的なCLIアプリケーションの完成です。",
+    "bookKeyCode": "println!(\"CLI_DONE\");\nstep(4);",
+    "starterCode": "mod cli_lib {\n    pub fn bonus(flag: String) -> i32 {\n        if flag == \"PRO\" { 4 } else { 1 }\n    }\n}\n\n#[test]\nfn test_pro() {\n    assert_eq!(cli_lib::bonus(\"PRO\"), 4);\n}\n\nfn main() {\n    let args = cli_args();\n    let b = cli_lib::bonus(env_flag());\n    add_vault(b);\n    // \"CLI_DONE\" を出力して、スイッチ(2, 1)を踏みながらゴール(4, 1)へ4歩進もう！\n    println!(\"RUN: {}\", args[1]);\n    step(4);\n}",
+    "solutionCode": "mod cli_lib {\n    pub fn bonus(flag: String) -> i32 {\n        if flag == \"PRO\" { 4 } else { 1 }\n    }\n}\n\n#[test]\nfn test_pro() {\n    assert_eq!(cli_lib::bonus(\"PRO\"), 4);\n}\n\nfn main() {\n    let args = cli_args();\n    let b = cli_lib::bonus(env_flag());\n    add_vault(b);\n    println!(\"CLI_DONE: {}\", args[1]);\n    step(4);\n}",
+    "quickChips": [
+      {
+        "label": "println!(\"CLI_DONE: {}\", args[1]);",
+        "insert": "println!(\"CLI_DONE: {}\", args[1]);"
+      }
+    ],
+    "hints": [
+      "println! の出力文字が \"RUN: ...\" になっているから目標の \"CLI_DONE\" が見つからないよ。",
+      "println!(\"CLI_DONE: {}\", args[1]); に書き換えれば完璧！",
+      "println!(\"CLI_DONE: {}\", args[1]);"
+    ],
+    "worldSetup": {
+      "width": 6,
+      "height": 3,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "botStart": {
+        "x": 0,
+        "y": 1,
+        "dir": 0
+      },
+      "goal": {
+        "x": 4,
+        "y": 1
+      },
+      "cliArgs": [
+        "kobo",
+        "deploy"
+      ],
+      "envFlag": "PRO",
+      "switches": [
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "gates": [
+        {
+          "x": 3,
+          "y": 1,
+          "openTicks": 1,
+          "closedTicks": 1,
+          "linkedSwitch": {
+            "x": 2,
+            "y": 1
+          }
+        }
+      ],
+      "vault": {
+        "x": 1,
+        "y": 0,
+        "initial": 0,
+        "target": 4
+      }
+    },
+    "victoryCondition": {
+      "reachGoal": true,
+      "vaultTarget": 4,
+      "testsRequired": 1,
+      "stdoutIncludes": [
+        "CLI_DONE"
+      ]
+    },
+    "parTicks": 6
+  },
+  {
+    "displayId": "12-16",
+    "id": "4d21d984-cae8-55b3-8b37-4ee94ed21ea6",
+    "index": 280,
+    "chapter": 12,
+    "chapterTitle": "第12章 入出力プロジェクト：コマンドラインプログラムを構築する",
     "stageKind": "challenge",
-    "title": "12-23. コレクション総合パズル：迷宮制覇",
-    "topicTag": "コレクションの最終チャレンジ",
-    "kurumiIntro": "コレクションの総合チャレンジ！`Vec`・`String`・`HashMap`・`struct`・`enum`・`mod` すべての知識が詰まった大迷宮だよ。2つのスイッチ、スパーク、コンベア、金庫、コア納品をすべて制覇しよう！",
-    "goalSummary": "知識を総動員！\"CHALLENGE_COMPLETE\"・金庫⚡7・コア⚡5+納品・全スイッチ・ゴール (5, 3) へ",
-    "bookSectionTitle": "総まとめ — 設計図・列挙型・モジュール・コレクション",
-    "bookSummary": "構造体や列挙型でプログラムの骨格を作り、モジュールで整理し、コレクションでデータを自在に扱う力が身に着きました！",
-    "bookKeyCode": "struct + enum + mod + HashMap + Vec + String",
-    "starterCode": "mod helper {\n    pub fn safe_move(n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nuse helper::safe_move;\n\nfn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"part1\", 3);\n    dict.insert(\"part2\", 4);\n    let keys = vec![\"part1\", \"part2\"];\n    let mut vault_sum = 0;\n    for k in keys {\n        vault_sum += dict.get(k).unwrap_or(0);\n    }\n    add_vault(vault_sum);\n\n    println!(\"IN_PROGRESS\");\n\n    // ここから (1,1)コア→(2,1)強化＆スイッチ→(4,1)スイッチ→(5,1)右折→(5,3)納品台へ進もう！\n    safe_move(1);\n}",
-    "solutionCode": "mod helper {\n    pub fn safe_move(n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nuse helper::safe_move;\n\nfn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"part1\", 3);\n    dict.insert(\"part2\", 4);\n    let keys = vec![\"part1\", \"part2\"];\n    let mut vault_sum = 0;\n    for k in keys {\n        vault_sum += dict.get(k).unwrap_or(0);\n    }\n    add_vault(vault_sum);\n\n    let mut badge = String::from(\"CHALLENGE\");\n    badge.push_str(\"_COMPLETE\");\n    println!(\"{}\", badge);\n\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    boost(&mut c);\n    safe_move(3);\n    turn_right();\n    safe_move(2);\n    deliver(c);\n}",
+    "title": "12-16. CLIグランドパズル：完全工房システム",
+    "topicTag": "CLIの最終チャレンジ",
+    "kurumiIntro": "CLIシステムの集大成！`Result` のエラー処理・`Config` 引数解析・`env_flag` 判定・`#[test]` 2つ・`println!`/`eprintln!`・ダイヤル・スパーク・2スイッチ・コア納品を全部ひとまとめに動かそう！！",
+    "goalSummary": "知識を総結集！全テスト・stdout/stderr・ダイヤル(4)・金庫⚡7・コア⚡5+・全スイッチ",
+    "bookSectionTitle": "総まとめ — 安全で堅牢なテスト駆動CLIシステム",
+    "bookSummary": "エラー処理、型とトレイトの抽象化、自動テスト、入出力CLI設計のすべてが噛み合うことで、プロ仕様の信頼できるロボットが完成しました！",
+    "bookKeyCode": "Result + trait + #[test] + cli_args() + eprintln!",
+    "starterCode": "struct CliCfg {\n    tag: String,\n    vault_amt: i32,\n}\n\nmod engine {\n    pub fn calc_power(flag: String, batch: Vec<i32>) -> i32 {\n        let mut s = if flag == \"PRO\" { 2 } else { 0 };\n        for x in batch {\n            if x >= 10 { s += x / 10; }\n        }\n        s\n    }\n}\n\n#[test]\nfn t_pro() { assert_eq!(engine::calc_power(\"PRO\", vec![5, 20, 30]), 7); }\n\n#[test]\nfn t_std() { assert_eq!(engine::calc_power(\"STD\", vec![5, 20]), 2); }\n\nfn build_cfg() -> Result<CliCfg, String> {\n    let args = cli_args();\n    if args.len() < 2 { return Err(\"引数不足\"); }\n    let v = engine::calc_power(env_flag(), conveyor_batch());\n    Ok(CliCfg { tag: args[1], vault_amt: v })\n}\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    match build_cfg() {\n        Ok(cfg) => {\n            println!(\"RUN_{}\", cfg.tag);\n            eprintln!(\"WARN_CHECK\");\n            add_vault(cfg.vault_amt);\n            try_dial(4);\n            // (1,1)コア→(2,1)強化＆スイッチ1→(3,1)スパーク→(4,1)スイッチ2→(5,1)右折→(5,3)納品台へ！\n            safe_go(1);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
+    "solutionCode": "struct CliCfg {\n    tag: String,\n    vault_amt: i32,\n}\n\nmod engine {\n    pub fn calc_power(flag: String, batch: Vec<i32>) -> i32 {\n        let mut s = if flag == \"PRO\" { 2 } else { 0 };\n        for x in batch {\n            if x >= 10 { s += x / 10; }\n        }\n        s\n    }\n}\n\n#[test]\nfn t_pro() { assert_eq!(engine::calc_power(\"PRO\", vec![5, 20, 30]), 7); }\n\n#[test]\nfn t_std() { assert_eq!(engine::calc_power(\"STD\", vec![5, 20]), 2); }\n\nfn build_cfg() -> Result<CliCfg, String> {\n    let args = cli_args();\n    if args.len() < 2 { return Err(\"引数不足\"); }\n    let v = engine::calc_power(env_flag(), conveyor_batch());\n    Ok(CliCfg { tag: args[1], vault_amt: v })\n}\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    match build_cfg() {\n        Ok(cfg) => {\n            println!(\"CHALLENGE_{}\", cfg.tag);\n            eprintln!(\"WARN_CHECK\");\n            add_vault(cfg.vault_amt);\n            try_dial(4);\n            safe_go(1);\n            let mut c = grab_core();\n            safe_go(1);\n            boost(&mut c);\n            safe_go(3);\n            turn_right();\n            safe_go(2);\n            deliver(c);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
     "quickChips": [
       {
         "label": "let mut c = grab_core();",
-        "insert": "let mut c = grab_core();\n    "
+        "insert": "let mut c = grab_core();\n            "
       },
       {
         "label": "boost(&mut c);",
-        "insert": "boost(&mut c);\n    "
+        "insert": "boost(&mut c);\n            "
       },
       {
-        "label": "safe_move(3);",
-        "insert": "safe_move(3);\n    "
+        "label": "safe_go(3);",
+        "insert": "safe_go(3);\n            "
       },
       {
         "label": "deliver(c);",
@@ -2634,9 +1973,9 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
       }
     ],
     "hints": [
-      "(1,1)で `let mut c = grab_core();`、次の `(2,1)` が強化台兼スイッチ1だから `boost(&mut c);` しよう！",
-      "その後 `safe_move(3);` で(3,1)のスパークを待って越え、(4,1)のスイッチ2を踏み、(5,1)へ！",
-      "最後は `turn_right(); safe_move(2); deliver(c);` でゲート (5,2) を抜けて (5,3) に納品完了だよ！"
+      "CLI・テスト・ログ・金庫⚡7・ダイヤル解錠の土台はばっちりだよ！",
+      "safe_go(1) で (1,1) のコアを拾い、safe_go(1) で (2,1) 強化台兼スイッチ1で `boost(&mut c);` しよう！",
+      "続いて `safe_go(3); turn_right(); safe_go(2); deliver(c);` で(5,3)の納品台へ到達すれば課題クリア！"
     ],
     "worldSetup": {
       "width": 6,
@@ -2732,13 +2071,26 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
         "x": 5,
         "y": 3
       },
+      "cliArgs": [
+        "kobo",
+        "COMPLETE"
+      ],
+      "envFlag": "PRO",
+      "conveyorItems": [
+        5,
+        20,
+        30
+      ],
+      "dial": {
+        "secret": 4
+      },
       "cores": [
         {
           "id": "c1",
           "x": 1,
           "y": 1,
           "power": 3,
-          "label": "最終コア"
+          "label": "総括コア"
         }
       ],
       "chargers": [
@@ -2799,6 +2151,14 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
             },
             {
               "x": 3,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": 2
+            },
+            {
+              "x": 3,
               "y": 1
             }
           ],
@@ -2808,117 +2168,21 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     },
     "victoryCondition": {
       "reachGoal": true,
+      "dialSolved": true,
       "deliverCores": 1,
       "minCorePower": 5,
       "vaultTarget": 7,
+      "testsRequired": 2,
       "stdoutIncludes": [
         "CHALLENGE_COMPLETE"
+      ],
+      "stderrIncludes": [
+        "WARN_CHECK"
       ],
       "requireAllSwitches": true,
-      "requireSpatialCoreRules": true
+      "requireSpatialCoreRules": true,
+      "requireSafeErrorHandling": true
     },
-    "parTicks": 15
-  },
-  {
-    "displayId": "12-24",
-    "id": "5cc099ac-9b4a-5d44-95b0-608fb71d08f7",
-    "index": 200,
-    "chapter": 12,
-    "chapterTitle": "第12章 一般的なコレクション",
-    "title": "12-24. コレクション3種の総合課題",
-    "topicTag": "第12章 総合実践",
-    "kurumiIntro": "コレクションの総合課題！`Vec` のルート、`String` の合言葉、`HashMap` の金庫エネルギーを全部連携させて、L字の先のゴールへ着こう！",
-    "goalSummary": "Vec・String・HashMap を使い \"CHALLENGE_COMPLETE\" 出力＋金庫⚡3＋ゴールへ",
-    "bookSectionTitle": "第12章まとめ — Vec・String・HashMap",
-    "bookSummary": "リストには `Vec`、可変テキストには `String`、キー検索には `HashMap` を使うのがRustコレクションの基本3点セットです。",
-    "bookKeyCode": "let mut msg = String::from(\"CHALLENGE\");\nmsg.push_str(\"_COMPLETE\");",
-    "starterCode": "fn main() {\n    let mut msg = String::from(\"CHALLENGE\");\n    msg.push_str(\"_COMPLETE\");\n    println!(\"{}\", msg);\n\n    let mut map = HashMap::new();\n    map.insert(\"vault\", 3);\n    add_vault(map.get(\"vault\").unwrap_or(0));\n\n    let moves = vec![3, 2];\n    step(moves[0]);\n    turn_right();\n    // moves[1] 歩だけ進んでゴール (3, 3) へ！\n    \n}",
-    "solutionCode": "fn main() {\n    let mut msg = String::from(\"CHALLENGE\");\n    msg.push_str(\"_COMPLETE\");\n    println!(\"{}\", msg);\n\n    let mut map = HashMap::new();\n    map.insert(\"vault\", 3);\n    add_vault(map.get(\"vault\").unwrap_or(0));\n\n    let moves = vec![3, 2];\n    step(moves[0]);\n    turn_right();\n    step(moves[1]);\n}",
-    "quickChips": [
-      {
-        "label": "step(moves[1]);",
-        "insert": "step(moves[1]);"
-      }
-    ],
-    "hints": [
-      "msg と map と moves[0] までは準備完了！あとは最後の曲がった先の2歩だよ。",
-      "最後の行に step(moves[1]); を書こう！",
-      "turn_right();\nstep(moves[1]);"
-    ],
-    "worldSetup": {
-      "width": 5,
-      "height": 5,
-      "walls": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "botStart": {
-        "x": 0,
-        "y": 1,
-        "dir": 0
-      },
-      "goal": {
-        "x": 3,
-        "y": 3
-      },
-      "vault": {
-        "x": 2,
-        "y": 0,
-        "initial": 0,
-        "target": 3
-      }
-    },
-    "victoryCondition": {
-      "reachGoal": true,
-      "vaultTarget": 3,
-      "stdoutIncludes": [
-        "CHALLENGE_COMPLETE"
-      ]
-    },
-    "parTicks": 8
+    "parTicks": 18
   }
 ];
-
-

@@ -1,293 +1,428 @@
 import { StageStoryEntry } from '../types/game';
 
 export const STORY_CHAPTER_12: StageStoryEntry[] = [
-  // ===== 第12章：食べすぎ注意のメニュー表 (12-1 〜 12-12) =====
   {
-    stageId: 'c0581340-c3c5-5377-b453-7ef58d8eecfe',
-    requestTitle: '伸び縮みするパン予約カゴが大行列',
-    client: 'coppe',
-    intro: [
+    "stageId": "cb19db0b-240d-50ed-be38-89c3fe355fee",
+    "requestTitle": "ポッポ探偵登場！キーワードで届け先を探せ",
+    "client": "poppo",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'panic',
-        text: '今日のパンの予約数がどんどん増えたり減ったりするんだ！あとからいくつでもポンポン足せる大きなカゴが欲しいよ〜！',
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "じゃじゃーん！今日は帽子を深めにかぶって、手がかりのキーワードと夜間ランプ設定から届け先を推理します！"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '任せてコッペさん！どんなに注文が増えてもパンクしない、伸び縮みする買い物リストを用意したよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "ポッポ探偵カッコいいカニ！僕も助手のカニワトソンとして虫眼鏡をのぞくロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: '予約が追加されても余裕だね！焼きたてをぜんぶ並べられたよ〜！',
-      },
-    ],
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "おおっ、ひと目で正しい住所がヒットしました！なんだか名探偵になった気分です！"
+      }
+    ]
   },
   {
-    stageId: '8b57d218-9e07-5421-a27f-e7d227d78e80',
-    requestTitle: '空っぽのリストから集荷スタート！',
-    client: 'poppo',
-    intro: [
+    "stageId": "82b69a1f-ff10-522f-b41d-dc663fc6fa3f",
+    "requestTitle": "バラバラの手がかりを手帳1冊にまとめよう",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '最初は空っぽの荷物リストから始めて、集荷した順番にどんどん書き足しながら歩きたいんです！',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "捜査メモがポケットのあちこちに散らかっていると探しづらいね。設定専用のカード1枚にまとめられないかい？"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '最初はゼロでも、回るうちに袋がパンパンになっていくのワクワクするカニ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "それ名案！手帳のカードにスッキリひとまとめにしておけば、ポケットを探り回らなくて済むよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: '集荷のたびにリストが育っていくみたいで頼もしいですね！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "情報が1枚のカードにまとまると、あとからの見直しもぐっと楽になるね。"
+      }
+    ]
   },
   {
-    stageId: 'da6c9668-2286-5537-b079-941dd62655fb',
-    requestTitle: '空の引き出しを無理やり開けてパニック！？',
-    client: 'mimosa',
-    intro: [
+    "stageId": "cdcc5256-5359-5cce-a2aa-61ab4a272fc1",
+    "requestTitle": "昼モード・夜モードの切り替えスイッチ",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: '棚に何番目の箱があるか分からないとき、勢いよく引っ張ったら引き出しごと抜けちゃいそうで心配なの。',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "夜のランプがオンのときは、お昼のときとちょっと歩数を変えてお庭を見回りたいわ。"
       },
       {
-        speaker: 'milk',
-        emotion: 'normal',
-        text: 'ピピ！まずはそっと中身があるか覗いて確かめれば、空振りしてひっくり返ることはないよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "お昼は元気に大股、夜はお星さまを見ながらそろり歩きカニ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: '空の段を確認しても壊れないなんて、とっても優しい工夫ね。',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "時間帯に合わせて賢く歩き方を変えてくれて助かったわ！"
+      }
+    ]
   },
   {
-    stageId: '5da5c53a-688d-5247-bb6f-5080b1a23189',
-    requestTitle: '注文リストの合計を数えながらL字歩き',
-    client: 'coppe',
-    intro: [
+    "stageId": "cf512ac5-9221-505e-870c-1d52ec940528",
+    "requestTitle": "忘れん坊さんにも優しいお助けメッセージ",
+    "client": "coppe",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: 'リストに入っている数をぜんぶ足して金庫をいっぱいにして、そのあとL字のカウンターへパンを届けてくれないかい？',
+        "speaker": "coppe",
+        "emotion": "panic",
+        "text": "うっかり必要なメモを渡し忘れたとき、機械がプイッと止まっちゃわないで優しく「忘れてるよ〜」って教えてほしいんだ！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'パンを数えながら歩くカニ〜！……あれっ、2回同じパン数えちゃったかも？やり直しロボ！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "任せて！足りないときは親切なメッセージでお知らせするようにしておけば、誰でも安心して使えるね！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: '合計もルートもピタリと一致！いつも助かるよ〜！',
-      },
-    ],
+        "speaker": "coppe",
+        "emotion": "happy",
+        "text": "これなら初めて使うお客さんにも優しい道具になるね！"
+      }
+    ]
   },
   {
-    stageId: '4af280a8-2c53-54a9-bd94-b10ddce67661',
-    requestTitle: 'つなげて楽しい！お花屋さんの看板ボード',
-    client: 'mimosa',
-    intro: [
+    "stageId": "c7c95c3c-4f38-5cdc-9522-57b0cea1a312",
+    "requestTitle": "普通の伝票と赤い注意メモの仕分け術",
+    "client": "moka",
+    "intro": [
       {
-        speaker: 'mimosa',
-        emotion: 'normal',
-        text: 'お店の看板に季節のあいさつと「本日のおすすめ」をくっつけて、長い1つのメッセージにしたいの。',
+        "speaker": "moka",
+        "emotion": "normal",
+        "text": "ふつうのお手紙と緊急の注意書きが同じカゴに混ざると見づらくてね。注意書きだけは赤いトレイに分けたいんだ。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '言葉をペタペタつなぎ足して、可愛いおすすめ看板を仕上げちゃおう！',
-      },
+        "speaker": "milk",
+        "emotion": "happy",
+        "text": "ピピ！大事な注意書きを赤いトレイに分けておけば、いざという時も見落とさないよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'mimosa',
-        emotion: 'happy',
-        text: '素敵な看板メッセージができあがったわ！通りすがりの人も立ち止まって見てる♪',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "すっきり分かれて見やすいね。頼もしい道具になったよ。"
+      }
+    ]
   },
   {
-    stageId: 'd6a7bb8f-68d7-5a00-aa96-3acd02299e6a',
-    requestTitle: '2つの看板文字をガチャンと合体！',
-    client: 'moka',
-    intro: [
+    "stageId": "98bb6489-186b-53c3-828e-0cf6576d9cb5",
+    "requestTitle": "「OK！」と「気をつけて！」の二重奏",
+    "client": "poppo",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: '前半の看板板と後半のメッセージ板、ガチャンとひとつに合体させて店頭に出したいんだけどね。',
+        "speaker": "poppo",
+        "emotion": "normal",
+        "text": "順調なときの記録はふつうの日記に、注意のお知らせは赤い連絡帳に、両方きちんと分けて記録したいです！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: 'ボンドとテープでしっかり合体させるカニ！……あっ、自分のハサミまでくっついちゃったロボ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "右手に日記、左手に連絡帳を持ってササッと書き分けるカニ！……文字がカニ文字にならないよう気をつけるロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '看板がビシッと1本につながったよ。お客さんにもよく見えそうだ。',
-      },
-    ],
+        "speaker": "poppo",
+        "emotion": "happy",
+        "text": "綺麗な仕分けで記録がぴかぴかになりました！"
+      }
+    ]
   },
   {
-    stageId: 'fd9002e9-f055-5419-9d4e-7df7295beebc',
-    requestTitle: '秘密の合言葉を組み立てて叫ぼう！',
-    client: 'poppo',
-    intro: [
+    "stageId": "06f4c9fa-5322-5af9-81f8-2f52695e366d",
+    "requestTitle": "探偵の虫眼鏡道具だけ別箱に整理しよう",
+    "client": "mimosa",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '郵便局の秘密の合言葉を、文字パーツを順番につなぎ合わせて完成させたいんです！',
+        "speaker": "mimosa",
+        "emotion": "normal",
+        "text": "全部をひとつの机に広げずに、探し物の道具だけを小さな専用ケースにまとめてチェックもつけておきたいの。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '文字をひとつずつ間違えずにくっつけて、合言葉を元気よくお届けしよう！',
-      },
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "道具を小さなケースに分けて、しかも点検チェック付きにするんだね！とってもきれいで使いやすいよ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: '合言葉バッチリ通りました！噛まずに言えてよかったです！',
-      },
-    ],
+        "speaker": "mimosa",
+        "emotion": "happy",
+        "text": "点検付きの探し物道具、とっても頼もしいわ！"
+      }
+    ]
   },
   {
-    stageId: '1eb1e04b-a566-559e-b5bc-1a3bac25a608',
-    requestTitle: '看板の合図が「特急」に変わったらダッシュ！',
-    client: 'coppe',
-    intro: [
+    "stageId": "1ebcf4e6-6bc1-5f61-9487-faa01683ed43",
+    "requestTitle": "ポッポ探偵・迷子の手紙をぜんぶ解決！",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'coppe',
-        emotion: 'normal',
-        text: '看板の文字が「特急便」に切り替わったら、大事な光の玉を持って一気に納品台まで走ってほしいんだ！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "探偵道具がぜんぶ揃ったね！手がかり読み取り・赤メモ仕分け・連動ゲート突破まで一気に決めよう！"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '合図の文字をじーっと見張って、変わったらロケット発進カニ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "名探偵フェリス＆ポッポの活躍、とくと見るカニ！真実はいつもお菓子箱の中ロボ！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'coppe',
-        emotion: 'happy',
-        text: '特急便すごいスピードだったよ〜！ホカホカのまま届いたね！',
-      },
-    ],
+        "speaker": "moka",
+        "emotion": "happy",
+        "text": "よくここまで調べ上げたね。迷子の手紙もみんな持ち主の元へ戻って、町がまたひとつ明るくなったよ。"
+      }
+    ]
   },
   {
-    stageId: '7af4a668-eb8f-519c-b356-0338ccbea270',
-    requestTitle: '常連さんの「いつもの！」早見表',
-    client: 'moka',
-    intro: [
+    "stageId": "d7653986-119c-5386-ae39-f3e78c4799f6",
+    "requestTitle": "CLI引数ルート分岐とコンベア走破の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: 'お客さんの名前を引いたら、いつもの好みのコーヒー豆がすぐ出てくる名簿を作りたいんだ。',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「cli_args() + ルート分岐」を使う依頼が届いたよ。起動時の引数 args[1] の内容を見て処理を切り替え、標準出力へ実行モードをログ記録します。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '名前と好みをペアでメモしておく「いつもの帳」を作ろう！これで常連さんが来てもドヤ顔で出せるね！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '「いつもの」でサッと出せるようになったよ。頼もしいね。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！cli_args() から \"FAST\" を出力し、スイッチ＋コンベアで8ティック以内に (5, 3) へ。教わった「cli_args() + ルート分岐」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: 'a2fc03f5-86ff-517d-8bf9-a0250c01b161',
-    requestTitle: 'コッペさんとミモザさんの「いつもの」合計！',
-    client: 'moka',
-    intro: [
+    "stageId": "986e5ff1-ac6c-57dc-90f1-74296736adc1",
+    "requestTitle": "Config 構造体＋ダイヤル番号の結合の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'moka',
-        emotion: 'normal',
-        text: 'コッペさんとミモザさんの2人分の注文数を、名簿から引き出して合計してくれるかい？',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「Config::build + ダイヤル解錠」を使う依頼が届いたよ。引数と環境設定の両方を Config 構造体にまとめ、Result<Config, String> で安全に構築してから実行部へ渡します。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '名簿をめくって2人分を足し算カニ！コッペさんだけ甘めのお砂糖山盛りなのもメモしてあるロボ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '2人分のカップ、ちょうどいいタイミングで淹れ上がったよ。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！Config で \"CONFIG_OK\" 出力・ダイヤル(5)解錠・金庫⚡5・(4, 1)へ。教わった「Config::build + ダイヤル解錠」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '6090b7ba-d154-55d5-92ab-a275029fda2c',
-    requestTitle: '町内スタンプ帳のポイント上乗せ作戦',
-    client: 'poppo',
-    intro: [
+    "stageId": "b87d47fc-af3a-5703-8836-a76d69a54774",
+    "requestTitle": "CLI設定から自律迷路ソルバー起動の依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'poppo',
-        emotion: 'normal',
-        text: '同じお家のポイントカードに、お届けするたび点数を消さずに上乗せしていきたいんですが、どうすればいいですか？',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「CLI + 左手法迷路」を使う依頼が届いたよ。CLI層で引数と環境変数を解釈し、検証済みの設定でモジュールの自律制御ロジックを起動する綺麗なアーキテクチャです。"
       },
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '前の数字に今回の分を足して書き直せば完璧！これでポイントが消えちゃう悲劇は起きないよ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'poppo',
-        emotion: 'happy',
-        text: '古い記録を消さずに加算できました！町内会の名簿にも使えそうです！',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！CLI 起動ログ \"MAZE\" とテスト合格で迷路の (3, 3) へ。教わった「CLI + 左手法迷路」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
   {
-    stageId: '5cc099ac-9b4a-5d44-95b0-608fb71d08f7',
-    requestTitle: 'リスト・看板・名簿の合同ミッション！',
-    client: 'kurumi',
-    intro: [
+    "stageId": "c831c1c1-a891-53bd-aff3-1a64ff93dec1",
+    "requestTitle": "minigrep フィルタ＋二重スイッチU字ルートの依頼",
+    "client": "kurumi",
+    "intro": [
       {
-        speaker: 'kurumi',
-        emotion: 'happy',
-        text: '注文リストも看板文字も常連さん名簿も全部そろったよ！町の合同おつかいを気持ちよく締めくくろう！',
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「minigrep + 二重スイッチ」を使う依頼が届いたよ。集計・フィルタ処理のテストを済ませた上で、U字の複合スイッチ経路を走り切ります。"
       },
       {
-        speaker: 'ferris',
-        emotion: 'happy',
-        text: '準備万端カニ！終わったらモカさんのお店でココアをごちそうになるロボ！',
-      },
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
     ],
-    outro: [
+    "outro": [
       {
-        speaker: 'moka',
-        emotion: 'happy',
-        text: '見事な連携だったね。約束どおり特製ココアを淹れて待っていたよ。ゆっくりしていきな。',
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！2テスト合格＋\"BATCH_3\"＋金庫⚡3＋全スイッチ＋(0, 3)へ。教わった「minigrep + 二重スイッチ」が役に立ったね。"
       },
-    ],
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
   },
+  {
+    "stageId": "71bac323-56c1-54c5-a7b2-4d7db7c3abf3",
+    "requestTitle": "env_flag 切替でコア検査・納品フロー変更の依頼",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「env_flag() + 空間コア」を使う依頼が届いたよ。env_flag() の値に応じて厳密検査モードをオンにし、空間上の検査台・強化台を経由するフローを実行します。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！STRICT モードで \"STRICT_OK\" 出力・コア検査＆強化(⚡5+)・納品。教わった「env_flag() + 空間コア」が役に立ったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
+  },
+  {
+    "stageId": "023ce4f0-00a6-583a-9c3a-a016b2f8dc2e",
+    "requestTitle": "コア工場CLI：エラー分離＆検査強化の依頼",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「CLI + stdout/stderr + コア」を使う依頼が届いたよ。出力ストリームの分離と単体テスト、そして現実の安全操縦（スパーク待機・コア操作）をすべて統合します。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！テスト合格・stdout \"CORE_DELIVERED\"・stderr \"WARN_SPARK\"・コア⚡5+納品・全スイッチ。教わった「CLI + stdout/stderr + コア」が役に立ったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
+  },
+  {
+    "stageId": "990fa11d-9836-56be-9f70-6e2e77edde16",
+    "requestTitle": "minigrep 検索結果＋スパーク警告 eprintln!の依頼",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「minigrep + stderr 分離」を使う依頼が届いたよ。検索結果などの正常データは標準出力（println!）、安全警告やエラー報告は標準エラー出力（eprintln!）へ分けるのがUNIX/CLIの鉄則です。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！テスト合格・stdout \"FOUND\"・stderr \"WARN\"・金庫⚡3・(5, 1)へ。教わった「minigrep + stderr 分離」が役に立ったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
+  },
+  {
+    "stageId": "4d21d984-cae8-55b3-8b37-4ee94ed21ea6",
+    "requestTitle": "CLIグランドパズル：完全工房システムの依頼",
+    "client": "kurumi",
+    "intro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "normal",
+        "text": "「CLIの最終チャレンジ」を使う依頼が届いたよ。エラー処理、型とトレイトの抽象化、自動テスト、入出力CLI設計のすべてが噛み合うことで、プロ仕様の信頼できるロボットが完成しました！"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+      }
+    ],
+    "outro": [
+      {
+        "speaker": "kurumi",
+        "emotion": "happy",
+        "text": "できた！知識を総結集！全テスト・stdout/stderr・ダイヤル(4)・金庫⚡7・コア⚡5+・全スイッチ。教わった「CLIの最終チャレンジ」が役に立ったね。"
+      },
+      {
+        "speaker": "ferris",
+        "emotion": "happy",
+        "text": "今回の学びを次の依頼にも活かしていこう！"
+      }
+    ]
+  }
 ];
