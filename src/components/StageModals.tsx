@@ -12,6 +12,7 @@ import {
   MessageCircleHeart,
 } from 'lucide-react';
 import { GameState, StageDefinition } from '../types/game';
+import { getStageDisplayTitle } from '../data/stages';
 
 interface StageModalsProps {
   gameState: GameState;
@@ -57,7 +58,7 @@ export const StageModals: React.FC<StageModalsProps> = ({
       {gameState === 'PAUSED' && (
         <div className="anime-card w-full max-w-md rounded-3xl bg-[#FFFDF9] p-6 text-center space-y-5">
           <div>
-            <p className="text-xs font-bold text-[#EA580C]">{stage.id} · 一時停止</p>
+            <p className="text-xs font-bold text-[#EA580C]">{stage.displayId} · 一時停止</p>
             <h2 className="font-display text-2xl font-extrabold text-[#4A352B] mt-1">
               工房の休憩メニュー
             </h2>
@@ -112,10 +113,10 @@ export const StageModals: React.FC<StageModalsProps> = ({
         <div className="anime-card w-full max-w-lg rounded-3xl bg-[#FFFDF9] p-6 space-y-5">
           <div className="text-center space-y-2">
             <p className="text-xs font-extrabold text-[#0D9488]">
-              {stage.id} · ステージクリア！
+              {stage.displayId} · ステージクリア！
             </p>
             <h2 className="font-display text-2xl font-extrabold text-[#4A352B]">
-              {stage.title}
+              {getStageDisplayTitle(stage)}
             </h2>
 
             <div className="flex items-center justify-center gap-1.5 pt-1 text-sm font-extrabold text-[#0D9488]">

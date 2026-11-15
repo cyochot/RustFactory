@@ -3,7 +3,8 @@ import { StageDefinition } from '../types/game';
 export const ACT5_STAGES: StageDefinition[] = [
   // ===== 第17章 オブジェクト指向プログラミング機能 (17-1 ~ 17-8, index 169 ~ 176) =====
   {
-    id: '17-1',
+    displayId: '17-1',
+    id: 'cc3aa3b6-256c-5917-8355-bdb415791494',
     index: 169,
     act: 5,
     chapter: 17,
@@ -43,7 +44,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '17-2',
+    displayId: '17-2',
+    id: 'c419f437-352b-5f1d-8298-e4c37e52a12a',
     index: 170,
     act: 5,
     chapter: 17,
@@ -83,7 +85,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '17-3',
+    displayId: '17-3',
+    id: '7a5d0c50-d5f6-588f-9f29-ae1174a234f5',
     index: 171,
     act: 5,
     chapter: 17,
@@ -122,7 +125,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '17-4',
+    displayId: '17-4',
+    id: '8cb63b66-a58b-569e-ae65-433de5ecea2a',
     index: 172,
     act: 5,
     chapter: 17,
@@ -162,7 +166,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '17-5',
+    displayId: '17-5',
+    id: '0ab6754a-d4df-54ac-a77f-e80fc746a157',
     index: 173,
     act: 5,
     chapter: 17,
@@ -200,7 +205,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '17-6',
+    displayId: '17-6',
+    id: 'bee5e43c-ba0a-5915-a8bd-4412c17f2ead',
     index: 174,
     act: 5,
     chapter: 17,
@@ -239,7 +245,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '17-7',
+    displayId: '17-7',
+    id: '661f50ef-b06b-5e02-b076-2228c88a0e8e',
     index: 175,
     act: 5,
     chapter: 17,
@@ -278,7 +285,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '17-8',
+    displayId: '17-8',
+    id: '70cb7557-cf2f-57ca-8b60-541cbead8dc1',
     index: 176,
     act: 5,
     chapter: 17,
@@ -321,7 +329,8 @@ export const ACT5_STAGES: StageDefinition[] = [
 
   // ===== 第18章 パターンとマッチング (18-1 ~ 18-8, index 177 ~ 184) =====
   {
-    id: '18-1',
+    displayId: '18-1',
+    id: 'a4e95ee9-d55c-5c3b-aa42-63d292e22a0e',
     index: 177,
     act: 5,
     chapter: 18,
@@ -359,7 +368,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '18-2',
+    displayId: '18-2',
+    id: '7e0db7bd-3d57-50a0-93b7-78ecaeff3f76',
     index: 178,
     act: 5,
     chapter: 18,
@@ -399,7 +409,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '18-3',
+    displayId: '18-3',
+    id: '2408bb72-9259-5dd6-ba85-f9857cf291a5',
     index: 179,
     act: 5,
     chapter: 18,
@@ -438,7 +449,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '18-4',
+    displayId: '18-4',
+    id: '6032bb13-8be5-517d-95d7-784a910560e3',
     index: 180,
     act: 5,
     chapter: 18,
@@ -478,7 +490,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '18-5',
+    displayId: '18-5',
+    id: '7bafe10a-2ef4-517f-b48f-9256122665f4',
     index: 181,
     act: 5,
     chapter: 18,
@@ -516,7 +529,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '18-6',
+    displayId: '18-6',
+    id: '331c57e3-ad96-5e04-b779-c1c7a378c808',
     index: 182,
     act: 5,
     chapter: 18,
@@ -556,7 +570,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '18-7',
+    displayId: '18-7',
+    id: 'b4374fe3-6426-5e4b-ab02-e93453235b97',
     index: 183,
     act: 5,
     chapter: 18,
@@ -596,7 +611,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '18-8',
+    displayId: '18-8',
+    id: '6881bf72-be99-592e-99bc-f6ad3df32748',
     index: 184,
     act: 5,
     chapter: 18,
@@ -639,7 +655,8 @@ export const ACT5_STAGES: StageDefinition[] = [
 
   // ===== 第19章 高度な機能 (19-1 ~ 19-4, index 185 ~ 188) =====
   {
-    id: '19-1',
+    displayId: '19-1',
+    id: '62c16d48-5006-58eb-a279-15dc4fbab59e',
     index: 185,
     act: 5,
     chapter: 19,
@@ -677,7 +694,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '19-2',
+    displayId: '19-2',
+    id: '63517659-1139-5cc9-9399-c16490d7cf29',
     index: 186,
     act: 5,
     chapter: 19,
@@ -716,7 +734,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '19-3',
+    displayId: '19-3',
+    id: '7e58cc7c-831e-5f71-a098-53511a88fcf7',
     index: 187,
     act: 5,
     chapter: 19,
@@ -755,7 +774,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '19-4',
+    displayId: '19-4',
+    id: '62a4650f-fe84-5fda-836a-c0036f5ffe9b',
     index: 188,
     act: 5,
     chapter: 19,
@@ -798,7 +818,8 @@ export const ACT5_STAGES: StageDefinition[] = [
 
   // ===== 第20章 最後のプロジェクト (20-1 ~ 20-4, index 189 ~ 192) =====
   {
-    id: '20-1',
+    displayId: '20-1',
+    id: 'e5174596-ce40-5101-8458-936adfaa471e',
     index: 189,
     act: 5,
     chapter: 20,
@@ -838,7 +859,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '20-2',
+    displayId: '20-2',
+    id: '4afacd4d-4762-58fe-a29a-d9d840ab00a1',
     index: 190,
     act: 5,
     chapter: 20,
@@ -878,7 +900,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 12,
   },
   {
-    id: '20-3',
+    displayId: '20-3',
+    id: 'bbc23ec8-df92-58c5-9893-853e4f7ed3e3',
     index: 191,
     act: 5,
     chapter: 20,
@@ -921,7 +944,8 @@ export const ACT5_STAGES: StageDefinition[] = [
     parTicks: 14,
   },
   {
-    id: '20-4',
+    displayId: '20-4',
+    id: '9f448eba-db6a-5cb2-b0e7-68f02e74f4e5',
     index: 192,
     act: 5,
     chapter: 20,

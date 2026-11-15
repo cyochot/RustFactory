@@ -5,7 +5,8 @@ export const PUZZLE_ACT2_STAGES: StageDefinition[] = [
   // 第5章 構造体 パズル・挑戦拡張 (5-9 〜 5-16)
   // =========================================================================
   {
-    id: '5-9',
+    displayId: '5-9',
+    id: 'f02d67b8-17fb-5ba9-bed7-58542c37634e',
     index: 0,
     act: 2,
     chapter: 5,
@@ -88,7 +89,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '5-10',
+    displayId: '5-10',
+    id: '0c23c893-e04b-58eb-8123-1a5ead126bb4',
     index: 0,
     act: 2,
     chapter: 5,
@@ -177,7 +179,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '5-11',
+    displayId: '5-11',
+    id: 'c8c5352e-5e91-522d-bc7f-0b113b345d01',
     index: 0,
     act: 2,
     chapter: 5,
@@ -271,7 +274,8 @@ fn main() {
     parTicks: 12,
   },
   {
-    id: '5-12',
+    displayId: '5-12',
+    id: 'a71ca700-b80a-5bcb-9c08-acb27467c9f2',
     index: 0,
     act: 2,
     chapter: 5,
@@ -350,7 +354,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '5-13',
+    displayId: '5-13',
+    id: '054630ab-1a53-53e5-8f0e-62559507dd13',
     index: 0,
     act: 2,
     chapter: 5,
@@ -446,7 +451,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '5-14',
+    displayId: '5-14',
+    id: '47e6d964-34c0-503b-b7b9-ca62cf48076a',
     index: 0,
     act: 2,
     chapter: 5,
@@ -537,7 +543,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '5-15',
+    displayId: '5-15',
+    id: '3b4bfcf0-aa4f-5711-8936-ac4766059c00',
     index: 0,
     act: 2,
     chapter: 5,
@@ -634,7 +641,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '5-16',
+    displayId: '5-16',
+    id: 'aa57e89b-520e-570f-8ed0-3dde87e472b0',
     index: 0,
     act: 2,
     chapter: 5,
@@ -751,7 +759,8 @@ fn main() {
   // 第6章 enumとパターンマッチング パズル・挑戦拡張 (6-13 〜 6-24)
   // =========================================================================
   {
-    id: '6-13',
+    displayId: '6-13',
+    id: 'b8cacf70-a74c-57ea-bdaf-d5c24934b111',
     index: 0,
     act: 2,
     chapter: 6,
@@ -835,7 +844,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '6-14',
+    displayId: '6-14',
+    id: 'a9d69c8c-39e3-58dc-b93f-074d77f1b9d2',
     index: 0,
     act: 2,
     chapter: 6,
@@ -929,7 +939,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '6-15',
+    displayId: '6-15',
+    id: '9675f3b2-9098-5081-baa8-a36a4ec53ab4',
     index: 0,
     act: 2,
     chapter: 6,
@@ -986,7 +997,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '6-16',
+    displayId: '6-16',
+    id: 'a642e260-2f26-5f89-8ee0-9f27405ba456',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1079,7 +1091,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '6-17',
+    displayId: '6-17',
+    id: 'e8facaca-88b5-5973-98f1-4248dcdad4d0',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1142,7 +1155,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '6-18',
+    displayId: '6-18',
+    id: '34266106-3321-5c2d-9168-172c91df8523',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1257,7 +1271,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '6-19',
+    displayId: '6-19',
+    id: 'b7414456-bea4-51ca-94bb-093e5d09772c',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1352,7 +1367,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '6-20',
+    displayId: '6-20',
+    id: 'a0ccee25-7aa9-5139-9e29-5bb6b8fe7012',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1428,7 +1444,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '6-21',
+    displayId: '6-21',
+    id: 'bd45fe4b-97ce-51ea-a3b3-aa112c3af960',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1522,7 +1539,8 @@ fn main() {
     parTicks: 12,
   },
   {
-    id: '6-22',
+    displayId: '6-22',
+    id: '0dc09086-c946-5991-ac3e-0f967d5ad0e8',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1598,7 +1616,8 @@ fn main() {
     parTicks: 15,
   },
   {
-    id: '6-23',
+    displayId: '6-23',
+    id: '3d5f336d-5d5a-5a55-bb0b-0f06f14d372c',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1687,7 +1706,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '6-24',
+    displayId: '6-24',
+    id: '0173493a-1743-5f71-b043-68a133bce3ce',
     index: 0,
     act: 2,
     chapter: 6,
@@ -1843,7 +1863,8 @@ fn main() {
   // 第7章 モジュールとパス パズル・挑戦拡張 (7-9 〜 7-16)
   // =========================================================================
   {
-    id: '7-9',
+    displayId: '7-9',
+    id: '73562f8a-40ac-509e-8445-4d6ccc8298b4',
     index: 0,
     act: 2,
     chapter: 7,
@@ -1932,7 +1953,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '7-10',
+    displayId: '7-10',
+    id: '7273cc50-a9a7-5c71-a468-708caf117875',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2023,7 +2045,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '7-11',
+    displayId: '7-11',
+    id: '5b6edd0d-a1bc-5c03-8ff9-024a867d04f0',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2098,7 +2121,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '7-12',
+    displayId: '7-12',
+    id: '116ceadb-8d15-54f0-ba3f-88b3f67ea44e',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2186,7 +2210,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '7-13',
+    displayId: '7-13',
+    id: '0ac079f4-88b5-5189-bdc4-4d3a4e098701',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2262,7 +2287,8 @@ fn main() {
     parTicks: 5,
   },
   {
-    id: '7-14',
+    displayId: '7-14',
+    id: '0908821d-5296-51dc-9388-cc0bd3f783f5',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2343,7 +2369,8 @@ fn main() {
     parTicks: 11,
   },
   {
-    id: '7-15',
+    displayId: '7-15',
+    id: '33c3ce56-0349-55bc-8a50-c15e47c87e4d',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2450,7 +2477,8 @@ fn main() {
     parTicks: 12,
   },
   {
-    id: '7-16',
+    displayId: '7-16',
+    id: 'd56b1292-ec0c-50a3-a42d-d1f5b4340960',
     index: 0,
     act: 2,
     chapter: 7,
@@ -2547,7 +2575,8 @@ fn main() {
   // 第8章 一般的なコレクション パズル・挑戦拡張 (8-13 〜 8-24)
   // =========================================================================
   {
-    id: '8-13',
+    displayId: '8-13',
+    id: '0ef458ae-a34d-580a-a67b-888e8ed83efe',
     index: 0,
     act: 2,
     chapter: 8,
@@ -2607,7 +2636,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '8-14',
+    displayId: '8-14',
+    id: '056db8f2-5847-5e13-9b61-f1d6f9ec7501',
     index: 0,
     act: 2,
     chapter: 8,
@@ -2668,7 +2698,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '8-15',
+    displayId: '8-15',
+    id: 'a854babb-ef5d-5c32-9762-d2ca6ff15c51',
     index: 0,
     act: 2,
     chapter: 8,
@@ -2737,7 +2768,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '8-16',
+    displayId: '8-16',
+    id: 'e7b903f4-ca79-5791-8042-61ec29eb9a3b',
     index: 0,
     act: 2,
     chapter: 8,
@@ -2791,7 +2823,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '8-17',
+    displayId: '8-17',
+    id: '7a589476-6bbc-5804-bf17-4e28397fdf75',
     index: 0,
     act: 2,
     chapter: 8,
@@ -2850,7 +2883,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '8-18',
+    displayId: '8-18',
+    id: '1af1c991-6dca-5b76-a75d-9cf99273c780',
     index: 0,
     act: 2,
     chapter: 8,
@@ -2918,7 +2952,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '8-19',
+    displayId: '8-19',
+    id: '77e7ce27-a4fd-5c15-99d0-bb64128a16b5',
     index: 0,
     act: 2,
     chapter: 8,
@@ -3001,7 +3036,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '8-20',
+    displayId: '8-20',
+    id: '80000176-efda-5bc0-8fe2-07fb165a0beb',
     index: 0,
     act: 2,
     chapter: 8,
@@ -3090,7 +3126,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '8-21',
+    displayId: '8-21',
+    id: '57500e74-d953-58fd-9776-75f205d6ebd6',
     index: 0,
     act: 2,
     chapter: 8,
@@ -3152,7 +3189,8 @@ fn main() {
     parTicks: 13,
   },
   {
-    id: '8-22',
+    displayId: '8-22',
+    id: '2f8e6a17-235e-55d7-b8af-33443c7435b2',
     index: 0,
     act: 2,
     chapter: 8,
@@ -3225,7 +3263,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '8-23',
+    displayId: '8-23',
+    id: '22c0ba77-9cf6-5294-a052-97e578c28c55',
     index: 0,
     act: 2,
     chapter: 8,
@@ -3307,7 +3346,8 @@ fn main() {
     parTicks: 15,
   },
   {
-    id: '8-24',
+    displayId: '8-24',
+    id: '3b8c3958-3f0b-5049-881c-0663cb6f152c',
     index: 0,
     act: 2,
     chapter: 8,

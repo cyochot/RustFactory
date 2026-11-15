@@ -115,7 +115,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
               <Play className="h-5 w-5 fill-current" />
               <span>
                 {clearedCount > 0
-                  ? `つづきから遊ぶ (${nextStage.id})`
+                  ? `つづきから遊ぶ (${nextStage.displayId})`
                   : '工房へあそびにいく'}
               </span>
             </button>

@@ -119,6 +119,7 @@ export interface QuickChip {
 
 export interface StageDefinition {
   id: string;
+  displayId: string;
   index: number;
   act: 1 | 2 | 3 | 4 | 5;
   chapter: number;

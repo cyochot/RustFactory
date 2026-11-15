@@ -5,7 +5,8 @@ export const ACT1_STAGES: StageDefinition[] = [
   // 第1章 事始め (1-1 〜 1-8)
   // =========================================================================
   {
-    id: '1-1',
+    displayId: '1-1',
+    id: '3d738a54-da4a-52c6-b1cb-c05b7553fc60',
     index: 1,
     act: 1,
     chapter: 1,
@@ -45,7 +46,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '1-2',
+    displayId: '1-2',
+    id: 'd9ea670f-238a-54b4-879b-8201d9706c66',
     index: 2,
     act: 1,
     chapter: 1,
@@ -86,7 +88,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '1-3',
+    displayId: '1-3',
+    id: '5da9d1d4-abaa-508e-aabc-f56914cf3969',
     index: 3,
     act: 1,
     chapter: 1,
@@ -128,7 +131,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '1-4',
+    displayId: '1-4',
+    id: 'f82c6a65-fb35-5d1b-8409-c3354d315bdd',
     index: 4,
     act: 1,
     chapter: 1,
@@ -169,7 +173,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '1-5',
+    displayId: '1-5',
+    id: '97cc03cb-b7c6-531c-85f4-775660346be9',
     index: 5,
     act: 1,
     chapter: 1,
@@ -208,7 +213,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '1-6',
+    displayId: '1-6',
+    id: '8fbca29b-fc90-5a12-b7f2-1038db1c6314',
     index: 6,
     act: 1,
     chapter: 1,
@@ -247,7 +253,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '1-7',
+    displayId: '1-7',
+    id: 'c3cdcf8a-02f3-54a9-9358-f873fcb627de',
     index: 7,
     act: 1,
     chapter: 1,
@@ -287,7 +294,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '1-8',
+    displayId: '1-8',
+    id: 'b022d65a-c79c-5290-93b0-e24c94ca7c37',
     index: 8,
     act: 1,
     chapter: 1,
@@ -333,7 +341,8 @@ export const ACT1_STAGES: StageDefinition[] = [
   // 第2章 数当てゲーム (2-1 〜 2-4)
   // =========================================================================
   {
-    id: '2-1',
+    displayId: '2-1',
+    id: 'c7db5262-fe5d-5bd7-ada8-b547ecb72e20',
     index: 9,
     act: 1,
     chapter: 2,
@@ -374,7 +383,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '2-2',
+    displayId: '2-2',
+    id: '7fd4e25e-40fb-5133-adee-a1a0221e491d',
     index: 10,
     act: 1,
     chapter: 2,
@@ -415,7 +425,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '2-3',
+    displayId: '2-3',
+    id: 'd9193199-6424-5df5-b90b-3fd3665c6a67',
     index: 11,
     act: 1,
     chapter: 2,
@@ -455,7 +466,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '2-4',
+    displayId: '2-4',
+    id: 'eb488e99-3eeb-56ad-8db6-716fca47d7b3',
     index: 12,
     act: 1,
     chapter: 2,
@@ -501,7 +513,8 @@ export const ACT1_STAGES: StageDefinition[] = [
   // =========================================================================
   // --- 変数 let と不変性 (3-1 〜 3-4) ---
   {
-    id: '3-1',
+    displayId: '3-1',
+    id: '6e466d1c-6446-50a6-9f20-5713b0f001bc',
     index: 13,
     act: 1,
     chapter: 3,
@@ -542,7 +555,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '3-2',
+    displayId: '3-2',
+    id: 'ee29dcf5-b86c-5d88-a78c-bcadf4f31c38',
     index: 14,
     act: 1,
     chapter: 3,
@@ -581,7 +595,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '3-3',
+    displayId: '3-3',
+    id: 'c039a435-cf9f-5b6d-87cf-6bc49c25ab78',
     index: 15,
     act: 1,
     chapter: 3,
@@ -622,7 +637,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '3-4',
+    displayId: '3-4',
+    id: 'b4247893-4f8e-55a6-bf4b-bfd93240b2f4',
     index: 16,
     act: 1,
     chapter: 3,
@@ -665,7 +681,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- 可変性 mut とシャドーイング (3-5 〜 3-8) ---
   {
-    id: '3-5',
+    displayId: '3-5',
+    id: '039e4a88-0c87-5c92-8e17-3cf0b2f296ca',
     index: 17,
     act: 1,
     chapter: 3,
@@ -705,7 +722,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-6',
+    displayId: '3-6',
+    id: '377498db-d9ab-5616-bbb4-224392d3567f',
     index: 18,
     act: 1,
     chapter: 3,
@@ -745,7 +763,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '3-7',
+    displayId: '3-7',
+    id: 'f15cf767-4a5e-5cc3-a583-ef9a0b9066c1',
     index: 19,
     act: 1,
     chapter: 3,
@@ -785,7 +804,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-8',
+    displayId: '3-8',
+    id: 'f7b3e4bb-0166-575d-a501-a676dfc374f0',
     index: 20,
     act: 1,
     chapter: 3,
@@ -828,7 +848,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- データ型 (3-9 〜 3-12) ---
   {
-    id: '3-9',
+    displayId: '3-9',
+    id: 'd1c509c8-ae38-50bc-a8fa-ab48455d6760',
     index: 21,
     act: 1,
     chapter: 3,
@@ -868,7 +889,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-10',
+    displayId: '3-10',
+    id: 'b11c3a34-ea38-54b2-8739-ab0bb02b4dfe',
     index: 22,
     act: 1,
     chapter: 3,
@@ -908,7 +930,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '3-11',
+    displayId: '3-11',
+    id: '8ad7a0c6-1726-556b-ba4d-308098dc63b2',
     index: 23,
     act: 1,
     chapter: 3,
@@ -947,7 +970,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-12',
+    displayId: '3-12',
+    id: '627e9a97-0fe4-5eea-b8d4-b8130c2b866c',
     index: 24,
     act: 1,
     chapter: 3,
@@ -991,7 +1015,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- 関数 fn と戻り値 (3-13 〜 3-16) ---
   {
-    id: '3-13',
+    displayId: '3-13',
+    id: 'ad8723b7-9cb3-5a23-a8e0-f0ddc061b223',
     index: 25,
     act: 1,
     chapter: 3,
@@ -1030,7 +1055,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-14',
+    displayId: '3-14',
+    id: '0a3c9f77-c645-5cd5-af0e-bbc385222479',
     index: 26,
     act: 1,
     chapter: 3,
@@ -1070,7 +1096,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '3-15',
+    displayId: '3-15',
+    id: '041cf963-f0ba-508c-92a4-f44dac3db59d',
     index: 27,
     act: 1,
     chapter: 3,
@@ -1109,7 +1136,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-16',
+    displayId: '3-16',
+    id: 'f734e8a9-cba0-5a6b-814c-dc38fc85ee09',
     index: 28,
     act: 1,
     chapter: 3,
@@ -1150,7 +1178,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- 条件分岐 if / else (3-17 〜 3-20) ---
   {
-    id: '3-17',
+    displayId: '3-17',
+    id: 'e41c8968-0b68-5dca-a17c-0cdd5b6ac63d',
     index: 29,
     act: 1,
     chapter: 3,
@@ -1190,7 +1219,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-18',
+    displayId: '3-18',
+    id: '8adb3fdd-da52-5b73-a97b-ccffec78fe4f',
     index: 30,
     act: 1,
     chapter: 3,
@@ -1228,7 +1258,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '3-19',
+    displayId: '3-19',
+    id: 'a90971e7-5050-5236-ba1f-7abfe3891ba7',
     index: 31,
     act: 1,
     chapter: 3,
@@ -1267,7 +1298,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '3-20',
+    displayId: '3-20',
+    id: 'f66e8848-d720-552b-905d-bc7647dd47fa',
     index: 32,
     act: 1,
     chapter: 3,
@@ -1310,7 +1342,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- 繰り返し loop / while / for (3-21 〜 3-24) ---
   {
-    id: '3-21',
+    displayId: '3-21',
+    id: '91c103b3-4b14-5702-825b-17ba9f9def66',
     index: 33,
     act: 1,
     chapter: 3,
@@ -1352,7 +1385,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '3-22',
+    displayId: '3-22',
+    id: '3164f81c-a2e0-50c3-8b9c-ed58da4e0c6b',
     index: 34,
     act: 1,
     chapter: 3,
@@ -1392,7 +1426,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '3-23',
+    displayId: '3-23',
+    id: '156c1e98-7679-5841-bb20-4bc9e0bd9ea6',
     index: 35,
     act: 1,
     chapter: 3,
@@ -1432,7 +1467,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 9,
   },
   {
-    id: '3-24',
+    displayId: '3-24',
+    id: '4197175c-0415-5922-90de-969c839b1e44',
     index: 36,
     act: 1,
     chapter: 3,
@@ -1482,7 +1518,8 @@ export const ACT1_STAGES: StageDefinition[] = [
   // =========================================================================
   // --- 所有権と Move (4-1 〜 4-4) ---
   {
-    id: '4-1',
+    displayId: '4-1',
+    id: '50da55a5-9f54-56a0-9ca7-ad9d72ff3541',
     index: 37,
     act: 1,
     chapter: 4,
@@ -1523,7 +1560,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '4-2',
+    displayId: '4-2',
+    id: '2cd33dd4-9627-54ce-97b8-a711e77061e4',
     index: 38,
     act: 1,
     chapter: 4,
@@ -1563,7 +1601,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '4-3',
+    displayId: '4-3',
+    id: '3bfa7dd4-ab23-5565-9b0f-a597d3e73d62',
     index: 39,
     act: 1,
     chapter: 4,
@@ -1603,7 +1642,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '4-4',
+    displayId: '4-4',
+    id: '05bf262f-5786-5234-b6cc-9de582a1a776',
     index: 40,
     act: 1,
     chapter: 4,
@@ -1649,7 +1689,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- 参照と借用 &T / &mut T (4-5 〜 4-8) ---
   {
-    id: '4-5',
+    displayId: '4-5',
+    id: '982d2f3c-0ac0-53b8-a8c4-e8d038dd8fa4',
     index: 41,
     act: 1,
     chapter: 4,
@@ -1692,7 +1733,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '4-6',
+    displayId: '4-6',
+    id: '780244e4-ee33-5914-93ed-d60d1bf06489',
     index: 42,
     act: 1,
     chapter: 4,
@@ -1733,7 +1775,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '4-7',
+    displayId: '4-7',
+    id: '93d94563-e767-55af-911d-43a5c6a17067',
     index: 43,
     act: 1,
     chapter: 4,
@@ -1776,7 +1819,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '4-8',
+    displayId: '4-8',
+    id: 'b93e4f37-2a9d-5313-84f8-af74f2395f5e',
     index: 44,
     act: 1,
     chapter: 4,
@@ -1822,7 +1866,8 @@ export const ACT1_STAGES: StageDefinition[] = [
 
   // --- スライス記法 &[T] (4-9 〜 4-12) ---
   {
-    id: '4-9',
+    displayId: '4-9',
+    id: 'f5a0f239-cfc0-553b-8c39-f24be2137f2e',
     index: 45,
     act: 1,
     chapter: 4,
@@ -1863,7 +1908,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '4-10',
+    displayId: '4-10',
+    id: 'be100168-6dd5-54c6-b965-8e2b5f48f2bd',
     index: 46,
     act: 1,
     chapter: 4,
@@ -1903,7 +1949,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '4-11',
+    displayId: '4-11',
+    id: '9ba6d447-0926-51b4-b323-bcd6e3074cc8',
     index: 47,
     act: 1,
     chapter: 4,
@@ -1943,7 +1990,8 @@ export const ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '4-12',
+    displayId: '4-12',
+    id: '9173a523-fa9e-5b50-adc2-b98d38e4c2a7',
     index: 48,
     act: 1,
     chapter: 4,

@@ -11,12 +11,38 @@ const chapters = [
 
 const patterns: PuzzlePattern[] = ['vault', 'switch', 'conveyor', 'loop', 'function', 'straight'];
 
-const makePuzzle = (chapter: number, chapterTitle: string, number: number): StageDefinition => {
+const puzzleIdentities = [
+  { displayId: '17-9', id: 'fafc7783-da70-5802-b3f7-adfedcf62c9b' },
+  { displayId: '17-10', id: '56ba2a08-9045-5e05-a06d-61cd7405338b' },
+  { displayId: '17-11', id: '370edeb4-9a0c-5c13-9068-2b556311ff20' },
+  { displayId: '17-12', id: '1f285b92-a6db-5f8d-8f4d-61ae58e9d4bd' },
+  { displayId: '17-13', id: '3dd92b1f-880f-5afb-b8a6-e3881793cf25' },
+  { displayId: '17-14', id: '056e99f3-0ba8-5565-b054-7898e7d05c9d' },
+  { displayId: '18-9', id: '18f2f9de-a13d-5eaf-b7b2-ac2d050524c4' },
+  { displayId: '18-10', id: '48e019d2-b72d-58e6-9d3a-bab9d88bec16' },
+  { displayId: '18-11', id: '0d8bcb34-fd7a-5522-9511-5f5740dd9a69' },
+  { displayId: '18-12', id: 'dac8d922-e573-53fa-9687-605dff9742b8' },
+  { displayId: '18-13', id: '330da330-a4f6-51bc-936f-91f07c070fc4' },
+  { displayId: '18-14', id: '0ade949b-3d7b-5a3c-8cc7-713d5b8450c1' },
+  { displayId: '19-9', id: 'd4f31eb7-b8cb-5fc1-aa63-9023f9844fc4' },
+  { displayId: '19-10', id: 'ea2c70b1-4a0b-5616-b4ad-ba8449d43429' },
+  { displayId: '19-11', id: 'f097b407-b547-5f31-90f7-d20b5e3d0141' },
+  { displayId: '19-12', id: '2ed6f4f3-91b7-5f1c-9f1c-9ce8d214193d' },
+  { displayId: '19-13', id: '3b75de6b-d0a6-5d91-a833-71112fe89425' },
+  { displayId: '19-14', id: '63df2438-d620-5ce9-86bc-c3703825cf8f' },
+  { displayId: '20-9', id: '16ed0178-ef2e-5a7d-a8ba-2991d8158f21' },
+  { displayId: '20-10', id: 'd4dc4dd5-37fe-55b0-840d-6f5cd5c28449' },
+  { displayId: '20-11', id: 'df52b0f7-29aa-5965-8db4-b5616f725645' },
+  { displayId: '20-12', id: 'dbe5cb60-8cd1-5370-a936-ac55e631e484' },
+  { displayId: '20-13', id: 'fd54d254-8058-5ea2-b219-edc362ccc7f3' },
+  { displayId: '20-14', id: '43ab1131-4d40-515c-a2d4-442f803d6756' },
+] as const;
+
+const makePuzzle = (chapter: number, chapterTitle: string, number: number, identity: { id: string; displayId: string }): StageDefinition => {
   const pattern = patterns[number - 9];
   const distance = pattern === 'conveyor' ? 5 : 3 + ((chapter + number) % 4);
   const target = Math.max(3, distance - 1);
   const kind: StageKind = number === 14 ? 'challenge' : number >= 12 ? 'puzzle' : 'basic';
-  const id = `${chapter}-${number}`;
   const width = distance + 1;
   const walls = [
     ...Array.from({ length: width }, (_, x) => ({ x, y: 0 })),
@@ -124,7 +150,8 @@ const makePuzzle = (chapter: number, chapterTitle: string, number: number): Stag
   }
 
   return {
-    id,
+    id: identity.id,
+    displayId: identity.displayId,
     index: 0,
     act: 5,
     chapter,
@@ -147,6 +174,6 @@ const makePuzzle = (chapter: number, chapterTitle: string, number: number): Stag
   };
 };
 
-export const PUZZLE_ACT5_STAGES: StageDefinition[] = chapters.flatMap(({ chapter, title }) =>
-  patterns.map((_, offset) => makePuzzle(chapter, title, 9 + offset))
+export const PUZZLE_ACT5_STAGES: StageDefinition[] = chapters.flatMap(({ chapter, title }, chapterIndex) =>
+  patterns.map((_, offset) => makePuzzle(chapter, title, 9 + offset, puzzleIdentities[chapterIndex * patterns.length + offset]))
 );

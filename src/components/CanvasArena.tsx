@@ -6,6 +6,7 @@ import {
   StageDefinition,
   TickSnapshot,
 } from '../types/game';
+import { getStageDisplayTitle } from '../data/stages';
 
 import { getPrintDialogueTiming } from '../engine/dialogueTiming';
 
@@ -1362,11 +1363,11 @@ export const CanvasArena: React.FC<CanvasArenaProps> = ({
       <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-3">
         <div className="pointer-events-auto flex items-center gap-2 rounded-xl border-2 border-[#4A352B] bg-[#FFFDF9] px-3 py-1.5 shadow-[0_3px_0_#D9C0A3]">
           <span className="font-code text-xs font-bold text-[#EA580C]">
-            {stage.id}
+            {stage.displayId}
           </span>
           <span className="text-xs text-[#7C6154]">·</span>
           <span className="text-xs font-bold text-[#4A352B] truncate max-w-[230px]">
-            {stage.title}
+            {getStageDisplayTitle(stage)}
           </span>
         </div>
 

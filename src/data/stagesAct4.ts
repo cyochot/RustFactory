@@ -5,7 +5,8 @@ export const ACT4_STAGES: StageDefinition[] = [
   // 第13章 イテレーターとクロージャー (13-1 〜 13-8)
   // =========================================================================
   {
-    id: '13-1',
+    displayId: '13-1',
+    id: 'f1594c5f-7e74-5a6c-858d-2a806801e85a',
     index: 129,
     act: 4,
     chapter: 13,
@@ -43,7 +44,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '13-2',
+    displayId: '13-2',
+    id: '8e873b83-e9e8-50cc-b7e6-cbc2226e18e1',
     index: 130,
     act: 4,
     chapter: 13,
@@ -83,7 +85,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '13-3',
+    displayId: '13-3',
+    id: '8e146ba4-7fe7-51b3-a24f-8f16f3c60bad',
     index: 131,
     act: 4,
     chapter: 13,
@@ -122,7 +125,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '13-4',
+    displayId: '13-4',
+    id: 'e2bd512f-e44e-578d-9846-2df1fac16e1c',
     index: 132,
     act: 4,
     chapter: 13,
@@ -161,7 +165,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '13-5',
+    displayId: '13-5',
+    id: '3c608b20-614b-5590-b0a8-3b0e88916620',
     index: 133,
     act: 4,
     chapter: 13,
@@ -201,7 +206,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '13-6',
+    displayId: '13-6',
+    id: '369417a9-c001-5e62-9e19-8b7764132ded',
     index: 134,
     act: 4,
     chapter: 13,
@@ -239,7 +245,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '13-7',
+    displayId: '13-7',
+    id: '764fd1a2-ae86-530d-937d-be03f7ec61f9',
     index: 135,
     act: 4,
     chapter: 13,
@@ -287,7 +294,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '13-8',
+    displayId: '13-8',
+    id: '8fb6421e-5d44-51e3-bca2-4842354cde9a',
     index: 136,
     act: 4,
     chapter: 13,
@@ -335,7 +343,8 @@ export const ACT4_STAGES: StageDefinition[] = [
   // 第14章 Cargoとcrates.io (14-1 〜 14-4)
   // =========================================================================
   {
-    id: '14-1',
+    displayId: '14-1',
+    id: '20649eef-f71c-5821-b966-a1e23b920e2f',
     index: 137,
     act: 4,
     chapter: 14,
@@ -374,7 +383,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '14-2',
+    displayId: '14-2',
+    id: '1d1d1eae-a488-5133-9fdd-a0b378a96eaa',
     index: 138,
     act: 4,
     chapter: 14,
@@ -413,7 +423,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '14-3',
+    displayId: '14-3',
+    id: '9de2fcd1-59e3-5e8c-85a5-46e76c89a7c2',
     index: 139,
     act: 4,
     chapter: 14,
@@ -453,7 +464,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '14-4',
+    displayId: '14-4',
+    id: '12c1af9f-0396-5ba7-826d-d039f93befd9',
     index: 140,
     act: 4,
     chapter: 14,
@@ -499,7 +511,8 @@ export const ACT4_STAGES: StageDefinition[] = [
   // =========================================================================
   // --- Box<T> / Deref / Drop (15-1 〜 15-4) ---
   {
-    id: '15-1',
+    displayId: '15-1',
+    id: '5745f0f2-7b62-5d82-a59e-c01c09ac7b17',
     index: 141,
     act: 4,
     chapter: 15,
@@ -537,7 +550,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '15-2',
+    displayId: '15-2',
+    id: 'b901a04c-139c-52fd-9d85-acc046a59495',
     index: 142,
     act: 4,
     chapter: 15,
@@ -576,7 +590,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '15-3',
+    displayId: '15-3',
+    id: 'a5eb96f6-5132-5eff-afab-00ba03aaa75f',
     index: 143,
     act: 4,
     chapter: 15,
@@ -615,7 +630,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '15-4',
+    displayId: '15-4',
+    id: '6df8d4cc-5e97-58e3-b339-01c6055e64de',
     index: 144,
     act: 4,
     chapter: 15,
@@ -655,7 +671,8 @@ export const ACT4_STAGES: StageDefinition[] = [
 
   // --- Rc<T> 参照カウント (15-5 〜 15-8) ---
   {
-    id: '15-5',
+    displayId: '15-5',
+    id: 'bb17e121-9dc5-594a-ace4-b233fef8e9d4',
     index: 145,
     act: 4,
     chapter: 15,
@@ -694,7 +711,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '15-6',
+    displayId: '15-6',
+    id: '89fad8cc-d58d-5e7b-b0d8-b9c93b216b4f',
     index: 146,
     act: 4,
     chapter: 15,
@@ -733,7 +751,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '15-7',
+    displayId: '15-7',
+    id: 'e2eb4f07-4104-50a4-82ba-f7f105174fe4',
     index: 147,
     act: 4,
     chapter: 15,
@@ -772,7 +791,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '15-8',
+    displayId: '15-8',
+    id: 'fb8c2141-1beb-5df9-a172-a207752b4715',
     index: 148,
     act: 4,
     chapter: 15,
@@ -818,7 +838,8 @@ export const ACT4_STAGES: StageDefinition[] = [
 
   // --- RefCell<T> 内部可変性 (15-9 〜 15-12) ---
   {
-    id: '15-9',
+    displayId: '15-9',
+    id: 'e54dc38b-c506-5de5-b893-6ffe329eb759',
     index: 149,
     act: 4,
     chapter: 15,
@@ -856,7 +877,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 3,
   },
   {
-    id: '15-10',
+    displayId: '15-10',
+    id: '4f384d79-8afd-55ea-b24f-1048346a3680',
     index: 150,
     act: 4,
     chapter: 15,
@@ -895,7 +917,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '15-11',
+    displayId: '15-11',
+    id: 'ffd83129-76d5-5bed-bef0-56d280dbddab',
     index: 151,
     act: 4,
     chapter: 15,
@@ -933,7 +956,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '15-12',
+    displayId: '15-12',
+    id: '451659e2-c700-5579-a149-c060ef9f5d3a',
     index: 152,
     act: 4,
     chapter: 15,
@@ -978,7 +1002,8 @@ export const ACT4_STAGES: StageDefinition[] = [
   // =========================================================================
   // --- thread::spawn と join() (16-1 〜 16-4) ---
   {
-    id: '16-1',
+    displayId: '16-1',
+    id: 'c3c83e83-0264-5981-b647-107682a9c530',
     index: 153,
     act: 4,
     chapter: 16,
@@ -1017,7 +1042,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '16-2',
+    displayId: '16-2',
+    id: '5cfe7a0a-c007-56b0-8587-9900dbdbdb47',
     index: 154,
     act: 4,
     chapter: 16,
@@ -1058,7 +1084,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '16-3',
+    displayId: '16-3',
+    id: '0d3fd059-b354-5e1a-9679-7335cc4bb382',
     index: 155,
     act: 4,
     chapter: 16,
@@ -1099,7 +1126,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '16-4',
+    displayId: '16-4',
+    id: 'b523c4fe-6466-578e-8b4a-fe84bcb1d1da',
     index: 156,
     act: 4,
     chapter: 16,
@@ -1140,7 +1168,8 @@ export const ACT4_STAGES: StageDefinition[] = [
 
   // --- mpsc::channel メッセージ受け渡し (16-5 〜 16-8) ---
   {
-    id: '16-5',
+    displayId: '16-5',
+    id: '92b31b2c-f643-5807-bcb0-53b326b64023',
     index: 157,
     act: 4,
     chapter: 16,
@@ -1180,7 +1209,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '16-6',
+    displayId: '16-6',
+    id: '54a4a74f-b8a4-5f45-b173-51cfb4a06882',
     index: 158,
     act: 4,
     chapter: 16,
@@ -1219,7 +1249,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '16-7',
+    displayId: '16-7',
+    id: 'b7d9d909-f828-593f-abda-b1da35da1eab',
     index: 159,
     act: 4,
     chapter: 16,
@@ -1258,7 +1289,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '16-8',
+    displayId: '16-8',
+    id: 'c7bf8ef0-e8e5-5cc7-8ed5-a61821b74adc',
     index: 160,
     act: 4,
     chapter: 16,
@@ -1300,7 +1332,8 @@ export const ACT4_STAGES: StageDefinition[] = [
 
   // --- Arc<Mutex<T>> 状態共有並行性 (16-9 〜 16-12) ---
   {
-    id: '16-9',
+    displayId: '16-9',
+    id: '744c7878-de43-5906-a5f9-9e47b5af88a2',
     index: 161,
     act: 4,
     chapter: 16,
@@ -1339,7 +1372,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '16-10',
+    displayId: '16-10',
+    id: '634a5c12-0856-56f9-b72e-12f52e69d796',
     index: 162,
     act: 4,
     chapter: 16,
@@ -1378,7 +1412,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '16-11',
+    displayId: '16-11',
+    id: '5e6662ee-55f1-5067-80ad-526eee7c9aaa',
     index: 163,
     act: 4,
     chapter: 16,
@@ -1417,7 +1452,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '16-12',
+    displayId: '16-12',
+    id: '15df331e-f034-5353-afac-6c7be3f3c60e',
     index: 164,
     act: 4,
     chapter: 16,
@@ -1459,7 +1495,8 @@ export const ACT4_STAGES: StageDefinition[] = [
 
   // --- Send / Sync と並行性総まとめ (16-13 〜 16-16) ---
   {
-    id: '16-13',
+    displayId: '16-13',
+    id: '59331df0-516f-5b5b-a7d8-00b6a8565f58',
     index: 165,
     act: 4,
     chapter: 16,
@@ -1500,7 +1537,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '16-14',
+    displayId: '16-14',
+    id: '7dce4831-1304-5e03-bc52-fe604de23da8',
     index: 166,
     act: 4,
     chapter: 16,
@@ -1538,7 +1576,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 9,
   },
   {
-    id: '16-15',
+    displayId: '16-15',
+    id: 'e345d21f-9d47-5057-9d01-dcf0e549f33f',
     index: 167,
     act: 4,
     chapter: 16,
@@ -1580,7 +1619,8 @@ export const ACT4_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '16-16',
+    displayId: '16-16',
+    id: '4f0d82ae-fb14-5e35-a27d-2950a1fac060',
     index: 168,
     act: 4,
     chapter: 16,

@@ -5,7 +5,8 @@ export const PUZZLE_ACT3_STAGES: StageDefinition[] = [
   // 第9章 エラー処理 パズル・挑戦拡張 (9-13 〜 9-24)
   // =========================================================================
   {
-    id: '9-13',
+    displayId: '9-13',
+    id: 'e191b416-e095-5ee1-9b79-8582cbfe3795',
     index: 0,
     act: 3,
     chapter: 9,
@@ -70,7 +71,8 @@ export const PUZZLE_ACT3_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '9-14',
+    displayId: '9-14',
+    id: '347b5576-609f-5487-9baa-3c95ffef4880',
     index: 0,
     act: 3,
     chapter: 9,
@@ -146,7 +148,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '9-15',
+    displayId: '9-15',
+    id: '12b4325e-3fae-5070-b5cc-4ac200fee821',
     index: 0,
     act: 3,
     chapter: 9,
@@ -233,7 +236,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '9-16',
+    displayId: '9-16',
+    id: 'bb40b425-1e21-5e54-b451-89d99fcf5820',
     index: 0,
     act: 3,
     chapter: 9,
@@ -299,7 +303,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '9-17',
+    displayId: '9-17',
+    id: '83c80558-999e-5c81-8598-4de72b9acf09',
     index: 0,
     act: 3,
     chapter: 9,
@@ -379,7 +384,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '9-18',
+    displayId: '9-18',
+    id: 'd2207f99-4376-534a-998a-71b6e795a295',
     index: 0,
     act: 3,
     chapter: 9,
@@ -469,7 +475,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '9-19',
+    displayId: '9-19',
+    id: '2678885e-6411-58e7-aade-8435ea619487',
     index: 0,
     act: 3,
     chapter: 9,
@@ -550,7 +557,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '9-20',
+    displayId: '9-20',
+    id: 'dd2b40aa-e38b-557a-9561-b4859e3a9a15',
     index: 0,
     act: 3,
     chapter: 9,
@@ -631,7 +639,8 @@ fn main() {
     parTicks: 13,
   },
   {
-    id: '9-21',
+    displayId: '9-21',
+    id: '442a7e4e-f02a-5fd6-aea4-a12ac226d4ad',
     index: 0,
     act: 3,
     chapter: 9,
@@ -702,7 +711,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '9-22',
+    displayId: '9-22',
+    id: 'a095b4cf-0ea6-52e0-9488-b0f3af96c4af',
     index: 0,
     act: 3,
     chapter: 9,
@@ -780,7 +790,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '9-23',
+    displayId: '9-23',
+    id: '0788c04e-789b-5505-9656-d78c0da40b9b',
     index: 0,
     act: 3,
     chapter: 9,
@@ -867,7 +878,8 @@ fn main() {
     parTicks: 12,
   },
   {
-    id: '9-24',
+    displayId: '9-24',
+    id: 'd926b74c-71b4-5d77-9b38-3c14adde08ca',
     index: 0,
     act: 3,
     chapter: 9,
@@ -968,7 +980,8 @@ fn main() {
   // 第10章 ジェネリック型・トレイト・ライフタイム パズル・挑戦拡張 (10-13 〜 10-24)
   // =========================================================================
   {
-    id: '10-13',
+    displayId: '10-13',
+    id: '8b3d8b50-360b-5151-aed0-ad7cc476ab70',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1043,7 +1056,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '10-14',
+    displayId: '10-14',
+    id: '31e70608-d2d8-5714-8eee-3fba590ecdb3',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1118,7 +1132,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '10-15',
+    displayId: '10-15',
+    id: '8f71099b-27eb-5844-b594-aed9c6e540eb',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1214,7 +1229,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '10-16',
+    displayId: '10-16',
+    id: '28016ab7-3c5e-5472-bc4c-631fcb94ecd1',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1314,7 +1330,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '10-17',
+    displayId: '10-17',
+    id: '843c371a-ec86-5cad-9cbb-279b2feaee78',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1377,7 +1394,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '10-18',
+    displayId: '10-18',
+    id: '49691899-0b21-5dcf-be1b-4c3a581670c6',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1443,7 +1461,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '10-19',
+    displayId: '10-19',
+    id: '07f2c040-9791-54e8-8788-09370c49cc5b',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1549,7 +1568,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '10-20',
+    displayId: '10-20',
+    id: '455cf048-9f16-530c-9359-1bb15e4b9236',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1630,7 +1650,8 @@ fn main() {
     parTicks: 15,
   },
   {
-    id: '10-21',
+    displayId: '10-21',
+    id: '08ae2516-d978-50bb-a1af-ded3ae253058',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1722,7 +1743,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '10-22',
+    displayId: '10-22',
+    id: '73901717-26d9-5611-a9ef-6d36f09050ed',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1817,7 +1839,8 @@ fn main() {
     parTicks: 13,
   },
   {
-    id: '10-23',
+    displayId: '10-23',
+    id: '2eccc816-7f2d-5d01-af35-7bccdb1aa496',
     index: 0,
     act: 3,
     chapter: 10,
@@ -1921,7 +1944,8 @@ fn main() {
     parTicks: 11,
   },
   {
-    id: '10-24',
+    displayId: '10-24',
+    id: '3d87fe8b-b0c2-53a1-bb42-215675cc5c53',
     index: 0,
     act: 3,
     chapter: 10,
@@ -2061,7 +2085,8 @@ fn main() {
   // 第11章 自動テスト パズル・挑戦拡張 (11-9 〜 11-16)
   // =========================================================================
   {
-    id: '11-9',
+    displayId: '11-9',
+    id: 'cd6ee93f-2e76-53dc-9286-0b0e7c0188c3',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2139,7 +2164,8 @@ fn main() {
     parTicks: 4,
   },
   {
-    id: '11-10',
+    displayId: '11-10',
+    id: 'b4812899-7dd0-58bb-9d34-f53ab5d04515',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2225,7 +2251,8 @@ fn main() {
     parTicks: 9,
   },
   {
-    id: '11-11',
+    displayId: '11-11',
+    id: '0b91ddc0-b6f7-5e13-912f-333b7f29bdb1',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2300,7 +2327,8 @@ fn main() {
     parTicks: 5,
   },
   {
-    id: '11-12',
+    displayId: '11-12',
+    id: 'f904680c-0b52-5074-8b88-fc6ee3f21fdc',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2378,7 +2406,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '11-13',
+    displayId: '11-13',
+    id: 'ba9a9ab0-13b7-56aa-888e-5528cf88b85f',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2468,7 +2497,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '11-14',
+    displayId: '11-14',
+    id: '4a4bab84-ce14-50b1-9a7f-d1acadec111a',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2552,7 +2582,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '11-15',
+    displayId: '11-15',
+    id: '35e89f94-e94e-5719-a257-93db17b70a38',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2649,7 +2680,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '11-16',
+    displayId: '11-16',
+    id: 'd50a425c-2aac-553f-a6c3-87f3bfa09626',
     index: 0,
     act: 3,
     chapter: 11,
@@ -2759,7 +2791,8 @@ fn main() {
   // 第12章 入出力CLIプロジェクト パズル・挑戦拡張 (12-9 〜 12-16)
   // =========================================================================
   {
-    id: '12-9',
+    displayId: '12-9',
+    id: 'd7653986-119c-5386-ae39-f3e78c4799f6',
     index: 0,
     act: 3,
     chapter: 12,
@@ -2829,7 +2862,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '12-10',
+    displayId: '12-10',
+    id: '986e5ff1-ac6c-57dc-90f1-74296736adc1',
     index: 0,
     act: 3,
     chapter: 12,
@@ -2922,7 +2956,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '12-11',
+    displayId: '12-11',
+    id: '990fa11d-9836-56be-9f70-6e2e77edde16',
     index: 0,
     act: 3,
     chapter: 12,
@@ -3019,7 +3054,8 @@ fn main() {
     parTicks: 11,
   },
   {
-    id: '12-12',
+    displayId: '12-12',
+    id: '71bac323-56c1-54c5-a7b2-4d7db7c3abf3',
     index: 0,
     act: 3,
     chapter: 12,
@@ -3092,7 +3128,8 @@ fn main() {
     parTicks: 11,
   },
   {
-    id: '12-13',
+    displayId: '12-13',
+    id: 'b87d47fc-af3a-5703-8836-a76d69a54774',
     index: 0,
     act: 3,
     chapter: 12,
@@ -3188,7 +3225,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '12-14',
+    displayId: '12-14',
+    id: 'c831c1c1-a891-53bd-aff3-1a64ff93dec1',
     index: 0,
     act: 3,
     chapter: 12,
@@ -3283,7 +3321,8 @@ fn main() {
     parTicks: 15,
   },
   {
-    id: '12-15',
+    displayId: '12-15',
+    id: '023ce4f0-00a6-583a-9c3a-a016b2f8dc2e',
     index: 0,
     act: 3,
     chapter: 12,
@@ -3388,7 +3427,8 @@ fn main() {
     parTicks: 15,
   },
   {
-    id: '12-16',
+    displayId: '12-16',
+    id: '4d21d984-cae8-55b3-8b37-4ee94ed21ea6',
     index: 0,
     act: 3,
     chapter: 12,

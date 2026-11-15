@@ -5,12 +5,9 @@ import {
   Unlock,
   CheckCircle2,
   Trash2,
-  ChevronDown,
-  ChevronRight,
   Compass,
-  ChevronsUpDown,
 } from 'lucide-react';
-import { ACT_META } from '../data/stages';
+import { ACT_META, getStageDisplayTitle } from '../data/stages';
 import { StageDefinition, StageKind, StageProgress } from '../types/game';
 
 type AtlasStatusFilter = 'all' | 'uncleared' | 'cleared';
@@ -51,67 +48,31 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
   onClose,
 }) => {
   const activeStage = stages.find((s) => s.id === currentStageId) ?? stages[0];
-  const [selectedAct, setSelectedAct] = useState<1 | 2 | 3 | 4 | 5>(activeStage.act);
+  const [selectedAct, setSelectedAct] = useState<1 | 2 | 3 | 4 | 5 | 'all'>('all');
   const [statusFilter, setStatusFilter] = useState<AtlasStatusFilter>('all');
   const [kindFilter, setKindFilter] = useState<AtlasKindFilter>('all');
-  const [expandedChapters, setExpandedChapters] = useState<Set<number>>(
-    () => new Set([activeStage.chapter])
-  );
   const [pendingJumpId, setPendingJumpId] = useState<string | null>(null);
   const stageRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const actStages = useMemo(
-    () => stages.filter((s) => s.act === selectedAct),
+    () => stages
+      .filter((s) => selectedAct === 'all' || s.act === selectedAct)
+      .sort((a, b) => a.index - b.index),
     [stages, selectedAct]
   );
 
-  const chapterGroups = useMemo(() => {
-    const groups: Array<{
-      chapter: number;
-      chapterTitle: string;
-      allStages: StageDefinition[];
-      filteredStages: StageDefinition[];
-      clearedCount: number;
-    }> = [];
-    const byChap = new Map<number, (typeof groups)[number]>();
-
-    for (const st of actStages) {
-      let grp = byChap.get(st.chapter);
-      if (!grp) {
-        grp = {
-          chapter: st.chapter,
-          chapterTitle: st.chapterTitle,
-          allStages: [],
-          filteredStages: [],
-          clearedCount: 0,
-        };
-        byChap.set(st.chapter, grp);
-        groups.push(grp);
-      }
-      grp.allStages.push(st);
+  const filteredStages = useMemo(
+    () => actStages.filter((st) => {
       const isCleared = Boolean(progress[st.id]?.cleared);
-      if (isCleared) grp.clearedCount += 1;
-
       const matchesStatus =
         statusFilter === 'all' ||
         (statusFilter === 'cleared' && isCleared) ||
         (statusFilter === 'uncleared' && !isCleared);
       const matchesKind = kindFilter === 'all' || getStageKind(st) === kindFilter;
-      if (matchesStatus && matchesKind) {
-        grp.filteredStages.push(st);
-      }
-    }
-    return groups;
-  }, [actStages, progress, statusFilter, kindFilter]);
-
-  const visibleGroups = useMemo(
-    () => chapterGroups.filter((g) => g.filteredStages.length > 0),
-    [chapterGroups]
+      return matchesStatus && matchesKind;
+    }),
+    [actStages, progress, statusFilter, kindFilter]
   );
-
-  const allVisibleExpanded =
-    visibleGroups.length > 0 &&
-    visibleGroups.every((g) => expandedChapters.has(g.chapter));
 
   useEffect(() => {
     if (!pendingJumpId) return;
@@ -120,58 +81,16 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
       el.scrollIntoView({ block: 'center', behavior: 'smooth' });
       setPendingJumpId(null);
     }
-  }, [pendingJumpId, selectedAct, expandedChapters, statusFilter]);
+  }, [pendingJumpId, selectedAct, statusFilter, kindFilter]);
 
-  const handleSelectAct = (actNum: 1 | 2 | 3 | 4 | 5) => {
+  const handleSelectAct = (actNum: 1 | 2 | 3 | 4 | 5 | 'all') => {
     setSelectedAct(actNum);
-    const actChapters = Array.from(
-      new Set(stages.filter((s) => s.act === actNum).map((s) => s.chapter))
-    );
-    setExpandedChapters((prev) => {
-      if (actChapters.some((ch) => prev.has(ch))) return prev;
-      const next = new Set(prev);
-      if (actNum === activeStage.act) {
-        next.add(activeStage.chapter);
-      } else if (actChapters.length > 0) {
-        next.add(actChapters[0]);
-      }
-      return next;
-    });
-  };
-
-  const toggleChapter = (chapter: number) => {
-    setExpandedChapters((prev) => {
-      const next = new Set(prev);
-      if (next.has(chapter)) {
-        next.delete(chapter);
-      } else {
-        next.add(chapter);
-      }
-      return next;
-    });
-  };
-
-  const handleToggleExpandAll = () => {
-    setExpandedChapters((prev) => {
-      const next = new Set(prev);
-      if (allVisibleExpanded) {
-        for (const g of visibleGroups) next.delete(g.chapter);
-      } else {
-        for (const g of visibleGroups) next.add(g.chapter);
-      }
-      return next;
-    });
   };
 
   const handleJumpToCurrent = () => {
-    setSelectedAct(activeStage.act);
+    setSelectedAct('all');
     setStatusFilter('all');
     setKindFilter('all');
-    setExpandedChapters((prev) => {
-      const next = new Set(prev);
-      next.add(activeStage.chapter);
-      return next;
-    });
     setPendingJumpId(activeStage.id);
   };
 
@@ -238,11 +157,15 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
 
         {/* 5-Act Segmented Tabs */}
         <div className="flex flex-wrap gap-1.5 border-b border-[#E5D3BC] bg-[#FFFDF9] px-5 py-3">
-          {ACT_META.map((act) => {
+          {[{ act: 'all' as const, title: '全体の進行順', subtitle: '全384ステージ' }, ...ACT_META.map((act) => ({
+            act: act.act,
+            title: act.title,
+            subtitle: act.chaptersLabel,
+          }))].map((act) => {
             const countCleared = stages.filter(
-              (s) => s.act === act.act && progress[s.id]?.cleared
+              (s) => (act.act === 'all' || s.act === act.act) && progress[s.id]?.cleared
             ).length;
-            const countTotal = stages.filter((s) => s.act === act.act).length;
+            const countTotal = stages.filter((s) => act.act === 'all' || s.act === act.act).length;
             const active = selectedAct === act.act;
             return (
               <button
@@ -263,7 +186,7 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
                     active ? 'text-white/90' : 'text-[#7C6154]'
                   }`}
                 >
-                  {act.chaptersLabel} · {countCleared}/{countTotal}
+                  {act.subtitle} · {countCleared}/{countTotal}
                 </div>
               </button>
             );
@@ -340,28 +263,18 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={handleToggleExpandAll}
-              disabled={visibleGroups.length === 0}
-              className="flex min-h-[36px] items-center gap-1.5 rounded-xl border border-[#D9C0A3] bg-[#FFFDF9] px-3 text-xs font-bold text-[#4A352B] hover:border-[#4A352B] disabled:opacity-45 whitespace-nowrap shrink-0 cursor-pointer"
-            >
-              <ChevronsUpDown className="h-3.5 w-3.5 text-[#7C6154]" />
-              <span>{allVisibleExpanded ? 'すべて折りたたむ' : 'すべて展開'}</span>
-            </button>
-
-            <button
-              type="button"
               onClick={handleJumpToCurrent}
               className="flex min-h-[36px] items-center gap-1.5 rounded-xl border-2 border-[#4A352B] bg-[#CCFBF1] px-3 text-xs font-extrabold text-[#0F766E] hover:bg-[#99F6E4] whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Compass className="h-3.5 w-3.5" />
-              <span>現在のステージへ ({activeStage.id})</span>
+              <span>現在のステージへ ({activeStage.displayId})</span>
             </button>
           </div>
         </div>
 
-        {/* Chapter-Grouped Stage Accordions */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
-          {visibleGroups.length === 0 ? (
+        {/* Flat Stage List */}
+        <div className="flex-1 overflow-y-auto p-5">
+          {filteredStages.length === 0 ? (
             <div className="rounded-2xl border-2 border-dashed border-[#D9C0A3] bg-[#FFFDF9] p-8 text-center">
               <p className="text-sm font-bold text-[#4A352B]">
                 {statusFilter === 'uncleared'
@@ -382,134 +295,86 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
               </button>
             </div>
           ) : (
-            visibleGroups.map((grp) => {
-              const isExpanded = expandedChapters.has(grp.chapter);
-              const containsCurrent = grp.filteredStages.some(
-                (s) => s.id === currentStageId
-              );
+            <div className="flex flex-col gap-3">
+              {filteredStages.map((st) => {
+                const stProg = progress[st.id];
+                const unlocked = isUnlocked(st);
+                const isCurrent = st.id === currentStageId;
+                const kindInfo = KIND_LABELS[getStageKind(st)];
 
-              return (
-                <section
-                  key={grp.chapter}
-                  className="rounded-2xl border-2 border-[#E5D3BC] bg-[#FFFDF9] overflow-hidden"
-                >
+                return (
                   <button
+                    key={st.id}
+                    ref={(el) => {
+                      stageRefs.current[st.id] = el;
+                    }}
                     type="button"
-                    onClick={() => toggleChapter(grp.chapter)}
-                    aria-expanded={isExpanded}
-                    className="flex w-full items-center justify-between gap-3 bg-[#F7EBDA]/75 px-4 py-3 text-left hover:bg-[#F7EBDA] transition-colors cursor-pointer"
+                    disabled={!unlocked}
+                    onClick={() => onSelectStage(st.id)}
+                    className={`flex flex-col justify-between rounded-2xl border-2 p-4 text-left transition-transform duration-150 ${
+                      !unlocked
+                        ? 'border-[#E5D3BC] bg-[#F5EBDD] opacity-60 cursor-not-allowed'
+                        : isCurrent
+                        ? 'border-[#EA580C] bg-[#FFF7ED] shadow-[0_3px_0_#FDBA74] hover:-translate-y-0.5 cursor-pointer'
+                        : 'border-[#4A352B] bg-white shadow-[0_3px_0_#D9C0A3] hover:-translate-y-0.5 cursor-pointer'
+                    }`}
                   >
-                    <div className="flex items-center gap-2 min-w-0">
-                      {isExpanded ? (
-                        <ChevronDown className="h-4 w-4 shrink-0 text-[#4A352B]" />
-                      ) : (
-                        <ChevronRight className="h-4 w-4 shrink-0 text-[#4A352B]" />
-                      )}
-                      <h3 className="text-sm font-extrabold text-[#4A352B] truncate">
-                        {grp.chapterTitle}
-                      </h3>
-                      {containsCurrent && (
-                        <>
-                          <span aria-hidden="true" className="text-[#D9C0A3]">
-                            ·
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-bold text-[#7C6154]">
+                          <span className="font-code text-[#EA580C]">{st.displayId}</span>
+                          <span aria-hidden="true">·</span>
+                          <span>{`第${st.chapter}章 ${st.chapterTitle}`}</span>
+                          <span aria-hidden="true">·</span>
+                          <span className={kindInfo.colorClass}>{kindInfo.label}</span>
+                          <span aria-hidden="true">·</span>
+                          <span className="text-[#0F766E] truncate">
+                            {st.topicTag}
                           </span>
-                          <span className="text-xs font-extrabold text-[#EA580C] whitespace-nowrap shrink-0">
-                            現在挑戦中
-                          </span>
-                        </>
-                      )}
+                        </div>
+                        <h4 className="mt-0.5 text-sm font-extrabold text-[#4A352B]">
+                          {getStageDisplayTitle(st)}
+                        </h4>
+                      </div>
+
+                      {stProg?.cleared ? (
+                        <CheckCircle2 className="h-5 w-5 shrink-0 text-[#0D9488]" />
+                      ) : !unlocked ? (
+                        <Lock className="h-4 w-4 shrink-0 text-[#7C6154]" />
+                      ) : null}
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs font-bold text-[#7C6154] tabular-nums whitespace-nowrap shrink-0">
-                      <span>
-                        {grp.clearedCount}/{grp.allStages.length} クリア
+                    <div className="mt-3 flex items-center justify-between gap-3 text-xs">
+                      <span className="min-w-0 flex-1 text-[#7C6154] truncate">
+                        {st.goalSummary}
+                      </span>
+
+                      <span
+                        className={`shrink-0 font-bold tabular-nums whitespace-nowrap ${
+                          stProg?.cleared
+                            ? 'text-[#0D9488]'
+                            : !unlocked
+                            ? 'text-[#9C8173]'
+                            : isCurrent
+                            ? 'text-[#EA580C]'
+                            : 'text-[#7C6154]'
+                        }`}
+                      >
+                        {stProg?.cleared
+                          ? stProg.bestTicks !== undefined
+                            ? `クリア ${stProg.bestTicks}/${st.parTicks}T`
+                            : 'クリア済み'
+                          : !unlocked
+                          ? '未解放'
+                          : isCurrent
+                          ? '挑戦中'
+                          : `目標 ${st.parTicks}T`}
                       </span>
                     </div>
                   </button>
-
-                  {isExpanded && (
-                    <div className="grid grid-cols-1 gap-3 border-t border-[#E5D3BC] p-4 sm:grid-cols-2">
-                      {grp.filteredStages.map((st) => {
-                        const stProg = progress[st.id];
-                        const unlocked = isUnlocked(st);
-                        const isCurrent = st.id === currentStageId;
-                        const kindInfo = KIND_LABELS[getStageKind(st)];
-
-                        return (
-                          <button
-                            key={st.id}
-                            ref={(el) => {
-                              stageRefs.current[st.id] = el;
-                            }}
-                            type="button"
-                            disabled={!unlocked}
-                            onClick={() => onSelectStage(st.id)}
-                            className={`flex flex-col justify-between rounded-2xl border-2 p-4 text-left transition-transform duration-150 ${
-                              !unlocked
-                                ? 'border-[#E5D3BC] bg-[#F5EBDD] opacity-60 cursor-not-allowed'
-                                : isCurrent
-                                ? 'border-[#EA580C] bg-[#FFF7ED] shadow-[0_3px_0_#FDBA74] hover:-translate-y-0.5 cursor-pointer'
-                                : 'border-[#4A352B] bg-white shadow-[0_3px_0_#D9C0A3] hover:-translate-y-0.5 cursor-pointer'
-                            }`}
-                          >
-                            <div className="flex items-start justify-between gap-2">
-                              <div className="min-w-0">
-                                <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#7C6154]">
-                                  <span className="font-code text-[#EA580C]">{st.id}</span>
-                                  <span aria-hidden="true">·</span>
-                                  <span className={kindInfo.colorClass}>{kindInfo.label}</span>
-                                  <span aria-hidden="true">·</span>
-                                  <span className="text-[#0F766E] truncate">
-                                    {st.topicTag}
-                                  </span>
-                                </div>
-                                <h4 className="mt-0.5 text-sm font-extrabold text-[#4A352B]">
-                                  {st.title}
-                                </h4>
-                              </div>
-
-                              {stProg?.cleared ? (
-                                <CheckCircle2 className="h-5 w-5 shrink-0 text-[#0D9488]" />
-                              ) : !unlocked ? (
-                                <Lock className="h-4 w-4 shrink-0 text-[#7C6154]" />
-                              ) : null}
-                            </div>
-
-                            <div className="mt-3 flex items-center justify-between gap-3 text-xs">
-                              <span className="min-w-0 flex-1 text-[#7C6154] truncate">
-                                {st.goalSummary}
-                              </span>
-
-                              <span
-                                className={`shrink-0 font-bold tabular-nums whitespace-nowrap ${
-                                  stProg?.cleared
-                                    ? 'text-[#0D9488]'
-                                    : !unlocked
-                                    ? 'text-[#9C8173]'
-                                    : isCurrent
-                                    ? 'text-[#EA580C]'
-                                    : 'text-[#7C6154]'
-                                }`}
-                              >
-                                {stProg?.cleared
-                                  ? stProg.bestTicks !== undefined
-                                    ? `クリア ${stProg.bestTicks}/${st.parTicks}T`
-                                    : 'クリア済み'
-                                  : !unlocked
-                                  ? '未解放'
-                                  : isCurrent
-                                  ? '挑戦中'
-                                  : `目標 ${st.parTicks}T`}
-                              </span>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                </section>
-              );
-            })
+                );
+              })}
+            </div>
           )}
         </div>
       </div>

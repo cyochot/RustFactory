@@ -5,7 +5,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
   // 第13章 パズル応用編 (13-9 〜 13-16)
   // =========================================================================
   {
-    id: '13-9',
+    displayId: '13-9',
+    id: '34bb6524-afeb-5616-bf70-96512643f90f',
     index: 0,
     act: 4,
     chapter: 13,
@@ -62,7 +63,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '13-10',
+    displayId: '13-10',
+    id: 'd5ffd4a2-ae06-583a-b3cd-422db5999170',
     index: 0,
     act: 4,
     chapter: 13,
@@ -129,7 +131,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '13-11',
+    displayId: '13-11',
+    id: '47adfe78-09fd-5ac3-9880-71e6629c4bb8',
     index: 0,
     act: 4,
     chapter: 13,
@@ -191,7 +194,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '13-12',
+    displayId: '13-12',
+    id: '59f2ca3c-3c77-5b12-8f66-474c041a5c99',
     index: 0,
     act: 4,
     chapter: 13,
@@ -255,7 +259,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '13-13',
+    displayId: '13-13',
+    id: '672ad5a0-6da4-58d4-b72a-407876b2bd76',
     index: 0,
     act: 4,
     chapter: 13,
@@ -322,7 +327,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 12,
   },
   {
-    id: '13-14',
+    displayId: '13-14',
+    id: 'c5c87f2d-46ad-5545-81ec-bb750cb770de',
     index: 0,
     act: 4,
     chapter: 13,
@@ -377,7 +383,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '13-15',
+    displayId: '13-15',
+    id: '2a6b45cc-30f6-5670-9d6b-7e9f85509232',
     index: 0,
     act: 4,
     chapter: 13,
@@ -449,7 +456,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '13-16',
+    displayId: '13-16',
+    id: '51b5ff89-5dd8-575f-9faa-b2891bd4032d',
     index: 0,
     act: 4,
     chapter: 13,
@@ -542,7 +550,8 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
   // 第14章 パズル応用編 (14-5 〜 14-8)
   // =========================================================================
   {
-    id: '14-5',
+    displayId: '14-5',
+    id: 'a47779e1-d34b-5350-879c-9f257d73aec7',
     index: 0,
     act: 4,
     chapter: 14,
@@ -598,7 +607,8 @@ fn main() {
     parTicks: 4,
   },
   {
-    id: '14-6',
+    displayId: '14-6',
+    id: 'dbacae9d-d4be-50b7-b0c8-74faf457c401',
     index: 0,
     act: 4,
     chapter: 14,
@@ -678,7 +688,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '14-7',
+    displayId: '14-7',
+    id: 'cdecc4e1-f218-52f7-8f00-8c8273122a40',
     index: 0,
     act: 4,
     chapter: 14,
@@ -765,7 +776,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '14-8',
+    displayId: '14-8',
+    id: 'd7f2d369-4988-5e3c-a141-7effcf5a3db9',
     index: 0,
     act: 4,
     chapter: 14,
@@ -849,7 +861,8 @@ fn main() {
   // 第15章 パズル応用編 (15-13 〜 15-24)
   // =========================================================================
   {
-    id: '15-13',
+    displayId: '15-13',
+    id: '1f4e58fb-4cfe-5cd5-ba57-5aa128266ec5',
     index: 0,
     act: 4,
     chapter: 15,
@@ -905,7 +918,8 @@ fn main() {
     parTicks: 5,
   },
   {
-    id: '15-14',
+    displayId: '15-14',
+    id: '007f4c05-dd69-51b7-b3ee-e80303a04656',
     index: 0,
     act: 4,
     chapter: 15,
@@ -969,7 +983,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '15-15',
+    displayId: '15-15',
+    id: '3e9730a7-1de7-5c4c-a484-74c7ebfb0bf6',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1037,7 +1052,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '15-16',
+    displayId: '15-16',
+    id: 'b3705f70-1c20-5a33-9028-eb14333e6ae3',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1110,7 +1126,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '15-17',
+    displayId: '15-17',
+    id: 'ee0aadfe-6a0f-57db-8537-873e31cd4349',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1177,7 +1194,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '15-18',
+    displayId: '15-18',
+    id: '54ab4b3c-0663-52b5-8dc8-0e8f7687938e',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1258,7 +1276,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '15-19',
+    displayId: '15-19',
+    id: '73b33189-827b-51b7-976a-c6ea1b476074',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1336,7 +1355,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '15-20',
+    displayId: '15-20',
+    id: 'e3cedf2e-58b8-55c4-ab2d-4c8bd0f5fee6',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1397,7 +1417,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '15-21',
+    displayId: '15-21',
+    id: '1bef7c21-c2cb-5cf1-84c3-65e120ca0c9f',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1466,7 +1487,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '15-22',
+    displayId: '15-22',
+    id: 'bda5e013-6d70-5ae8-a991-b576407822e8',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1546,7 +1568,8 @@ fn main() {
     parTicks: 7,
   },
   {
-    id: '15-23',
+    displayId: '15-23',
+    id: '91449bb9-4dc7-549f-8a66-54a36fe8d430',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1618,7 +1641,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '15-24',
+    displayId: '15-24',
+    id: '92eb75db-c24c-55fd-a983-832ad103d8c1',
     index: 0,
     act: 4,
     chapter: 15,
@@ -1718,7 +1742,8 @@ fn main() {
   // 第16章 パズル応用編 (16-17 〜 16-32)
   // =========================================================================
   {
-    id: '16-17',
+    displayId: '16-17',
+    id: 'd2b69214-1533-5850-9e49-0148257c61f6',
     index: 0,
     act: 4,
     chapter: 16,
@@ -1789,7 +1814,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '16-18',
+    displayId: '16-18',
+    id: 'a8d084c8-1fe6-55dd-851c-bf5703da3f37',
     index: 0,
     act: 4,
     chapter: 16,
@@ -1851,7 +1877,8 @@ fn main() {
     parTicks: 6,
   },
   {
-    id: '16-19',
+    displayId: '16-19',
+    id: '3ad49ad5-c31d-5da1-adc3-fa6fd50a6825',
     index: 0,
     act: 4,
     chapter: 16,
@@ -1916,7 +1943,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '16-20',
+    displayId: '16-20',
+    id: '9236e9d1-69ef-5fa0-ad0d-1d6ecf862de6',
     index: 0,
     act: 4,
     chapter: 16,
@@ -1986,7 +2014,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '16-21',
+    displayId: '16-21',
+    id: '9eade17d-26f7-5a42-88fd-3b21ae7ae09a',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2059,7 +2088,8 @@ fn main() {
     parTicks: 12,
   },
   {
-    id: '16-22',
+    displayId: '16-22',
+    id: '32ff8c60-c4a3-54aa-8c22-bac121cf58b9',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2129,7 +2159,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '16-23',
+    displayId: '16-23',
+    id: 'd6e4c8b1-2e0c-5475-b5a5-6c5bea307c40',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2214,7 +2245,8 @@ fn main() {
     parTicks: 14,
   },
   {
-    id: '16-24',
+    displayId: '16-24',
+    id: 'f0176c61-dc85-5cc4-906d-eec14c9a2dd9',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2287,7 +2319,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '16-25',
+    displayId: '16-25',
+    id: 'd0ba99b5-4253-584a-8c47-c323623ef00c',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2363,7 +2396,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '16-26',
+    displayId: '16-26',
+    id: '1e4aaa52-a10e-58d3-946e-0195ba5c16a0',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2438,7 +2472,8 @@ fn main() {
     parTicks: 12,
   },
   {
-    id: '16-27',
+    displayId: '16-27',
+    id: 'd556eb51-1b53-5031-af4b-f14bd499d092',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2521,7 +2556,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '16-28',
+    displayId: '16-28',
+    id: 'a36894ab-6e89-5dd5-afeb-578f0cf7ad00',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2615,7 +2651,8 @@ fn main() {
     parTicks: 10,
   },
   {
-    id: '16-29',
+    displayId: '16-29',
+    id: '52cae23d-f78f-554e-9eab-ec4b7bb95e4c',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2684,7 +2721,8 @@ fn main() {
     parTicks: 8,
   },
   {
-    id: '16-30',
+    displayId: '16-30',
+    id: '5fe590a7-25b5-51e4-b318-6fbbb667c3f4',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2764,7 +2802,8 @@ fn main() {
     parTicks: 14,
   },
   {
-    id: '16-31',
+    displayId: '16-31',
+    id: '88ae87dc-62b7-5b6f-8e33-fc872dcdee68',
     index: 0,
     act: 4,
     chapter: 16,
@@ -2870,7 +2909,8 @@ fn main() {
     parTicks: 15,
   },
   {
-    id: '16-32',
+    displayId: '16-32',
+    id: 'f5c99c76-935c-5bcf-b635-78ff4d7069ed',
     index: 0,
     act: 4,
     chapter: 16,

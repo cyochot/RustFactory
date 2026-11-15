@@ -34,9 +34,9 @@ import { StoryNovelOverlay } from './components/StoryNovelOverlay';
 import { StoryLogModal } from './components/StoryLogModal';
 import { CheckCircle2 } from 'lucide-react';
 
-const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v3';
-const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v3';
-const STORAGE_KEY_STORY_SEEN = 'kobo_rust_story_seen_v3';
+const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v4';
+const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v4';
+const STORAGE_KEY_STORY_SEEN = 'kobo_rust_story_seen_v4';
 
 function buildInitialTick0Snapshot(stage: StageDefinition): TickSnapshot {
   const s = stage.worldSetup;
@@ -303,7 +303,7 @@ export default function App() {
       setShowFunctionRef(false);
       setShowStoryLog(false);
       setGameState('PLAYING');
-      if (!seenStories[target.id]?.intro && getStageStory(target.id)) {
+      if (!seenStories[target.id]?.intro && getStageStory(target.displayId)) {
         setActiveStory({
           stageId: target.id,
           phase: 'intro',
@@ -397,7 +397,7 @@ export default function App() {
           },
         }));
         const openClear = () => {
-          if (!seenStories[currentStage.id]?.outro && getStageStory(currentStage.id)) {
+          if (!seenStories[currentStage.id]?.outro && getStageStory(currentStage.displayId)) {
             setActiveStory({
               stageId: currentStage.id,
               phase: 'outro',
@@ -723,9 +723,11 @@ export default function App() {
       ? ALL_STAGES[currentStageIdx + 1]
       : undefined;
 
-  const activeStoryObj = activeStory ? getStageStory(activeStory.stageId) : undefined;
   const activeStoryStage = activeStory
     ? ALL_STAGES.find((s) => s.id === activeStory.stageId)
+    : undefined;
+  const activeStoryObj = activeStoryStage
+    ? getStageStory(activeStoryStage.displayId)
     : undefined;
 
   return (
@@ -770,7 +772,7 @@ export default function App() {
               onPause={() => setGameState('PAUSED')}
               onOpenBook={() => setShowBookGuide(true)}
               onReplayStory={() => {
-                if (getStageStory(currentStage.id)) {
+                if (getStageStory(currentStage.displayId)) {
                   setActiveStory({
                     stageId: currentStage.id,
                     phase: 'intro',
@@ -836,9 +838,10 @@ export default function App() {
           initialAct={currentStage.act}
           currentStageId={currentStage.id}
           onPlayStoryBeat={(stageId, beatPhase) => {
-            if (getStageStory(stageId)) {
+            const stage = ALL_STAGES.find((candidate) => candidate.displayId === stageId);
+            if (stage && getStageStory(stage.displayId)) {
               setActiveStory({
-                stageId,
+                stageId: stage.id,
                 phase: beatPhase,
                 isReplay: true,
               });
@@ -873,7 +876,7 @@ export default function App() {
         onOpenAtlas={() => setShowAtlas(true)}
         onOpenStoryLog={() => setShowStoryLog(true)}
         onReplayOutro={() => {
-          if (getStageStory(currentStage.id)) {
+          if (getStageStory(currentStage.displayId)) {
             setActiveStory({
               stageId: currentStage.id,
               phase: 'outro',

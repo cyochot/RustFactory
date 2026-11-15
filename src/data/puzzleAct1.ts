@@ -5,7 +5,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
   // 第1章 事始め パズル・挑戦拡張 (1-9 〜 1-16)
   // =========================================================================
   {
-    id: '1-9',
+    displayId: '1-9',
+    id: '3dc08e11-a91c-53de-9ebb-d47c15b5ecc1',
     index: 0,
     act: 1,
     chapter: 1,
@@ -49,7 +50,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 4,
   },
   {
-    id: '1-10',
+    displayId: '1-10',
+    id: '7751d7c0-99d8-578b-8ac6-8a6b5e6045c2',
     index: 0,
     act: 1,
     chapter: 1,
@@ -95,7 +97,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 13,
   },
   {
-    id: '1-11',
+    displayId: '1-11',
+    id: 'bf44af99-9150-56bf-8660-f45dfeaf1227',
     index: 0,
     act: 1,
     chapter: 1,
@@ -146,7 +149,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '1-12',
+    displayId: '1-12',
+    id: 'f57d3e58-9575-5163-8c39-5ba16985ba21',
     index: 0,
     act: 1,
     chapter: 1,
@@ -201,7 +205,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '1-13',
+    displayId: '1-13',
+    id: '9e823160-a764-556e-95b9-48f519d8e6c4',
     index: 0,
     act: 1,
     chapter: 1,
@@ -251,7 +256,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 15,
   },
   {
-    id: '1-14',
+    displayId: '1-14',
+    id: 'fc1e8444-017a-5f77-a6d3-646044eec856',
     index: 0,
     act: 1,
     chapter: 1,
@@ -302,7 +308,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '1-15',
+    displayId: '1-15',
+    id: 'e34ed4af-4924-5008-9856-45f158f643a8',
     index: 0,
     act: 1,
     chapter: 1,
@@ -353,7 +360,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '1-16',
+    displayId: '1-16',
+    id: '88728e13-36e6-54a1-8354-99c8bc40d969',
     index: 0,
     act: 1,
     chapter: 1,
@@ -421,7 +429,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
   // 第2章 数当てゲーム パズル・挑戦拡張 (2-5 〜 2-8)
   // =========================================================================
   {
-    id: '2-5',
+    displayId: '2-5',
+    id: 'bffca818-f6e4-50f8-b50f-4ff61be8ee4e',
     index: 0,
     act: 1,
     chapter: 2,
@@ -462,7 +471,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 9,
   },
   {
-    id: '2-6',
+    displayId: '2-6',
+    id: '1df14795-f8d1-5b67-80ef-75c29087e00d',
     index: 0,
     act: 1,
     chapter: 2,
@@ -507,7 +517,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 15,
   },
   {
-    id: '2-7',
+    displayId: '2-7',
+    id: 'd78a5e8c-49cf-5a67-85b6-81d77e50f861',
     index: 0,
     act: 1,
     chapter: 2,
@@ -557,7 +568,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 9,
   },
   {
-    id: '2-8',
+    displayId: '2-8',
+    id: '7ba5c375-80ef-52b3-bf2c-e4c386b2aab2',
     index: 0,
     act: 1,
     chapter: 2,
@@ -615,7 +627,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
   // 第3章 一般的なプログラミングの概念 パズル・挑戦拡張 (3-25 〜 3-48)
   // =========================================================================
   {
-    id: '3-25',
+    displayId: '3-25',
+    id: '3e67a423-966a-5a30-8e4f-a44fa7ccad0e',
     index: 0,
     act: 1,
     chapter: 3,
@@ -657,7 +670,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '3-26',
+    displayId: '3-26',
+    id: '7200c110-6d05-53e5-902e-bdc72e088dd9',
     index: 0,
     act: 1,
     chapter: 3,
@@ -701,7 +715,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-27',
+    displayId: '3-27',
+    id: 'a7b6d1f1-9c1d-5bf3-9f55-0e1f99e7092f',
     index: 0,
     act: 1,
     chapter: 3,
@@ -745,7 +760,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 9,
   },
   {
-    id: '3-28',
+    displayId: '3-28',
+    id: 'ad2d8a8b-f9c5-5e7d-8962-03fdb5fc2577',
     index: 0,
     act: 1,
     chapter: 3,
@@ -791,7 +807,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-29',
+    displayId: '3-29',
+    id: 'bbf38b6e-ec0a-5fae-9802-afe15bb017e8',
     index: 0,
     act: 1,
     chapter: 3,
@@ -837,7 +854,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 11,
   },
   {
-    id: '3-30',
+    displayId: '3-30',
+    id: '4046d4d6-e3b8-5117-b491-85e94a3268be',
     index: 0,
     act: 1,
     chapter: 3,
@@ -882,7 +900,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 24,
   },
   {
-    id: '3-31',
+    displayId: '3-31',
+    id: 'e4998b57-9a9e-508b-a9d6-58236afea786',
     index: 0,
     act: 1,
     chapter: 3,
@@ -928,7 +947,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 24,
   },
   {
-    id: '3-32',
+    displayId: '3-32',
+    id: 'b2411e44-bf11-5d5f-a996-ea8ab6c064b4',
     index: 0,
     act: 1,
     chapter: 3,
@@ -975,7 +995,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 16,
   },
   {
-    id: '3-33',
+    displayId: '3-33',
+    id: '796bcd6e-4754-52af-aa5d-ebfd5aeef655',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1025,7 +1046,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 12,
   },
   {
-    id: '3-34',
+    displayId: '3-34',
+    id: '4f9e1d29-7838-5f19-be0a-e795c04755fd',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1073,7 +1095,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 15,
   },
   {
-    id: '3-35',
+    displayId: '3-35',
+    id: 'b1fe1c68-32ac-5c5a-a55e-6ac4b9d8b805',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1119,7 +1142,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-36',
+    displayId: '3-36',
+    id: 'cd9524fb-a914-5916-8651-83ca5232a3c1',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1164,7 +1188,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 13,
   },
   {
-    id: '3-37',
+    displayId: '3-37',
+    id: 'f3d9fad2-67fa-54f9-9365-a640aa17c8d3',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1207,7 +1232,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 5,
   },
   {
-    id: '3-38',
+    displayId: '3-38',
+    id: 'bfea49b0-36d7-5f7d-bafb-9503964e90b0',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1250,7 +1276,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 7,
   },
   {
-    id: '3-39',
+    displayId: '3-39',
+    id: '2023e83c-b056-5e86-ab60-3eca6c8274e3',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1292,7 +1319,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-40',
+    displayId: '3-40',
+    id: 'b2e1db3e-422b-51f0-9885-3396944aec83',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1337,7 +1365,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-41',
+    displayId: '3-41',
+    id: 'c381570b-4707-5667-8fa0-13a557e2a0e1',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1381,7 +1410,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 11,
   },
   {
-    id: '3-42',
+    displayId: '3-42',
+    id: 'c4fa05a0-a15b-5368-a67e-d9ffd74e681a',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1422,7 +1452,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-43',
+    displayId: '3-43',
+    id: 'a8b5ca14-afca-5e98-afa3-d08d885a4d60',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1465,7 +1496,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 14,
   },
   {
-    id: '3-44',
+    displayId: '3-44',
+    id: '3be2101b-6dd6-59a9-b38d-c17bc6cd7ed0',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1513,7 +1545,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-45',
+    displayId: '3-45',
+    id: '5797805d-9d5b-52cb-96cd-19cfcf168676',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1558,7 +1591,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '3-46',
+    displayId: '3-46',
+    id: '53885462-a93f-54f8-8960-c522c6a58d68',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1607,7 +1641,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '3-47',
+    displayId: '3-47',
+    id: '579eaabd-ccfa-592c-8925-f3d8e7a3d5cc',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1657,7 +1692,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 18,
   },
   {
-    id: '3-48',
+    displayId: '3-48',
+    id: '11fd22c0-1961-540b-be16-d1db794f6ffc',
     index: 0,
     act: 1,
     chapter: 3,
@@ -1716,7 +1752,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
   // 第4章 所有権を理解する パズル・挑戦拡張 (4-13 〜 4-24)
   // =========================================================================
   {
-    id: '4-13',
+    displayId: '4-13',
+    id: '839a50b3-0e8d-5eab-8a16-e61279527412',
     index: 0,
     act: 1,
     chapter: 4,
@@ -1760,7 +1797,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 9,
   },
   {
-    id: '4-14',
+    displayId: '4-14',
+    id: '48754d16-9caf-509c-8aa7-b0042f4d82d9',
     index: 0,
     act: 1,
     chapter: 4,
@@ -1815,7 +1853,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 13,
   },
   {
-    id: '4-15',
+    displayId: '4-15',
+    id: 'f1fea5fa-191c-5269-8dc8-e4d3486dbbe9',
     index: 0,
     act: 1,
     chapter: 4,
@@ -1865,7 +1904,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '4-16',
+    displayId: '4-16',
+    id: 'c2034a35-446f-5458-861a-e8845be95e9d',
     index: 0,
     act: 1,
     chapter: 4,
@@ -1912,7 +1952,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 19,
   },
   {
-    id: '4-17',
+    displayId: '4-17',
+    id: '7038a61a-393c-5fcc-b7ba-9108ba9d831b',
     index: 0,
     act: 1,
     chapter: 4,
@@ -1968,7 +2009,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 8,
   },
   {
-    id: '4-18',
+    displayId: '4-18',
+    id: 'c24b0e4e-1143-56af-9b3f-e27b805160e5',
     index: 0,
     act: 1,
     chapter: 4,
@@ -2016,7 +2058,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 11,
   },
   {
-    id: '4-19',
+    displayId: '4-19',
+    id: 'ee757951-5d2f-5c76-ada5-6791b35593b6',
     index: 0,
     act: 1,
     chapter: 4,
@@ -2067,7 +2110,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '4-20',
+    displayId: '4-20',
+    id: 'e059ebd7-5f3d-55e8-afda-279711b587a2',
     index: 0,
     act: 1,
     chapter: 4,
@@ -2111,7 +2155,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 6,
   },
   {
-    id: '4-21',
+    displayId: '4-21',
+    id: '0c595cd1-d38e-5bce-8a42-e6c45af0dd2b',
     index: 0,
     act: 1,
     chapter: 4,
@@ -2165,7 +2210,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 17,
   },
   {
-    id: '4-22',
+    displayId: '4-22',
+    id: '5565fbf6-40de-53c4-912d-bd215afe50f2',
     index: 0,
     act: 1,
     chapter: 4,
@@ -2223,7 +2269,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 12,
   },
   {
-    id: '4-23',
+    displayId: '4-23',
+    id: 'ebdddaaf-e4ed-5151-a9a4-dd654d3c9eb4',
     index: 0,
     act: 1,
     chapter: 4,
@@ -2277,7 +2324,8 @@ export const PUZZLE_ACT1_STAGES: StageDefinition[] = [
     parTicks: 10,
   },
   {
-    id: '4-24',
+    displayId: '4-24',
+    id: 'e754be20-628a-5af1-9496-0caceada82d4',
     index: 0,
     act: 1,
     chapter: 4,
