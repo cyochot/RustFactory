@@ -291,349 +291,349 @@ export const STORY_CHAPTER_6: StageStoryEntry[] = [
   },
   {
     "stageId": "34266106-3321-5c2d-9168-172c91df8523",
-    "requestTitle": "複数バリアント enum でコア納品の依頼",
+    "requestTitle": "くるみちゃんの焼きたてパン争奪戦",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum + 空間コア納品」を使う依頼が届いたよ。異なる種類の操作（移動・コア操作）を1つの enum 型として定義し、実行エンジン側で解釈させることができます。"
+        "text": "コッペさんの焼きたてパンと、まんまるの光る飾り玉が届いたよ！フェリス、熱いうちに広場へ運ぼう。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "ぼくのぶんは一番大きいのをお願いするカニ！……あっ、よだれでお皿がすべるロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum Op 列でコアを拾い、検査・強化して (4, 1) で納品しよう。教わった「enum + 空間コア納品」が役に立ったね。"
+        "text": "パンも光る飾り玉も広場に届いたよ！フェリスのお皿だけ、パンが二つ重なってタワーになってるね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "倒れそうカニ！……と思ったら、下のパンがクッションになって無事だったロボ！"
       }
     ]
   },
   {
     "stageId": "b8cacf70-a74c-57ea-bdaf-d5c24934b111",
-    "requestTitle": "enum 命令インタプリタ迷路の依頼",
+    "requestTitle": "商店街で迷子の赤い風船さがし",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum + match インタプリタ」を使う依頼が届いたよ。ロボットの一連の動きをデータ（enum の配列）として表現すると、ルート編集や拡張がとてもやりやすくなります。"
+        "text": "商店街のくねくね路地で赤い風船がふわふわ逃げちゃった！ベルトの荷物台まで転がる前に、持ち主の子を探そう。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "見つけたらぼくがつかまえるカニ！……風船を追いかけたら、帽子まで飛んでいったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum Cmd 列を正しく組んでスイッチとコンベア経由で (5, 3) へ。教わった「enum + match インタプリタ」が役に立ったね。"
+        "text": "風船は無事に持ち主の子へ。フェリスの帽子も、八百屋さんのカゴの中で見つかったよ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "トマトのとなりで赤くなってたカニ！ぼく、売り物と間違われてたロボ！？"
       }
     ]
   },
   {
     "stageId": "a9d69c8c-39e3-58dc-b93f-074d77f1b9d2",
-    "requestTitle": "センサー状態 enum で自律ルート選択の依頼",
+    "requestTitle": "ミモザさんの庭でお昼寝ねこ探し",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum + match 分岐」を使う依頼が届いたよ。複雑な条件判定の結果をいったん分かりやすい enum 値へ変換してから match で行動を決めると、ミスが激減します。"
+        "text": "ミモザさんのお庭で、ねこのミントちゃんがかくれんぼ中。お花を踏まないように、みんなでそっと探そう！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "こっちの茂みから、しっぽが見えてるカニ！……あれはミモザさんのほうきだったロボ。"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum Sense で迷路を自律判定してゴール (4, 4) へ。教わった「enum + match 分岐」が役に立ったね。"
+        "text": "ミントちゃん、植木鉢の陰でぐっすりだったわ。みんなの声にも気づかないくらいね♪"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "ぼくも隣で寝そうになったカニ……ふわふわの土が気持ちよかったロボ。"
       }
     ]
   },
   {
     "stageId": "bd45fe4b-97ce-51ea-a3b3-aa112c3af960",
-    "requestTitle": "出力チェック付き enum ログ設計の依頼",
+    "requestTitle": "喫茶店のマグカップ行方不明事件",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum + stdout 検証」を使う依頼が届いたよ。ログ印字とロボット動作を match の同じ腕（アーム）に書けば、動いた記録の取りこぼしがなくなります。"
+        "text": "モカさん、お気に入りの青いマグが見つからないの？窓辺の光る飾り玉のそばも、みんなで探してみよう！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "ぼくのハサミで探すカニ！……あっ、持ち手に青いリボンが結んであるロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！\"SCAN_DONE\" と \"BOOST_DONE\" を出力し、コア⚡4以上を納品しよう。教わった「enum + stdout 検証」が役に立ったね。"
+        "text": "マグは窓辺で日なたぼっこしてたよ。洗ったあと、モカさんがそこに置いたんだって。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "青いリボンで見つけたぼく、名探偵カニ！ごほうびのココアは大きいカップでお願いロボ！"
       }
     ]
   },
   {
     "stageId": "a642e260-2f26-5f89-8ee0-9f27405ba456",
-    "requestTitle": "match 網羅性＋ワイルドカードでスパーク警戒の依頼",
+    "requestTitle": "雨宿り中のフェリス、傘が三本",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「match 網羅性と _ 制御」を使う依頼が届いたよ。すべてのケースを書くか、残りを _ で受けることでコンパイル時に漏れを防ぎます。"
+        "text": "急な雨でみんな工房に避難！傘が三本あるけど、どれも誰のものか分からなくなっちゃった。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "ぼくの傘は大きいカニ！……って、これはコッペさんのパン用日よけだったロボ！？"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum Warn を完全に網羅して、スパークとゲートを安全突破しよう。教わった「match 網羅性と _ 制御」が役に立ったね。"
+        "text": "傘は持ち主ごとに戻せたね。フェリスはパンの日よけをさして、頭だけ雨から守ってるよ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "パンのいい匂いがする傘カニ！これ、ちょっと気に入ったロボ！"
       }
     ]
   },
   {
     "stageId": "e8facaca-88b5-5973-98f1-4248dcdad4d0",
-    "requestTitle": "enum ダイヤル探索機の依頼",
+    "requestTitle": "くるみちゃんの手作りクッキー試食会",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum Ordering + ダイヤル解錠」を使う依頼が届いたよ。比較結果を表す Ordering::{Less, Greater, Equal} を match で受けるのは Rust でとてもよく見る定番パターンです。"
+        "text": "クッキーを焼いたよ！形がちょっといびつだけど、数字合わせの缶に入れておくね。みんなで味見して感想を聞かせて！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "味見なら任せるカニ！ぼく、星形を三つ……あっ、ひとつは焼く前の生地だったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！while loop と match try_dial(g) でダイヤルを解錠しゴール (5, 1) へ。教わった「enum Ordering + ダイヤル解錠」が役に立ったね。"
+        "text": "焼きたてクッキーは大人気！フェリスの生地も、くるみちゃんが焼いてくれてちゃんとおいしくなったよ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "ぼくの星形、ちょっとふくらみすぎてヒトデになったカニ！"
       }
     ]
   },
   {
     "stageId": "b7414456-bea4-51ca-94bb-093e5d09772c",
-    "requestTitle": "enum impl メソッドと時計仕掛けスイッチの依頼",
+    "requestTitle": "フェリスのハサミで毛糸玉救出！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum への impl + コンベア」を使う依頼が届いたよ。振る舞いまで enum 自身に impl しておくと、配列をループで回しながら .run() を呼ぶだけで済みます。"
+        "text": "編み物中のミモザさん、毛糸玉が棚のすき間へ転がって、荷物ベルトに乗っちゃった！フェリスのハサミでそっと取れるかな？"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "得意のハサミでつまむカニ！毛糸に引っかからないよう、慎重に……慎重に……！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum Action::run() で全スイッチを踏んで 8ティック以内に (5, 1) へ。教わった「enum への impl + コンベア」が役に立ったね。"
+        "text": "毛糸玉は無事に救出！フェリスのハサミには、毛糸のかわりにリボンが結ばれていたよ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "おしゃれになったカニ！このまま編み物教室にも行くロボ！"
       }
     ]
   },
   {
     "stageId": "0dc09086-c946-5991-ac3e-0f967d5ad0e8",
-    "requestTitle": "迷路探索＋if let ボーナス金庫の依頼",
+    "requestTitle": "商店街の大きな紙袋を届けよう",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum + if let + 迷路探索」を使う依頼が届いたよ。重要な1パターンだけを手早く拾う if let と、網羅性が要る移動判定 match を両方適材適所で使い分けましょう。"
+        "text": "商店街の福引き景品がいっぱい！くねくね小道の先で待つお店の人たちに、大きな紙袋を届けてあげよう。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "袋の中身はお菓子かな、ぬいぐるみかな？ぼく、重くてもへっちゃらカニ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！全スイッチを踏んで金庫⚡6を満たし、(0, 3) のゴールへ到達。教わった「enum + if let + 迷路探索」が役に立ったね。"
+        "text": "景品はみんなに届いたよ！道ばたの金色の飾りを見つけたフェリスは、一番大きな袋の巨大クッションに飛び込んじゃった。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "袋ごと抱きしめたら、そのまま眠くなってきたカニ……。"
       }
     ]
   },
   {
     "stageId": "a0ccee25-7aa9-5139-9e29-5bb6b8fe7012",
-    "requestTitle": "Option と match 式で動的分岐ルートの依頼",
+    "requestTitle": "ポッポさんの配達帽子をおめかし",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「let val = match opt」を使う依頼が届いたよ。match は値を返す「式」なので、直接関数の戻り値を受け取って変数の計算に組み込めます。"
+        "text": "ポッポさんの配達帽子に、お花の飾りをつけてほしいんだって。どの花が似合うか一緒に選ぼう！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "ぼくは赤いお花がいいと思うカニ！……あれ、花じゃなくてコッペさんのジャム瓶のふただったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！match 式が返す距離を使って L字コース (3, 4) へ到達しよう。教わった「let val = match opt」が役に立ったね。"
+        "text": "小さな白い花が帽子にぴったり！ポッポさん、鏡を見てにこにこしてるよ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "ジャムのふたもピカピカに磨いて返したカニ！ぼくの頭にも似合うロボ？"
       }
     ]
   },
   {
     "stageId": "9675f3b2-9098-5081-baa8-a36a4ec53ab4",
-    "requestTitle": "Option<i32> の宝石（ボーナス電力）集めの依頼",
+    "requestTitle": "お昼寝前のひみつのおやつ探し",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「Option<T> / Some / None」を使う依頼が届いたよ。値が存在しない場合があるデータは Option<T> のリストにまとめておき、if let Some(v) や match で安全に取り出します。"
+        "text": "お昼寝の前に、どこかに隠したクッキーを見つけたいな。フェリス、昨日どこで食べてたか覚えてる？"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "たしか本棚の近くカニ！……見つけた！でもこれは、しおりに描いたクッキーの絵だったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！Option 配列の Some 値だけ合計⚡6を金庫に入れ、ゲートを越えて (4, 1) へ。教わった「Option<T> / Some / None」が役に立ったね。"
+        "text": "本物のクッキーはお昼寝枕の下で発見！くるみちゃん、枕が甘い匂いになっちゃったね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "これなら夢の中でもおやつを食べられるカニ！……起きてから食べるロボ！"
       }
     ]
   },
   {
     "stageId": "3d5f336d-5d5a-5a55-bb0b-0f06f14d372c",
-    "requestTitle": "二重スイッチと enum コマンド短縮チャレンジの依頼",
+    "requestTitle": "フェリスの大きな洗濯ばさみ大騒動",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「enum + コンベア短縮チャレンジ」を使う依頼が届いたよ。コンベアが自動で移動を補ってくれる場所を見抜き、最小限のバリアント列を組むパズルです。"
+        "text": "洗濯物を干していたら、強い風でシーツが飛びそう！フェリス、洗濯ばさみを持ってきてくれる？"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "大きいのを持ってきたカニ！……大きすぎて、ぼくのハサミごとシーツに挟まったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum 指令でコンベアとスイッチを抜け 9ティック以内に (5, 3) へ。教わった「enum + コンベア短縮チャレンジ」が役に立ったね。"
+        "text": "シーツは無事に干せたよ。風でふくらんで、フェリスまで洗濯物みたいにぶら下がってる！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "景色がいいカニ！このまま乾くまで見張ってるロボ！"
       }
     ]
   },
   {
     "stageId": "0173493a-1743-5f71-b043-68a133bce3ce",
-    "requestTitle": "第6章挑戦：ハイブリッド安全ステート制御の依頼",
+    "requestTitle": "公園のシャボン玉まつり",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「第6章 最終チャレンジ」を使う依頼が届いたよ。すべての行動と状態を型安全な enum で表現し、漏れのない match で実行することで複雑なミッションを完璧に制御できます。"
+        "text": "夕暮れの公園でシャボン玉まつりをするよ！小道の向こうで光がきらきらしてるね。大きな輪っかも小さな輪っかも、好きなだけ飛ばそう。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "ぼくの特大シャボン玉、空まで届きそうカニ！中に入って空を散歩したいロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！enum Task でダイヤル解錠・スパーク突破・コア⚡5+納品・ゴールを達成。教わった「第6章 最終チャレンジ」が役に立ったね。"
+        "text": "公園いっぱいに虹色の泡が広がったよ！フェリスの泡だけ大きすぎて、頭にちょこんとかぶさっちゃった。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "泡のお帽子、意外と似合うカニ！帰るまで割れないといいロボ！"
       }
     ]
   }

@@ -195,233 +195,233 @@ export const STORY_CHAPTER_12: StageStoryEntry[] = [
   },
   {
     "stageId": "d7653986-119c-5386-ae39-f3e78c4799f6",
-    "requestTitle": "CLI引数ルート分岐とコンベア走破の依頼",
+    "requestTitle": "ポッポくん、昼寝用の枕を探す",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「cli_args() + ルート分岐」を使う依頼が届いたよ。起動時の引数 args[1] の内容を見て処理を切り替え、標準出力へ実行モードをログ記録します。"
+        "text": "配達の合間にひと休みしたいポッポくん、工房の棚が並ぶ通路で枕を探してるんだって。ふかふか、ひんやり、パンの形……どれがいいかな？"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "パンの形なら、枕と間違えて食べちゃう心配もないカニ！……たぶんロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！cli_args() から \"FAST\" を出力し、スイッチ＋コンベアで8ティック以内に (5, 3) へ。教わった「cli_args() + ルート分岐」が役に立ったね。"
+        "text": "この雲みたいな枕、気持ちいいです！パンの形の枕も気になりますが、まずはこれでお昼寝します〜。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "寝言で『焼きたて〜』って言ってるカニ。夢の中ではパン枕を食べてるロボ！"
       }
     ]
   },
   {
     "stageId": "986e5ff1-ac6c-57dc-90f1-74296736adc1",
-    "requestTitle": "Config 構造体＋ダイヤル番号の結合の依頼",
+    "requestTitle": "モカさんのカフェ、雨の日の窓辺席",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「Config::build + ダイヤル解錠」を使う依頼が届いたよ。引数と環境設定の両方を Config 構造体にまとめ、Result<Config, String> で安全に構築してから実行部へ渡します。"
+        "text": "雨の日は窓辺の席が大人気。モカさんが新しい設定の札を丸い番号飾りのついたケースにしまったけど、窓に近づきすぎるとフェリスちゃんの鼻がガラスにぺたんってついちゃうよ！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "くもった窓にカニの絵を描くカニ！……あっ、鼻の跡もついちゃったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！Config で \"CONFIG_OK\" 出力・ダイヤル(5)解錠・金庫⚡5・(4, 1)へ。教わった「Config::build + ダイヤル解錠」が役に立ったね。"
+        "text": "窓辺に小さなカニの絵が増えたね。鼻の跡はふき取って、絵だけ残しておこうか。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "絵の横に『本日のおすすめはカニプリン』って書いたカニ！"
       }
     ]
   },
   {
     "stageId": "b87d47fc-af3a-5703-8836-a76d69a54774",
-    "requestTitle": "CLI設定から自律迷路ソルバー起動の依頼",
+    "requestTitle": "ポッポくん、かくれんぼの鬼になる",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「CLI + 左手法迷路」を使う依頼が届いたよ。CLI層で引数と環境変数を解釈し、検証済みの設定でモジュールの自律制御ロジックを起動する綺麗なアーキテクチャです。"
+        "text": "かくれんぼで鬼になったポッポくん、目をつぶって数えてる間にフェリスちゃんが帽子の中へ隠れちゃった！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "帽子がいつもより重いカニ……ポッポくん、まだ数えてるロボ？"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！CLI 起動ログ \"MAZE\" とテスト合格で迷路の (3, 3) へ。教わった「CLI + 左手法迷路」が役に立ったね。"
+        "text": "見つけました！帽子がもぞもぞ動いたので、すぐわかりました。フェリスちゃん、そこは隠れ場所だったんですね！"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "見つかったカニ！でも帽子の中はあったかくて、もう一回隠れたいロボ〜！"
       }
     ]
   },
   {
     "stageId": "c831c1c1-a891-53bd-aff3-1a64ff93dec1",
-    "requestTitle": "minigrep フィルタ＋二重スイッチU字ルートの依頼",
+    "requestTitle": "みるくの落としものは赤いボタン？",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「minigrep + 二重スイッチ」を使う依頼が届いたよ。集計・フィルタ処理のテストを済ませた上で、U字の複合スイッチ経路を走り切ります。"
+        "text": "みるくちゃんが大切な赤いボタンを落としちゃった！みんなで床を探したけど、赤いものが多くて見分けがつかないね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "赤いボタン発見カニ！……と思ったら、コッペさんのジャムのふただったロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！2テスト合格＋\"BATCH_3\"＋金庫⚡3＋全スイッチ＋(0, 3)へ。教わった「minigrep + 二重スイッチ」が役に立ったね。"
+        "text": "見つかったのは、みるくちゃんのリボンについていた小さなボタン！ジャムのふたも一緒に見つかってよかったね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "今度は僕のハサミを探してほしいカニ！……あ、手に持ってたロボ！"
       }
     ]
   },
   {
     "stageId": "71bac323-56c1-54c5-a7b2-4d7db7c3abf3",
-    "requestTitle": "env_flag 切替でコア検査・納品フロー変更の依頼",
+    "requestTitle": "ミモザさんの温室で、くしゃみ連発！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「env_flag() + 空間コア」を使う依頼が届いたよ。env_flag() の値に応じて厳密検査モードをオンにし、空間上の検査台・強化台を経由するフローを実行します。"
+        "text": "温室に光る飾り玉を運んでいたフェリスちゃんが、くしゃみを三連発！花粉じゃなくて、ふわふわの綿毛が鼻をくすぐったみたい。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "へっくしょんカニ！綿毛がハサミにくっついて、くすぐったいロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！STRICT モードで \"STRICT_OK\" 出力・コア検査＆強化(⚡5+)・納品。教わった「env_flag() + 空間コア」が役に立ったね。"
+        "text": "綿毛は外へ逃がして、光る飾り玉も無事に温室の棚へ。ミモザさん、鉢のそばに小さな風車も飾っておいたわ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "風車を見るたびにくしゃみを思い出すカニ！へっくしょん！"
       }
     ]
   },
   {
     "stageId": "023ce4f0-00a6-583a-9c3a-a016b2f8dc2e",
-    "requestTitle": "コア工場CLI：エラー分離＆検査強化の依頼",
+    "requestTitle": "商店街みんなで作る、巨大フルーツポンチ",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「CLI + stdout/stderr + コア」を使う依頼が届いたよ。出力ストリームの分離と単体テスト、そして現実の安全操縦（スパーク待機・コア操作）をすべて統合します。"
+        "text": "今日は商店街の大きなフルーツポンチ作り！コッペさんは果物を切って、モカさんは器を用意して、みんなで持ち寄るよ。仕上げには光る飾り玉もテーブルのそばに置くんだって。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "僕はさくらんぼ係カニ！味見で一粒減っても、赤いからすぐばれるロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！テスト合格・stdout \"CORE_DELIVERED\"・stderr \"WARN_SPARK\"・コア⚡5+納品・全スイッチ。教わった「CLI + stdout/stderr + コア」が役に立ったね。"
+        "text": "大きな器いっぱいのフルーツポンチが完成！さくらんぼが一粒少ないのは……フェリスちゃん、口の横に赤い汁がついてるよ？"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "飾りつけの味見カニ！赤い汁は……さくらんぼの応援ロボ！"
       }
     ]
   },
   {
     "stageId": "990fa11d-9836-56be-9f70-6e2e77edde16",
-    "requestTitle": "minigrep 検索結果＋スパーク警告 eprintln!の依頼",
+    "requestTitle": "お昼寝中のモカさんに、そっとお届け",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「minigrep + stderr 分離」を使う依頼が届いたよ。検索結果などの正常データは標準出力（println!）、安全警告やエラー報告は標準エラー出力（eprintln!）へ分けるのがUNIX/CLIの鉄則です。"
+        "text": "モカさんがカウンターでうとうとしてるよ。冷めないうちにお茶を置きたいけど、起こさないようにそっとね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "静かに歩くカニ……ハサミも鳴らさないカニ……くぅ〜。今のお腹の音は僕じゃないロボ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！テスト合格・stdout \"FOUND\"・stderr \"WARN\"・金庫⚡3・(5, 1)へ。教わった「minigrep + stderr 分離」が役に立ったね。"
+        "text": "お茶、ありがとう。寝ていたわけじゃないよ。フェリスくんのお腹が鳴るか、静かに聞いていたんだ。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "聞こえてたカニ！？お茶の香りでお腹が起きちゃったロボ！"
       }
     ]
   },
   {
     "stageId": "4d21d984-cae8-55b3-8b37-4ee94ed21ea6",
-    "requestTitle": "CLIグランドパズル：完全工房システムの依頼",
+    "requestTitle": "町内ピクニック、毛布が風に飛ばされる！",
     "client": "kurumi",
     "intro": [
       {
         "speaker": "kurumi",
         "emotion": "normal",
-        "text": "「CLIの最終チャレンジ」を使う依頼が届いたよ。エラー処理、型とトレイトの抽象化、自動テスト、入出力CLI設計のすべてが噛み合うことで、プロ仕様の信頼できるロボットが完成しました！"
+        "text": "みんなで丘にピクニックに来たのに、毛布が風でふわーっと飛んでいっちゃった！お弁当が転がる前に追いかけよう。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "必要な手順を整理して、工房のロボットに解決してもらおう！"
+        "text": "毛布さん、待つカニ〜！お弁当は僕が守るロボ！……あっ、サンドイッチも飛んだカニ！"
       }
     ],
     "outro": [
       {
         "speaker": "kurumi",
         "emotion": "happy",
-        "text": "できた！知識を総結集！全テスト・stdout/stderr・ダイヤル(4)・金庫⚡7・コア⚡5+・全スイッチ。教わった「CLIの最終チャレンジ」が役に立ったね。"
+        "text": "毛布は丘の木にふわりと着地！サンドイッチも無事だったよ。風のおかげで、みんなの髪型だけ少しお祭りみたいになったね。"
       },
       {
         "speaker": "ferris",
         "emotion": "happy",
-        "text": "今回の学びを次の依頼にも活かしていこう！"
+        "text": "僕のハサミの間に葉っぱが挟まったカニ！ピクニックのおみやげロボ！"
       }
     ]
   }
