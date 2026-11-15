@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-atelier: #fff8ee;
+    --bg-wood: #f5dfc2;
+    --surface-card: #ffffff;
+    --surface-biscuit: #f7ebda;
+    --ink-cocoa: #4a352b;
+    --ink-muted: #7c6154;
+    --editor-bg: #2c211d;
+    --editor-gutter: #231916;
+    --accent-crab: #f97316;
+    --accent-mint: #14b8a6;
+    --accent-berry: #ec4899;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-atelier);
+    color: var(--ink-cocoa);
+    font-family: "M PLUS Rounded 1c", "Fredoka", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.font-display {
+  font-family: "Fredoka", "M PLUS Rounded 1c", sans-serif;
+  text-wrap: balance;
+}
+
+.font-code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cute anime ink border & soft craft offset shadow */
+.anime-card {
+  border: 2px solid #4a352b;
+  box-shadow: 0 4px 0 #d9c0a3;
+}
+
+.anime-btn {
+  border: 2px solid #4a352b;
+  box-shadow: 0 3px 0 #4a352b;
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 140ms ease;
+}
+
+.anime-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 #4a352b;
+}
+
+.anime-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #4a352b;
+}
+
+/* Custom subtle scrollbars for editor & atlas */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(74, 53, 43, 0.06);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 53, 43, 0.25);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 53, 43, 0.4);
+}

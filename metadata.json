@@ -1,0 +1,6 @@
+{
+  "name": "鉄と歯車のRust工房 — Kobo Rust",
+  "description": "プログラミング初心者から『プログラミング言語Rust 日本語版』第1章〜第20章を遊びながら学べる、かわいいアニメ調の決定論的テキストコーディング・アクションパズルゲーム。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
