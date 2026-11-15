@@ -3477,7 +3477,12 @@ export function compileAndSimulate(
     if (resolvedName === 'try_dial') {
       const guess = args[0]?.kind === 'int' ? args[0].val : 0;
       const secret = setup.dial?.secret ?? 7;
-      pendingCues.push({ kind: 'dial_check', x: fiber.x, y: fiber.y, text: String(guess) });
+      pendingCues.push({
+        kind: 'dial_check',
+        x: setup.dial?.x ?? fiber.x,
+        y: setup.dial?.y ?? fiber.y,
+        text: String(guess),
+      });
       yield 'tick';
       if (guess === secret) {
         dialSolved = true;
@@ -3819,6 +3824,9 @@ export function compileAndSimulate(
     }
     if (vc.vaultTarget !== undefined && vaultValue < vc.vaultTarget) {
       return { won: false, failMsg: `共有金庫のエネルギーが目標に届きませんでした（${vaultValue}/${vc.vaultTarget}）。` };
+    }
+    if (vc.vaultExact !== undefined && vaultValue !== vc.vaultExact) {
+      return { won: false, failMsg: `共有金庫の値が目標と一致しません（${vaultValue}/${vc.vaultExact}）。` };
     }
     if (vc.dialSolved && !dialSolved) {
       return { won: false, failMsg: 'ひみつダイヤルの数値がまだ一致していません！' };

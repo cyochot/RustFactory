@@ -58,7 +58,7 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
       conveyors: [{ x: 2, y: 1, dir: 0 }],
       vault: { x: 1, y: 0, initial: 0, target: 6 },
     },
-    victoryCondition: { reachGoal: true, vaultTarget: 6 },
+    victoryCondition: { reachGoal: true, vaultTarget: 6, vaultExact: 6 },
     parTicks: 7,
   },
   {
@@ -534,7 +534,7 @@ export const PUZZLE_ACT4_STAGES: StageDefinition[] = [
       ],
       vault: { x: 1, y: 0, initial: 0, target: 6 },
     },
-    victoryCondition: { reachGoal: true, deliverCores: 1, minCorePower: 4, scanCount: 1, vaultTarget: 6, requireSpatialCoreRules: true },
+    victoryCondition: { reachGoal: true, deliverCores: 1, minCorePower: 4, scanCount: 1, vaultTarget: 6, vaultExact: 6, requireSpatialCoreRules: true },
     parTicks: 15,
   },
 
@@ -1542,7 +1542,7 @@ fn main() {
       conveyors: [{ x: 1, y: 1, dir: 0 }, { x: 2, y: 2, dir: 0 }, { x: 4, y: 2, dir: 0 }],
       vault: { x: 2, y: 0, initial: 0, target: 6 },
     },
-    victoryCondition: { reachGoal: true, vaultTarget: 6, testsRequired: 1 },
+    victoryCondition: { reachGoal: true, vaultTarget: 6, vaultExact: 6, testsRequired: 1 },
     parTicks: 7,
   },
   {
@@ -1572,7 +1572,7 @@ fn main() {
             *p += 1;
         }
     }
-    add_vault(*base + 2);
+    add_vault(*base);
 }`,
     solutionCode: `fn main() {
     let base = Box::new(2);
@@ -1614,7 +1614,7 @@ fn main() {
       ],
       vault: { x: 2, y: 0, initial: 0, target: 4 },
     },
-    victoryCondition: { reachGoal: true, vaultTarget: 4 },
+    victoryCondition: { reachGoal: true, vaultTarget: 4, vaultExact: 4 },
     parTicks: 10,
   },
   {
@@ -1737,7 +1737,7 @@ fn main() {
     let h = thread::spawn(|| {
         step(1);
         // 上のみるく号も、フェリスちゃんがスイッチを踏むまでゲート(2, 0)を待とう！
-        step(3);
+        step(4);
     });
     step(1);
     while !is_gate_open() {
@@ -1785,7 +1785,7 @@ fn main() {
         { x: 2, y: 0, openTicks: 1, closedTicks: 1, linkedSwitch: { x: 1, y: 2 } },
       ],
     },
-    victoryCondition: { reachGoal: true, workerReachGoal: true, requireAllSwitches: true },
+    victoryCondition: { reachGoal: true, workerReachGoal: true, requireAllSwitches: true, maxTicks: 7 },
     parTicks: 8,
   },
   {
@@ -1871,7 +1871,7 @@ fn main() {
     let dist = 3;
     // move キーワードを付けて所有権をスレッドへ移そう！
     let h = thread::spawn(|| {
-        try_dial(code);
+        try_dial(code - 1);
         step(dist);
     });
     step(4);
@@ -1912,7 +1912,7 @@ fn main() {
       workerGoal: { x: 3, y: 0 },
       dial: { x: 2, y: 1, secret: 6 },
     },
-    victoryCondition: { reachGoal: true, workerReachGoal: true, dialSolved: true },
+    victoryCondition: { reachGoal: true, workerReachGoal: true, dialSolved: true, maxTicks: 8 },
     parTicks: 8,
   },
   {
@@ -2232,7 +2232,7 @@ fn main() {
     starterCode: `fn main() {
     let h = thread::spawn(|| {
         // 上のみるく号もスパーク(2, 0)に気をつけて進もう！
-        step(4);
+        step(5);
     });
     for _ in 0..4 {
         while is_spark_ahead() {
@@ -2283,7 +2283,7 @@ fn main() {
         { id: 'sp1', path: [{ x: 2, y: 0 }, { x: 2, y: 1 }, { x: 2, y: 2 }, { x: 2, y: 3 }, { x: 2, y: 2 }, { x: 2, y: 1 }], initialIndex: 2 },
       ],
     },
-    victoryCondition: { reachGoal: true, workerReachGoal: true },
+    victoryCondition: { reachGoal: true, workerReachGoal: true, maxTicks: 7 },
     parTicks: 10,
   },
   {
@@ -2800,6 +2800,9 @@ fn main() {
     while !is_gate_open() {
         wait_tick(1);
     }
+    while is_spark_ahead() {
+        wait_tick(1);
+    }
     step(1);
     // ここ (3, 2) は強化台！boost(&mut core); を呼んでから納品台へ進もう
     
@@ -2826,6 +2829,9 @@ fn main() {
     scan(&core);
     step(1);
     while !is_gate_open() {
+        wait_tick(1);
+    }
+    while is_spark_ahead() {
         wait_tick(1);
     }
     step(1);
@@ -2910,6 +2916,9 @@ fn main() {
     while !is_gate_open() {
         wait_tick(1);
     }
+    while is_spark_ahead() {
+        wait_tick(1);
+    }
     step(1);
     boost(&mut core);
     step(1);
@@ -2980,7 +2989,7 @@ fn main() {
       switches: [{ x: 1, y: 0 }],
       gates: [{ x: 2, y: 2, openTicks: 1, closedTicks: 1, linkedSwitch: { x: 1, y: 0 } }],
       sparks: [
-        { id: 'sp1', path: [{ x: 3, y: 0 }, { x: 3, y: 1 }, { x: 3, y: 2 }, { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 3, y: 1 }], initialIndex: 0 },
+        { id: 'sp1', path: [{ x: 3, y: 0 }, { x: 3, y: 1 }, { x: 3, y: 0 }, { x: 3, y: 1 }], initialIndex: 0 },
       ],
       dial: { x: 1, y: 1, secret: 6 },
       vault: { x: 2, y: 1, initial: 0, target: 6 },

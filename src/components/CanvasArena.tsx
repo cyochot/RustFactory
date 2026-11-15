@@ -927,8 +927,8 @@ export const CanvasArena: React.FC<CanvasArenaProps> = ({
 
       // Secret Dial (Ch.2)
       if (setup.dial) {
-        const cx = originX + (setup.dial.x + 0.5) * tileSize;
-        const cy = originY + (setup.dial.y + 0.5) * tileSize;
+        const cx = originX + ((setup.dial.x ?? setup.goal.x) + 0.5) * tileSize;
+        const cy = originY + ((setup.dial.y ?? setup.goal.y) + 0.5) * tileSize;
         ctx.beginPath();
         ctx.arc(cx, cy, tileSize * 0.32, 0, Math.PI * 2);
         ctx.fillStyle = snapA?.dialSolved ? '#A7F3D0' : '#FCE7F3';

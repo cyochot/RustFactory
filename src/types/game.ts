@@ -83,7 +83,7 @@ export interface StageWorldSetup {
   deliveries?: PedestalSpec[];
   switches?: Array<{ x: number; y: number }>;
   vault?: { x: number; y: number; initial: number; target: number };
-  dial?: { x: number; y: number; secret: number };
+  dial?: { x?: number; y?: number; secret: number };
   conveyorItems?: number[];
   cliArgs?: string[];
   envFlag?: string;
@@ -98,6 +98,7 @@ export interface VictoryCondition {
   minCorePower?: number;
   scanCount?: number;
   vaultTarget?: number;
+  vaultExact?: number;
   dialSolved?: boolean;
   testsRequired?: number;
   jobsRequired?: number;

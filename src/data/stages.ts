@@ -4,14 +4,33 @@ import { ACT2_STAGES } from './stagesAct2';
 import { ACT3_STAGES } from './stagesAct3';
 import { ACT4_STAGES } from './stagesAct4';
 import { ACT5_STAGES } from './stagesAct5';
+import { PUZZLE_ACT1_STAGES } from './puzzleAct1';
+import { PUZZLE_ACT2_STAGES } from './puzzleAct2';
+import { PUZZLE_ACT3_STAGES } from './puzzleAct3';
+import { PUZZLE_ACT4_STAGES } from './puzzleAct4';
+import { PUZZLE_ACT5_STAGES } from './puzzleAct5';
 
-export const ALL_STAGES: StageDefinition[] = [
+const STAGE_DEFINITIONS: StageDefinition[] = [
   ...ACT1_STAGES,
+  ...PUZZLE_ACT1_STAGES,
   ...ACT2_STAGES,
+  ...PUZZLE_ACT2_STAGES,
   ...ACT3_STAGES,
+  ...PUZZLE_ACT3_STAGES,
   ...ACT4_STAGES,
+  ...PUZZLE_ACT4_STAGES,
   ...ACT5_STAGES,
+  ...PUZZLE_ACT5_STAGES,
 ];
+
+export const ALL_STAGES: StageDefinition[] = STAGE_DEFINITIONS
+  .slice()
+  .sort((a, b) => {
+    const chapterOrder = a.chapter - b.chapter;
+    if (chapterOrder !== 0) return chapterOrder;
+    return Number(a.id.split('-')[1]) - Number(b.id.split('-')[1]);
+  })
+  .map((stage, index) => ({ ...stage, index: index + 1 }));
 
 export const ACT_META: Array<{
   act: 1 | 2 | 3 | 4 | 5;
