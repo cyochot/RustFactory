@@ -20,33 +20,6 @@ import { STORY_CHAPTER_18 } from './storyChapter18';
 import { STORY_CHAPTER_19 } from './storyChapter19';
 import { STORY_CHAPTER_20 } from './storyChapter20';
 
-export const STORY_CHAPTER_TITLES: Record<number, string> = {
-  1: '第1章：事始め',
-  2: '第2章：数当てゲームのプログラミング',
-  3: '第3章：一般的なプログラミングの概念',
-  4: '第4章：所有権を理解する',
-  5: '第5章：構造体を使用して関係のあるデータを構造化する',
-  6: '第6章：Enumとパターンマッチング',
-  7: '第7章：パッケージ、クレート、モジュール',
-  8: '第8章：一般的なコレクション',
-  9: '第9章：エラー処理',
-  10: '第10章：ジェネリック型、トレイト、ライフタイム',
-  11: '第11章：自動テストを書く',
-  12: '第12章：入出力CLIプロジェクト',
-  13: '第13章：イテレータとクロージャ',
-  14: '第14章：CargoとCrates.io',
-  15: '第15章：スマートポインタ',
-  16: '第16章：恐れるな！並行性',
-  17: '第17章：Rustのオブジェクト指向プログラミング機能',
-  18: '第18章：パターンとマッチング',
-  19: '第19章：高度な機能',
-  20: '第20章：マルチスレッドWebサーバ',
-};
-
-export function getStoryChapterTitle(chapter: number): string {
-  return STORY_CHAPTER_TITLES[chapter] ?? `第${chapter}章`;
-}
-
 export const ALL_STAGE_STORIES: StageStoryEntry[] = [
   ...STORY_CHAPTER_1,
   ...STORY_CHAPTER_2,

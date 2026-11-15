@@ -7,7 +7,6 @@ import { StoryCharacterAvatar } from './StoryCharacterAvatar';
 interface StoryNovelOverlayProps {
   story: StageStoryEntry;
   stageDisplayId: string;
-  chapterTitle: string;
   beatPhase: StoryBeatPhase;
   onComplete: () => void;
 }
@@ -15,7 +14,6 @@ interface StoryNovelOverlayProps {
 export const StoryNovelOverlay: React.FC<StoryNovelOverlayProps> = ({
   story,
   stageDisplayId,
-  chapterTitle,
   beatPhase,
   onComplete,
 }) => {
@@ -137,7 +135,7 @@ export const StoryNovelOverlay: React.FC<StoryNovelOverlayProps> = ({
             <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] font-bold text-[#7C6154]">
               <span className="font-code text-[#EA580C]">{stageDisplayId}</span>
               <span aria-hidden="true">·</span>
-              <span className="truncate">{story.requestTitle}</span>
+              <span className="truncate">{STORY_CHARACTERS[story.client].name}</span>
               <span aria-hidden="true">·</span>
               <span className="text-[#0F766E]">{phaseLabel}</span>
             </div>

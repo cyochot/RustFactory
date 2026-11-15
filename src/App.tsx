@@ -20,7 +20,7 @@ import {
   StageProgress,
   TickSnapshot,
 } from './types/game';
-import { getStageStory, getStoryChapterTitle } from './data/storyScripts';
+import { getStageStory } from './data/storyScripts';
 import { TitleScreen } from './components/TitleScreen';
 import { CanvasArena } from './components/CanvasArena';
 import { KurumiWorkbench } from './components/KurumiWorkbench';
@@ -813,7 +813,6 @@ export default function App() {
         <StoryNovelOverlay
           story={activeStoryObj}
           stageDisplayId={activeStoryStage.displayId}
-          chapterTitle={getStoryChapterTitle(activeStoryStage.chapter)}
           beatPhase={activeStory.phase}
           onComplete={handleCompleteActiveStory}
         />
