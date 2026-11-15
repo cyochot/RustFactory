@@ -823,7 +823,6 @@ export default function App() {
           freeStudyMode={freeStudyMode}
           onToggleFreeStudy={() => setFreeStudyMode((f) => !f)}
           onSelectStage={loadStage}
-          onRequestResetSave={() => setShowResetConfirm(true)}
           onClose={() => setShowAtlas(false)}
         />
       )}
@@ -887,7 +886,6 @@ export default function App() {
           clearSettleTimer();
           setGameState('TITLE_MENU');
         }}
-        onRequestResetSave={() => setShowResetConfirm(true)}
       />
 
       {/* Save Data Reset Confirmation Modal */}

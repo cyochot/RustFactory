@@ -4,7 +4,6 @@ import {
   Lock,
   Unlock,
   CheckCircle2,
-  Trash2,
   Compass,
 } from 'lucide-react';
 import { getStageDisplayTitle } from '../data/stages';
@@ -33,7 +32,6 @@ interface StageAtlasModalProps {
   freeStudyMode: boolean;
   onToggleFreeStudy: () => void;
   onSelectStage: (stageId: string) => void;
-  onRequestResetSave: () => void;
   onClose: () => void;
 }
 
@@ -44,7 +42,6 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
   freeStudyMode,
   onToggleFreeStudy,
   onSelectStage,
-  onRequestResetSave,
   onClose,
 }) => {
   const activeStage = stages.find((s) => s.id === currentStageId) ?? stages[0];
@@ -128,16 +125,6 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
                 <Lock className="h-3.5 w-3.5" />
               )}
               <span>{freeStudyMode ? '全章フリー解放 ON' : '順番にアンロック'}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onRequestResetSave}
-              title="セーブデータを初期化する"
-              className="anime-btn flex h-10 items-center gap-1.5 rounded-xl bg-[#FFF1F2] px-3 text-xs font-bold text-[#BE123C] whitespace-nowrap shrink-0 cursor-pointer"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-              <span>データ初期化</span>
             </button>
 
             <button

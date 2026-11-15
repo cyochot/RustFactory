@@ -7,7 +7,6 @@ import {
   Home,
   Play,
   AlertCircle,
-  Trash2,
   BookHeart,
   MessageCircleHeart,
 } from 'lucide-react';
@@ -29,7 +28,6 @@ interface StageModalsProps {
   onOpenStoryLog: () => void;
   onReplayOutro: () => void;
   onReturnTitle: () => void;
-  onRequestResetSave: () => void;
 }
 
 export const StageModals: React.FC<StageModalsProps> = ({
@@ -47,7 +45,6 @@ export const StageModals: React.FC<StageModalsProps> = ({
   onOpenStoryLog,
   onReplayOutro,
   onReturnTitle,
-  onRequestResetSave,
 }) => {
   if (gameState !== 'PAUSED' && gameState !== 'ROUND_SUMMARY' && gameState !== 'GAME_OVER') {
     return null;
@@ -96,14 +93,6 @@ export const StageModals: React.FC<StageModalsProps> = ({
             >
               <Home className="h-4 w-4" />
               <span>タイトル画面へ</span>
-            </button>
-            <button
-              type="button"
-              onClick={onRequestResetSave}
-              className="anime-btn flex h-11 items-center justify-center gap-2 rounded-xl bg-[#FFF1F2] text-xs font-bold text-[#BE123C] cursor-pointer"
-            >
-              <Trash2 className="h-4 w-4" />
-              <span>セーブデータを初期化</span>
             </button>
           </div>
         </div>
