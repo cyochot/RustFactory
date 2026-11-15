@@ -8,7 +8,6 @@ interface StoryNovelOverlayProps {
   story: StageStoryEntry;
   chapterTitle: string;
   beatPhase: StoryBeatPhase;
-  isReplay?: boolean;
   onComplete: () => void;
 }
 
@@ -16,7 +15,6 @@ export const StoryNovelOverlay: React.FC<StoryNovelOverlayProps> = ({
   story,
   chapterTitle,
   beatPhase,
-  isReplay = false,
   onComplete,
 }) => {
   const lines = useMemo(
@@ -119,9 +117,7 @@ export const StoryNovelOverlay: React.FC<StoryNovelOverlayProps> = ({
 
   const phaseLabel =
     beatPhase === 'intro' ? '町のちいさな依頼' : 'おてつだい完了！';
-  const finishLabel = isReplay
-    ? 'とじる'
-    : beatPhase === 'intro'
+  const finishLabel = beatPhase === 'intro'
     ? 'パズルへすすむ'
     : 'クリア結果を見る';
 

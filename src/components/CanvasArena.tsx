@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Pause, BookOpen, MessageCircleHeart } from 'lucide-react';
+import { Volume2, VolumeX, Pause, BookOpen } from 'lucide-react';
 import {
   Direction,
   InStagePhase,
@@ -22,7 +22,6 @@ interface CanvasArenaProps {
   onToggleMute: () => void;
   onPause: () => void;
   onOpenBook: () => void;
-  onReplayStory: () => void;
 }
 
 interface Particle {
@@ -445,7 +444,6 @@ export const CanvasArena: React.FC<CanvasArenaProps> = ({
   onToggleMute,
   onPause,
   onOpenBook,
-  onReplayStory,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -1383,16 +1381,6 @@ export const CanvasArena: React.FC<CanvasArenaProps> = ({
               {stage.parTicks}
             </span>
           </div>
-
-          <button
-            type="button"
-            onClick={onReplayStory}
-            className="anime-btn flex h-9 items-center gap-1.5 rounded-xl bg-[#FEF3C7] px-3 text-xs font-bold text-[#92400E] whitespace-nowrap cursor-pointer"
-            title="このステージの依頼会話を見返す"
-          >
-            <MessageCircleHeart className="h-3.5 w-3.5" />
-            <span>お話</span>
-          </button>
 
           <button
             type="button"

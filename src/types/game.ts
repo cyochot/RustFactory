@@ -281,11 +281,3 @@ export interface StageStoryEntry {
   outro: StoryLine[];
 }
 
-export type SeenStoryMap = Record<
-  string,
-  {
-    intro?: boolean;
-    outro?: boolean;
-  }
->;
-

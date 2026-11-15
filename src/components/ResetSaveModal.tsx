@@ -1,11 +1,10 @@
 import React from 'react';
 import { AlertTriangle, Trash2, X } from 'lucide-react';
-import { SeenStoryMap, StageProgress } from '../types/game';
+import { StageProgress } from '../types/game';
 
 interface ResetSaveModalProps {
   totalStages: number;
   progress: Record<string, StageProgress>;
-  seenStories: SeenStoryMap;
   freeStudyMode: boolean;
   onConfirmReset: () => void;
   onClose: () => void;
@@ -14,7 +13,6 @@ interface ResetSaveModalProps {
 export const ResetSaveModal: React.FC<ResetSaveModalProps> = ({
   totalStages,
   progress,
-  seenStories,
   freeStudyMode,
   onConfirmReset,
   onClose,
@@ -24,8 +22,7 @@ export const ResetSaveModal: React.FC<ResetSaveModalProps> = ({
   const savedCodeCount = entries.filter(
     (p) => typeof p.savedCode === 'string' && p.savedCode.length > 0
   ).length;
-  const seenStoryCount = Object.keys(seenStories).length;
-  const hasSaveData = entries.length > 0 || seenStoryCount > 0 || freeStudyMode;
+  const hasSaveData = entries.length > 0 || freeStudyMode;
 
   return (
     <div
@@ -84,12 +81,6 @@ export const ResetSaveModal: React.FC<ResetSaveModalProps> = ({
                   <span>各ステージの保存コード</span>
                   <span className="font-code font-bold tabular-nums">
                     {savedCodeCount} 件
-                  </span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span>既読ストーリー記録</span>
-                  <span className="font-code font-bold tabular-nums">
-                    {seenStoryCount} 話
                   </span>
                 </li>
                 <li className="flex items-center justify-between">

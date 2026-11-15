@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Map, Play, BookOpen, Award, Trash2, BookHeart } from 'lucide-react';
+import { Map, Play, BookOpen, Award, Trash2 } from 'lucide-react';
 import { StageDefinition, StageProgress } from '../types/game';
 import titleBgImg from '../assets/images/atelier_title_bg_1794618239723.jpg';
 
@@ -9,7 +9,6 @@ interface TitleScreenProps {
   nextStage: StageDefinition;
   onStartNext: () => void;
   onOpenAtlas: () => void;
-  onOpenStoryLog: () => void;
   onRequestResetSave: () => void;
 }
 
@@ -19,7 +18,6 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   nextStage,
   onStartNext,
   onOpenAtlas,
-  onOpenStoryLog,
   onRequestResetSave,
 }) => {
   const [bgError, setBgError] = useState(false);
@@ -127,15 +125,6 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
             >
               <Map className="h-4 w-4 text-[#0D9488]" />
               <span>全{stages.length}ステージ地図</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onOpenStoryLog}
-              className="anime-btn flex h-13 items-center gap-2 rounded-2xl bg-[#FFFDF9] px-5 text-sm font-bold text-[#4A352B] whitespace-nowrap cursor-pointer"
-            >
-              <BookHeart className="h-4 w-4 text-[#F97316]" />
-              <span>お話ログ</span>
             </button>
 
             <button

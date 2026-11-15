@@ -7,8 +7,6 @@ import {
   Home,
   Play,
   AlertCircle,
-  BookHeart,
-  MessageCircleHeart,
 } from 'lucide-react';
 import { GameState, StageDefinition } from '../types/game';
 import { getStageDisplayTitle } from '../data/stages';
@@ -25,8 +23,6 @@ interface StageModalsProps {
   onRetrySameCode: () => void;
   onNextStage: () => void;
   onOpenAtlas: () => void;
-  onOpenStoryLog: () => void;
-  onReplayOutro: () => void;
   onReturnTitle: () => void;
 }
 
@@ -42,8 +38,6 @@ export const StageModals: React.FC<StageModalsProps> = ({
   onRetrySameCode,
   onNextStage,
   onOpenAtlas,
-  onOpenStoryLog,
-  onReplayOutro,
   onReturnTitle,
 }) => {
   if (gameState !== 'PAUSED' && gameState !== 'ROUND_SUMMARY' && gameState !== 'GAME_OVER') {
@@ -77,14 +71,6 @@ export const StageModals: React.FC<StageModalsProps> = ({
             >
               <Map className="h-4 w-4" />
               <span>ステージ地図を開く</span>
-            </button>
-            <button
-              type="button"
-              onClick={onOpenStoryLog}
-              className="anime-btn flex h-12 items-center justify-center gap-2 rounded-xl bg-[#FEF3C7] text-sm font-bold text-[#92400E] cursor-pointer"
-            >
-              <BookHeart className="h-4 w-4" />
-              <span>歯車町の依頼ノート（お話）</span>
             </button>
             <button
               type="button"
@@ -149,15 +135,6 @@ export const StageModals: React.FC<StageModalsProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              type="button"
-              onClick={onReplayOutro}
-              className="anime-btn flex h-12 items-center justify-center gap-1.5 rounded-xl bg-[#FEF3C7] px-4 text-xs font-bold text-[#92400E] whitespace-nowrap cursor-pointer"
-            >
-              <MessageCircleHeart className="h-4 w-4" />
-              <span>お話を見返す</span>
-            </button>
-
             <button
               type="button"
               onClick={onRetrySameCode}

@@ -16,10 +16,8 @@ import {
   CompilerDiagnostic,
   GameState,
   InStagePhase,
-  SeenStoryMap,
   StageDefinition,
   StageProgress,
-  StoryBeatPhase,
   TickSnapshot,
 } from './types/game';
 import { getStageStory, getStoryChapterTitle } from './data/storyScripts';
@@ -31,12 +29,10 @@ import { BookGuideModal } from './components/BookGuideModal';
 import { StageModals } from './components/StageModals';
 import { ResetSaveModal } from './components/ResetSaveModal';
 import { StoryNovelOverlay } from './components/StoryNovelOverlay';
-import { StoryLogModal } from './components/StoryLogModal';
 import { CheckCircle2 } from 'lucide-react';
 
 const STORAGE_KEY_PROGRESS = 'kobo_rust_progress_v5';
 const STORAGE_KEY_FREE_MODE = 'kobo_rust_free_study_v5';
-const STORAGE_KEY_STORY_SEEN = 'kobo_rust_story_seen_v5';
 
 function buildInitialTick0Snapshot(stage: StageDefinition): TickSnapshot {
   const s = stage.worldSetup;
@@ -169,20 +165,10 @@ export default function App() {
   const [showBookGuide, setShowBookGuide] = useState(false);
   const [showFunctionRef, setShowFunctionRef] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [showStoryLog, setShowStoryLog] = useState(false);
   const [resetDoneNotice, setResetDoneNotice] = useState(false);
-  const [seenStories, setSeenStories] = useState<SeenStoryMap>(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY_STORY_SEEN);
-      return raw ? (JSON.parse(raw) as SeenStoryMap) : {};
-    } catch {
-      return {};
-    }
-  });
   const [activeStory, setActiveStory] = useState<{
     stageId: string;
-    phase: StoryBeatPhase;
-    isReplay: boolean;
+    phase: 'intro' | 'outro';
     pendingRoundSummary?: boolean;
   } | null>(null);
 
@@ -220,18 +206,6 @@ export default function App() {
   }, [freeStudyMode]);
 
   useEffect(() => {
-    try {
-      if (Object.keys(seenStories).length === 0) {
-        localStorage.removeItem(STORAGE_KEY_STORY_SEEN);
-      } else {
-        localStorage.setItem(STORAGE_KEY_STORY_SEEN, JSON.stringify(seenStories));
-      }
-    } catch {
-      // ignore
-    }
-  }, [seenStories]);
-
-  useEffect(() => {
     if (!resetDoneNotice) return;
     const timer = window.setTimeout(() => setResetDoneNotice(false), 3500);
     return () => window.clearTimeout(timer);
@@ -257,13 +231,11 @@ export default function App() {
     try {
       localStorage.removeItem(STORAGE_KEY_PROGRESS);
       localStorage.removeItem(STORAGE_KEY_FREE_MODE);
-      localStorage.removeItem(STORAGE_KEY_STORY_SEEN);
     } catch {
       // ignore
     }
     const firstStage = ALL_STAGES[0];
     setProgress({});
-    setSeenStories({});
     setActiveStory(null);
     setFreeStudyMode(false);
     setCurrentStageId(firstStage.id);
@@ -279,7 +251,6 @@ export default function App() {
     setShowAtlas(false);
     setShowBookGuide(false);
     setShowFunctionRef(false);
-    setShowStoryLog(false);
     setShowResetConfirm(false);
     setGameState('TITLE_MENU');
     setResetDoneNotice(true);
@@ -301,33 +272,22 @@ export default function App() {
       setShowAtlas(false);
       setShowBookGuide(false);
       setShowFunctionRef(false);
-      setShowStoryLog(false);
       setGameState('PLAYING');
-      if (!seenStories[target.id]?.intro && getStageStory(target.id)) {
+      if (getStageStory(target.id)) {
         setActiveStory({
           stageId: target.id,
           phase: 'intro',
-          isReplay: false,
         });
       } else {
         setActiveStory(null);
       }
     },
-    [progress, seenStories, syncTickState]
+    [progress, syncTickState]
   );
 
   const handleCompleteActiveStory = useCallback(() => {
     if (!activeStory) return;
-    const { stageId, phase: beatPhase, isReplay, pendingRoundSummary } = activeStory;
-    if (!isReplay) {
-      setSeenStories((prev) => ({
-        ...prev,
-        [stageId]: {
-          ...prev[stageId],
-          [beatPhase]: true,
-        },
-      }));
-    }
+    const { pendingRoundSummary } = activeStory;
     setActiveStory(null);
     if (pendingRoundSummary) {
       setGameState('ROUND_SUMMARY');
@@ -397,11 +357,10 @@ export default function App() {
           },
         }));
         const openClear = () => {
-          if (!seenStories[currentStage.id]?.outro && getStageStory(currentStage.id)) {
+          if (getStageStory(currentStage.id)) {
             setActiveStory({
               stageId: currentStage.id,
               phase: 'outro',
-              isReplay: false,
               pendingRoundSummary: true,
             });
           } else {
@@ -431,7 +390,7 @@ export default function App() {
         }
       }
     },
-    [code, currentStage.id, seenStories]
+    [code, currentStage.id]
   );
 
   const handleCompileAndRun = useCallback(() => {
@@ -639,7 +598,7 @@ export default function App() {
 
       if (activeStory) return;
 
-      if (gameState === 'TITLE_MENU' && !showAtlas && !showStoryLog && !showResetConfirm) {
+      if (gameState === 'TITLE_MENU' && !showAtlas && !showResetConfirm) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           workshopAudio.unlock();
@@ -653,10 +612,6 @@ export default function App() {
         e.preventDefault();
         if (showResetConfirm) {
           setShowResetConfirm(false);
-          return;
-        }
-        if (showStoryLog) {
-          setShowStoryLog(false);
           return;
         }
         if (showFunctionRef) {
@@ -676,7 +631,7 @@ export default function App() {
         return;
       }
 
-      if (showResetConfirm || showStoryLog) return;
+      if (showResetConfirm) return;
       if (inInput) return;
 
       if (gameState === 'PLAYING') {
@@ -711,7 +666,6 @@ export default function App() {
     showBookGuide,
     showFunctionRef,
     showResetConfirm,
-    showStoryLog,
   ]);
 
   const currentSnapshot =
@@ -745,10 +699,6 @@ export default function App() {
             workshopAudio.unlock();
             setShowAtlas(true);
           }}
-          onOpenStoryLog={() => {
-            workshopAudio.unlock();
-            setShowStoryLog(true);
-          }}
           onRequestResetSave={() => setShowResetConfirm(true)}
         />
       ) : (
@@ -771,15 +721,6 @@ export default function App() {
               }}
               onPause={() => setGameState('PAUSED')}
               onOpenBook={() => setShowBookGuide(true)}
-              onReplayStory={() => {
-                if (getStageStory(currentStage.id)) {
-                  setActiveStory({
-                    stageId: currentStage.id,
-                    phase: 'intro',
-                    isReplay: true,
-                  });
-                }
-              }}
             />
           </div>
 
@@ -827,28 +768,6 @@ export default function App() {
         />
       )}
 
-      {/* Story Log / Replay Archive Modal */}
-      {showStoryLog && (
-        <StoryLogModal
-          stages={ALL_STAGES}
-          progress={progress}
-          seenStories={seenStories}
-          freeStudyMode={freeStudyMode}
-          currentStageId={currentStage.id}
-          onPlayStoryBeat={(stageUUID, beatPhase) => {
-            const stage = ALL_STAGES.find((candidate) => candidate.id === stageUUID);
-            if (stage && getStageStory(stage.id)) {
-              setActiveStory({
-                stageId: stage.id,
-                phase: beatPhase,
-                isReplay: true,
-              });
-            }
-          }}
-          onClose={() => setShowStoryLog(false)}
-        />
-      )}
-
       {/* Book-ja Section Summary Guide Modal */}
       {showBookGuide && (
         <BookGuideModal
@@ -872,16 +791,6 @@ export default function App() {
           if (nextStageObj) loadStage(nextStageObj.id);
         }}
         onOpenAtlas={() => setShowAtlas(true)}
-        onOpenStoryLog={() => setShowStoryLog(true)}
-        onReplayOutro={() => {
-          if (getStageStory(currentStage.id)) {
-            setActiveStory({
-              stageId: currentStage.id,
-              phase: 'outro',
-              isReplay: true,
-            });
-          }
-        }}
         onReturnTitle={() => {
           clearSettleTimer();
           setGameState('TITLE_MENU');
@@ -893,7 +802,6 @@ export default function App() {
         <ResetSaveModal
           totalStages={ALL_STAGES.length}
           progress={progress}
-          seenStories={seenStories}
           freeStudyMode={freeStudyMode}
           onConfirmReset={handleResetAllSaveData}
           onClose={() => setShowResetConfirm(false)}
@@ -906,7 +814,6 @@ export default function App() {
           story={activeStoryObj}
           chapterTitle={getStoryChapterTitle(activeStoryStage.chapter)}
           beatPhase={activeStory.phase}
-          isReplay={activeStory.isReplay}
           onComplete={handleCompleteActiveStory}
         />
       )}
