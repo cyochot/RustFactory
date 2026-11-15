@@ -7,7 +7,7 @@ import {
   Trash2,
   Compass,
 } from 'lucide-react';
-import { ACT_META, getStageDisplayTitle } from '../data/stages';
+import { getStageDisplayTitle } from '../data/stages';
 import { StageDefinition, StageKind, StageProgress } from '../types/game';
 
 type AtlasStatusFilter = 'all' | 'uncleared' | 'cleared';
@@ -48,21 +48,21 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
   onClose,
 }) => {
   const activeStage = stages.find((s) => s.id === currentStageId) ?? stages[0];
-  const [selectedAct, setSelectedAct] = useState<1 | 2 | 3 | 4 | 5 | 'all'>('all');
+  const [selectedChapter, setSelectedChapter] = useState<number | 'all'>('all');
   const [statusFilter, setStatusFilter] = useState<AtlasStatusFilter>('all');
   const [kindFilter, setKindFilter] = useState<AtlasKindFilter>('all');
   const [pendingJumpId, setPendingJumpId] = useState<string | null>(null);
   const stageRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  const actStages = useMemo(
+  const chapterStages = useMemo(
     () => stages
-      .filter((s) => selectedAct === 'all' || s.act === selectedAct)
+      .filter((s) => selectedChapter === 'all' || s.chapter === selectedChapter)
       .sort((a, b) => a.index - b.index),
-    [stages, selectedAct]
+    [stages, selectedChapter]
   );
 
   const filteredStages = useMemo(
-    () => actStages.filter((st) => {
+    () => chapterStages.filter((st) => {
       const isCleared = Boolean(progress[st.id]?.cleared);
       const matchesStatus =
         statusFilter === 'all' ||
@@ -71,7 +71,7 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
       const matchesKind = kindFilter === 'all' || getStageKind(st) === kindFilter;
       return matchesStatus && matchesKind;
     }),
-    [actStages, progress, statusFilter, kindFilter]
+    [chapterStages, progress, statusFilter, kindFilter]
   );
 
   useEffect(() => {
@@ -81,14 +81,10 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
       el.scrollIntoView({ block: 'center', behavior: 'smooth' });
       setPendingJumpId(null);
     }
-  }, [pendingJumpId, selectedAct, statusFilter, kindFilter]);
-
-  const handleSelectAct = (actNum: 1 | 2 | 3 | 4 | 5 | 'all') => {
-    setSelectedAct(actNum);
-  };
+  }, [pendingJumpId, selectedChapter, statusFilter, kindFilter]);
 
   const handleJumpToCurrent = () => {
-    setSelectedAct('all');
+    setSelectedChapter('all');
     setStatusFilter('all');
     setKindFilter('all');
     setPendingJumpId(activeStage.id);
@@ -155,47 +151,24 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
           </div>
         </div>
 
-        {/* 5-Act Segmented Tabs */}
-        <div className="flex flex-wrap gap-1.5 border-b border-[#E5D3BC] bg-[#FFFDF9] px-5 py-3">
-          {[{ act: 'all' as const, title: '全体の進行順', subtitle: '全384ステージ' }, ...ACT_META.map((act) => ({
-            act: act.act,
-            title: act.title,
-            subtitle: act.chaptersLabel,
-          }))].map((act) => {
-            const countCleared = stages.filter(
-              (s) => (act.act === 'all' || s.act === act.act) && progress[s.id]?.cleared
-            ).length;
-            const countTotal = stages.filter((s) => act.act === 'all' || s.act === act.act).length;
-            const active = selectedAct === act.act;
-            return (
-              <button
-                key={act.act}
-                type="button"
-                onClick={() => handleSelectAct(act.act)}
-                className={`rounded-xl border-2 px-3 py-2 text-left transition-colors cursor-pointer ${
-                  active
-                    ? 'border-[#4A352B] bg-[#F97316] text-white'
-                    : 'border-[#E5D3BC] bg-[#FFF8EE] text-[#4A352B] hover:border-[#4A352B]'
-                }`}
-              >
-                <div className="text-xs font-extrabold whitespace-nowrap">
-                  {act.title}
-                </div>
-                <div
-                  className={`text-[11px] tabular-nums whitespace-nowrap ${
-                    active ? 'text-white/90' : 'text-[#7C6154]'
-                  }`}
-                >
-                  {act.subtitle} · {countCleared}/{countTotal}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
         {/* Filter & Navigation Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-[#E5D3BC] bg-[#FFF8EE] px-5 py-2.5">
           <div className="flex flex-wrap items-center gap-2">
+            <label className="flex min-h-[38px] items-center gap-2 rounded-xl border border-[#E5D3BC] bg-[#FFFDF9] px-3 text-xs font-bold text-[#4A352B]">
+              <span>章</span>
+              <select
+                value={selectedChapter}
+                onChange={(event) => setSelectedChapter(event.target.value === 'all' ? 'all' : Number(event.target.value))}
+                aria-label="章で絞り込む"
+                className="max-w-[180px] bg-transparent font-bold outline-none"
+              >
+                <option value="all">全章・全体順</option>
+                {Array.from(new Set(stages.map((stage) => stage.chapter))).sort((a, b) => a - b).map((chapter) => (
+                  <option key={chapter} value={chapter}>{`第${chapter}章`}</option>
+                ))}
+              </select>
+            </label>
+
             {/* Status Filter Segmented Control */}
             <div
               className="flex items-center gap-1 rounded-xl border border-[#E5D3BC] bg-[#F7EBDA] p-1"
@@ -322,6 +295,9 @@ export const StageAtlasModal: React.FC<StageAtlasModalProps> = ({
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-bold text-[#7C6154]">
+                          <span className="rounded-md bg-[#4A352B] px-1.5 py-0.5 font-code tabular-nums text-white">
+                            #{String(st.index).padStart(3, '0')}
+                          </span>
                           <span className="font-code text-[#EA580C]">{st.displayId}</span>
                           <span aria-hidden="true">·</span>
                           <span>{`第${st.chapter}章 ${st.chapterTitle}`}</span>

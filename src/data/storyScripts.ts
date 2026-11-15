@@ -5,38 +5,6 @@ import { STORY_ACT3 } from './storyAct3';
 import { STORY_ACT4 } from './storyAct4';
 import { STORY_ACT5 } from './storyAct5';
 
-export const STORY_ACT_META: Array<{
-  act: 1 | 2 | 3 | 4 | 5;
-  title: string;
-  chaptersLabel: string;
-}> = [
-  {
-    act: 1,
-    title: '第1幕：ドタバタ工房オープン！',
-    chaptersLabel: '第1話圏（1〜4章）',
-  },
-  {
-    act: 2,
-    title: '第2幕：商店街の珍騒動つづく',
-    chaptersLabel: '第2話圏（5〜8章）',
-  },
-  {
-    act: 3,
-    title: '第3幕：雨の日も晴れの日も大忙し',
-    chaptersLabel: '第3話圏（9〜12章）',
-  },
-  {
-    act: 4,
-    title: '第4幕：ふたり揃えばお祭り気分',
-    chaptersLabel: '第4話圏（13〜16章）',
-  },
-  {
-    act: 5,
-    title: '第5幕：歯車町わいわい大騒ぎ！',
-    chaptersLabel: '第5話圏（17〜20章）',
-  },
-];
-
 export const STORY_CHAPTER_TITLES: Record<number, string> = {
   1: '第1章：工房オープンとご近所あいさつ',
   2: '第2章：ひみつの鍵とジャム缶騒動',

@@ -10,11 +10,7 @@ import {
   ChevronsUpDown,
 } from 'lucide-react';
 import { STORY_CHARACTERS } from '../data/storyCharacters';
-import {
-  STORY_ACT_META,
-  getStageStory,
-  getStoryChapterTitle,
-} from '../data/storyScripts';
+import { getStageStory, getStoryChapterTitle } from '../data/storyScripts';
 import {
   SeenStoryMap,
   StageDefinition,
@@ -30,7 +26,6 @@ interface StoryLogModalProps {
   progress: Record<string, StageProgress>;
   seenStories: SeenStoryMap;
   freeStudyMode: boolean;
-  initialAct?: 1 | 2 | 3 | 4 | 5;
   currentStageId?: string;
   onPlayStoryBeat: (stageId: string, phase: StoryBeatPhase) => void;
   onClose: () => void;
@@ -41,28 +36,20 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
   progress,
   seenStories,
   freeStudyMode,
-  initialAct = 1,
   currentStageId,
   onPlayStoryBeat,
   onClose,
 }) => {
   const activeStage =
     (currentStageId ? stages.find((s) => s.id === currentStageId) : undefined) ??
-    stages.find((s) => s.act === initialAct) ??
     stages[0];
 
-  const [selectedAct, setSelectedAct] = useState<1 | 2 | 3 | 4 | 5>(initialAct);
   const [statusFilter, setStatusFilter] = useState<StoryStatusFilter>('all');
   const [expandedChapters, setExpandedChapters] = useState<Set<number>>(
     () => new Set([activeStage.chapter])
   );
   const [pendingJumpId, setPendingJumpId] = useState<string | null>(null);
   const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
-  const actStages = useMemo(
-    () => stages.filter((s) => s.act === selectedAct),
-    [stages, selectedAct]
-  );
 
   const chapterGroups = useMemo(() => {
     const groups: Array<{
@@ -74,7 +61,7 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
     }> = [];
     const byChap = new Map<number, (typeof groups)[number]>();
 
-    for (const st of actStages) {
+    for (const st of [...stages].sort((a, b) => a.index - b.index)) {
       let grp = byChap.get(st.chapter);
       if (!grp) {
         grp = {
@@ -99,8 +86,8 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
         grp.filteredStages.push(st);
       }
     }
-    return groups;
-  }, [actStages, progress, statusFilter]);
+    return groups.sort((a, b) => a.chapter - b.chapter);
+  }, [stages, progress, statusFilter]);
 
   const visibleGroups = useMemo(
     () => chapterGroups.filter((g) => g.filteredStages.length > 0),
@@ -118,24 +105,7 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
       el.scrollIntoView({ block: 'center', behavior: 'smooth' });
       setPendingJumpId(null);
     }
-  }, [pendingJumpId, selectedAct, expandedChapters, statusFilter]);
-
-  const handleSelectAct = (actNum: 1 | 2 | 3 | 4 | 5) => {
-    setSelectedAct(actNum);
-    const actChapters = Array.from(
-      new Set(stages.filter((s) => s.act === actNum).map((s) => s.chapter))
-    );
-    setExpandedChapters((prev) => {
-      if (actChapters.some((ch) => prev.has(ch))) return prev;
-      const next = new Set(prev);
-      if (actNum === activeStage.act) {
-        next.add(activeStage.chapter);
-      } else if (actChapters.length > 0) {
-        next.add(actChapters[0]);
-      }
-      return next;
-    });
-  };
+  }, [pendingJumpId, expandedChapters, statusFilter]);
 
   const toggleChapter = (chapter: number) => {
     setExpandedChapters((prev) => {
@@ -162,7 +132,6 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
   };
 
   const handleJumpToCurrent = () => {
-    setSelectedAct(activeStage.act);
     setStatusFilter('all');
     setExpandedChapters((prev) => {
       const next = new Set(prev);
@@ -218,38 +187,6 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
           >
             <X className="h-5 w-5" />
           </button>
-        </div>
-
-        {/* 5-Act Tabs */}
-        <div className="flex flex-wrap gap-1.5 border-b border-[#E5D3BC] bg-[#FFFDF9] px-5 py-3">
-          {STORY_ACT_META.map((act) => {
-            const actList = stages.filter((s) => s.act === act.act);
-            const actCleared = actList.filter((s) => progress[s.id]?.cleared).length;
-            const active = selectedAct === act.act;
-            return (
-              <button
-                key={act.act}
-                type="button"
-                onClick={() => handleSelectAct(act.act)}
-                className={`rounded-xl border-2 px-3 py-2 text-left transition-colors cursor-pointer ${
-                  active
-                    ? 'border-[#4A352B] bg-[#F97316] text-white'
-                    : 'border-[#E5D3BC] bg-[#FFF8EE] text-[#4A352B] hover:border-[#4A352B]'
-                }`}
-              >
-                <div className="text-xs font-extrabold whitespace-nowrap">
-                  {act.title}
-                </div>
-                <div
-                  className={`text-[11px] tabular-nums whitespace-nowrap ${
-                    active ? 'text-white/90' : 'text-[#7C6154]'
-                  }`}
-                >
-                  {act.chaptersLabel} · 解決 {actCleared}/{actList.length}
-                </div>
-              </button>
-            );
-          })}
         </div>
 
         {/* Filter & Navigation Toolbar */}
@@ -312,8 +249,10 @@ export const StoryLogModal: React.FC<StoryLogModalProps> = ({
             <div className="rounded-2xl border-2 border-dashed border-[#D9C0A3] bg-[#FFFDF9] p-8 text-center">
               <p className="text-sm font-bold text-[#4A352B]">
                 {statusFilter === 'unsolved'
-                  ? 'この幕の未解決の依頼はありません（すべて解決済みです！）'
-                  : 'この幕に解決済みの依頼がまだありません。'}
+                  ? '未解決の依頼はありません（すべて解決済みです！）'
+                  : statusFilter === 'solved'
+                  ? '解決済みの依頼はまだありません。'
+                  : '表示できる依頼はありません。'}
               </p>
               <button
                 type="button"

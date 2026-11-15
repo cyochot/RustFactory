@@ -153,7 +153,6 @@ const makePuzzle = (chapter: number, chapterTitle: string, number: number, ident
     id: identity.id,
     displayId: identity.displayId,
     index: 0,
-    act: 5,
     chapter,
     chapterTitle,
     stageKind: kind,
@@ -174,6 +173,6 @@ const makePuzzle = (chapter: number, chapterTitle: string, number: number, ident
   };
 };
 
-export const PUZZLE_ACT5_STAGES: StageDefinition[] = chapters.flatMap(({ chapter, title }, chapterIndex) =>
+export const CHAPTER_17_20_PUZZLES: StageDefinition[] = chapters.flatMap(({ chapter, title }, chapterIndex) =>
   patterns.map((_, offset) => makePuzzle(chapter, title, 9 + offset, puzzleIdentities[chapterIndex * patterns.length + offset]))
 );

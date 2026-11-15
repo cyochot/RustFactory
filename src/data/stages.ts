@@ -1,29 +1,29 @@
 import { StageDefinition } from '../types/game';
-import { ACT1_STAGES } from './stagesAct1';
-import { ACT2_STAGES } from './stagesAct2';
-import { ACT3_STAGES } from './stagesAct3';
-import { ACT4_STAGES } from './stagesAct4';
-import { ACT5_STAGES } from './stagesAct5';
-import { PUZZLE_ACT1_STAGES } from './puzzleAct1';
-import { PUZZLE_ACT2_STAGES } from './puzzleAct2';
-import { PUZZLE_ACT3_STAGES } from './puzzleAct3';
-import { PUZZLE_ACT4_STAGES } from './puzzleAct4';
-import { PUZZLE_ACT5_STAGES } from './puzzleAct5';
+import { CHAPTER_1_4_STAGES } from './stagesAct1';
+import { CHAPTER_5_8_STAGES } from './stagesAct2';
+import { CHAPTER_9_12_STAGES } from './stagesAct3';
+import { CHAPTER_13_16_STAGES } from './stagesAct4';
+import { CHAPTER_17_20_STAGES } from './stagesAct5';
+import { CHAPTER_1_4_PUZZLES } from './puzzleAct1';
+import { CHAPTER_5_8_PUZZLES } from './puzzleAct2';
+import { CHAPTER_9_12_PUZZLES } from './puzzleAct3';
+import { CHAPTER_13_16_PUZZLES } from './puzzleAct4';
+import { CHAPTER_17_20_PUZZLES } from './puzzleAct5';
 
 const REGULAR_STAGES: StageDefinition[] = [
-  ...ACT1_STAGES,
-  ...ACT2_STAGES,
-  ...ACT3_STAGES,
-  ...ACT4_STAGES,
-  ...ACT5_STAGES,
+  ...CHAPTER_1_4_STAGES,
+  ...CHAPTER_5_8_STAGES,
+  ...CHAPTER_9_12_STAGES,
+  ...CHAPTER_13_16_STAGES,
+  ...CHAPTER_17_20_STAGES,
 ];
 
 const PUZZLE_STAGES: StageDefinition[] = [
-  ...PUZZLE_ACT1_STAGES,
-  ...PUZZLE_ACT2_STAGES,
-  ...PUZZLE_ACT3_STAGES,
-  ...PUZZLE_ACT4_STAGES,
-  ...PUZZLE_ACT5_STAGES,
+  ...CHAPTER_1_4_PUZZLES,
+  ...CHAPTER_5_8_PUZZLES,
+  ...CHAPTER_9_12_PUZZLES,
+  ...CHAPTER_13_16_PUZZLES,
+  ...CHAPTER_17_20_PUZZLES,
 ];
 
 const PUZZLE_INSERTION_ANCHORS: Record<string, string> = {
@@ -79,41 +79,3 @@ export function getStageDisplayTitle(stage: StageDefinition): string {
     ? stage.title.slice(legacyPrefix.length)
     : stage.title;
 }
-
-export const ACT_META: Array<{
-  act: 1 | 2 | 3 | 4 | 5;
-  title: string;
-  subtitle: string;
-  chaptersLabel: string;
-}> = [
-  {
-    act: 1,
-    title: '第1幕：基本の歯車棟',
-    subtitle: '順次実行・変数・分岐・ループ・所有権と借用',
-    chaptersLabel: '第1章〜第4章',
-  },
-  {
-    act: 2,
-    title: '第2幕：設計図とデータ構造棟',
-    subtitle: '構造体・enum・match・モジュール・コレクション',
-    chaptersLabel: '第5章〜第8章',
-  },
-  {
-    act: 3,
-    title: '第3幕：堅牢性と抽象化棟',
-    subtitle: 'エラー処理・ジェネリクス・トレイト・自動テスト・CLI',
-    chaptersLabel: '第9章〜第12章',
-  },
-  {
-    act: 4,
-    title: '第4幕：関数型・メモリ・並行処理棟',
-    subtitle: 'イテレーター・スマートポインター・スレッド・Mutex',
-    chaptersLabel: '第13章〜第16章',
-  },
-  {
-    act: 5,
-    title: '第5幕：高度な設計と最終工房',
-    subtitle: 'トレイトオブジェクト・パターン・unsafe・マクロ・ThreadPool',
-    chaptersLabel: '第17章〜第20章',
-  },
-];

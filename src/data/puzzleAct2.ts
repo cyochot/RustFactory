@@ -1,6 +1,6 @@
 import { StageDefinition } from '../types/game';
 
-export const PUZZLE_ACT2_STAGES: StageDefinition[] = [
+export const CHAPTER_5_8_PUZZLES: StageDefinition[] = [
   // =========================================================================
   // 第5章 構造体 パズル・挑戦拡張 (5-9 〜 5-16)
   // =========================================================================
@@ -8,7 +8,6 @@ export const PUZZLE_ACT2_STAGES: StageDefinition[] = [
     displayId: '5-9',
     id: 'f02d67b8-17fb-5ba9-bed7-58542c37634e',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'puzzle',
@@ -92,7 +91,6 @@ fn main() {
     displayId: '5-10',
     id: '0c23c893-e04b-58eb-8123-1a5ead126bb4',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'puzzle',
@@ -182,7 +180,6 @@ fn main() {
     displayId: '5-11',
     id: 'c8c5352e-5e91-522d-bc7f-0b113b345d01',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'puzzle',
@@ -277,7 +274,6 @@ fn main() {
     displayId: '5-12',
     id: 'a71ca700-b80a-5bcb-9c08-acb27467c9f2',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'puzzle',
@@ -357,7 +353,6 @@ fn main() {
     displayId: '5-13',
     id: '054630ab-1a53-53e5-8f0e-62559507dd13',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'puzzle',
@@ -454,7 +449,6 @@ fn main() {
     displayId: '5-14',
     id: '47e6d964-34c0-503b-b7b9-ca62cf48076a',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'challenge',
@@ -546,7 +540,6 @@ fn main() {
     displayId: '5-15',
     id: '3b4bfcf0-aa4f-5711-8936-ac4766059c00',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'challenge',
@@ -644,7 +637,6 @@ fn main() {
     displayId: '5-16',
     id: 'aa57e89b-520e-570f-8ed0-3dde87e472b0',
     index: 0,
-    act: 2,
     chapter: 5,
     chapterTitle: '第5章 構造体',
     stageKind: 'challenge',
@@ -762,7 +754,6 @@ fn main() {
     displayId: '6-13',
     id: 'b8cacf70-a74c-57ea-bdaf-d5c24934b111',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -847,7 +838,6 @@ fn main() {
     displayId: '6-14',
     id: 'a9d69c8c-39e3-58dc-b93f-074d77f1b9d2',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -942,7 +932,6 @@ fn main() {
     displayId: '6-15',
     id: '9675f3b2-9098-5081-baa8-a36a4ec53ab4',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1000,7 +989,6 @@ fn main() {
     displayId: '6-16',
     id: 'a642e260-2f26-5f89-8ee0-9f27405ba456',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1094,7 +1082,6 @@ fn main() {
     displayId: '6-17',
     id: 'e8facaca-88b5-5973-98f1-4248dcdad4d0',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1158,7 +1145,6 @@ fn main() {
     displayId: '6-18',
     id: '34266106-3321-5c2d-9168-172c91df8523',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1274,7 +1260,6 @@ fn main() {
     displayId: '6-19',
     id: 'b7414456-bea4-51ca-94bb-093e5d09772c',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1370,7 +1355,6 @@ fn main() {
     displayId: '6-20',
     id: 'a0ccee25-7aa9-5139-9e29-5bb6b8fe7012',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1447,7 +1431,6 @@ fn main() {
     displayId: '6-21',
     id: 'bd45fe4b-97ce-51ea-a3b3-aa112c3af960',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'puzzle',
@@ -1542,7 +1525,6 @@ fn main() {
     displayId: '6-22',
     id: '0dc09086-c946-5991-ac3e-0f967d5ad0e8',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'challenge',
@@ -1619,7 +1601,6 @@ fn main() {
     displayId: '6-23',
     id: '3d5f336d-5d5a-5a55-bb0b-0f06f14d372c',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'challenge',
@@ -1709,7 +1690,6 @@ fn main() {
     displayId: '6-24',
     id: '0173493a-1743-5f71-b043-68a133bce3ce',
     index: 0,
-    act: 2,
     chapter: 6,
     chapterTitle: '第6章 enumとパターンマッチング',
     stageKind: 'challenge',
@@ -1866,7 +1846,6 @@ fn main() {
     displayId: '7-9',
     id: '73562f8a-40ac-509e-8445-4d6ccc8298b4',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'puzzle',
@@ -1956,7 +1935,6 @@ fn main() {
     displayId: '7-10',
     id: '7273cc50-a9a7-5c71-a468-708caf117875',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'puzzle',
@@ -2048,7 +2026,6 @@ fn main() {
     displayId: '7-11',
     id: '5b6edd0d-a1bc-5c03-8ff9-024a867d04f0',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'puzzle',
@@ -2124,7 +2101,6 @@ fn main() {
     displayId: '7-12',
     id: '116ceadb-8d15-54f0-ba3f-88b3f67ea44e',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'puzzle',
@@ -2213,7 +2189,6 @@ fn main() {
     displayId: '7-13',
     id: '0ac079f4-88b5-5189-bdc4-4d3a4e098701',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'puzzle',
@@ -2290,7 +2265,6 @@ fn main() {
     displayId: '7-14',
     id: '0908821d-5296-51dc-9388-cc0bd3f783f5',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'puzzle',
@@ -2372,7 +2346,6 @@ fn main() {
     displayId: '7-15',
     id: '33c3ce56-0349-55bc-8a50-c15e47c87e4d',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'challenge',
@@ -2480,7 +2453,6 @@ fn main() {
     displayId: '7-16',
     id: 'd56b1292-ec0c-50a3-a42d-d1f5b4340960',
     index: 0,
-    act: 2,
     chapter: 7,
     chapterTitle: '第7章 モジュールとパス',
     stageKind: 'challenge',
@@ -2578,7 +2550,6 @@ fn main() {
     displayId: '8-13',
     id: '0ef458ae-a34d-580a-a67b-888e8ed83efe',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -2639,7 +2610,6 @@ fn main() {
     displayId: '8-14',
     id: '056db8f2-5847-5e13-9b61-f1d6f9ec7501',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -2701,7 +2671,6 @@ fn main() {
     displayId: '8-15',
     id: 'a854babb-ef5d-5c32-9762-d2ca6ff15c51',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -2771,7 +2740,6 @@ fn main() {
     displayId: '8-16',
     id: 'e7b903f4-ca79-5791-8042-61ec29eb9a3b',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -2826,7 +2794,6 @@ fn main() {
     displayId: '8-17',
     id: '7a589476-6bbc-5804-bf17-4e28397fdf75',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -2886,7 +2853,6 @@ fn main() {
     displayId: '8-18',
     id: '1af1c991-6dca-5b76-a75d-9cf99273c780',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -2955,7 +2921,6 @@ fn main() {
     displayId: '8-19',
     id: '77e7ce27-a4fd-5c15-99d0-bb64128a16b5',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -3039,7 +3004,6 @@ fn main() {
     displayId: '8-20',
     id: '80000176-efda-5bc0-8fe2-07fb165a0beb',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -3129,7 +3093,6 @@ fn main() {
     displayId: '8-21',
     id: '57500e74-d953-58fd-9776-75f205d6ebd6',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'puzzle',
@@ -3192,7 +3155,6 @@ fn main() {
     displayId: '8-22',
     id: '2f8e6a17-235e-55d7-b8af-33443c7435b2',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'challenge',
@@ -3266,7 +3228,6 @@ fn main() {
     displayId: '8-23',
     id: '22c0ba77-9cf6-5294-a052-97e578c28c55',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'challenge',
@@ -3274,7 +3235,7 @@ fn main() {
     topicTag: 'コレクション + スパーク迷宮',
     kurumiIntro:
       '巡回スパークの先の迷路へ挑もう！`HashMap` の合言葉でダイヤルを解き、`String` に経過を記録しつつ、コアを拾って検査・強化・納品まで一気に決めよう！',
-    goalSummary: 'ダイヤル解錠・"ACT2_PRO" 出力・コア⚡4+納品・全スイッチ・ゴール達成',
+    goalSummary: 'ダイヤル解錠・"COLLECTIONS_PRO" 出力・コア⚡4+納品・全スイッチ・ゴール達成',
     bookSectionTitle: '8.1〜8.3 コレクションの複合パズル',
     bookSummary:
       'データ構造を使い分けながら、現実の空間ルールと危険物をすべてコントロールする総合演習です。',
@@ -3284,7 +3245,7 @@ fn main() {
     book.insert("dial", 5);
     try_dial(book.get("dial").unwrap_or(0));
 
-    let mut msg = String::from("ACT2");
+    let mut msg = String::from("COLLECTIONS");
     println!("{}", msg);
 
     // (1,1)コア→(2,1)検査→(3,1)スパーク注意！→(4,1)強化＆スイッチ→(5,1)納品
@@ -3295,8 +3256,8 @@ fn main() {
     book.insert("dial", 5);
     try_dial(book.get("dial").unwrap_or(0));
 
-    let mut msg = String::from("ACT2");
-    msg.push_str("_PRO");
+    let mut msg = String::from("COLLECTIONS");
+     msg.push_str("_PRO");
     println!("{}", msg);
 
     while is_spark_ahead() { wait_tick(1); }
@@ -3342,23 +3303,22 @@ fn main() {
         { id: 'sp1', path: [{ x: 3, y: 0 }, { x: 3, y: 1 }, { x: 3, y: 2 }, { x: 3, y: 1 }], initialIndex: 0 },
       ],
     },
-    victoryCondition: { reachGoal: true, dialSolved: true, deliverCores: 1, minCorePower: 4, scanCount: 1, stdoutIncludes: ['ACT2_PRO'], requireAllSwitches: true, requireSpatialCoreRules: true },
+    victoryCondition: { reachGoal: true, dialSolved: true, deliverCores: 1, minCorePower: 4, scanCount: 1, stdoutIncludes: ['COLLECTIONS_PRO'], requireAllSwitches: true, requireSpatialCoreRules: true },
     parTicks: 15,
   },
   {
     displayId: '8-24',
     id: '3b8c3958-3f0b-5049-881c-0663cb6f152c',
     index: 0,
-    act: 2,
     chapter: 8,
     chapterTitle: '第8章 一般的なコレクション',
     stageKind: 'challenge',
-    title: '8-24. 第2幕グランドパズル：コレクション迷宮制覇',
-    topicTag: '第2幕 最終チャレンジ',
+    title: '8-24. コレクション総合パズル：迷宮制覇',
+    topicTag: 'コレクションの最終チャレンジ',
     kurumiIntro:
-      '第2幕のラストチャレンジ！`Vec`・`String`・`HashMap`・`struct`・`enum`・`mod` すべての知識が詰まった大迷宮だよ。2つのスイッチ、スパーク、コンベア、金庫、コア納品をすべて制覇しよう！',
-    goalSummary: '第2幕総動員！"ACT2_MASTER"・金庫⚡7・コア⚡5+納品・全スイッチ・ゴール (5, 3) へ',
-    bookSectionTitle: '第2幕 総まとめ — 設計図・列挙型・モジュール・コレクション',
+      'コレクションの総合チャレンジ！`Vec`・`String`・`HashMap`・`struct`・`enum`・`mod` すべての知識が詰まった大迷宮だよ。2つのスイッチ、スパーク、コンベア、金庫、コア納品をすべて制覇しよう！',
+    goalSummary: '知識を総動員！"CHALLENGE_COMPLETE"・金庫⚡7・コア⚡5+納品・全スイッチ・ゴール (5, 3) へ',
+    bookSectionTitle: '総まとめ — 設計図・列挙型・モジュール・コレクション',
     bookSummary:
       '構造体や列挙型でプログラムの骨格を作り、モジュールで整理し、コレクションでデータを自在に扱う力が身に着きました！',
     bookKeyCode: 'struct + enum + mod + HashMap + Vec + String',
@@ -3384,9 +3344,7 @@ fn main() {
     }
     add_vault(vault_sum);
 
-    let mut badge = String::from("ACT2");
-    badge.push_str("_MASTER");
-    println!("{}", badge);
+    println!("IN_PROGRESS");
 
     // ここから (1,1)コア→(2,1)強化＆スイッチ→(4,1)スイッチ→(5,1)右折→(5,3)納品台へ進もう！
     safe_move(1);
@@ -3413,8 +3371,8 @@ fn main() {
     }
     add_vault(vault_sum);
 
-    let mut badge = String::from("ACT2");
-    badge.push_str("_MASTER");
+    let mut badge = String::from("CHALLENGE");
+    badge.push_str("_COMPLETE");
     println!("{}", badge);
 
     safe_move(1);
@@ -3448,7 +3406,7 @@ fn main() {
       ],
       botStart: { x: 0, y: 1, dir: 0 },
       goal: { x: 5, y: 3 },
-      cores: [{ id: 'c1', x: 1, y: 1, power: 3, label: '幕末コア' }],
+      cores: [{ id: 'c1', x: 1, y: 1, power: 3, label: '最終コア' }],
       chargers: [{ x: 2, y: 1 }],
       switches: [{ x: 2, y: 1 }, { x: 4, y: 1 }],
       gates: [{ x: 5, y: 2, openTicks: 1, closedTicks: 1, linkedSwitch: { x: 4, y: 1 } }],
@@ -3458,7 +3416,7 @@ fn main() {
         { id: 'sp1', path: [{ x: 3, y: 0 }, { x: 3, y: 1 }, { x: 3, y: 2 }, { x: 3, y: 1 }], initialIndex: 0 },
       ],
     },
-    victoryCondition: { reachGoal: true, deliverCores: 1, minCorePower: 5, vaultTarget: 7, stdoutIncludes: ['ACT2_MASTER'], requireAllSwitches: true, requireSpatialCoreRules: true },
+    victoryCondition: { reachGoal: true, deliverCores: 1, minCorePower: 5, vaultTarget: 7, stdoutIncludes: ['CHALLENGE_COMPLETE'], requireAllSwitches: true, requireSpatialCoreRules: true },
     parTicks: 15,
   },
 ];

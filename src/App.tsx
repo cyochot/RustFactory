@@ -835,7 +835,6 @@ export default function App() {
           progress={progress}
           seenStories={seenStories}
           freeStudyMode={freeStudyMode}
-          initialAct={currentStage.act}
           currentStageId={currentStage.id}
           onPlayStoryBeat={(stageId, beatPhase) => {
             const stage = ALL_STAGES.find((candidate) => candidate.displayId === stageId);
