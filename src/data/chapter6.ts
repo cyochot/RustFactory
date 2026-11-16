@@ -419,7 +419,7 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6章 & 2.1 シャドーイングと cmp",
     "bookSummary": "Rustでは `let x = x * 2;` のように同じ名前で変数を上書き（シャドーイング）して型や値を整理できます。",
     "bookKeyCode": "let guess = base * 2;\nmatch guess.cmp(&target) { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - ダイヤル解除: 値 18 を求めて try_dial(...) を呼ぶ\n    // - 標準出力(println!): \"OPEN!\" を出力\n    let target_dial = 18; // ダイヤル解除コード（18 を計算して try_dial へ）\n    let expected_output = \"OPEN!\"; // println! で出力に含める文字列\n    let base = 9;\n    // シャドーイングで base を 2倍(18) にし、try_dial(base) で \"OPEN!\" を出力しよう！\n    \n}",
     "solutionCode": "fn main() {\n    let base = 9;\n    let base = base * 2;\n    match try_dial(base) {\n        Ordering::Equal => println!(\"OPEN!\"),\n        _ => {},\n    }\n    step(2);\n    wait_tick(1);\n    step(3);\n}",
     "quickChips": [
       {
@@ -567,7 +567,7 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 標準 enum Ordering のパターンマッチング",
     "bookSummary": "比較結果を表す `Ordering::{Less, Greater, Equal}` を `match` で受けるのは Rust でとてもよく見る定番パターンです。",
     "bookKeyCode": "match try_dial(g) { Ordering::Equal => { break; }, ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - ダイヤル解除: try_dial(guess) が Ordering::Equal になる値を探す\n    let mut guess = 1;\n    // loop と match try_dial(guess) でダイヤルを解除し、ゴールへ向かおう！\n    \n}",
     "solutionCode": "fn main() {\n    let mut guess = 1;\n    loop {\n        match try_dial(guess) {\n            Ordering::Less => guess += 1,\n            Ordering::Greater => guess -= 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(5);\n}",
     "quickChips": [
       {
@@ -685,7 +685,7 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6章 二分探索 — Ordering で探索範囲を半分に",
     "bookSummary": "`Ordering::Less` なら `low = guess + 1`、`Ordering::Greater` なら `high = guess - 1` に更新して中央値 `guess = (low + high) / 2` を試すと超高速に当たります！",
     "bookKeyCode": "let mid = (low + high) / 2;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - ダイヤル解除: try_dial(guess) が Ordering::Equal になる値を探す\n    // - 制限時間: 10 ティック以内\n    let max_ticks = 10; // 目標制限ティック数\n    let mut low = 1;\n    let mut high = 20;\n    // 二分探索で try_dial(guess) が Ordering::Equal になるまで絞り込もう！\n    \n}",
     "solutionCode": "fn main() {\n    let mut low = 1;\n    let mut high = 20;\n    loop {\n        let guess = (low + high) / 2;\n        match try_dial(guess) {\n            Ordering::Less => low = guess + 1,\n            Ordering::Greater => high = guess - 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(4);\n}",
     "quickChips": [
       {
@@ -783,7 +783,7 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6章 数当て応用 — 減算ステップと経路",
     "bookSummary": "目的地の順序に応じて「スイッチを踏みゲートを開く」「ダイヤルを解く」「ゴールへ向かう」の順番をプログラム内で組み立てましょう。",
     "bookKeyCode": "Ordering::Greater => guess -= 3,",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 2)\n    // - ダイヤル解除: try_dial(guess) が Ordering::Equal になる値を探す\n    // - 制限時間: 16 ティック以内\n    let max_ticks = 16; // 目標制限ティック数\n    let mut guess = 20;\n    // loop と match try_dial(guess) でダイヤルを解除し、ゴールへ向かおう！\n    \n}",
     "solutionCode": "fn main() {\n    turn_right();\n    step();\n    turn_left();\n    step(2);\n    turn_left();\n    step();\n    turn_right();\n    let mut guess = 20;\n    loop {\n        match try_dial(guess) {\n            Ordering::Greater => guess -= 3,\n            Ordering::Less => guess += 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(2);\n}",
     "quickChips": [
       {
@@ -912,7 +912,7 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第6章 数当てゲーム — アルゴリズムとコース攻略の融合",
     "bookSummary": "探索アルゴリズムでティック数を抑えることで、後続の移動・スパーク待ちにも十分な余裕が生まれます。",
     "bookKeyCode": "while low <= high { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 2)\n    // - ダイヤル解除: try_dial(guess) が Ordering::Equal になる値を探す\n    // - 制限時間: 14 ティック以内\n    let max_ticks = 14; // 目標制限ティック数\n    let mut low = 1;\n    let mut high = 50;\n    // 二分探索で try_dial(guess) が Ordering::Equal になるまで絞り込もう！\n    \n}",
     "solutionCode": "fn main() {\n    let mut low = 1;\n    let mut high = 50;\n    loop {\n        let guess = (low + high) / 2;\n        match try_dial(guess) {\n            Ordering::Less => low = guess + 1,\n            Ordering::Greater => high = guess - 1,\n            Ordering::Equal => { break; },\n        }\n    }\n    step(2);\n    wait_tick(1);\n    step(2);\n}",
     "quickChips": [
       {
@@ -1082,7 +1082,7 @@ export const CHAPTER_6_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第6章まとめ — enum・match・Option の完全統合",
     "bookSummary": "すべての行動と状態を型安全な `enum` で表現し、漏れのない `match` で実行することで複雑なミッションを完璧に制御できます。",
     "bookKeyCode": "match task { Task::SolveDial => ..., Task::SafeGo(n) => ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Task {\n    SolveDial,\n    SafeGo(i32),\n    Pick,\n    Upgrade,\n    Ship,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (3, 1)\n    // - ダイヤル解除: try_dial(guess) が Ordering::Equal になる値を探す\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 強化⚡5+(3,1) -> 納品(5,1)]\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let plan = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum Task {\n    SolveDial,\n    SafeGo(i32),\n    Pick,\n    Upgrade,\n    Ship,\n}\n\nfn main() {\n    let plan = vec![\n        Task::SolveDial,\n        Task::SafeGo(1),\n        Task::Pick,\n        Task::SafeGo(2),\n        Task::Upgrade,\n        Task::SafeGo(2),\n        Task::Ship,\n    ];\n    let mut core = None;\n    for t in plan {\n        match t {\n            Task::SolveDial => {\n                let mut g = 1;\n                loop {\n                    match try_dial(g) {\n                        Ordering::Less => g += 1,\n                        Ordering::Greater => g -= 1,\n                        Ordering::Equal => { break; },\n                    }\n                }\n            },\n            Task::SafeGo(n) => {\n                for _ in 0..n {\n                    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                    step();\n                }\n            },\n            Task::Pick => {\n                core = Some(grab_core());\n            },\n            Task::Upgrade => {\n                if let Some(mut c) = core {\n                    boost(&mut c);\n                    core = Some(c);\n                }\n            },\n            Task::Ship => {\n                if let Some(c) = core {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
     "quickChips": [
       {

@@ -14,7 +14,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.1 enum を定義する",
     "bookSummary": "`enum` は「いくつかの決まった選択肢のどれか1つ」を表します。さらに `Move(i32)` のように、選択肢ごとにデータを持たせることもできる強力な仕組みです。",
     "bookKeyCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}",
-    "starterCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    let c = Command::Move(1);\n    run_cmd(c);\n}",
+    "starterCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    let c = Command::Move(1);\n    run_cmd(c);\n}",
     "solutionCode": "enum Command {\n    Move(i32),\n    TurnRight,\n}\n\nfn run_cmd(cmd: Command) {\n    match cmd {\n        Command::Move(n) => step(n),\n        Command::TurnRight => turn_right(),\n    }\n}\n\nfn main() {\n    let c = Command::Move(3);\n    run_cmd(c);\n}",
     "quickChips": [
       {
@@ -928,7 +928,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 状態を enum にして match で分岐",
     "bookSummary": "複雑な条件判定の結果をいったん分かりやすい `enum` 値へ変換してから `match` で行動を決めると、ミスが激減します。",
     "bookKeyCode": "match sense_tile() { Sense::Left => turn_left(), ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Sense {\n    LeftOpen,\n    FrontOpen,\n    Blocked,\n}\n\nfn check_env() -> Sense {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 4)\n    \n}",
     "solutionCode": "enum Sense {\n    LeftOpen,\n    FrontOpen,\n    Blocked,\n}\n\nfn check_env() -> Sense {\n    if !is_wall_left() {\n        Sense::LeftOpen\n    } else if !is_wall_ahead() {\n        Sense::FrontOpen\n    } else {\n        Sense::Blocked\n    }\n}\n\nfn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        match check_env() {\n            Sense::LeftOpen => { turn_left(); step(); },\n            Sense::FrontOpen => step(),\n            Sense::Blocked => turn_right(),\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1087,7 +1087,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 match の網羅性とワイルドカード _",
     "bookSummary": "すべてのケースを書くか、残りを `_` で受けることでコンパイル時に漏れを防ぎます。",
     "bookKeyCode": "match status { Status::Go => step(), _ => wait_tick(1) }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Warn {\n    Clear,\n    GateClosed,\n    SparkNear,\n    Emergency,\n}\n\nfn sense() -> Warn {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    \n}",
     "solutionCode": "enum Warn {\n    Clear,\n    GateClosed,\n    SparkNear,\n    Emergency,\n}\n\nfn sense() -> Warn {\n    if !is_gate_open() {\n        Warn::GateClosed\n    } else if is_spark_ahead() {\n        Warn::SparkNear\n    } else {\n        Warn::Clear\n    }\n}\n\nfn main() {\n    while !at_goal() {\n        match sense() {\n            Warn::Clear => step(),\n            _ => wait_tick(1),\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1259,7 +1259,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.1 命令を配列で並べて解釈する enum",
     "bookSummary": "ロボットの一連の動きをデータ（`enum` の配列）として表現すると、ルート編集や拡張がとてもやりやすくなります。",
     "bookKeyCode": "vec![Cmd::Go(2), Cmd::TurnR, Cmd::Go(2)]",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Cmd {\n    Go(i32),\n    TurnR,\n    TurnL,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 制限時間: 10 ティック以内\n    let max_ticks = 10; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let script = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum Cmd {\n    Go(i32),\n    TurnR,\n    TurnL,\n}\n\nfn main() {\n    let script = vec![\n        Cmd::Go(2),\n        Cmd::TurnR,\n        Cmd::Go(2),\n        Cmd::TurnL,\n        Cmd::Go(2),\n    ];\n    for c in script {\n        match c {\n            Cmd::Go(n) => step(n),\n            Cmd::TurnR => turn_right(),\n            Cmd::TurnL => turn_left(),\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1404,7 +1404,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 パターンマッチング実践パズル",
     "bookSummary": "複数のアクションを `enum` で表現してループ＋`match` で解釈する設計は、インタプリタやゲーム制御の基本構造です。",
     "bookKeyCode": "match step_cmd {\n    Cmd::WaitOrGo => ...,\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Cmd {\n    SafeStep,\n    TurnR,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n\n    // --- ステージの初期データ / 機構 ---\n    let plan = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum Cmd {\n    SafeStep,\n    TurnR,\n}\n\nfn main() {\n    let plan = vec![\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n        Cmd::TurnR,\n        Cmd::SafeStep,\n        Cmd::SafeStep,\n    ];\n    for c in plan {\n        match c {\n            Cmd::SafeStep => {\n                if !is_gate_open() {\n                    wait_tick(1);\n                }\n                step();\n            },\n            Cmd::TurnR => turn_right(),\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1504,7 +1504,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.1 操作のミニ言語（DSL）を enum で作る",
     "bookSummary": "異なる種類の操作（移動・コア操作）を1つの `enum` 型として定義し、実行エンジン側で解釈させることができます。",
     "bookKeyCode": "enum Op { Walk(i32), Grab, Scan, Boost, Deliver }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Op {\n    Walk(i32),\n    Grab,\n    Scan,\n    Boost,\n    Deliver,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let ops = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum Op {\n    Walk(i32),\n    Grab,\n    Scan,\n    Boost,\n    Deliver,\n}\n\nfn main() {\n    let ops = vec![\n        Op::Walk(1),\n        Op::Grab,\n        Op::Walk(1),\n        Op::Scan,\n        Op::Walk(1),\n        Op::Boost,\n        Op::Walk(1),\n        Op::Deliver,\n    ];\n    let mut has = false;\n    let mut held = None;\n    for op in ops {\n        match op {\n            Op::Walk(n) => step(n),\n            Op::Grab => {\n                held = Some(grab_core());\n                has = true;\n            },\n            Op::Scan => {\n                if let Some(c) = held {\n                    scan(&c);\n                }\n            },\n            Op::Boost => {\n                if let Some(mut c) = held {\n                    boost(&mut c);\n                    held = Some(c);\n                }\n            },\n            Op::Deliver => {\n                if let Some(c) = held {\n                    deliver(c);\n                }\n            },\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1630,7 +1630,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 ログ出力と処理実行をセットにする enum",
     "bookSummary": "ログ印字とロボット動作を `match` の同じ腕（アーム）に書けば、動いた記録の取りこぼしがなくなります。",
     "bookKeyCode": "match ev { Ev::Scan => { println!(\"SCAN_DONE\"); scan(&c); } ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum StepJob {\n    Move(i32),\n    Inspect,\n    PowerUp,\n    Finish,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    // - 標準出力(println!): \"SCAN_DONE\", \"BOOST_DONE\" を出力\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output_1 = \"SCAN_DONE\"; // println! で出力に含める文字列\n    let expected_output_2 = \"BOOST_DONE\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let jobs = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum StepJob {\n    Move(i32),\n    Inspect,\n    PowerUp,\n    Finish,\n}\n\nfn main() {\n    step(1);\n    let mut core = grab_core();\n    let jobs = vec![StepJob::Move(1), StepJob::Inspect, StepJob::Move(1), StepJob::PowerUp, StepJob::Move(1), StepJob::Finish];\n    for j in jobs {\n        match j {\n            StepJob::Move(n) => step(n),\n            StepJob::Inspect => {\n                println!(\"SCAN_DONE\");\n                scan(&core);\n            },\n            StepJob::PowerUp => {\n                println!(\"BOOST_DONE\");\n                boost(&mut core);\n            },\n            StepJob::Finish => deliver(core),\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1756,7 +1756,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.1 & 6.2 enum メソッドと最短パス",
     "bookSummary": "振る舞いまで `enum` 自身に `impl` しておくと、配列をループで回しながら `.run()` を呼ぶだけで済みます。",
     "bookKeyCode": "impl StepAction { fn run(&self) { match self { ... } } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum StepAction {\n    SafeStep,\n    Charge(i32),\n}\n\nimpl StepAction {\n    fn run(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    // - 制限時間: 8 ティック以内\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    let max_ticks = 8; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let list = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum StepAction {\n    SafeStep,\n    Charge(i32),\n}\n\nimpl StepAction {\n    fn run(&self) {\n        match self {\n            StepAction::SafeStep => {\n                while !is_gate_open() { wait_tick(1); }\n                step();\n            },\n            StepAction::Charge(v) => add_vault(*v),\n        }\n    }\n}\n\nfn main() {\n    let list = vec![\n        StepAction::Charge(3),\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n        StepAction::SafeStep,\n    ];\n    for a in list {\n        a.run();\n    }\n}",
     "quickChips": [
       {
@@ -1893,7 +1893,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 & 6.3 Option を返す関数と match 式",
     "bookSummary": "`match` は値を返す「式」なので、直接関数の戻り値を受け取って変数の計算に組み込めます。",
     "bookKeyCode": "let d = match get_hop(pos) { Some(n) => n, None => 0 };",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn plan_leg(is_first: bool) -> Option<i32> {\n    // TODO: 条件を満たすように実装しよう\n    None\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 4)\n    // - 全スイッチ作動: (3, 1)\n    \n}",
     "solutionCode": "fn plan_leg(is_first: bool) -> Option<i32> {\n    if is_first { Some(3) } else { Some(3) }\n}\n\nfn main() {\n    let dx = match plan_leg(true) {\n        Some(n) => n,\n        None => 0,\n    };\n    let dy = match plan_leg(false) {\n        Some(n) => n,\n        None => 0,\n    };\n    step(dx);\n    turn_right();\n    step(dy);\n}",
     "quickChips": [
       {
@@ -2027,7 +2027,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.1 & 6.3 Option<T> をリストで扱う",
     "bookSummary": "値が存在しない場合があるデータは `Option<T>` のリストにまとめておき、`if let Some(v)` や `match` で安全に取り出します。",
     "bookKeyCode": "for opt in bonuses { if let Some(v) = opt { add_vault(v); } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let items = vec![Some(2), None, Some(4), None];\n    \n}",
     "solutionCode": "fn main() {\n    let items = vec![Some(2), None, Some(4), None];\n    for item in items {\n        if let Some(v) = item {\n            add_vault(v);\n        }\n    }\n    step(4);\n}",
     "quickChips": [
       {
@@ -2148,7 +2148,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.3 if let と自律迷路走破の融合",
     "bookSummary": "重要な1パターンだけを手早く拾う `if let` と、網羅性が要る移動判定 `match` を両方適材適所で使い分けましょう。",
     "bookKeyCode": "if let Bonus::Gold(v) = cell { add_vault(v); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Bonus {\n    Gold(i32),\n    Empty,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 3)\n    // - 全スイッチ作動: (4, 1), (2, 3)\n    // - 金庫目標: ⚡6 以上を貯める\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let rewards = vec![Bonus::Gold(2), Bonus::Empty, Bonus::Gold(4)];\n    \n}",
     "solutionCode": "enum Bonus {\n    Gold(i32),\n    Empty,\n}\n\nfn main() {\n    let rewards = vec![Bonus::Gold(2), Bonus::Empty, Bonus::Gold(4)];\n    for r in rewards {\n        if let Bonus::Gold(v) = r {\n            add_vault(v);\n        }\n    }\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
     "quickChips": [
       {
@@ -2428,7 +2428,7 @@ export const CHAPTER_5_STAGES: StageDefinition[] = [
     "bookSectionTitle": "6.2 & 6.3 コンベア連鎖を enum で操る",
     "bookSummary": "コンベアが自動で移動を補ってくれる場所を見抜き、最小限のバリアント列を組むパズルです。",
     "bookKeyCode": "vec![Inst::Go(1), Inst::Right, ...]",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Inst {\n    Go(i32),\n    Right,\n    Left,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 制限時間: 8 ティック以内\n    let max_ticks = 8; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let prog = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum Inst {\n    Go(i32),\n    Right,\n    Left,\n}\n\nfn main() {\n    let prog = vec![\n        Inst::Go(1),\n        Inst::Right,\n        Inst::Go(1),\n        Inst::Left,\n        Inst::Go(2),\n    ];\n    for p in prog {\n        match p {\n            Inst::Go(n) => step(n),\n            Inst::Right => turn_right(),\n            Inst::Left => turn_left(),\n        }\n    }\n}",
     "quickChips": [
       {

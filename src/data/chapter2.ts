@@ -222,7 +222,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.1 変数でプログラムを見通しよく保つ",
     "bookSummary": "同じ動きが繰り返されるときは、意味のある名前を付けた変数に長さを保存しておくと変更にも強くなります。",
     "bookKeyCode": "let h = 2;\nlet v = 1;\nstep(h); turn_right(); step(v); turn_left();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    \n}",
     "solutionCode": "fn main() {\n    let h = 2;\n    let v = 1;\n    step(h);\n    turn_right();\n    step(v);\n    turn_left();\n    step(h);\n    turn_right();\n    step(v);\n}",
     "quickChips": [
       {
@@ -337,7 +337,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 式と計算 — 座標から移動量を決める",
     "bookSummary": "`goal_x() - bot_x()` のようにセンサー関数同士を引き算すると、現在地からゴールまでの距離を自動計算できます。",
     "bookKeyCode": "let dx = goal_x() - bot_x();\nstep(dx);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (5, 1)\n    // センサー関数で現在地からゴールまでの差分を計算しよう\n    let dx = goal_x() - bot_x();\n    let dy = goal_y() - bot_y();\n    // 東へ dx 歩進んでスイッチを踏み、右を向いて南へ dy 歩進もう！\n    \n}",
     "solutionCode": "fn main() {\n    let dx = goal_x() - bot_x();\n    let dy = goal_y() - bot_y();\n    step(dx);\n    turn_right();\n    step(dy);\n}",
     "quickChips": [
       {
@@ -674,7 +674,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.1 変数と値による移動量の指定",
     "bookSummary": "計算結果を変数に保持し、複数の工房操作へ再利用できます。",
     "bookKeyCode": "let power = 4;\nadd_vault(power);",
-    "starterCode": "fn main() {\n    add_vault(3);\n    step(5);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    add_vault(3);\n    step(5);\n}",
     "solutionCode": "fn main() {\n    let power = 4;\n    add_vault(power);\n    step(5);\n}",
     "quickChips": [
       {
@@ -776,7 +776,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.1 変数と値による移動量の指定",
     "bookSummary": "計算結果を変数に保持し、複数の工房操作へ再利用できます。",
     "bookKeyCode": "let power = 5;\nadd_vault(power);",
-    "starterCode": "fn main() {\n    add_vault(4);\n    step(6);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    add_vault(4);\n    step(6);\n}",
     "solutionCode": "fn main() {\n    let power = 5;\n    add_vault(power);\n    step(6);\n}",
     "quickChips": [
       {
@@ -886,7 +886,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.1 変数と値による移動量の指定",
     "bookSummary": "計算結果を変数に保持し、複数の工房操作へ再利用できます。",
     "bookKeyCode": "let power = 3;\nadd_vault(power);",
-    "starterCode": "fn main() {\n    add_vault(2);\n    step(3);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    add_vault(2);\n    step(3);\n}",
     "solutionCode": "fn main() {\n    let power = 3;\n    add_vault(power);\n    step(3);\n}",
     "quickChips": [
       {
@@ -972,7 +972,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.1 変数と値による移動量の指定",
     "bookSummary": "計算結果を変数に保持し、複数の工房操作へ再利用できます。",
     "bookKeyCode": "let power = 3;\nadd_vault(power);",
-    "starterCode": "fn main() {\n    add_vault(2);\n    step(4);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    add_vault(2);\n    step(4);\n}",
     "solutionCode": "fn main() {\n    let power = 3;\n    add_vault(power);\n    step(4);\n}",
     "quickChips": [
       {
@@ -1066,7 +1066,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.1 変数と可変性 — カウンターの更新",
     "bookSummary": "可変変数 `let mut count = 0;` を使うと、処理を進めながら `count += 2;` のように累計を記録できます。",
     "bookKeyCode": "let mut total = 0;\ntotal += 2;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 標準出力(println!): \"TOTAL: 5\" を出力\n    let expected_output = \"TOTAL: 5\"; // println! で出力に含める文字列\n    let mut total = 0; // 歩いた歩数をここに加算しよう\n    // ヒント: x=3 に周期ゲートがあるよ。2歩進んで wait_tick(1) で待とう\n    \n}",
     "solutionCode": "fn main() {\n    let mut total = 0;\n    step(2);\n    total += 2;\n    wait_tick(1);\n    step(3);\n    total += 3;\n    println!(\"TOTAL: {}\", total);\n}",
     "quickChips": [
       {
@@ -1180,7 +1180,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.1 不変と可変の使い分け実践",
     "bookSummary": "変更が必要なカウンタや累積値にだけ `mut` を付け、歩数など変えない値は通常の `let` にすることで意図が読みやすくなります。",
     "bookKeyCode": "let mut energy = 2;\nadd_vault(energy);\nenergy += 1;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (2, 3)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let mut energy = 2; // 最初のチャージ量（合計⚡5にしよう）\n    // 最初のエネルギーを預けて2歩進み、右を向いて energy を +1 してもう一度預けよう！\n    \n}",
     "solutionCode": "fn main() {\n    let mut energy = 2;\n    add_vault(energy);\n    step(2);\n    turn_right();\n    energy += 1;\n    add_vault(energy);\n    step(2);\n}",
     "quickChips": [
       {
@@ -1477,7 +1477,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 複合型 — タプルの分配（Destructuring）",
     "bookSummary": "`let (a, b, c) = (2, 2, 3);` と書くと、複数の数値を1つのまとまりからスッキリ取り出せます。",
     "bookKeyCode": "let (a, b, c) = (2, 2, 3);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 3)\n    // - 全スイッチ作動: (2, 2)\n    // - 制限時間: 11 ティック以内\n    let max_ticks = 11; // 目標制限ティック数\n    let plan = (2, 2, 3); // 3区間の移動歩数 (a, b, c)\n    let (a, b, c) = plan;\n    // a, b, c を使ってスイッチを踏み、コンベアでゴールしよう！\n    \n}",
     "solutionCode": "fn main() {\n    let plan = (2, 2, 3);\n    let (a, b, c) = plan;\n    step(a);\n    turn_right();\n    step(b);\n    turn_left();\n    step(c);\n}",
     "quickChips": [
       {
@@ -1855,7 +1855,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 関数の戻り値 — 式と文の違い",
     "bookSummary": "Rustでは関数本体の最後に `;` を付けずに書いた式がそのまま戻り値になります。",
     "bookKeyCode": "fn calc_dash(a: i32) -> i32 {\n    a * 2 - 1\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn calc_dash(a: i32) -> i32 {\n    // TODO: a=2 のとき 3 になる計算式を書こう（例: a * 2 - 1）\n    0\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 標準出力(println!): \"DASH: 3\" を出力\n    // - 制限時間: 5 ティック以内\n    let expected_output = \"DASH: 3\"; // println! で出力に含める文字列\n    let max_ticks = 5; // 目標制限ティック数\n    let d = calc_dash(2);\n    // println!(\"DASH: {}\", d); と step(d); を実行しよう！\n    \n}",
     "solutionCode": "fn calc_dash(a: i32) -> i32 {\n    a * 2 - 1\n}\n\nfn main() {\n    let d = calc_dash(2);\n    println!(\"DASH: {}\", d);\n    step(d);\n}",
     "quickChips": [
       {
@@ -2267,7 +2267,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.3 関数で手順をまとめる",
     "bookSummary": "引数で操作量を受け取る関数を作ると、手順を再利用できます。",
     "bookKeyCode": "fn travel(n: i32) { step(n); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn travel(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    \n}",
     "solutionCode": "fn travel(n: i32) {\n    step(n);\n}\nfn main() { travel(5); }",
     "quickChips": [
       {
@@ -2362,7 +2362,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.3 関数で手順をまとめる",
     "bookSummary": "引数で操作量を受け取る関数を作ると、手順を再利用できます。",
     "bookKeyCode": "fn travel(n: i32) { step(n); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn travel(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    \n}",
     "solutionCode": "fn travel(n: i32) {\n    step(n);\n}\nfn main() { travel(6); }",
     "quickChips": [
       {
@@ -2465,7 +2465,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.3 関数で手順をまとめる",
     "bookSummary": "引数で操作量を受け取る関数を作ると、手順を再利用できます。",
     "bookKeyCode": "fn travel(n: i32) { step(n); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn travel(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    \n}",
     "solutionCode": "fn travel(n: i32) {\n    step(n);\n}\nfn main() { travel(3); }",
     "quickChips": [
       {
@@ -2544,7 +2544,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.3 関数で手順をまとめる",
     "bookSummary": "引数で操作量を受け取る関数を作ると、手順を再利用できます。",
     "bookKeyCode": "fn travel(n: i32) { step(n); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn travel(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    \n}",
     "solutionCode": "fn travel(n: i32) {\n    step(n);\n}\nfn main() { travel(4); }",
     "quickChips": [
       {
@@ -2729,7 +2729,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 データ型 — スカラー型と複合型",
     "bookSummary": "整数は `i32`、はい/いいえは `bool`、異なる型の組み合わせはタプル `(i32, bool)`、同じ型の並びは配列 `[1, 2, 3]` で表します。タプルは `.0` や `.1` で中身を取り出せます。",
     "bookKeyCode": "let active: bool = true;\nlet moves: (i32, i32) = (2, 2);",
-    "starterCode": "fn main() {\n    let active: bool = false;\n    let moves: (i32, i32) = (2, 2);\n    if active {\n        step(moves.0 + moves.1);\n    }\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    let active: bool = false;\n    let moves: (i32, i32) = (2, 2);\n    if active {\n        step(moves.0 + moves.1);\n    }\n}",
     "solutionCode": "fn main() {\n    let active: bool = true;\n    let moves: (i32, i32) = (2, 2);\n    if active {\n        step(moves.0 + moves.1);\n    }\n}",
     "quickChips": [
       {
@@ -3027,7 +3027,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 制御フロー — let 文の中で if 式を使う",
     "bookSummary": "Rust では `let x = if cond { 5 } else { 6 };` のように書けます。両方のブロックの末尾にセミコロンを付けず同じ型を返すのが決まりです。",
     "bookKeyCode": "let n = if is_on_switch() { 3 } else { 1 };",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 制限時間: 10 ティック以内\n    let max_ticks = 10; // 目標制限ティック数\n    step(2);\n    // if 式で is_on_switch() に応じた歩数を返し、ゴール (5, 3) へ進もう！\n    let next_steps = 0;\n    \n}",
     "solutionCode": "fn main() {\n    step(2);\n    let next_steps = if is_on_switch() {\n        2\n    } else {\n        1\n    };\n    turn_right();\n    step(next_steps);\n    turn_left();\n    step(3);\n}",
     "quickChips": [
       {
@@ -3306,7 +3306,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 関数の引数 — 複数パラメータと型注釈",
     "bookSummary": "Rustの関数は `fn move_leg(right: bool, n: i32)` のようにすべての引数に型を指定します。同じ形の移動パターンをスマートに表現できます。",
     "bookKeyCode": "fn turn_and_walk(right: bool, n: i32) {\n    if right { turn_right(); } else { turn_left(); }\n    step(n);\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn turn_and_walk(right: bool, n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 5)\n    \n}",
     "solutionCode": "fn turn_and_walk(right: bool, n: i32) {\n    if right {\n        turn_right();\n    } else {\n        turn_left();\n    }\n    step(n);\n}\n\nfn main() {\n    step(1);\n    turn_and_walk(true, 2);\n    turn_and_walk(false, 2);\n    turn_and_walk(true, 2);\n    turn_and_walk(false, 1);\n}",
     "quickChips": [
       {
@@ -3599,7 +3599,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 ループから値を返す",
     "bookSummary": "`let count = loop { ... if cond { break c; } };` の構文で、条件を満たした瞬間のカウント値を変数へ受け取れます。",
     "bookKeyCode": "let steps = loop {\n    ...\n    if is_on_switch() { break n; }\n};",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 3)\n    // - 全スイッチ作動: (0, 3)\n    turn_right();\n    let mut count = 0;\n    // loop { ... if is_on_switch() { break count; } } で歩数を返そう！\n    \n}",
     "solutionCode": "fn main() {\n    turn_right();\n    let mut count = 0;\n    let walked = loop {\n        step();\n        count += 1;\n        if is_on_switch() {\n            break count;\n        }\n    };\n    turn_left();\n    step(walked + 4);\n}",
     "quickChips": [
       {
@@ -3773,7 +3773,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 制御フロー — 壁センサーによる自律走行",
     "bookSummary": "`is_wall_ahead()` は目の前が壁のとき `true` を返します。`loop` の中で `if at_goal() { break; }` と組み合わせれば未知の曲がり角も進めます。",
     "bookKeyCode": "loop {\n    if at_goal() { break; }\n    if is_wall_ahead() { turn_right(); } else { step(); }\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if is_wall_ahead() {\n            if is_wall_right() {\n                turn_left();\n            } else {\n                turn_right();\n            }\n        } else {\n            step();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -3940,7 +3940,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 ループ応用 — 渦巻き迷路の一般解法",
     "bookSummary": "規則的な曲がり角が続く迷路も、センサー分岐のルールを1つ書くだけでコンパクトに解決できます。",
     "bookKeyCode": "if is_wall_ahead() { turn_right(); } else { step(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if is_wall_ahead() {\n            turn_right();\n        } else {\n            step();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -4115,7 +4115,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 迷路探索 — 左手法（Left-Hand Rule）",
     "bookSummary": "1) 左が空いていたら左を向いて1歩進む。2) 前が空いていたら1歩進む。3) どちらも壁なら右を向く。これだけでどんな単連結迷路も解けます！",
     "bookKeyCode": "if !is_wall_left() {\n    turn_left();\n    step();\n} else if !is_wall_ahead() {\n    step();\n} else {\n    turn_right();\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 5)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            turn_right();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -4286,7 +4286,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 迷路探索 — 探索アルゴリズムの選択",
     "bookSummary": "右手法（`!is_wall_right()` を優先）と左手法（`!is_wall_left()` を優先）では巡回する順番が逆になります。スイッチ位置に合わせて使い分けましょう。",
     "bookKeyCode": "if !is_wall_right() { turn_right(); step(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (1, 5)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if !is_wall_right() {\n            turn_right();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            turn_left();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -4635,7 +4635,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 & 7.5 関数 × センサーで汎用動作を作る",
     "bookSummary": "「壁まで進む」という高レベルの命令を関数にしておけば、コンベアが途中に入って距離が変わっても問題なく壁の前で止まれます。",
     "bookKeyCode": "fn dash_to_wall() {\n    while !is_wall_ahead() { step(); }\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn dash_to_wall() {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 4)\n    // - 制限時間: 10 ティック以内\n    let max_ticks = 10; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn dash_to_wall() {\n    while !is_wall_ahead() {\n        step();\n    }\n}\n\nfn main() {\n    dash_to_wall();\n    turn_right();\n    dash_to_wall();\n    turn_left();\n    dash_to_wall();\n}",
     "quickChips": [
       {
@@ -5021,7 +5021,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 複合型の組み合わせ応用",
     "bookSummary": "配列をループで回し、真偽値フラグに応じて条件を切り替えるパターンは実際の制御プログラムでもよく登場します。",
     "bookKeyCode": "let nums = [2, 1, 2];\nfor n in nums { add_vault(n); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let nums = [2, 1, 2];\n    \n}",
     "solutionCode": "fn main() {\n    let nums = [2, 1, 2];\n    let ready = true;\n    if ready {\n        for n in nums {\n            add_vault(n);\n        }\n    }\n    step(4);\n}",
     "quickChips": [
       {
@@ -5145,7 +5145,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 & 7.5 配列の反復処理",
     "bookSummary": "固定のステップリスト `let legs = [2, 1, 2];` を `for s in legs` で回すと、同じ構造の曲がり道を一気に走破できます。",
     "bookKeyCode": "let legs = [2, 2, 1];\nfor s in legs { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 2)\n    // - 全スイッチ作動: (3, 1), (0, 3)\n\n    // --- ステージの初期データ / 機構 ---\n    let legs = [3, 2, 3, 1];\n    \n}",
     "solutionCode": "fn main() {\n    let legs = [3, 2, 3, 1];\n    for s in legs {\n        step(s);\n        turn_right();\n    }\n}",
     "quickChips": [
       {
@@ -5267,7 +5267,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.5 for ループによる反復",
     "bookSummary": "for ループの範囲を決めると、同じ操作を安全に繰り返せます。",
     "bookKeyCode": "for _ in 0..4 { step(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    \n}",
     "solutionCode": "fn main() {\n    for _ in 0..4 { step(); }\n}",
     "quickChips": [
       {
@@ -5354,7 +5354,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.5 for ループによる反復",
     "bookSummary": "for ループの範囲を決めると、同じ操作を安全に繰り返せます。",
     "bookKeyCode": "for _ in 0..5 { step(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    \n}",
     "solutionCode": "fn main() {\n    for _ in 0..5 { step(); }\n}",
     "quickChips": [
       {
@@ -5449,7 +5449,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.5 for ループによる反復",
     "bookSummary": "for ループの範囲を決めると、同じ操作を安全に繰り返せます。",
     "bookKeyCode": "for _ in 0..6 { step(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    \n}",
     "solutionCode": "fn main() {\n    for _ in 0..6 { step(); }\n}",
     "quickChips": [
       {
@@ -5552,7 +5552,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3.5 for ループによる反復",
     "bookSummary": "for ループの範囲を決めると、同じ操作を安全に繰り返せます。",
     "bookKeyCode": "for _ in 0..3 { step(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    \n}",
     "solutionCode": "fn main() {\n    for _ in 0..3 { step(); }\n}",
     "quickChips": [
       {
@@ -5631,7 +5631,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 条件分岐 — 論理和 || による安全判定",
     "bookSummary": "`!is_gate_open() || is_spark_ahead()` と書くと、「ゲートが閉じている」または「次のマスにスパークがいる」のどちらかのとき `wait_tick(1);` を選べます。",
     "bookKeyCode": "if !is_gate_open() || is_spark_ahead() {\n    wait_tick(1);\n} else {\n    step();\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (7, 2)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if !is_gate_open() || is_spark_ahead() {\n            wait_tick(1);\n        } else {\n            step();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -5856,7 +5856,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 算術演算 — 剰余 % で周期を扱う",
     "bookSummary": "割り算の余りを求める `%`（剰余演算子）は、「2回に1回」「3の倍数のとき」といった周期パズルに最適です。",
     "bookKeyCode": "if i % 2 == 0 {\n    wait_tick(1);\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    \n}",
     "solutionCode": "fn main() {\n    for i in 0..6 {\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
     "quickChips": [
       {
@@ -5979,7 +5979,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 ループ制御 — continue で周回をスキップ",
     "bookSummary": "`continue;` を実行すると、その周回の残りの処理を飛ばして次のループ回へ進みます。条件付きスキップに便利です。",
     "bookKeyCode": "for i in 1..=6 {\n    if i % 2 != 0 { continue; }\n    ...\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 標準出力(println!): \"BEAT\" を出力\n    let expected_output = \"BEAT\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "fn main() {\n    for i in 1..=6 {\n        if i % 2 != 0 {\n            continue;\n        }\n        println!(\"BEAT\");\n        step();\n    }\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(2);\n}",
     "quickChips": [
       {
@@ -6090,7 +6090,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 センサーの優先順位設計",
     "bookSummary": "「まずスパークが前にいたら待つ」「次に壁が前なら曲がる」「どちらも大丈夫なら前進」の優先順位をつけると安定します。",
     "bookKeyCode": "if is_spark_ahead() {\n    wait_tick(1);\n} else if is_wall_ahead() {\n    ...\n} else {\n    step();\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 4)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if is_spark_ahead() {\n            wait_tick(1);\n        } else if is_wall_ahead() {\n            if is_wall_right() {\n                turn_left();\n            } else {\n                turn_right();\n            }\n        } else {\n            step();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -6279,7 +6279,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 センサー主導の回避行動",
     "bookSummary": "複雑な周期の障害物ほど、固定の `wait_tick(N)` を数えるより `is_spark_ahead()` で毎ティック判断する方がシンプルかつ確実です。",
     "bookKeyCode": "while !at_goal() {\n    if is_spark_ahead() { wait_tick(1); } else { step(); }\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 2)\n    // - 制限時間: 11 ティック以内\n    let max_ticks = 11; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn main() {\n    while !at_goal() {\n        if is_spark_ahead() {\n            wait_tick(1);\n        } else {\n            step();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -6469,7 +6469,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 関数応用 — 再帰（Recursion）",
     "bookSummary": "関数の中で自分自身を呼び出すことを再帰と言います。必ず終了条件（ベースケース：`if n <= 0 { return; }`）を先に書くのが鉄則です。",
     "bookKeyCode": "fn march(n: i32) {\n    if n <= 0 { return; }\n    ...\n    march(n - 1);\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn march(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    \n}",
     "solutionCode": "fn march(n: i32) {\n    if n <= 0 {\n        return;\n    }\n    if is_spark_ahead() {\n        wait_tick(1);\n        march(n);\n        return;\n    }\n    step();\n    march(n - 1);\n}\n\nfn main() {\n    march(5);\n}",
     "quickChips": [
       {
@@ -6584,7 +6584,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 関数 — 重複処理を関数に切り出す",
     "bookSummary": "何度も使う安全チェックを `fn safe_step()` に関数化しておくと、メインの移動ロジックがとても読みやすくなります。",
     "bookKeyCode": "fn safe_step() {\n    while !is_gate_open() || is_spark_ahead() { wait_tick(1); }\n    step();\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn safe_step() {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    \n}",
     "solutionCode": "fn safe_step() {\n    while !is_gate_open() || is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    while !at_goal() {\n        safe_step();\n    }\n}",
     "quickChips": [
       {
@@ -6719,7 +6719,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 制御フロー — 状態に応じた柔軟な移動",
     "bookSummary": "`while bot_x() < goal_x()` や `if is_wall_ahead()` を組み合わせると、障害物に出会ったときだけ避ける賢い動きが作れます。",
     "bookKeyCode": "while !at_goal() {\n    if is_wall_ahead() { ... } else { step(); }\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 制限時間: 10 ティック以内\n    let max_ticks = 10; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn main() {\n    while !at_goal() {\n        if bot_y() < goal_y() && is_wall_ahead() {\n            turn_right();\n            step(2);\n            turn_left();\n        } else if is_wall_ahead() {\n            turn_right();\n        } else {\n            step();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -6835,7 +6835,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 & 7.5 パラメータ化と最適化",
     "bookSummary": "繰り返し安全移動を行う補助関数 `step_safe(n)` を用意しておくと、迷路やスイッチ回収のコーディング速度が一気に上がります。",
     "bookKeyCode": "fn step_safe(n: i32) {\n    for _ in 0..n { while !is_gate_open() { wait_tick(1); } step(); }\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn step_safe(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 3)\n    // - 全スイッチ作動: (3, 1)\n    // - 制限時間: 12 ティック以内\n    let max_ticks = 12; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn step_safe(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}\n\nfn main() {\n    step_safe(3);\n    turn_right();\n    step_safe(2);\n    turn_left();\n    step_safe(2);\n}",
     "quickChips": [
       {
@@ -7041,7 +7041,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 総合チャレンジ — 自律ロボットの完全制御",
     "bookSummary": "「今向いている先が安全なら進む」「左が空いていて安全なら左折する」と手順を整理すれば、危険な迷路も1つのループで走破できます。",
     "bookKeyCode": "if is_spark_ahead() { wait_tick(1); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 5)\n    \n}",
     "solutionCode": "fn main() {\n    loop {\n        if at_goal() {\n            break;\n        }\n        if !is_wall_left() {\n            turn_left();\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        } else if !is_wall_ahead() {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        } else {\n            turn_right();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -7430,7 +7430,7 @@ export const CHAPTER_2_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.5 第2章マスター — 変数・関数・制御フローの集大成",
     "bookSummary": "これまで学んだ変数・計算・関数・分岐・ループ・センサーのすべてを動員して攻略する第2章の最終試験です。",
     "bookKeyCode": "fn step_safe() { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn step_safe() {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 4)\n    // - 全スイッチ作動: (2, 1)\n    // - 標準出力(println!): \"CH3 MASTER\" を出力\n    // - 制限時間: 15 ティック以内\n    let expected_output = \"CH3 MASTER\"; // println! で出力に含める文字列\n    let max_ticks = 15; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn step_safe() {\n    while !is_gate_open() || is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    println!(\"CH3 MASTER\");\n    step_safe();\n    step_safe();\n    turn_right();\n    step_safe();\n    step_safe();\n    turn_left();\n    while !at_goal() {\n        step_safe();\n    }\n}",
     "quickChips": [
       {

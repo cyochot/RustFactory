@@ -311,7 +311,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.1 複数のジェネリック型パラメータ",
     "bookSummary": "`struct Duo<T, U>` のように異なる複数の型パラメータを使うと、柔軟でありながらコンパイル時の型安全性が保たれます。",
     "bookKeyCode": "struct Duo<T, U> { a: T, b: U }",
-    "starterCode": "struct Duo<T, U> {\n    steps: T,\n    tag: U,\n}\n\nfn main() {\n    let d = Duo { steps: 3, tag: \"WAIT\" };\n    println!(\"SIGNAL: {}\", d.tag);\n    step(d.steps);\n}",
+    "starterCode": "struct Duo<T, U> {\n    steps: T,\n    tag: U,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 標準出力(println!): \"GO\" を出力\n    let expected_output = \"GO\"; // println! で出力に含める文字列\n    let d = Duo { steps: 3, tag: \"WAIT\" };\n    println!(\"SIGNAL: {}\", d.tag);\n    step(d.steps);\n}",
     "solutionCode": "struct Duo<T, U> {\n    steps: T,\n    tag: U,\n}\n\nfn main() {\n    let d = Duo { steps: 3, tag: \"GO\" };\n    println!(\"SIGNAL: {}\", d.tag);\n    step(d.steps);\n}",
     "quickChips": [
       {
@@ -401,7 +401,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.1 型パラメータを複数フィールドに持つ構造体",
     "bookSummary": "共通の型 `T` を持つフィールドをまとめることで、将来の数値精度変更（`i32` -> `f64` など）にも強い構造体になります。",
     "bookKeyCode": "struct Route<T> { a: T, b: T, c: T }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Route<T> {\n    a: T,\n    b: T,\n    c: T,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 制限時間: 7 ティック以内\n    let max_ticks = 7; // 目標制限ティック数\n    \n}",
     "solutionCode": "struct Route<T> {\n    a: T,\n    b: T,\n    c: T,\n}\n\nfn main() {\n    let r = Route { a: 1, b: 1, c: 2 };\n    step(r.a);\n    turn_right();\n    step(r.b);\n    turn_left();\n    step(r.c);\n}",
     "quickChips": [
       {
@@ -565,7 +565,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.1 & 10.2 ジェネリック型の使い回し",
     "bookSummary": "同じ `Holder<T>` の定義を使って、ダイヤル番号用・歩数用・金庫チャージ用といった異なる目的のデータを綺麗に扱います。",
     "bookKeyCode": "impl<T> Holder<T> { fn inner(&self) -> &T { &self.v } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Holder<T> {\n    v: T,\n}\n\nimpl<T> Holder<T> {\n    fn read(&self) -> &T {\n        &self.v\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - ダイヤル解除: 値 4 を求めて try_dial(...) を呼ぶ\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let target_dial = 4; // ダイヤル解除コード（4 を計算して try_dial へ）\n    \n}",
     "solutionCode": "struct Holder<T> {\n    v: T,\n}\n\nimpl<T> Holder<T> {\n    fn read(&self) -> &T {\n        &self.v\n    }\n}\n\nfn main() {\n    let key = Holder { v: 4 };\n    let dist = Holder { v: 4 };\n    try_dial(*key.read());\n    add_vault(*dist.read());\n    step(*dist.read());\n}",
     "quickChips": [
       {
@@ -1093,7 +1093,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.2 同じトレイトでも実装ごとに安全性を変える",
     "bookSummary": "共通のメソッド名 `walk(&self, n)` でありながら、型によって安全確認の有無など異なる振る舞いを実装できます。",
     "bookKeyCode": "impl Walker for SafeUnit { fn walk(&self, n: i32) { ... } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "trait Walker {\n    fn walk(&self, n: i32);\n}\n\nstruct SafeUnit {\n    tag: i32,\n}\n\nimpl Walker for SafeUnit {\n    fn walk(&self, n: i32) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn go<T: Walker>(u: &T, n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1)\n    \n}",
     "solutionCode": "trait Walker {\n    fn walk(&self, n: i32);\n}\n\nstruct SafeUnit {\n    tag: i32,\n}\n\nimpl Walker for SafeUnit {\n    fn walk(&self, n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nfn go<T: Walker>(u: &T, n: i32) {\n    u.walk(n);\n}\n\nfn main() {\n    let unit = SafeUnit { tag: 1 };\n    go(&unit, 5);\n}",
     "quickChips": [
       {
@@ -1275,7 +1275,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.2 トレイト境界による処理能力の保証",
     "bookSummary": "`fn mission<T: Trait>(u: &T)` は「このトレイトを満たす型しか渡せない」ことをコンパイル時に保証する仕組みです。",
     "bookKeyCode": "fn mission<T: CoreStage>(m: &T)",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "trait CoreStage {\n    fn run(&self);\n}\n\nstruct LineWorker {\n    bonus: i32,\n}\n\nimpl CoreStage for LineWorker {\n    fn run(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn dispatch<T: CoreStage>(worker: &T) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "trait CoreStage {\n    fn run(&self);\n}\n\nstruct LineWorker {\n    bonus: i32,\n}\n\nimpl CoreStage for LineWorker {\n    fn run(&self) {\n        add_vault(self.bonus);\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(1);\n        deliver(c);\n    }\n}\n\nfn dispatch<T: CoreStage>(worker: &T) {\n    worker.run();\n}\n\nfn main() {\n    let w = LineWorker { bonus: 4 };\n    dispatch(&w);\n}",
     "quickChips": [
       {
@@ -1404,7 +1404,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.2 トレイトによるアルゴリズム差し替え設計",
     "bookSummary": "探索手法をトレイトとして抽象化しておけば、呼び出し元の `run_solver` を一切変えずに別の探索策略へ差し替えられます。",
     "bookKeyCode": "fn run_solver<T: MazeSolver>(s: &T) { s.solve(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "trait MazeSolver {\n    fn solve(&self);\n}\n\nstruct LeftWallBot {\n    vault: i32,\n}\n\nimpl MazeSolver for LeftWallBot {\n    fn solve(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn run_solver<T: MazeSolver>(s: &T) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - 金庫目標: ⚡4 以上を貯める\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    \n}",
     "solutionCode": "trait MazeSolver {\n    fn solve(&self);\n}\n\nstruct LeftWallBot {\n    vault: i32,\n}\n\nimpl MazeSolver for LeftWallBot {\n    fn solve(&self) {\n        add_vault(self.vault);\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nfn run_solver<T: MazeSolver>(s: &T) {\n    s.solve();\n}\n\nfn main() {\n    let bot = LeftWallBot { vault: 4 };\n    run_solver(&bot);\n}",
     "quickChips": [
       {
@@ -1526,7 +1526,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.2 トレイト計算と最短コンベアパス",
     "bookSummary": "トレイトメソッドで必要なエネルギーを算出しつつ、最短ステップでゴールを目指します。",
     "bookKeyCode": "impl PowerSpec for BoostA { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "trait PowerSpec {\n    fn power(&self) -> i32;\n}\n\nstruct BoostA { v: i32 }\n\nstruct BoostB { v: i32 }\n\nimpl PowerSpec for BoostA {\n    fn power(&self) -> i32 {\n        // TODO: メソッドを実装しよう\n        0\n    }\n}\n\nimpl PowerSpec for BoostB {\n    fn power(&self) -> i32 {\n        // TODO: メソッドを実装しよう\n        0\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - 制限時間: 8 ティック以内\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let max_ticks = 8; // 目標制限ティック数\n    \n}",
     "solutionCode": "trait PowerSpec {\n    fn power(&self) -> i32;\n}\n\nstruct BoostA { v: i32 }\nstruct BoostB { v: i32 }\n\nimpl PowerSpec for BoostA { fn power(&self) -> i32 { self.v * 2 } }\nimpl PowerSpec for BoostB {\n    fn power(&self) -> i32 { self.v + 1 }\n}\n\nfn main() {\n    let a = BoostA { v: 1 };\n    let b = BoostB { v: 2 };\n    add_vault(a.power() + b.power());\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(2);\n}",
     "quickChips": [
       {
@@ -1697,7 +1697,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.2 ジェネリック設計で複雑な経路を攻略する",
     "bookSummary": "安全移動能力をトレイトに定義し、ジェネリック関数を通してミッションを実行します。",
     "bookKeyCode": "fn launch_bot<T: Pilot>(p: &T)",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "trait Pilot {\n    fn fly(&self);\n}\n\nstruct SmartPilot<T> {\n    vault_amt: T,\n}\n\nimpl Pilot for SmartPilot<i32> {\n    fn fly(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn launch_bot<T: Pilot>(p: &T) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - 全スイッチ作動: (1, 1), (3, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    \n}",
     "solutionCode": "trait Pilot {\n    fn fly(&self);\n}\n\nstruct SmartPilot<T> {\n    vault_amt: T,\n}\n\nimpl Pilot for SmartPilot<i32> {\n    fn fly(&self) {\n        add_vault(self.vault_amt);\n        for _ in 0..4 {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n        turn_right();\n        for _ in 0..2 {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nfn launch_bot<T: Pilot>(p: &T) {\n    p.fly();\n}\n\nfn main() {\n    let sp = SmartPilot { vault_amt: 5 };\n    launch_bot(&sp);\n}",
     "quickChips": [
       {
@@ -2159,7 +2159,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.3 複数の参照を安全に比較・返却する関数",
     "bookSummary": "同じライフタイム `'a` を持つ2つの参照を受け取り、条件に合う方の参照だけを安全に呼び出し元へ返します。",
     "bookKeyCode": "fn choose<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn choose<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    \n}",
     "solutionCode": "fn choose<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let wrong = 1;\n    let right = 4;\n    let dist = choose(&wrong, &right);\n    add_vault(*dist);\n    step(*dist);\n}",
     "quickChips": [
       {
@@ -2280,7 +2280,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.3 複数参照フィールドを持つ構造体とライフタイム",
     "bookSummary": "同じライフタイムパラメータ `'a` を2つの参照フィールドへ割り当てることで、どちらの参照も構造体より長生きすることを保証します。",
     "bookKeyCode": "struct RefGuide<'a> { x: &'a i32, y: &'a i32 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct RefGuide<'a> {\n    x: &'a i32,\n    y: &'a i32,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    \n}",
     "solutionCode": "struct RefGuide<'a> {\n    x: &'a i32,\n    y: &'a i32,\n}\n\nfn main() {\n    let east = 3;\n    let south = 2;\n    let g = RefGuide { x: &east, y: &south };\n    add_vault(*g.x + *g.y);\n    step(*g.x);\n    turn_right();\n    step(*g.y);\n}",
     "quickChips": [
       {
@@ -2382,7 +2382,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.3 ライフタイム参照値と空間工程の結合",
     "bookSummary": "参照から安全に受け取った数値を現場のエネルギー目標へ使いながら、巡回障害物とコア操作を完遂します。",
     "bookKeyCode": "fn pick_target<'a>(a: &'a i32, b: &'a i32) -> &'a i32",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn pick_target<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n// 安全移動ヘルパー関数\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (4, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(4,1) -> 納品(5,1)]\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn pick_target<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let low = 2;\n    let high = 6;\n    let target = pick_target(&low, &high);\n    add_vault(*target);\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    scan(&c);\n    safe_go(2);\n    boost(&mut c);\n    safe_go(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -2602,7 +2602,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "10.1 & 10.3 ジェネリクスとライフタイムの組み合わせ",
     "bookSummary": "ジェネリックコンテナで受け取った値の中から、ライフタイム付きの比較関数で最適な参照を選び出す総合演習です。",
     "bookKeyCode": "struct Pair<T, U> { label: T, val: U }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Packet<T, U> {\n    tag: T,\n    val: U,\n}\n\nfn pick_big<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 3)\n    // - 全スイッチ作動: (4, 1), (2, 3)\n    // - ダイヤル解除: 値 5 を求めて try_dial(...) を呼ぶ\n    // - 標準出力(println!): \"DIAL_OK\" を出力\n    let target_dial = 5; // ダイヤル解除コード（5 を計算して try_dial へ）\n    let expected_output = \"DIAL_OK\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let p = Packet { tag: \"DIAL_OK\", val: 5 };\n    \n}",
     "solutionCode": "struct Packet<T, U> {\n    tag: T,\n    val: U,\n}\n\nfn pick_big<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn main() {\n    let p = Packet { tag: \"DIAL_OK\", val: 5 };\n    let fallback = 2;\n    let code = pick_big(&p.val, &fallback);\n    println!(\"{}\", p.tag);\n    try_dial(*code);\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
     "quickChips": [
       {
@@ -2868,7 +2868,7 @@ export const CHAPTER_10_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第10章まとめ — Rust の型抽象の完成形",
     "bookSummary": "ジェネリクス・トレイト・ライフタイムの3つが合わさることで、高い再利用性と絶対的な安全性を両立した設計が完成します。",
     "bookKeyCode": "struct + trait + impl + <'a> 統合",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "trait MasterMission {\n    fn execute(&self);\n}\n\nstruct Champion<T> {\n    vault_goal: T,\n}\n\nfn select_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\nfn move_safe(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nimpl MasterMission for Champion<i32> {\n    fn execute(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn start<T: MasterMission>(m: &T) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡7 以上を貯める\n    // - ダイヤル解除: 値 3 を求めて try_dial(...) を呼ぶ\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 強化⚡5+(2,1) -> 納品(5,3)]\n    // - 標準出力(println!): \"CH10_PRO\" を出力\n    let target_vault = 7; // 目標金庫エネルギー（⚡7以上）\n    let target_dial = 3; // ダイヤル解除コード（3 を計算して try_dial へ）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let expected_output = \"CH10_PRO\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "trait MasterMission {\n    fn execute(&self);\n}\n\nstruct Champion<T> {\n    vault_goal: T,\n}\n\nfn select_max<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {\n    if *a > *b { a } else { b }\n}\n\nfn move_safe(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nimpl MasterMission for Champion<i32> {\n    fn execute(&self) {\n        add_vault(self.vault_goal);\n        println!(\"CH10_PRO\");\n        let k1 = 1;\n        let k2 = 3;\n        try_dial(*select_max(&k1, &k2));\n        move_safe(1);\n        let mut c = grab_core();\n        move_safe(1);\n        boost(&mut c);\n        move_safe(3);\n        turn_right();\n        move_safe(2);\n        deliver(c);\n    }\n}\n\nfn start<T: MasterMission>(m: &T) {\n    m.execute();\n}\n\nfn main() {\n    let champ = Champion { vault_goal: 7 };\n    start(&champ);\n}",
     "quickChips": [
       {

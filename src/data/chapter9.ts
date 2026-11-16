@@ -474,7 +474,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 エラーとセンサー異常を組み合わせた回復",
     "bookSummary": "結果値 `Result` の判定と空間センサー（スパーク・ゲート）を組み合わせて、絶対に止まらない安全な制御を書きます。",
     "bookKeyCode": "match read_part(-2) { Ok(v) => ..., Err(_) => ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn safe_step(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    \n}",
     "solutionCode": "fn safe_step(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let steps = match read_part(-2) {\n        Ok(v) => v / 10,\n        Err(_) => 5,\n    };\n    add_vault(steps);\n    safe_step(steps);\n}",
     "quickChips": [
       {
@@ -867,7 +867,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 工程チェックとしての Result<i32, String>",
     "bookSummary": "工程の条件を満たしているかを `Result` で検査し、満たしていなければ分かりやすいエラーを返すようにすると事故を防げます。",
     "bookKeyCode": "fn verify_core(p: i32) -> Result<i32, String>",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn verify_core(p: i32) -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(3,1) -> 納品(4,1)]\n    // - 標準出力(println!): \"CORE_OK\" を出力\n    // - 安全処理: パニックせず Result を安全に扱う\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"CORE_OK\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "fn verify_core(p: i32) -> Result<i32, String> {\n    if p >= 5 { Ok(p) } else { Err(\"パワー不足\") }\n}\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    match verify_core(core_power()) {\n        Ok(p) => {\n            println!(\"CORE_OK: {}\", p);\n            step(1);\n            deliver(c);\n        },\n        Err(e) => println!(\"FAIL: {}\", e),\n    }\n}",
     "quickChips": [
       {
@@ -989,7 +989,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 正常値の集計と異常値のログ分離",
     "bookSummary": "配列の `Result` を処理するとき、`Ok` だけを集計しつつ `Err` はログ出力や代替行動に回す実用的なパターンです。",
     "bookKeyCode": "match r { Ok(v) => sum += v, Err(_) => println!(\"WARN_PART\") }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - 標準出力(println!): \"WARN_PART\" を出力\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let expected_output = \"WARN_PART\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let inputs = vec![read_part(2), read_part(-1), read_part(2)];\n    \n}",
     "solutionCode": "fn main() {\n    let inputs = vec![read_part(2), read_part(-1), read_part(2)];\n    let mut sum = 0;\n    for r in inputs {\n        match r {\n            Ok(v) => sum += v / 10,\n            Err(_) => println!(\"WARN_PART\"),\n        }\n    }\n    add_vault(sum);\n    step(3);\n}",
     "quickChips": [
       {
@@ -1103,7 +1103,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 回復と時間制限の両立",
     "bookSummary": "フォールバックを使って止まらず動きつつ、ベルトコンベアによる加速を活かして制限時間を達成するチャレンジです。",
     "bookKeyCode": "let s = read_part(-1).unwrap_or(1);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - 安全処理: パニックせず Result を安全に扱う\n    // - 制限時間: 8 ティック以内\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let max_ticks = 8; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn main() {\n    let a = read_part(1).unwrap_or(0) / 10;\n    let b = read_part(-1).unwrap_or(1);\n    let c = read_part(-2).unwrap_or(2);\n    add_vault(a + b + c);\n    step(a);\n    turn_right();\n    step(b);\n    turn_left();\n    step(c);\n}",
     "quickChips": [
       {
@@ -1279,7 +1279,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 高信頼コア搬送パイプライン",
     "bookSummary": "センサー値が壊れていても代替計算へ切り替えてコアの検査・強化・納品を最後まで安全にやり切ります。",
     "bookKeyCode": "match read_part(-1) { Ok(v) => v, Err(_) => 5 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn safe_move(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (4, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(4,1) -> 納品(5,1)]\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn safe_move(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let vault_val = read_part(3).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    scan(&c);\n    safe_move(2);\n    boost(&mut c);\n    safe_move(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -1500,7 +1500,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.1 & 9.2 現場機械を止めないフォールバック値",
     "bookSummary": "異常系を受け取った際に安全な既定値へ切り替えることで、搬送ライン全体を停止させずに走り切れます。",
     "bookKeyCode": "let dy = read_part(-1).unwrap_or(1);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 安全処理: パニックせず Result を安全に扱う\n    \n}",
     "solutionCode": "fn main() {\n    let dx = read_part(1).unwrap_or(0) / 10;\n    let dy = read_part(-1).unwrap_or(1);\n    step(dx);\n    turn_right();\n    step(dy);\n    turn_left();\n    step(2);\n}",
     "quickChips": [
       {
@@ -1663,7 +1663,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.1 & 9.3 panic! すべき時・回復すべき時",
     "bookSummary": "テストや絶対に起きてはいけない不整合では `panic!` を使いますが、センサー異常や入力ミスなど想定内のエラーは回復処理を書くのが原則です。",
     "bookKeyCode": "let total = read_part(-5).unwrap_or(4);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    \n}",
     "solutionCode": "fn main() {\n    let total = read_part(-5).unwrap_or(4);\n    for _ in 0..total {\n        if !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    }\n}",
     "quickChips": [
       {
@@ -2040,7 +2040,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 ? による複数バリデーションの結合",
     "bookSummary": "複数の確認処理を `?` で連結すると、途中のエラーを漏れなくキャッチしつつ正常時のロジックを綺麗に並べられます。",
     "bookKeyCode": "let a = validate(2)?;\nlet b = validate(3)?;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn validate(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"無効\") }\n}\n\nfn calc_vault() -> Result<i32, String> {\n    // TODO: ? 演算子を使って validate(2) と validate(3) の合計(5)を返そう！\n    let a = validate(2);\n    let b = validate(3);\n    Err(\"未実装\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    let v = calc_vault().unwrap_or(0);\n    add_vault(v);\n    // コアを拾い、検査・強化・納品しよう！\n    \n}",
     "solutionCode": "fn validate(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n) } else { Err(\"無効\") }\n}\n\nfn calc_vault() -> Result<i32, String> {\n    let a = validate(2)?;\n    let b = validate(3)?;\n    Ok(a + b)\n}\n\nfn main() {\n    let v = calc_vault().unwrap_or(0);\n    add_vault(v);\n    step(1);\n    let mut core = grab_core();\n    step(1);\n    scan(&core);\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -2166,7 +2166,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 入力バリデーションを Result で表現する",
     "bookSummary": "不正な引数が紛れ込む前に `Result` で範囲チェックを行い、有効な値だけをデバイス制御に渡す設計です。",
     "bookKeyCode": "fn verify_dial(n: i32) -> Result<i32, String>",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn verify_dial(n: i32) -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn solve_safe() -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - ダイヤル解除: 値 5 を求めて try_dial(...) を呼ぶ\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let target_dial = 5; // ダイヤル解除コード（5 を計算して try_dial へ）\n    \n}",
     "solutionCode": "fn verify_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"範囲外\") }\n}\n\nfn solve_safe() -> Result<i32, String> {\n    let d = verify_dial(5)?;\n    try_dial(d);\n    Ok(d)\n}\n\nfn main() {\n    match solve_safe() {\n        Ok(v) => {\n            add_vault(v);\n            step(5);\n        },\n        Err(e) => println!(\"DIAL_ERR: {}\", e),\n    }\n}",
     "quickChips": [
       {
@@ -2292,7 +2292,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 ルート計算関数からのエラー伝播",
     "bookSummary": "計算関数を `?` でつないで安全なルート座標を取り出し、全区間を一気に走り抜けます。",
     "bookKeyCode": "let d1 = read_dist(4)?;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn read_dist(n: i32) -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn plan() -> Result<(i32, i32, i32), String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 3)\n    // - 全スイッチ作動: (4, 1), (2, 3)\n    // - 安全処理: パニックせず Result を安全に扱う\n    \n}",
     "solutionCode": "fn read_dist(n: i32) -> Result<i32, String> {\n    let v = read_part(n)?;\n    Ok(v / 10)\n}\n\nfn plan() -> Result<(i32, i32, i32), String> {\n    let e = read_dist(4)?;\n    let s = read_dist(2)?;\n    let w = read_dist(4)?;\n    Ok((e, s, w))\n}\n\nfn main() {\n    let (e, s, w) = plan().unwrap_or((1, 1, 1));\n    step(e);\n    turn_right();\n    step(s);\n    turn_right();\n    step(w);\n}",
     "quickChips": [
       {
@@ -2439,7 +2439,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 複数のエラー源を組み合わせた回復設計",
     "bookSummary": "壊れうる設定読み取りは安全なバックアップ値で守りつつ、セキュリティ条件は `?` で厳密に検証します。",
     "bookKeyCode": "let secret = check(6)?;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn check_dial(n: i32) -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn run_mission() -> Result<(), String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n    \n}",
     "solutionCode": "fn check_dial(n: i32) -> Result<i32, String> {\n    if n >= 1 && n <= 9 { Ok(n) } else { Err(\"不正ダイヤル\") }\n}\n\nfn run_mission() -> Result<(), String> {\n    let vault_val = read_part(4).unwrap_or(0) / 10 + read_part(-1).unwrap_or(2);\n    add_vault(vault_val);\n    let secret = check_dial(6)?;\n    try_dial(secret);\n    step(5);\n    Ok(())\n}\n\nfn main() {\n    if let Err(e) = run_mission() {\n        println!(\"ERR: {}\", e);\n    }\n}",
     "quickChips": [
       {
@@ -2565,7 +2565,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "9.2 起動前チェックを ? でまとめる",
     "bookSummary": "複数の起動前点検を `preflight()` に `?` で並べておけば、すべての点検を突破したときだけメイン動作を開始できます。",
     "bookKeyCode": "fn preflight() -> Result<i32, String> { let a = read_part(1)?; ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn preflight() -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    \n}",
     "solutionCode": "fn preflight() -> Result<i32, String> {\n    let a = read_part(2)?;\n    let b = read_part(2)?;\n    Ok((a + b) / 10)\n}\n\nfn main() {\n    match preflight() {\n        Ok(v) => {\n            add_vault(v);\n            while !at_goal() {\n                if !is_wall_left() {\n                    turn_left();\n                    step();\n                } else if !is_wall_ahead() {\n                    step();\n                } else {\n                    turn_right();\n                }\n            }\n        },\n        Err(e) => println!(\"STOP: {}\", e),\n    }\n}",
     "quickChips": [
       {
@@ -2815,7 +2815,7 @@ export const CHAPTER_9_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第9章まとめ — 無停止フェイルセーフ制御",
     "bookSummary": "あらゆる失敗可能性を `Result` と `?` で明示し、適切な回復値へ着地させることで、止まらないシステムを組み上げました。",
     "bookKeyCode": "match run() { Ok(_) => ..., Err(_) => recover() }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn safe_go(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn check_batch() -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 強化⚡5+(2,1) -> 納品(5,3)]\n    // - 標準出力(println!): \"SAFE_CLEAR\" を出力\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let expected_output = \"SAFE_CLEAR\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "fn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn check_batch() -> Result<i32, String> {\n    let p1 = read_part(3)?;\n    let p2 = read_part(3)?;\n    Ok((p1 + p2) / 10)\n}\n\nfn main() {\n    let energy = check_batch().unwrap_or(0);\n    add_vault(energy);\n    println!(\"SAFE_CLEAR\");\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    boost(&mut c);\n    safe_go(3);\n    turn_right();\n    safe_go(2);\n    deliver(c);\n}",
     "quickChips": [
       {

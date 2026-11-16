@@ -110,7 +110,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.1 CLI引数を実行モードに反映する",
     "bookSummary": "起動時の引数 `args[1]` の内容を見て処理を切り替え、標準出力へ実行モードをログ記録します。",
     "bookKeyCode": "let args = cli_args();\nif args[1] == \"FAST\" { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 標準出力(println!): \"FAST\" を出力\n    // - 制限時間: 8 ティック以内\n    let expected_output = \"FAST\"; // println! で出力に含める文字列\n    let max_ticks = 8; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let args = cli_args();\n    \n}",
     "solutionCode": "fn main() {\n    let args = cli_args();\n    println!(\"MODE: {}\", args[1]);\n    if args[1] == \"FAST\" {\n        step(1);\n        turn_right();\n        step(1);\n        turn_left();\n        step(2);\n    }\n}",
     "quickChips": [
       {
@@ -375,7 +375,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.5 環境変数による安全工程の切り替え",
     "bookSummary": "`env_flag()` の値に応じて厳密検査モードをオンにし、空間上の検査台・強化台を経由するフローを実行します。",
     "bookKeyCode": "if env_flag() == \"STRICT\" { scan(&c); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(3,1) -> 納品(4,1)]\n    // - 標準出力(println!): \"STRICT_OK\" を出力\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"STRICT_OK\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let mode = env_flag();\n    \n}",
     "solutionCode": "fn main() {\n    let mode = env_flag();\n    println!(\"ENV: {}\", mode);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    if mode == \"STRICT\" {\n        scan(&c);\n        println!(\"STRICT_OK\");\n    }\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -796,7 +796,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.3 設定構造体 Config による情報一元化",
     "bookSummary": "引数と環境設定の両方を `Config` 構造体にまとめ、`Result<Config, String>` で安全に構築してから実行部へ渡します。",
     "bookKeyCode": "struct Config { tag: String, dial: i32 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Config {\n    tag: String,\n    dial: i32,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Result<Config, String> {\n        // TODO: メソッドを実装しよう\n        Err(\"TODO\")\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - ダイヤル解除: 値 5 を求めて try_dial(...) を呼ぶ\n    // - 標準出力(println!): \"CONFIG_OK\" を出力\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let target_dial = 5; // ダイヤル解除コード（5 を計算して try_dial へ）\n    let expected_output = \"CONFIG_OK\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "struct Config {\n    tag: String,\n    dial: i32,\n}\n\nimpl Config {\n    fn build(args: Vec<String>) -> Result<Config, String> {\n        if args.len() < 2 {\n            return Err(\"引数不足\");\n        }\n        Ok(Config { tag: args[1], dial: 5 })\n    }\n}\n\nfn main() {\n    match Config::build(cli_args()) {\n        Ok(cfg) => {\n            println!(\"TAG: {}\", cfg.tag);\n            try_dial(cfg.dial);\n            add_vault(cfg.dial);\n            step(4);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
     "quickChips": [
       {
@@ -1111,7 +1111,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.4 CLIランチャーからライブラリロジックを呼ぶ",
     "bookSummary": "CLI層で引数と環境変数を解釈し、検証済みの設定でモジュールの自律制御ロジックを起動する綺麗なアーキテクチャです。",
     "bookKeyCode": "if args[1] == \"MAZE\" { cli_lib::solve(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod cli_lib {\n    pub fn check_mode(s: String) -> bool {\n        // TODO: モジュール内の処理を実装しよう\n        false\n    }\n}\n\n#[test]\nfn t_mode() {\n    assert!(cli_lib::check_mode(\"MAZE\"));\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - 標準出力(println!): \"MAZE\" を出力\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    let expected_output = \"MAZE\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let args = cli_args();\n    \n}",
     "solutionCode": "mod cli_lib {\n    pub fn check_mode(s: String) -> bool {\n        s == \"MAZE\"\n    }\n}\n\n#[test]\nfn t_mode() {\n    assert!(cli_lib::check_mode(\"MAZE\"));\n}\n\nfn main() {\n    let args = cli_args();\n    if cli_lib::check_mode(args[1]) {\n        println!(\"START: {}\", args[1]);\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1234,7 +1234,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.4 TDD でフィルタ機能とルート実行を分離",
     "bookSummary": "集計・フィルタ処理のテストを済ませた上で、U字の複合スイッチ経路を走り切ります。",
     "bookKeyCode": "mod filter { pub fn count_between(a: i32, b: i32, list: Vec<i32>) -> i32 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod filter {\n    pub fn count_range(min_v: i32, max_v: i32, list: Vec<i32>) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t_in() { assert_eq!(filter::count_range(5, 15, vec![3, 5, 12, 20]), 2); }\n\n#[test]\nfn t_all() { assert_eq!(filter::count_range(1, 10, vec![2, 5, 9]), 3); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 3)\n    // - 全スイッチ作動: (4, 1), (2, 3)\n    // - 金庫目標: ⚡3 以上を貯める\n    // - 標準出力(println!): \"BATCH_3\" を出力\n    // - ユニットテスト: #[test] を 2個以上すべて合格\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    let expected_output = \"BATCH_3\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "mod filter {\n    pub fn count_range(min_v: i32, max_v: i32, list: Vec<i32>) -> i32 {\n        let mut n = 0;\n        for x in list {\n            if x >= min_v && x <= max_v { n += 1; }\n        }\n        n\n    }\n}\n\n#[test]\nfn t_in() { assert_eq!(filter::count_range(5, 15, vec![3, 5, 12, 20]), 2); }\n\n#[test]\nfn t_all() { assert_eq!(filter::count_range(1, 10, vec![2, 5, 9]), 3); }\n\nfn main() {\n    let c = filter::count_range(5, 15, conveyor_batch());\n    add_vault(c);\n    println!(\"BATCH_{}\", c);\n    step(4);\n    turn_right();\n    step(2);\n    turn_right();\n    step(4);\n}",
     "quickChips": [
       {
@@ -1398,7 +1398,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.4 & 12.6 ライブラリ検索＋エラー出力分離",
     "bookSummary": "検索結果などの正常データは標準出力（`println!`）、安全警告やエラー報告は標準エラー出力（`eprintln!`）へ分けるのがUNIX/CLIの鉄則です。",
     "bookKeyCode": "println!(\"FOUND: {}\", n);\neprintln!(\"WARN: spark\");",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod grep {\n    pub fn count_ge(limit: i32, list: Vec<i32>) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t_grep() {\n    assert_eq!(grep::count_ge(10, vec![2, 10, 15, 20]), 3);\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    // - 標準出力(println!): \"FOUND: 3\" を出力\n    // - エラー出力(eprintln!): \"WARN\" を出力\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    let expected_output = \"FOUND: 3\"; // println! で出力に含める文字列\n    let expected_stderr = \"WARN\"; // eprintln! で出力に含める文字列\n    \n}",
     "solutionCode": "mod grep {\n    pub fn count_ge(limit: i32, list: Vec<i32>) -> i32 {\n        let mut c = 0;\n        for x in list {\n            if x >= limit { c += 1; }\n        }\n        c\n    }\n}\n\n#[test]\nfn t_grep() {\n    assert_eq!(grep::count_ge(10, vec![2, 10, 15, 20]), 3);\n}\n\nfn main() {\n    let found = grep::count_ge(10, conveyor_batch());\n    add_vault(found);\n    println!(\"FOUND: {}\", found);\n    eprintln!(\"WARN: spark ahead\");\n    for _ in 0..5 {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}",
     "quickChips": [
       {
@@ -1600,7 +1600,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "12.6 本番CLIにおける標準出力と標準エラー出力の運用",
     "bookSummary": "出力ストリームの分離と単体テスト、そして現実の安全操縦（スパーク待機・コア操作）をすべて統合します。",
     "bookKeyCode": "println!(\"CORE_DELIVERED\"); eprintln!(\"WARN_SPARK\");",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod cli {\n    pub fn bonus(mode: String) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t_turbo() { assert_eq!(cli::bonus(\"TURBO\"), 5); }\n\nfn safe_go(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (4, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(4,1) -> 納品(5,1)]\n    // - 標準出力(println!): \"CORE_DELIVERED\" を出力\n    // - エラー出力(eprintln!): \"WARN_SPARK\" を出力\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"CORE_DELIVERED\"; // println! で出力に含める文字列\n    let expected_stderr = \"WARN_SPARK\"; // eprintln! で出力に含める文字列\n    \n}",
     "solutionCode": "mod cli {\n    pub fn bonus(mode: String) -> i32 {\n        if mode == \"TURBO\" { 5 } else { 1 }\n    }\n}\n\n#[test]\nfn t_turbo() { assert_eq!(cli::bonus(\"TURBO\"), 5); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    add_vault(cli::bonus(env_flag()));\n    eprintln!(\"WARN_SPARK\");\n    safe_go(1);\n    let mut c = grab_core();\n    safe_go(1);\n    scan(&c);\n    safe_go(2);\n    boost(&mut c);\n    safe_go(1);\n    deliver(c);\n    println!(\"CORE_DELIVERED\");\n}",
     "quickChips": [
       {
@@ -1952,7 +1952,7 @@ export const CHAPTER_12_STAGES: StageDefinition[] = [
     "bookSectionTitle": "総まとめ — 安全で堅牢なテスト駆動CLIシステム",
     "bookSummary": "エラー処理、型とトレイトの抽象化、自動テスト、入出力CLI設計のすべてが噛み合うことで、プロ仕様の信頼できるロボットが完成しました！",
     "bookKeyCode": "Result + trait + #[test] + cli_args() + eprintln!",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct CliCfg {\n    tag: String,\n    vault_amt: i32,\n}\n\nmod engine {\n    pub fn calc_power(flag: String, batch: Vec<i32>) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t_pro() { assert_eq!(engine::calc_power(\"PRO\", vec![5, 20, 30]), 7); }\n\n#[test]\nfn t_std() { assert_eq!(engine::calc_power(\"STD\", vec![5, 20]), 2); }\n\nfn build_cfg() -> Result<CliCfg, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\nfn safe_go(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡7 以上を貯める\n    // - ダイヤル解除: 値 4 を求めて try_dial(...) を呼ぶ\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 強化⚡5+(2,1) -> 納品(5,3)]\n    // - 標準出力(println!): \"CHALLENGE_COMPLETE\" を出力\n    // - エラー出力(eprintln!): \"WARN_CHECK\" を出力\n    // - ユニットテスト: #[test] を 2個以上すべて合格\n    // - 安全処理: パニックせず Result を安全に扱う\n    let target_vault = 7; // 目標金庫エネルギー（⚡7以上）\n    let target_dial = 4; // ダイヤル解除コード（4 を計算して try_dial へ）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let expected_output = \"CHALLENGE_COMPLETE\"; // println! で出力に含める文字列\n    let expected_stderr = \"WARN_CHECK\"; // eprintln! で出力に含める文字列\n    \n}",
     "solutionCode": "struct CliCfg {\n    tag: String,\n    vault_amt: i32,\n}\n\nmod engine {\n    pub fn calc_power(flag: String, batch: Vec<i32>) -> i32 {\n        let mut s = if flag == \"PRO\" { 2 } else { 0 };\n        for x in batch {\n            if x >= 10 { s += x / 10; }\n        }\n        s\n    }\n}\n\n#[test]\nfn t_pro() { assert_eq!(engine::calc_power(\"PRO\", vec![5, 20, 30]), 7); }\n\n#[test]\nfn t_std() { assert_eq!(engine::calc_power(\"STD\", vec![5, 20]), 2); }\n\nfn build_cfg() -> Result<CliCfg, String> {\n    let args = cli_args();\n    if args.len() < 2 { return Err(\"引数不足\"); }\n    let v = engine::calc_power(env_flag(), conveyor_batch());\n    Ok(CliCfg { tag: args[1], vault_amt: v })\n}\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    match build_cfg() {\n        Ok(cfg) => {\n            println!(\"CHALLENGE_{}\", cfg.tag);\n            eprintln!(\"WARN_CHECK\");\n            add_vault(cfg.vault_amt);\n            try_dial(4);\n            safe_go(1);\n            let mut c = grab_core();\n            safe_go(1);\n            boost(&mut c);\n            safe_go(3);\n            turn_right();\n            safe_go(2);\n            deliver(c);\n        },\n        Err(e) => eprintln!(\"ERR: {}\", e),\n    }\n}",
     "quickChips": [
       {

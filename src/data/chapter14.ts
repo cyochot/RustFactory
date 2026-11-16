@@ -111,7 +111,7 @@ export const CHAPTER_14_STAGES: StageDefinition[] = [
     "bookSectionTitle": "14.3 リリース設定とハードウェア加速の協調",
     "bookSummary": "環境側の加速（搬送ベルト）とプログラム側のリリース最適化（`#[cfg(feature = \"fast\")]`）を合わせると極限の短時間航行が可能になります。",
     "bookKeyCode": "#[cfg(feature = \"fast\")]\nfn boost_run() { step(3); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "#[cfg(feature = \"fast\")]\nfn dash() {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 制限時間: 4 ティック以内（#[cfg(feature = \"fast\")] 必須）\n    let max_ticks = 4; // 目標制限ティック数\n    \n}",
     "solutionCode": "#[cfg(feature = \"fast\")]\nfn dash() {\n    step(3);\n}\n\nfn main() {\n    dash();\n}",
     "quickChips": [
       {
@@ -412,7 +412,7 @@ export const CHAPTER_14_STAGES: StageDefinition[] = [
     "bookSectionTitle": "14.3 ワークスペース協調と無駄のない手順",
     "bookSummary": "複数モジュールの計算結果をそのまま最短移動へつなぎ、余計なウェイトなしで目標を達成します。",
     "bookKeyCode": "try_dial(cipher::key());\npilot::turn_walk(3, 2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod cipher {\n    pub fn key() -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\nmod pilot {\n    pub fn run_l(dx: i32, dy: i32) {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\n#[test]\nfn t_key() { assert_eq!(cipher::key(), 5); }\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - ダイヤル解除: 値 5 を求めて try_dial(...) を呼ぶ\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    // - 制限時間: 9 ティック以内（#[cfg(feature = \"fast\")] 必須）\n    let target_dial = 5; // ダイヤル解除コード（5 を計算して try_dial へ）\n    let max_ticks = 9; // 目標制限ティック数\n    \n}",
     "solutionCode": "mod cipher {\n    pub fn key() -> i32 {\n        5\n    }\n}\n\nmod pilot {\n    pub fn run_l(dx: i32, dy: i32) {\n        step(dx);\n        turn_right();\n        step(dy);\n    }\n}\n\n#[test]\nfn t_key() { assert_eq!(cipher::key(), 5); }\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    let k = cipher::key();\n    try_dial(k);\n    pilot::run_l(3, 2);\n}",
     "quickChips": [
       {
@@ -512,7 +512,7 @@ export const CHAPTER_14_STAGES: StageDefinition[] = [
     "bookSectionTitle": "14.2 & 14.3 クレート境界の高速テスト＆実行",
     "bookSummary": "ライブラリの公開APIを単体テストで検証したうえで、`fast` ビルドで制限時間内にタスクを完了させます。",
     "bookKeyCode": "mod express_crate { pub fn calc(a: i32) -> i32 { a + 2 } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod express_crate {\n    pub fn calc(a: i32) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\nuse express_crate::calc;\n\n#[test]\nfn t_fast() {\n    assert_eq!(calc(2), 4);\n}\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    // - 制限時間: 6 ティック以内（#[cfg(feature = \"fast\")] 必須）\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let max_ticks = 6; // 目標制限ティック数\n    \n}",
     "solutionCode": "mod express_crate {\n    pub fn calc(a: i32) -> i32 {\n        a + 2\n    }\n}\n\nuse express_crate::calc;\n\n#[test]\nfn t_fast() {\n    assert_eq!(calc(2), 4);\n}\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    let d = calc(2);\n    add_vault(d);\n    step(d);\n}",
     "quickChips": [
       {
@@ -731,7 +731,7 @@ export const CHAPTER_14_STAGES: StageDefinition[] = [
     "bookSectionTitle": "14.3 プロダクションリリース品質の最短工程",
     "bookSummary": "不要な待ち時間を削りつつ必須の安全検査とテストをすべてパスさせるリリース品質の設計です。",
     "bookKeyCode": "#[cfg(feature = \"fast\")]\nfn ship() { ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "#[cfg(feature = \"fast\")]\nfn ship() {\n    // TODO: 条件を満たすように実装しよう\n}\n\n#[test]\nfn t_ready() { assert_eq!(2 + 2, 4); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    // - 制限時間: 10 ティック以内（#[cfg(feature = \"fast\")] 必須）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    let max_ticks = 10; // 目標制限ティック数\n    \n}",
     "solutionCode": "#[cfg(feature = \"fast\")]\nfn ship() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}\n\n#[test]\nfn t_ready() { assert_eq!(2 + 2, 4); }\n\nfn main() {\n    ship();\n}",
     "quickChips": [
       {

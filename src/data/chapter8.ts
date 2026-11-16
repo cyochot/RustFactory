@@ -295,7 +295,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1 ベクタの反復とインデックス活用",
     "bookSummary": "リストの長さと要素を活用することで、定型ルートやパラメータを柔軟に管理できます。",
     "bookKeyCode": "let legs = vec![3, 2];\nstep(legs[0]); turn_right(); step(legs[1]);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - 金庫目標: ⚡2 以上を貯める\n    let target_vault = 2; // 目標金庫エネルギー（⚡2以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let mut legs = vec![3];\n    \n}",
     "solutionCode": "fn main() {\n    let mut legs = vec![3];\n    legs.push(2);\n    step(legs[0]);\n    turn_right();\n    add_vault(legs[1]);\n    step(legs[1]);\n}",
     "quickChips": [
       {
@@ -393,7 +393,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1 Vec による柔軟なルートパラメータ化",
     "bookSummary": "各直進区間の長さを `Vec` に格納しておけば、同じループ構造で異なるマップも簡単に走らせられます。",
     "bookKeyCode": "let segs = vec![2, 2, 2, 1];",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n\n    // --- ステージの初期データ / 機構 ---\n    let mut segs = vec![2, 2];\n    \n}",
     "solutionCode": "fn main() {\n    let mut segs = vec![2, 2];\n    segs.push(2);\n    step(segs[0]);\n    turn_right();\n    step(segs[1]);\n    turn_left();\n    step(segs[2]);\n}",
     "quickChips": [
       {
@@ -550,7 +550,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1 最短手順リストを Vec で組む",
     "bookSummary": "コンベアによって稼げるマス数を計算し、最小限の `Vec` ステップを組み立てるタイムアタックパズルです。",
     "bookKeyCode": "let moves = vec![1, 1, 1];",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - 制限時間: 8 ティック以内\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let max_ticks = 8; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn main() {\n    let mut bonuses = Vec::new();\n    bonuses.push(3);\n    bonuses.push(3);\n    let mut total = 0;\n    for b in bonuses { total += b; }\n    add_vault(total);\n    step(1);\n    turn_right();\n    step(1);\n    turn_left();\n    step(2);\n}",
     "quickChips": [
       {
@@ -1117,7 +1117,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.2 String の段階的な追記",
     "bookSummary": "処理が1ステップ完了するたびに `.push_str()` で状態ラベルを追記していくパターンです。",
     "bookKeyCode": "log.push_str(\"_SCANNED\");",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    // - 標準出力(println!): \"CORE_SCANNED_BOOSTED\" を出力\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"CORE_SCANNED_BOOSTED\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let mut tag = String::from(\"CORE\");\n    \n}",
     "solutionCode": "fn main() {\n    let mut tag = String::from(\"CORE\");\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    tag.push_str(\"_SCANNED\");\n    step(1);\n    boost(&mut c);\n    tag.push_str(\"_BOOSTED\");\n    println!(\"{}\", tag);\n    step(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -1238,7 +1238,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.2 .len() による長さ取得",
     "bookSummary": "ASCII文字列なら `s.len()` で文字数がそのまま数値として取得できるため、設定値やチェックに活用できます。",
     "bookKeyCode": "let dist = code.len();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let mut code = String::from(\"KOBO\");\n    \n}",
     "solutionCode": "fn main() {\n    let mut code = String::from(\"KOBO\");\n    code.push_str(\"!\");\n    let dist = code.len();\n    add_vault(dist);\n    step(dist);\n}",
     "quickChips": [
       {
@@ -1359,7 +1359,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1 & 8.2 文字列配列をそのままスクリプトに",
     "bookSummary": "文字列のリストをループして `if cmd == \"...\"` で振り分けると、シンプルなスクリプトインタプリタが作れます。",
     "bookKeyCode": "for c in cmds { if c == \"F\" { ... } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - 全スイッチ作動: (1, 1)\n\n    // --- ステージの初期データ / 機構 ---\n    let cmds = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "fn main() {\n    let cmds = vec![\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n        String::from(\"R\"),\n        String::from(\"F\"),\n        String::from(\"F\"),\n    ];\n    for c in cmds {\n        if c == \"F\" {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        } else if c == \"R\" {\n            turn_right();\n        } else if c == \"L\" {\n            turn_left();\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1817,7 +1817,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1 範囲外アクセスを防ぐ .get() と unwrap_or",
     "bookSummary": "添字がベクタの長さを超える可能性があるときは `list.get(i)` で `Option` として受け取ると安全です。",
     "bookKeyCode": "let val = cmds.get(i).unwrap_or(0);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let cmds = vec![2, 4];\n    \n}",
     "solutionCode": "fn main() {\n    let cmds = vec![2, 4];\n    let mut sum = 0;\n    for i in 0..4 {\n        sum += cmds.get(i).unwrap_or(0);\n    }\n    add_vault(sum);\n    step(5);\n}",
     "quickChips": [
       {
@@ -1938,7 +1938,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.3 HashMap を設定テーブルとして使う",
     "bookSummary": "名前をキーにして値を引く辞書は、複数パーツのパスワードや係数を管理するときにとても便利です。",
     "bookKeyCode": "let code = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (1, 1)\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n\n    // --- ステージの初期データ / 機構 ---\n    let mut dict = HashMap::new();\n    dict.insert(\"alpha\", 2);\n    dict.insert(\"beta\", 4);\n    dict.insert(\"gamma\", 9);\n    \n}",
     "solutionCode": "fn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"alpha\", 2);\n    dict.insert(\"beta\", 4);\n    dict.insert(\"gamma\", 9);\n    let secret = dict.get(\"alpha\").unwrap_or(0) + dict.get(\"beta\").unwrap_or(0);\n    try_dial(secret);\n    step(4);\n}",
     "quickChips": [
       {
@@ -2048,7 +2048,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.3 リストの要素を HashMap でカウントする",
     "bookSummary": "配列の要素を1つずつ確認しながら `map.insert(k, cur + 1)` のように回数を積み上げて集計します。",
     "bookKeyCode": "let c = counts.get(k).unwrap_or(0); counts.insert(k, c + 1);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - 制限時間: 6 ティック以内\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let max_ticks = 6; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let tags = vec![\"gear\", \"spring\", \"gear\", \"gear\", \"bolt\"];\n    let mut counts = HashMap::new();\n    \n}",
     "solutionCode": "fn main() {\n    let tags = vec![\"gear\", \"spring\", \"gear\", \"gear\", \"bolt\"];\n    let mut counts = HashMap::new();\n    for t in tags {\n        let prev = counts.get(t).unwrap_or(0);\n        counts.insert(t, prev + 1);\n    }\n    let total = counts.get(\"gear\").unwrap_or(0)\n        + counts.get(\"spring\").unwrap_or(0)\n        + counts.get(\"bolt\").unwrap_or(0);\n    add_vault(total);\n    step(3);\n}",
     "quickChips": [
       {
@@ -2167,7 +2167,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.3 HashMap から段階的パラメータを引き出す",
     "bookSummary": "文字列キー `\"leg1\"`, `\"leg2\"`, `\"leg3\"` に距離を登録して取り出すと、各フェーズの意味が明確になります。",
     "bookKeyCode": "step(map.get(\"leg1\").unwrap_or(0));",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 3)\n    // - 全スイッチ作動: (4, 1), (2, 3)\n\n    // --- ステージの初期データ / 機構 ---\n    let mut route = HashMap::new();\n    route.insert(\"east\", 4);\n    route.insert(\"south\", 2);\n    route.insert(\"west\", 4);\n    \n}",
     "solutionCode": "fn main() {\n    let mut route = HashMap::new();\n    route.insert(\"east\", 4);\n    route.insert(\"south\", 2);\n    route.insert(\"west\", 4);\n    step(route.get(\"east\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"south\").unwrap_or(0));\n    turn_right();\n    step(route.get(\"west\").unwrap_or(0));\n}",
     "quickChips": [
       {
@@ -2313,7 +2313,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1〜8.3 3大コレクションの実践連携",
     "bookSummary": "リスト（`Vec`）、ラベル（`String`）、設定表（`HashMap`）を組み合わせることで複雑な業務処理が組めます。",
     "bookKeyCode": "let p = menu.get(k).unwrap_or(0);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 強化⚡4+(2,1) -> 納品(4,1)]\n    // - 標準出力(println!): \"ORDER_OK\" を出力\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let expected_output = \"ORDER_OK\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let mut menu = HashMap::new();\n    menu.insert(\"bread\", 2);\n    menu.insert(\"coffee\", 3);\n    let orders = vec![\"bread\", \"coffee\"];\n    let mut label = String::from(\"ORDER\");\n    \n}",
     "solutionCode": "fn main() {\n    let mut menu = HashMap::new();\n    menu.insert(\"bread\", 2);\n    menu.insert(\"coffee\", 3);\n\n    let orders = vec![\"bread\", \"coffee\"];\n    let mut sum = 0;\n    for o in orders {\n        sum += menu.get(o).unwrap_or(0);\n    }\n    add_vault(sum);\n\n    let mut label = String::from(\"ORDER\");\n    label.push_str(\"_OK\");\n    println!(\"{}\", label);\n\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    boost(&mut c);\n    step(2);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -2453,7 +2453,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "8.1〜8.3 コレクションの複合パズル",
     "bookSummary": "データ構造を使い分けながら、現実の空間ルールと危険物をすべてコントロールする総合演習です。",
     "bookKeyCode": "HashMap / String / Vec + 空間コア操作",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (4, 1)\n    // - ダイヤル解除: 値 5 を求めて try_dial(...) を呼ぶ\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(4,1) -> 納品(5,1)]\n    // - 標準出力(println!): \"COLLECTIONS_PRO\" を出力\n    let target_dial = 5; // ダイヤル解除コード（5 を計算して try_dial へ）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"COLLECTIONS_PRO\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let mut book = HashMap::new();\n    book.insert(\"dial\", 5);\n    let mut msg = String::from(\"COLLECTIONS\");\n    \n}",
     "solutionCode": "fn main() {\n    let mut book = HashMap::new();\n    book.insert(\"dial\", 5);\n    try_dial(book.get(\"dial\").unwrap_or(0));\n\n    let mut msg = String::from(\"COLLECTIONS\");\n     msg.push_str(\"_PRO\");\n    println!(\"{}\", msg);\n\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    let mut c = grab_core();\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    scan(&c);\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    while is_spark_ahead() { wait_tick(1); }\n    step(1);\n    boost(&mut c);\n    while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n    step(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -2713,7 +2713,7 @@ export const CHAPTER_8_STAGES: StageDefinition[] = [
     "bookSectionTitle": "総まとめ — 設計図・列挙型・モジュール・コレクション",
     "bookSummary": "構造体や列挙型でプログラムの骨格を作り、モジュールで整理し、コレクションでデータを自在に扱う力が身に着きました！",
     "bookKeyCode": "struct + enum + mod + HashMap + Vec + String",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod helper {\n    pub fn safe_move(n: i32) {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nuse helper::safe_move;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡7 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 強化⚡5+(2,1) -> 納品(5,3)]\n    // - 標準出力(println!): \"CHALLENGE_COMPLETE\" を出力\n    let target_vault = 7; // 目標金庫エネルギー（⚡7以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let expected_output = \"CHALLENGE_COMPLETE\"; // println! で出力に含める文字列\n\n    // --- ステージの初期データ / 機構 ---\n    let mut dict = HashMap::new();\n    dict.insert(\"part1\", 3);\n    dict.insert(\"part2\", 4);\n    let keys = vec![\"part1\", \"part2\"];\n    let mut badge = String::from(\"CHALLENGE\");\n    \n}",
     "solutionCode": "mod helper {\n    pub fn safe_move(n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n            step();\n        }\n    }\n}\n\nuse helper::safe_move;\n\nfn main() {\n    let mut dict = HashMap::new();\n    dict.insert(\"part1\", 3);\n    dict.insert(\"part2\", 4);\n    let keys = vec![\"part1\", \"part2\"];\n    let mut vault_sum = 0;\n    for k in keys {\n        vault_sum += dict.get(k).unwrap_or(0);\n    }\n    add_vault(vault_sum);\n\n    let mut badge = String::from(\"CHALLENGE\");\n    badge.push_str(\"_COMPLETE\");\n    println!(\"{}\", badge);\n\n    safe_move(1);\n    let mut c = grab_core();\n    safe_move(1);\n    boost(&mut c);\n    safe_move(3);\n    turn_right();\n    safe_move(2);\n    deliver(c);\n}",
     "quickChips": [
       {

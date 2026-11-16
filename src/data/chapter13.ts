@@ -299,7 +299,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.1 工程ステップと所有権・可変借用",
     "bookSummary": "クロージャーで定型移動をまとめつつ、コアの借用 `&c`・`&mut c`・所有権移動 `deliver(c)` の順を空間レイアウトに合わせて組み立てます。",
     "bookKeyCode": "let go1 = || step(1); scan(&c); boost(&mut c); deliver(c);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn main() {\n    let advance = || step(1);\n    advance();\n    let mut c = grab_core();\n    advance();\n    scan(&c);\n    advance();\n    boost(&mut c);\n    advance();\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -417,7 +417,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.1 手順抽象化クロージャーによる反復制御",
     "bookSummary": "安全確認付きの1歩移動を無名クロージャー `safe_walk` にまとめてループ実行すれば、見通しの良い安全制御が書けます。",
     "bookKeyCode": "let safe_walk = || { while is_spark_ahead() || !is_gate_open() { wait_tick(1); } step(); };",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1)\n    \n}",
     "solutionCode": "fn main() {\n    let safe_walk = || {\n        while is_spark_ahead() || !is_gate_open() {\n            wait_tick(1);\n        }\n        step();\n    };\n    for _ in 0..5 {\n        safe_walk();\n    }\n}",
     "quickChips": [
       {
@@ -599,7 +599,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.1 状態判定クロージャーの反復利用",
     "bookSummary": "迷路の1ステップ分の自律判断をクロージャーに切り出すと、メインループが驚くほど読みやすくなります。",
     "bookKeyCode": "while !at_goal() { maze_tick(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - 全スイッチ作動: (2, 1)\n    \n}",
     "solutionCode": "fn main() {\n    let maze_tick = || {\n        if !is_wall_left() {\n            turn_left();\n            step();\n        } else if !is_wall_ahead() {\n            step();\n        } else {\n            turn_right();\n        }\n    };\n    while !at_goal() {\n        maze_tick();\n    }\n}",
     "quickChips": [
       {
@@ -1114,7 +1114,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.1 読み取りキャプチャと再利用",
     "bookSummary": "不変な環境変数をキャプチャしたクロージャーは何度でも呼び出せ、設定値を使った計算を一貫させられます。",
     "bookKeyCode": "let scale = 3;\nlet mul = |x| x * scale;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (1, 3)\n    // - 全スイッチ作動: (2, 1), (3, 3)\n    // - 金庫目標: ⚡9 以上を貯める\n    let target_vault = 9; // 目標金庫エネルギー（⚡9以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let batch = conveyor_batch();\n    \n}",
     "solutionCode": "fn main() {\n    let scale = 3;\n    let calc_vault = |x| x * scale;\n    let batch = conveyor_batch();\n    let total: i32 = batch.iter().map(calc_vault).sum();\n    add_vault(total);\n    step(3);\n    turn_right();\n    step(2);\n    turn_right();\n    step(2);\n}",
     "quickChips": [
       {
@@ -1259,7 +1259,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.2 イテレーターからコレクションへの変換",
     "bookSummary": "加工後のデータを `.collect()` で `Vec<i32>` に確定させてから順番に消費すれば、ルート計算と実行を綺麗に分離できます。",
     "bookKeyCode": "let legs: Vec<i32> = raw.iter().map(|x| x * 2).collect();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n\n    // --- ステージの初期データ / 機構 ---\n    let raw = vec![2, 1];\n    \n}",
     "solutionCode": "fn main() {\n    let raw = vec![2, 1];\n    let legs: Vec<i32> = raw.iter().map(|x| x * 2).collect();\n    let code = legs[0] + legs[1];\n    try_dial(code);\n    add_vault(code);\n    step(legs[0]);\n    turn_right();\n    step(legs[1]);\n}",
     "quickChips": [
       {
@@ -1395,7 +1395,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.2 環境キャプチャ＋イテレーター集計",
     "bookSummary": "外側の変数 `threshold` をキャプチャした `.filter()` と `.map()`・`.sum()` を組み合わせると、設定に応じた動的フィルタ集計が簡潔に書けます。",
     "bookKeyCode": "batch.iter().filter(|x| x >= threshold).map(|x| x / 2).sum()",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ちょうど ⚡6 にする\n    let target_vault = 6; // 目標金庫エネルギー（ちょうど⚡6）\n\n    // --- ステージの初期データ / 機構 ---\n    let batch = conveyor_batch();\n    \n}",
     "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let threshold = 4;\n    let power = batch.iter().filter(|x| x >= threshold).map(|x| x / 2).sum();\n    add_vault(power);\n    step(2);\n    step(2);\n}",
     "quickChips": [
       {
@@ -1510,7 +1510,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.2 ノイズ除去フィルタパイプライン",
     "bookSummary": "負の値やゼロなどのノイズを `.filter(|x| x > 0)` で除外してから集計することで、異常データに強い制御が実現します。",
     "bookKeyCode": "batch.iter().filter(|x| x > 0).sum()",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let batch = conveyor_batch();\n    \n}",
     "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let clean_sum: i32 = batch.iter().filter(|x| x > 0).sum();\n    add_vault(clean_sum);\n    step(2);\n    step(1);\n}",
     "quickChips": [
       {
@@ -1770,7 +1770,7 @@ export const CHAPTER_13_STAGES: StageDefinition[] = [
     "bookSectionTitle": "13.1 & 13.2 クロージャーとイテレーターの統合活用",
     "bookSummary": "データ処理はイテレーターパイプラインに任せ、現場移動は安全クロージャーに任せるきれいな責務分離の完成形です。",
     "bookKeyCode": "let safe = || { while is_spark_ahead() { wait_tick(1); } step(); };",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ちょうど ⚡6 にする\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(5,1)]\n    let target_vault = 6; // 目標金庫エネルギー（ちょうど⚡6）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let batch = conveyor_batch();\n    \n}",
     "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let v: i32 = batch.iter().filter(|x| x > 1).map(|x| x - 1).sum();\n    add_vault(v);\n    let safe_step = || {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    };\n    safe_step();\n    let mut c = grab_core();\n    safe_step();\n    scan(&c);\n    safe_step();\n    boost(&mut c);\n    safe_step();\n    safe_step();\n    deliver(c);\n}",
     "quickChips": [
       {

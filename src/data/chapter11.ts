@@ -197,7 +197,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.1 仕様を満たす計算関数のテスト駆動開発",
     "bookSummary": "テストケースが求める数学的仕様（例：コンベア分の割引計算）に合わせて本体関数を修正し、同時に実戦コースも走らせます。",
     "bookKeyCode": "#[test] fn t1() { assert_eq!(net_steps(5, 2), 3); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn step_count(dist: i32) -> i32 {\n    // TODO: テストが通るように計算を修正しよう（今は dist のままになっているよ）\n    dist\n}\n\n#[test]\nfn t_conveyor() {\n    assert_eq!(step_count(5), 3);\n}\n\n#[test]\nfn t_zero() {\n    assert_eq!(step_count(0), 0);\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - ユニットテスト: #[test] を 2個以上すべて合格\n    // - 制限時間: 6 ティック以内\n    let max_ticks = 6; // 目標制限ティック数\n    let s = step_count(5);\n    step(s);\n}",
     "solutionCode": "fn net_steps(total_dist: i32, conv_count: i32) -> i32 {\n    total_dist - conv_count\n}\n\n#[test]\nfn t_two_conv() {\n    assert_eq!(net_steps(5, 2), 3);\n}\n\n#[test]\nfn t_zero_conv() {\n    assert_eq!(net_steps(4, 0), 4);\n}\n\nfn main() {\n    let s = net_steps(5, 2);\n    step(s);\n}",
     "quickChips": [
       {
@@ -668,7 +668,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.2 足りないテストケースを自ら補う",
     "bookSummary": "既存のテストを直すだけでなく、抜けていたケース用の `#[test]` 関数を新規追加してテスト網羅度を引き上げます。",
     "bookKeyCode": "#[test]\nfn t_clamp_min() { assert_eq!(clamp(1, 4), 4); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn clamp_min(v: i32, min_v: i32) -> i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n#[test]\nfn t_normal() {\n    assert_eq!(clamp_min(6, 4), 6);\n}\n\n#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - ユニットテスト: #[test] を 2個以上すべて合格\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    \n}",
     "solutionCode": "fn clamp_min(v: i32, min_v: i32) -> i32 {\n    if v < min_v { min_v } else { v }\n}\n\n#[test]\nfn t_normal() {\n    assert_eq!(clamp_min(6, 4), 6);\n}\n\n#[test]\nfn t_min() {\n    assert_eq!(clamp_min(1, 4), 4);\n}\n\nfn main() {\n    let val = clamp_min(1, 4);\n    add_vault(val);\n    for _ in 0..5 {\n        while is_spark_ahead() { wait_tick(1); }\n        step();\n    }\n}",
     "quickChips": [
       {
@@ -839,7 +839,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.3 公開モジュールの結合テスト",
     "bookSummary": "クレートの外側から公開API（`cipher::make_code`）を呼び出すテストで、モジュール同士のつながりを確認します。",
     "bookKeyCode": "assert_eq!(cipher::make_code(3, 4), 7);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod cipher {\n    pub fn make_code(a: i32, b: i32) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(cipher::make_code(1, 2), 3); }\n\n#[test]\nfn t2() { assert_eq!(cipher::make_code(3, 4), 7); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡7 以上を貯める\n    // - ダイヤル解除: 値 7 を求めて try_dial(...) を呼ぶ\n    // - ユニットテスト: #[test] を 2個以上すべて合格\n    let target_vault = 7; // 目標金庫エネルギー（⚡7以上）\n    let target_dial = 7; // ダイヤル解除コード（7 を計算して try_dial へ）\n    \n}",
     "solutionCode": "mod cipher {\n    pub fn make_code(a: i32, b: i32) -> i32 {\n        a + b\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(cipher::make_code(1, 2), 3); }\n\n#[test]\nfn t2() { assert_eq!(cipher::make_code(3, 4), 7); }\n\nfn main() {\n    let secret = cipher::make_code(3, 4);\n    try_dial(secret);\n    add_vault(secret);\n    step(5);\n}",
     "quickChips": [
       {
@@ -965,7 +965,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.3 コレクション入力の単体テスト",
     "bookSummary": "空配列・1要素・複数要素の3パターンを `#[test]` で検証し、コレクションを扱う関数のバグを防ぎます。",
     "bookKeyCode": "#[test] fn t_empty() { assert_eq!(sum_legs(vec![]), 0); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn sum_legs(legs: Vec<i32>) -> i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n#[test]\nfn t_empty() { assert_eq!(sum_legs(vec![]), 0); }\n\n#[test]\nfn t_one() { assert_eq!(sum_legs(vec![4]), 4); }\n\n#[test]\nfn t_pair() { assert_eq!(sum_legs(vec![3, 2]), 5); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - ユニットテスト: #[test] を 3個以上すべて合格\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    \n}",
     "solutionCode": "fn sum_legs(legs: Vec<i32>) -> i32 {\n    let mut s = 0;\n    for x in legs {\n        s += x;\n    }\n    s\n}\n\n#[test]\nfn t_empty() { assert_eq!(sum_legs(vec![]), 0); }\n\n#[test]\nfn t_one() { assert_eq!(sum_legs(vec![4]), 4); }\n\n#[test]\nfn t_pair() { assert_eq!(sum_legs(vec![3, 2]), 5); }\n\nfn main() {\n    let total = sum_legs(vec![3, 2]);\n    add_vault(total);\n    step(3);\n    turn_right();\n    step(2);\n}",
     "quickChips": [
       {
@@ -1083,7 +1083,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.1 & 11.3 条件判定と空間ルールの一致",
     "bookSummary": "プログラム上の検査関数と実際の現場ルールを一致させることで、出荷前のミスをゼロにできます。",
     "bookKeyCode": "assert!(can_deliver(4));",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn can_deliver(power: i32) -> bool {\n    // TODO: 条件を満たすように実装しよう\n    false\n}\n\n#[test]\nfn t_ok() { assert!(can_deliver(4)); }\n\n#[test]\nfn t_low() { assert!(!can_deliver(2)); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    // - ユニットテスト: #[test] を 2個以上すべて合格\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn can_deliver(power: i32) -> bool {\n    power >= 4\n}\n\n#[test]\nfn t_ok() { assert!(can_deliver(4)); }\n\n#[test]\nfn t_low() { assert!(!can_deliver(2)); }\n\nfn main() {\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    if can_deliver(core_power()) {\n        step(1);\n        deliver(c);\n    }\n}",
     "quickChips": [
       {
@@ -1202,7 +1202,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.3 リファクタリングしてもテストが守ってくれる安心感",
     "bookSummary": "ロジックと現場の操作をつなぐ計算部分をテストで固めることで、自信を持って複雑な手順を走らせられます。",
     "bookKeyCode": "pub fn boost_calc(p: i32) -> i32 { p + 2 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod core_calc {\n    pub fn boost_calc(p: i32) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t_base1() { assert_eq!(core_calc::boost_calc(1), 3); }\n\n#[test]\nfn t_base3() { assert_eq!(core_calc::boost_calc(3), 5); }\n\n#[test]\nfn t_zero() { assert!(core_calc::boost_calc(0) == 2); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(3,1) -> 納品(4,1)]\n    // - ユニットテスト: #[test] を 3個以上すべて合格\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "mod core_calc {\n    pub fn boost_calc(p: i32) -> i32 {\n        p + 2\n    }\n}\n\n#[test]\nfn t_base1() { assert_eq!(core_calc::boost_calc(1), 3); }\n\n#[test]\nfn t_base3() { assert_eq!(core_calc::boost_calc(3), 5); }\n\n#[test]\nfn t_zero() { assert!(core_calc::boost_calc(0) == 2); }\n\nfn main() {\n    let target = core_calc::boost_calc(3);\n    add_vault(target);\n    step(1);\n    let mut c = grab_core();\n    step(1);\n    scan(&c);\n    step(1);\n    boost(&mut c);\n    step(1);\n    deliver(c);\n}",
     "quickChips": [
       {
@@ -1423,7 +1423,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "11.3 Result 関数の正常・境界・異常テスト",
     "bookSummary": "正の正常ケース、境界のゼロ、負の異常ケースの3種類をテストすることで関数の品質を保証します。",
     "bookKeyCode": "if n > 0 { Ok(n * 2) } else { Err(\"無効\") }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn double_positive(n: i32) -> Result<i32, String> {\n    // TODO: 条件を満たすように実装しよう\n    Err(\"TODO\")\n}\n\n#[test]\nfn t_pos() { assert_eq!(double_positive(3).unwrap(), 6); }\n\n#[test]\nfn t_zero() { assert_eq!(double_positive(0).unwrap_or(-1), -1); }\n\n#[test]\nfn t_neg() { assert_eq!(double_positive(-2).unwrap_or(-1), -1); }\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ユニットテスト: #[test] を 3個以上すべて合格\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    \n}",
     "solutionCode": "fn double_positive(n: i32) -> Result<i32, String> {\n    if n > 0 { Ok(n * 2) } else { Err(\"無効\") }\n}\n\n#[test]\nfn t_pos() { assert_eq!(double_positive(3).unwrap(), 6); }\n\n#[test]\nfn t_zero() { assert_eq!(double_positive(0).unwrap_or(-1), -1); }\n\n#[test]\nfn t_neg() { assert_eq!(double_positive(-2).unwrap_or(-1), -1); }\n\nfn main() {\n    let val = double_positive(3).unwrap_or(0);\n    add_vault(val);\n    step(3);\n}",
     "quickChips": [
       {
@@ -1638,7 +1638,7 @@ export const CHAPTER_11_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第11章まとめ — テストに裏打ちされた安心の発進",
     "bookSummary": "3つ以上の単体・結合テストで検証された計算モジュールを使い、障害物だらけのコースを確実に突破します。",
     "bookKeyCode": "#[test] × 3 + 迷宮攻略",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod spec {\n    pub fn energy(a: i32, b: i32) -> i32 {\n        // TODO: モジュール内の処理を実装しよう\n        0\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(spec::energy(1, 2), 6); }\n\n#[test]\nfn t2() { assert_eq!(spec::energy(0, 3), 6); }\n\n#[test]\nfn t3() { assert!(spec::energy(2, 2) == 8); }\n\nfn safe_go(n: i32) {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (1, 1), (4, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - 標準出力(println!): \"TEST_PASS\" を出力\n    // - ユニットテスト: #[test] を 3個以上すべて合格\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let expected_output = \"TEST_PASS\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "mod spec {\n    pub fn energy(a: i32, b: i32) -> i32 {\n        (a + b) * 2\n    }\n}\n\n#[test]\nfn t1() { assert_eq!(spec::energy(1, 2), 6); }\n\n#[test]\nfn t2() { assert_eq!(spec::energy(0, 3), 6); }\n\n#[test]\nfn t3() { assert!(spec::energy(2, 2) == 8); }\n\nfn safe_go(n: i32) {\n    for _ in 0..n {\n        while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n        step();\n    }\n}\n\nfn main() {\n    let e = spec::energy(1, 2);\n    add_vault(e);\n    println!(\"TEST_PASS\");\n    safe_go(5);\n    turn_right();\n    safe_go(2);\n}",
     "quickChips": [
       {

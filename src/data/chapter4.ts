@@ -14,7 +14,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.1 構造体を定義してインスタンス化する",
     "bookSummary": "`struct 名前 { フィールド名: 型 }` で関連するデータをまとめられます。使うときは `名前 { フィールド名: 値 }` で実体（インスタンス）を作ります。",
     "bookKeyCode": "struct BotPlan {\n    steps: i32,\n    boost: i32,\n}",
-    "starterCode": "struct BotPlan {\n    steps: i32,\n    boost: i32,\n}\n\nfn main() {\n    let plan = BotPlan { steps: 1, boost: 1 };\n    add_vault(plan.boost);\n    step(plan.steps);\n}",
+    "starterCode": "struct BotPlan {\n    steps: i32,\n    boost: i32,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    let plan = BotPlan { steps: 1, boost: 1 };\n    add_vault(plan.boost);\n    step(plan.steps);\n}",
     "solutionCode": "struct BotPlan {\n    steps: i32,\n    boost: i32,\n}\n\nfn main() {\n    let plan = BotPlan { steps: 3, boost: 3 };\n    add_vault(plan.boost);\n    step(plan.steps);\n}",
     "quickChips": [
       {
@@ -490,7 +490,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.1 & 5.2 構造体インスタンスの生成と更新",
     "bookSummary": "構造体の設定値をまとめ、状況に合わせて `add_vault` と曲がり角のステップを組み合わせます。",
     "bookKeyCode": "struct NavConfig { east: i32, south: i32, power: i32 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct NavConfig {\n    east: i32,\n    south: i32,\n    power: i32,\n}\n\nimpl NavConfig {\n    fn start(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let cfg = NavConfig { east: 5, south: 2, power: 5 };\n    \n}",
     "solutionCode": "struct NavConfig {\n    east: i32,\n    south: i32,\n    power: i32,\n}\n\nimpl NavConfig {\n    fn start(&self) {\n        add_vault(self.power);\n        step(self.east);\n        turn_right();\n        step(self.south);\n    }\n}\n\nfn main() {\n    let cfg = NavConfig { east: 5, south: 2, power: 5 };\n    cfg.start();\n}",
     "quickChips": [
       {
@@ -631,7 +631,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.3 安全チェックを内蔵したメソッド設計",
     "bookSummary": "移動や待機のセンサーチェックを構造体のメソッド内に閉じ込めると、メイン処理が読みやすく安全な設計になります。",
     "bookKeyCode": "fn safe_advance(&self, steps: i32)",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct GuardBot {\n    vault_boost: i32,\n}\n\nimpl GuardBot {\n    fn safe_advance(&self, steps: i32) {\n        // TODO: メソッドを実装しよう\n    }\n\n    fn deposit(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let bot = GuardBot { vault_boost: 3 };\n    \n}",
     "solutionCode": "struct GuardBot {\n    vault_boost: i32,\n}\n\nimpl GuardBot {\n    fn safe_advance(&self, steps: i32) {\n        for _ in 0..steps {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n    fn deposit(&self) {\n        add_vault(self.vault_boost);\n    }\n}\n\nfn main() {\n    let bot = GuardBot { vault_boost: 3 };\n    bot.deposit();\n    bot.safe_advance(5);\n}",
     "quickChips": [
       {
@@ -812,7 +812,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.3 パラメータ化したタイミング制御",
     "bookSummary": "構造体に待機ティック数をフィールドとして持たせることで、コードのロジックを変えずにタイミングの微調整ができます。",
     "bookKeyCode": "struct TimerBot { initial_wait: i32 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct TimerBot {\n    initial_wait: i32,\n}\n\nimpl TimerBot {\n    fn run(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (4, 1)\n    // - 制限時間: 10 ティック以内\n    let max_ticks = 10; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let tb = TimerBot { initial_wait: 1 };\n    \n}",
     "solutionCode": "struct TimerBot {\n    initial_wait: i32,\n}\n\nimpl TimerBot {\n    fn run(&self) {\n        if self.initial_wait > 0 {\n            wait_tick(self.initial_wait);\n        }\n        for _ in 0..3 {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nfn main() {\n    let tb = TimerBot { initial_wait: 1 };\n    tb.run();\n}",
     "quickChips": [
       {
@@ -1037,7 +1037,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.3 複数の構造体同士の連携設計",
     "bookSummary": "データを持つ構造体と実行を担う構造体を分けると、複雑な工程でも役割がすっきり整理できます。",
     "bookKeyCode": "let c = Courier::from_bp(&bp);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Blueprint {\n    vault_amt: i32,\n}\n\nstruct Courier {\n    vault_amt: i32,\n}\n\nimpl Courier {\n    fn from_bp(bp: Blueprint) -> Courier {\n        // TODO: メソッドを実装しよう\n        0\n    }\n\n    fn operate(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 強化⚡4+(2,1) -> 納品(4,1)]\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let bp = Blueprint { vault_amt: 4 };\n    \n}",
     "solutionCode": "struct Blueprint {\n    vault_amt: i32,\n}\n\nstruct Courier {\n    vault_amt: i32,\n}\n\nimpl Courier {\n    fn from_bp(bp: Blueprint) -> Courier {\n        Courier { vault_amt: bp.vault_amt }\n    }\n    fn operate(&self) {\n        add_vault(self.vault_amt);\n        step(1);\n        let mut core = grab_core();\n        step(1);\n        boost(&mut core);\n        step(2);\n        deliver(core);\n    }\n}\n\nfn main() {\n    let bp = Blueprint { vault_amt: 4 };\n    let courier = Courier::from_bp(bp);\n    courier.operate();\n}",
     "quickChips": [
       {
@@ -1182,7 +1182,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.1 & 5.3 構造体データとルート最適化",
     "bookSummary": "構造体にルートのパラメータをまとめることで、コンベアの押し出し効果を含めた移動計画をわかりやすく管理できます。",
     "bookKeyCode": "struct DeliveryPlan { leg1: i32, leg2: i32 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct DeliveryPlan {\n    leg1: i32,\n    leg2: i32,\n}\n\nimpl DeliveryPlan {\n    fn execute(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (2, 1)\n    // - 制限時間: 8 ティック以内\n    let max_ticks = 8; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let plan = DeliveryPlan { leg1: 2, leg2: 1 };\n    \n}",
     "solutionCode": "struct DeliveryPlan {\n    leg1: i32,\n    leg2: i32,\n}\n\nimpl DeliveryPlan {\n    fn execute(&self) {\n        step(self.leg1);\n        turn_right();\n        step(self.leg2);\n        turn_left();\n        step(2);\n    }\n}\n\nfn main() {\n    let plan = DeliveryPlan { leg1: 2, leg2: 1 };\n    plan.execute();\n}",
     "quickChips": [
       {
@@ -1438,7 +1438,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.2 & 5.3 現場手順を表す構造体メソッド",
     "bookSummary": "検査台では `&core`、強化台では `&mut core`、納品台では所有権を移す `deliver(core)` を使う手順を綺麗に組み立てましょう。",
     "bookKeyCode": "scan(&core); boost(&mut core); deliver(core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Mission {\n    scans: i32,\n}\n\nimpl Mission {\n    fn new() -> Mission {\n            Mission { scans: 0 }\n        }\n\n    fn run(&mut self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 2)\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(5,2)]\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "struct Mission {\n    scans: i32,\n}\n\nimpl Mission {\n    fn new() -> Mission {\n        Mission { scans: 0 }\n    }\n    fn run(&mut self) {\n        step(1);\n        let mut core = grab_core();\n        step(1);\n        scan(&core);\n        self.scans += 1;\n        step(1);\n        boost(&mut core);\n        step(2);\n        turn_right();\n        step(1);\n        deliver(core);\n    }\n}\n\nfn main() {\n    let mut m = Mission::new();\n    m.run();\n}",
     "quickChips": [
       {
@@ -1584,7 +1584,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "5.3 & 5.5 自律制御メソッドを持つ構造体",
     "bookSummary": "構造体自身が自分の状態（歩数やエネルギーなど）を更新しながらセンサーで進路を選ぶ設計です。",
     "bookKeyCode": "fn solve(&mut self) { while !at_goal() { ... } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Rover {\n    moves: i32,\n}\n\nimpl Rover {\n    fn new() -> Rover {\n            Rover { moves: 0 }\n        }\n\n    fn solve(&mut self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    \n}",
     "solutionCode": "struct Rover {\n    moves: i32,\n}\n\nimpl Rover {\n    fn new() -> Rover {\n        Rover { moves: 0 }\n    }\n    fn solve(&mut self) {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n                self.moves += 1;\n            } else if !is_wall_ahead() {\n                step();\n                self.moves += 1;\n            } else {\n                turn_right();\n            }\n        }\n        add_vault(self.moves);\n    }\n}\n\nfn main() {\n    let mut r = Rover::new();\n    r.solve();\n}",
     "quickChips": [
       {
@@ -1841,7 +1841,7 @@ export const CHAPTER_4_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第4章まとめ — 状態・センサー・ルール統合構造体",
     "bookSummary": "必要な手順をメソッドに整理し、危険物をセンサーで避けつつ空間上の各ステーションを順番に巡る設計の完成です。",
     "bookKeyCode": "impl MasterBot { fn complete(&mut self) { ... } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct MasterBot {\n    vault_charge: i32,\n}\n\nimpl MasterBot {\n    fn new(v: i32) -> MasterBot {\n            MasterBot { vault_charge: v }\n        }\n\n    fn safe_step(&self, n: i32) {\n        // TODO: メソッドを実装しよう\n    }\n\n    fn complete(&self) {\n        // TODO: メソッドを実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (4, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(4,1) -> 納品(5,3)]\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "struct MasterBot {\n    vault_charge: i32,\n}\n\nimpl MasterBot {\n    fn new(v: i32) -> MasterBot {\n        MasterBot { vault_charge: v }\n    }\n    fn safe_step(&self, n: i32) {\n        for _ in 0..n {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n    fn complete(&self) {\n        add_vault(self.vault_charge);\n        self.safe_step(1);\n        let mut core = grab_core();\n        self.safe_step(1);\n        scan(&core);\n        self.safe_step(2);\n        boost(&mut core);\n        self.safe_step(1);\n        turn_right();\n        self.safe_step(2);\n        deliver(core);\n    }\n}\n\nfn main() {\n    let mb = MasterBot::new(6);\n    mb.complete();\n}",
     "quickChips": [
       {

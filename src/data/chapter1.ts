@@ -316,7 +316,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 順次実行 — 経路計画とデバッグ",
     "bookSummary": "動きが長いときは「1コマ送り」ボタンで1手ずつ位置と向きを確かめると、どこで曲がり間違えたかすぐに分かります。",
     "bookKeyCode": "step(3);\nturn_right();\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 3)\n    \n}",
     "solutionCode": "fn main() {\n    turn_left();\n    step(2);\n    turn_right();\n    step(3);\n    turn_right();\n    step(2);\n}",
     "quickChips": [
       {
@@ -419,7 +419,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "スイッチの状態変化を利用して、閉じたゲートを通過できます。",
     "bookKeyCode": "step(); // スイッチを作動させてから進む",
-    "starterCode": "fn main() {\n    step(5);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    // - 全スイッチ作動: (1, 1)\n    step(5);\n}",
     "solutionCode": "fn main() {\n    step(6);\n}",
     "quickChips": [
       {
@@ -541,7 +541,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "移動先の環境を先読みすると、少ない操作で長い距離を進めます。",
     "bookKeyCode": "step(3); // コンベアの押し出しを計算",
-    "starterCode": "fn main() {\n    step(2);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 制限時間: 4 ティック以内\n    step(2);\n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -649,7 +649,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "開始座標とゴール座標の差から必要な移動回数を計算します。",
     "bookKeyCode": "step(6);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    \n}",
     "solutionCode": "fn main() {\n    step(6);\n}",
     "quickChips": [
       {
@@ -752,7 +752,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "スイッチの状態変化を利用して、閉じたゲートを通過できます。",
     "bookKeyCode": "step(); // スイッチを作動させてから進む",
-    "starterCode": "fn main() {\n    step(2);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    // - 全スイッチ作動: (1, 1)\n    step(2);\n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -850,7 +850,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "移動先の環境を先読みすると、少ない操作で長い距離を進めます。",
     "bookKeyCode": "step(3); // コンベアの押し出しを計算",
-    "starterCode": "fn main() {\n    step(2);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 制限時間: 4 ティック以内\n    step(2);\n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -958,7 +958,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "開始座標とゴール座標の差から必要な移動回数を計算します。",
     "bookKeyCode": "step(3);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (3, 1)\n    \n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -1037,7 +1037,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "スイッチの状態変化を利用して、閉じたゲートを通過できます。",
     "bookKeyCode": "step(); // スイッチを作動させてから進む",
-    "starterCode": "fn main() {\n    step(3);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (1, 1)\n    step(3);\n}",
     "solutionCode": "fn main() {\n    step(4);\n}",
     "quickChips": [
       {
@@ -1143,7 +1143,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "移動先の環境を先読みすると、少ない操作で長い距離を進めます。",
     "bookKeyCode": "step(3); // コンベアの押し出しを計算",
-    "starterCode": "fn main() {\n    step(2);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 制限時間: 4 ティック以内\n    step(2);\n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -1251,7 +1251,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "開始座標とゴール座標の差から必要な移動回数を計算します。",
     "bookKeyCode": "step(4);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    \n}",
     "solutionCode": "fn main() {\n    step(4);\n}",
     "quickChips": [
       {
@@ -1338,7 +1338,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "スイッチの状態変化を利用して、閉じたゲートを通過できます。",
     "bookKeyCode": "step(); // スイッチを作動させてから進む",
-    "starterCode": "fn main() {\n    step(4);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1)\n    step(4);\n}",
     "solutionCode": "fn main() {\n    step(5);\n}",
     "quickChips": [
       {
@@ -1452,7 +1452,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "移動先の環境を先読みすると、少ない操作で長い距離を進めます。",
     "bookKeyCode": "step(3); // コンベアの押し出しを計算",
-    "starterCode": "fn main() {\n    step(2);\n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 制限時間: 4 ティック以内\n    step(2);\n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -1560,7 +1560,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "ゲーム操作の練習 — 順次実行と盤面ギミック",
     "bookSummary": "開始座標とゴール座標の差から必要な移動回数を計算します。",
     "bookKeyCode": "step(5);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    \n}",
     "solutionCode": "fn main() {\n    step(5);\n}",
     "quickChips": [
       {
@@ -1655,7 +1655,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 順次実行 — コンベアを使った歩数短縮",
     "bookSummary": "ベルトコンベアのマスへ `step()` で乗ると、そのまま矢印の方向へ1マス押し出されます。普通の床を歩くより少ない命令・少ないティックで移動できます！",
     "bookKeyCode": "step(3); // コンベアが1歩ずつ運んでくれる！",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 制限時間: 4 ティック以内\n    \n}",
     "solutionCode": "fn main() {\n    step(3);\n}",
     "quickChips": [
       {
@@ -1767,7 +1767,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 順次実行 — ギミックの順序設計",
     "bookSummary": "連動スイッチ（SW）を踏むと対応するゲートが開きます。ゴールへ直進する前に、正しい向きと歩数で寄り道ルートを組み立てましょう。",
     "bookKeyCode": "step();\nturn_left();\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - 全スイッチ作動: (1, 1)\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    turn_left();\n    step(2);\n    turn_right();\n    step(2);\n    turn_right();\n    step(2);\n    turn_left();\n    step();\n}",
     "quickChips": [
       {
@@ -1905,7 +1905,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 順次実行 — コンベア押し出しの計算",
     "bookSummary": "コンベアは乗った瞬間に矢印先へ1マス進みます。つまり「コンベアの1マス手前」へ歩くだけで一気に2マス分移動できるのがポイントです。",
     "bookKeyCode": "step();\nturn_right();\nstep();\nturn_left();\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - 全スイッチ作動: (1, 2)\n    // - 制限時間: 7 ティック以内\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    turn_right();\n    step();\n    turn_left();\n    step(2);\n}",
     "quickChips": [
       {
@@ -2068,7 +2068,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 順次実行 — 効率的な一筆書きルート",
     "bookSummary": "複数の目的地を回るときは、戻りが少なくなる一筆書きルートとコンベアの組み合わせを考えるとティック数を節約できます。",
     "bookKeyCode": "step(2);\nturn_right();\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 2)\n    // - 全スイッチ作動: (1, 1), (2, 3)\n    // - 制限時間: 15 ティック以内\n    \n}",
     "solutionCode": "fn main() {\n    turn_left();\n    step();\n    turn_right();\n    step();\n    turn_right();\n    step(2);\n    turn_left();\n    step(2);\n    turn_left();\n    step();\n    turn_right();\n    step();\n}",
     "quickChips": [
       {
@@ -2236,7 +2236,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 順次実行 — wait_tick() でリズムを合わせる",
     "bookSummary": "動かないことも立派な戦略です。`wait_tick(n)` を使うと、その場にとどまったまま時間（ティック）だけを正確に進められます。",
     "bookKeyCode": "wait_tick(1);\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 2)\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    wait_tick(1);\n    step(4);\n}",
     "quickChips": [
       {
@@ -2417,7 +2417,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "順次実行と盤面ギミックの総合演習",
     "bookSummary": "ゲートの「開/閉カウントダウン」とスパークの移動周期を観察し、必要なときだけ `wait_tick()` を差し込むのが攻略のコツです。",
     "bookKeyCode": "step(2);\nwait_tick(1);\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 2)\n    // - 制限時間: 11 ティック以内\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    wait_tick(2);\n    step(2);\n    wait_tick(1);\n    step(3);\n}",
     "quickChips": [
       {
@@ -2898,7 +2898,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "1.2 & 1.3 順次実行の総合演習",
     "bookSummary": "出力マクロ `println!` も1ティック消費します。制限ティックがあるときは無駄のない移動と出力をセットで設計しましょう。",
     "bookKeyCode": "println!(\"READY\");\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 2)\n    // - 標準出力(println!): \"READY\" を出力\n    // - 制限時間: 8 ティック以内\n    println!(\"...\");\n    \n}",
     "solutionCode": "fn main() {\n    println!(\"READY\");\n    step();\n    turn_left();\n    step(2);\n    turn_right();\n    step();\n}",
     "quickChips": [
       {
@@ -3185,7 +3185,7 @@ export const CHAPTER_1_STAGES: StageDefinition[] = [
     "bookSectionTitle": "順次実行と盤面ギミックの総合演習",
     "bookSummary": "ここまでの基礎命令をすべて使いこなし、自分の頭で盤面を読んで最小ルートを設計する総合問題です。",
     "bookKeyCode": "println!(\"STAGE1 CLEAR\");",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 3)\n    // - 全スイッチ作動: (3, 1)\n    // - 標準出力(println!): \"STAGE1 CLEAR\" を出力\n    // - 制限時間: 12 ティック以内\n    println!(\"...\");\n    \n}",
     "solutionCode": "fn main() {\n    println!(\"STAGE1 CLEAR\");\n    step(2);\n    turn_right();\n    step();\n    turn_left();\n    step();\n    wait_tick(1);\n    step(2);\n}",
     "quickChips": [
       {

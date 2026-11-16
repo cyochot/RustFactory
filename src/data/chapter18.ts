@@ -198,7 +198,7 @@ export const CHAPTER_18_STAGES: StageDefinition[] = [
     "bookSectionTitle": "18.2 構造体パターンと論駁可能な分岐の組み合わせ",
     "bookSummary": "移動計画の構造体を `let RoutePlan { ... } = plan;` で分解し、オプショナルな追加報酬を `if let Some(v)` で取り出します。",
     "bookKeyCode": "let RoutePlan { to_core, to_scan, to_charge } = plan;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct RoutePlan {\n    to_core: i32,\n    to_scan: i32,\n    to_charge: i32,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(3,1) -> 納品(4,1)]\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let plan = RoutePlan { to_core: 1, to_scan: 1, to_charge: 1 };\n    \n}",
     "solutionCode": "struct RoutePlan {\n    to_core: i32,\n    to_scan: i32,\n    to_charge: i32,\n}\n\nfn main() {\n    let plan = RoutePlan { to_core: 1, to_scan: 1, to_charge: 1 };\n    let RoutePlan { to_core, to_scan, to_charge } = plan;\n    let bonus = Some(3);\n    if let Some(v) = bonus {\n        add_vault(v);\n    }\n    step(to_core);\n    let mut core = grab_core();\n    step(to_scan);\n    scan(&core);\n    step(to_charge);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -432,7 +432,7 @@ export const CHAPTER_18_STAGES: StageDefinition[] = [
     "bookSectionTitle": "18.3 複式・範囲パターンと高速コース走破",
     "bookSummary": "複数条件を `|` と `..=` でコンパクトにまとめつつ、コンベア加速の歩数計算とスパーク回避を組み合わせて制限時間内にゴールします。",
     "bookKeyCode": "1 | 2 => 1, 3..=6 => 2, _ => 0",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - 制限時間: 8 ティック以内\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let max_ticks = 8; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn main() {\n    let mut sum = 0;\n    for item in conveyor_batch() {\n        sum += match item {\n            1 | 2 => 1,\n            3..=6 => 2,\n            _ => 0,\n        };\n    }\n    add_vault(sum);\n    step(2);\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step(3);\n}",
     "quickChips": [
       {
@@ -673,7 +673,7 @@ export const CHAPTER_18_STAGES: StageDefinition[] = [
     "bookSectionTitle": "18.3 列挙型コマンドと迷路ナビゲーション",
     "bookSummary": "コマンド列を `enum` バリアントで表し、`match` の分配束縛で取り出した数値に応じて安全待機や方向転換を行います。",
     "bookKeyCode": "Nav::TurnWaitGo(n) => { turn_right(); while !is_gate_open() { wait_tick(1); } step(n); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "enum Nav {\n    Go(i32),\n    TurnGo(i32),\n    TurnWaitGo(i32),\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (0, 3)\n    // - 全スイッチ作動: (1, 1), (3, 3)\n\n    // --- ステージの初期データ / 機構 ---\n    let cmds = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "enum Nav {\n    Go(i32),\n    TurnGo(i32),\n    TurnWaitGo(i32),\n}\n\nfn main() {\n    let cmds = vec![Nav::Go(3), Nav::TurnGo(2), Nav::TurnWaitGo(3)];\n    for cmd in cmds {\n        match cmd {\n            Nav::Go(n) => step(n),\n            Nav::TurnGo(n) => {\n                turn_right();\n                step(n);\n            },\n            Nav::TurnWaitGo(n) => {\n                turn_right();\n                while !is_gate_open() {\n                    wait_tick(1);\n                }\n                step(n);\n            },\n        }\n    }\n}",
     "quickChips": [
       {
@@ -1095,7 +1095,7 @@ export const CHAPTER_18_STAGES: StageDefinition[] = [
     "bookSectionTitle": "18.3 .. 省略と @ ガードの複合テスト",
     "bookSummary": "不要フィールドを `..` で省略し、取り出した値を `@` バインディングと `if` ガードで厳密に選別して計算します。",
     "bookKeyCode": "let Crate { code, .. } = c;\nmatch code { v @ 2..=6 if v % 2 == 0 => v, _ => 0 }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Crate { code: i32, weight: i32 }\n\nfn filter_even(c: Crate) -> i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n#[test]\nfn t_even() {\n    assert_eq!(filter_even(Crate { code: 3, weight: 5 }), 0);\n    assert_eq!(filter_even(Crate { code: 4, weight: 5 }), 4);\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n\n    // --- ステージの初期データ / 機構 ---\n    let crates = vec![\n            Crate { code: 2, weight: 10 },\n            Crate { code: 3, weight: 8 },\n            Crate { code: 4, weight: 6 },\n            Crate { code: 8, weight: 4 },\n        ];\n    \n}",
     "solutionCode": "struct Crate { code: i32, weight: i32 }\n\nfn filter_even(c: Crate) -> i32 {\n    let Crate { code, .. } = c;\n    match code {\n        v @ 2..=6 if v % 2 == 0 => v,\n        _ => 0,\n    }\n}\n\n#[test]\nfn t_even() {\n    assert_eq!(filter_even(Crate { code: 3, weight: 5 }), 0);\n    assert_eq!(filter_even(Crate { code: 4, weight: 5 }), 4);\n}\n\nfn main() {\n    let crates = vec![\n        Crate { code: 2, weight: 10 },\n        Crate { code: 3, weight: 8 },\n        Crate { code: 4, weight: 6 },\n        Crate { code: 8, weight: 4 },\n    ];\n    let mut sum = 0;\n    for c in crates {\n        sum += filter_even(c);\n    }\n    try_dial(sum);\n    add_vault(sum);\n    step(4);\n}",
     "quickChips": [
       {
@@ -1207,7 +1207,7 @@ export const CHAPTER_18_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第18章 パターンとマッチング 総合演習",
     "bookSummary": "あらゆるデータの形を安全・正確に分解できるパターンマッチングは、Rust の記述力の要です。",
     "bookKeyCode": "match pkt { Pkt::Boost(n @ 1..=5) if n >= 5 => ... }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct Packet {\n    code: i32,\n    steps: i32,\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let pkt = Packet { code: 5, steps: 5 };\n    \n}",
     "solutionCode": "struct Packet {\n    code: i32,\n    steps: i32,\n}\n\nfn main() {\n    let pkt = Packet { code: 5, steps: 5 };\n    let Packet { code, steps } = pkt;\n    match code {\n        c @ 1..=6 if c >= 5 => {\n            add_vault(c);\n            step(steps);\n        },\n        _ => step(1),\n    }\n}",
     "quickChips": [
       {
@@ -1335,7 +1335,7 @@ export const CHAPTER_18_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第18章マスター — パターンマッチング完全制覇",
     "bookSummary": "データ構造を自在に分解・選別・網羅するパターン記法と `#[test]` 検証を組み合わせ、複雑なギミックが並ぶ工程を正確に制御します。",
     "bookKeyCode": "n @ 2..=6 if n % 2 == 0 + struct { tag, .. } + enum StepCmd",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "struct OrderPkg { tag: i32, steps: i32, secret: i32 }\n\nenum StepCmd { Advance(i32), Check, Charge, SendOff }\n\nfn pick_score(x: i32) -> i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n#[test]\nfn t_pat() {\n    assert_eq!(pick_score(2), 2);\n    assert_eq!(pick_score(3), 0);\n    assert_eq!(pick_score(4), 4);\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (8, 1)\n    // - 全スイッチ作動: (3, 1), (6, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡4+(7,1) -> 納品(8,1)]\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let cmds = vec![\n        // TODO: 上で定義したコマンドを正しい順番に並べよう\n    ];\n    \n}",
     "solutionCode": "struct OrderPkg { tag: i32, steps: i32, secret: i32 }\n\nenum StepCmd { Advance(i32), Check, Charge, SendOff }\n\nfn pick_score(x: i32) -> i32 {\n    match x {\n        n @ 2..=6 if n % 2 == 0 => n,\n        1 | 7 => 0,\n        _ => 0,\n    }\n}\n\n#[test]\nfn t_pat() {\n    assert_eq!(pick_score(2), 2);\n    assert_eq!(pick_score(3), 0);\n    assert_eq!(pick_score(4), 4);\n}\n\nfn main() {\n    let (a, _, b) = (2, 99, 4);\n    let score = pick_score(a) + pick_score(b);\n    let pkg = OrderPkg { tag: score, steps: 2, secret: 10 };\n    let OrderPkg { tag, .. } = pkg;\n    let bonus = Some(tag);\n    if let Some(v) = bonus {\n        try_dial(v);\n        add_vault(v);\n    }\n\n    step(1);\n    let mut core = grab_core();\n    let cmds = vec![\n        StepCmd::Advance(1),\n        StepCmd::Check,\n        StepCmd::Advance(5),\n        StepCmd::Charge,\n        StepCmd::Advance(1),\n        StepCmd::SendOff,\n    ];\n    for cmd in cmds {\n        match cmd {\n            StepCmd::Advance(n) => {\n                for _ in 0..n {\n                    while !is_gate_open() || is_spark_ahead() { wait_tick(1); }\n                    step();\n                }\n            },\n            StepCmd::Check => scan(&core),\n            StepCmd::Charge => boost(&mut core),\n            StepCmd::SendOff => deliver(core),\n        }\n    }\n}",
     "quickChips": [
       {

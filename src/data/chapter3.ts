@@ -438,7 +438,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.1 値のライフタイムと再利用",
     "bookSummary": "変数 `c1` を `deliver(c1)` で手放したあと、新しく `let c2 = grab_core();` として次のコアの所有権を受け取ることで連続輸送ができます。",
     "bookKeyCode": "let c1 = grab_core();\ndeliver(c1);\nlet c2 = grab_core();\ndeliver(c2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 2)\n    // - コア納品: 2個 [拾う(1,1 / 2,2) -> 納品(4,2)]\n    let required_cores = 2; // 納品するコア数\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    let c1 = grab_core();\n    step(3);\n    turn_right();\n    step();\n    deliver(c1);\n    turn_right();\n    step(2);\n    let c2 = grab_core();\n    turn_right();\n    turn_right();\n    step(2);\n    deliver(c2);\n}",
     "quickChips": [
       {
@@ -794,7 +794,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.2 借用規則 — 複数の不変参照は同時に存在できる",
     "bookSummary": "データを読み取るだけの不変借用（`&T`）は何度でも、いくつでも安全に作れます。",
     "bookKeyCode": "scan(&core);\nscan(&core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - コア納品: 1個 [拾う(0,1) -> 検査(1,1/3,1) -> 納品(5,1)]\n    let required_scans = 3; // 必要な検査回数\n    \n}",
     "solutionCode": "fn main() {\n    let core = grab_core();\n    step();\n    scan(&core);\n    scan(&core);\n    step(2);\n    scan(&core);\n    step(2);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -1161,7 +1161,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.1 所有権の移動と返却",
     "bookSummary": "関数に値を渡すと所有権が移りますが、関数が `-> Core` としてその値を返せば、呼び出し元が再び所有権を受け取って次の処理へ進めます。",
     "bookKeyCode": "fn enhance(mut c: Core) -> Core {\n    boost(&mut c);\n    c\n}",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn enhance(mut c: Core) -> Core {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - コア納品: 1個（⚡3以上） [拾う(1,1) -> 検査(4,1) -> 強化⚡3+(3,1) -> 納品(5,1)]\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn enhance(mut c: Core) -> Core {\n    boost(&mut c);\n    c\n}\n\nfn main() {\n    step();\n    let core = grab_core();\n    step(2);\n    let core = enhance(core);\n    step();\n    scan(&core);\n    step();\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -1291,7 +1291,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.2 可変借用と不変借用の順番",
     "bookSummary": "1つの `let mut core` に対して、まず `&mut core` で強化を終わらせてから、あとで `&core` で検査すれば借用の衝突は起きません。",
     "bookKeyCode": "let mut core = grab_core();\nboost(&mut core);\nscan(&core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - コア納品: 1個（⚡3以上） [拾う(1,1) -> 検査(3,3) -> 強化⚡3+(1,3) -> 納品(4,3)]\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    let mut core = grab_core();\n    turn_right();\n    step(2);\n    boost(&mut core);\n    turn_left();\n    step(2);\n    scan(&core);\n    step();\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -1453,7 +1453,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.2 借用タイミングの設計",
     "bookSummary": "コンベアのマスに乗ると自動で押し出されるため、検査台や強化台はコンベアの前後に配置されています。足元を見極めて呼び出しましょう。",
     "bookKeyCode": "step(); boost(&mut core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - コア納品: 1個（⚡3以上） [拾う(0,1) -> 検査(4,1) -> 強化⚡3+(2,1) -> 納品(5,1)]\n    // - 制限時間: 9 ティック以内\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n    let max_ticks = 9; // 目標制限ティック数\n    \n}",
     "solutionCode": "fn main() {\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    step();\n    scan(&core);\n    step();\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -1600,7 +1600,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.2 所有権 × 安全センサーの組み合わせ",
     "bookSummary": "センサー待機 `while is_spark_ahead() { wait_tick(1); }` を補助関数にまとめておくと、運搬コードがぐっと見やすくなります。",
     "bookKeyCode": "while is_spark_ahead() { wait_tick(1); }\nstep();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn step_avoid() {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 2)\n    // - コア納品: 1個（⚡3以上） [拾う(0,2) -> 検査(3,2) -> 強化⚡3+(4,2) -> 納品(6,2)]\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn step_avoid() {\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    let mut core = grab_core();\n    step_avoid();\n    step_avoid();\n    step_avoid();\n    scan(&core);\n    step_avoid();\n    boost(&mut core);\n    step_avoid();\n    step_avoid();\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -1832,7 +1832,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.1 & 4.2 空間ルーティング × 所有権",
     "bookSummary": "コアのある場所・検査台（`&T検査`）・納品台それぞれに実際に移動してから命令を呼ばないとエラーになります。`deliver(core)` は最後に呼びましょう！",
     "bookKeyCode": "step(); let core = grab_core();\nstep(2); scan(&core);\nstep(2); deliver(core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - コア納品: 1個 [拾う(1,1) -> 検査(3,1) -> 納品(5,1)]\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    let core = grab_core();\n    step(2);\n    scan(&core);\n    step(2);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -1959,7 +1959,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.2 借用のスコープ — 1回ずつ順番に &mut する",
     "bookSummary": "同じ行の中で2つの `&mut core` を同時に作ることはできませんが、1行ずつ順番に呼べば前の可変借用が終わってから次の可変借用を始められます。",
     "bookKeyCode": "boost(&mut core);\nboost(&mut core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - コア納品: 1個（⚡5以上） [拾う(0,1) -> 検査(2,1) -> 強化⚡5+(1,1) -> 納品(4,1)]\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    \n}",
     "solutionCode": "fn main() {\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    boost(&mut core);\n    step();\n    scan(&core);\n    step(2);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -2085,7 +2085,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.1 & 4.2 手順の組み立て（依存関係パズル）",
     "bookSummary": "すべての条件（スイッチ、コア拾得、強化、検査、納品）を1回の走行で満たすための空間ルートを逆算しましょう。",
     "bookKeyCode": "step();\nturn_right();\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 3)\n    // - コア納品: 1個（⚡3以上） [拾う(2,1) -> 強化⚡3+(3,1) -> 納品(5,1)]\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    \n}",
     "solutionCode": "fn main() {\n    step();\n    turn_right();\n    step(2);\n    turn_left();\n    turn_left();\n    step(2);\n    turn_right();\n    step();\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    step(2);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -2581,7 +2581,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.3 スライス型 — 所有権を持たずに一部分を参照する",
     "bookSummary": "`&vec[1..4]` は配列のインデックス1〜3（合計3要素）をコピーなしで指し示すスライス参照です。",
     "bookKeyCode": "let batch = conveyor_batch();\nlet n = inspect_slice(&batch[1..4]);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (3, 1)\n    // - 検査(scan / inspect_slice): 3回以上\n    let required_scans = 3; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let batch = conveyor_batch();\n    \n}",
     "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    let part = &batch[1..4];\n    let n = inspect_slice(part);\n    step(n + 1);\n}",
     "quickChips": [
       {
@@ -2714,7 +2714,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "4.3 借用とスライスの総合応用",
     "bookSummary": "スライス `&batch[..2]` とコアの借用 `&core` / `&mut core` を正しく組み合わせ、Move 前に必要な検査を完了させましょう。",
     "bookKeyCode": "inspect_slice(&batch[0..2]);\nboost(&mut core);\nscan(&core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - コア納品: 1個（⚡3以上） [拾う(1,1) -> 検査(4,1) -> 強化⚡3+(2,1) -> 納品(5,1)]\n    // - 制限時間: 11 ティック以内\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 3; // 必要な検査回数\n    let max_ticks = 11; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let batch = conveyor_batch();\n    \n}",
     "solutionCode": "fn main() {\n    let batch = conveyor_batch();\n    inspect_slice(&batch[0..2]);\n    step();\n    let mut core = grab_core();\n    step();\n    boost(&mut core);\n    step();\n    scan(&core);\n    step();\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -3011,7 +3011,7 @@ export const CHAPTER_3_STAGES: StageDefinition[] = [
     "bookSectionTitle": "3章マスター — 所有権の総合実習",
     "bookSummary": "ここまで学んだ制御フロー・関数・所有権・可変/不変借用のすべてを使って2連続の精密輸送ミッションを達成します。",
     "bookKeyCode": "println!(\"CHALLENGE_COMPLETE\");",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn step_wait() {\n    // TODO: 条件を満たすように実装しよう\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (6, 3)\n    // - 全スイッチ作動: (3, 1)\n    // - コア納品: 2個（⚡3以上） [拾う(1,1 / 4,3) -> 検査(3,1) -> 強化⚡3+(2,1) -> 納品(6,3)]\n    // - 標準出力(println!): \"CHALLENGE_COMPLETE\" を出力\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_cores = 2; // 納品するコア数\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"CHALLENGE_COMPLETE\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "fn step_wait() {\n    while !is_gate_open() || is_spark_ahead() {\n        wait_tick(1);\n    }\n    step();\n}\n\nfn main() {\n    println!(\"CHALLENGE_COMPLETE\");\n    step_wait();\n    let mut c1 = grab_core();\n    step_wait();\n    boost(&mut c1);\n    step_wait();\n    scan(&c1);\n    turn_right();\n    step_wait();\n    step_wait();\n    turn_left();\n    step_wait();\n    step_wait();\n    step_wait();\n    deliver(c1);\n    turn_right();\n    turn_right();\n    step_wait();\n    step_wait();\n    let c2 = grab_core();\n    turn_right();\n    turn_right();\n    step_wait();\n    step_wait();\n    deliver(c2);\n}",
     "quickChips": [
       {

@@ -177,7 +177,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.1 並列実行による協調動作",
     "bookSummary": "2つのスレッドが別々のレーンで同時に動き、片方の準備が整ってからもう片方が通り抜ける協調パターンです。",
     "bookKeyCode": "while !is_gate_open() { wait_tick(1); }\nstep(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 2) / みるく号 (3, 0)\n\n    let h = thread::spawn(|| {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let h = thread::spawn(|| {\n        step(3);\n    });\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(2);\n    h.join();\n}",
     "quickChips": [
       {
@@ -272,7 +272,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.1 並列協調による相互ゲート突破",
     "bookSummary": "別々のスレッドが各レーンのスイッチを押すことで、お互いの封鎖ゲートを開け合って同時にゴールへ向かいます。",
     "bookKeyCode": "while !is_gate_open() { wait_tick(1); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (4, 0)\n    // - 全スイッチ作動: (1, 0), (1, 2)\n    // - 制限時間: 7 ティック以内\n    let max_ticks = 7; // 目標制限ティック数\n\n    let h = thread::spawn(|| {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let h = thread::spawn(|| {\n        step(1);\n        while !is_gate_open() {\n            wait_tick(1);\n        }\n        step(3);\n    });\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(3);\n    h.join();\n}",
     "quickChips": [
       {
@@ -387,7 +387,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.1 並列環境でのタイミングと位置設計",
     "bookSummary": "各スレッドのフィールド条件（ベルト位置）に合わせたパラメータを適切に渡して並列移動します。",
     "bookKeyCode": "thread::spawn(|| { step(2); step(1); });",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (5, 2) / みるく号 (5, 0)\n\n    let h = thread::spawn(|| {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let h = thread::spawn(|| {\n        step(2);\n        step(1);\n    });\n    step(2);\n    step(2);\n    h.join();\n}",
     "quickChips": [
       {
@@ -485,7 +485,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.1 各スレッド独立の安全監視ループ",
     "bookSummary": "並列に動くスレッドは互いのタイミングが異なるため、それぞれが自分のセンサーで安全を確認しながら進みます。",
     "bookKeyCode": "thread::spawn(|| { for _ in 0..4 { while is_spark_ahead() { wait_tick(1); } step(); } });",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (4, 0)\n    // - 制限時間: 7 ティック以内\n    let max_ticks = 7; // 目標制限ティック数\n\n    let h = thread::spawn(|| {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let h = thread::spawn(|| {\n        for _ in 0..4 {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    });\n    for _ in 0..4 {\n        while is_spark_ahead() {\n            wait_tick(1);\n        }\n        step();\n    }\n    h.join();\n}",
     "quickChips": [
       {
@@ -639,7 +639,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.1 自律ワーカーと待機スレッドの協調",
     "bookSummary": "探索を行うスレッドが条件を満たすまで、本線スレッドがゲート前などで協調待機して合流します。",
     "bookKeyCode": "while !is_gate_open() { wait_tick(1); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 3) / みるく号 (3, 1)\n    // - 全スイッチ作動: (3, 0)\n\n    let h = thread::spawn(|| {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let h = thread::spawn(|| {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                step();\n            } else if !is_wall_ahead() {\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    });\n    step(2);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(2);\n    h.join();\n}",
     "quickChips": [
       {
@@ -839,7 +839,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.1 所有権の移動と並列タスク分担",
     "bookSummary": "計算済みの値を `move ||` で別スレッドへ安全に渡し、異なる役目を並列でこなします。",
     "bookKeyCode": "let h = thread::spawn(move || { try_dial(code); step(dist); });",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 3) / みるく号 (3, 0)\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    // - 制限時間: 8 ティック以内\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n    let max_ticks = 8; // 目標制限ティック数\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let code = 6;\n    let dist = 3;\n    let h = thread::spawn(move || {\n        try_dial(code);\n        step(dist);\n    });\n    step(4);\n    turn_right();\n    step(1);\n    h.join();\n}",
     "quickChips": [
       {
@@ -1190,7 +1190,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 複数チャンネルによる双方向同期",
     "bookSummary": "複数の `mpsc::channel` を用意すると、スレッド同士で準備完了通知や計算パラメータを順番にやり取りできます。",
     "bookKeyCode": "tx1.send(2);\nlet a = rx1.recv().unwrap(); tx2.send(a + 3);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (4, 0)\n    // - 全スイッチ作動: (2, 0)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let (tx1, rx1) = mpsc::channel();\n    let (tx2, rx2) = mpsc::channel();\n    let h = thread::spawn(move || {\n        step(2);\n        tx1.send(2);\n        let bonus = rx2.recv().unwrap();\n        add_vault(bonus);\n        step(2);\n    });\n    let step_cnt = rx1.recv().unwrap();\n    tx2.send(step_cnt + 3);\n    step(step_cnt + 2);\n    h.join();\n}",
     "quickChips": [
       {
@@ -1297,7 +1297,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 連続メッセージの受信集約",
     "bookSummary": "複数回 `send` されたストリーム状のデータを `for _ in 0..3 { sum += rx.recv().unwrap(); }` で集計します。",
     "bookKeyCode": "for _ in 0..3 { total += rx.recv().unwrap(); }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 3) / みるく号 (2, 0)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let (tx, rx) = mpsc::channel();\n    let h = thread::spawn(move || {\n        tx.send(1);\n        tx.send(3);\n        tx.send(2);\n        step(2);\n    });\n    let mut sum = 0;\n    for _ in 0..3 {\n        sum += rx.recv().unwrap();\n    }\n    try_dial(sum);\n    add_vault(sum);\n    step(3);\n    turn_right();\n    step(1);\n    h.join();\n}",
     "quickChips": [
       {
@@ -1495,7 +1495,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 所有権転送と現場での空間加工ルール",
     "bookSummary": "別スレッドからチャンネルで受け取った `EnergyCore` は完全に自分の所有物になるため、自分のレーンの強化台で安全に `boost(&mut c)` できます。",
     "bookKeyCode": "let mut c = rx.recv().unwrap();\nstep(2);\nboost(&mut c);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (3, 0)\n    // - コア納品: 1個（⚡3以上） [拾う(0,0) -> 強化⚡3+(2,2) -> 納品(4,2)]\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let (tx, rx) = mpsc::channel();\n    let h = thread::spawn(move || {\n        let core = grab_core();\n        tx.send(core);\n        step(3);\n    });\n    let mut c = rx.recv().unwrap();\n    step(2);\n    boost(&mut c);\n    step(2);\n    deliver(c);\n    h.join();\n}",
     "quickChips": [
       {
@@ -1600,7 +1600,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 チャネル到着の待機と空間検査フロー",
     "bookSummary": "別レーンからチャンネルで受け取ったアイテムを自レーンの検査・強化設備に通してから納品台へ運びます。",
     "bookKeyCode": "let mut c = rx.recv().unwrap(); step(1); scan(&c); step(1); boost(&mut c);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (3, 0)\n    // - コア納品: 1個（⚡4以上） [拾う(0,0) -> 検査(1,2) -> 強化⚡4+(2,2) -> 納品(4,2)]\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let (tx, rx) = mpsc::channel();\n    let h = thread::spawn(move || {\n        let c = grab_core();\n        tx.send(c);\n        step(3);\n    });\n    let mut core = rx.recv().unwrap();\n    step(1);\n    scan(&core);\n    step(1);\n    boost(&mut core);\n    step(2);\n    deliver(core);\n    h.join();\n}",
     "quickChips": [
       {
@@ -1712,7 +1712,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 中盤チャレンジ — スレッド・チャンネル・空間協調",
     "bookSummary": "複数の `mpsc::channel` でアイテムと制御値を同時に受け渡しつつ、両スレッドが安全確認と連動スイッチをこなして合流します。",
     "bookKeyCode": "let (tx1, rx1) = mpsc::channel();\nlet (tx2, rx2) = mpsc::channel();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (4, 0)\n    // - 全スイッチ作動: (1, 0)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(0,0) -> 検査(1,2) -> 強化⚡4+(3,2) -> 納品(4,2)]\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    let required_scans = 1; // 必要な検査回数\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let (tx1, rx1) = mpsc::channel();\n    let (tx2, rx2) = mpsc::channel();\n    let h = thread::spawn(move || {\n        let c = grab_core();\n        tx1.send(c);\n        tx2.send(5);\n        for _ in 0..4 {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    });\n    let mut core = rx1.recv().unwrap();\n    let bonus = rx2.recv().unwrap();\n    add_vault(bonus);\n    step(1);\n    scan(&core);\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n    h.join();\n}",
     "quickChips": [
       {
@@ -2164,7 +2164,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.3 join() 前の確実なアンロック",
     "bookSummary": "子スレッドが同じ `Mutex` を必要としているときに、親スレッドがロックを握ったまま `join()` を呼ぶと永久に待ち合うデッドロックが発生します。",
     "bookKeyCode": "let mut g = v.lock().unwrap(); *g += 3; drop(g); h.join();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 2) / みるく号 (3, 0)\n    // - 金庫目標: ⚡6 以上を貯める\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let vault = Arc::new(Mutex::new(0));\n    let v2 = Arc::clone(&vault);\n\n    let mut g = vault.lock().unwrap();\n    *g += 3;\n    // TODO: このままスレッドでも lock() するとデッドロックするよ！drop(g); で解放しよう\n\n    let h = thread::spawn(move || {\n        let mut g2 = v2.lock().unwrap();\n        *g2 += 3;\n        // みるく号をコンベア経由でゴールへ進ませよう\n    });\n    // フェリスちゃんもコンベア経由でゴールへ進み、h.join(); で合流しよう！\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v2 = Arc::clone(&vault);\n\n    let mut g = vault.lock().unwrap();\n    *g += 3;\n    drop(g);\n\n    let h = thread::spawn(move || {\n        { let mut g2 = v2.lock().unwrap(); *g2 += 3; }\n        step(2);\n    });\n    h.join();\n    step(2);\n}",
     "quickChips": [
       {
@@ -2260,7 +2260,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.3 ロック区間の最小化による高速並行処理",
     "bookSummary": "クリティカルセクション（`Mutex` をロックしている時間）を最小限にすることで、並列スレッド間の待機時間を減らせます。",
     "bookKeyCode": "drop(g);\nh.join();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "#[cfg(feature = \"fast\")]\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 2) / みるく号 (3, 0)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - 制限時間: 8 ティック以内（#[cfg(feature = \"fast\")] 必須）\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let max_ticks = 8; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let vault = Arc::new(Mutex::new(0));\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "#[cfg(feature = \"fast\")]\nfn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v2 = Arc::clone(&vault);\n    let mut g = vault.lock().unwrap();\n    *g += 2;\n    drop(g);\n    let h = thread::spawn(move || {\n        { let mut g2 = v2.lock().unwrap(); *g2 += 2; }\n        step(2);\n    });\n    step(2);\n    h.join();\n}",
     "quickChips": [
       {
@@ -2441,7 +2441,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.3 複数スレッドからの累積値参照",
     "bookSummary": "全ワーカーが `join()` で完了した後にメインスレッドからロックを取れば、全スレッドの集計結果を確定値として扱えます。",
     "bookKeyCode": "h1.join(); h2.join();\nlet sum = *vault.lock().unwrap();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 2) / みるく号 (2, 0)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n\n    // --- ステージの初期データ / 機構 ---\n    let vault = Arc::new(Mutex::new(0));\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v1 = Arc::clone(&vault);\n    let v2 = Arc::clone(&vault);\n    let h1 = thread::spawn(move || {\n        { let mut g = v1.lock().unwrap(); *g += 2; }\n        step(2);\n    });\n    let h2 = thread::spawn(move || {\n        let mut g = v2.lock().unwrap();\n        *g += 2;\n    });\n    {\n        let mut g = vault.lock().unwrap();\n        *g += 2;\n    }\n    h1.join();\n    h2.join();\n    let total = *vault.lock().unwrap();\n    try_dial(total);\n    step(3);\n}",
     "quickChips": [
       {
@@ -2629,7 +2629,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 & 16.3 テスト済み純粋関数と並行ランタイムの分離",
     "bookSummary": "ロジック計算を純粋関数に切り出して単体テストし、スレッド間でその結果を安全にやり取りします。",
     "bookKeyCode": "fn combine(a: i32, b: i32) -> i32 { a + b }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn combine(a: i32, b: i32) -> i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n#[test]\nfn t_comb() {\n    assert_eq!(combine(3, 4), 7);\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 2) / みるく号 (2, 0)\n    // - 金庫目標: ⚡7 以上を貯める\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    let target_vault = 7; // 目標金庫エネルギー（⚡7以上）\n\n    // --- ステージの初期データ / 機構 ---\n    let vault = Arc::new(Mutex::new(0));\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn combine(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn t_comb() {\n    assert_eq!(combine(3, 4), 7);\n}\n\nfn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v2 = Arc::clone(&vault);\n    let (tx, rx) = mpsc::channel();\n    let h = thread::spawn(move || {\n        tx.send(3);\n        { let mut g = v2.lock().unwrap(); *g += 3; }\n        step(2);\n    });\n    let from_worker = rx.recv().unwrap();\n    let total = combine(from_worker, 4);\n    {\n        let mut g = vault.lock().unwrap();\n        *g += total - 3;\n    }\n    step(3);\n    h.join();\n}",
     "quickChips": [
       {
@@ -2714,7 +2714,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.2 & 16.3 大規模協調制御の設計",
     "bookSummary": "メッセージ転送・排他加算・スイッチ連動を同時に組み合わせても、それぞれが責任分担を守れば安全かつシンプルに協調できます。",
     "bookKeyCode": "scan(&core); ... boost(&mut core); ... deliver(core);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (3, 0)\n    // - 全スイッチ作動: (1, 0)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡3以上） [拾う(0,0) -> 検査(1,2) -> 強化⚡3+(3,2) -> 納品(4,2)]\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let vault = Arc::new(Mutex::new(0));\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v2 = Arc::clone(&vault);\n    let (tx, rx) = mpsc::channel();\n    let h = thread::spawn(move || {\n        let c = grab_core();\n        { let mut g = v2.lock().unwrap(); *g += 2; }\n        tx.send(c);\n        step(3);\n    });\n    {\n        let mut g = vault.lock().unwrap();\n        *g += 3;\n    }\n    let mut core = rx.recv().unwrap();\n    step(1);\n    scan(&core);\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n    h.join();\n}",
     "quickChips": [
       {
@@ -3016,7 +3016,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "16.4 生変数共有の危険と Arc<Mutex<T>> 置換",
     "bookSummary": "コンパイラが指摘するスレッド間の可変共有エラーを、`Arc::new(Mutex::new(...))` パターンへ安全にリファクタリングします。",
     "bookKeyCode": "let safe = Arc::new(Mutex::new(0));",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (3, 2) / みるく号 (2, 0)\n    // - 全スイッチ作動: (2, 0)\n    // - 金庫目標: ⚡5 以上を貯める\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    // TODO: Rc は Send ではないため thread::spawn に送るとコンパイルエラーになるよ！\n    // Arc::new(Mutex::new(0)) に書き換えて合計⚡5を作り、スイッチを踏んで2体ともゴールへ！\n    let sum = Rc::new(0);\n    let s2 = Rc::clone(&sum);\n    let h = thread::spawn(move || {\n        let _ = s2;\n        step(2);\n    });\n    step(4);\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let sum = Arc::new(Mutex::new(0));\n    let s2 = Arc::clone(&sum);\n    let h = thread::spawn(move || {\n        { let mut g = s2.lock().unwrap(); *g += 3; }\n        step(2);\n    });\n    {\n        let mut g = sum.lock().unwrap();\n        *g += 2;\n    }\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(2);\n    h.join();\n}",
     "quickChips": [
       {
@@ -3241,7 +3241,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第16章 総括 — 恐怖なき並行プログラミングの到達点",
     "bookSummary": "所有権ベースの `channel` と型安全な `Arc<Mutex<T>>`、さらに各スレッドの自律センサーを組み合わせ、最高難度の協調システムをバグゼロで動かします。",
     "bookKeyCode": "thread::spawn + channel + Arc<Mutex> + spawn safety",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (4, 2) / みるく号 (4, 0)\n    // - 全スイッチ作動: (1, 0)\n    // - 金庫目標: ⚡6 以上を貯める\n    // - ダイヤル解除: 値 6 を求めて try_dial(...) を呼ぶ\n    // - コア納品: 1個（⚡3以上） [拾う(0,0) -> 検査(1,2) -> 強化⚡3+(3,2) -> 納品(4,2)]\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    let target_dial = 6; // ダイヤル解除コード（6 を計算して try_dial へ）\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n\n    // --- ステージの初期データ / 機構 ---\n    let vault = Arc::new(Mutex::new(0));\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v2 = Arc::clone(&vault);\n    let (tx, rx) = mpsc::channel();\n\n    let h = thread::spawn(move || {\n        let c = grab_core();\n        { let mut g = v2.lock().unwrap(); *g += 3; }\n        tx.send(c);\n        for _ in 0..4 {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    });\n\n    {\n        let mut g = vault.lock().unwrap();\n        *g += 3;\n    }\n    h.join();\n    let total = *vault.lock().unwrap();\n    let mut core = rx.recv().unwrap();\n    try_dial(total);\n    step(1);\n    scan(&core);\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(1);\n    boost(&mut core);\n    step(1);\n    deliver(core);\n}",
     "quickChips": [
       {
@@ -3453,7 +3453,7 @@ export const CHAPTER_16_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第16章マスター — 恐怖なき並行システムの集大成",
     "bookSummary": "`#[cfg(feature = \"fast\")]`、単体テスト、複数スレッドによる `Arc<Mutex<T>>` 更新と `mpsc::channel` 転送を組み合わせ、安全かつ高速に協調動作を完遂します。",
     "bookKeyCode": "#[cfg(feature = \"fast\")] + Arc<Mutex<T>> + mpsc::channel + #[test]",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "fn calc_share(a: i32, b: i32) -> i32 {\n    // TODO: 条件を満たすように実装しよう\n    0\n}\n\n#[test]\nfn t_share() {\n    assert_eq!(calc_share(3, 4), 7);\n}\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: フェリスちゃん (5, 2) / みるく号 (5, 0)\n    // - 全スイッチ作動: (2, 0)\n    // - 金庫目標: ⚡7 以上を貯める\n    // - ダイヤル解除: 値 7 を求めて try_dial(...) を呼ぶ\n    // - コア納品: 1個（⚡3以上） [拾う(0,0) -> 検査(1,2) -> 強化⚡3+(3,2) -> 納品(5,2)]\n    // - ユニットテスト: #[test] を 1個以上すべて合格\n    // - 制限時間: 24 ティック以内（#[cfg(feature = \"fast\")] 必須）\n    let target_vault = 7; // 目標金庫エネルギー（⚡7以上）\n    let target_dial = 7; // ダイヤル解除コード（7 を計算して try_dial へ）\n    let min_core_power = 3; // 納品コアの必要パワー（⚡3以上）\n    let required_scans = 1; // 必要な検査回数\n    let max_ticks = 24; // 目標制限ティック数\n\n    // --- ステージの初期データ / 機構 ---\n    let vault = Arc::new(Mutex::new(0));\n\n    let h = thread::spawn(move || {\n        // TODO: みるく号（並列ワーカー）側の処理を書こう\n    });\n    // TODO: フェリスちゃん（メイン）側の処理を書いて h.join(); しよう\n    h.join();\n}",
     "solutionCode": "fn calc_share(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn t_share() {\n    assert_eq!(calc_share(3, 4), 7);\n}\n\n#[cfg(feature = \"fast\")]\nfn main() {\n    let vault = Arc::new(Mutex::new(0));\n    let v1 = Arc::clone(&vault);\n    let v2 = Arc::clone(&vault);\n    let (tx, rx) = mpsc::channel();\n\n    let h1 = thread::spawn(move || {\n        let c = grab_core();\n        { let mut g = v1.lock().unwrap(); *g += 3; }\n        tx.send(c);\n        step(1);\n        for _ in 0..3 {\n            while is_spark_ahead() {\n                wait_tick(1);\n            }\n            step();\n        }\n    });\n    let h2 = thread::spawn(move || {\n        { let mut g = v2.lock().unwrap(); *g += 4; }\n    });\n\n    h1.join();\n    h2.join();\n    let total = *vault.lock().unwrap();\n    let mut core = rx.recv().unwrap();\n    try_dial(total);\n    step(1);\n    scan(&core);\n    step(1);\n    while !is_gate_open() {\n        wait_tick(1);\n    }\n    step(1);\n    boost(&mut core);\n    while is_spark_ahead() {\n        wait_tick(1);\n    }\n    step(2);\n    deliver(core);\n}",
     "quickChips": [
       {

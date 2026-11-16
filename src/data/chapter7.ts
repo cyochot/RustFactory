@@ -667,7 +667,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 & 7.3 階層ごとの pub 可視性管理",
     "bookSummary": "内側の関数に `pub` を付けるだけでなく、親モジュール（例：`pub mod sensor`）自体も外に見せたい場合は `pub` が必要です。",
     "bookKeyCode": "mod nav { pub mod sensor { pub fn safe_step() { ... } } }",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod nav {\n    // TODO: 外部の use nav::sensor::go_safe; から使えるように pub を付けよう！\n    mod sensor {\n        fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 3)\n    // - 全スイッチ作動: (3, 1)\n    \n}",
     "solutionCode": "mod nav {\n    pub mod sensor {\n        pub fn go_safe() {\n            while is_spark_ahead() || !is_gate_open() {\n                wait_tick(1);\n            }\n            step();\n        }\n    }\n}\n\nuse nav::sensor::go_safe;\n\nfn main() {\n    for _ in 0..4 {\n        go_safe();\n    }\n    turn_right();\n    for _ in 0..2 {\n        go_safe();\n    }\n}",
     "quickChips": [
       {
@@ -841,7 +841,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 再利用可能なアルゴリズムをモジュール化",
     "bookSummary": "汎用的な左手法迷路ソルバーなどをモジュールにまとめておけば、呼び出し元の `main` が劇的に簡潔になります。",
     "bookKeyCode": "use maze_lib::escape;\nescape();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod maze_lib {\n    pub fn escape() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (2, 1)\n    \n}",
     "solutionCode": "mod maze_lib {\n    pub fn escape() {\n        while !at_goal() {\n            if !is_wall_left() {\n                turn_left();\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else if !is_wall_ahead() {\n                while is_spark_ahead() { wait_tick(1); }\n                step();\n            } else {\n                turn_right();\n            }\n        }\n    }\n}\n\nuse maze_lib::escape;\n\nfn main() {\n    escape();\n}",
     "quickChips": [
       {
@@ -984,7 +984,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.2 セキュリティ処理のカプセル化",
     "bookSummary": "ダイヤルの総当たりループのような少し複雑な処理も、モジュールに閉じ込めて `unlock()` として公開すれば安全に使えます。",
     "bookKeyCode": "security::unlock();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod security {\n    pub fn unlock() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nuse security::unlock;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡3 以上を貯める\n    // - ダイヤル解除: try_dial(guess) が Ordering::Equal になる値を探す\n    let target_vault = 3; // 目標金庫エネルギー（⚡3以上）\n    \n}",
     "solutionCode": "mod security {\n    pub fn unlock() {\n        let mut d = 1;\n        loop {\n            match try_dial(d) {\n                Ordering::Less => d += 1,\n                Ordering::Greater => d -= 1,\n                Ordering::Equal => { break; },\n            }\n        }\n        add_vault(3);\n    }\n}\n\nuse security::unlock;\n\nfn main() {\n    unlock();\n    step(4);\n}",
     "quickChips": [
       {
@@ -1105,7 +1105,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.4 異なるモジュールから機能を集める use",
     "bookSummary": "役割ごとにモジュールを切り出し、`main` で `use` して流れを組み立てると、設計の見通しがとても良くなります。",
     "bookKeyCode": "use treasury::store;\nuse cargo::deliver_l;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod treasury {\n    pub fn store(v: i32) {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nuse treasury::store;\n\nuse cargo::carry;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (4, 1)\n    // - 全スイッチ作動: (2, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - コア納品: 1個（⚡4以上） [拾う(1,1) -> 強化⚡4+(2,1) -> 納品(4,1)]\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let min_core_power = 4; // 納品コアの必要パワー（⚡4以上）\n    \n}",
     "solutionCode": "mod treasury {\n    pub fn store(v: i32) {\n        add_vault(v);\n    }\n}\n\nmod cargo {\n    pub fn carry() {\n        step(1);\n        let mut c = grab_core();\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nuse treasury::store;\nuse cargo::carry;\n\nfn main() {\n    store(4);\n    carry();\n}",
     "quickChips": [
       {
@@ -1242,7 +1242,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.4 親モジュールを残して名前の衝突を回避",
     "bookSummary": "`bakery::act()` と `post::act()` のように親モジュールを付けて呼び分けることで、同名の関数を混乱なく使えます。",
     "bookKeyCode": "bakery::act();\npost::act();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (1, 1), (4, 1)\n    // - 標準出力(println!): \"BREAD_OK\", \"POST_OK\" を出力\n    let expected_output_1 = \"BREAD_OK\"; // println! で出力に含める文字列\n    let expected_output_2 = \"POST_OK\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "mod bakery {\n    pub fn act() {\n        println!(\"BREAD_OK\");\n        step(2);\n    }\n}\n\nmod post {\n    pub fn act() {\n        println!(\"POST_OK\");\n        step(3);\n    }\n}\n\nfn main() {\n    bakery::act();\n    post::act();\n}",
     "quickChips": [
       {
@@ -1364,7 +1364,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.3 & 7.4 高速輸送モジュールの切り出し",
     "bookSummary": "充電と移動のモジュールを整えて呼び出すことで、コンベア区間の最短ステップを正確に走らせます。",
     "bookKeyCode": "turbo::boost_vault(4);\nturbo::dash();",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        // TODO: モジュール内の処理を実装しよう\n    }\n\n    pub fn dash() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nuse turbo::boost_vault;\n\nuse turbo::dash;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (2, 1), (4, 1)\n    // - 金庫目標: ⚡4 以上を貯める\n    // - 制限時間: 7 ティック以内\n    let target_vault = 4; // 目標金庫エネルギー（⚡4以上）\n    let max_ticks = 7; // 目標制限ティック数\n    \n}",
     "solutionCode": "mod turbo {\n    pub fn boost_vault(n: i32) {\n        add_vault(n);\n    }\n    pub fn dash() {\n        step(3);\n    }\n}\n\nuse turbo::boost_vault;\nuse turbo::dash;\n\nfn main() {\n    boost_vault(4);\n    dash();\n}",
     "quickChips": [
       {
@@ -1490,7 +1490,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "7.4 複数サブシステムの連携",
     "bookSummary": "責務を明確に分けた3つのモジュールを `use` で呼び込み、安全確実にゴールまでのパイプラインを構築します。",
     "bookKeyCode": "auth::verify(); pilot::move_safe(2);",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod auth {\n    pub fn verify() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        // TODO: モジュール内の処理を実装しよう\n    }\n}\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 1)\n    // - 全スイッチ作動: (3, 1)\n    // - 金庫目標: ⚡5 以上を貯める\n    // - コア納品: 1個（⚡5以上） [拾う(1,1) -> 検査(2,1) -> 強化⚡5+(3,1) -> 納品(5,1)]\n    // - 標準出力(println!): \"MODULE_CLEAR\" を出力\n    let target_vault = 5; // 目標金庫エネルギー（⚡5以上）\n    let min_core_power = 5; // 納品コアの必要パワー（⚡5以上）\n    let required_scans = 1; // 必要な検査回数\n    let expected_output = \"MODULE_CLEAR\"; // println! で出力に含める文字列\n    \n}",
     "solutionCode": "mod auth {\n    pub fn verify() {\n        println!(\"MODULE_CLEAR\");\n        add_vault(5);\n    }\n}\n\nmod core_ops {\n    pub fn process() {\n        let mut c = grab_core();\n        step(1);\n        scan(&c);\n        step(1);\n        boost(&mut c);\n        step(2);\n        deliver(c);\n    }\n}\n\nmod pilot {\n    pub fn go_to_core() {\n        while is_spark_ahead() { wait_tick(1); }\n        step(1);\n    }\n}\n\nfn main() {\n    auth::verify();\n    pilot::go_to_core();\n    core_ops::process();\n}",
     "quickChips": [
       {
@@ -1763,7 +1763,7 @@ export const CHAPTER_7_STAGES: StageDefinition[] = [
     "bookSectionTitle": "第7章まとめ — モジュール分割と可視性設計の極意",
     "bookSummary": "複雑なロボットの制御システムも、適切なモジュール階層と `pub` / `use` の境界設計によりすっきり見通せるようになります。",
     "bookKeyCode": "use factory::nav::step_safe;",
-    "starterCode": "fn main() {\n    \n}",
+    "starterCode": "mod factory {\n    pub mod vault {\n        pub fn fill() {\n            // TODO: モジュール内の処理を実装しよう\n        }\n    }\n\n    pub mod nav {\n        pub fn step_safe(n: i32) {\n            // TODO: モジュール内の処理を実装しよう\n        }\n    }\n}\n\nuse factory::vault::fill;\n\nuse factory::nav::step_safe;\n\nfn main() {\n    // 【達成条件】\n    // - ゴール到達: (5, 3)\n    // - 全スイッチ作動: (1, 1), (4, 1)\n    // - 金庫目標: ⚡6 以上を貯める\n    let target_vault = 6; // 目標金庫エネルギー（⚡6以上）\n    \n}",
     "solutionCode": "mod factory {\n    pub mod vault {\n        pub fn fill() { add_vault(6); }\n    }\n    pub mod nav {\n        pub fn step_safe(n: i32) {\n            for _ in 0..n {\n                while is_spark_ahead() || !is_gate_open() { wait_tick(1); }\n                step();\n            }\n        }\n    }\n}\n\nuse factory::vault::fill;\nuse factory::nav::step_safe;\n\nfn main() {\n    fill();\n    step_safe(5);\n    turn_right();\n    step_safe(2);\n}",
     "quickChips": [
       {
